@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -25,6 +25,7 @@
 		6BBFF7C62A5012DB00DE050E /* SDWebImageWebPCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 6BBFF7C52A5012DB00DE050E /* SDWebImageWebPCoder */; };
 		6BBFF7C92A5012EC00DE050E /* SDWebImageSVGCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 6BBFF7C82A5012EC00DE050E /* SDWebImageSVGCoder */; };
 		6BBFF7CC2A5012FF00DE050E /* SDWebImagePDFCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 6BBFF7CB2A5012FF00DE050E /* SDWebImagePDFCoder */; };
+		6BBFF7CF2A503EAF00DE050E /* DarockKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6BBFF7CE2A503EAF00DE050E /* DarockKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 				6BBFF7CC2A5012FF00DE050E /* SDWebImagePDFCoder in Frameworks */,
 				6B0253D32A4EF5FB00567986 /* DarockKit in Frameworks */,
 				6BBFF7C62A5012DB00DE050E /* SDWebImageWebPCoder in Frameworks */,
+				6BBFF7CF2A503EAF00DE050E /* DarockKit in Frameworks */,
 				6BBFF7C92A5012EC00DE050E /* SDWebImageSVGCoder in Frameworks */,
 				6BBFF7BC2A4FF18100DE050E /* EFQRCode in Frameworks */,
 			);
@@ -169,6 +171,7 @@
 				6BBFF7C52A5012DB00DE050E /* SDWebImageWebPCoder */,
 				6BBFF7C82A5012EC00DE050E /* SDWebImageSVGCoder */,
 				6BBFF7CB2A5012FF00DE050E /* SDWebImagePDFCoder */,
+				6BBFF7CE2A503EAF00DE050E /* DarockKit */,
 			);
 			productName = "DarockBili Watch App";
 			productReference = 6B0253BA2A4EF59600567986 /* 腕上哔哩.app */;
@@ -202,12 +205,12 @@
 			);
 			mainGroup = 6B0253AD2A4EF59600567986;
 			packageReferences = (
-				6B0253D12A4EF5FB00567986 /* XCLocalSwiftPackageReference "../DarockKit" */,
 				6BBFF7BA2A4FF18100DE050E /* XCRemoteSwiftPackageReference "EFQRCode" */,
 				6BBFF7C12A5012B800DE050E /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				6BBFF7C42A5012DB00DE050E /* XCRemoteSwiftPackageReference "SDWebImageWebPCoder" */,
 				6BBFF7C72A5012EC00DE050E /* XCRemoteSwiftPackageReference "SDWebImageSVGCoder" */,
 				6BBFF7CA2A5012FF00DE050E /* XCRemoteSwiftPackageReference "SDWebImagePDFCoder" */,
+				6BBFF7CD2A503EAF00DE050E /* XCRemoteSwiftPackageReference "DarockKit" */,
 			);
 			productRefGroup = 6B0253B52A4EF59600567986 /* Products */;
 			projectDirPath = "";
@@ -506,13 +509,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		6B0253D12A4EF5FB00567986 /* XCLocalSwiftPackageReference "../DarockKit" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../DarockKit;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
 		6BBFF7BA2A4FF18100DE050E /* XCRemoteSwiftPackageReference "EFQRCode" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -554,6 +550,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		6BBFF7CD2A503EAF00DE050E /* XCRemoteSwiftPackageReference "DarockKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Darock-Studio/DarockKit";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -585,6 +589,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6BBFF7CA2A5012FF00DE050E /* XCRemoteSwiftPackageReference "SDWebImagePDFCoder" */;
 			productName = SDWebImagePDFCoder;
+		};
+		6BBFF7CE2A503EAF00DE050E /* DarockKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6BBFF7CD2A503EAF00DE050E /* XCRemoteSwiftPackageReference "DarockKit" */;
+			productName = DarockKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

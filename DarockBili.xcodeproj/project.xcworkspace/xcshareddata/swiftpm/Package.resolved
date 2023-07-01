@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "darockkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Darock-Studio/DarockKit",
+      "state" : {
+        "branch" : "main",
+        "revision" : "fe03a9c37f3335dfaef6bc5e05cd7b1c8ec9db81"
+      }
+    },
+    {
       "identity" : "efqrcode",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/EFPrefix/EFQRCode",
