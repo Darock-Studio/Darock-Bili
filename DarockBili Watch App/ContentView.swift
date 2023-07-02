@@ -9,11 +9,13 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        TabView {
-            MainView()
-                .tag(1)
-            PersonAccountView()
-                .tag(2)
+        NavigationStack {
+            TabView {
+                MainView()
+                    .tag(1)
+                PersonAccountView()
+                    .tag(2)
+            }
         }
     }
 }

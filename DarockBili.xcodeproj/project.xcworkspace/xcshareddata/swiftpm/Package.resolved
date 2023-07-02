@@ -10,15 +10,6 @@
       }
     },
     {
-      "identity" : "darockkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Darock-Studio/DarockKit",
-      "state" : {
-        "branch" : "main",
-        "revision" : "fe03a9c37f3335dfaef6bc5e05cd7b1c8ec9db81"
-      }
-    },
-    {
       "identity" : "efqrcode",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/EFPrefix/EFQRCode",
@@ -88,6 +79,15 @@
       "state" : {
         "revision" : "374dc7f7b9e76c6aeb393f6a84590c6d387e1ecb",
         "version" : "2.2.2"
+      }
+    },
+    {
+      "identity" : "swiftsoup",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/scinfu/SwiftSoup",
+      "state" : {
+        "revision" : "8b6cf29eead8841a1fa7822481cb3af4ddaadba6",
+        "version" : "2.6.1"
       }
     },
     {

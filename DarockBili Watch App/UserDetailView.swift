@@ -10,6 +10,7 @@ import DarockKit
 import Alamofire
 import SwiftyJSON
 import SDWebImageSwiftUI
+import AuthenticationServices
 
 struct UserDetailView: View {
     var uid: String
@@ -25,11 +26,14 @@ struct UserDetailView: View {
     @State var userSign = ""
     @State var videos = [[String: String]]()
     @State var isVideosLoaded = false
+    @State var viewSelector: UserDetailViewPubsType = .video
+    @State var articles = [[String: String]]()
     var body: some View {
         ScrollView {
             VStack {
                 HStack {
-                    AsyncImage(url: URL(string: userFaceUrl + "@60w"))
+                    WebImage(url: URL(string: userFaceUrl + "@60w"), options: [.progressiveLoad])
+                        .cornerRadius(100)
                     Spacer()
                 }
                 HStack {
@@ -78,26 +82,129 @@ struct UserDetailView: View {
                 }
                 Spacer()
                     .frame(height: 20)
-                VStack {
-                    if videos.count != 0 {
-                        ForEach(0...videos.count - 1, id: \.self) { i in
-                            NavigationLink(destination: {VideoDetailView(videoDetails: ["Pic": videos[i]["PicUrl"]!, "Title": videos[i]["Title"]!, "BV": videos[i]["BV"]!, "UP": username, "View": videos[i]["PlayCount"]!, "Danmaku": videos[i]["DanmakuCount"]!])}, label: {
-                                HStack {
-                                    WebImage(url: URL(string: videos[i]["PicUrl"]! + "@40w"))
-                                    VStack {
-                                        Text(videos[i]["Title"]!)
-                                            .font(.system(size: 14, weight: .bold))
-                                            .lineLimit(3)
-                                        
+                Group {
+                    HStack {
+                        Button(action: {
+                            viewSelector = .video
+                        }, label: {
+                            Text("视频")
+                                .foregroundColor(viewSelector == .video ? Color(hex: 0xfa678e) : .white)
+                        })
+                        .buttonBorderShape(.roundedRectangle(radius: 14))
+                        Button(action: {
+                            viewSelector = .article
+                        }, label: {
+                            Text("专栏")
+                                .foregroundColor(viewSelector == .article ? Color(hex: 0xfa678e) : .white)
+                        })
+                        .buttonBorderShape(.roundedRectangle(radius: 14))
+                    }
+                    if viewSelector == .video {
+                        VStack {
+                            if videos.count != 0 {
+                                ForEach(0...videos.count - 1, id: \.self) { i in
+                                    NavigationLink(destination: {VideoDetailView(videoDetails: ["Pic": videos[i]["PicUrl"]!, "Title": videos[i]["Title"]!, "BV": videos[i]["BV"]!, "UP": username, "View": videos[i]["PlayCount"]!, "Danmaku": videos[i]["DanmakuCount"]!])}, label: {
                                         HStack {
-                                            Label(videos[i]["PlayCount"]!, systemImage: "play.rectangle")
-                                            Label(videos[i]["DanmakuCount"]!, systemImage: "text.word.spacing")
+                                            WebImage(url: URL(string: videos[i]["PicUrl"]! + "@40w"))
+                                            VStack {
+                                                Text(videos[i]["Title"]!)
+                                                    .font(.system(size: 14, weight: .bold))
+                                                    .lineLimit(3)
+                                                
+                                                HStack {
+                                                    Label(videos[i]["PlayCount"]!, systemImage: "play.rectangle")
+                                                    Label(videos[i]["DanmakuCount"]!, systemImage: "text.word.spacing")
+                                                }
+                                                .font(.system(size: 10))
+                                            }
                                         }
-                                        .font(.system(size: 10))
-                                    }
+                                    })
+                                    .buttonBorderShape(.roundedRectangle(radius: 8))
                                 }
-                            })
-                            .buttonBorderShape(.roundedRectangle(radius: 8))
+                            }
+                        }
+                    } else if viewSelector == .article {
+                        VStack {
+                            if articles.count != 0 {
+                                ForEach(0...articles.count - 1, id: \.self) { i in
+//                                    NavigationLink(destination: {ArticleView(cvid: articles[i]["CV"]!)}, label: {
+//                                        VStack {
+//                                            Text(articles[i]["Title"]!)
+//                                                .font(.system(size: 16, weight: .bold))
+//                                                .lineLimit(3)
+//                                            HStack {
+//                                                VStack {
+//                                                    Text(articles[i]["Summary"]!)
+//                                                        .font(.system(size: 10, weight: .bold))
+//                                                        .lineLimit(3)
+//                                                        .foregroundColor(.gray)
+//                                                    HStack {
+//                                                        Text(articles[i]["Type"]!)
+//                                                            .font(.system(size: 10))
+//                                                            .lineLimit(1)
+//                                                            .foregroundColor(.gray)
+//                                                        Label(articles[i]["View"]!, systemImage: "eye.fill")
+//                                                            .font(.system(size: 10))
+//                                                            .lineLimit(1)
+//                                                            .foregroundColor(.gray)
+//                                                        Label(articles[i]["Like"]!, systemImage: "hand.thumbsup.fill")
+//                                                            .font(.system(size: 10))
+//                                                            .lineLimit(1)
+//                                                            .foregroundColor(.gray)
+//                                                    }
+//                                                }
+//                                                WebImage(url: URL(string: articles[i]["Pic"]! + "@60w"), options: [.progressiveLoad])
+//                                                    .cornerRadius(5)
+//                                            }
+//                                        }
+//                                    })
+//                                    .buttonBorderShape(.roundedRectangle(radius: 14))
+                                    Button(action: {
+                                        let session = ASWebAuthenticationSession(url: URL(string: "https://www.bilibili.com/read/cv\(articles[i]["CV"]!)")!, callbackURLScheme: nil) { _, _ in
+                                            return
+                                        }
+                                        session.prefersEphemeralWebBrowserSession = true
+                                        session.start()
+                                    }, label: {
+                                        VStack {
+                                            Text(articles[i]["Title"]!)
+                                                .font(.system(size: 16, weight: .bold))
+                                                .lineLimit(3)
+                                            HStack {
+                                                VStack {
+                                                    Text(articles[i]["Summary"]!)
+                                                        .font(.system(size: 10, weight: .bold))
+                                                        .lineLimit(3)
+                                                        .foregroundColor(.gray)
+                                                    HStack {
+                                                        Text(articles[i]["Type"]!)
+                                                            .font(.system(size: 10))
+                                                            .lineLimit(1)
+                                                            .foregroundColor(.gray)
+                                                        Label(articles[i]["View"]!, systemImage: "eye.fill")
+                                                            .font(.system(size: 10))
+                                                            .lineLimit(1)
+                                                            .foregroundColor(.gray)
+                                                        Label(articles[i]["Like"]!, systemImage: "hand.thumbsup.fill")
+                                                            .font(.system(size: 10))
+                                                            .lineLimit(1)
+                                                            .foregroundColor(.gray)
+                                                    }
+                                                }
+                                                WebImage(url: URL(string: articles[i]["Pic"]! + "@60w"), options: [.progressiveLoad])
+                                                    .cornerRadius(5)
+                                            }
+                                        }
+                                    })
+                                    .buttonBorderShape(.roundedRectangle(radius: 14))
+                                }
+                            }
+                        }
+                        .onAppear {
+                            RefreshArticles()
+                        }
+                        .onDisappear {
+                            articles = [[String: String]]()
                         }
                     }
                 }
@@ -119,8 +226,6 @@ struct UserDetailView: View {
                             officialType = respJson["data"]["official"]["type"].int!
                             officialTitle = respJson["data"]["official"]["title"].string!
                             userSign = respJson["data"]["sign"].string!
-                            
-                            
                         }
                     }
                 }
@@ -150,6 +255,30 @@ struct UserDetailView: View {
             }
         }
     }
+    func RefreshArticles() {
+        let headers: HTTPHeaders = [
+            "cookie": "SESSDATA=\(sessdata);"
+        ]
+        DarockKit.Network.shared.requestString("https://api.darock.top/bili/wbi/sign/\("mid=\(uid)&ps=12&pn=1&sort=publish_time&platform=web".base64Encoded())") { respStr, isSuccess in
+            if isSuccess {
+                debugPrint(respStr.apiFixed())
+                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/article?\(respStr.apiFixed())", headers: headers) { respJson, isSuccess in
+                    if isSuccess {
+                        debugPrint(respJson)
+                        let articlesJson = respJson["data"]["articles"]
+                        for article in articlesJson {
+                            articles.append(["Title": article.1["title"].string!, "Summary": article.1["summary"].string!, "Type": article.1["categories"][0]["name"].string!, "View": String(article.1["stats"]["view"].int!), "Like": String(article.1["stats"]["like"].int!), "Pic": article.1["image_urls"][0].string!, "CV": String(article.1["id"].int!)])
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+enum UserDetailViewPubsType {
+    case video
+    case article
 }
 
 #Preview {

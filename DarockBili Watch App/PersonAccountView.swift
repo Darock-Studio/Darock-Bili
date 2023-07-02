@@ -20,6 +20,7 @@ struct PersonAccountView: View {
     @State var username = ""
     @State var userSign = ""
     @State var userFaceUrl = ""
+    @State var isLogoutAlertPresented = false
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -64,7 +65,34 @@ struct PersonAccountView: View {
                                         .font(.system(size: 18))
                                         .bold()
                                 })
+                                Spacer()
+                                    .frame(height: 10)
+                                Button(role: .destructive, action: {
+                                    isLogoutAlertPresented = true
+                                }, label: {
+                                    Label("退出登录", systemImage: "rectangle.portrait.and.arrow.right")
+                                        .font(.system(size: 18))
+                                        .bold()
+                                })
+                                .alert("退出登录", isPresented: $isLogoutAlertPresented, actions: {
+                                    Button(role: .destructive, action: {
+                                        dedeUserID = ""
+                                        dedeUserID__ckMd5 = ""
+                                        sessdata = ""
+                                        biliJct = ""
+                                    }, label: {
+                                        Text("确定")
+                                    })
+                                    Button(action: {
+                                        
+                                    }, label: {
+                                        Text("取消")
+                                    })
+                                }, message: {
+                                    Text("确定吗？")
+                                })
                             }
+                            
                         }
                         .onAppear {
                             let headers: HTTPHeaders = [

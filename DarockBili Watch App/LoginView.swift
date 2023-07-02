@@ -167,10 +167,10 @@ struct LoginView: View {
                                     timer.invalidate()
                                     
                                     let respUrl = respJson["data"]["url"].string!
-                                    dedeUserID = String(respUrl.split(separator: "DedeUserID=")[1].split(separator: "\\u0026")[0])
-                                    dedeUserID__ckMd5 = String(respUrl.split(separator: "DedeUserID__ckMd5=")[1].split(separator: "\\u0026")[0])
-                                    sessdata = String(respUrl.split(separator: "SESSDATA=")[1].split(separator: "\\u0026")[0])
-                                    biliJct = String(respUrl.split(separator: "bili_jct=")[1].split(separator: "\\u0026")[0])
+                                    dedeUserID = String(respUrl.split(separator: "DedeUserID=")[1].split(separator: "&")[0])
+                                    dedeUserID__ckMd5 = String(respUrl.split(separator: "DedeUserID__ckMd5=")[1].split(separator: "&")[0])
+                                    sessdata = String(respUrl.split(separator: "SESSDATA=")[1].split(separator: "&")[0])
+                                    biliJct = String(respUrl.split(separator: "bili_jct=")[1].split(separator: "&")[0])
                                     dismiss()
                                 }
                                 

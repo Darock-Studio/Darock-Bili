@@ -9,6 +9,7 @@ import SwiftUI
 import DarockKit
 import SwiftyJSON
 import Alamofire
+import SDWebImageSwiftUI
 
 struct MainView: View {
     @AppStorage("DedeUserID") var dedeUserID = ""
@@ -16,44 +17,59 @@ struct MainView: View {
     @AppStorage("SESSDATA") var sessdata = ""
     @AppStorage("bili_jct") var biliJct = ""
     @State var videos = [[String: String]]()
+    @State var searchText = ""
+    @State var isSearchPresented = false
     var body: some View {
-        NavigationStack {
+        Group {
             List {
-                if videos.count != 0 {
-                    ForEach(0...videos.count - 1, id: \.self) { i in
-                        NavigationLink(destination: {VideoDetailView(videoDetails: videos[i])}, label: {
-                            VStack {
-                                HStack {
-                                    Spacer()
-                                    ZStack {
-                                        AsyncImage(url: URL(string: videos[i]["Pic"]! + "@150w")!)
-                                        VStack {
-                                            Spacer()
-                                            HStack {
-                                                Label(videos[i]["View"]!, systemImage: "play.rectangle")
-                                                    .font(.system(size: 12))
-                                                Label(videos[i]["Danmaku"]!, systemImage: "text.word.spacing")
-                                                    .font(.system(size: 12))
+                Section {
+                    TextField("搜索", text: $searchText)
+                        .onSubmit {
+                            isSearchPresented = true
+                        }
+                        .sheet(isPresented: $isSearchPresented, content: {SearchView(keyword: searchText)})
+                        .onDisappear {
+                            searchText = ""
+                        }
+                }
+                Section {
+                    if videos.count != 0 {
+                        ForEach(0...videos.count - 1, id: \.self) { i in
+                            NavigationLink(destination: {VideoDetailView(videoDetails: videos[i])}, label: {
+                                VStack {
+                                    HStack {
+                                        Spacer()
+                                        ZStack {
+                                            WebImage(url: URL(string: videos[i]["Pic"]! + "@150w")!, options: [.progressiveLoad])
+                                                .cornerRadius(7)
+                                            VStack {
                                                 Spacer()
+                                                HStack {
+                                                    Label(videos[i]["View"]!, systemImage: "play.rectangle")
+                                                        .font(.system(size: 12))
+                                                    Label(videos[i]["Danmaku"]!, systemImage: "text.word.spacing")
+                                                        .font(.system(size: 12))
+                                                    Spacer()
+                                                }
                                             }
                                         }
+                                        Spacer()
                                     }
-                                    Spacer()
+                                    Text(videos[i]["Title"]!)
+                                        .font(.system(size: 18))
+                                        .lineLimit(3)
+                                    HStack {
+                                        Spacer()
+                                            .frame(width: 5)
+                                        Text(videos[i]["UP"]!)
+                                            .font(.system(size: 14))
+                                            .foregroundColor(.gray)
+                                            .lineLimit(1)
+                                        Spacer()
+                                    }
                                 }
-                                Text(videos[i]["Title"]!)
-                                    .font(.system(size: 18))
-                                    .lineLimit(3)
-                                HStack {
-                                    Spacer()
-                                        .frame(width: 5)
-                                    Text(videos[i]["UP"]!)
-                                        .font(.system(size: 14))
-                                        .foregroundColor(.gray)
-                                        .lineLimit(1)
-                                    Spacer()
-                                }
-                            }
-                        })
+                            })
+                        }
                     }
                 }
             }
