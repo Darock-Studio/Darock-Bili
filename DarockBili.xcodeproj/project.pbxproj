@@ -21,6 +21,7 @@
 		6BBFA2BE2A51236900FE61D1 /* VideoCommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA2BD2A51236900FE61D1 /* VideoCommentsView.swift */; };
 		6BBFA2C12A5123CE00FE61D1 /* DarockKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6BBFA2C02A5123CE00FE61D1 /* DarockKit */; };
 		6BBFA2C32A512CF500FE61D1 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA2C22A512CF500FE61D1 /* AboutView.swift */; };
+		6BBFA2C52A515D8B00FE61D1 /* FirstUsingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFA2C42A515D8B00FE61D1 /* FirstUsingView.swift */; };
 		6BBFF7BC2A4FF18100DE050E /* EFQRCode in Frameworks */ = {isa = PBXBuildFile; productRef = 6BBFF7BB2A4FF18100DE050E /* EFQRCode */; };
 		6BBFF7BE2A50040E00DE050E /* FollowListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFF7BD2A50040E00DE050E /* FollowListView.swift */; };
 		6BBFF7C02A50046C00DE050E /* UserDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBFF7BF2A50046C00DE050E /* UserDetailView.swift */; };
@@ -72,6 +73,7 @@
 		6B0253E32A4F265100567986 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		6BBFA2BD2A51236900FE61D1 /* VideoCommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCommentsView.swift; sourceTree = "<group>"; };
 		6BBFA2C22A512CF500FE61D1 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		6BBFA2C42A515D8B00FE61D1 /* FirstUsingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstUsingView.swift; sourceTree = "<group>"; };
 		6BBFF7BD2A50040E00DE050E /* FollowListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowListView.swift; sourceTree = "<group>"; };
 		6BBFF7BF2A50046C00DE050E /* UserDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailView.swift; sourceTree = "<group>"; };
 		6BBFF7D02A50411400DE050E /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -130,9 +132,10 @@
 				6BBFF7BF2A50046C00DE050E /* UserDetailView.swift */,
 				6BBFF7D52A5073FC00DE050E /* ArticleView.swift */,
 				6B0253E32A4F265100567986 /* LoginView.swift */,
+				6BBFA2C42A515D8B00FE61D1 /* FirstUsingView.swift */,
+				6BBFA2C22A512CF500FE61D1 /* AboutView.swift */,
 				6B0253C32A4EF59700567986 /* Assets.xcassets */,
 				6B0253C52A4EF59700567986 /* Preview Content */,
-				6BBFA2C22A512CF500FE61D1 /* AboutView.swift */,
 			);
 			path = "DarockBili Watch App";
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BBFA2C52A515D8B00FE61D1 /* FirstUsingView.swift in Sources */,
 				6BBFF7D12A50411400DE050E /* SearchView.swift in Sources */,
 				6B0253C22A4EF59600567986 /* ContentView.swift in Sources */,
 				6BBFA2BE2A51236900FE61D1 /* VideoCommentsView.swift in Sources */,
@@ -409,7 +413,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -441,7 +445,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -473,7 +477,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_KEY_CFBundleDisplayName = "腕上哔哩";
@@ -490,7 +494,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_KEY_CFBundleDisplayName = "腕上哔哩";

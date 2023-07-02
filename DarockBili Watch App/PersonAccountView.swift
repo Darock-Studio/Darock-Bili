@@ -66,7 +66,14 @@ struct PersonAccountView: View {
                                         .bold()
                                 })
                                 Spacer()
-                                    .frame(height: 10)
+                                    .frame(height: 20)
+                                NavigationLink(destination: {AboutView()}, label: {
+                                    Label("关于", systemImage: "")
+                                        .font(.system(size: 18))
+                                        .bold()
+                                })
+                                Spacer()
+                                    .frame(height: 20)
                                 Button(role: .destructive, action: {
                                     isLogoutAlertPresented = true
                                 }, label: {

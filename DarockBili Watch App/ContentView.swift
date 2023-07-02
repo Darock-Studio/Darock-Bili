@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @AppStorage("IsFirstUsing") var isFirstUsing = true
+    @State var isGuidePresented = false
     var body: some View {
         NavigationStack {
             TabView {
@@ -15,6 +17,12 @@ struct ContentView: View {
                     .tag(1)
                 PersonAccountView()
                     .tag(2)
+            }
+            .sheet(isPresented: $isGuidePresented, content: {FirstUsingView()})
+            .onAppear {
+                if isFirstUsing {
+                    isGuidePresented = true
+                }
             }
         }
     }
