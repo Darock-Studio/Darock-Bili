@@ -1,0 +1,549 @@
+{
+  "sourceLanguage" : "zh-Hans",
+  "strings" : {
+    "" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "--- Alamofire ---\nLicensed under MIT license\n-----------------\n\n--- EFQRCode ---\nLicensed under MIT license\n----------------\n\n--- libwebp ---\nLicensed under BSD-3-Clause license\n---------------\n\n--- SDWebImage ---\nLicensed under MIT license\n------------------\n\n--- SDWebImagePDFCoder ---\nLicensed under MIT license\n--------------------------\n\n--- SDWebImageSVGCoder ---\nLicensed under MIT license\n--------------------------\n\n--- SDWebImageSwiftUI ---\nLicensed under MIT license\n-------------------------\n\n--- SDWebImageWebPCoder ---\nLicensed under MIT license\n---------------------------\n\n--- swift_qrcodejs ---\nLicensed under MIT license\n----------------------\n\n--- SwiftyJSON ---\nLicensed under MIT license\n------------------" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "--- Alamofire ---\nLicensed under MIT license\n-----------------\n\n--- EFQRCode ---\nLicensed under MIT license\n----------------\n\n--- libwebp ---\nLicensed under BSD-3-Clause license\n---------------\n\n--- SDWebImage ---\nLicensed under MIT license\n------------------\n\n--- SDWebImagePDFCoder ---\nLicensed under MIT license\n--------------------------\n\n--- SDWebImageSVGCoder ---\nLicensed under MIT license\n--------------------------\n\n--- SDWebImageSwiftUI ---\nLicensed under MIT license\n-------------------------\n\n--- SDWebImageWebPCoder ---\nLicensed under MIT license\n---------------------------\n\n--- swift_qrcodejs ---\nLicensed under MIT license\n----------------------\n\n--- SwiftyJSON ---\nLicensed under MIT license\n------------------"
+          }
+        }
+      }
+    },
+    "%@%@%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@%2$@%3$@"
+          }
+        }
+      }
+    },
+    "%lld / %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld / %2$lld"
+          }
+        }
+      }
+    },
+    "bilibili UP主认证：%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bilibili Uploaders Certification: %@"
+          }
+        }
+      }
+    },
+    "Darock Studio" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "Darock 正在努力开发，将会很快更新" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Darock is working hard and will update soon."
+          }
+        }
+      }
+    },
+    "Thanks to:" : {
+
+    },
+    "上一页" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previous Page"
+          }
+        }
+      }
+    },
+    "下一页" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next Page"
+          }
+        }
+      }
+    },
+    "专栏" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Essays"
+          }
+        }
+      }
+    },
+    "人机验证已完成" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CAPTCHA finished."
+          }
+        }
+      }
+    },
+    "关于" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About"
+          }
+        }
+      }
+    },
+    "关注列表" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uploaders"
+          }
+        }
+      }
+    },
+    "加载更多" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Load more"
+          }
+        }
+      }
+    },
+    "历史记录" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "History"
+          }
+        }
+      }
+    },
+    "取消" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
+    },
+    "可在 TestFlight 中反馈，感谢您的支持！" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can report in TestFlight, thanks for your supporting."
+          }
+        }
+      }
+    },
+    "基本操作：" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Basics:"
+          }
+        }
+      }
+    },
+    "密码" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password"
+          }
+        }
+      }
+    },
+    "已扫描" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scanned"
+          }
+        }
+      }
+    },
+    "开源组件许可" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open-source resources permission"
+          }
+        }
+      }
+    },
+    "很快到来" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Coming Soon"
+          }
+        }
+      }
+    },
+    "我的收藏" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My favorites:"
+          }
+        }
+      }
+    },
+    "我知道了！" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Got It!"
+          }
+        }
+      }
+    },
+    "扫码登录" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scan to Login"
+          }
+        }
+      }
+    },
+    "投币" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Give Coin"
+          }
+        }
+      }
+    },
+    "搜索" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search"
+          }
+        }
+      }
+    },
+    "播放" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Play"
+          }
+        }
+      }
+    },
+    "暗礁反馈" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Darock Feedback"
+          }
+        }
+      }
+    },
+    "来自 %@ 的消息：欢迎加群 248036605 获取最新消息谢谢喵！" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Message from %@: Join QQ group 238036605 for the lastest news."
+          }
+        }
+      }
+    },
+    "欢迎使用腕上哔哩！" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome to 腕上哔哩"
+          }
+        }
+      }
+    },
+    "正在下载..." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Downloading…"
+          }
+        }
+      }
+    },
+    "正在解析..." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Decoding…"
+          }
+        }
+      }
+    },
+    "正在预加载..." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preloading…"
+          }
+        }
+      }
+    },
+    "点击登录" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap to Login"
+          }
+        }
+      }
+    },
+    "登录" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login"
+          }
+        }
+      }
+    },
+    "确定" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm"
+          }
+        }
+      }
+    },
+    "确定吗？" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure?"
+          }
+        }
+      }
+    },
+    "视频" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video"
+          }
+        }
+      }
+    },
+    "离线缓存" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Downloads"
+          }
+        }
+      }
+    },
+    "网络环境：" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Internet Connection:"
+          }
+        }
+      }
+    },
+    "腕上哔哩 v%@ Build %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Darock Bill v%1$@ Build %2$@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "腕上哔哩 v%1$@ Build %2$@"
+          }
+        }
+      }
+    },
+    "腕上哔哩切换页面主要靠点击和滑动，当您发现屏幕下方有小点时可尝试左右滑动切换页面" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Darock Bill navigate by tapping and swiping, you can swipe to change views if you see spots at the button of the scr"
+          }
+        }
+      }
+    },
+    "腕上哔哩现在还处于测试阶段，遇到问题可以使用暗礁反馈（将在晚些时候上线）帮助我们改进" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Darock Bill is still in Beta, if you ran into a problem you can report in Darock Feedback (coming later) to help us improve."
+          }
+        }
+      }
+    },
+    "请确定 Watch 的状态栏（控制中心上方）显示为%@而不是%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please check Watch’s Status Bar (at the top of the Control Center) had shown %@ instead of %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "请确定 Watch 的状态栏（控制中心上方）显示为%1$@而不是%2$@"
+          }
+        }
+      }
+    },
+    "账号" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account"
+          }
+        }
+      }
+    },
+    "这里有一些值得注意的地方：" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tips:"
+          }
+        }
+      }
+    },
+    "进行人机验证" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CAPTCHA"
+          }
+        }
+      }
+    },
+    "退出登录" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Log out"
+          }
+        }
+      }
+    },
+    "遇到问题？下载%@（暂未上线），附带上方文本进行反馈" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ran into a problem? Report your problem with the text above via %@ (coming soon)"
+          }
+        }
+      }
+    },
+    "问题反馈：" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Report bugs:"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

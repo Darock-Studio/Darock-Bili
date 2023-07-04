@@ -38,6 +38,65 @@ struct LoginView: View {
     @State var qrTimer: Timer?
     var body: some View {
         TabView {
+            ScrollView {
+                if qrImage != nil {
+                    ZStack {
+                        VStack {
+                            Image(uiImage: UIImage(cgImage: qrImage!))
+                                .resizable()
+                                .frame(width: 140, height: 140)
+                                .blur(radius: isScanned ? 8 : 0)
+                            Text("扫码登录")
+                                .bold()
+                        }
+                        if isScanned {
+                            Text("已扫描")
+                                .font(.title2)
+                                //.foregroundColor(.white)
+                        }
+                    }
+                } else {
+                    ProgressView()
+                }
+            }
+            .tag(0)
+            .onAppear {
+                DarockKit.Network.shared.requestJSON("https://passport.bilibili.com/x/passport-login/web/qrcode/generate") { respJson, isSuccess in
+                    if isSuccess {
+                        let qrUrl = respJson["data"]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
+                        debugPrint(qrUrl)
+                        if let image = EFQRCode.generate(for: qrUrl) {
+                            qrImage = image
+                        }
+                        qrKey = respJson["data"]["qrcode_key"].string!
+                        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
+                            qrTimer = timer
+                            DarockKit.Network.shared.requestJSON("https://passport.bilibili.com/x/passport-login/web/qrcode/poll?qrcode_key=\(qrKey)") { respJson, isSuccess in
+                                if respJson["data"]["code"].int == 86090 {
+                                    isScanned = true
+                                } else if respJson["data"]["code"].int == 0 {
+                                    timer.invalidate()
+                                    
+                                    let respUrl = respJson["data"]["url"].string!
+                                    dedeUserID = String(respUrl.split(separator: "DedeUserID=")[1].split(separator: "&")[0])
+                                    dedeUserID__ckMd5 = String(respUrl.split(separator: "DedeUserID__ckMd5=")[1].split(separator: "&")[0])
+                                    sessdata = String(respUrl.split(separator: "SESSDATA=")[1].split(separator: "&")[0])
+                                    biliJct = String(respUrl.split(separator: "bili_jct=")[1].split(separator: "&")[0])
+                                    dismiss()
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+            }
+            .onDisappear {
+                if qrTimer != nil {
+                    qrTimer!.invalidate()
+                }
+            }
+            
+            
             List {
                 Section {
                     TextField("账号", text: $accountInput)
@@ -131,59 +190,6 @@ struct LoginView: View {
                     }
                 }
             }
-            ScrollView {
-                if qrImage != nil {
-                    ZStack {
-                        Image(uiImage: UIImage(cgImage: qrImage!))
-                            .resizable()
-                            .frame(width: 140, height: 140)
-                            .blur(radius: isScanned ? 8 : 0)
-                        if isScanned {
-                            Text("已扫描")
-                                .font(.title2)
-                                //.foregroundColor(.white)
-                        }
-                    }
-                } else {
-                    ProgressView()
-                }
-            }
-            .tag(0)
-            .onAppear {
-                DarockKit.Network.shared.requestJSON("https://passport.bilibili.com/x/passport-login/web/qrcode/generate") { respJson, isSuccess in
-                    if isSuccess {
-                        let qrUrl = respJson["data"]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
-                        debugPrint(qrUrl)
-                        if let image = EFQRCode.generate(for: qrUrl) {
-                            qrImage = image
-                        }
-                        qrKey = respJson["data"]["qrcode_key"].string!
-                        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
-                            qrTimer = timer
-                            DarockKit.Network.shared.requestJSON("https://passport.bilibili.com/x/passport-login/web/qrcode/poll?qrcode_key=\(qrKey)") { respJson, isSuccess in
-                                if respJson["data"]["code"].int == 86090 {
-                                    isScanned = true
-                                } else if respJson["data"]["code"].int == 0 {
-                                    timer.invalidate()
-                                    
-                                    let respUrl = respJson["data"]["url"].string!
-                                    dedeUserID = String(respUrl.split(separator: "DedeUserID=")[1].split(separator: "&")[0])
-                                    dedeUserID__ckMd5 = String(respUrl.split(separator: "DedeUserID__ckMd5=")[1].split(separator: "&")[0])
-                                    sessdata = String(respUrl.split(separator: "SESSDATA=")[1].split(separator: "&")[0])
-                                    biliJct = String(respUrl.split(separator: "bili_jct=")[1].split(separator: "&")[0])
-                                    dismiss()
-                                }
-                                
-                            }
-                        }
-                    }
-                }
-            }
-            .onDisappear {
-                if qrTimer != nil {
-                    qrTimer!.invalidate()
-                }
-            }
         }
     }
     
@@ -198,6 +204,8 @@ struct LoginView: View {
     }
 }
 
-#Preview {
-    LoginView()
+struct LoginView_Previews: PreviewProvider {
+    static var previews: some View {
+        LoginView()
+    }
 }

@@ -15,9 +15,13 @@ struct AboutView: View {
                 Section {
                     Text("腕上哔哩 v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)")
                     Text("遇到问题？下载\(Text("暗礁反馈").foregroundColor(.blue))（暂未上线），附带上方文本进行反馈")
+                    Text("可在 TestFlight 中反馈，感谢您的支持！")
                 }
-                Text("Powered by:")
-                Text("Darock Studio")
+                Section {
+                    Text("Credits:")
+                    Text("Darock Studio")
+                    Label("来自 \(Text("Darock Studio").bold()) 的消息：欢迎加群 248036605 获取最新消息谢谢喵！", systemImage: "arrowshape.up")
+                }
                 Section {
                     NavigationLink(destination: {OpenSource()}, label: {
                         Text("开源组件许可")
@@ -76,6 +80,8 @@ struct AboutView: View {
     }
 }
 
-#Preview {
-    AboutView()
+struct AboutView_Previews: PreviewProvider {
+    static var previews: some View {
+        AboutView()
+    }
 }

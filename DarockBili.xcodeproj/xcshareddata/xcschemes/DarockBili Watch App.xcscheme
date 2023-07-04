@@ -40,8 +40,39 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      shouldAutocreateTestPlan = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <TestPlans>
+         <TestPlanReference
+            reference = "container:Part Test.xctestplan">
+         </TestPlanReference>
+         <TestPlanReference
+            reference = "container:UI Test.xctestplan">
+         </TestPlanReference>
+      </TestPlans>
+      <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6B56A9092A53C9BE0089DD31"
+               BuildableName = "DarockBili Tests.xctest"
+               BlueprintName = "DarockBili Tests"
+               ReferencedContainer = "container:DarockBili.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6B56A9162A53CA9B0089DD31"
+               BuildableName = "DarockBili UITests.xctest"
+               BlueprintName = "DarockBili UITests"
+               ReferencedContainer = "container:DarockBili.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -52,7 +83,26 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES">
+      allowLocationSimulation = "YES"
+      notificationPayloadFile = "PushNotificationPayload.apns">
+      <PostActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "cd /Users/WindowsMEMZ/Desktop/DarockBili&#10;xcrun agvtool next-version -all&#10;">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "6B0253B92A4EF59600567986"
+                     BuildableName = "&#x8155;&#x4e0a;&#x54d4;&#x54e9;.app"
+                     BlueprintName = "DarockBili Watch App"
+                     ReferencedContainer = "container:DarockBili.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PostActions>
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
@@ -87,5 +137,23 @@
    <ArchiveAction
       buildConfiguration = "Release"
       revealArchiveInOrganizer = "YES">
+      <PostActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "cd /Users/WindowsMEMZ/Desktop/DarockBili&#10;xcrun agvtool next-version -all&#10;">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "6B0253B92A4EF59600567986"
+                     BuildableName = "&#x8155;&#x4e0a;&#x54d4;&#x54e9;.app"
+                     BlueprintName = "DarockBili Watch App"
+                     ReferencedContainer = "container:DarockBili.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PostActions>
    </ArchiveAction>
 </Scheme>

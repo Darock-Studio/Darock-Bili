@@ -96,6 +96,8 @@ struct SearchView: View {
     }
 }
 
-#Preview {
-    SearchView(keyword: "Darock")
+struct SearchView_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchView(keyword: "Darock")
+    }
 }

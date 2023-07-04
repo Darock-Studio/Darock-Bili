@@ -19,9 +19,18 @@ struct MainView: View {
     @State var videos = [[String: String]]()
     @State var searchText = ""
     @State var isSearchPresented = false
+    @State var notice = ""
     var body: some View {
         Group {
             List {
+                Section {
+                    if notice != "" {
+                        NavigationLink(destination: {NoticeView()}, label: {
+                            Text(notice)
+                                .bold()
+                        })
+                    }
+                }
                 Section {
                     TextField("搜索", text: $searchText)
                         .onSubmit {
@@ -70,27 +79,46 @@ struct MainView: View {
                                 }
                             })
                         }
+                        Button(action: {
+                            LoadNewVideos()
+                        }, label: {
+                            Text("加载更多")
+                                .bold()
+                        })
+                    } else {
+                        ProgressView()
                     }
                 }
             }
         }
         .onAppear {
-            let headers: HTTPHeaders = [
-                "cookie": "SESSDATA=\(sessdata)"
-            ]
-            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/dynamic/region?ps=8&rid=1", headers: headers) { respJson, isSuccess in
+            LoadNewVideos()
+            DarockKit.Network.shared.requestString("https://api.darock.top/bili/notice") { respStr, isSuccess in
                 if isSuccess {
-                    let datas = respJson["data"]["archives"]
-                    debugPrint(datas)
-                    for videoInfo in datas {
-                        videos.append(["Pic": videoInfo.1["pic"].string!, "Title": videoInfo.1["title"].string!, "BV": videoInfo.1["bvid"].string!, "UP": videoInfo.1["owner"]["name"].string!, "View": String(videoInfo.1["stat"]["view"].int!), "Danmaku": String(videoInfo.1["stat"]["danmaku"].int!)])
-                    }
+                    notice = respStr.apiFixed()
+                }
+            }
+        }
+    }
+    
+    func LoadNewVideos() {
+        let headers: HTTPHeaders = [
+            "cookie": "SESSDATA=\(sessdata)"
+        ]
+        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/dynamic/region?ps=50&rid=1", headers: headers) { respJson, isSuccess in
+            if isSuccess {
+                let datas = respJson["data"]["archives"]
+                debugPrint(datas)
+                for videoInfo in datas {
+                    videos.append(["Pic": videoInfo.1["pic"].string!, "Title": videoInfo.1["title"].string!, "BV": videoInfo.1["bvid"].string!, "UP": videoInfo.1["owner"]["name"].string!, "View": String(videoInfo.1["stat"]["view"].int!), "Danmaku": String(videoInfo.1["stat"]["danmaku"].int!)])
                 }
             }
         }
     }
 }
 
-#Preview {
-    MainView()
+struct MainView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainView()
+    }
 }

@@ -1,0 +1,93 @@
+//
+//  HistoryView.swift
+//  DarockBili Watch App
+//
+//  Created by WindowsMEMZ on 2023/7/3.
+//
+
+import SwiftUI
+import DarockKit
+import Alamofire
+import SwiftyJSON
+
+struct HistoryView: View {
+    @AppStorage("DedeUserID") var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") var sessdata = ""
+    @AppStorage("bili_jct") var biliJct = ""
+    @State var histories = [[String: String]]()
+    @State var nowPage = 1
+    @State var totalPage = 1
+    var body: some View {
+        List {
+            if histories.count != 0 {
+                ForEach(0...histories.count - 1, id: \.self) { i in
+                    NavigationLink(destination: {VideoDetailView(videoDetails: histories[i])}, label: {
+                        HStack {
+                            AsyncImage(url: URL(string: histories[i]["Pic"]! + "@40w"))
+                                .cornerRadius(5)
+                            VStack {
+                                Text(histories[i]["Title"]!)
+                                    .font(.system(size: 15, weight: .bold))
+                                    .lineLimit(3)
+                                HStack {
+                                    Text(histories[i]["UP"]!)
+                                        .font(.system(size: 12))
+                                        .foregroundColor(.gray)
+                                        .lineLimit(1)
+                                    Spacer()
+                                }
+                                HStack {
+                                    switch Int(histories[i]["Device"]!)! {
+                                    case 1, 3, 5, 7:
+                                        Image(systemName: "iphone")
+                                            .resizable()
+                                            .frame(width: 10, height: 16)
+                                    case 2:
+                                        Image(systemName: "desktopcomputer")
+                                            .resizable()
+                                            .frame(width: 16, height: 10)
+                                    case 4, 6:
+                                        Image(systemName: "ipad.landscape")
+                                            .resizable()
+                                            .frame(width: 16, height: 10)
+                                    case 33:
+                                        Image(systemName: "tv")
+                                            .resizable()
+                                            .frame(width: 16, height: 10)
+                                    default:
+                                        Image(systemName: "iphone")
+                                            .resizable()
+                                            .frame(width: 10, height: 16)
+                                    }
+                                    Spacer()
+                                }
+                                .foregroundColor(.gray)
+                            }
+                        }
+                    })
+                }
+            }
+        }
+        .onAppear {
+            let headers: HTTPHeaders = [
+                "cookie": "SESSDATA=\(sessdata);"
+            ]
+            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v2/history", headers: headers) { respJson, isSuccess in
+                if isSuccess {
+                    debugPrint(respJson)
+                    let datas = respJson["data"]
+                    for data in datas {
+                        histories.append(["Type": data.1["business"].string!, "Pic": data.1["pic"].string!, "Title": data.1["title"].string!, "UP": data.1["owner"]["name"].string!, "Device": String(data.1["device"].int!), "BV": data.1["bvid"].string!])
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct HistoryView_Previews: PreviewProvider {
+    static var previews: some View {
+        HistoryView()
+    }
+}

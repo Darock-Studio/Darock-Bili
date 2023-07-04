@@ -29,3 +29,4 @@ class AppDelegate: NSObject, WKApplicationDelegate {
         SDImageCodersManager.shared.addCoder(SDImagePDFCoder.shared)
     }
 }
+
