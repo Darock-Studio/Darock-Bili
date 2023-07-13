@@ -27,6 +27,12 @@ class AppDelegate: NSObject, WKApplicationDelegate {
         SDImageCodersManager.shared.addCoder(SDImageWebPCoder.shared)
         SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)
         SDImageCodersManager.shared.addCoder(SDImagePDFCoder.shared)
+        
+//        let nsd = biliEmojiDictionary as NSDictionary
+//        let manager = FileManager.default
+//        let urlForDocument = manager.urls(for: .documentDirectory, in: .userDomainMask)
+//        try! nsd.write(to: URL(string: (urlForDocument[0] as URL).absoluteString + "biliEmoji.plist")!)
+//        debugPrint((urlForDocument[0] as URL).absoluteString + "biliEmoji.plist")
+        
     }
 }
-

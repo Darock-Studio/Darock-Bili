@@ -20,6 +20,7 @@ struct VideoCommentsView: View {
     @AppStorage("bili_jct") var biliJct = ""
     @State var avid = -1
     @State var comments = [[String: String]]()
+    @State var nowPage = 1
     var body: some View {
         ScrollView {
             if comments.count != 0 {
@@ -33,30 +34,6 @@ struct VideoCommentsView: View {
                                     Text(comments[i]["Sender"]!)
                                         .font(.system(size: 14, weight: .bold))
                                         .lineLimit(1)
-//                                    switch Int(comments[i]["SenderLevel"]!)! {
-//                                    case 0:
-//                                        Image("Lv0Icon")
-//                                    case 1:
-//                                        Image("Lv1Icon")
-//                                    case 2:
-//                                        Image("Lv2Icon")
-//                                    case 3:
-//                                        Image("Lv3Icon")
-//                                    case 4:
-//                                        Image("Lv4Icon")
-//                                    case 5:
-//                                        Image("Lv5Icon")
-//                                    case 6:
-//                                        Image("Lv6Icon")
-//                                    case 7:
-//                                        Image("Lv7Icon")
-//                                    case 8:
-//                                        Image("Lv8Icon")
-//                                    case 9:
-//                                        Image("Lv9Icon")
-//                                    default:
-//                                        Image("Lv9Icon")
-//                                    }
                                 }
                                 Text(comments[i]["IP"]!)
                                     .font(.system(size: 10))
@@ -66,6 +43,24 @@ struct VideoCommentsView: View {
                             Spacer()
                         }
                         HStack {
+//                            Text({ () -> String in
+//                                var showText = comments[i]["Text"]!
+//                                if comments[i]["Text"]!.contains("[") && comments[i]["Text"]!.contains("]") {
+//                                    var emojiNames = [String]()
+//                                    let textSpd = comments[i]["Text"]!.split(separator: "[")
+//                                    for text in textSpd {
+//                                        emojiNames.append(String(text.split(separator: "]")[0]))
+//                                    }
+//                                    var emojiLinks = [String]()
+//                                    for name in emojiNames {
+//                                        emojiLinks.append(biliEmojiDictionary[name] ?? name)
+//                                    }
+//                                    for i in 0...emojiLinks.count - 1 {
+//                                        showText = showText.replacingOccurrences(of: "[\(emojiNames[i])]", with: "\(AsyncImage(url: URL(string: emojiLinks[i])))")
+//                                    }
+//                                }
+//                                return showText
+//                            }())
                             Text(comments[i]["Text"]!)
                                 .font(.system(size: 16, weight: .bold))
                                 .lineLimit(8)
@@ -88,34 +83,47 @@ struct VideoCommentsView: View {
                         Divider()
                     }
                 }
+                Button(action: {
+                    nowPage += 1
+                    ContinueLoadComment()
+                }, label: {
+                    Text("继续加载")
+                        .bold()
+                })
             }
         }
         .onAppear {
-            DarockKit.Network.shared.requestString("https://api.darock.top/bili/toav/\(oid)") { respStr, isSuccess in
-                if isSuccess {
-                    avid = Int(respStr)!
-                    debugPrint(avid)
-                    let headers: HTTPHeaders = [
-                        "cookie": "SESSDATA=\(sessdata);"
-                    ]
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v2/reply?type=1&oid=\(avid)&sort=1&ps=3&pn=1", headers: headers) { respJson, isSuccess in
-                        if isSuccess {
-                            let replies = respJson["data"]["replies"]
-                            for reply in replies {
-                                comments.append(["Text": reply.1["content"]["message"].string!, "Sender": reply.1["member"]["uname"].string!, "SenderPic": reply.1["member"]["avatar"].string!, "SenderLevel": String(reply.1["member"]["level_info"]["current_level"].int!), "IP": reply.1["reply_control"]["location"].string ?? "", "UserAction": String(reply.1["action"].int!), "Rpid": String(reply.1["rpid"].int!)])
-                            }
-                        } else {
-                            Logger().error("There is a error when request comments from Bilibili server")
-                        }
-                    }
-                } else {
-                    Logger().error("There is a error when request avid from Darock server")
-                }
-            }
+            ContinueLoadComment()
         }
         .onDisappear {
+            nowPage = 1
             comments = [[String: String]]()
             SDImageCache.shared.clearMemory()
+        }
+    }
+    
+    func ContinueLoadComment() {
+        DarockKit.Network.shared.requestString("https://api.darock.top/bili/toav/\(oid)") { respStr, isSuccess in
+            if isSuccess {
+                avid = Int(respStr)!
+                debugPrint(avid)
+                let headers: HTTPHeaders = [
+                    "cookie": "SESSDATA=\(sessdata);"
+                ]
+                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v2/reply?type=1&oid=\(avid)&sort=1&ps=20&pn=\(nowPage)", headers: headers) { respJson, isSuccess in
+                    if isSuccess {
+                        let replies = respJson["data"]["replies"]
+                        for reply in replies {
+                            
+                            comments.append(["Text": reply.1["content"]["message"].string!, "Sender": reply.1["member"]["uname"].string!, "SenderPic": reply.1["member"]["avatar"].string!, "SenderLevel": String(reply.1["member"]["level_info"]["current_level"].int!), "IP": reply.1["reply_control"]["location"].string ?? "", "UserAction": String(reply.1["action"].int!), "Rpid": String(reply.1["rpid"].int!)])
+                        }
+                    } else {
+                        Logger().error("There is a error when request comments from Bilibili server")
+                    }
+                }
+            } else {
+                Logger().error("There is a error when request avid from Darock server")
+            }
         }
     }
 }
