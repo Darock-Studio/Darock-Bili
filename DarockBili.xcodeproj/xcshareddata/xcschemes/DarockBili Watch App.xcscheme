@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6B0253B92A4EF59600567986"
-               BuildableName = "&#x8155;&#x4e0a;&#x54d4;&#x54e9;.app"
+               BuildableName = "&#x55b5;&#x54e9;&#x55b5;&#x54e9;.app"
                BlueprintName = "DarockBili Watch App"
                ReferencedContainer = "container:DarockBili.xcodeproj">
             </BuildableReference>
@@ -40,15 +40,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
-      <TestPlans>
-         <TestPlanReference
-            reference = "container:Part Test.xctestplan">
-         </TestPlanReference>
-         <TestPlanReference
-            reference = "container:UI Test.xctestplan">
-         </TestPlanReference>
-      </TestPlans>
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      shouldAutocreateTestPlan = "YES">
       <Testables>
          <TestableReference
             skipped = "NO"
@@ -66,7 +59,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6B56A9162A53CA9B0089DD31"
+               BlueprintIdentifier = "6BD2A0BC2A57E0DD00D37D0D"
                BuildableName = "DarockBili UITests.xctest"
                BlueprintName = "DarockBili UITests"
                ReferencedContainer = "container:DarockBili.xcodeproj">
@@ -83,8 +76,7 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES"
-      notificationPayloadFile = "PushNotificationPayload.apns">
+      allowLocationSimulation = "YES">
       <PostActions>
          <ExecutionAction
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
@@ -95,7 +87,7 @@
                   <BuildableReference
                      BuildableIdentifier = "primary"
                      BlueprintIdentifier = "6B0253B92A4EF59600567986"
-                     BuildableName = "&#x8155;&#x4e0a;&#x54d4;&#x54e9;.app"
+                     BuildableName = "&#x55b5;&#x54e9;&#x55b5;&#x54e9;.app"
                      BlueprintName = "DarockBili Watch App"
                      ReferencedContainer = "container:DarockBili.xcodeproj">
                   </BuildableReference>
@@ -108,7 +100,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6B0253B92A4EF59600567986"
-            BuildableName = "&#x8155;&#x4e0a;&#x54d4;&#x54e9;.app"
+            BuildableName = "&#x55b5;&#x54e9;&#x55b5;&#x54e9;.app"
             BlueprintName = "DarockBili Watch App"
             ReferencedContainer = "container:DarockBili.xcodeproj">
          </BuildableReference>
@@ -125,7 +117,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6B0253B92A4EF59600567986"
-            BuildableName = "&#x8155;&#x4e0a;&#x54d4;&#x54e9;.app"
+            BuildableName = "&#x55b5;&#x54e9;&#x55b5;&#x54e9;.app"
             BlueprintName = "DarockBili Watch App"
             ReferencedContainer = "container:DarockBili.xcodeproj">
          </BuildableReference>
@@ -147,7 +139,7 @@
                   <BuildableReference
                      BuildableIdentifier = "primary"
                      BlueprintIdentifier = "6B0253B92A4EF59600567986"
-                     BuildableName = "&#x8155;&#x4e0a;&#x54d4;&#x54e9;.app"
+                     BuildableName = "&#x55b5;&#x54e9;&#x55b5;&#x54e9;.app"
                      BlueprintName = "DarockBili Watch App"
                      ReferencedContainer = "container:DarockBili.xcodeproj">
                   </BuildableReference>

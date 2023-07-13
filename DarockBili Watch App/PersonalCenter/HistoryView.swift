@@ -22,50 +22,33 @@ struct HistoryView: View {
         List {
             if histories.count != 0 {
                 ForEach(0...histories.count - 1, id: \.self) { i in
-                    NavigationLink(destination: {VideoDetailView(videoDetails: histories[i])}, label: {
-                        HStack {
-                            AsyncImage(url: URL(string: histories[i]["Pic"]! + "@40w"))
-                                .cornerRadius(5)
-                            VStack {
-                                Text(histories[i]["Title"]!)
-                                    .font(.system(size: 15, weight: .bold))
-                                    .lineLimit(3)
-                                HStack {
-                                    Text(histories[i]["UP"]!)
-                                        .font(.system(size: 12))
-                                        .foregroundColor(.gray)
-                                        .lineLimit(1)
-                                    Spacer()
-                                }
-                                HStack {
-                                    switch Int(histories[i]["Device"]!)! {
-                                    case 1, 3, 5, 7:
-                                        Image(systemName: "iphone")
-                                            .resizable()
-                                            .frame(width: 10, height: 16)
-                                    case 2:
-                                        Image(systemName: "desktopcomputer")
-                                            .resizable()
-                                            .frame(width: 16, height: 10)
-                                    case 4, 6:
-                                        Image(systemName: "ipad.landscape")
-                                            .resizable()
-                                            .frame(width: 16, height: 10)
-                                    case 33:
-                                        Image(systemName: "tv")
-                                            .resizable()
-                                            .frame(width: 16, height: 10)
-                                    default:
-                                        Image(systemName: "iphone")
-                                            .resizable()
-                                            .frame(width: 10, height: 16)
-                                    }
-                                    Spacer()
-                                }
-                                .foregroundColor(.gray)
-                            }
-                        }
-                    })
+                    VideoCard(histories[i])
+//                    HStack {
+//                        switch Int(histories[i]["Device"]!)! {
+//                        case 1, 3, 5, 7:
+//                            Image(systemName: "iphone")
+//                                .resizable()
+//                                .frame(width: 10, height: 16)
+//                        case 2:
+//                            Image(systemName: "desktopcomputer")
+//                                .resizable()
+//                                .frame(width: 16, height: 10)
+//                        case 4, 6:
+//                            Image(systemName: "ipad.landscape")
+//                                .resizable()
+//                                .frame(width: 16, height: 10)
+//                        case 33:
+//                            Image(systemName: "tv")
+//                                .resizable()
+//                                .frame(width: 16, height: 10)
+//                        default:
+//                            Image(systemName: "iphone")
+//                                .resizable()
+//                                .frame(width: 10, height: 16)
+//                        }
+//                        Spacer()
+//                    }
+//                    .foregroundColor(.gray)
                 }
             }
         }
@@ -78,7 +61,7 @@ struct HistoryView: View {
                     debugPrint(respJson)
                     let datas = respJson["data"]
                     for data in datas {
-                        histories.append(["Type": data.1["business"].string!, "Pic": data.1["pic"].string!, "Title": data.1["title"].string!, "UP": data.1["owner"]["name"].string!, "Device": String(data.1["device"].int!), "BV": data.1["bvid"].string!])
+                        histories.append(["Type": data.1["business"].string!, "Pic": data.1["pic"].string!, "Title": data.1["title"].string!, "UP": data.1["owner"]["name"].string!, "Device": String(data.1["device"].int!), "BV": data.1["bvid"].string!, "View": String(data.1["stat"]["view"].int!), "Danmaku": String(data.1["stat"]["danmaku"].int!)])
                     }
                 }
             }

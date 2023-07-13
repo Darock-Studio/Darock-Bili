@@ -31,10 +31,10 @@ struct VideoDownloadView: View {
                             .bold()
                         Spacer()
                     }
-                    ProgressView(value: downloadProgress, total: 100.0)
+                    ProgressView(value: downloadProgress * 100, total: 100.0)
                     HStack {
                         Spacer()
-                        Text(String(format: "%.2f", downloadProgress))
+                        Text(String(format: "%.2f", downloadProgress * 100) + " %")
                         Spacer()
                     }
                 }
@@ -75,7 +75,10 @@ struct VideoDownloadView: View {
                         .response { r in
                             if r.error == nil, let filePath = r.fileURL?.path {
                                 debugPrint(filePath)
-                                UserDefaults.standard.set(videoDetails, forKey: bvid)
+                                debugPrint(bvid)
+                                var detTmp = videoDetails
+                                detTmp.updateValue(filePath, forKey: "Path")
+                                UserDefaults.standard.set(detTmp, forKey: bvid)
                             } else {
                                 debugPrint(r.error as Any)
                             }

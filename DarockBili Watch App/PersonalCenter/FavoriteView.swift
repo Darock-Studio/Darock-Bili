@@ -37,6 +37,7 @@ struct FavoriteView: View {
                 DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v3/fav/folder/created/list-all?up_mid=\(dedeUserID)", headers: headers) { respJson, isSuccess in
                     if isSuccess {
                         debugPrint(respJson)
+                        isLoaded = true
                         let datas = respJson["data"]["list"]
                         for data in datas {
                             favoriteFolders.append(["Title": data.1["title"].string!, "ID": String(data.1["id"].int!), "Count": String(data.1["media_count"].int!)])
@@ -62,28 +63,7 @@ struct FavoriteDetailView: View {
             if details.count != 0 {
                 Section {
                     ForEach(0...details.count - 1, id: \.self) { i in
-                        NavigationLink(destination: {VideoDetailView(videoDetails: details[i])}, label: {
-                            HStack {
-                                AsyncImage(url: URL(string: details[i]["Pic"]! + "@40w"))
-                                    .cornerRadius(5)
-                                VStack {
-                                    Text(details[i]["Title"]!)
-                                        .font(.system(size: 15, weight: .bold))
-                                        .lineLimit(3)
-                                    Text(details[i]["UP"]!)
-                                        .font(.system(size: 12))
-                                        .lineLimit(1)
-                                        .foregroundColor(.gray)
-                                    HStack {
-                                        Label(details[i]["View"]!, systemImage: "play.rectangle")
-                                        Label(details[i]["Danmaku"]!, systemImage: "text.word.spacing")
-                                    }
-                                    .font(.system(size: 11))
-                                    .foregroundColor(.gray)
-                                    .lineLimit(1)
-                                }
-                            }
-                        })
+                        VideoCard(details[i])
                     }
                 }
                 Section {

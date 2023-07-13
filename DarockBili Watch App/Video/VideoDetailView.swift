@@ -5,10 +5,13 @@
 //  Created by WindowsMEMZ on 2023/6/30.
 //
 
+import AVKit
 import SwiftUI
+import WatchKit
 import DarockKit
-import SwiftyJSON
 import Alamofire
+import SwiftyJSON
+import AVFoundation
 import SDWebImageSwiftUI
 
 struct VideoDetailView: View {
@@ -22,6 +25,7 @@ struct VideoDetailView: View {
     @AppStorage("bili_jct") var biliJct = ""
     @State var isVideoPlayerPresented = false
     @State var isDownloadPresented = false
+    @State var isNowPlayingPresented = false
     @State var isLoading = false
     @State var isLiked = false
     @State var isCoined = false
@@ -29,158 +33,231 @@ struct VideoDetailView: View {
     @State var isCoinViewPresented = false
     @State var goodVideos = [[String: String]]()
     @State var owner = [String: String]()
+    @State var stat = [String: String]()
+    @State var ownerFansCount = 0
+    @State var videoDesc = ""
     var body: some View {
         TabView {
             ZStack {
-                ScrollView {
+                TabView {
                     VStack {
+                        Spacer()
+                        AsyncImage(url: URL(string: videoDetails["Pic"]! + "@120w_90h"))
+                            .cornerRadius(5)
+                            .shadow(color: .black.opacity(0.5), radius: 5, x: 1, y: 2)
+                            .offset(y: 8)
+                        Spacer()
+                            .frame(height: 20)
                         Text(videoDetails["Title"]!)
-                            .lineLimit(3)
-                            .font(.system(size: 18, weight: .bold))
-                        Button(action: {
-                            isLoading = true
-                            
-                            let headers: HTTPHeaders = [
-                                "cookie": "SESSDATA=\(sessdata)"
-                            ]
-                            AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
-                                let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
-                                VideoDetailView.willPlayVideoCID = String(cid)
-                                AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
-                                    VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
-                                    //debugPrint(response)
-                                    VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                                    isVideoPlayerPresented = true
-                                    isLoading = false
-                                }
-                            }
-                        }, label: {
-                            AsyncImage(url: URL(string: videoDetails["Pic"]! + "@150w")!)
-                        })
-                        .buttonBorderShape(.roundedRectangle(radius: 14))
-                        Button(action: {
-                            isLoading = true
-                            
-                            let headers: HTTPHeaders = [
-                                "cookie": "SESSDATA=\(sessdata)"
-                            ]
-                            AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
-                                let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
-                                VideoDetailView.willPlayVideoCID = String(cid)
-                                AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
-                                    VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
-                                    //debugPrint(response)
-                                    VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                                    isVideoPlayerPresented = true
-                                    isLoading = false
-                                }
-                            }
-                        }, label: {
-                            Label("播放", systemImage: "play.fill")
-                                .font(.system(size: 21))
-                        })
-                        .sheet(isPresented: $isVideoPlayerPresented, content: {VideoPlayerView()})
-                        ScrollView(.horizontal) {
-                            HStack {
-                                Button(action: {
-                                    let headers: HTTPHeaders = [
-                                        "cookie": "SESSDATA=\(sessdata)"
-                                    ]
-                                    AF.request("https://api.bilibili.com/x/web-interface/archive/like", method: .post, parameters: BiliVideoLike(bvid: videoDetails["BV"]!, like: isLiked ? 2 : 1, csrf: biliJct), headers: headers).response { response in
-                                        debugPrint(response)
-                                        isLiked.toggle()
-                                    }
-                                }, label: {
-                                    Image(systemName: "hand.thumbsup.fill")
-                                        .foregroundColor(isLiked ? Color(hex: 0xfa678e)  : .white)
-                                })
-                                Button(action: {
-                                    if !isCoined {
-                                        isCoinViewPresented = true
-                                    }
-                                }, label: {
-                                    Image(systemName: "b.circle")
-                                        .foregroundColor(isCoined ? Color(hex: 0xfa678e)  : .white)
-                                        .bold()
-                                })
-                                .sheet(isPresented: $isCoinViewPresented, content: {VideoThrowCoinView(bvid: videoDetails["BV"]!)})
-                                Button(action: {
-                                    let headers: HTTPHeaders = [
-                                        "cookie": "SESSDATA=\(sessdata)",
-                                        "referer": "bilibili.com/video/\(videoDetails["BV"]!)"
-                                    ]
-                                    DarockKit.Network.shared.requestString("https://api.darock.top/bili/toav/\(videoDetails["BV"]!)") { respStr, isSuccess in
-                                        if isSuccess {
-                                            AF.request("https://api.bilibili.com/medialist/gateway/coll/resource/deal", method: .post, parameters: BiliVideoFavourite(rid: Int(respStr)!, csrf: biliJct), headers: headers).response { response in
-                                                debugPrint(response)
-                                                isFavoured.toggle()
-                                            }
-                                        }
-                                    }
-                                }, label: {
-                                    Image(systemName: "star.fill")
-                                        .foregroundColor(isFavoured ? Color(hex: 0xfa678e) : .white)
-                                })
-                                Button(action: {
-                                    isDownloadPresented = true
-                                }, label: {
-                                    Image(systemName: "arrow.down.doc")
-                                })
-                                .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
-                            }
-                        }
-                        if owner["ID"] != nil {
-                            NavigationLink(destination: {UserDetailView(uid: owner["ID"]!)}, label: {
-                                HStack {
-                                    AsyncImage(url: URL(string: owner["Face"]! + "@40w"))
-                                        .cornerRadius(100)
-                                    VStack {
-                                        Text(owner["Name"]!)
-                                            .font(.system(size: 18, weight: .bold))
-                                            .lineLimit(2)
-                                    }
-                                    Spacer()
-                                }
+                            .lineLimit(2)
+                            .font(.system(size: 12, weight: .bold))
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 5)
+                        Text(videoDetails["UP"]!)
+                            .lineLimit(1)
+                            .font(.system(size: 12))
+                            .padding(.horizontal, 40)
+                            .padding(.vertical, 0)
+                            .opacity(0.65)
+                        Spacer()
+                    }
+                    .offset(y: 16)
+                    .toolbar {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Button(action: {
+                                
+                            }, label: {
+                                Image(systemName: "ellipsis")
                             })
                         }
-                        Spacer()
-                            .frame(height: 25)
-                        if goodVideos.count != 0 {
-                            ForEach(0...goodVideos.count - 1, id: \.self) { i in
-                                NavigationLink(destination: {VideoDetailView(videoDetails: goodVideos[i])}, label: {
+                        ToolbarItemGroup(placement: .bottomBar) {
+                            Button(action: {
+                                isLoading = true
+                                
+                                let headers: HTTPHeaders = [
+                                    "cookie": "SESSDATA=\(sessdata)"
+                                ]
+                                AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
+                                    let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
+                                    VideoDetailView.willPlayVideoCID = String(cid)
+                                    AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
+                                        let audioLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
+                                        let asset = AVAsset(url: URL(string: audioLink)!)
+                                        let playerItem = AVPlayerItem(asset: asset)
+                                        let player = AVPlayer(playerItem: playerItem)
+                                        player.play()
+                                        isNowPlayingPresented = true
+                                        isLoading = false
+                                    }
+                                }
+                            }, label: {
+                                Image(systemName: "waveform")
+                            })
+                            .sheet(isPresented: $isNowPlayingPresented, content: {NowPlayingView()})
+                            Button(action: {
+                                isLoading = true
+                                
+                                let headers: HTTPHeaders = [
+                                    "cookie": "SESSDATA=\(sessdata)"
+                                ]
+                                AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
+                                    let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
+                                    VideoDetailView.willPlayVideoCID = String(cid)
+                                    AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
+                                        VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
+                                        //debugPrint(response)
+                                        VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                                        isVideoPlayerPresented = true
+                                        isLoading = false
+                                    }
+                                }
+                            }, label: {
+                                Image(systemName: "play.fill")
+                            })
+                            .sheet(isPresented: $isVideoPlayerPresented, content: {VideoPlayerView()})
+                        }
+                    }
+                    .tag(1)
+                    
+                    
+                    ScrollView {
+//                        Spacer()
+//                            .frame(height: 50)
+                        VStack {
+                            if owner["ID"] != nil {
+                                NavigationLink(destination: {UserDetailView(uid: owner["ID"]!)}, label: {
                                     HStack {
-                                        WebImage(url: URL(string: goodVideos[i]["Pic"]! + "@40w"), options: [.progressiveLoad])
-                                            .cornerRadius(7)
+                                        AsyncImage(url: URL(string: owner["Face"]! + "@40w"))
+                                            .cornerRadius(100)
                                         VStack {
                                             HStack {
-                                                Text(goodVideos[i]["Title"]!)
-                                                    .font(.system(size: 15, weight: .bold))
+                                                Text(owner["Name"]!)
+                                                    .font(.system(size: 16, weight: .bold))
                                                     .lineLimit(2)
                                                 Spacer()
                                             }
                                             HStack {
-                                                Text(goodVideos[i]["UP"]!)
-                                                    .font(.system(size: 12))
-                                                    .foregroundColor(.gray)
+                                                Text(String(ownerFansCount).shorter())
+                                                    .font(.system(size: 11))
                                                     .lineLimit(1)
+                                                    .opacity(0.6)
                                                 Spacer()
                                             }
-                                            HStack {
-                                                Label(goodVideos[i]["View"]!, systemImage: "play.rectangle")
-                                                Label(goodVideos[i]["Danmaku"]!, systemImage: "text.word.spacing")
-                                                Spacer()
-                                            }
-                                            .font(.system(size: 12))
-                                            .foregroundColor(.gray)
-                                            .lineLimit(1)
                                         }
+                                        Spacer()
                                     }
                                 })
-                                .buttonBorderShape(.roundedRectangle(radius: 14))
+                            }
+                            VStack {
+                                HStack {
+                                    Button(action: {
+                                        let headers: HTTPHeaders = [
+                                            "cookie": "SESSDATA=\(sessdata)"
+                                        ]
+                                        AF.request("https://api.bilibili.com/x/web-interface/archive/like", method: .post, parameters: BiliVideoLike(bvid: videoDetails["BV"]!, like: isLiked ? 2 : 1, csrf: biliJct), headers: headers).response { response in
+                                            debugPrint(response)
+                                            isLiked.toggle()
+                                        }
+                                    }, label: {
+                                        VStack {
+                                            Image(systemName: isLiked ? "hand.thumbsup.fill" : "hand.thumbsup")
+                                                .foregroundColor(isLiked ? Color(hex: 0xfa678e)  : .white)
+                                            Text(stat["Like"]?.shorter() ?? "")
+                                                .font(.system(size: 11))
+                                                .foregroundColor(isLiked ? Color(hex: 0xfa678e)  : .white)
+                                                .opacity(isLiked ? 1 : 0.6)
+                                        }
+                                    })
+                                    Button(action: {
+                                        if !isCoined {
+                                            isCoinViewPresented = true
+                                        }
+                                    }, label: {
+                                        VStack {
+                                            Image(systemName: isCoined ? "b.circle.fill" : "b.circle")
+                                                .foregroundColor(isCoined ? Color(hex: 0xfa678e)  : .white)
+                                                .bold()
+                                            Text(stat["Coin"]?.shorter() ?? "")
+                                                .font(.system(size: 11))
+                                                .foregroundColor(isCoined ? Color(hex: 0xfa678e)  : .white)
+                                                .opacity(isCoined ? 1 : 0.6)
+                                        }
+                                    })
+                                    .sheet(isPresented: $isCoinViewPresented, content: {VideoThrowCoinView(bvid: videoDetails["BV"]!)})
+                                    Button(action: {
+                                        let headers: HTTPHeaders = [
+                                            "cookie": "SESSDATA=\(sessdata)",
+                                            "referer": "bilibili.com/video/\(videoDetails["BV"]!)"
+                                        ]
+                                        DarockKit.Network.shared.requestString("https://api.darock.top/bili/toav/\(videoDetails["BV"]!)") { respStr, isSuccess in
+                                            if isSuccess {
+                                                AF.request("https://api.bilibili.com/medialist/gateway/coll/resource/deal", method: .post, parameters: BiliVideoFavourite(rid: Int(respStr)!, csrf: biliJct), headers: headers).response { response in
+                                                    debugPrint(response)
+                                                    isFavoured.toggle()
+                                                }
+                                            }
+                                        }
+                                    }, label: {
+                                        VStack {
+                                            Image(systemName: isFavoured ? "star.fill" : "star")
+                                                .foregroundColor(isFavoured ? Color(hex: 0xf9678f) : .white)
+                                            Text(stat["Favorite"]?.shorter() ?? "")
+                                                .font(.system(size: 11))
+                                                .foregroundColor(isFavoured ? Color(hex: 0xfa678e)  : .white)
+                                                .opacity(isFavoured ? 1 : 0.6)
+                                        }
+                                    })
+//                                    Button(action: {
+//                                        isDownloadPresented = true
+//                                    }, label: {
+//                                        Image(systemName: "arrow.down.doc")
+//                                    })
+//                                    .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
+                                }
+                                
+                                Spacer()
+                                    .frame(height: 10)
+                                VStack {
+                                    HStack {
+                                        Image(systemName: "text.word.spacing")
+                                        Text(videoDetails["Danmaku"]! + " 弹幕")
+                                        Spacer()
+                                    }
+                                    HStack {
+                                        Image(systemName: "person.2")
+                                        Text("114 人在看")
+                                            .offset(x: -1)
+                                        Spacer()
+                                    }
+                                    .offset(x: -2)
+                                    HStack {
+                                        Image(systemName: "play.circle")
+                                        Text(videoDetails["View"]! + " 播放")
+                                            .offset(x: 1)
+                                        Spacer()
+                                    }
+                                    HStack {
+                                        Image(systemName: "movieclapper")
+                                        Text(videoDetails["BV"]!)
+                                        Spacer()
+                                    }
+                                    .offset(x: -1)
+                                }
+                                .font(.system(size: 11))
+                                .opacity(0.6)
+                                .padding(.horizontal, 10)
+                                Spacer()
+                                    .frame(height: 10)
+                                Text(videoDesc)
+                                    .font(.system(size: 12))
+                                    .opacity(0.65)
+                                    .padding(.horizontal, 8)
                             }
                         }
                     }
+                    .tag(2)
                 }
+                .tabViewStyle(.verticalPage)
                 .blur(radius: isLoading ? 14 : 0)
                 if isLoading {
                     Text("正在解析...")
@@ -188,9 +265,32 @@ struct VideoDetailView: View {
                         .bold()
                 }
             }
+            .containerBackground(for: .navigation) {
+                ZStack {
+                    AsyncImage(url: URL(string: videoDetails["Pic"]!))
+                        .blur(radius: 20)
+                    Color.black
+                        .opacity(0.4)
+                }
+            }
             .tag(1)
             VideoCommentsView(oid: String(videoDetails["BV"]!.dropFirst().dropFirst()))
+                .containerBackground(for: .navigation) {
+                    ZStack {
+                        AsyncImage(url: URL(string: videoDetails["Pic"]!))
+                            .blur(radius: 20)
+                        Color.black
+                            .opacity(0.4)
+                    }
+                }
                 .tag(2)
+            if goodVideos.count != 0 {
+                List {
+                    ForEach(0...goodVideos.count - 1, id: \.self) { i in
+                        VideoCard(goodVideos[i])
+                    }
+                }.tag(3)
+            }
         }
         .onAppear {
             let headers: HTTPHeaders = [
@@ -198,21 +298,21 @@ struct VideoDetailView: View {
             ]
             DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/archive/has/like?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
-                    if respJson["data"].int! == 1 {
+                    if respJson["data"].int ?? 0 == 1 {
                         isLiked = true
                     }
                 }
             }
             DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/archive/coins?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
-                    if respJson["data"]["multiply"].int! != 0 {
+                    if respJson["data"]["multiply"].int ?? 0 != 0 {
                         isCoined = true
                     }
                 }
             }
             DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v2/fav/video/favoured?aid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
-                    if respJson["data"]["favoured"].bool! == true {
+                    if respJson["data"]["favoured"].bool ?? false == true {
                         isFavoured = true
                     }
                 }
@@ -227,13 +327,29 @@ struct VideoDetailView: View {
             }
             DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)") { respJson, isSuccess in
                 if isSuccess {
+                    debugPrint(respJson)
                     owner = ["Name": respJson["data"]["owner"]["name"].string!, "Face": respJson["data"]["owner"]["face"].string!, "ID": String(respJson["data"]["owner"]["mid"].int!)]
+                    stat = ["Like": String(respJson["data"]["stat"]["like"].int!), "Coin": String(respJson["data"]["stat"]["coin"].int!), "Favorite": String(respJson["data"]["stat"]["favorite"].int!)]
+                    videoDesc = respJson["data"]["desc"].string!.replacingOccurrences(of: "\\n", with: "\n")
+                    let mid = respJson["data"]["owner"]["mid"].int!
+                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation/stat?vmid=\(mid)", headers: headers) { respJson, isSuccess in
+                        if isSuccess {
+                            ownerFansCount = respJson["data"]["follower"].int!
+                        }
+                    }
                 }
             }
             
             if videoDetails["Title"]!.contains("<em class=\"keyword\">") {
                 videoDetails["Title"] = "\(String(videoDetails["Title"]!.hasPrefix("<em class=\"keyword\">") ? "" : (videoDetails["Title"]!.split(separator: "<em class=\"keyword\">")[0])))\(String(videoDetails["Title"]!.split(separator: "<em class=\"keyword\">")[videoDetails["Title"]!.hasPrefix("<em class=\"keyword\">") ? 0 : 1].split(separator: "</em>")[0]))\(String(videoDetails["Title"]!.hasSuffix("</em>") ? "" : videoDetails["Title"]!.split(separator: "</em>")[1]))"
             }
+        }
+        .onDisappear {
+            goodVideos = [[String: String]]()
+            owner = [String: String]()
+            stat = [String: String]()
+            videoDesc = ""
+            SDImageCache.shared.clearMemory()
         }
     }
 }

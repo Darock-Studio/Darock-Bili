@@ -102,7 +102,7 @@ struct VideoCommentsView: View {
                         if isSuccess {
                             let replies = respJson["data"]["replies"]
                             for reply in replies {
-                                comments.append(["Text": reply.1["content"]["message"].string!, "Sender": reply.1["member"]["uname"].string!, "SenderPic": reply.1["member"]["avatar"].string!, "SenderLevel": String(reply.1["member"]["level_info"]["current_level"].int!), "IP": reply.1["reply_control"]["location"].string!, "UserAction": String(reply.1["action"].int!), "Rpid": String(reply.1["rpid"].int!)])
+                                comments.append(["Text": reply.1["content"]["message"].string!, "Sender": reply.1["member"]["uname"].string!, "SenderPic": reply.1["member"]["avatar"].string!, "SenderLevel": String(reply.1["member"]["level_info"]["current_level"].int!), "IP": reply.1["reply_control"]["location"].string ?? "", "UserAction": String(reply.1["action"].int!), "Rpid": String(reply.1["rpid"].int!)])
                             }
                         } else {
                             Logger().error("There is a error when request comments from Bilibili server")
@@ -112,6 +112,10 @@ struct VideoCommentsView: View {
                     Logger().error("There is a error when request avid from Darock server")
                 }
             }
+        }
+        .onDisappear {
+            comments = [[String: String]]()
+            SDImageCache.shared.clearMemory()
         }
     }
 }

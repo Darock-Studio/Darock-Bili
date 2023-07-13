@@ -27,6 +27,19 @@
         }
       }
     },
+    "#%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "%@ 搜索..." : {
+
+    },
     "%@%@%@" : {
       "localizations" : {
         "en" : {
@@ -59,6 +72,9 @@
         }
       }
     },
+    "114 人在看" : {
+
+    },
     "bilibili UP主认证：%@" : {
       "localizations" : {
         "en" : {
@@ -69,7 +85,7 @@
         }
       }
     },
-    "Darock Studio" : {
+    "Credits:" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -79,7 +95,18 @@
         }
       }
     },
+    "Darock Studio" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Darock Studio"
+          }
+        }
+      }
+    },
     "Darock 正在努力开发，将会很快更新" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -89,8 +116,45 @@
         }
       }
     },
-    "Thanks to:" : {
-
+    "Hello, world!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "Jst Placeholder" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "ReX" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "Watch 的状态栏（控制中心上方）显示为%@而不是%@" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Watch 的状态栏（控制中心上方）显示为%1$@而不是%2$@"
+          }
+        }
+      }
     },
     "上一页" : {
       "localizations" : {
@@ -112,7 +176,11 @@
         }
       }
     },
+    "不发送" : {
+
+    },
     "专栏" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -132,6 +200,12 @@
         }
       }
     },
+    "以下为错误详情：" : {
+
+    },
+    "位置：%@" : {
+
+    },
     "关于" : {
       "localizations" : {
         "en" : {
@@ -142,7 +216,11 @@
         }
       }
     },
+    "关注" : {
+
+    },
     "关注列表" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -151,6 +229,12 @@
           }
         }
       }
+    },
+    "关闭 iPhone 的 Wi-Fi 以及蓝牙" : {
+
+    },
+    "出现问题！" : {
+
     },
     "加载更多" : {
       "localizations" : {
@@ -162,6 +246,9 @@
         }
       }
     },
+    "即将退出..." : {
+
+    },
     "历史记录" : {
       "localizations" : {
         "en" : {
@@ -171,6 +258,27 @@
           }
         }
       }
+    },
+    "反馈成功！后续可使用反馈 ID：%@ 跟进情况" : {
+
+    },
+    "反馈类型" : {
+
+    },
+    "反馈问题" : {
+
+    },
+    "发生问题前...(选填)" : {
+
+    },
+    "发送" : {
+
+    },
+    "发送的信息中不含任何您的个人信息" : {
+
+    },
+    "发送的反馈中不含任何您的个人信息" : {
+
     },
     "取消" : {
       "localizations" : {
@@ -183,11 +291,22 @@
       }
     },
     "可在 TestFlight 中反馈，感谢您的支持！" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "You can report in TestFlight, thanks for your supporting."
+          }
+        }
+      }
+    },
+    "喵哩喵哩 v%@ Build %@" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "喵哩喵哩 v%1$@ Build %2$@"
           }
         }
       }
@@ -212,6 +331,9 @@
         }
       }
     },
+    "已发送" : {
+
+    },
     "已扫描" : {
       "localizations" : {
         "en" : {
@@ -221,6 +343,9 @@
           }
         }
       }
+    },
+    "建议" : {
+
     },
     "开源组件许可" : {
       "localizations" : {
@@ -233,6 +358,7 @@
       }
     },
     "很快到来" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -241,6 +367,27 @@
           }
         }
       }
+    },
+    "怎么做？" : {
+
+    },
+    "您可以将此信息发送至 Darock 以帮助我们改进喵哩喵哩" : {
+
+    },
+    "您应当确认：" : {
+
+    },
+    "您的 App 版本将会一并被发送" : {
+
+    },
+    "感谢您的支持！" : {
+
+    },
+    "我的" : {
+
+    },
+    "我的好友" : {
+
     },
     "我的收藏" : {
       "localizations" : {
@@ -282,7 +429,14 @@
         }
       }
     },
+    "推荐" : {
+
+    },
+    "描述发生问题前做了什么？预期的结果？实际的结果？" : {
+
+    },
     "搜索" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -293,6 +447,7 @@
       }
     },
     "播放" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -302,7 +457,11 @@
         }
       }
     },
+    "是...边缘的风景。" : {
+
+    },
     "暗礁反馈" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -322,6 +481,15 @@
         }
       }
     },
+    "来自ReX的消息：界面与交互设计来自 腕上生花 - ReX Design（wear.rexwe.net）" : {
+
+    },
+    "标题" : {
+
+    },
+    "案例编号为 %@ 后续可通过此编号跟进状态" : {
+
+    },
     "欢迎使用腕上哔哩！" : {
       "localizations" : {
         "en" : {
@@ -332,6 +500,9 @@
         }
       }
     },
+    "正在%@" : {
+
+    },
     "正在下载..." : {
       "localizations" : {
         "en" : {
@@ -341,6 +512,9 @@
           }
         }
       }
+    },
+    "正在发送..." : {
+
     },
     "正在解析..." : {
       "localizations" : {
@@ -362,6 +536,9 @@
         }
       }
     },
+    "此错误无需或无法发送至 Darock" : {
+
+    },
     "点击登录" : {
       "localizations" : {
         "en" : {
@@ -371,6 +548,12 @@
           }
         }
       }
+    },
+    "疑难解答找到的问题：" : {
+
+    },
+    "疑难解答无法确定问题" : {
+
     },
     "登录" : {
       "localizations" : {
@@ -403,6 +586,7 @@
       }
     },
     "视频" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -422,6 +606,18 @@
         }
       }
     },
+    "稍后再看" : {
+
+    },
+    "简单地描述问题" : {
+
+    },
+    "粉丝" : {
+
+    },
+    "继续加载" : {
+
+    },
     "网络环境：" : {
       "localizations" : {
         "en" : {
@@ -432,7 +628,11 @@
         }
       }
     },
+    "网络说明" : {
+
+    },
     "腕上哔哩 v%@ Build %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -468,6 +668,27 @@
         }
       }
     },
+    "范围：%@" : {
+
+    },
+    "设置" : {
+
+    },
+    "该用户无专栏" : {
+
+    },
+    "该用户无视频" : {
+
+    },
+    "详细信息" : {
+
+    },
+    "详细信息：%@" : {
+
+    },
+    "请不要在问题描述中填写个人信息" : {
+
+    },
     "请确定 Watch 的状态栏（控制中心上方）显示为%@而不是%@" : {
       "localizations" : {
         "en" : {
@@ -484,6 +705,9 @@
         }
       }
     },
+    "请重试之前的操作，如果问题依然存在，请联系开发者" : {
+
+    },
     "账号" : {
       "localizations" : {
         "en" : {
@@ -493,6 +717,9 @@
           }
         }
       }
+    },
+    "返回" : {
+
     },
     "这里有一些值得注意的地方：" : {
       "localizations" : {
@@ -524,7 +751,11 @@
         }
       }
     },
+    "退出程序" : {
+
+    },
     "遇到问题？下载%@（暂未上线），附带上方文本进行反馈" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -534,12 +765,37 @@
         }
       }
     },
+    "遇到问题？在设置页面点击“反馈问题”或在 TestFlight 中反馈，感谢您的支持！" : {
+
+    },
+    "错误/异常行为" : {
+
+    },
+    "错误与网络有关，您应当先点此尝试 网络疑难解答" : {
+
+    },
     "问题反馈：" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Report bugs:"
+          }
+        }
+      }
+    },
+    "问题可能来自 Darock，请联系开发者或等待问题解决" : {
+
+    },
+    "问题来自您的网络连接，点此查看网络说明" : {
+
+    },
+    "非常抱歉，喵哩喵哩在 %@ 时出现了问题。%@" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "非常抱歉，喵哩喵哩在 %1$@ 时出现了问题。%2$@"
           }
         }
       }

@@ -8,20 +8,82 @@
 import SwiftUI
 
 struct DownloadsView: View {
+    public static var willPlayVideoPath = ""
+    @State var metadatas = [[String: String]]()
+    @State var isPlayerPresented = false
     var body: some View {
         List {
-            VStack {
-                Text("很快到来")
-                    .bold()
-                Text("Darock 正在努力开发，将会很快更新")
+            if metadatas.count != 0 {
+                ForEach(0...metadatas.count - 1, id: \.self) { i in
+                    if metadatas[i]["notGet"] == nil {
+//                        NavigationLink(destination: {VideoDetailView(videoDetails: metadatas[i])}, label: {
+//                            HStack {
+//                                AsyncImage(url: URL(string: metadatas[i]["Pic"]! + "@40w_30h"))
+//                                    .cornerRadius(5)
+//                                VStack {
+//                                    Text(metadatas[i]["Title"]!)
+//                                        .font(.system(size: 15, weight: .bold))
+//                                        .lineLimit(3)
+//                                    HStack {
+//                                        Label(metadatas[i]["View"]!, systemImage: "play.circle")
+//                                        Label(metadatas[i]["UP"]!, systemImage: "person")
+//                                    }
+//                                    .font(.system(size: 11))
+//                                    .foregroundColor(.gray)
+//                                    .lineLimit(1)
+//                                }
+//                            }
+//                        })
+                        Button(action: {
+                            DownloadsView.willPlayVideoPath = metadatas[i]["Path"]!
+                            isPlayerPresented = true
+                        }, label: {
+                            HStack {
+                                AsyncImage(url: URL(string: metadatas[i]["Pic"]! + "@40w"))
+                                    .cornerRadius(5)
+                                VStack {
+                                    Text(metadatas[i]["Title"]!)
+                                        .font(.system(size: 15, weight: .bold))
+                                        .lineLimit(3)
+                                    HStack {
+                                        Label(metadatas[i]["View"]!, systemImage: "play.circle")
+                                        Label(metadatas[i]["UP"]!, systemImage: "person")
+                                    }
+                                    .font(.system(size: 11))
+                                    .foregroundColor(.gray)
+                                    .lineLimit(1)
+                                }
+                            }
+                        })
+                        .sheet(isPresented: $isPlayerPresented, content: {OfflineVideoPlayer()})
+                    } else {
+                        
+                    }
+                }
             }
         }
         .onAppear {
             let files = AppFileManager(path: "dlds").GetRoot() ?? [[String: String]]()
             for file in files {
                 debugPrint(file)
+                if !Bool(file["isDirectory"]!)! {
+                    let name = file["name"]!
+                    let nameWithOutSuffix = String(name.split(separator: ".")[0])
+                    if UserDefaults.standard.dictionary(forKey: nameWithOutSuffix) != nil {
+                        metadatas.append(UserDefaults.standard.dictionary(forKey: nameWithOutSuffix)! as! [String: String])
+                    } else {
+                        metadatas.append(["notGet": "true"])
+                    }
+                }
             }
         }
+    }
+}
+
+struct OfflineVideoPlayer: View {
+    var path: String? = nil
+    var body: some View {
+        /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Hello, world!@*/Text("Hello, world!")/*@END_MENU_TOKEN@*/
     }
 }
 

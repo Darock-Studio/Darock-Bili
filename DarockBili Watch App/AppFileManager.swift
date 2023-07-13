@@ -89,7 +89,7 @@ class AppFileManager {
     public func GetRoot() -> [[String: String]]? {
         let manager = FileManager.default
         let urlForDocument = manager.urls(for: .documentDirectory, in: .userDomainMask)
-        let folderUrl = URL(string: ((urlForDocument[0] as URL).absoluteString + "images"))!
+        let folderUrl = URL(string: ((urlForDocument[0] as URL).absoluteString + path))!
         let contentsOfPath = try? manager.contentsOfDirectory(atPath: folderUrl.path)
         if contentsOfPath != nil {
             var files = [[String: String]]()
