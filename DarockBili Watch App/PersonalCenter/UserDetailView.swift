@@ -243,6 +243,27 @@ struct UserDetailView: View {
                                         })
                                         .buttonBorderShape(.roundedRectangle(radius: 14))
                                     }
+                                    
+                                    if articleNowPage != 1 {
+                                        Button(action: {
+                                            articleNowPage -= 1
+                                            RefreshArticles()
+                                        }, label: {
+                                            Text("上一页")
+                                                .bold()
+                                        })
+                                    }
+                                    Text("\(articleNowPage) / \(articleTotalPage)")
+                                        .font(.system(size: 18, weight: .bold))
+                                    if articleNowPage != articleTotalPage {
+                                        Button(action: {
+                                            articleNowPage += 1
+                                            RefreshArticles()
+                                        }, label: {
+                                            Text("下一页")
+                                                .bold()
+                                        })
+                                    }
                                 } else {
                                     if isNoArticle {
                                         Text("该用户无专栏")
