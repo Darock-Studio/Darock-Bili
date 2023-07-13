@@ -18,6 +18,7 @@
 		6B0253DF2A4F1DCF00567986 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0253DE2A4F1DCF00567986 /* VideoPlayerView.swift */; };
 		6B0253E22A4F23DB00567986 /* PersonAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0253E12A4F23DB00567986 /* PersonAccountView.swift */; };
 		6B0253E42A4F265100567986 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0253E32A4F265100567986 /* LoginView.swift */; };
+		6B1680392A604175001FA988 /* biliEmoji.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6B1680382A604175001FA988 /* biliEmoji.plist */; };
 		6B2773C12A599FE300950EB7 /* UIExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2773C02A599FE300950EB7 /* UIExt.swift */; };
 		6B56A8FF2A53A9F80089DD31 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B56A8FE2A53A9F80089DD31 /* FavoriteView.swift */; };
 		6B56A9012A53B8D30089DD31 /* DownloadsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B56A9002A53B8D30089DD31 /* DownloadsView.swift */; };
@@ -25,6 +26,11 @@
 		6B56A9052A53BD330089DD31 /* AppFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B56A9042A53BD330089DD31 /* AppFileManager.swift */; };
 		6B56A9272A53E6850089DD31 /* WatchLaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B56A9262A53E6850089DD31 /* WatchLaterView.swift */; };
 		6B6790A42A5296FB00FAE216 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6790A32A5296FB00FAE216 /* HistoryView.swift */; };
+		6B8C2AFD2A6019B6001FEC85 /* FeedbackLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8C2AFC2A6019B6001FEC85 /* FeedbackLoginView.swift */; };
+		6B8C2AFF2A601E36001FEC85 /* FeedbackEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8C2AFE2A601E36001FEC85 /* FeedbackEnterView.swift */; };
+		6B8C2B012A601E58001FEC85 /* FeedbackMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8C2B002A601E57001FEC85 /* FeedbackMainView.swift */; };
+		6B8C2B032A6020F2001FEC85 /* FeedbackDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8C2B022A6020F2001FEC85 /* FeedbackDetailsView.swift */; };
+		6B8C2B052A602D2E001FEC85 /* CommentEmojiDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8C2B042A602D2E001FEC85 /* CommentEmojiDictionary.swift */; };
 		6B91C4A92A5598260020259E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B91C4A82A5598260020259E /* SettingsView.swift */; };
 		6B91C4AD2A55A40D0020259E /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B91C4AC2A55A40D0020259E /* FeedbackView.swift */; };
 		6B91C4AF2A55A54C0020259E /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B91C4AE2A55A54C0020259E /* ColorPickerView.swift */; };
@@ -85,6 +91,7 @@
 		6B0253DE2A4F1DCF00567986 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		6B0253E12A4F23DB00567986 /* PersonAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonAccountView.swift; sourceTree = "<group>"; };
 		6B0253E32A4F265100567986 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		6B1680382A604175001FA988 /* biliEmoji.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = biliEmoji.plist; sourceTree = SOURCE_ROOT; };
 		6B2773C02A599FE300950EB7 /* UIExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExt.swift; sourceTree = "<group>"; };
 		6B56A8FE2A53A9F80089DD31 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		6B56A9002A53B8D30089DD31 /* DownloadsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsView.swift; sourceTree = "<group>"; };
@@ -93,6 +100,11 @@
 		6B56A9242A53CFC10089DD31 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		6B56A9262A53E6850089DD31 /* WatchLaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchLaterView.swift; sourceTree = "<group>"; };
 		6B6790A32A5296FB00FAE216 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		6B8C2AFC2A6019B6001FEC85 /* FeedbackLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackLoginView.swift; sourceTree = "<group>"; };
+		6B8C2AFE2A601E36001FEC85 /* FeedbackEnterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackEnterView.swift; sourceTree = "<group>"; };
+		6B8C2B002A601E57001FEC85 /* FeedbackMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackMainView.swift; sourceTree = "<group>"; };
+		6B8C2B022A6020F2001FEC85 /* FeedbackDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackDetailsView.swift; sourceTree = "<group>"; };
+		6B8C2B042A602D2E001FEC85 /* CommentEmojiDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentEmojiDictionary.swift; sourceTree = "<group>"; };
 		6B91C4A82A5598260020259E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		6B91C4AC2A55A40D0020259E /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
 		6B91C4AE2A55A54C0020259E /* ColorPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorPickerView.swift; path = ../../../ColorPickerView.swift; sourceTree = "<group>"; };
@@ -148,6 +160,7 @@
 		6B0253BE2A4EF59600567986 /* DarockBili Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				6B1680382A604175001FA988 /* biliEmoji.plist */,
 				6B56A9242A53CFC10089DD31 /* Localizable.xcstrings */,
 				6B0253DB2A4F109700567986 /* DarockBili-Watch-App-Info.plist */,
 				6B56A9042A53BD330089DD31 /* AppFileManager.swift */,
@@ -195,8 +208,20 @@
 				6B0253DE2A4F1DCF00567986 /* VideoPlayerView.swift */,
 				6BBFA2BD2A51236900FE61D1 /* VideoCommentsView.swift */,
 				6B56A9022A53B9770089DD31 /* VideoDownloadView.swift */,
+				6B8C2B042A602D2E001FEC85 /* CommentEmojiDictionary.swift */,
 			);
 			path = Video;
+			sourceTree = "<group>";
+		};
+		6B8C2AFB2A601990001FEC85 /* DarockFeedback */ = {
+			isa = PBXGroup;
+			children = (
+				6B8C2AFE2A601E36001FEC85 /* FeedbackEnterView.swift */,
+				6B8C2AFC2A6019B6001FEC85 /* FeedbackLoginView.swift */,
+				6B8C2B002A601E57001FEC85 /* FeedbackMainView.swift */,
+				6B8C2B022A6020F2001FEC85 /* FeedbackDetailsView.swift */,
+			);
+			path = DarockFeedback;
 			sourceTree = "<group>";
 		};
 		6B91C4A52A5597C20020259E /* Others */ = {
@@ -215,6 +240,7 @@
 		6B91C4A62A5597E10020259E /* Errors */ = {
 			isa = PBXGroup;
 			children = (
+				6B8C2AFB2A601990001FEC85 /* DarockFeedback */,
 				6B91C4AC2A55A40D0020259E /* FeedbackView.swift */,
 				6BA3F5692A543B3A0016BD8D /* ErrorGetView.swift */,
 				6BF6B5CE2A544A1F004A31BC /* NetworkFixView.swift */,
@@ -340,6 +366,7 @@
 			files = (
 				6B0253C72A4EF59700567986 /* Preview Assets.xcassets in Resources */,
 				6B0253C42A4EF59700567986 /* Assets.xcassets in Resources */,
+				6B1680392A604175001FA988 /* biliEmoji.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,10 +379,13 @@
 			files = (
 				6BBFA2C52A515D8B00FE61D1 /* FirstUsingView.swift in Sources */,
 				6B56A8FF2A53A9F80089DD31 /* FavoriteView.swift in Sources */,
+				6B8C2AFF2A601E36001FEC85 /* FeedbackEnterView.swift in Sources */,
 				6BBFF7D12A50411400DE050E /* SearchView.swift in Sources */,
 				6B56A9052A53BD330089DD31 /* AppFileManager.swift in Sources */,
 				6BE4AA7A2A56798600F18565 /* CodeExt.swift in Sources */,
+				6B8C2B012A601E58001FEC85 /* FeedbackMainView.swift in Sources */,
 				6B0253C22A4EF59600567986 /* ContentView.swift in Sources */,
+				6B8C2AFD2A6019B6001FEC85 /* FeedbackLoginView.swift in Sources */,
 				6BBFA32D2A51C39F00FE61D1 /* NoticeView.swift in Sources */,
 				6BBFA2BE2A51236900FE61D1 /* VideoCommentsView.swift in Sources */,
 				6BBFF7BE2A50040E00DE050E /* FollowListView.swift in Sources */,
@@ -373,10 +403,12 @@
 				6B56A9032A53B9770089DD31 /* VideoDownloadView.swift in Sources */,
 				6B0253C02A4EF59600567986 /* DarockBiliApp.swift in Sources */,
 				6B0253DF2A4F1DCF00567986 /* VideoPlayerView.swift in Sources */,
+				6B8C2B032A6020F2001FEC85 /* FeedbackDetailsView.swift in Sources */,
 				6B0253E22A4F23DB00567986 /* PersonAccountView.swift in Sources */,
 				6B56A9012A53B8D30089DD31 /* DownloadsView.swift in Sources */,
 				6B2773C12A599FE300950EB7 /* UIExt.swift in Sources */,
 				6B91C4AF2A55A54C0020259E /* ColorPickerView.swift in Sources */,
+				6B8C2B052A602D2E001FEC85 /* CommentEmojiDictionary.swift in Sources */,
 				6BBFF7D62A5073FC00DE050E /* ArticleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -512,7 +544,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 101;
+				CURRENT_PROJECT_VERSION = 104;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -544,7 +576,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 101;
+				CURRENT_PROJECT_VERSION = 104;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -576,7 +608,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 101;
+				CURRENT_PROJECT_VERSION = 104;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
@@ -593,7 +625,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 101;
+				CURRENT_PROJECT_VERSION = 104;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
