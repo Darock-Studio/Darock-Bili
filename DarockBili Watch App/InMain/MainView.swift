@@ -20,6 +20,9 @@ struct MainView: View {
     @State var isSearchPresented = false
     @State var notice = ""
     @State var isNetworkFixPresented = false
+    @State var isFirstLoaded = false
+    @State var newMajorVer = ""
+    @State var newBuildVer = ""
     var body: some View {
         Group {
             List {
@@ -39,6 +42,18 @@ struct MainView: View {
                                 .bold()
                         })
                     }
+                    if newMajorVer != "" && newBuildVer != "" {
+                        let nowMajorVer = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+                        let nowBuildVer = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
+                        if nowMajorVer < newMajorVer || nowBuildVer < newBuildVer {
+                            Text("喵哩喵哩新版本(v\(newMajorVer) Build \(newBuildVer))已发布！可前往 TestFlight 更新")
+                        }
+                    }
+//                    Button(action: {
+//                        debugPrint(backtraceAllThread())
+//                    }, label: {
+//                        Text("Debug")
+//                    })
                 }
                 Section {
                     if videos.count != 0 {
@@ -71,10 +86,19 @@ struct MainView: View {
             }
         }
         .onAppear {
-            LoadNewVideos()
+            if !isFirstLoaded {
+                LoadNewVideos()
+                isFirstLoaded = true
+            }
             DarockKit.Network.shared.requestString("https://api.darock.top/bili/notice") { respStr, isSuccess in
                 if isSuccess {
                     notice = respStr.apiFixed()
+                }
+            }
+            DarockKit.Network.shared.requestString("https://api.darock.top/bili/newver") { respStr, isSuccess in
+                if isSuccess && respStr.apiFixed().contains("|") {
+                    newMajorVer = String(respStr.apiFixed().split(separator: "|")[0])
+                    newBuildVer = String(respStr.apiFixed().split(separator: "|")[1])
                 }
             }
         }
