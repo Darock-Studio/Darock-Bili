@@ -20,6 +20,9 @@
 		6B0253E42A4F265100567986 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0253E32A4F265100567986 /* LoginView.swift */; };
 		6B1680392A604175001FA988 /* biliEmoji.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6B1680382A604175001FA988 /* biliEmoji.plist */; };
 		6B2773C12A599FE300950EB7 /* UIExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2773C02A599FE300950EB7 /* UIExt.swift */; };
+		6B2D76482A610E7000AA57DA /* Backtrace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2D76472A610E7000AA57DA /* Backtrace.swift */; };
+		6B2D764C2A610EC800AA57DA /* backtrace.c in Sources */ = {isa = PBXBuildFile; fileRef = 6B2D764B2A610EC800AA57DA /* backtrace.c */; };
+		6B2D764E2A61154300AA57DA /* SignalErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2D764D2A61154300AA57DA /* SignalErrorView.swift */; };
 		6B56A8FF2A53A9F80089DD31 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B56A8FE2A53A9F80089DD31 /* FavoriteView.swift */; };
 		6B56A9012A53B8D30089DD31 /* DownloadsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B56A9002A53B8D30089DD31 /* DownloadsView.swift */; };
 		6B56A9032A53B9770089DD31 /* VideoDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B56A9022A53B9770089DD31 /* VideoDownloadView.swift */; };
@@ -93,6 +96,10 @@
 		6B0253E32A4F265100567986 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		6B1680382A604175001FA988 /* biliEmoji.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = biliEmoji.plist; sourceTree = SOURCE_ROOT; };
 		6B2773C02A599FE300950EB7 /* UIExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExt.swift; sourceTree = "<group>"; };
+		6B2D76472A610E7000AA57DA /* Backtrace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backtrace.swift; sourceTree = "<group>"; };
+		6B2D764A2A610EC800AA57DA /* backtrace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = backtrace.h; sourceTree = "<group>"; };
+		6B2D764B2A610EC800AA57DA /* backtrace.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = backtrace.c; sourceTree = "<group>"; };
+		6B2D764D2A61154300AA57DA /* SignalErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalErrorView.swift; sourceTree = "<group>"; };
 		6B56A8FE2A53A9F80089DD31 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		6B56A9002A53B8D30089DD31 /* DownloadsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsView.swift; sourceTree = "<group>"; };
 		6B56A9022A53B9770089DD31 /* VideoDownloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloadView.swift; sourceTree = "<group>"; };
@@ -186,6 +193,16 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		6B2D76492A610E9E00AA57DA /* Backtrace */ = {
+			isa = PBXGroup;
+			children = (
+				6B2D76472A610E7000AA57DA /* Backtrace.swift */,
+				6B2D764A2A610EC800AA57DA /* backtrace.h */,
+				6B2D764B2A610EC800AA57DA /* backtrace.c */,
+			);
+			path = Backtrace;
+			sourceTree = "<group>";
+		};
 		6B6790A12A52965900FAE216 /* PersonalCenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,10 +257,12 @@
 		6B91C4A62A5597E10020259E /* Errors */ = {
 			isa = PBXGroup;
 			children = (
+				6B2D76492A610E9E00AA57DA /* Backtrace */,
 				6B8C2AFB2A601990001FEC85 /* DarockFeedback */,
 				6B91C4AC2A55A40D0020259E /* FeedbackView.swift */,
 				6BA3F5692A543B3A0016BD8D /* ErrorGetView.swift */,
 				6BF6B5CE2A544A1F004A31BC /* NetworkFixView.swift */,
+				6B2D764D2A61154300AA57DA /* SignalErrorView.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -320,6 +339,7 @@
 					};
 					6B0253B92A4EF59600567986 = {
 						CreatedOnToolsVersion = 15.0;
+						LastSwiftMigration = 1500;
 					};
 				};
 			};
@@ -381,6 +401,7 @@
 				6B56A8FF2A53A9F80089DD31 /* FavoriteView.swift in Sources */,
 				6B8C2AFF2A601E36001FEC85 /* FeedbackEnterView.swift in Sources */,
 				6BBFF7D12A50411400DE050E /* SearchView.swift in Sources */,
+				6B2D764C2A610EC800AA57DA /* backtrace.c in Sources */,
 				6B56A9052A53BD330089DD31 /* AppFileManager.swift in Sources */,
 				6BE4AA7A2A56798600F18565 /* CodeExt.swift in Sources */,
 				6B8C2B012A601E58001FEC85 /* FeedbackMainView.swift in Sources */,
@@ -391,6 +412,7 @@
 				6BBFF7BE2A50040E00DE050E /* FollowListView.swift in Sources */,
 				6BBFA2C32A512CF500FE61D1 /* AboutView.swift in Sources */,
 				6B91C4A92A5598260020259E /* SettingsView.swift in Sources */,
+				6B2D764E2A61154300AA57DA /* SignalErrorView.swift in Sources */,
 				6B0253E42A4F265100567986 /* LoginView.swift in Sources */,
 				6B0253DD2A4F155800567986 /* VideoDetailView.swift in Sources */,
 				6B6790A42A5296FB00FAE216 /* HistoryView.swift in Sources */,
@@ -407,6 +429,7 @@
 				6B0253E22A4F23DB00567986 /* PersonAccountView.swift in Sources */,
 				6B56A9012A53B8D30089DD31 /* DownloadsView.swift in Sources */,
 				6B2773C12A599FE300950EB7 /* UIExt.swift in Sources */,
+				6B2D76482A610E7000AA57DA /* Backtrace.swift in Sources */,
 				6B91C4AF2A55A54C0020259E /* ColorPickerView.swift in Sources */,
 				6B8C2B052A602D2E001FEC85 /* CommentEmojiDictionary.swift in Sources */,
 				6BBFF7D62A5073FC00DE050E /* ArticleView.swift in Sources */,
@@ -543,6 +566,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 104;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
@@ -564,6 +588,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 10.0;
@@ -575,6 +600,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 104;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
