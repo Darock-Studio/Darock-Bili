@@ -9,8 +9,15 @@
 /* Begin PBXBuildFile section */
 		6BC8CB1A2A6CEC7400D2E9E9 /* ColorThief.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC8CB192A6CEC7400D2E9E9 /* ColorThief.swift */; };
 		6BC8CB1C2A6CEC8400D2E9E9 /* MMCQ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC8CB1B2A6CEC8400D2E9E9 /* MMCQ.swift */; };
-		6BC8CB1F2A6CF48400D2E9E9 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6BC8CB1E2A6CF48400D2E9E9 /* CachedAsyncImage */; };
-		6BC8CB262A6D149400D2E9E9 /* Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 6BC8CB252A6D149400D2E9E9 /* Dynamic */; };
+		6BC8CB282A6D758000D2E9E9 /* EFQRCode in Frameworks */ = {isa = PBXBuildFile; productRef = 6BC8CB272A6D758000D2E9E9 /* EFQRCode */; };
+		6BC8CB2A2A6D758000D2E9E9 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6BC8CB292A6D758000D2E9E9 /* SDWebImageSwiftUI */; };
+		6BC8CB2C2A6D758000D2E9E9 /* SDWebImageWebPCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 6BC8CB2B2A6D758000D2E9E9 /* SDWebImageWebPCoder */; };
+		6BC8CB2E2A6D758000D2E9E9 /* SDWebImageSVGCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 6BC8CB2D2A6D758000D2E9E9 /* SDWebImageSVGCoder */; };
+		6BC8CB302A6D758000D2E9E9 /* SDWebImagePDFCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 6BC8CB2F2A6D758000D2E9E9 /* SDWebImagePDFCoder */; };
+		6BC8CB322A6D758000D2E9E9 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 6BC8CB312A6D758000D2E9E9 /* SwiftSoup */; };
+		6BC8CB342A6D758000D2E9E9 /* DarockKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6BC8CB332A6D758000D2E9E9 /* DarockKit */; };
+		6BC8CB362A6D758000D2E9E9 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6BC8CB352A6D758000D2E9E9 /* CachedAsyncImage */; };
+		6BC8CB382A6D758000D2E9E9 /* Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 6BC8CB372A6D758000D2E9E9 /* Dynamic */; };
 		6BFF29052A6C0B3A00914A8E /* DarockBiliApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFF29042A6C0B3A00914A8E /* DarockBiliApp.swift */; };
 		6BFF29072A6C0B3A00914A8E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFF29062A6C0B3A00914A8E /* ContentView.swift */; };
 		6BFF29092A6C0B3F00914A8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BFF29082A6C0B3F00914A8E /* Assets.xcassets */; };
@@ -55,13 +62,6 @@
 		6BFF29932A6C0E1D00914A8E /* FeedbackLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8C2AFC2A6019B6001FEC85 /* FeedbackLoginView.swift */; };
 		6BFF29942A6C0E1D00914A8E /* SignalErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2D764D2A61154300AA57DA /* SignalErrorView.swift */; };
 		6BFF29952A6C0E2200914A8E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B0253C62A4EF59700567986 /* Preview Assets.xcassets */; };
-		6BFF29982A6C0EC200914A8E /* EFQRCode in Frameworks */ = {isa = PBXBuildFile; productRef = 6BFF29972A6C0EC200914A8E /* EFQRCode */; };
-		6BFF299A2A6C0EC200914A8E /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6BFF29992A6C0EC200914A8E /* SDWebImageSwiftUI */; };
-		6BFF299C2A6C0EC200914A8E /* SDWebImageWebPCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 6BFF299B2A6C0EC200914A8E /* SDWebImageWebPCoder */; };
-		6BFF299E2A6C0EC200914A8E /* SDWebImageSVGCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 6BFF299D2A6C0EC200914A8E /* SDWebImageSVGCoder */; };
-		6BFF29A02A6C0EC200914A8E /* SDWebImagePDFCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 6BFF299F2A6C0EC200914A8E /* SDWebImagePDFCoder */; };
-		6BFF29A22A6C0EC200914A8E /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 6BFF29A12A6C0EC200914A8E /* SwiftSoup */; };
-		6BFF29A42A6C0EC200914A8E /* DarockKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6BFF29A32A6C0EC200914A8E /* DarockKit */; };
 		6BFF29A62A6C10EB00914A8E /* DarockKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6BFF29A52A6C10EB00914A8E /* DarockKit */; };
 /* End PBXBuildFile section */
 
@@ -156,15 +156,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6BC8CB262A6D149400D2E9E9 /* Dynamic in Frameworks */,
-				6BFF299A2A6C0EC200914A8E /* SDWebImageSwiftUI in Frameworks */,
-				6BC8CB1F2A6CF48400D2E9E9 /* CachedAsyncImage in Frameworks */,
-				6BFF29982A6C0EC200914A8E /* EFQRCode in Frameworks */,
-				6BFF299C2A6C0EC200914A8E /* SDWebImageWebPCoder in Frameworks */,
-				6BFF29A02A6C0EC200914A8E /* SDWebImagePDFCoder in Frameworks */,
-				6BFF29A42A6C0EC200914A8E /* DarockKit in Frameworks */,
-				6BFF299E2A6C0EC200914A8E /* SDWebImageSVGCoder in Frameworks */,
-				6BFF29A22A6C0EC200914A8E /* SwiftSoup in Frameworks */,
+				6BC8CB382A6D758000D2E9E9 /* Dynamic in Frameworks */,
+				6BC8CB2A2A6D758000D2E9E9 /* SDWebImageSwiftUI in Frameworks */,
+				6BC8CB362A6D758000D2E9E9 /* CachedAsyncImage in Frameworks */,
+				6BC8CB282A6D758000D2E9E9 /* EFQRCode in Frameworks */,
+				6BC8CB2C2A6D758000D2E9E9 /* SDWebImageWebPCoder in Frameworks */,
+				6BC8CB302A6D758000D2E9E9 /* SDWebImagePDFCoder in Frameworks */,
+				6BC8CB342A6D758000D2E9E9 /* DarockKit in Frameworks */,
+				6BC8CB2E2A6D758000D2E9E9 /* SDWebImageSVGCoder in Frameworks */,
+				6BC8CB322A6D758000D2E9E9 /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,15 +387,15 @@
 			);
 			name = "DarockBili Watch App";
 			packageProductDependencies = (
-				6BFF29972A6C0EC200914A8E /* EFQRCode */,
-				6BFF29992A6C0EC200914A8E /* SDWebImageSwiftUI */,
-				6BFF299B2A6C0EC200914A8E /* SDWebImageWebPCoder */,
-				6BFF299D2A6C0EC200914A8E /* SDWebImageSVGCoder */,
-				6BFF299F2A6C0EC200914A8E /* SDWebImagePDFCoder */,
-				6BFF29A12A6C0EC200914A8E /* SwiftSoup */,
-				6BFF29A32A6C0EC200914A8E /* DarockKit */,
-				6BC8CB1E2A6CF48400D2E9E9 /* CachedAsyncImage */,
-				6BC8CB252A6D149400D2E9E9 /* Dynamic */,
+				6BC8CB272A6D758000D2E9E9 /* EFQRCode */,
+				6BC8CB292A6D758000D2E9E9 /* SDWebImageSwiftUI */,
+				6BC8CB2B2A6D758000D2E9E9 /* SDWebImageWebPCoder */,
+				6BC8CB2D2A6D758000D2E9E9 /* SDWebImageSVGCoder */,
+				6BC8CB2F2A6D758000D2E9E9 /* SDWebImagePDFCoder */,
+				6BC8CB312A6D758000D2E9E9 /* SwiftSoup */,
+				6BC8CB332A6D758000D2E9E9 /* DarockKit */,
+				6BC8CB352A6D758000D2E9E9 /* CachedAsyncImage */,
+				6BC8CB372A6D758000D2E9E9 /* Dynamic */,
 			);
 			productName = "DarockBili WatchKit App Watch App";
 			productReference = 6BFF295C2A6C0D1C00914A8E /* DarockBili Watch App.app */;
@@ -902,50 +902,50 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		6BC8CB1E2A6CF48400D2E9E9 /* CachedAsyncImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6BC8CB1D2A6CF48400D2E9E9 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
-			productName = CachedAsyncImage;
-		};
-		6BC8CB252A6D149400D2E9E9 /* Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6BC8CB242A6D149400D2E9E9 /* XCRemoteSwiftPackageReference "Dynamic" */;
-			productName = Dynamic;
-		};
-		6BFF29972A6C0EC200914A8E /* EFQRCode */ = {
+		6BC8CB272A6D758000D2E9E9 /* EFQRCode */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6BBFF7BA2A4FF18100DE050E /* XCRemoteSwiftPackageReference "EFQRCode" */;
 			productName = EFQRCode;
 		};
-		6BFF29992A6C0EC200914A8E /* SDWebImageSwiftUI */ = {
+		6BC8CB292A6D758000D2E9E9 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6BBFF7C12A5012B800DE050E /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
 		};
-		6BFF299B2A6C0EC200914A8E /* SDWebImageWebPCoder */ = {
+		6BC8CB2B2A6D758000D2E9E9 /* SDWebImageWebPCoder */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6BBFF7C42A5012DB00DE050E /* XCRemoteSwiftPackageReference "SDWebImageWebPCoder" */;
 			productName = SDWebImageWebPCoder;
 		};
-		6BFF299D2A6C0EC200914A8E /* SDWebImageSVGCoder */ = {
+		6BC8CB2D2A6D758000D2E9E9 /* SDWebImageSVGCoder */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6BBFF7C72A5012EC00DE050E /* XCRemoteSwiftPackageReference "SDWebImageSVGCoder" */;
 			productName = SDWebImageSVGCoder;
 		};
-		6BFF299F2A6C0EC200914A8E /* SDWebImagePDFCoder */ = {
+		6BC8CB2F2A6D758000D2E9E9 /* SDWebImagePDFCoder */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6BBFF7CA2A5012FF00DE050E /* XCRemoteSwiftPackageReference "SDWebImagePDFCoder" */;
 			productName = SDWebImagePDFCoder;
 		};
-		6BFF29A12A6C0EC200914A8E /* SwiftSoup */ = {
+		6BC8CB312A6D758000D2E9E9 /* SwiftSoup */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6BBFF7D22A50737C00DE050E /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
 		};
-		6BFF29A32A6C0EC200914A8E /* DarockKit */ = {
+		6BC8CB332A6D758000D2E9E9 /* DarockKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6BA1E5492A6AF2A900293B2C /* XCRemoteSwiftPackageReference "DarockKit" */;
 			productName = DarockKit;
+		};
+		6BC8CB352A6D758000D2E9E9 /* CachedAsyncImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6BC8CB1D2A6CF48400D2E9E9 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
+			productName = CachedAsyncImage;
+		};
+		6BC8CB372A6D758000D2E9E9 /* Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6BC8CB242A6D149400D2E9E9 /* XCRemoteSwiftPackageReference "Dynamic" */;
+			productName = Dynamic;
 		};
 		6BFF29A52A6C10EB00914A8E /* DarockKit */ = {
 			isa = XCSwiftPackageProductDependency;

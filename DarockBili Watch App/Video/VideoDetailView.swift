@@ -246,7 +246,7 @@ struct VideoDetailView: View {
                             ownerFansCount = respJson["data"]["follower"].int!
                         }
                     }
-                    let cid = String(respJson["data"]["pages"]["cid"].int!)
+                    let cid = String(respJson["data"]["pages"][0]["cid"].int!)
                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/online/total?bvid=\(videoDetails["BV"]!)&cid=\(cid)") { respJson, isSuccess in
                         if isSuccess {
                             nowPlayingCount = respJson["data"]["total"].string!
