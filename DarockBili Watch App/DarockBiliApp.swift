@@ -5,6 +5,7 @@
 //  Created by WindowsMEMZ on 2023/6/30.
 //
 
+import Darwin
 import SwiftUI
 import SDWebImage
 import SDWebImageWebPCoder
@@ -17,7 +18,7 @@ struct DarockBili_Watch_AppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if UserDefaults.standard.bool(forKey: "isNewSignalError") {
+            if UserDefaults.standard.string(forKey: "NewSignalError") ?? "" != "" {
                 SignalErrorView()
             } else {
                 ContentView()
@@ -28,19 +29,24 @@ struct DarockBili_Watch_AppApp: App {
 
 class AppDelegate: NSObject, WKApplicationDelegate {
     func applicationDidFinishLaunching() {
-        signal(SIGABRT, {error in
-            signalErrorRecord(error, "SIGABRT")
-        })
-        signal(SIGTRAP, {error in
-            signalErrorRecord(error, "SIGTRAP")
-        })
-        signal(SIGILL, {error in
-            signalErrorRecord(error, "SIGILL")
+//        signal(SIGABRT, {error in
+//            signalErrorRecord(error, "SIGABRT")
+//        })
+//        signal(SIGTRAP, {error in
+//            signalErrorRecord(error, "SIGTRAP")
+//        })
+//        signal(SIGILL, {error in
+//            signalErrorRecord(error, "SIGILL")
+//        })
+        signal(SIGKILL, {error in
+            signalErrorRecord(error, "SIGKILL")
         })
         
         SDImageCodersManager.shared.addCoder(SDImageWebPCoder.shared)
         SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)
         SDImageCodersManager.shared.addCoder(SDImagePDFCoder.shared)
+        SDImageCache.shared.config.maxMemoryCost = 1024 * 1024 * 20
+        SDImageCache.shared.config.shouldCacheImagesInMemory = false
         
 //        let nsd = biliEmojiDictionary as NSDictionary
 //        let manager = FileManager.default
@@ -86,10 +92,8 @@ func signalErrorRecord(_ errorNum: Int32, _ errorSignal: String) {
     
     EOF
     """
-    var logNum = UserDefaults.standard.integer(forKey: "signalErrorLogNum")
-    logNum += 1
-    UserDefaults.standard.set(dateStr, forKey: "signalErrorTitle\(logNum)")
-    UserDefaults.standard.set(fullString, forKey: "signalError\(logNum)")
-    UserDefaults.standard.set(logNum, forKey: "signalErrorLogNum")
-    UserDefaults.standard.set(true, forKey: "isNewSignalError")
+    let manager = FileManager.default
+    let urlForDocument = manager.urls(for: .documentDirectory, in: .userDomainMask)
+    try! fullString.write(to: URL(string: (urlForDocument[0] as URL).absoluteString + "\(dateStr.replacingOccurrences(of: " ", with: "_").replacingOccurrences(of: "/", with: "-").replacingOccurrences(of: ":", with: "__")).ddf")!, atomically: true, encoding: .utf8)
+    UserDefaults.standard.set("\(dateStr).ddf", forKey: "NewSignalError")
 }

@@ -28,15 +28,15 @@ struct FeedbackMainView: View {
                 Text("无反馈")
             }
         }
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button(action: {
-                    
-                }, label: {
-                    Image(systemName: "square.and.pencil")
-                })
-            }
-        }
+//        .toolbar {
+//            ToolbarItem(placement: .topBarTrailing) {
+//                Button(action: {
+//                    
+//                }, label: {
+//                    Image(systemName: "square.and.pencil")
+//                })
+//            }
+//        }
         .onAppear {
             DarockKit.Network.shared.requestString("https://api.darock.top/feedback/get/\(darockIdAccount)") { respStr, isSuccess in
                 if isSuccess {

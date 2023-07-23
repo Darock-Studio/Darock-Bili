@@ -71,7 +71,7 @@ struct ErrorGetView: View {
                             } else {
                                 Text("已发送")
                                     .bold()
-                                Text("案例编号为 \(Text(sentCode).fontDesign(.monospaced)) 后续可通过此编号跟进状态")
+                                Text("案例编号为 \(Text(sentCode).font(.system(size: 18, design: .monospaced))) 后续可通过此编号跟进状态")
                                     .font(.system(size: 18, weight: .bold))
                                 if error.ignoreable {
                                     Button(action: {

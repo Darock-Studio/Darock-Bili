@@ -16,7 +16,7 @@ struct AboutView: View {
     @State var isEasterEggPresented = false
     @State var isEasterEgg2Presented = false
     var body: some View {
-        NavigationStack {
+         NavigationStack {
             List {
                 Section {
                     Text("喵哩喵哩 v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)")

@@ -16,9 +16,9 @@ struct SettingsView: View {
     var body: some View {
         List {
             Section {
-//                NavigationLink(destination: {ColorPickerView()}, label: {
-//                    Text("ColorPicker")
-//                })
+                NavigationLink(destination: {PlayerSettingsView()}, label: {
+                    Text("播放设置")
+                })
             }
             Section {
                 NavigationLink(destination: {FeedbackView()}, label: {
@@ -65,6 +65,15 @@ struct SettingsView: View {
         }
         .navigationTitle("设置")
         .navigationBarTitleDisplayMode(.large)
+    }
+    
+    struct PlayerSettingsView: View {
+        @AppStorage("IsPlayerAutoRotating") var isPlayerAutoRotating = true
+        var body: some View {
+            List {
+                Toggle("自动旋转（仅竖向）", isOn: $isPlayerAutoRotating)
+            }
+        }
     }
 }
 

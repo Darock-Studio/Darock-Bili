@@ -72,6 +72,8 @@ struct FollowListView: View {
                     RefreshNew()
                     isLoadedFollows = true
                 }
+                
+                recordUserStep("Enter FollowListView")
             }
             .tag(1)
             List {
@@ -88,7 +90,7 @@ struct FollowListView: View {
                 for data in datas {
                     users.append(["Name": data.1["uname"].string!, "Face": data.1["face"].string!, "Sign": data.1["sign"].string!, "UID": String(data.1["mid"].int!)])
                 }
-                totalPage = respJson["data"]["total"].int! / 20 + 1
+                totalPage = respJson["data"]["total"].int ?? 0 / 20 + 1
             }
         }
     }

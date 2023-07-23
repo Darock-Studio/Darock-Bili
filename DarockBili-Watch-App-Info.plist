@@ -4,10 +4,6 @@
 <dict>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>prefs</string>
-	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

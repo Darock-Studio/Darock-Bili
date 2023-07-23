@@ -57,7 +57,7 @@ struct FeedbackView: View {
                                 }
                             //Text("正在\(sendStep)")
                         } else {
-                            Text("反馈成功！后续可使用反馈 ID：\(Text(feedbackCode).fontDesign(.monospaced).bold()) 跟进情况")
+                            Text("反馈成功！后续可使用反馈 ID：\(Text(feedbackCode).font(.system(size: 18, design: .monospaced)).bold()) 跟进情况")
                         }
                     }
                     

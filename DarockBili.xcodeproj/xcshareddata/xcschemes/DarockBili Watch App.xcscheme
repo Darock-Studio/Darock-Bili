@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6B0253B92A4EF59600567986"
-               BuildableName = "&#x55b5;&#x54e9;&#x55b5;&#x54e9;.app"
+               BlueprintIdentifier = "6BFF295B2A6C0D1C00914A8E"
+               BuildableName = "DarockBili Watch App.app"
                BlueprintName = "DarockBili Watch App"
                ReferencedContainer = "container:DarockBili.xcodeproj">
             </BuildableReference>
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6B0253B32A4EF59600567986"
+               BlueprintIdentifier = "6BFF29012A6C0B3A00914A8E"
                BuildableName = "DarockBili.app"
                BlueprintName = "DarockBili"
                ReferencedContainer = "container:DarockBili.xcodeproj">
@@ -42,30 +42,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
-      <Testables>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6B56A9092A53C9BE0089DD31"
-               BuildableName = "DarockBili Tests.xctest"
-               BlueprintName = "DarockBili Tests"
-               ReferencedContainer = "container:DarockBili.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6BD2A0BC2A57E0DD00D37D0D"
-               BuildableName = "DarockBili UITests.xctest"
-               BlueprintName = "DarockBili UITests"
-               ReferencedContainer = "container:DarockBili.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -82,16 +58,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "cd /Users/WindowsMEMZ/Desktop/DarockBili&#10;xcrun agvtool next-version -all&#10;">
-               <EnvironmentBuildable>
-                  <BuildableReference
-                     BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "6B0253B92A4EF59600567986"
-                     BuildableName = "&#x55b5;&#x54e9;&#x55b5;&#x54e9;.app"
-                     BlueprintName = "DarockBili Watch App"
-                     ReferencedContainer = "container:DarockBili.xcodeproj">
-                  </BuildableReference>
-               </EnvironmentBuildable>
+               scriptText = "cd /Users/WindowsMEMZ/Desktop/DarockBili&#10;agvtool next-version -all&#10;">
             </ActionContent>
          </ExecutionAction>
       </PostActions>
@@ -99,8 +66,8 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6B0253B92A4EF59600567986"
-            BuildableName = "&#x55b5;&#x54e9;&#x55b5;&#x54e9;.app"
+            BlueprintIdentifier = "6BFF295B2A6C0D1C00914A8E"
+            BuildableName = "DarockBili Watch App.app"
             BlueprintName = "DarockBili Watch App"
             ReferencedContainer = "container:DarockBili.xcodeproj">
          </BuildableReference>
@@ -116,8 +83,8 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6B0253B92A4EF59600567986"
-            BuildableName = "&#x55b5;&#x54e9;&#x55b5;&#x54e9;.app"
+            BlueprintIdentifier = "6BFF295B2A6C0D1C00914A8E"
+            BuildableName = "DarockBili Watch App.app"
             BlueprintName = "DarockBili Watch App"
             ReferencedContainer = "container:DarockBili.xcodeproj">
          </BuildableReference>
@@ -134,16 +101,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "cd /Users/WindowsMEMZ/Desktop/DarockBili&#10;xcrun agvtool next-version -all&#10;">
-               <EnvironmentBuildable>
-                  <BuildableReference
-                     BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "6B0253B92A4EF59600567986"
-                     BuildableName = "&#x55b5;&#x54e9;&#x55b5;&#x54e9;.app"
-                     BlueprintName = "DarockBili Watch App"
-                     ReferencedContainer = "container:DarockBili.xcodeproj">
-                  </BuildableReference>
-               </EnvironmentBuildable>
+               scriptText = "cd /Users/WindowsMEMZ/Desktop/DarockBili&#10;agvtool next-version -all&#10;">
             </ActionContent>
          </ExecutionAction>
       </PostActions>

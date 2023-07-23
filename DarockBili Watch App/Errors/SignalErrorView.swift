@@ -10,9 +10,9 @@ import DarockKit
 import Alamofire
 
 struct SignalErrorView: View {
-    @AppStorage("signalErrorLogNum") var signalErrorLogNum = 0
     @State var userDesc = ""
     @State var isSending = false
+    @State var errorText = ""
     var body: some View {
         ScrollView {
             VStack {
@@ -32,10 +32,17 @@ struct SignalErrorView: View {
                     Spacer()
                 }
                 ScrollView {
-                    Text(UserDefaults.standard.string(forKey: "signalError\(signalErrorLogNum)")!)
-                        .font(.system(size: 10))
+                    VStack {
+                        Text(errorText)
+                            .font(.system(size: 10))
+                            .padding(3)
+                        Spacer()
+                    }
+                    .frame(height: 10000)
                 }
                 .frame(maxHeight: 100)
+                .border(Color.accentColor, width: 2)
+                .cornerRadius(5)
                 Text("将上方信息发送到 Darock 可以帮助我们改进喵哩喵哩")
                     .bold()
                     .multilineTextAlignment(.leading)
@@ -44,14 +51,15 @@ struct SignalErrorView: View {
                     isSending = true
                     let headers: HTTPHeaders = [
                         "accept": "application/json",
-                        "Content-Type": "application/json",
-                        "codedContent": userDesc + "\n" + UserDefaults.standard.string(forKey: "signalError\(signalErrorLogNum)")!
+                        "Content-Type": "multipart/form-data"
                     ]
-                    AF.request("https://api.darock.top/bili/crashfeedback", headers: headers).response { response in
-                        let respStr = String(data: response.data!, encoding: .utf8)!
+                    AF.upload(multipartFormData: { multipartFormData in
+                        multipartFormData.append(("User Description: " + userDesc + "\n\n" + errorText).data(using: .utf8)!, withName: "file", fileName: UserDefaults.standard.string(forKey: "NewSignalError")!)
+                    }, to: "https://api.darock.top/bili/crashfeedback/\(UserDefaults.standard.string(forKey: "NewSignalError")!.base64Encoded())", method: .post, headers: headers).responseString { response in
+                        let rspStr = String(data: response.data!, encoding: .utf8)!
                         debugPrint(response)
-                        debugPrint(respStr)
-                        UserDefaults.standard.set(false, forKey: "isNewSignalError")
+                        isSending = false
+                        UserDefaults.standard.set("", forKey: "NewSignalError")
                     }
                 }, label: {
                     if !isSending {
@@ -61,12 +69,19 @@ struct SignalErrorView: View {
                         ProgressView()
                     }
                 })
+                .disabled(isSending)
                 Button(action: {
-                    UserDefaults.standard.set(false, forKey: "isNewSignalError")
+                    UserDefaults.standard.set("", forKey: "NewSignalError")
                 }, label: {
                     Text("不发送")
                 })
             }
+        }
+        .onAppear {
+            let fileName = UserDefaults.standard.string(forKey: "NewSignalError")!
+            let manager = FileManager.default
+            let urlForDocument = manager.urls(for: .documentDirectory, in: .userDomainMask)
+            errorText = try! String(contentsOf: URL(string: (urlForDocument[0] as URL).absoluteString + fileName.replacingOccurrences(of: " ", with: "_").replacingOccurrences(of: "/", with: "-").replacingOccurrences(of: ":", with: "__"))!)
         }
     }
 }
