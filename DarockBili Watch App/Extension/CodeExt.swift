@@ -8,7 +8,7 @@
 
 import OSLog
 import SwiftUI
-import Dynamic
+//import Dynamic
 import CryptoKit
 import Alamofire
 import Foundation
@@ -123,8 +123,8 @@ public func getMemory() -> Float {
 /// 切换时间显示
 /// - Parameter b: 是否显示
 public func hideDigitalTime(_ b: Bool) {
-    let app = Dynamic.PUICApplication.sharedPUICApplication()
-    app._setStatusBarTimeHidden(b, animated: true, completion: nil)
+//    let app = Dynamic.PUICApplication.sharedPUICApplication()
+//    app._setStatusBarTimeHidden(b, animated: true, completion: nil)
 }
 
 public class WbiSign: ObservableObject {

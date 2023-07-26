@@ -22,7 +22,6 @@
 		6BC8CB322A6D758000D2E9E9 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 6BC8CB312A6D758000D2E9E9 /* SwiftSoup */; };
 		6BC8CB342A6D758000D2E9E9 /* DarockKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6BC8CB332A6D758000D2E9E9 /* DarockKit */; };
 		6BC8CB362A6D758000D2E9E9 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6BC8CB352A6D758000D2E9E9 /* CachedAsyncImage */; };
-		6BC8CB3E2A6D768700D2E9E9 /* Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 6BC8CB3D2A6D768700D2E9E9 /* Dynamic */; };
 		6BC8CB402A6D7F6F00D2E9E9 /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC8CB3F2A6D7F6F00D2E9E9 /* AudioPlayerView.swift */; };
 		6BFF29052A6C0B3A00914A8E /* DarockBiliApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFF29042A6C0B3A00914A8E /* DarockBiliApp.swift */; };
 		6BFF29072A6C0B3A00914A8E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFF29062A6C0B3A00914A8E /* ContentView.swift */; };
@@ -165,7 +164,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6BC8CB3E2A6D768700D2E9E9 /* Dynamic in Frameworks */,
 				6BC8CB2A2A6D758000D2E9E9 /* SDWebImageSwiftUI in Frameworks */,
 				6BC8CB362A6D758000D2E9E9 /* CachedAsyncImage in Frameworks */,
 				6BC8CB282A6D758000D2E9E9 /* EFQRCode in Frameworks */,
@@ -426,7 +424,6 @@
 				6BC8CB312A6D758000D2E9E9 /* SwiftSoup */,
 				6BC8CB332A6D758000D2E9E9 /* DarockKit */,
 				6BC8CB352A6D758000D2E9E9 /* CachedAsyncImage */,
-				6BC8CB3D2A6D768700D2E9E9 /* Dynamic */,
 				6B37B4BC2A715EF900F26F1A /* SFSymbol */,
 			);
 			productName = "DarockBili WatchKit App Watch App";
@@ -470,7 +467,6 @@
 				6BBFF7D22A50737C00DE050E /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				6BA1E5492A6AF2A900293B2C /* XCRemoteSwiftPackageReference "DarockKit" */,
 				6BC8CB1D2A6CF48400D2E9E9 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
-				6BC8CB3C2A6D768700D2E9E9 /* XCRemoteSwiftPackageReference "Dynamic" */,
 				6B37B4BB2A715EF800F26F1A /* XCRemoteSwiftPackageReference "SFSymbol" */,
 			);
 			productRefGroup = 6B0253B52A4EF59600567986 /* Products */;
@@ -943,14 +939,6 @@
 				minimumVersion = 2.1.1;
 			};
 		};
-		6BC8CB3C2A6D768700D2E9E9 /* XCRemoteSwiftPackageReference "Dynamic" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mhdhejazi/Dynamic#installation";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -998,11 +986,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6BC8CB1D2A6CF48400D2E9E9 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
 			productName = CachedAsyncImage;
-		};
-		6BC8CB3D2A6D768700D2E9E9 /* Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6BC8CB3C2A6D768700D2E9E9 /* XCRemoteSwiftPackageReference "Dynamic" */;
-			productName = Dynamic;
 		};
 		6BFF29A52A6C10EB00914A8E /* DarockKit */ = {
 			isa = XCSwiftPackageProductDependency;
