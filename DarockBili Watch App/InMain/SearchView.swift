@@ -42,8 +42,6 @@ struct SearchMainView: View {
             .onAppear {
                 searchHistory.removeAll()
                 searchHistory = UserDefaults.standard.stringArray(forKey: "SearchHistory") ?? [String]()
-                
-                recordUserStep("Enter Search Main")
             }
         }
     }
@@ -130,8 +128,6 @@ struct SearchView: View {
                     }
                 }
             }
-            
-            recordUserStep("Enter Search")
         }
     }
 }

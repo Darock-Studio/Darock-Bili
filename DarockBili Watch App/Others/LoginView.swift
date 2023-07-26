@@ -30,12 +30,14 @@ struct LoginView: View {
     //User Input
     @State var accountInput = ""
     @State var passwdInput = ""
-    
+    @State var phoneCode = "86"
     //---QR Login---
     @State var qrImage: CGImage?
     @State var qrKey = ""
     @State var isScanned = false
     @State var qrTimer: Timer?
+    
+    @State var smsLoginToken = ""
     var body: some View {
         TabView {
             ScrollView {
@@ -96,80 +98,73 @@ struct LoginView: View {
                 }
             }
             
-            
+            //--SMS Login--
             List {
-                Section {
-                    TextField("账号", text: $accountInput)
-                        .autocorrectionDisabled()
-                        .textInputAutocapitalization(.never)
-                    SecureField("密码", text: $passwdInput)
-                }
-                Section {
-                    Button(action: {
-                        let session = ASWebAuthenticationSession(url: URL(string: "https://darock.top/geetest?gt=\(gt)&challenge=\(challenge)")!, callbackURLScheme: "captcha") { callbackURL, _ in
-                            if callbackURL != nil {
-                                if callbackURL!.absoluteString.contains("callback") {
-                                    let str = callbackURL!.absoluteString.urlDecoded()
-                                    validate = String(str.split(separator: "?")[1].split(separator: "&")[0])
-                                    seccode = String(str.split(separator: "&")[1])
-                                }
+                TextField("国际冠字码", text: $phoneCode)
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
+                TextField("手机号", text: $accountInput)
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
+                Button(action: {
+                    let session = ASWebAuthenticationSession(url: URL(string: "https://darock.top/geetest?gt=\(gt)&challenge=\(challenge)")!, callbackURLScheme: "captcha") { callbackURL, _ in
+                        if callbackURL != nil {
+                            if callbackURL!.absoluteString.contains("callback") {
+                                let str = callbackURL!.absoluteString.urlDecoded()
+                                validate = String(str.split(separator: "?")[1].split(separator: "&")[0])
+                                seccode = String(str.split(separator: "&")[1])
                             }
                         }
-                        session.prefersEphemeralWebBrowserSession = true
-                        session.start()
-                    }, label: {
-                        Text(validate == "" ? "进行人机验证" : "人机验证已完成")
-                            .bold()
-                    })
-                    .disabled(validate != "")
-                }
+                    }
+                    session.prefersEphemeralWebBrowserSession = true
+                    session.start()
+                }, label: {
+                    Text(validate == "" ? "进行人机验证" : "人机验证已完成")
+                        .bold()
+                })
+                .disabled(validate != "")
+                Button(action: {
+                    let headers: HTTPHeaders = [
+                        "Host": "passport.bilibili.com",
+                        "Origin": "https://www.bilibili.com",
+                        "Referer": "https://www.bilibili.com/",
+                        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
+                        "Cookie": "browser_resolution=1580-497; FEED_LIVE_VERSION=V8; buvid4=818BA302-8EAC-0630-67AB-BB978A5797AF60982-023042618-ho21%2BqF6LZokzAShrGptM4EHZm2TE4%2FTXmfZyPpzfCnLuUmUckb8wg%3D%3D; buvid_fp=5a716236853dd1e737d439882c685594; header_theme_version=CLOSE; home_feed_column=5; _uuid=15B5A2103-BBC2-9109A-7458-6410C3CF101028B94909infoc; b_lsid=CCF71993_18991563B31; b_ut=7; i-wanna-go-back=-1; innersign=0; b_nut=1690360493; buvid3=6481EDF5-10C43-9593-251E-89210B4A1C10A193894infoc"
+                    ]
+                    AF.request("https://passport.bilibili.com/x/passport-login/web/sms/send", method: .post, parameters: BiliSmsCodePost(cid: Int(phoneCode)!, tel: Int(accountInput)!, token: loginToken, challenge: challenge, validate: validate, seccode: seccode), headers: headers).response { response in
+                        debugPrint(response)
+                        let json = try! JSON(data: response.data!)
+                        smsLoginToken = json["data"]["captcha_key"].string!
+                    }
+                }, label: {
+                    Text("获取验证码")
+                })
+                .disabled(accountInput == "" || validate == "")
+                SecureField("验证码", text: $passwdInput)
                 Section {
                     Button(action: {
-                        DarockKit.Network.shared.requestJSON("https://passport.bilibili.com/x/passport-login/web/key") { respJson, isSuccess in
-                            if isSuccess {
-                                salt = respJson["data"]["hash"].string!
-                                publicKey = respJson["data"]["key"].string!
-                                DarockKit.Network.shared.requestString("https://api.darock.top/bili/passwd/encrypt/\(passwdInput)/\(salt)/\(publicKey.base64Encoded())") { respStr, isSuccess in
-                                    if isSuccess {
-                                        let encedPwd = respStr.apiFixed()
-                                        debugPrint(encedPwd)
-                                        let headers: HTTPHeaders = [
-                                            "Accept": "application/json, text/plain, */*",
-                                            "Accept-Encoding": "gzip, deflate, br",
-                                            "Accept-Language": "zh-CN,zh-Hans;q=0.9",
-                                            "cookie": "browser_resolution=1589-508; FEED_LIVE_VERSION=V_NO_BANNER_3; buvid4=818BA302-8EAC-0630-67AB-BB978A5797AF60982-023042618-ho21%2BqF6LZokzAShrGptM4EHZm2TE4%2FTXmfZyPpzfCnLuUmUckb8wg%3D%3D; buvid_fp=087ddcc55a832e51e27f6d86c4c6d949; header_theme_version=CLOSE; home_feed_column=5; innersign=0; sid=52zgqw2f; buvid_fp_plain=undefined; b_lsid=49F4B85E_1890FC90708; fingerprint=087ddcc55a832e51e27f6d86c4c6d949; CURRENT_FNVAL=4048; bp_t_offset_356891781=812530614670458945; PVID=1; i-wanna-go-back=-1; nostalgia_conf=-1; b_ut=5; CURRENT_QUALITY=80; CURRENT_PID=1c964fe0-e421-11ed-a53e-71daf528d4ad; rpdid=|(J~R~|ulJRu0J'uY)kl|YYJ); _uuid=D4AEF18F-AE6A-846A-2185-11010F1836510E1060766infoc; b_nut=1682504360; buvid3=5C956D5D-918E-680C-0E37-EC4A879CE7D260508infoc",
-                                            "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
-                                            "sec-fetch-dest": "empty",
-                                            "sec-fetch-mode": "cors",
-                                            "sec-fetch-site": "same-site",
-                                            "Host": "passport.bilibili.com",
-                                            "Origin": "https://www.bilibili.com",
-                                            "referer": "https://www.bilibili.com/"
-                                        ]
-                                        AF.request("https://passport.bilibili.com/x/passport-login/web/login", method: .post, parameters: BiliLoginPost(username: accountInput, password: encedPwd, token: loginToken, challenge: challenge, validate: validate, seccode: seccode), headers: headers).response { response in
-                                            let data = response.data
-                                            if data != nil {
-                                                let json = try! JSON(data: data!)
-                                                debugPrint(json)
-                                                if json["code"].int == 0 {
-                                                    if json["data"]["status"].int == 0 {
-                                                        debugPrint(response.response!.headers)
-                                                        let setCookie = response.response!.headers["Set-Cookie"]!
-                                                        dedeUserID = String(setCookie.split(separator: "DedeUserID=")[1].split(separator: ";")[0])
-                                                        dedeUserID__ckMd5 = String(setCookie.split(separator: "DedeUserID__ckMd5=")[1].split(separator: ";")[0])
-                                                        if setCookie.hasPrefix("SESSDATA") {
-                                                            sessdata = String(setCookie.split(separator: "SESSDATA=")[0].split(separator: ";")[0])
-                                                        } else {
-                                                            sessdata = String(setCookie.split(separator: "SESSDATA=")[1].split(separator: ";")[0])
-                                                        }
-                                                        biliJct = String(setCookie.split(separator: "bili_jct=")[1].split(separator: ";")[0])
-                                                        dismiss()
-                                                    } else if json["data"]["status"].int == 2 {
-                                                        
-                                                    }
-                                                }
-                                            }
+                        AF.request("https://passport.bilibili.com/x/passport-login/web/login/sms", method: .post, parameters: BiliLoginPost(cid: Int(phoneCode)!, tel: Int(accountInput)!, code: Int(passwdInput)!, captcha_key: smsLoginToken)).response { response in
+                            let data = response.data
+                            if data != nil {
+                                let json = try! JSON(data: data!)
+                                debugPrint(json)
+                                if json["code"].int == 0 {
+                                    if json["data"]["status"].int == 0 {
+                                        debugPrint(response.response!.headers)
+                                        let setCookie = response.response!.headers["Set-Cookie"]!
+                                        dedeUserID = String(setCookie.split(separator: "DedeUserID=")[1].split(separator: ";")[0])
+                                        dedeUserID__ckMd5 = String(setCookie.split(separator: "DedeUserID__ckMd5=")[1].split(separator: ";")[0])
+                                        if setCookie.hasPrefix("SESSDATA") {
+                                            sessdata = String(setCookie.split(separator: "SESSDATA=")[0].split(separator: ";")[0])
+                                        } else {
+                                            sessdata = String(setCookie.split(separator: "SESSDATA=")[1].split(separator: ";")[0])
                                         }
+                                        biliJct = String(setCookie.split(separator: "bili_jct=")[1].split(separator: ";")[0])
+                                        dismiss()
+                                    } else if json["data"]["status"].int == 1006 {
+                                        
+                                    } else if json["data"]["status"].int == 1007 {
+                                        
                                     }
                                 }
                             }
@@ -194,9 +189,17 @@ struct LoginView: View {
     }
     
     struct BiliLoginPost: Codable {
-        let username: String
-        let password: String
-        var keep: Int = 0
+        let cid: Int
+        let tel: Int
+        let code: Int
+        var source: String = "main_web"
+        let captcha_key: String
+        var keep: Bool = true
+    }
+    struct BiliSmsCodePost: Codable {
+        let cid: Int
+        let tel: Int
+        var source: String = "main_web"
         let token: String
         let challenge: String
         let validate: String

@@ -5,15 +5,19 @@
 //  Created by WindowsMEMZ on 2023/6/30.
 //
 
+import AVKit
 import SwiftUI
+import WatchKit
 import DarockKit
 import Alamofire
-import AVKit
 import AVFoundation
-import WatchKit
 
 struct VideoPlayerView: View {
+    @AppStorage("DedeUserID") var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
+    @AppStorage("bili_jct") var biliJct = ""
+    @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
     @AppStorage("IsPlayerAutoRotating") var isPlayerAutoRotating = true
     @State var currentTime: Double = 0.0
     @State var playerTimer: Timer?
@@ -22,13 +26,15 @@ struct VideoPlayerView: View {
     @State var tabviewChoseTab = 1
     @State var playerRotate = 0.0
     var body: some View {
-        let asset = AVURLAsset(url: URL(string: VideoDetailView.willPlayVideoLink)!/*, options: ["AVURLAssetHTTPHeaderFieldsKey": [
-            "Referer": "https://www.bilibili.com/video/\(VideoDetailView.willPlayVideoBV)",
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
-            "platform": "html5"
-                                                                                    ]]*/, options: [AVURLAssetHTTPUserAgentKey: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"])
-        let item = AVPlayerItem(asset: asset)
-        let player = AVPlayer(playerItem: item)
+//        let asset = AVURLAsset(url: URL(string: VideoDetailView.willPlayVideoLink)!/*, options: ["AVURLAssetHTTPHeaderFieldsKey": [
+//            "Referer": "https://www.bilibili.com/video/\(VideoDetailView.willPlayVideoBV)",
+//            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
+//            "platform": "html5"
+//                                                                                    ]]*/, options: [AVURLAssetHTTPUserAgentKey: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"])
+//        let item = AVPlayerItem(asset: asset)
+//        let player = AVPlayer(playerItem: item)
+        let pExtension = AVExtension(VideoDetailView.willPlayVideoLink)!
+        let player = pExtension.getPlayer()
         ZStack {
             TabView(selection: $tabviewChoseTab) {
                 ScrollView {
@@ -62,7 +68,7 @@ struct VideoPlayerView: View {
 //                                                debugPrint(player.currentTime())
 //                                                debugPrint(player.currentItem!.status)
 //                                                danmakuWallOffsetX = player.currentTime().seconds * 20
-                            debugPrint(player.currentTime().seconds)
+                            debugPrint(pExtension.getCurrentPlayTime())
                         }
                     }
                     .onDisappear {
@@ -128,6 +134,9 @@ struct VideoPlayerView: View {
                 WKApplication.shared().isAutorotating = true
             }
             debugPrint(URL(string: VideoDetailView.willPlayVideoLink)!)
+            let headers: HTTPHeaders = [
+                "cookie": "SESSDATA=\(sessdata)"
+            ]
             AF.request("https://api.bilibili.com/x/v1/dm/list.so?oid=\(VideoDetailView.willPlayVideoCID)").response { response in
                 let danmakus = String(data: response.data!, encoding: .utf8)!
                 debugPrint(danmakus)
@@ -159,6 +168,11 @@ struct VideoPlayerView: View {
                         return false
                     }
                     debugPrint(showDanmakus)
+                }
+            }
+            if recordHistoryTime == "play" {
+                AF.request("https://api.bilibili.com/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": VideoDetailView.willPlayVideoBV, "mid": dedeUserID, "type": 3, "dt": 2, "play_type": 2, "csrf": biliJct], headers: headers).response { response in
+                    debugPrint(response)
                 }
             }
         }

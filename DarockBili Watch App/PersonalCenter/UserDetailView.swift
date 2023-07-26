@@ -27,46 +27,71 @@ struct UserDetailView: View {
     @State var officialType = -1
     @State var officialTitle = ""
     @State var userSign = ""
-    @State var followCount = 0
-    @State var fansCount = 0
+    @State var followCount = -1
+    @State var fansCount = -1
     @State var videos = [[String: String]]()
     @State var viewSelector: UserDetailViewPubsType = .video
     @State var articles = [[String: String]]()
     @State var videoCount = 0
     @State var articalCount = 0
-    @State var coinCount = 0
+    @State var coinCount = -1
+    @State var isFollowed = false
+    @State var isSendbMessagePresented = false
     var body: some View {
         TabView {
             if #available(watchOS 10, *) {
                 TabView {
-                    FirstPageBase(uid: uid, userFaceUrl: $userFaceUrl, followCount: $followCount, fansCount: $fansCount, coinCount: $coinCount)
-                        .toolbar {
-                            ToolbarItemGroup(placement: .bottomBar) {
-                                Button(action: {
-                                    
-                                }, label: {
-                                    Image(systemName: "bell")
-                                })
-                                if dedeUserID == uid {
-                                    HStack {
-                                        Image(systemName: "b.circle")
-                                            .font(.system(size: 12))
-                                            .opacity(0.55)
-                                            .offset(y: 1)
-                                        Text(String(coinCount))
-                                            .font(.system(size: 14))
+                    VStack {
+                        NavigationLink("", isActive: $isSendbMessagePresented, destination: {bMessageSendView(uid: Int(uid)!, username: username)})
+                            .frame(width: 0, height: 0)
+                        FirstPageBase(uid: uid, userFaceUrl: $userFaceUrl, followCount: $followCount, fansCount: $fansCount, coinCount: $coinCount)
+                            .toolbar {
+                                ToolbarItemGroup(placement: .bottomBar) {
+                                    Button(action: {
+                                        let headers: HTTPHeaders = [
+                                            "cookie": "SESSDATA=\(sessdata);"
+                                        ]
+                                        AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
+                                            debugPrint(response)
+                                            let json = try! JSON(data: response.data!)
+                                            let code = json["code"].int!
+                                            if code == 0 {
+                                                tipWithText(isFollowed ? "取关成功" : "关注成功", symbol: "checkmark.circle.fill")
+                                                isFollowed.toggle()
+                                            } else {
+                                                tipWithText(json["message"].string!, symbol: "xmark.circle.fill")
+                                            }
+                                        }
+                                    }, label: {
+                                        Image(systemName: isFollowed ? "person.badge.minus" : "person.badge.plus")
+                                    })
+                                    if dedeUserID == uid {
+                                        HStack {
+                                            Image(systemName: "b.circle")
+                                                .font(.system(size: 12))
+                                                .opacity(0.55)
+                                                .offset(y: 1)
+                                            if coinCount != -1 {
+                                                Text(String(coinCount))
+                                                    .font(.system(size: 14))
+                                            } else {
+                                                Text("114")
+                                                    .font(.system(size: 14))
+                                                    .redacted(reason: .placeholder)
+                                            }
+                                        }
                                     }
+                                    Button(action: {
+                                        isSendbMessagePresented = true
+                                    }, label: {
+                                        Image(systemName: "ellipsis.bubble")
+                                    })
                                 }
-                                Button(action: {
-                                    
-                                }, label: {
-                                    Image(systemName: "ellipsis.bubble")
-                                })
                             }
-                        }
-                        .offset(y: -10)
-                        .navigationTitle(username)
-                        .tag(1)
+                            .offset(y: 10)
+                            .navigationTitle(username)
+                            .tag(1)
+                    }
                     SecondPageBase(officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign)
                         .tag(2)
                 }
@@ -139,6 +164,13 @@ struct UserDetailView: View {
                     }
                 }
             }
+            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation?fid=\(uid)") { respJson, isSuccess in
+                if isSuccess {
+                    if respJson["data"]["attribute"].int! == 2 || respJson["data"]["attribute"].int! == 6 {
+                        isFollowed = true
+                    }
+                }
+            }
         }
     }
     
@@ -165,16 +197,28 @@ struct UserDetailView: View {
                 }
                 HStack {
                     VStack {
-                        Text(String(followCount))
-                            .font(.system(size: 14))
+                        if followCount != -1 {
+                            Text(String(followCount))
+                                .font(.system(size: 14))
+                        } else {
+                            Text("114")
+                                .font(.system(size: 14))
+                                .redacted(reason: .placeholder)
+                        }
                         Text("关注")
                             .font(.system(size: 12))
                             .opacity(0.6)
                     }
                     Spacer()
                     VStack {
-                        Text(String(fansCount).shorter())
-                            .font(.system(size: 14))
+                        if fansCount != -1 {
+                            Text(String(fansCount).shorter())
+                                .font(.system(size: 14))
+                        } else {
+                            Text("114")
+                                .font(.system(size: 14))
+                                .redacted(reason: .placeholder)
+                        }
                         Text("粉丝")
                             .font(.system(size: 12))
                             .opacity(0.6)
@@ -467,6 +511,13 @@ struct UserDetailView: View {
                 }
             }
         }
+    }
+    
+    struct ModifyUserRelation: Codable {
+        let fid: Int
+        let act: Int
+        var re_src: Int = 11
+        let csrf: String
     }
 }
 

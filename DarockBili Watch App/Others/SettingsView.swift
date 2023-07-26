@@ -16,6 +16,11 @@ struct SettingsView: View {
     var body: some View {
         List {
             Section {
+                NavigationLink(destination: {AppBehaviorSettingsView()}, label: {
+                    Text("App 行为")
+                })
+            }
+            Section {
                 NavigationLink(destination: {PlayerSettingsView()}, label: {
                     Text("播放设置")
                 })
@@ -72,6 +77,19 @@ struct SettingsView: View {
         var body: some View {
             List {
                 Toggle("自动旋转（仅竖向）", isOn: $isPlayerAutoRotating)
+            }
+        }
+    }
+    
+    struct AppBehaviorSettingsView: View {
+        @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
+        var body: some View {
+            List {
+                Picker("记录历史记录", selection: $recordHistoryTime) {
+                    Text("进入详情页时").tag("into")
+                    Text("开始播放时").tag("play")
+                    Text("关闭").tag("never")
+                }
             }
         }
     }

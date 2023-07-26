@@ -195,8 +195,6 @@ struct PersonAccountView: View {
                                     isNetworkFixPresented = true
                                 }
                             }
-                            
-                            recordUserStep("Enter PersonAccountView")
                         }
                         .sheet(isPresented: $isNetworkFixPresented, content: {NetworkFixView()})
                     }

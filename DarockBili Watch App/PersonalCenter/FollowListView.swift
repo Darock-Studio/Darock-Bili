@@ -72,8 +72,6 @@ struct FollowListView: View {
                     RefreshNew()
                     isLoadedFollows = true
                 }
-                
-                recordUserStep("Enter FollowListView")
             }
             .tag(1)
             List {

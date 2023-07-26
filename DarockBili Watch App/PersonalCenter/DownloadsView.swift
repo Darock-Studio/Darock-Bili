@@ -5,7 +5,9 @@
 //  Created by WindowsMEMZ on 2023/7/4.
 //
 
+import AVKit
 import SwiftUI
+import AVFoundation
 
 struct DownloadsView: View {
     public static var willPlayVideoPath = ""
@@ -83,7 +85,20 @@ struct DownloadsView: View {
 struct OfflineVideoPlayer: View {
     var path: String? = nil
     var body: some View {
-        /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Hello, world!@*/Text("Hello, world!")/*@END_MENU_TOKEN@*/
+        let asset = AVAsset(url: URL(fileURLWithPath: path == nil ? DownloadsView.willPlayVideoPath : path!))
+        let item = AVPlayerItem(asset: asset)
+        let player = AVPlayer(playerItem: item)
+        VStack {
+            VideoPlayer(player: player)
+                .ignoresSafeArea()
+        }
+        .onAppear {
+            hideDigitalTime(true)
+            debugPrint(DownloadsView.willPlayVideoPath)
+        }
+        .onDisappear {
+            hideDigitalTime(false)
+        }
     }
 }
 

@@ -13,7 +13,6 @@ struct ContentView: View {
     @AppStorage("LastUsingVer") var lastUsingVer = ""
     @AppStorage("IsNoTipSystemVer") var isNoTipSystemVer = false
     @State var isGuidePresented = false
-    @State var isReleaseNotesPresented = false
     @State var isSystemVerTipPresented = false
     var body: some View {
         NavigationStack {
@@ -26,15 +25,9 @@ struct ContentView: View {
             .sheet(isPresented: $isGuidePresented, onDismiss: {
                 isFirstUsing = false
             }, content: {FirstUsingView()})
-            .sheet(isPresented: $isReleaseNotesPresented, onDismiss: {
-                lastUsingVer = ContentView.nowAppVer
-            }, content: {NewVerInformationView()})
             .onAppear {
                 if isFirstUsing {
                     isGuidePresented = true
-                }
-                if lastUsingVer != ContentView.nowAppVer {
-                    isReleaseNotesPresented = true
                 }
                 if !isNoTipSystemVer {
                     if #unavailable(watchOS 10) {

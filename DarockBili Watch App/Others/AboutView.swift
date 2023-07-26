@@ -9,6 +9,8 @@ import SwiftUI
 import EFQRCode
 import AuthenticationServices
 
+
+
 struct AboutView: View {
     @State var easterEggText = ""
     @State var rexEasterEggColor = Color.white
@@ -20,7 +22,7 @@ struct AboutView: View {
             List {
                 Section {
                     Text("喵哩喵哩 v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)")
-//                    Text("遇到问题？下载\(Text("暗礁反馈").foregroundColor(.blue))（暂未上线），附带上方文本进行反馈")
+                    Text("编译时间: \(CodingTime.getCodingTime())")
                     Text("遇到问题？在设置页面点击“反馈问题”或在 TestFlight 中反馈，感谢您的支持！")
                 }
                 Section {
@@ -93,6 +95,10 @@ struct AboutView: View {
                 Licensed under MIT license
                 -----------------
                 
+                --- Dynamic ---
+                Licensed under Apache License 2.0
+                ---------------
+                
                 --- EFQRCode ---
                 Licensed under MIT license
                 ----------------
@@ -120,6 +126,10 @@ struct AboutView: View {
                 --- SDWebImageWebPCoder ---
                 Licensed under MIT license
                 ---------------------------
+                
+                --- SFSymbol ---
+                Licensed under MIT license
+                ----------------
                 
                 --- swift_qrcodejs ---
                 Licensed under MIT license

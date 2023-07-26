@@ -15,9 +15,6 @@ import Foundation
 import AVFoundation
 import CommonCrypto
 
-public var printLog = ""
-public var userStepLog = ""
-
 extension String {
     func shorter() -> String {
         let intData = Int(self)
@@ -91,13 +88,36 @@ extension String {
     }
 }
 
-public func printWithRecord(_ t: String) {
-    debugPrint(t)
-    printLog += t + "\n"
+extension Date {
+    /// 获取当前 秒级 时间戳 - 10位
+    var timeStamp: Int {
+        let timeInterval: TimeInterval = self.timeIntervalSince1970
+        let timeStamp = Int(timeInterval)
+        return timeStamp
+    }
+
+/// 获取当前 毫秒级 时间戳 - 13位
+    var milliStamp: String {
+        let timeInterval: TimeInterval = self.timeIntervalSince1970
+        let millisecond = CLongLong(round(timeInterval*1000))
+        return "\(millisecond)"
+    }
 }
 
-public func recordUserStep(_ desc: String) {
-    userStepLog += desc + "\n"
+
+@discardableResult
+public func getMemory() -> Float {
+    var taskInfo = task_vm_info_data_t()
+    var count = mach_msg_type_number_t(MemoryLayout<task_vm_info>.size) / 4
+    let result: kern_return_t = withUnsafeMutablePointer(to: &taskInfo) {
+        $0.withMemoryRebound(to: integer_t.self, capacity: 1) {
+            task_info(mach_task_self_, task_flavor_t(TASK_VM_INFO), $0, &count)
+        }
+    }
+    let usedMb = Float(taskInfo.phys_footprint) / 1048576.0
+    let totalMb = Float(ProcessInfo.processInfo.physicalMemory) / 1048576.0
+    result != KERN_SUCCESS ? debugPrint("Memory used: ? of \(totalMb)") : debugPrint("Memory used: \(usedMb) of \(totalMb)")
+    return usedMb
 }
 
 /// 切换时间显示
@@ -187,5 +207,4 @@ public class WbiSign: ObservableObject {
             }
         }
     }
-    
 }

@@ -7,6 +7,8 @@
 
 import Foundation
 import SwiftUI
+import WatchKit
+import UIKit
 import SDWebImageSwiftUI
 
 @ViewBuilder func VideoCard(_ videoDetails: [String: String]) -> some View {
@@ -37,3 +39,16 @@ import SDWebImageSwiftUI
     .buttonBorderShape(.roundedRectangle(radius: 14))
 }
 
+struct VolumeControlView: WKInterfaceObjectRepresentable {
+    typealias WKInterfaceObjectType = WKInterfaceVolumeControl
+    
+    
+    func makeWKInterfaceObject(context: WKInterfaceObjectRepresentableContext<VolumeControlView>) -> WKInterfaceVolumeControl {
+        // Return the interface object that the view displays.
+        return WKInterfaceVolumeControl(origin: .local)
+    }
+    
+    func updateWKInterfaceObject(_ map: WKInterfaceVolumeControl, context: WKInterfaceObjectRepresentableContext<VolumeControlView>) {
+        
+    }
+}

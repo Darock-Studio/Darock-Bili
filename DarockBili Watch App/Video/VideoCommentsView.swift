@@ -83,83 +83,112 @@ struct VideoCommentsView: View {
         @State var avid = -1
         @State var comments = [[String: String]]()
         @State var nowPage = 1
-        
+        @State var isSenderDetailsPresented = [Bool]()
+        @State var commentOffsets = [CGFloat]()
         var body: some View {
             ScrollView {
-                if comments.count != 0 {
-                    ForEach(0...comments.count - 1, id: \.self) { i in
-                        VStack {
-                            HStack {
-                                WebImage(url: URL(string: comments[i]["SenderPic"]! + "@30w"), options: [.progressiveLoad])
-                                    .cornerRadius(100)
-                                VStack {
-                                    HStack {
-                                        Text(comments[i]["Sender"]!)
-                                            .font(.system(size: 14, weight: .bold))
+                LazyVStack {
+                    if comments.count != 0 {
+                        ForEach(0...comments.count - 1, id: \.self) { i in
+                            VStack {
+                                HStack {
+                                    WebImage(url: URL(string: comments[i]["SenderPic"]! + "@30w"), options: [.progressiveLoad])
+                                        .cornerRadius(100)
+                                    VStack {
+                                        NavigationLink("", isActive: $isSenderDetailsPresented[i], destination: {UserDetailView(uid: comments[i]["SenderID"]!)})
+                                            .frame(width: 0, height: 0)
+                                        HStack {
+                                            Text(comments[i]["Sender"]!)
+                                                .font(.system(size: 14, weight: .bold))
+                                                .lineLimit(1)
+                                        }
+                                        Text(comments[i]["IP"]!)
+                                            .font(.system(size: 10))
+                                            .foregroundColor(.gray)
                                             .lineLimit(1)
                                     }
-                                    Text(comments[i]["IP"]!)
-                                        .font(.system(size: 10))
-                                        .foregroundColor(.gray)
-                                        .lineLimit(1)
+                                    Spacer()
                                 }
-                                Spacer()
-                            }
-                            HStack {
-                                //                            Text({ () -> String in
-                                //                                var showText = comments[i]["Text"]!
-                                //                                if comments[i]["Text"]!.contains("[") && comments[i]["Text"]!.contains("]") {
-                                //                                    var emojiNames = [String]()
-                                //                                    let textSpd = comments[i]["Text"]!.split(separator: "[")
-                                //                                    for text in textSpd {
-                                //                                        emojiNames.append(String(text.split(separator: "]")[0]))
-                                //                                    }
-                                //                                    var emojiLinks = [String]()
-                                //                                    for name in emojiNames {
-                                //                                        emojiLinks.append(biliEmojiDictionary[name] ?? name)
-                                //                                    }
-                                //                                    for i in 0...emojiLinks.count - 1 {
-                                //                                        showText = showText.replacingOccurrences(of: "[\(emojiNames[i])]", with: "\(AsyncImage(url: URL(string: emojiLinks[i])))")
-                                //                                    }
-                                //                                }
-                                //                                return showText
-                                //                            }())
-                                Text(comments[i]["Text"]!)
-                                    .font(.system(size: 16, weight: .bold))
-                                    .lineLimit((comments[i]["isFull"] ?? "false") == "true" ? 1000 : 8)
-                                    .onTapGesture {
-                                        comments[i].updateValue((comments[i]["isFull"] ?? "false") == "true" ? "false" : "true", forKey: "isFull")
-                                    }
-                                Spacer()
-                            }
-                            HStack {
-                                Label("", systemImage: comments[i]["UserAction"]! == "1" ? "hand.thumbsup.fill" : "hand.thumbsup")
-                                    .font(.system(size: 15, weight: .bold))
-                                    .foregroundColor(comments[i]["UserAction"]! == "1" ? Color(hex: 0xfa678e) : .white)
-                                    .lineLimit(1)
-                                    .onTapGesture {
-                                        let headers: HTTPHeaders = [
-                                            "cookie": "SESSDATA=\(sessdata)"
-                                        ]
-                                        AF.request("https://api.bilibili.com/x/v2/reply/action", method: .post, parameters: BiliCommentLike(oid: avid, rpid: Int(comments[i]["Rpid"]!)!, action: comments[i]["UserAction"]! == "1" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
-                                            debugPrint(response)
-                                            
-                                            comments[i]["UserAction"]! = comments[i]["UserAction"]! == "1" ? "0" : "1"
+                                .onTapGesture {
+                                    isSenderDetailsPresented[i] = true
+                                }
+                                HStack {
+                                    //                            Text({ () -> String in
+                                    //                                var showText = comments[i]["Text"]!
+                                    //                                if comments[i]["Text"]!.contains("[") && comments[i]["Text"]!.contains("]") {
+                                    //                                    var emojiNames = [String]()
+                                    //                                    let textSpd = comments[i]["Text"]!.split(separator: "[")
+                                    //                                    for text in textSpd {
+                                    //                                        emojiNames.append(String(text.split(separator: "]")[0]))
+                                    //                                    }
+                                    //                                    var emojiLinks = [String]()
+                                    //                                    for name in emojiNames {
+                                    //                                        emojiLinks.append(biliEmojiDictionary[name] ?? name)
+                                    //                                    }
+                                    //                                    for i in 0...emojiLinks.count - 1 {
+                                    //                                        showText = showText.replacingOccurrences(of: "[\(emojiNames[i])]", with: "\(AsyncImage(url: URL(string: emojiLinks[i])))")
+                                    //                                    }
+                                    //                                }
+                                    //                                return showText
+                                    //                            }())
+                                    Text(comments[i]["Text"]!)
+                                        .font(.system(size: 16, weight: .bold))
+                                        .lineLimit((comments[i]["isFull"] ?? "false") == "true" ? 1000 : 8)
+                                        .onTapGesture {
+                                            comments[i].updateValue((comments[i]["isFull"] ?? "false") == "true" ? "false" : "true", forKey: "isFull")
                                         }
-                                    }
-                                Spacer()
+                                    Spacer()
+                                }
+                                HStack {
+                                    Label(comments[i]["Like"]!, systemImage: comments[i]["UserAction"]! == "1" ? "hand.thumbsup.fill" : "hand.thumbsup")
+                                        .font(.system(size: 14))
+                                        .foregroundColor(comments[i]["UserAction"]! == "1" ? Color(hex: 0xF889BA) : .white)
+                                        .lineLimit(1)
+                                        .opacity(comments[i]["UserAction"]! == "1" ? 1 : 0.6)
+                                        .onTapGesture {
+                                            let headers: HTTPHeaders = [
+                                                "cookie": "SESSDATA=\(sessdata)"
+                                            ]
+                                            AF.request("https://api.bilibili.com/x/v2/reply/action", method: .post, parameters: BiliCommentLike(oid: avid, rpid: Int(comments[i]["Rpid"]!)!, action: comments[i]["UserAction"]! == "1" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
+                                                debugPrint(response)
+                                                
+                                                comments[i]["UserAction"]! = comments[i]["UserAction"]! == "1" ? "0" : "1"
+                                            }
+                                        }
+                                    Label("", systemImage: comments[i]["UserAction"]! == "2" ? "hand.thumbsdown.fill" : "hand.thumbsdown")
+                                        .font(.system(size: 14))
+                                        .foregroundColor(comments[i]["UserAction"]! == "2" ? Color(hex: 0xF889BA) : .white)
+                                        .lineLimit(1)
+                                        .opacity(comments[i]["UserAction"]! == "2" ? 1 : 0.6)
+                                        .onTapGesture {
+                                            let headers: HTTPHeaders = [
+                                                "cookie": "SESSDATA=\(sessdata)"
+                                            ]
+                                            AF.request("https://api.bilibili.com/x/v2/reply/hate", method: .post, parameters: BiliCommentLike(oid: avid, rpid: Int(comments[i]["Rpid"]!)!, action: comments[i]["UserAction"]! == "2" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
+                                                debugPrint(response)
+                                                
+                                                comments[i]["UserAction"]! = comments[i]["UserAction"]! == "2" ? "0" : "2"
+                                            }
+                                        }
+                                    Spacer()
+                                }
+                                Divider()
                             }
-                            Divider()
+                            .padding(5)
+                            .offset(y: commentOffsets[i])
+                            .animation(.easeOut(duration: 0.4), value: commentOffsets[i])
+                            .onAppear {
+                                commentOffsets[i] = 0
+                            }
                         }
-                        .padding(5)
+                        Button(action: {
+                            nowPage += 1
+                            ContinueLoadComment()
+                        }, label: {
+                            Text("继续加载")
+                                .bold()
+                        })
                     }
-                    Button(action: {
-                        nowPage += 1
-                        ContinueLoadComment()
-                    }, label: {
-                        Text("继续加载")
-                            .bold()
-                    })
                 }
             }
             .onAppear {
@@ -184,8 +213,9 @@ struct VideoCommentsView: View {
                         if isSuccess {
                             let replies = respJson["data"]["replies"]
                             for reply in replies {
-                                
-                                comments.append(["Text": reply.1["content"]["message"].string!, "Sender": reply.1["member"]["uname"].string!, "SenderPic": reply.1["member"]["avatar"].string!, "SenderLevel": String(reply.1["member"]["level_info"]["current_level"].int!), "IP": reply.1["reply_control"]["location"].string ?? "", "UserAction": String(reply.1["action"].int!), "Rpid": String(reply.1["rpid"].int!)])
+                                isSenderDetailsPresented.append(false)
+                                commentOffsets.append(20)
+                                comments.append(["Text": reply.1["content"]["message"].string!, "Sender": reply.1["member"]["uname"].string!, "SenderPic": reply.1["member"]["avatar"].string!, "SenderID": reply.1["member"]["mid"].string!, "IP": reply.1["reply_control"]["location"].string ?? "", "UserAction": String(reply.1["action"].int!), "Rpid": String(reply.1["rpid"].int!), "Like": String(reply.1["like"].int!)])
                             }
                         } else {
                             Logger().error("There is a error when request comments from Bilibili server")

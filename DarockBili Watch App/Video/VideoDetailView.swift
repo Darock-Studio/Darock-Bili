@@ -7,6 +7,7 @@
 
 import AVKit
 import SwiftUI
+import SFSymbol
 import WatchKit
 import DarockKit
 import Alamofire
@@ -15,7 +16,6 @@ import AVFoundation
 import CachedAsyncImage
 import SDWebImageSwiftUI
 
-var audioPlayer = AVPlayer()
 struct VideoDetailView: View {
     public static var willPlayVideoLink = ""
     public static var willPlayVideoBV = ""
@@ -25,6 +25,7 @@ struct VideoDetailView: View {
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
     @AppStorage("bili_jct") var biliJct = ""
+    @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
     @State var isLoading = false
     @State var isLiked = false
     @State var isCoined = false
@@ -33,6 +34,7 @@ struct VideoDetailView: View {
     @State var goodVideos = [[String: String]]()
     @State var owner = [String: String]()
     @State var stat = [String: String]()
+    @State var tags = [String]()
     @State var ownerFansCount = 0
     @State var nowPlayingCount = "0"
     @State var videoDesc = ""
@@ -47,80 +49,99 @@ struct VideoDetailView: View {
                 ZStack {
                     Group {
                         TabView {
-                            DetailViewFirstPageBase(videoDetails: $videoDetails, isLoading: $isLoading)
-                                .offset(y: 16)
-                                .toolbar {
-                                    ToolbarItem(placement: .topBarTrailing) {
-                                        Button(action: {
-                                            
-                                        }, label: {
-                                            Image(systemName: "ellipsis")
-                                        })
-                                        .sheet(isPresented: $isMoreMenuPresented, content: {
-                                            List {
-                                                Button(action: {
-                                                    isDownloadPresented = true
-                                                }, label: {
-                                                    Label("下载视频", image: "arrow.down.doc")
-                                                })
-                                                .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
-                                            }
-                                        })
-                                    }
-                                    ToolbarItemGroup(placement: .bottomBar) {
-                                        Button(action: {
-                                            isLoading = true
-                                            
-                                            let headers: HTTPHeaders = [
-                                                "cookie": "SESSDATA=\(sessdata)"
-                                            ]
-                                            AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
-                                                let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
-                                                VideoDetailView.willPlayVideoCID = String(cid)
-                                                AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
-                                                    let audioLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
-                                                    let asset = AVURLAsset(url: URL(string: audioLink)!, options: [AVURLAssetHTTPUserAgentKey: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"])
-                                                    let playerItem = AVPlayerItem(asset: asset)
-                                                    audioPlayer = AVPlayer(playerItem: playerItem)
-                                                    let playerObserver = audioPlayer.observe(\.status, options: [.new, .old]) { (player, change) in
-                                                        if player.status == .readyToPlay {
-                                                            player.play()
-                                                            debugPrint("Played")
+                            VStack {
+                                NavigationLink("", isActive: $isNowPlayingPresented, destination: {AudioPlayerView(videoDetails: videoDetails)})
+                                    .frame(width: 0, height: 0)
+                                
+                                DetailViewFirstPageBase(videoDetails: $videoDetails, isLoading: $isLoading)
+                                    .offset(y: 16)
+                                    .toolbar {
+                                        ToolbarItem(placement: .topBarTrailing) {
+                                            Button(action: {
+                                                isMoreMenuPresented = true
+                                            }, label: {
+                                                Image(systemName: "ellipsis")
+                                            })
+                                            .sheet(isPresented: $isMoreMenuPresented, content: {
+                                                List {
+                                                    Button(action: {
+                                                        isDownloadPresented = true
+                                                    }, label: {
+                                                        Label("下载视频", systemImage: "arrow.down.doc")
+                                                    })
+                                                    .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
+                                                    Button(action: {
+                                                        let headers: HTTPHeaders = [
+                                                            "cookie": "SESSDATA=\(sessdata)"
+                                                        ]
+                                                        AF.request("https://api.bilibili.com/x/v2/history/toview/add", method: .post, parameters: ["bvid": videoDetails["BV"]!, "csrf": biliJct], headers: headers).response { response in
+                                                            do {
+                                                                let json = try JSON(data: response.data ?? Data())
+                                                                if let code = json["code"].int {
+                                                                    if code == 0 {
+                                                                        tipWithText("添加成功", symbol: SFSymbol.Checkmark.circleFill.rawValue)
+                                                                    } else {
+                                                                        tipWithText(json["message"].string ?? "未知错误", symbol: SFSymbol.Xmark.circleFill.rawValue)
+                                                                    }
+                                                                } else {
+                                                                    tipWithText("未知错误", symbol: SFSymbol.Xmark.circleFill.rawValue)
+                                                                }
+                                                            } catch {
+                                                                tipWithText("未知错误", symbol: SFSymbol.Xmark.circleFill.rawValue)
+                                                            }
                                                         }
+                                                    }, label: {
+                                                        Label("添加到稍后再看", systemImage: "memories.badge.plus")
+                                                    })
+                                                }
+                                            })
+                                        }
+                                        ToolbarItemGroup(placement: .bottomBar) {
+                                            Button(action: {
+                                                isLoading = true
+                                                
+                                                let headers: HTTPHeaders = [
+                                                    "cookie": "SESSDATA=\(sessdata)"
+                                                ]
+                                                AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
+                                                    let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
+                                                    VideoDetailView.willPlayVideoCID = String(cid)
+                                                    AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
+                                                        VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
+                                                        VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                                                        isNowPlayingPresented = true
+                                                        isLoading = false
                                                     }
-                                                    isNowPlayingPresented = true
-                                                    isLoading = false
                                                 }
-                                            }
-                                        }, label: {
-                                            Image(systemName: "waveform")
-                                        })
-                                        .sheet(isPresented: $isNowPlayingPresented, content: {NowPlayingView()})
-                                        Button(action: {
-                                            isLoading = true
-                                            
-                                            let headers: HTTPHeaders = [
-                                                "cookie": "SESSDATA=\(sessdata)"
-                                            ]
-                                            AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
-                                                let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
-                                                VideoDetailView.willPlayVideoCID = String(cid)
-                                                AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
-                                                    VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
-                                                    //debugPrint(response)
-                                                    VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                                                    isVideoPlayerPresented = true
-                                                    isLoading = false
+                                            }, label: {
+                                                Image(systemName: "waveform")
+                                            })
+                                            Button(action: {
+                                                isLoading = true
+                                                
+                                                let headers: HTTPHeaders = [
+                                                    "cookie": "SESSDATA=\(sessdata)"
+                                                ]
+                                                AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
+                                                    let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
+                                                    VideoDetailView.willPlayVideoCID = String(cid)
+                                                    AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
+                                                        VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
+                                                        //debugPrint(response)
+                                                        VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                                                        isVideoPlayerPresented = true
+                                                        isLoading = false
+                                                    }
                                                 }
-                                            }
-                                        }, label: {
-                                            Image(systemName: "play.fill")
-                                        })
-                                        .sheet(isPresented: $isVideoPlayerPresented, content: {VideoPlayerView()})
+                                            }, label: {
+                                                Image(systemName: "play.fill")
+                                            })
+                                            .sheet(isPresented: $isVideoPlayerPresented, content: {VideoPlayerView()})
+                                        }
                                     }
-                                }
-                                .tag(1)
-                            DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount)
+                                    .tag(1)
+                            }
+                            DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount)
                                 .tag(2)
                         }
                         .tabViewStyle(.verticalPage)
@@ -151,7 +172,7 @@ struct VideoDetailView: View {
                         }
                         .blur(radius: 20)
                         .opacity(backgroundPicOpacity)
-                        .animation(.easeOut(duration: 1.4), value: backgroundPicOpacity)
+                        .animation(.easeOut(duration: 1.2), value: backgroundPicOpacity)
                         Color.black
                             .opacity(0.4)
                     }
@@ -163,7 +184,7 @@ struct VideoDetailView: View {
                         ScrollView {
                             DetailViewFirstPageBase(videoDetails: $videoDetails, isLoading: $isLoading)
                                 .offset(y: 16)
-                            DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount)
+                            DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount)
                         }
                     }
                     .blur(radius: isLoading ? 14 : 0)
@@ -226,32 +247,58 @@ struct VideoDetailView: View {
                     }
                 }
             }
+            
             DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/archive/related?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
                     let datas = respJson["data"]
                     for data in datas {
-                        goodVideos.append(["Pic": data.1["pic"].string!, "Title": data.1["title"].string!, "BV": data.1["bvid"].string!, "UP": data.1["owner"]["name"].string!, "View": String(data.1["stat"]["view"].int!), "Danmaku": String(data.1["stat"]["danmaku"].int!)])
+                        if data.1["bvid"].string == nil {
+                            return
+                        }
+                        goodVideos.append(["Pic": data.1["pic"].string ?? "E", "Title": data.1["title"].string ?? "[加载失败]", "BV": data.1["bvid"].string!, "UP": data.1["owner"]["name"].string ?? "[加载失败]", "View": String(data.1["stat"]["view"].int ?? -1), "Danmaku": String(data.1["stat"]["danmaku"].int ?? -1)])
                     }
                 }
             }
-            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)") { respJson, isSuccess in
+            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
+                    debugPrint("----------Prints from VideoDetailView.onAppear.*.requsetJSON(*/view)----------")
                     debugPrint(respJson)
-                    owner = ["Name": respJson["data"]["owner"]["name"].string!, "Face": respJson["data"]["owner"]["face"].string!, "ID": String(respJson["data"]["owner"]["mid"].int!)]
-                    stat = ["Like": String(respJson["data"]["stat"]["like"].int!), "Coin": String(respJson["data"]["stat"]["coin"].int!), "Favorite": String(respJson["data"]["stat"]["favorite"].int!)]
-                    videoDesc = respJson["data"]["desc"].string!.replacingOccurrences(of: "\\n", with: "\n")
-                    let mid = respJson["data"]["owner"]["mid"].int!
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation/stat?vmid=\(mid)", headers: headers) { respJson, isSuccess in
-                        if isSuccess {
-                            ownerFansCount = respJson["data"]["follower"].int!
+                    owner = ["Name": respJson["data"]["owner"]["name"].string ?? "[加载失败]", "Face": respJson["data"]["owner"]["face"].string ?? "E", "ID": String(respJson["data"]["owner"]["mid"].int ?? -1)]
+                    stat = ["Like": String(respJson["data"]["stat"]["like"].int ?? -1), "Coin": String(respJson["data"]["stat"]["coin"].int ?? -1), "Favorite": String(respJson["data"]["stat"]["favorite"].int ?? -1)]
+                    videoDesc = respJson["data"]["desc"].string ?? "[加载失败]".replacingOccurrences(of: "\\n", with: "\n")
+                    if let mid = respJson["data"]["owner"]["mid"].int {
+                        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation/stat?vmid=\(mid)", headers: headers) { respJson, isSuccess in
+                            if isSuccess {
+                                ownerFansCount = respJson["data"]["follower"].int ?? -1
+                            }
                         }
                     }
-                    let cid = String(respJson["data"]["pages"][0]["cid"].int!)
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/online/total?bvid=\(videoDetails["BV"]!)&cid=\(cid)") { respJson, isSuccess in
-                        if isSuccess {
-                            nowPlayingCount = respJson["data"]["total"].string!
+                    if let cid = respJson["data"]["pages"][0]["cid"].int {
+                        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/online/total?bvid=\(videoDetails["BV"]!)&cid=\(cid)") { respJson, isSuccess in
+                            if isSuccess {
+                                nowPlayingCount = respJson["data"]["total"].string ?? "[加载失败]"
+                            }
+                        }
+                        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/v2?bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers) { respJson, isSuccess in
+                            debugPrint("----------Prints from VideoDetailView.onAppear.*.requsetJSON(*/player/v2)----------")
+                            debugPrint(respJson)
+                            
                         }
                     }
+                }
+            }
+            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/tag/archive/tags?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
+                if isSuccess {
+                    debugPrint("----------Prints from VideoDetailView.onAppear.*.requsetJSON(*/tags)----------")
+                    debugPrint(respJson)
+                    for tag in respJson["data"] {
+                        tags.append(tag.1["tag_name"].string ?? "[加载失败]")
+                    }
+                }
+            }
+            if recordHistoryTime == "into" {
+                AF.request("https://api.bilibili.com/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": videoDetails["BV"]!, "mid": dedeUserID, "type": 3, "dt": 2, "play_type": 2, "csrf": biliJct], headers: headers).response { response in
+                    debugPrint(response)
                 }
             }
             
@@ -282,10 +329,34 @@ struct VideoDetailView: View {
         var body: some View {
             VStack {
                 Spacer()
-                CachedAsyncImage(url: URL(string: videoDetails["Pic"]! + "@120w_90h"))
-                    .cornerRadius(5)
-                    .shadow(color: .black.opacity(0.5), radius: 5, x: 1, y: 2)
-                    .offset(y: 8)
+                CachedAsyncImage(url: URL(string: videoDetails["Pic"]! + "@120w_90h")) { phase in
+                    switch phase {
+                    case .empty:
+                        Image("Placeholder")
+                            .fixedSize()
+                            .frame(width: 120, height: 90)
+                            .redacted(reason: .placeholder)
+                    case .success(let image):
+                        image
+                    case .failure(let error):
+                        Image("Placeholder")
+                            .fixedSize()
+                            .frame(width: 120, height: 90)
+                            .redacted(reason: .placeholder)
+                            .onAppear {
+                                debugPrint(error)
+                            }
+                    @unknown default:
+                        Image("Placeholder")
+                            .fixedSize()
+                            .frame(width: 120, height: 90)
+                            .redacted(reason: .placeholder)
+                    }
+                }
+                .cornerRadius(5)
+                .shadow(color: .black.opacity(0.5), radius: 5, x: 1, y: 2)
+                .offset(y: 8)
+                    
                 Spacer()
                     .frame(height: 20)
                 Text(videoDetails["Title"]!)
@@ -323,6 +394,8 @@ struct VideoDetailView: View {
                         Image(systemName: "play.fill")
                     })
                     .sheet(isPresented: $isVideoPlayerPresented, content: {VideoPlayerView()})
+                    NavigationLink("", isActive: $isNowPlayingPresented, destination: {AudioPlayerView(videoDetails: videoDetails)})
+                        .frame(width: 0, height: 0)
                     Button(action: {
                         isLoading = true
                         
@@ -333,16 +406,8 @@ struct VideoDetailView: View {
                             let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
                             VideoDetailView.willPlayVideoCID = String(cid)
                             AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
-                                let audioLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
-                                let asset = AVURLAsset(url: URL(string: audioLink)!, options: [AVURLAssetHTTPUserAgentKey: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"])
-                                let playerItem = AVPlayerItem(asset: asset)
-                                audioPlayer = AVPlayer(playerItem: playerItem)
-                                let playerObserver = audioPlayer.observe(\.status, options: [.new, .old]) { (player, change) in
-                                    if player.status == .readyToPlay {
-                                        player.play()
-                                        debugPrint("Played")
-                                    }
-                                }
+                                VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
+                                VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
                                 isNowPlayingPresented = true
                                 isLoading = false
                             }
@@ -350,7 +415,6 @@ struct VideoDetailView: View {
                     }, label: {
                         Image(systemName: "waveform")
                     })
-                    .sheet(isPresented: $isNowPlayingPresented, content: {NowPlayingView()})
                     Button(action: {
                         
                     }, label: {
@@ -374,6 +438,7 @@ struct VideoDetailView: View {
         @Binding var videoDetails: [String: String]
         @Binding var owner: [String: String]
         @Binding var stat: [String: String]
+        @Binding var tags: [String]
         @Binding var videoDesc: String
         @Binding var isLiked: Bool
         @Binding var isCoined: Bool
@@ -385,6 +450,9 @@ struct VideoDetailView: View {
         @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
         @AppStorage("SESSDATA") var sessdata = ""
         @AppStorage("bili_jct") var biliJct = ""
+        @State var tagText = ""
+        @State var descOffset: CGFloat = 20
+        @State var tagOffset: CGFloat = 20
         var body: some View {
             ScrollView {
                 VStack {
@@ -397,11 +465,12 @@ struct VideoDetailView: View {
                                     HStack {
                                         Text(owner["Name"]!)
                                             .font(.system(size: 16, weight: .bold))
-                                            .lineLimit(2)
+                                            .lineLimit(1)
+                                            .minimumScaleFactor(0.1)
                                         Spacer()
                                     }
                                     HStack {
-                                        Text(String(ownerFansCount).shorter())
+                                        Text(String(ownerFansCount).shorter() + " 粉丝")
                                             .font(.system(size: 11))
                                             .lineLimit(1)
                                             .opacity(0.6)
@@ -413,7 +482,7 @@ struct VideoDetailView: View {
                         })
                         .buttonBorderShape(.roundedRectangle(radius: 18))
                     }
-                    VStack {
+                    LazyVStack {
                         HStack {
                             Button(action: {
                                 let headers: HTTPHeaders = [
@@ -421,6 +490,7 @@ struct VideoDetailView: View {
                                 ]
                                 AF.request("https://api.bilibili.com/x/web-interface/archive/like", method: .post, parameters: BiliVideoLike(bvid: videoDetails["BV"]!, like: isLiked ? 2 : 1, csrf: biliJct), headers: headers).response { response in
                                     debugPrint(response)
+                                    isLiked ? tipWithText("取消成功", symbol: "checkmark.circle.fill") : tipWithText("点赞成功", symbol: "checkmark.circle.fill")
                                     isLiked.toggle()
                                 }
                             }, label: {
@@ -464,6 +534,7 @@ struct VideoDetailView: View {
                                     if isSuccess {
                                         AF.request("https://api.bilibili.com/medialist/gateway/coll/resource/deal", method: .post, parameters: BiliVideoFavourite(rid: Int(respStr)!, csrf: biliJct), headers: headers).response { response in
                                             debugPrint(response)
+                                            isLiked ? tipWithText("取消成功", symbol: "checkmark.circle.fill") : tipWithText("收藏成功", symbol: "checkmark.circle.fill")
                                             isFavoured.toggle()
                                         }
                                     }
@@ -519,6 +590,26 @@ struct VideoDetailView: View {
                             .font(.system(size: 12))
                             .opacity(0.65)
                             .padding(.horizontal, 8)
+                            .offset(y: descOffset)
+                            .animation(.easeOut(duration: 0.4), value: descOffset)
+                            .onAppear {
+                                descOffset = 0
+                            }
+                        Spacer()
+                            .frame(height: 15)
+                        Label(tagText, systemImage: "tag")
+                            .font(.system(size: 13))
+                            .padding(.horizontal, 8)
+                            .opacity(0.6)
+                            .offset(y: tagOffset)
+                            .animation(.easeOut(duration: 0.3), value: tagOffset)
+                            .onAppear {
+                                tagOffset = 0
+                                tagText = ""
+                                for text in tags {
+                                    tagText += text + "  "
+                                }
+                            }
                     }
                 }
             }

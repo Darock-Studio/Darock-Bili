@@ -52,6 +52,15 @@ struct MainView: View {
             Group {
                 List {
                     Section {
+                        if debug {
+                            Text("Debug Version. DO NOT Discribe!!")
+                                .bold()
+                            Button(action: {
+                                tipWithText("Test")
+                            }, label: {
+                                Text("Debug")
+                            })
+                        }
                         if notice != "" {
                             NavigationLink(destination: {NoticeView()}, label: {
                                 Text(notice)
@@ -87,12 +96,14 @@ struct MainView: View {
                                     VideoCard(videos[i])
                                 }
                             }
-                            Button(action: {
-                                LoadNewVideos()
-                            }, label: {
-                                Text("加载更多")
-                                    .bold()
-                            })
+                            Section {
+                                Button(action: {
+                                    LoadNewVideos()
+                                }, label: {
+                                    Text("加载更多")
+                                        .bold()
+                                })
+                            }
                         } else {
                             ProgressView()
                         }
@@ -116,23 +127,42 @@ struct MainView: View {
                         newBuildVer = String(respStr.apiFixed().split(separator: "|")[1])
                     }
                 }
-                
-                recordUserStep("Enter Main")
             }
             .sheet(isPresented: $isNetworkFixPresented, content: {NetworkFixView()})
         }
         
-        func LoadNewVideos() {
+        func LoadNewVideos(clearWhenFinish: Bool = false) {
             let headers: HTTPHeaders = [
                 "cookie": "SESSDATA=\(sessdata)"
             ]
-            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/dynamic/region?ps=50&rid=1", headers: headers) { respJson, isSuccess in
+//            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/dynamic/region?ps=50&rid=1", headers: headers) { respJson, isSuccess in
+//                if isSuccess {
+//                    let datas = respJson["data"]["archives"]
+//                    debugPrint(datas)
+//                    autoreleasepool {
+//                        for videoInfo in datas {
+//                            videos.append(["Pic": videoInfo.1["pic"].string!, "Title": videoInfo.1["title"].string!, "BV": videoInfo.1["bvid"].string!, "UP": videoInfo.1["owner"]["name"].string!, "View": String(videoInfo.1["stat"]["view"].int!), "Danmaku": String(videoInfo.1["stat"]["danmaku"].int!)])
+//                        }
+//                    }
+//                } else {
+//                    isNetworkFixPresented = true
+//                }
+//            }
+            DarockKit.Network.shared.requestString("https://api.darock.top/bili/wbi/sign/\("ps=10".base64Encoded())") { respStr, isSuccess in
                 if isSuccess {
-                    let datas = respJson["data"]["archives"]
-                    debugPrint(datas)
-                    autoreleasepool {
-                        for videoInfo in datas {
-                            videos.append(["Pic": videoInfo.1["pic"].string!, "Title": videoInfo.1["title"].string!, "BV": videoInfo.1["bvid"].string!, "UP": videoInfo.1["owner"]["name"].string!, "View": String(videoInfo.1["stat"]["view"].int!), "Danmaku": String(videoInfo.1["stat"]["danmaku"].int!)])
+                    debugPrint(respStr.apiFixed())
+                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/wbi/index/top/feed/rcmd?\(respStr.apiFixed())", headers: headers) { respJson, isSuccess in
+                        if isSuccess {
+                            debugPrint(respJson)
+                            let datas = respJson["data"]["item"]
+                            if clearWhenFinish {
+                                videos = [[String: String]]()
+                            }
+                            for videoInfo in datas {
+                                videos.append(["Pic": videoInfo.1["pic"].string!, "Title": videoInfo.1["title"].string!, "BV": videoInfo.1["bvid"].string!, "UP": videoInfo.1["owner"]["name"].string!, "View": String(videoInfo.1["stat"]["view"].int!), "Danmaku": String(videoInfo.1["stat"]["danmaku"].int!)])
+                            }
+                        } else {
+                            isNetworkFixPresented = true
                         }
                     }
                 } else {
