@@ -28,6 +28,7 @@ struct SearchMainView: View {
                         .onDisappear {
                             searchText = ""
                         }
+                        .accessibilityIdentifier("SearchInput")
                 }
                 if searchHistory.count != 0 {
                     Section(header: Text("历史记录")) {

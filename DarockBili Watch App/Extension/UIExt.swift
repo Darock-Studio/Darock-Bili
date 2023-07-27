@@ -5,10 +5,10 @@
 //  Created by WindowsMEMZ on 2023/7/8.
 //
 
-import Foundation
+import UIKit
 import SwiftUI
 import WatchKit
-import UIKit
+import Foundation
 import SDWebImageSwiftUI
 
 @ViewBuilder func VideoCard(_ videoDetails: [String: String]) -> some View {
@@ -16,6 +16,12 @@ import SDWebImageSwiftUI
         VStack {
             HStack {
                 WebImage(url: URL(string: videoDetails["Pic"]! + "@50w")!, options: [.progressiveLoad, .scaleDownLargeImages])
+                    .placeholder {
+                        RoundedRectangle(cornerRadius: 7)
+                            .frame(width: 50)
+                            .foregroundColor(Color(hex: 0x3D3D3D))
+                            .redacted(reason: .placeholder)
+                    }
                     .cornerRadius(7)
                 Text(videoDetails["Title"]!)
                     .font(.system(size: 14, weight: .bold))

@@ -22,13 +22,13 @@ struct ContentView: View {
                 PersonAccountView()
                     .tag(2)
             }
-            .sheet(isPresented: $isGuidePresented, onDismiss: {
-                isFirstUsing = false
-            }, content: {FirstUsingView()})
+//            .sheet(isPresented: $isGuidePresented, onDismiss: {
+//                isFirstUsing = false
+//            }, content: {FirstUsingView()})
             .onAppear {
-                if isFirstUsing {
-                    isGuidePresented = true
-                }
+//                if isFirstUsing {
+//                    isGuidePresented = true
+//                }
                 if !isNoTipSystemVer {
                     if #unavailable(watchOS 10) {
                         isSystemVerTipPresented = true

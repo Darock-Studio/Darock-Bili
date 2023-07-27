@@ -76,12 +76,12 @@ extension String {
             return uint8Array.reduce("") { $0 + String(format: "%02X", $1)}
             /// 16位小写
         case .lowercase16:
-            let tempStr = uint8Array.reduce("") { $0 + String(format: "%02x", $1)}
+            //let tempStr = uint8Array.reduce("") { $0 + String(format: "%02x", $1)}
             return ""
             //            tempStr.getString(startIndex: 8, endIndex: 24)
             /// 16位大写
         case .uppercase16:
-            let tempStr = uint8Array.reduce("") { $0 + String(format: "%02X", $1)}
+            //let tempStr = uint8Array.reduce("") { $0 + String(format: "%02X", $1)}
             return ""
             //            tempStr.getString(startIndex: 8, endIndex: 24)
         }

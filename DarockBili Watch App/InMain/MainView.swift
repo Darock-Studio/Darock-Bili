@@ -28,6 +28,7 @@ struct MainView: View {
                                 .foregroundColor(.accentColor)
                         })
                         .sheet(isPresented: $isSearchPresented, content: {SearchMainView()})
+                        .accessibilityIdentifier("SearchButton")
                     }
                 }
         } else {
@@ -53,7 +54,7 @@ struct MainView: View {
                 List {
                     Section {
                         if debug {
-                            Text("Debug Version. DO NOT Discribe!!")
+                            Text("Debug Version. DO NOT Release!!")
                                 .bold()
                             Button(action: {
                                 tipWithText("Test")
@@ -94,6 +95,7 @@ struct MainView: View {
                             autoreleasepool {
                                 ForEach(0...videos.count - 1, id: \.self) { i in
                                     VideoCard(videos[i])
+                                        .accessibilityIdentifier(i == 0 ? "TestVideoCard" : "")
                                 }
                             }
                             Section {

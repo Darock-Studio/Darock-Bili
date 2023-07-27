@@ -139,7 +139,7 @@ struct LoginView: View {
                 }, label: {
                     Text("获取验证码")
                 })
-                .disabled(accountInput == "" || validate == "")
+                .disabled(accountInput == "" || validate == "" || smsLoginToken != "")
                 SecureField("验证码", text: $passwdInput)
                 Section {
                     Button(action: {

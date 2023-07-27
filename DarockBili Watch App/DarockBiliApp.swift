@@ -14,7 +14,7 @@ import SDWebImageSVGCoder
 import SDWebImageWebPCoder
 
 //!!!: Debug Setting, Set false Before Release
-let debug = true
+let debug = false
 
 var pShowTipText = ""
 var pShowTipSymbol = ""
@@ -153,8 +153,10 @@ class AppDelegate: NSObject, WKApplicationDelegate {
         SDImageCodersManager.shared.addCoder(SDImageWebPCoder.shared)
         SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)
         SDImageCodersManager.shared.addCoder(SDImagePDFCoder.shared)
-        SDImageCache.shared.config.maxMemoryCost = 1024 * 1024 * 20
+        SDImageCache.shared.config.maxMemoryCost = 1024 * 1024 * 10
         SDImageCache.shared.config.shouldCacheImagesInMemory = false
+        SDImageCache.shared.config.shouldUseWeakMemoryCache = true
+        SDImageCache.shared.clearMemory()
     }
 }
 

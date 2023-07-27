@@ -451,6 +451,12 @@ struct VideoDetailView: View {
         @AppStorage("SESSDATA") var sessdata = ""
         @AppStorage("bili_jct") var biliJct = ""
         @State var tagText = ""
+        @State var ownerBlockOffset: CGFloat = 20
+        @State var statLineOffset: CGFloat = 20
+        @State var danmakuCountOffset: CGFloat = 20
+        @State var nowWatchingCountOffset: CGFloat = 20
+        @State var totalPlayedCountOffset: CGFloat = 20
+        @State var bvidTextOffset: CGFloat = 20
         @State var descOffset: CGFloat = 20
         @State var tagOffset: CGFloat = 20
         var body: some View {
@@ -481,6 +487,12 @@ struct VideoDetailView: View {
                             }
                         })
                         .buttonBorderShape(.roundedRectangle(radius: 18))
+                        .offset(y: ownerBlockOffset)
+                        .animation(.easeOut(duration: 0.3), value: ownerBlockOffset)
+                        .onAppear {
+                            ownerBlockOffset = 0
+                        }
+                        .accessibilityIdentifier("OwnerPage")
                     }
                     LazyVStack {
                         HStack {
@@ -553,6 +565,11 @@ struct VideoDetailView: View {
                             })
                         }
                         .buttonBorderShape(.roundedRectangle(radius: 18))
+                        .offset(y: statLineOffset)
+                        .animation(.easeOut(duration: 0.4), value: statLineOffset)
+                        .onAppear {
+                            statLineOffset = 0
+                        }
                         Spacer()
                             .frame(height: 10)
                         VStack {
@@ -561,25 +578,43 @@ struct VideoDetailView: View {
                                 Text(videoDetails["Danmaku"]!.shorter() + " 弹幕")
                                 Spacer()
                             }
+                            .offset(y: danmakuCountOffset)
+                            .animation(.easeOut(duration: 0.55), value: danmakuCountOffset)
+                            .onAppear {
+                                danmakuCountOffset = 0
+                            }
                             HStack {
                                 Image(systemName: "person.2")
                                 Text("\(nowPlayingCount) 人在看")
                                     .offset(x: -1)
                                 Spacer()
                             }
-                            .offset(x: -2)
+                            .offset(x: -2, y: nowWatchingCountOffset)
+                            .animation(.easeOut(duration: 0.65), value: nowWatchingCountOffset)
+                            .onAppear {
+                                nowWatchingCountOffset = 0
+                            }
                             HStack {
                                 Image(systemName: "play.circle")
                                 Text(videoDetails["View"]!.shorter() + " 播放")
                                     .offset(x: 1)
                                 Spacer()
                             }
+                            .offset(y: totalPlayedCountOffset)
+                            .animation(.easeOut(duration: 0.75), value: totalPlayedCountOffset)
+                            .onAppear {
+                                totalPlayedCountOffset = 0
+                            }
                             HStack {
                                 Image(systemName: "movieclapper")
                                 Text(videoDetails["BV"]!)
                                 Spacer()
                             }
-                            .offset(x: -1)
+                            .offset(x: -1, y: bvidTextOffset)
+                            .animation(.easeOut(duration: 0.85), value: bvidTextOffset)
+                            .onAppear {
+                                bvidTextOffset = 0
+                            }
                         }
                         .font(.system(size: 11))
                         .opacity(0.6)
@@ -597,19 +632,25 @@ struct VideoDetailView: View {
                             }
                         Spacer()
                             .frame(height: 15)
-                        Label(tagText, systemImage: "tag")
-                            .font(.system(size: 13))
-                            .padding(.horizontal, 8)
-                            .opacity(0.6)
-                            .offset(y: tagOffset)
-                            .animation(.easeOut(duration: 0.3), value: tagOffset)
-                            .onAppear {
-                                tagOffset = 0
-                                tagText = ""
-                                for text in tags {
-                                    tagText += text + "  "
-                                }
+                        HStack {
+                            VStack {
+                                Image(systemName: "tag")
+                                Spacer()
                             }
+                            Text(tagText)
+                        }
+                        .font(.system(size: 13))
+                        .padding(.horizontal, 8)
+                        .opacity(0.6)
+                        .offset(y: tagOffset)
+                        .animation(.easeOut(duration: 0.3), value: tagOffset)
+                        .onAppear {
+                            tagOffset = 0
+                            tagText = ""
+                            for text in tags {
+                                tagText += text + "  "
+                            }
+                        }
                     }
                 }
             }
