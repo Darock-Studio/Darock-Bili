@@ -46,6 +46,7 @@ struct VideoDetailView: View {
     @State var backgroundPicOpacity = 0.0
     var body: some View {
         TabView {
+            #if swift(>=5.9)
             if #available(watchOS 10, *) {
                 ZStack {
                     Group {
@@ -197,7 +198,25 @@ struct VideoDetailView: View {
                 }
                 .tag(1)
             }
-            
+            #else
+            ZStack {
+                Group {
+                    ScrollView {
+                        DetailViewFirstPageBase(videoDetails: $videoDetails, honors: $honors, isLoading: $isLoading)
+                            .offset(y: 16)
+                        DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, honors: $honors, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount)
+                    }
+                }
+                .blur(radius: isLoading ? 14 : 0)
+                if isLoading {
+                    Text("正在解析...")
+                        .font(.title2)
+                        .bold()
+                }
+            }
+            .tag(1)
+            #endif
+            #if swift(>=5.9)
             if #available(watchOS 10, *) {
                 VideoCommentsView(oid: String(videoDetails["BV"]!.dropFirst().dropFirst()))
                     .containerBackground(for: .navigation) {
@@ -212,7 +231,9 @@ struct VideoDetailView: View {
             } else {
                 VideoCommentsView(oid: String(videoDetails["BV"]!.dropFirst().dropFirst()))
             }
-            
+            #else
+            VideoCommentsView(oid: String(videoDetails["BV"]!.dropFirst().dropFirst()))
+            #endif
             if goodVideos.count != 0 {
                 List {
                     ForEach(0...goodVideos.count - 1, id: \.self) { i in
