@@ -26,6 +26,7 @@ struct VideoDetailView: View {
     @AppStorage("SESSDATA") var sessdata = ""
     @AppStorage("bili_jct") var biliJct = ""
     @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
+    @AppStorage("VideoGetterSource") var videoGetterSource = "official"
     @State var isLoading = false
     @State var isLiked = false
     @State var isCoined = false
@@ -102,17 +103,28 @@ struct VideoDetailView: View {
                                             Button(action: {
                                                 isLoading = true
                                                 
-                                                let headers: HTTPHeaders = [
-                                                    "cookie": "SESSDATA=\(sessdata)"
-                                                ]
-                                                AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
-                                                    let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
-                                                    VideoDetailView.willPlayVideoCID = String(cid)
-                                                    AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
-                                                        VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
-                                                        VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                                                        isNowPlayingPresented = true
-                                                        isLoading = false
+                                                if videoGetterSource == "official" {
+                                                    let headers: HTTPHeaders = [
+                                                        "cookie": "SESSDATA=\(sessdata)"
+                                                    ]
+                                                    AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
+                                                        let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
+                                                        VideoDetailView.willPlayVideoCID = String(cid)
+                                                        AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
+                                                            VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
+                                                            VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                                                            isNowPlayingPresented = true
+                                                            isLoading = false
+                                                        }
+                                                    }
+                                                } else if videoGetterSource == "injahow" {
+                                                    DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!)&p=1&type=bangumi&q=16&otype=url") { respStr, isSuccess in
+                                                        if isSuccess {
+                                                            VideoDetailView.willPlayVideoLink = respStr
+                                                            VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                                                            isNowPlayingPresented = true
+                                                            isLoading = false
+                                                        }
                                                     }
                                                 }
                                             }, label: {
@@ -120,19 +132,30 @@ struct VideoDetailView: View {
                                             })
                                             Button(action: {
                                                 isLoading = true
-                                                
-                                                let headers: HTTPHeaders = [
-                                                    "cookie": "SESSDATA=\(sessdata)"
-                                                ]
-                                                AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
-                                                    let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
-                                                    VideoDetailView.willPlayVideoCID = String(cid)
-                                                    AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
-                                                        VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
-                                                        //debugPrint(response)
-                                                        VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                                                        isVideoPlayerPresented = true
-                                                        isLoading = false
+                                                debugPrint(videoDetails["BV"]!)
+                                                if videoGetterSource == "official" {
+                                                    let headers: HTTPHeaders = [
+                                                        "cookie": "SESSDATA=\(sessdata)"
+                                                    ]
+                                                    AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
+                                                        let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
+                                                        VideoDetailView.willPlayVideoCID = String(cid)
+                                                        AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
+                                                            VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
+                                                            //debugPrint(response)
+                                                            VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                                                            isVideoPlayerPresented = true
+                                                            isLoading = false
+                                                        }
+                                                    }
+                                                } else if videoGetterSource == "injahow" {
+                                                    DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=1&type=bangumi&q=16&otype=url") { respStr, isSuccess in
+                                                        if isSuccess {
+                                                            VideoDetailView.willPlayVideoLink = respStr
+                                                            VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                                                            isVideoPlayerPresented = true
+                                                            isLoading = false
+                                                        }
                                                     }
                                                 }
                                             }, label: {
@@ -349,6 +372,7 @@ struct VideoDetailView: View {
         @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
         @AppStorage("SESSDATA") var sessdata = ""
         @AppStorage("bili_jct") var biliJct = ""
+        @AppStorage("VideoGetterSource") var videoGetterSource = "official"
         @State var isVideoPlayerPresented = false
         @State var isMoreMenuPresented = false
         @State var isDownloadPresented = false
@@ -422,18 +446,29 @@ struct VideoDetailView: View {
                     Button(action: {
                         isLoading = true
                         
-                        let headers: HTTPHeaders = [
-                            "cookie": "SESSDATA=\(sessdata)"
-                        ]
-                        AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
-                            let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
-                            VideoDetailView.willPlayVideoCID = String(cid)
-                            AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
-                                VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
-                                //debugPrint(response)
-                                VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                                isVideoPlayerPresented = true
-                                isLoading = false
+                        if videoGetterSource == "official" {
+                            let headers: HTTPHeaders = [
+                                "cookie": "SESSDATA=\(sessdata)"
+                            ]
+                            AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
+                                let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
+                                VideoDetailView.willPlayVideoCID = String(cid)
+                                AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
+                                    VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
+                                    //debugPrint(response)
+                                    VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                                    isVideoPlayerPresented = true
+                                    isLoading = false
+                                }
+                            }
+                        } else if videoGetterSource == "injahow" {
+                            DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!)&p=1&type=bangumi&q=16&otype=url") { respStr, isSuccess in
+                                if isSuccess {
+                                    VideoDetailView.willPlayVideoLink = respStr
+                                    VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                                    isVideoPlayerPresented = true
+                                    isLoading = false
+                                }
                             }
                         }
                     }, label: {
@@ -445,17 +480,28 @@ struct VideoDetailView: View {
                     Button(action: {
                         isLoading = true
                         
-                        let headers: HTTPHeaders = [
-                            "cookie": "SESSDATA=\(sessdata)"
-                        ]
-                        AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
-                            let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
-                            VideoDetailView.willPlayVideoCID = String(cid)
-                            AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
-                                VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
-                                VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                                isNowPlayingPresented = true
-                                isLoading = false
+                        if videoGetterSource == "official" {
+                            let headers: HTTPHeaders = [
+                                "cookie": "SESSDATA=\(sessdata)"
+                            ]
+                            AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
+                                let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
+                                VideoDetailView.willPlayVideoCID = String(cid)
+                                AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
+                                    VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
+                                    VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                                    isNowPlayingPresented = true
+                                    isLoading = false
+                                }
+                            }
+                        } else if videoGetterSource == "injahow" {
+                            DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!)&p=1&type=bangumi&q=16&otype=url") { respStr, isSuccess in
+                                if isSuccess {
+                                    VideoDetailView.willPlayVideoLink = respStr
+                                    VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                                    isNowPlayingPresented = true
+                                    isLoading = false
+                                }
                             }
                         }
                     }, label: {
@@ -481,18 +527,29 @@ struct VideoDetailView: View {
                 Button(action: {
                     isLoading = true
                     
-                    let headers: HTTPHeaders = [
-                        "cookie": "SESSDATA=\(sessdata)"
-                    ]
-                    AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
-                        let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
-                        VideoDetailView.willPlayVideoCID = String(cid)
-                        AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
-                            VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
-                            //debugPrint(response)
-                            VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                            isVideoPlayerPresented = true
-                            isLoading = false
+                    if videoGetterSource == "official" {
+                        let headers: HTTPHeaders = [
+                            "cookie": "SESSDATA=\(sessdata)"
+                        ]
+                        AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
+                            let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
+                            VideoDetailView.willPlayVideoCID = String(cid)
+                            AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
+                                VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
+                                //debugPrint(response)
+                                VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                                isVideoPlayerPresented = true
+                                isLoading = false
+                            }
+                        }
+                    } else if videoGetterSource == "injahow" {
+                        DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!)&p=1&type=bangumi&q=16&otype=url") { respStr, isSuccess in
+                            if isSuccess {
+                                VideoDetailView.willPlayVideoLink = respStr
+                                VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                                isVideoPlayerPresented = true
+                                isLoading = false
+                            }
                         }
                     }
                 }, label: {
@@ -504,17 +561,28 @@ struct VideoDetailView: View {
                 Button(action: {
                     isLoading = true
                     
-                    let headers: HTTPHeaders = [
-                        "cookie": "SESSDATA=\(sessdata)"
-                    ]
-                    AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
-                        let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
-                        VideoDetailView.willPlayVideoCID = String(cid)
-                        AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
-                            VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
-                            VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                            isNowPlayingPresented = true
-                            isLoading = false
+                    if videoGetterSource == "official" {
+                        let headers: HTTPHeaders = [
+                            "cookie": "SESSDATA=\(sessdata)"
+                        ]
+                        AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
+                            let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
+                            VideoDetailView.willPlayVideoCID = String(cid)
+                            AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
+                                VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
+                                VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                                isNowPlayingPresented = true
+                                isLoading = false
+                            }
+                        }
+                    } else if videoGetterSource == "injahow" {
+                        DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!)&p=1&type=bangumi&q=16&otype=url") { respStr, isSuccess in
+                            if isSuccess {
+                                VideoDetailView.willPlayVideoLink = respStr
+                                VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                                isNowPlayingPresented = true
+                                isLoading = false
+                            }
                         }
                     }
                 }, label: {

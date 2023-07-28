@@ -83,13 +83,22 @@ struct SettingsView: View {
     
     struct AppBehaviorSettingsView: View {
         @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
+        @AppStorage("VideoGetterSource") var videoGetterSource = "official"
         var body: some View {
             List {
-                Picker("记录历史记录", selection: $recordHistoryTime) {
-                    Text("进入详情页时").tag("into")
-                    Text("开始播放时").tag("play")
-                    Text("关闭").tag("never")
+                Section {
+                    Picker("记录历史记录", selection: $recordHistoryTime) {
+                        Text("进入详情页时").tag("into")
+                        Text("开始播放时").tag("play")
+                        Text("关闭").tag("never")
+                    }
                 }
+//                Section(footer: Text("解析失败或无法播放视频时可尝试更换")) {
+//                    Picker("解析源", selection: $videoGetterSource) {
+//                        Text("官方").tag("official")
+//                        Text("第三方").tag("injahow")
+//                    }
+//                }
             }
         }
     }
