@@ -15,6 +15,7 @@ import CachedAsyncImage
 struct PersonAccountView: View {
     var body: some View {
         NavigationStack {
+            #if swift(>=5.9)
             if #available(watchOS 10, *) {
                 MainView()
                     .toolbar {
@@ -28,6 +29,9 @@ struct PersonAccountView: View {
             } else {
                 MainView(isShowSettingsButton: true)
             }
+            #else
+            MainView(isShowSettingsButton: true)
+            #endif
         }
     }
     

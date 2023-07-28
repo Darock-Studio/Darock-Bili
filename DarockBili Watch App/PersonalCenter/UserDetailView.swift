@@ -39,6 +39,7 @@ struct UserDetailView: View {
     @State var isSendbMessagePresented = false
     var body: some View {
         TabView {
+            #if swift(>=5.9)
             if #available(watchOS 10, *) {
                 TabView {
                     VStack {
@@ -107,7 +108,18 @@ struct UserDetailView: View {
                         .tag(2)
                 }
             }
+            #else
             ScrollView {
+                FirstPageBase(uid: uid, userFaceUrl: $userFaceUrl, followCount: $followCount, fansCount: $fansCount, coinCount: $coinCount)
+                    .offset(y: -10)
+                    .navigationTitle(username)
+                    .tag(1)
+                SecondPageBase(officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign)
+                    .tag(2)
+            }
+            #endif
+            ScrollView {
+                #if swift(>=5.9)
                 if #available(watchOS 10, *) {
                     VideosListBase(uid: uid, username: $username, videos: $videos, articles: $articles, viewSelector: $viewSelector, videoCount: $videoCount, articalCount: $articalCount)
                         .tag(2)
@@ -130,6 +142,11 @@ struct UserDetailView: View {
                         .tag(2)
                         .navigationTitle(viewSelector == .video ? "\(videoCount) 视频" : "\(articalCount) 专栏")
                 }
+                #else
+                VideosListBase(uid: uid, username: $username, videos: $videos, articles: $articles, viewSelector: $viewSelector, videoCount: $videoCount, articalCount: $articalCount)
+                    .tag(2)
+                    .navigationTitle(viewSelector == .video ? "\(videoCount) 视频" : "\(articalCount) 专栏")
+                #endif
             }
         }
         .onAppear {

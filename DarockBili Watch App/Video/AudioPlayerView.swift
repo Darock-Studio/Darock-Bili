@@ -26,6 +26,7 @@ struct AudioPlayerView: View {
         let playerItem = AVPlayerItem(asset: asset)
         let audioPlayer = AVPlayer(playerItem: playerItem)
         VStack {
+            #if swift(>=5.9)
             if #available(watchOS 10, *) {
                 VStack {
                     AsyncImage(url: URL(string: videoDetails["Pic"]! + "@110w_85h"))
@@ -108,12 +109,119 @@ struct AudioPlayerView: View {
                     }
                 }
             } else {
+                VStack {
+                    AsyncImage(url: URL(string: videoDetails["Pic"]! + "@110w_85h"))
+                        .cornerRadius(10)
+                    Text(videoDetails["Title"]!)
+                        .font(.system(size: 14, weight: .bold))
+                        .lineLimit(1)
+                        .padding(.vertical, 7)
+                        .padding(.horizontal, 20)
+                    Text(videoDetails["Title"]!)
+                        .font(.system(size: 14, weight: .bold))
+                        .lineLimit(1)
+                        .padding(.vertical, 7)
+                        .padding(.horizontal, 20)
+                    Button(action: {
+                        let behaviorCase = AudioPlayerBehavior(rawValue: audioPlayBehavior)!
+                        switch behaviorCase {
+                        case .singleLoop:
+                            audioPlayBehavior = AudioPlayerBehavior.pauseWhenFinish.rawValue
+                        case .pauseWhenFinish:
+                            audioPlayBehavior = AudioPlayerBehavior.singleLoop.rawValue
+                        case .listLoop:
+                            audioPlayBehavior = AudioPlayerBehavior.singleLoop.rawValue
+                        case .exitWhenFinish:
+                            audioPlayBehavior = AudioPlayerBehavior.singleLoop.rawValue
+                        }
+                        RefreshPlayerBehavior(player: audioPlayer, playerItem: playerItem)
+                    }, label: {
+                        Image(systemName: { () -> String in
+                            let behaviorCase = AudioPlayerBehavior(rawValue: audioPlayBehavior)!
+                            switch behaviorCase {
+                            case .singleLoop:
+                                return "repeat.1"
+                            case .pauseWhenFinish:
+                                return "pause"
+                            case .listLoop:
+                                return "repeat"
+                            case .exitWhenFinish:
+                                return "rectangle.portrait.and.arrow.forward"
+                            }
+                        }())
+                    })
+                    Button(action: {
+                        isPlaying.toggle()
+                        if isPlaying {
+                            //audioPlayer.play()
+                            AVExtension.avPlayerStartPlay(audioPlayer)
+                        } else {
+                            //audioPlayer.pause()
+                            AVExtension.avPlayerPausePlay(audioPlayer)
+                        }
+                    }, label: {
+                        Image(systemName: isPlaying ? "pause.fill" : "play.fill")
+                    })
+                    VolumeControlView()
+                }
+            }
+            #else
+            VStack {
+                AsyncImage(url: URL(string: videoDetails["Pic"]! + "@110w_85h"))
+                    .cornerRadius(10)
                 Text(videoDetails["Title"]!)
                     .font(.system(size: 14, weight: .bold))
                     .lineLimit(1)
                     .padding(.vertical, 7)
                     .padding(.horizontal, 20)
+                Text(videoDetails["Title"]!)
+                    .font(.system(size: 14, weight: .bold))
+                    .lineLimit(1)
+                    .padding(.vertical, 7)
+                    .padding(.horizontal, 20)
+                Button(action: {
+                    let behaviorCase = AudioPlayerBehavior(rawValue: audioPlayBehavior)!
+                    switch behaviorCase {
+                    case .singleLoop:
+                        audioPlayBehavior = AudioPlayerBehavior.pauseWhenFinish.rawValue
+                    case .pauseWhenFinish:
+                        audioPlayBehavior = AudioPlayerBehavior.singleLoop.rawValue
+                    case .listLoop:
+                        audioPlayBehavior = AudioPlayerBehavior.singleLoop.rawValue
+                    case .exitWhenFinish:
+                        audioPlayBehavior = AudioPlayerBehavior.singleLoop.rawValue
+                    }
+                    RefreshPlayerBehavior(player: audioPlayer, playerItem: playerItem)
+                }, label: {
+                    Image(systemName: { () -> String in
+                        let behaviorCase = AudioPlayerBehavior(rawValue: audioPlayBehavior)!
+                        switch behaviorCase {
+                        case .singleLoop:
+                            return "repeat.1"
+                        case .pauseWhenFinish:
+                            return "pause"
+                        case .listLoop:
+                            return "repeat"
+                        case .exitWhenFinish:
+                            return "rectangle.portrait.and.arrow.forward"
+                        }
+                    }())
+                })
+                Button(action: {
+                    isPlaying.toggle()
+                    if isPlaying {
+                        //audioPlayer.play()
+                        AVExtension.avPlayerStartPlay(audioPlayer)
+                    } else {
+                        //audioPlayer.pause()
+                        AVExtension.avPlayerPausePlay(audioPlayer)
+                    }
+                }, label: {
+                    Image(systemName: isPlaying ? "pause.fill" : "play.fill")
+                })
+                VolumeControlView()
             }
+            #endif
         }
         .onAppear {
             startObserver = playerItem.publisher(for: \.status)
