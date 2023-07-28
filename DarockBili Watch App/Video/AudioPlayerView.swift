@@ -158,6 +158,8 @@ public enum AudioPlayerBehavior: String {
     case exitWhenFinish = "exit"
 }
 
-#Preview {
-    AudioPlayerView(videoDetails: ["Pic": "http://i1.hdslb.com/bfs/archive/453a7f8deacb98c3b083ead733291f080383723a.jpg", "Title": "解压视频：20000个小球Marble run动画", "BV": "BV1PP41137Px", "UP": "小球模拟", "View": "114514", "Danmaku": "1919810"])
+struct AudioPlayerView_Previews: PreviewProvider {
+    static var previews: some View {
+        AudioPlayerView(videoDetails: ["Pic": "http://i1.hdslb.com/bfs/archive/453a7f8deacb98c3b083ead733291f080383723a.jpg", "Title": "解压视频：20000个小球Marble run动画", "BV": "BV1PP41137Px", "UP": "小球模拟", "View": "114514", "Danmaku": "1919810"])
+    }
 }

@@ -34,6 +34,7 @@ struct VideoDetailView: View {
     @State var goodVideos = [[String: String]]()
     @State var owner = [String: String]()
     @State var stat = [String: String]()
+    @State var honors = [String]()
     @State var tags = [String]()
     @State var ownerFansCount = 0
     @State var nowPlayingCount = "0"
@@ -53,7 +54,7 @@ struct VideoDetailView: View {
                                 NavigationLink("", isActive: $isNowPlayingPresented, destination: {AudioPlayerView(videoDetails: videoDetails)})
                                     .frame(width: 0, height: 0)
                                 
-                                DetailViewFirstPageBase(videoDetails: $videoDetails, isLoading: $isLoading)
+                                DetailViewFirstPageBase(videoDetails: $videoDetails, honors: $honors, isLoading: $isLoading)
                                     .offset(y: 16)
                                     .toolbar {
                                         ToolbarItem(placement: .topBarTrailing) {
@@ -141,7 +142,7 @@ struct VideoDetailView: View {
                                     }
                                     .tag(1)
                             }
-                            DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount)
+                            DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, honors: $honors, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount)
                                 .tag(2)
                         }
                         .tabViewStyle(.verticalPage)
@@ -182,9 +183,9 @@ struct VideoDetailView: View {
                 ZStack {
                     Group {
                         ScrollView {
-                            DetailViewFirstPageBase(videoDetails: $videoDetails, isLoading: $isLoading)
+                            DetailViewFirstPageBase(videoDetails: $videoDetails, honors: $honors, isLoading: $isLoading)
                                 .offset(y: 16)
-                            DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount)
+                            DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, honors: $honors, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount)
                         }
                     }
                     .blur(radius: isLoading ? 14 : 0)
@@ -266,6 +267,12 @@ struct VideoDetailView: View {
                     owner = ["Name": respJson["data"]["owner"]["name"].string ?? "[加载失败]", "Face": respJson["data"]["owner"]["face"].string ?? "E", "ID": String(respJson["data"]["owner"]["mid"].int ?? -1)]
                     stat = ["Like": String(respJson["data"]["stat"]["like"].int ?? -1), "Coin": String(respJson["data"]["stat"]["coin"].int ?? -1), "Favorite": String(respJson["data"]["stat"]["favorite"].int ?? -1)]
                     videoDesc = respJson["data"]["desc"].string ?? "[加载失败]".replacingOccurrences(of: "\\n", with: "\n")
+                    for _ in 1...4 {
+                        honors.append("")
+                    }
+                    for honor in respJson["data"]["honor_reply"]["honor"] {
+                        honors[honor.1["type"].int! - 1] = honor.1["desc"].string ?? "[加载失败]"
+                    }
                     if let mid = respJson["data"]["owner"]["mid"].int {
                         DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation/stat?vmid=\(mid)", headers: headers) { respJson, isSuccess in
                             if isSuccess {
@@ -317,6 +324,7 @@ struct VideoDetailView: View {
     
     struct DetailViewFirstPageBase: View {
         @Binding var videoDetails: [String: String]
+        @Binding var honors: [String]
         @Binding var isLoading: Bool
         @AppStorage("DedeUserID") var dedeUserID = ""
         @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
@@ -359,11 +367,29 @@ struct VideoDetailView: View {
                     
                 Spacer()
                     .frame(height: 20)
-                Text(videoDetails["Title"]!)
-                    .lineLimit(2)
-                    .font(.system(size: 12, weight: .bold))
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 5)
+                HStack {
+                    if honors.count >= 4 {
+                        if honors[3] != "" {
+                            HStack {
+                                Image(systemName: SFSymbol.Flame.fill.rawValue)
+                                Text("热门")
+                            }
+                            .font(.system(size: 11))
+                            .foregroundColor(.red)
+                            .padding(5)
+                            .background {
+                                Capsule()
+                                    .fill(.white)
+                                    .opacity(0.3)
+                            }
+                        }
+                    }
+                    Text(videoDetails["Title"]!)
+                        .lineLimit(2)
+                        .font(.system(size: 12, weight: .bold))
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 5)
+                }
                 Text(videoDetails["UP"]!)
                     .lineLimit(1)
                     .font(.system(size: 12))
@@ -438,6 +464,7 @@ struct VideoDetailView: View {
         @Binding var videoDetails: [String: String]
         @Binding var owner: [String: String]
         @Binding var stat: [String: String]
+        @Binding var honors: [String]
         @Binding var tags: [String]
         @Binding var videoDesc: String
         @Binding var isLiked: Bool

@@ -13,7 +13,6 @@ import SDWebImageSwiftUI
 import CachedAsyncImage
 
 struct PersonAccountView: View {
-    
     var body: some View {
         NavigationStack {
             if #available(watchOS 10, *) {

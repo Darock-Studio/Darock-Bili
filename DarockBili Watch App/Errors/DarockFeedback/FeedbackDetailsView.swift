@@ -27,6 +27,8 @@ struct FeedbackDetailsView: View {
     }
 }
 
-#Preview {
-    FeedbackDetailsView(fbName: "test")
+struct FeedbackDetailsView_Previews: PreviewProvider {
+    static var previews: some View {
+        FeedbackDetailsView(fbName: "test")
+    }
 }

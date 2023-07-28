@@ -202,6 +202,8 @@ struct bMessageSendView: View {
     }
 }
 
-#Preview {
-    bMessageSendView(uid: 114514, username: "ReX-We")
+struct bMessageSendView_Previews: PreviewProvider {
+    static var previews: some View {
+        bMessageSendView(uid: 114514, username: "ReX-We")
+    }
 }

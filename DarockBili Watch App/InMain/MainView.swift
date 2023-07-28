@@ -90,25 +90,25 @@ struct MainView: View {
                             .sheet(isPresented: $isSearchPresented, content: {SearchMainView()})
                         }
                     }
-                    Section {
-                        if videos.count != 0 {
+                    if videos.count != 0 {
+                        Section {
                             autoreleasepool {
                                 ForEach(0...videos.count - 1, id: \.self) { i in
                                     VideoCard(videos[i])
                                         .accessibilityIdentifier(i == 0 ? "TestVideoCard" : "")
                                 }
                             }
-                            Section {
-                                Button(action: {
-                                    LoadNewVideos()
-                                }, label: {
-                                    Text("加载更多")
-                                        .bold()
-                                })
-                            }
-                        } else {
-                            ProgressView()
                         }
+                        Section {
+                            Button(action: {
+                                LoadNewVideos()
+                            }, label: {
+                                Text("加载更多")
+                                    .bold()
+                            })
+                        }
+                    } else {
+                        ProgressView()
                     }
                 }
             }

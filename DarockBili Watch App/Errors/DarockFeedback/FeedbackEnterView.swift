@@ -18,6 +18,9 @@ struct FeedbackEnterView: View {
     }
 }
 
-#Preview {
-    FeedbackEnterView()
+struct FeedbackEnterView_Previews: PreviewProvider {
+    static var previews: some View {
+        FeedbackEnterView()
+    }
 }
+

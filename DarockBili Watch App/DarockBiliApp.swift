@@ -40,25 +40,39 @@ struct DarockBili_Watch_AppApp: App {
                     ContentView()
                     VStack {
                         Spacer()
-                        HStack {
-                            Image(systemName: showTipSymbol)
-                            Text(showTipText)
+                        if #available(watchOS 10, *) {
+                            HStack {
+                                Image(systemName: showTipSymbol)
+                                Text(showTipText)
+                            }
+                            .font(.system(size: 14, weight: .bold))
+                            .frame(width: 110, height: 40)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.1)
+                            .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                            .offset(y: tipBoxOffset)
+                            .animation(.easeOut(duration: 0.4), value: tipBoxOffset)
+                        } else {
+                            HStack {
+                                Image(systemName: showTipSymbol)
+                                Text(showTipText)
+                            }
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundColor(.black)
+                            .frame(width: 110, height: 40)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.1)
+                            .background {
+                                Color.white
+                                    .ignoresSafeArea()
+                                    .frame(width: 120, height: 40)
+                                    .cornerRadius(8)
+                                    .foregroundColor(Color(hex: 0xF5F5F5))
+                                    .opacity(0.95)
+                            }
+                            .offset(y: tipBoxOffset)
+                            .animation(.easeOut(duration: 0.4), value: tipBoxOffset)
                         }
-                        .font(.system(size: 14, weight: .bold))
-                        .foregroundColor(.black)
-                        .frame(width: 110, height: 40)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.1)
-                        .background {
-                            Color.white
-                                .ignoresSafeArea()
-                                .frame(width: 120, height: 40)
-                                .cornerRadius(8)
-                                .shadow(color: .white, radius: 4, x: 1, y: 1)
-                                .opacity(0.9)
-                        }
-                        .offset(y: tipBoxOffset)
-                        .animation(.easeIn(duration: 0.4), value: tipBoxOffset)
                     }
                 }
                     .sheet(isPresented: $isMemoryWarningPresented, content: {MemoryWarningView()})

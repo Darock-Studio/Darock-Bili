@@ -55,6 +55,8 @@ struct FeedbackMainView: View {
     }
 }
 
-#Preview {
-    FeedbackMainView()
+struct FeedbackMainView_Previews: PreviewProvider {
+    static var previews: some View {
+        FeedbackMainView()
+    }
 }

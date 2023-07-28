@@ -19,6 +19,8 @@ struct MemoryWarningView: View {
     }
 }
 
-#Preview {
-    MemoryWarningView()
+struct MemoryWarningView_Previews: PreviewProvider {
+    static var previews: some View {
+        MemoryWarningView()
+    }
 }

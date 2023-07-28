@@ -149,6 +149,8 @@ struct UserNetworkGuide: View {
     }
 }
 
-#Preview {
-    NetworkFixView()
+struct NetworkFixView_Previews: PreviewProvider {
+    static var previews: some View {
+        NetworkFixView()
+    }
 }

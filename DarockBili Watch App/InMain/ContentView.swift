@@ -21,6 +21,8 @@ struct ContentView: View {
                     .tag(1)
                 PersonAccountView()
                     .tag(2)
+//                UserDynamicMainView()
+//                    .tag(3)
             }
 //            .sheet(isPresented: $isGuidePresented, onDismiss: {
 //                isFirstUsing = false

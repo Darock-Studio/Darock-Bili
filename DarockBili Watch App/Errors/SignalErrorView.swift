@@ -86,6 +86,9 @@ struct SignalErrorView: View {
     }
 }
 
-#Preview {
-    SignalErrorView()
+struct SignalErrorView_Previews: PreviewProvider {
+    static var previews: some View {
+        SignalErrorView()
+    }
 }
+

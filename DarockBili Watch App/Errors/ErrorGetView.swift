@@ -134,6 +134,8 @@ struct GetableError {
     var sendable: Bool = true
 }
 
-#Preview {
-    ErrorGetView(error: GetableError(when: "Test", area: "Test", inAppArea: "Test", errDetail: "Test"))
+struct ErrorGetView_Previews: PreviewProvider {
+    static var previews: some View {
+        ErrorGetView(error: GetableError(when: "Test", area: "Test", inAppArea: "Test", errDetail: "Test"))
+    }
 }
