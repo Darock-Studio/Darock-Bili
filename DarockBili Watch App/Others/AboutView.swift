@@ -9,8 +9,6 @@ import SwiftUI
 import EFQRCode
 import AuthenticationServices
 
-
-
 struct AboutView: View {
     @State var easterEggText = ""
     @State var rexEasterEggColor = Color.white
@@ -23,7 +21,7 @@ struct AboutView: View {
                 Section {
                     Text("喵哩喵哩 v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)")
                     Text("编译时间: \(CodingTime.getCodingTime())")
-                    Text("遇到问题？在设置页面点击“反馈问题”或在 TestFlight 中反馈，感谢您的支持！")
+                    Text("遇到问题？在设置页面点击“反馈问题”进行反馈，感谢您的支持！")
                 }
                 Section {
                     Text("Credits:")

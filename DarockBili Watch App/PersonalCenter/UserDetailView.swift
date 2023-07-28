@@ -392,6 +392,7 @@ struct UserDetailView: View {
         var body: some View {
             VStack {
                 Group {
+                    #if swift(>=5.9)
                     if #unavailable(watchOS 10) {
                         Button(action: {
                             if viewSelector == .video {
@@ -408,6 +409,22 @@ struct UserDetailView: View {
                         Spacer()
                             .frame(height: 20)
                     }
+                    #else
+                    Button(action: {
+                        if viewSelector == .video {
+                            viewSelector = .article
+                        } else if viewSelector == .article {
+                            viewSelector = .video
+                        }
+                    }, label: {
+                        HStack {
+                            Image(systemName: viewSelector == .video ? "play.circle" : "doc.text.image")
+                            Text(viewSelector == .video ? "查看视频" : "查看专栏")
+                        }
+                    })
+                    Spacer()
+                        .frame(height: 20)
+                    #endif
                     if viewSelector == .video {
                         VStack {
                             if videos.count != 0 {
