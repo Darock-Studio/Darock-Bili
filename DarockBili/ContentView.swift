@@ -13,7 +13,7 @@ struct ContentView: View {
     var body: some View {
         NStack {
             VStack {
-                NeuText("您需要在 iPhone 上授予 Watch 网络权限", fontSize: 22)
+                NeuText("您需要在 iPhone 上授予 Apple Watch 网络权限", fontSize: 22)
                     .multilineTextAlignment(.center)
                 NeuButton(action: {
                     DarockKit.Network.shared.requestString("https://api.darock.top") { respStr, isSuccess in

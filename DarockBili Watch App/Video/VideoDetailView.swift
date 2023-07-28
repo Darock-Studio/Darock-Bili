@@ -417,6 +417,7 @@ struct VideoDetailView: View {
                     .opacity(0.65)
                 Spacer()
                     .frame(height: 20)
+                #if swift(>=5.9)
                 if #unavailable(watchOS 10) {
                     Button(action: {
                         isLoading = true
@@ -476,6 +477,65 @@ struct VideoDetailView: View {
                         }
                     })
                 }
+                #else
+                Button(action: {
+                    isLoading = true
+                    
+                    let headers: HTTPHeaders = [
+                        "cookie": "SESSDATA=\(sessdata)"
+                    ]
+                    AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
+                        let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
+                        VideoDetailView.willPlayVideoCID = String(cid)
+                        AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
+                            VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
+                            //debugPrint(response)
+                            VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                            isVideoPlayerPresented = true
+                            isLoading = false
+                        }
+                    }
+                }, label: {
+                    Label("播放", systemImage: "play.fill")
+                })
+                .sheet(isPresented: $isVideoPlayerPresented, content: {VideoPlayerView()})
+                NavigationLink("", isActive: $isNowPlayingPresented, destination: {AudioPlayerView(videoDetails: videoDetails)})
+                    .frame(width: 0, height: 0)
+                Button(action: {
+                    isLoading = true
+                    
+                    let headers: HTTPHeaders = [
+                        "cookie": "SESSDATA=\(sessdata)"
+                    ]
+                    AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
+                        let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
+                        VideoDetailView.willPlayVideoCID = String(cid)
+                        AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
+                            VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
+                            VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                            isNowPlayingPresented = true
+                            isLoading = false
+                        }
+                    }
+                }, label: {
+                    Label("以音频播放", systemImage: "waveform")
+                })
+                Button(action: {
+                    isMoreMenuPresented = true
+                }, label: {
+                    Label("更多", systemImage: "ellipsis")
+                })
+                .sheet(isPresented: $isMoreMenuPresented, content: {
+                    List {
+                        Button(action: {
+                            isDownloadPresented = true
+                        }, label: {
+                            Label("下载视频", image: "arrow.down.doc")
+                        })
+                        .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
+                    }
+                })
+                #endif
             }
         }
     }
