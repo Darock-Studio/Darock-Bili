@@ -1,0 +1,298 @@
+2023-07-28 1:17:51 PM +0000  Initial pipeline context: <IDEDistributionProcessingPipelineContext: 0x171c71c10; archive(resolved)="<IDEArchive: 0x2dbab0990>", distributionTask(resolved)="2", distributionDestination(resolved)="1", distributionMethod(resolved)="<IDEDistributionMethodiOSAppStoreDistribution: 0x2ea3e9d80>", team(resolved)="<IDEProvisioningDisambiguatableBasicTeam: 0x172883f30; teamID='B57D8PP775', teamName='Yuxuan Chen', teamType='Individual', username='wmemz2333@163.com', isFreeProvisioningTeam='0'>">
+	Chain (17, self inclusive):
+	<IDEDistributionProcessingPipelineContext: 0x171c71c10; archive = "<IDEArchive: 0x2dbab0990>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x2ea3e9d80>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x172883f30; teamID='B57D8PP775', teamName='Yuxuan Chen', teamType='Individual', username='wmemz2333@163.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionProcessingPipelineContext: 0x2ef1bbfb0; archive = "<IDEArchive: 0x2dbab0990>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x2ea3e9d80>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x172883f30; teamID='B57D8PP775', teamName='Yuxuan Chen', teamType='Individual', username='wmemz2333@163.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x2c2eef360; archive = "<IDEArchive: 0x2dbab0990>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x2ea3e9d80>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x172883f30; teamID='B57D8PP775', teamName='Yuxuan Chen', teamType='Individual', username='wmemz2333@163.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x2c8c85ad0; archive = "<IDEArchive: 0x2dbab0990>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x2ea3e9d80>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x172883f30; teamID='B57D8PP775', teamName='Yuxuan Chen', teamType='Individual', username='wmemz2333@163.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x2e822b830; archive = "<IDEArchive: 0x2dbab0990>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x2ea3e9d80>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x172883f30; teamID='B57D8PP775', teamName='Yuxuan Chen', teamType='Individual', username='wmemz2333@163.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x2c3f12dc0; archive = "<IDEArchive: 0x2dbab0990>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x2ea3e9d80>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x172883f30; teamID='B57D8PP775', teamName='Yuxuan Chen', teamType='Individual', username='wmemz2333@163.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x12b1be470; archive = "<IDEArchive: 0x2dbab0990>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x2ea3e9d80>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x172883f30; teamID='B57D8PP775', teamName='Yuxuan Chen', teamType='Individual', username='wmemz2333@163.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x2dae086f0; archive = "<IDEArchive: 0x2dbab0990>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x2ea3e9d80>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x172883f30; teamID='B57D8PP775', teamName='Yuxuan Chen', teamType='Individual', username='wmemz2333@163.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x2d809a930; archive = "<IDEArchive: 0x2dbab0990>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x2ea3e9d80>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x172883f30; teamID='B57D8PP775', teamName='Yuxuan Chen', teamType='Individual', username='wmemz2333@163.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x2f07c0a00; archive = "<IDEArchive: 0x2dbab0990>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x2ea3e9d80>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x172883f30; teamID='B57D8PP775', teamName='Yuxuan Chen', teamType='Individual', username='wmemz2333@163.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x2d8b63b00; archive = "<IDEArchive: 0x2dbab0990>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x2ea3e9d80>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x172883f30; teamID='B57D8PP775', teamName='Yuxuan Chen', teamType='Individual', username='wmemz2333@163.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x2c647a890; archive = "<IDEArchive: 0x2dbab0990>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x2ea3e9d80>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x172883f30; teamID='B57D8PP775', teamName='Yuxuan Chen', teamType='Individual', username='wmemz2333@163.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x2c3f18f70; archive = "<IDEArchive: 0x2dbab0990>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x2ea3e9d80>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x172883f30; teamID='B57D8PP775', teamName='Yuxuan Chen', teamType='Individual', username='wmemz2333@163.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x2f0606a60; archive = "<IDEArchive: 0x2dbab0990>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x2ea3e9d80>", team="(null)">
+	<IDEDistributionContext: 0x2c220c120; archive = "<IDEArchive: 0x2dbab0990>", distributionMethod="<IDEDistributionMethodiOSAppStoreDistribution: 0x2ea3e9d80>", team="(null)">
+	<IDEDistributionContext: 0x2eaf15870; archive = "<IDEArchive: 0x2dbab0990>", distributionMethod="(null)", team="(null)">
+	<IDEDistributionContext: 0x17dfba340; archive = "<IDEArchive: 0x2dbab0990>", distributionMethod="(null)", team="(null)">
+</IDEDistributionProcessingPipelineContext: 0x171c71c10>
+2023-07-28 1:17:51 PM +0000  Processing step: IDEDistributionCreateDestRootStep
+2023-07-28 1:17:51 PM +0000  Processing step: IDEDistributionCopyItemStep
+2023-07-28 1:17:51 PM +0000  Running /usr/bin/ditto '-V' '/Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/Products/Applications/DarockBili.app' '/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/Root/Payload/DarockBili.app'
+2023-07-28 1:17:51 PM +0000  >>> Copying /Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/Products/Applications/DarockBili.app 
+2023-07-28 1:17:51 PM +0000  copying file ./_CodeSignature/CodeResources ... 
+2023-07-28 1:17:51 PM +0000  4771 bytes for ./_CodeSignature/CodeResources
+2023-07-28 1:17:51 PM +0000  copying file ./DarockBili ... 
+2023-07-28 1:17:51 PM +0000  1618656 bytes for ./DarockBili
+2023-07-28 1:17:51 PM +0000  copying file ./AppIcon60x60@2x.png ... 
+2023-07-28 1:17:51 PM +0000  7421 bytes for ./AppIcon60x60@2x.png
+2023-07-28 1:17:51 PM +0000  copying file ./Assets.car ... 
+2023-07-28 1:17:51 PM +0000  254712 bytes for ./Assets.car
+2023-07-28 1:17:51 PM +0000  copying file ./AppIcon76x76@2x~ipad.png ... 
+2023-07-28 1:17:51 PM +0000  9232 bytes for ./AppIcon76x76@2x~ipad.png
+2023-07-28 1:17:51 PM +0000  copying file ./Watch/DarockBili Watch App.app/_CodeSignature/CodeResources ... 
+2023-07-28 1:17:51 PM +0000  2781 bytes for ./Watch/DarockBili Watch App.app/_CodeSignature/CodeResources
+2023-07-28 1:17:51 PM +0000  copying file ./Watch/DarockBili Watch App.app/DarockBili-Watch-App-Info.plist ... 
+2023-07-28 1:17:51 PM +0000  172 bytes for ./Watch/DarockBili Watch App.app/DarockBili-Watch-App-Info.plist
+2023-07-28 1:17:51 PM +0000  copying file ./Watch/DarockBili Watch App.app/Assets.car ... 
+2023-07-28 1:17:51 PM +0000  1231183 bytes for ./Watch/DarockBili Watch App.app/Assets.car
+2023-07-28 1:17:51 PM +0000  copying file ./Watch/DarockBili Watch App.app/embedded.mobileprovision ... 
+2023-07-28 1:17:51 PM +0000  23262 bytes for ./Watch/DarockBili Watch App.app/embedded.mobileprovision
+2023-07-28 1:17:51 PM +0000  copying file ./Watch/DarockBili Watch App.app/Info.plist ... 
+2023-07-28 1:17:51 PM +0000  1314 bytes for ./Watch/DarockBili Watch App.app/Info.plist
+2023-07-28 1:17:51 PM +0000  copying file ./Watch/DarockBili Watch App.app/DarockBili Watch App ... 
+2023-07-28 1:17:51 PM +0000  14858880 bytes for ./Watch/DarockBili Watch App.app/DarockBili Watch App
+2023-07-28 1:17:51 PM +0000  copying file ./Watch/DarockBili Watch App.app/PkgInfo ... 
+2023-07-28 1:17:51 PM +0000  8 bytes for ./Watch/DarockBili Watch App.app/PkgInfo
+2023-07-28 1:17:51 PM +0000  copying file ./embedded.mobileprovision ... 
+2023-07-28 1:17:51 PM +0000  23199 bytes for ./embedded.mobileprovision
+2023-07-28 1:17:51 PM +0000  copying file ./Info.plist ... 
+2023-07-28 1:17:51 PM +0000  1543 bytes for ./Info.plist
+2023-07-28 1:17:51 PM +0000  copying file ./PkgInfo ... 
+2023-07-28 1:17:51 PM +0000  8 bytes for ./PkgInfo
+2023-07-28 1:17:51 PM +0000  /usr/bin/ditto exited with 0
+2023-07-28 1:17:51 PM +0000  Processing step: IDEDistributionEmbedProfileStep
+2023-07-28 1:17:51 PM +0000  Processing step: IDEDistributionInfoPlistStep
+2023-07-28 1:17:51 PM +0000  Skipping setting DTXcodeBuildDistribution because toolsBuildVersionName was nil.
+2023-07-28 1:17:51 PM +0000  Skipping setting DTXcodeBuildDistribution because toolsBuildVersionName was nil.
+2023-07-28 1:17:51 PM +0000  Processing step: IDEDistributionItemRemovalStep
+2023-07-28 1:17:51 PM +0000  Processing step: IDEDistributionAppThinningPlistStep
+2023-07-28 1:17:51 PM +0000  Skipping step: IDEDistributionAppThinningPlistStep because it said so
+2023-07-28 1:17:51 PM +0000  Processing step: IDEDistributionCompileBitcodeStep
+2023-07-28 1:17:51 PM +0000  Skipping step: IDEDistributionCompileBitcodeStep because it said so
+2023-07-28 1:17:51 PM +0000  Processing step: IDEDistributionCodeSlimmingStep
+2023-07-28 1:17:51 PM +0000  Processing step: IDEDistributionCopyBCSymbolMapsStep
+2023-07-28 1:17:51 PM +0000  Processing step: IDEDistributionSymbolsStep
+2023-07-28 1:17:51 PM +0000  Processing symbols for DarockBili Watch App.app
+2023-07-28 1:17:51 PM +0000  Running /usr/bin/rsync '-8aPhhE' '/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/Root/Payload/DarockBili.app/Watch/DarockBili Watch App.app' '--link-dest' '/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/Root/Payload/DarockBili.app/Watch' '/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s'
+2023-07-28 1:17:51 PM +0000  building file list ... 
+2023-07-28 1:17:51 PM +0000   0 files...2023-07-28 1:17:51 PM +0000  9 files to consider
+2023-07-28 1:17:51 PM +0000  DarockBili Watch App.app/
+2023-07-28 1:17:51 PM +0000  DarockBili Watch App.app/_CodeSignature/
+2023-07-28 1:17:51 PM +0000  
+2023-07-28 1:17:51 PM +0000  sent 347 bytes  received 32 bytes  758.00 bytes/sec
+total size is 15.36M  speedup is 42503.14
+2023-07-28 1:17:51 PM +0000  /usr/bin/rsync exited with 0
+2023-07-28 1:17:51 PM +0000  Running /usr/bin/rsync '-8aPhhE' '/Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/dSYMs/' '--link-dest' '/Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/dSYMs/' '/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s'
+2023-07-28 1:17:51 PM +0000  building file list ... 
+2023-07-28 1:17:51 PM +0000   0 files...2023-07-28 1:17:51 PM +0000  21 files to consider
+2023-07-28 1:17:51 PM +0000  ./
+2023-07-28 1:17:51 PM +0000  DarockBili Watch App.app.dSYM/
+DarockBili Watch App.app.dSYM/Contents/
+2023-07-28 1:17:51 PM +0000  rsync: link "/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/DarockBili Watch App.app.dSYM/Contents/Info.plist" => /Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/dSYMs/DarockBili Watch App.app.dSYM/Contents/Info.plist failed: Cross-device link (18)
+2023-07-28 1:17:51 PM +0000  DarockBili Watch App.app.dSYM/Contents/Info.plist
+DarockBili Watch App.app.dSYM/Contents/Resources/
+DarockBili Watch App.app.dSYM/Contents/Resources/DWARF/
+2023-07-28 1:17:51 PM +0000  rsync: link "/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/DarockBili Watch App.app.dSYM/Contents/Resources/DWARF/DarockBili Watch App" => /Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/dSYMs/DarockBili Watch App.app.dSYM/Contents/Resources/DWARF/DarockBili Watch App failed: Cross-device link (18)
+2023-07-28 1:17:51 PM +0000  DarockBili Watch App.app.dSYM/Contents/Resources/DWARF/DarockBili Watch App
+DarockBili Watch App.app.dSYM/Contents/Resources/Relocations/
+DarockBili Watch App.app.dSYM/Contents/Resources/Relocations/aarch64/
+rsync: link "/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/DarockBili Watch App.app.dSYM/Contents/Resources/Relocations/aarch64/DarockBili Watch App.yml" => /Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/dSYMs/DarockBili Watch App.app.dSYM/Contents/Resources/Relocations/aarch64/DarockBili Watch App.yml failed: Cross-device link (18)
+2023-07-28 1:17:51 PM +0000  DarockBili Watch App.app.dSYM/Contents/Resources/Relocations/aarch64/DarockBili Watch App.yml
+DarockBili Watch App.app.dSYM/Contents/Resources/Relocations/aarch64_32/
+rsync: link "/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/DarockBili Watch App.app.dSYM/Contents/Resources/Relocations/aarch64_32/DarockBili Watch App.yml" => /Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/dSYMs/DarockBili Watch App.app.dSYM/Contents/Resources/Relocations/aarch64_32/DarockBili Watch App.yml failed: Cross-device link (18)
+2023-07-28 1:17:51 PM +0000  DarockBili Watch App.app.dSYM/Contents/Resources/Relocations/aarch64_32/DarockBili Watch App.yml
+DarockBili.app.dSYM/
+DarockBili.app.dSYM/Contents/
+rsync: link "/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/DarockBili.app.dSYM/Contents/Info.plist" => /Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/dSYMs/DarockBili.app.dSYM/Contents/Info.plist failed: Cross-device link (18)
+2023-07-28 1:17:51 PM +0000  DarockBili.app.dSYM/Contents/Info.plist
+DarockBili.app.dSYM/Contents/Resources/
+DarockBili.app.dSYM/Contents/Resources/DWARF/
+rsync: link "/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/DarockBili.app.dSYM/Contents/Resources/DWARF/DarockBili" => /Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/dSYMs/DarockBili.app.dSYM/Contents/Resources/DWARF/DarockBili failed: Cross-device link (18)
+2023-07-28 1:17:51 PM +0000  DarockBili.app.dSYM/Contents/Resources/DWARF/DarockBili
+DarockBili.app.dSYM/Contents/Resources/Relocations/
+DarockBili.app.dSYM/Contents/Resources/Relocations/aarch64/
+rsync: link "/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/DarockBili.app.dSYM/Contents/Resources/Relocations/aarch64/DarockBili.yml" => /Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/dSYMs/DarockBili.app.dSYM/Contents/Resources/Relocations/aarch64/DarockBili.yml failed: Cross-device link (18)
+2023-07-28 1:17:51 PM +0000  DarockBili.app.dSYM/Contents/Resources/Relocations/aarch64/DarockBili.yml
+2023-07-28 1:17:51 PM +0000  
+sent 755 bytes  received 146 bytes  1.76K bytes/sec
+total size is 119.57M  speedup is 139151.39
+2023-07-28 1:17:51 PM +0000  /usr/bin/rsync exited with 0
+2023-07-28 1:17:52 PM +0000  Writing /var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/Symbols/352C3B90-B950-3E2E-9B5D-9427A1F82FF4.symbols
+2023-07-28 1:17:52 PM +0000  Writing /var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/Symbols/D2E62FE4-6BDC-3BCD-AB4A-B4389D3CFC73.symbols
+2023-07-28 1:17:52 PM +0000  Processing symbols for DarockBili.app
+2023-07-28 1:17:52 PM +0000  Running /usr/bin/rsync '-8aPhhE' '/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/Root/Payload/DarockBili.app' '--link-dest' '/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/Root/Payload' '/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s'
+2023-07-28 1:17:52 PM +0000  building file list ... 
+2023-07-28 1:17:52 PM +0000   0 files...2023-07-28 1:17:52 PM +0000  20 files to consider
+2023-07-28 1:17:52 PM +0000  DarockBili.app/
+2023-07-28 1:17:52 PM +0000  DarockBili.app/Watch/
+DarockBili.app/Watch/DarockBili Watch App.app/
+2023-07-28 1:17:52 PM +0000  DarockBili.app/Watch/DarockBili Watch App.app/_CodeSignature/
+DarockBili.app/_CodeSignature/
+2023-07-28 1:17:52 PM +0000  
+2023-07-28 1:17:52 PM +0000  sent 679 bytes  received 50 bytes  1.42K bytes/sec
+total size is 17.18M  speedup is 24717.86
+2023-07-28 1:17:52 PM +0000  /usr/bin/rsync exited with 0
+2023-07-28 1:17:52 PM +0000  Running /usr/bin/rsync '-8aPhhE' '/Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/dSYMs/' '--link-dest' '/Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/dSYMs/' '/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s'
+2023-07-28 1:17:52 PM +0000  building file list ... 
+2023-07-28 1:17:52 PM +0000   0 files...2023-07-28 1:17:52 PM +0000  21 files to consider
+2023-07-28 1:17:52 PM +0000  ./
+2023-07-28 1:17:52 PM +0000  DarockBili Watch App.app.dSYM/
+DarockBili Watch App.app.dSYM/Contents/
+2023-07-28 1:17:52 PM +0000  DarockBili Watch App.app.dSYM/Contents/Resources/
+DarockBili Watch App.app.dSYM/Contents/Resources/DWARF/
+DarockBili Watch App.app.dSYM/Contents/Resources/Relocations/
+DarockBili Watch App.app.dSYM/Contents/Resources/Relocations/aarch64/
+DarockBili Watch App.app.dSYM/Contents/Resources/Relocations/aarch64_32/
+DarockBili.app.dSYM/
+DarockBili.app.dSYM/Contents/
+DarockBili.app.dSYM/Contents/Resources/
+DarockBili.app.dSYM/Contents/Resources/DWARF/
+DarockBili.app.dSYM/Contents/Resources/Relocations/
+DarockBili.app.dSYM/Contents/Resources/Relocations/aarch64/
+2023-07-28 1:17:52 PM +0000  
+2023-07-28 1:17:52 PM +0000  sent 755 bytes  received 146 bytes  1.76K bytes/sec
+total size is 119.57M  speedup is 139151.39
+2023-07-28 1:17:52 PM +0000  /usr/bin/rsync exited with 0
+2023-07-28 1:17:52 PM +0000  Writing /var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/Symbols/55FFEDC8-C227-3B9A-9F56-75059D939F3D.symbols
+2023-07-28 1:17:52 PM +0000  Processing step: IDEDistributionCopyAppleProvidedContentStep
+2023-07-28 1:17:52 PM +0000  Processing step: IDEDistributionAppThinningStep
+2023-07-28 1:17:52 PM +0000  Skipping step: IDEDistributionAppThinningStep because it said so
+2023-07-28 1:17:52 PM +0000  Processing step: IDEDistributionArchThinningStep
+2023-07-28 1:17:52 PM +0000  Running /Volumes/External_Data/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/Root/Payload/DarockBili.app/Watch/DarockBili Watch App.app/DarockBili Watch App' '-verify_arch' 'arm64e'
+2023-07-28 1:17:52 PM +0000  /Volumes/External_Data/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2023-07-28 1:17:52 PM +0000  Skipping architecture thinning for item "DarockBili Watch App" because arch "arm64e" wasn't found
+2023-07-28 1:17:52 PM +0000  Running /Volumes/External_Data/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/Root/Payload/DarockBili.app/DarockBili' '-verify_arch' 'arm64e'
+2023-07-28 1:17:52 PM +0000  /Volumes/External_Data/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2023-07-28 1:17:52 PM +0000  Skipping architecture thinning for item "DarockBili" because arch "arm64e" wasn't found
+2023-07-28 1:17:52 PM +0000  Processing step: IDEDistributionODRStep
+2023-07-28 1:17:52 PM +0000  Processing step: IDEDistributionStripXattrsStep
+2023-07-28 1:17:52 PM +0000  Skipping stripping extended attributes because the codesign step will strip them.
+2023-07-28 1:17:52 PM +0000  Skipping stripping extended attributes because the codesign step will strip them.
+2023-07-28 1:17:52 PM +0000  Processing step: IDEDistributionCodesignStep
+2023-07-28 1:17:52 PM +0000  Entitlements for <IDEDistributionItem: 0x2e822bfe0; bundleID='com.darock.DarockBili.watchkitapp', path='<DVTFilePath:0x2d8f99260:'/Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/Products/Applications/DarockBili.app/Watch/DarockBili Watch App.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x17dfc52d0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x2c6558f20; name='Apple Development: Yuxuan Chen (8CZ4JT4F3M)', hash='F3CC7C5393F1D4573709565D3C6A3BB5F3B592E0', serialNumber='50F32C2425DE0283D6361457F4C77FA6', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2023-04-26 11:27:46 AM +0000''>', entitlements='{
+    "application-identifier" = "B57D8PP775.com.darock.DarockBili.watchkitapp";
+    "com.apple.developer.team-identifier" = B57D8PP775;
+    "get-task-allow" = 1;
+}', teamID='B57D8PP775', identifier='com.darock.DarockBili.watchkitapp', executablePath='<DVTFilePath:0x2ed37fac0:'/Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/Products/Applications/DarockBili.app/Watch/DarockBili Watch App.app/DarockBili Watch App'>', hardenedRuntime='0'>'>: {
+    "application-identifier" = "B57D8PP775.com.darock.DarockBili.watchkitapp";
+    "beta-reports-active" = 1;
+    "com.apple.developer.team-identifier" = B57D8PP775;
+    "get-task-allow" = 0;
+}
+2023-07-28 1:17:52 PM +0000  Entitlements for <IDEDistributionItem: 0x2e822bfe0; bundleID='com.darock.DarockBili.watchkitapp', path='<DVTFilePath:0x2d8f99260:'/Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/Products/Applications/DarockBili.app/Watch/DarockBili Watch App.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x17dfc52d0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x165eee520; name='Apple Development: Yuxuan Chen (8CZ4JT4F3M)', hash='F3CC7C5393F1D4573709565D3C6A3BB5F3B592E0', serialNumber='50F32C2425DE0283D6361457F4C77FA6', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2023-04-26 11:27:46 AM +0000''>', entitlements='{
+    "application-identifier" = "B57D8PP775.com.darock.DarockBili.watchkitapp";
+    "com.apple.developer.team-identifier" = B57D8PP775;
+    "get-task-allow" = 1;
+}', teamID='B57D8PP775', identifier='com.darock.DarockBili.watchkitapp', executablePath='<DVTFilePath:0x2ed37fac0:'/Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/Products/Applications/DarockBili.app/Watch/DarockBili Watch App.app/DarockBili Watch App'>', hardenedRuntime='0'>'> are: {
+    "application-identifier" = "B57D8PP775.com.darock.DarockBili.watchkitapp";
+    "beta-reports-active" = 1;
+    "com.apple.developer.team-identifier" = B57D8PP775;
+    "get-task-allow" = 0;
+}
+2023-07-28 1:17:52 PM +0000  Writing entitlements for <IDEDistributionItem: 0x2e822bfe0; bundleID='com.darock.DarockBili.watchkitapp', path='<DVTFilePath:0x2d8f99260:'/Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/Products/Applications/DarockBili.app/Watch/DarockBili Watch App.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x17dfc52d0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x2c1cb2570; name='Apple Development: Yuxuan Chen (8CZ4JT4F3M)', hash='F3CC7C5393F1D4573709565D3C6A3BB5F3B592E0', serialNumber='50F32C2425DE0283D6361457F4C77FA6', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2023-04-26 11:27:46 AM +0000''>', entitlements='{
+    "application-identifier" = "B57D8PP775.com.darock.DarockBili.watchkitapp";
+    "com.apple.developer.team-identifier" = B57D8PP775;
+    "get-task-allow" = 1;
+}', teamID='B57D8PP775', identifier='com.darock.DarockBili.watchkitapp', executablePath='<DVTFilePath:0x2ed37fac0:'/Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/Products/Applications/DarockBili.app/Watch/DarockBili Watch App.app/DarockBili Watch App'>', hardenedRuntime='0'>'> to: /var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/entitlements~~~bODTJA
+2023-07-28 1:17:52 PM +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' 'B349DA973F4C7F074ED5DF70921D36FD9F869CF4' '--entitlements' '/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/entitlements~~~bODTJA' '--generate-entitlement-der' '--preserve-metadata=identifier,flags,runtime' '/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/Root/Payload/DarockBili.app/Watch/DarockBili Watch App.app'
+2023-07-28 1:17:52 PM +0000  /var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/Root/Payload/DarockBili.app/Watch/DarockBili Watch App.app: replacing existing signature
+2023-07-28 1:17:52 PM +0000  /var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/Root/Payload/DarockBili.app/Watch/DarockBili Watch App.app: signed app bundle with Mach-O universal (arm64 arm64_32) [com.darock.DarockBili.watchkitapp]
+2023-07-28 1:17:52 PM +0000  /usr/bin/codesign exited with 0
+2023-07-28 1:17:52 PM +0000  Entitlements for <IDEDistributionItem: 0x2f044cb80; bundleID='com.darock.DarockBili', path='<DVTFilePath:0x2d8f828b0:'/Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/Products/Applications/DarockBili.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x17dfbabc0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x2c1cb2570; name='Apple Development: Yuxuan Chen (8CZ4JT4F3M)', hash='F3CC7C5393F1D4573709565D3C6A3BB5F3B592E0', serialNumber='50F32C2425DE0283D6361457F4C77FA6', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2023-04-26 11:27:46 AM +0000''>', entitlements='{
+    "application-identifier" = "B57D8PP775.com.darock.DarockBili";
+    "com.apple.developer.team-identifier" = B57D8PP775;
+    "get-task-allow" = 1;
+}', teamID='B57D8PP775', identifier='com.darock.DarockBili', executablePath='<DVTFilePath:0x2c9130b20:'/Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/Products/Applications/DarockBili.app/DarockBili'>', hardenedRuntime='0'>'>: {
+    "application-identifier" = "B57D8PP775.com.darock.DarockBili";
+    "beta-reports-active" = 1;
+    "com.apple.developer.team-identifier" = B57D8PP775;
+    "get-task-allow" = 0;
+}
+2023-07-28 1:17:52 PM +0000  Entitlements for <IDEDistributionItem: 0x2f044cb80; bundleID='com.darock.DarockBili', path='<DVTFilePath:0x2d8f828b0:'/Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/Products/Applications/DarockBili.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x17dfbabc0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x2c35991a0; name='Apple Development: Yuxuan Chen (8CZ4JT4F3M)', hash='F3CC7C5393F1D4573709565D3C6A3BB5F3B592E0', serialNumber='50F32C2425DE0283D6361457F4C77FA6', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2023-04-26 11:27:46 AM +0000''>', entitlements='{
+    "application-identifier" = "B57D8PP775.com.darock.DarockBili";
+    "com.apple.developer.team-identifier" = B57D8PP775;
+    "get-task-allow" = 1;
+}', teamID='B57D8PP775', identifier='com.darock.DarockBili', executablePath='<DVTFilePath:0x2c9130b20:'/Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/Products/Applications/DarockBili.app/DarockBili'>', hardenedRuntime='0'>'> are: {
+    "application-identifier" = "B57D8PP775.com.darock.DarockBili";
+    "beta-reports-active" = 1;
+    "com.apple.developer.team-identifier" = B57D8PP775;
+    "get-task-allow" = 0;
+}
+2023-07-28 1:17:52 PM +0000  Writing entitlements for <IDEDistributionItem: 0x2f044cb80; bundleID='com.darock.DarockBili', path='<DVTFilePath:0x2d8f828b0:'/Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/Products/Applications/DarockBili.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x17dfbabc0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x2c35f2b00; name='Apple Development: Yuxuan Chen (8CZ4JT4F3M)', hash='F3CC7C5393F1D4573709565D3C6A3BB5F3B592E0', serialNumber='50F32C2425DE0283D6361457F4C77FA6', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2023-04-26 11:27:46 AM +0000''>', entitlements='{
+    "application-identifier" = "B57D8PP775.com.darock.DarockBili";
+    "com.apple.developer.team-identifier" = B57D8PP775;
+    "get-task-allow" = 1;
+}', teamID='B57D8PP775', identifier='com.darock.DarockBili', executablePath='<DVTFilePath:0x2c9130b20:'/Volumes/External_Data/Library/Developer/Xcode/Archives/2023-07-28/DarockBili Watch App 2023-7-28, 9.16 PM.xcarchive/Products/Applications/DarockBili.app/DarockBili'>', hardenedRuntime='0'>'> to: /var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/entitlements~~~g91k4k
+2023-07-28 1:17:52 PM +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' 'B349DA973F4C7F074ED5DF70921D36FD9F869CF4' '--entitlements' '/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/entitlements~~~g91k4k' '--generate-entitlement-der' '--preserve-metadata=identifier,flags,runtime' '/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/Root/Payload/DarockBili.app'
+2023-07-28 1:17:52 PM +0000  /var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/Root/Payload/DarockBili.app: replacing existing signature
+2023-07-28 1:17:52 PM +0000  /var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/Root/Payload/DarockBili.app: signed app bundle with Mach-O thin (arm64) [com.darock.DarockBili]
+2023-07-28 1:17:52 PM +0000  /usr/bin/codesign exited with 0
+2023-07-28 1:17:52 PM +0000  Processing step: IDEDistributionZipODRItemStep
+2023-07-28 1:17:52 PM +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2023-07-28 1:17:52 PM +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2023-07-28 1:17:52 PM +0000  Processing step: IDEDistributionCreateIPAStep
+2023-07-28 1:17:52 PM +0000  Running /usr/bin/rsync '-8aPhhE' '/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/Symbols' '--link-dest' '/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s' '/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/Root'
+2023-07-28 1:17:52 PM +0000  building file list ... 
+2023-07-28 1:17:52 PM +0000   0 files...2023-07-28 1:17:52 PM +0000  4 files to consider
+2023-07-28 1:17:52 PM +0000  Symbols/
+2023-07-28 1:17:52 PM +0000  
+2023-07-28 1:17:52 PM +0000  sent 252 bytes  received 26 bytes  556.00 bytes/sec
+total size is 32.16M  speedup is 121310.86
+2023-07-28 1:17:52 PM +0000  /usr/bin/rsync exited with 0
+2023-07-28 1:17:52 PM +0000  Running /usr/bin/ditto '-V' '-c' '-k' '--norsrc' '/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/Root' '/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/Packages/DarockBili.ipa'
+2023-07-28 1:17:52 PM +0000  >>> Copying /var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/Root 
+2023-07-28 1:17:52 PM +0000  copying file ./Payload/DarockBili.app/_CodeSignature/CodeResources ... 
+2023-07-28 1:17:52 PM +0000  4771 bytes for ./Payload/DarockBili.app/_CodeSignature/CodeResources
+2023-07-28 1:17:52 PM +0000  copying file ./Payload/DarockBili.app/DarockBili ... 
+2023-07-28 1:17:53 PM +0000  1618736 bytes for ./Payload/DarockBili.app/DarockBili
+2023-07-28 1:17:53 PM +0000  copying file ./Payload/DarockBili.app/AppIcon60x60@2x.png ... 
+2023-07-28 1:17:53 PM +0000  7421 bytes for ./Payload/DarockBili.app/AppIcon60x60@2x.png
+2023-07-28 1:17:53 PM +0000  copying file ./Payload/DarockBili.app/Assets.car ... 
+2023-07-28 1:17:53 PM +0000  254712 bytes for ./Payload/DarockBili.app/Assets.car
+2023-07-28 1:17:53 PM +0000  copying file ./Payload/DarockBili.app/AppIcon76x76@2x~ipad.png ... 
+2023-07-28 1:17:53 PM +0000  9232 bytes for ./Payload/DarockBili.app/AppIcon76x76@2x~ipad.png
+2023-07-28 1:17:53 PM +0000  copying file ./Payload/DarockBili.app/Watch/DarockBili Watch App.app/_CodeSignature/CodeResources ... 
+2023-07-28 1:17:53 PM +0000  2781 bytes for ./Payload/DarockBili.app/Watch/DarockBili Watch App.app/_CodeSignature/CodeResources
+2023-07-28 1:17:53 PM +0000  copying file ./Payload/DarockBili.app/Watch/DarockBili Watch App.app/DarockBili-Watch-App-Info.plist ... 
+2023-07-28 1:17:53 PM +0000  172 bytes for ./Payload/DarockBili.app/Watch/DarockBili Watch App.app/DarockBili-Watch-App-Info.plist
+copying file ./Payload/DarockBili.app/Watch/DarockBili Watch App.app/Assets.car ... 
+2023-07-28 1:17:53 PM +0000  1231183 bytes for ./Payload/DarockBili.app/Watch/DarockBili Watch App.app/Assets.car
+2023-07-28 1:17:53 PM +0000  copying file ./Payload/DarockBili.app/Watch/DarockBili Watch App.app/embedded.mobileprovision ... 
+2023-07-28 1:17:53 PM +0000  14351 bytes for ./Payload/DarockBili.app/Watch/DarockBili Watch App.app/embedded.mobileprovision
+2023-07-28 1:17:53 PM +0000  copying file ./Payload/DarockBili.app/Watch/DarockBili Watch App.app/Info.plist ... 
+2023-07-28 1:17:53 PM +0000  1314 bytes for ./Payload/DarockBili.app/Watch/DarockBili Watch App.app/Info.plist
+2023-07-28 1:17:53 PM +0000  copying file ./Payload/DarockBili.app/Watch/DarockBili Watch App.app/DarockBili Watch App ... 
+2023-07-28 1:17:53 PM +0000  14858944 bytes for ./Payload/DarockBili.app/Watch/DarockBili Watch App.app/DarockBili Watch App
+2023-07-28 1:17:53 PM +0000  copying file ./Payload/DarockBili.app/Watch/DarockBili Watch App.app/PkgInfo ... 
+2023-07-28 1:17:53 PM +0000  8 bytes for ./Payload/DarockBili.app/Watch/DarockBili Watch App.app/PkgInfo
+2023-07-28 1:17:53 PM +0000  copying file ./Payload/DarockBili.app/embedded.mobileprovision ... 
+2023-07-28 1:17:53 PM +0000  14288 bytes for ./Payload/DarockBili.app/embedded.mobileprovision
+2023-07-28 1:17:53 PM +0000  copying file ./Payload/DarockBili.app/Info.plist ... 
+2023-07-28 1:17:53 PM +0000  1543 bytes for ./Payload/DarockBili.app/Info.plist
+2023-07-28 1:17:53 PM +0000  copying file ./Payload/DarockBili.app/PkgInfo ... 
+2023-07-28 1:17:53 PM +0000  8 bytes for ./Payload/DarockBili.app/PkgInfo
+2023-07-28 1:17:53 PM +0000  copying file ./Symbols/55FFEDC8-C227-3B9A-9F56-75059D939F3D.symbols ... 
+2023-07-28 1:17:53 PM +0000  2626636 bytes for ./Symbols/55FFEDC8-C227-3B9A-9F56-75059D939F3D.symbols
+2023-07-28 1:17:53 PM +0000  copying file ./Symbols/D2E62FE4-6BDC-3BCD-AB4A-B4389D3CFC73.symbols ... 
+2023-07-28 1:17:53 PM +0000  15597236 bytes for ./Symbols/D2E62FE4-6BDC-3BCD-AB4A-B4389D3CFC73.symbols
+2023-07-28 1:17:53 PM +0000  copying file ./Symbols/352C3B90-B950-3E2E-9B5D-9427A1F82FF4.symbols ... 
+2023-07-28 1:17:54 PM +0000  15500548 bytes for ./Symbols/352C3B90-B950-3E2E-9B5D-9427A1F82FF4.symbols
+2023-07-28 1:17:54 PM +0000  /usr/bin/ditto exited with 0
+2023-07-28 1:17:54 PM +0000  Processing step: IDEDistributionAppStoreInformationStep
+2023-07-28 1:17:54 PM +0000  Skipping step: IDEDistributionAppStoreInformationStep because it said so
+2023-07-28 1:17:54 PM +0000  Processing step: IDEDistributionGenerateProcessedDistributionItems
+2023-07-28 1:17:54 PM +0000  IDEDistributionItem init <DVTFilePath:0x17f9e54f0:'/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/Root/Payload/DarockBili.app/Watch/DarockBili Watch App.app'>
+2023-07-28 1:17:54 PM +0000  IDEDistributionItem init <DVTFilePath:0x2c22f0880:'/var/folders/kk/9t23hd3d5bs5nvxqskjp11k80000gn/T/XcodeDistPipeline.~~~Xztt0s/Root/Payload/DarockBili.app'>
+2023-07-28 1:17:54 PM +0000  Processing step: IDEDistributionCreateManifestStep
+2023-07-28 1:17:54 PM +0000  Skipping step: IDEDistributionCreateManifestStep because it said so

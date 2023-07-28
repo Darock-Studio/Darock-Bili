@@ -641,6 +641,7 @@ struct VideoDetailView: View {
                             HStack {
                                 AsyncImage(url: URL(string: owner["Face"]! + "@40w"))
                                     .cornerRadius(100)
+                                    .frame(width: 40, height: 40)
                                 VStack {
                                     HStack {
                                         Text(owner["Name"]!)

@@ -159,18 +159,18 @@ struct UserDetailView: View {
                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/acc/info?\(respStr.apiFixed())", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             debugPrint(respJson)
-                            userFaceUrl = respJson["data"]["face"].string!
-                            AF.request(respJson["data"]["face"].string!).response { response in
-                                let data = response.data!
-                                let mColor = ColorThief.getColor(from: UIImage(data: data)!)!.makeUIColor()
-                                debugPrint(mColor)
-                            }
-                            username = respJson["data"]["name"].string!
-                            userLevel = respJson["data"]["level"].int!
-                            officialType = respJson["data"]["official"]["type"].int!
-                            officialTitle = respJson["data"]["official"]["title"].string!
-                            userSign = respJson["data"]["sign"].string!
-                            coinCount = respJson["data"]["coins"].int!
+                            userFaceUrl = respJson["data"]["face"].string ?? "E"
+//                            AF.request(respJson["data"]["face"].string ?? "E").response { response in
+//                                let data = response.data!
+//                                let mColor = ColorThief.getColor(from: UIImage(data: data)!)!.makeUIColor()
+//                                debugPrint(mColor)
+//                            }
+                            username = respJson["data"]["name"].string ?? "[加载失败]"
+                            userLevel = respJson["data"]["level"].int ?? 0
+                            officialType = respJson["data"]["official"]["type"].int ?? 0
+                            officialTitle = respJson["data"]["official"]["title"].string ?? ""
+                            userSign = respJson["data"]["sign"].string ?? "[加载失败]"
+                            coinCount = respJson["data"]["coins"].int ?? -1
                             DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation/stat?vmid=\(uid)") { respJson, isSuccess in
                                 if isSuccess {
                                     followCount = respJson["data"]["following"].int ?? -1
@@ -183,7 +183,7 @@ struct UserDetailView: View {
             }
             DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation?fid=\(uid)") { respJson, isSuccess in
                 if isSuccess {
-                    if respJson["data"]["attribute"].int! == 2 || respJson["data"]["attribute"].int! == 6 {
+                    if respJson["data"]["attribute"].int ?? 0 == 2 || respJson["data"]["attribute"].int ?? 0 == 6 {
                         isFollowed = true
                     }
                 }
@@ -564,10 +564,10 @@ struct UserDetailView: View {
                             debugPrint(respJson)
                             let vlist = respJson["data"]["list"]["vlist"]
                             for video in vlist {
-                                videos.append(["Title": video.1["title"].string!, "Length": video.1["length"].string!, "PlayCount": String(video.1["play"].int!), "PicUrl": video.1["pic"].string!, "BV": video.1["bvid"].string!, "Timestamp": String(video.1["created"].int!), "DanmakuCount": String(video.1["video_review"].int!)])
+                                videos.append(["Title": video.1["title"].string ?? "[加载失败]", "Length": video.1["length"].string ?? "E", "PlayCount": String(video.1["play"].int ?? -1), "PicUrl": video.1["pic"].string ?? "E", "BV": video.1["bvid"].string ?? "E", "Timestamp": String(video.1["created"].int ?? 0), "DanmakuCount": String(video.1["video_review"].int ?? -1)])
                             }
                             videoTotalPage = Int(respJson["data"]["page"]["count"].int! / 50) + 1
-                            videoCount = respJson["data"]["page"]["count"].int!
+                            videoCount = respJson["data"]["page"]["count"].int ?? 0
                             if !isVideosLoaded {
                                 if videos.count == 0 {
                                     isNoVideo = true
@@ -592,7 +592,7 @@ struct UserDetailView: View {
                             debugPrint(respJson)
                             let articlesJson = respJson["data"]["articles"]
                             for article in articlesJson {
-                                articles.append(["Title": article.1["title"].string!, "Summary": article.1["summary"].string!, "Type": article.1["categories"][0]["name"].string!, "View": String(article.1["stats"]["view"].int!), "Like": String(article.1["stats"]["like"].int!), "Pic": article.1["image_urls"][0].string!, "CV": String(article.1["id"].int!)])
+                                articles.append(["Title": article.1["title"].string ?? "[加载失败]", "Summary": article.1["summary"].string ?? "[加载失败]", "Type": article.1["categories"][0]["name"].string ?? "[加载失败]", "View": String(article.1["stats"]["view"].int ?? -1), "Like": String(article.1["stats"]["like"].int ?? -1), "Pic": article.1["image_urls"][0].string ?? "E", "CV": String(article.1["id"].int ?? 0)])
                             }
                             articleTotalPage = Int(respJson["data"]["count"].int ?? 0 / 30) + 1
                             articalCount = respJson["data"]["count"].int ?? 0

@@ -5,8 +5,6 @@
 //  Created by WindowsMEMZ on 2023/6/30.
 //
 
-// 注释来自 ChatGPT 生成
-
 import SwiftUI
 import DarockKit
 import SwiftyJSON

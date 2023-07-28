@@ -60,46 +60,7 @@ struct SearchView: View {
             List {
                 if videos.count != 0 {
                     ForEach(0...videos.count - 1, id: \.self) { i in
-                        NavigationLink(destination: {VideoDetailView(videoDetails: videos[i])}, label: {
-                            VStack {
-                                HStack {
-                                    Spacer()
-                                    ZStack {
-                                        WebImage(url: URL(string: videos[i]["Pic"]! + "@150w")!, options: [.progressiveLoad])
-                                            .cornerRadius(7)
-                                        VStack {
-                                            Spacer()
-                                            HStack {
-                                                Label(videos[i]["View"]!, systemImage: "play.rectangle")
-                                                    .font(.system(size: 12))
-                                                Label(videos[i]["Danmaku"]!, systemImage: "text.word.spacing")
-                                                    .font(.system(size: 12))
-                                                Spacer()
-                                            }
-                                        }
-                                    }
-                                    Spacer()
-                                }
-                                if videos[i]["Title"]!.contains("<em class=\"keyword\">") {
-                                    Text("\(String(videos[i]["Title"]!.hasPrefix("<em class=\"keyword\">") ? "" : (videos[i]["Title"]!.split(separator: "<em class=\"keyword\">")[0])))\(Text(String(videos[i]["Title"]!.split(separator: "<em class=\"keyword\">")[videos[i]["Title"]!.hasPrefix("<em class=\"keyword\">") ? 0 : 1].split(separator: "</em>")[0])).foregroundColor(.red).bold())\(String(videos[i]["Title"]!.hasSuffix("</em>") ? "" : videos[i]["Title"]!.split(separator: "</em>")[1]))")
-                                        .font(.system(size: 18))
-                                        .lineLimit(3)
-                                } else {
-                                    Text(videos[i]["Title"]!)
-                                        .font(.system(size: 18))
-                                        .lineLimit(3)
-                                }
-                                HStack {
-                                    Spacer()
-                                        .frame(width: 5)
-                                    Text(videos[i]["UP"]!)
-                                        .font(.system(size: 14))
-                                        .foregroundColor(.gray)
-                                        .lineLimit(1)
-                                    Spacer()
-                                }
-                            }
-                        })
+                        VideoCard(videos[i])
                     }
                 }
             }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6B21E4512A72D7A10000C225 /* UserDynamicMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B21E4502A72D7A00000C225 /* UserDynamicMainView.swift */; };
+		6B2469B42A73DA5A00291AC6 /* LivePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2469B32A73DA5A00291AC6 /* LivePlayerView.swift */; };
 		6B2B62302A7187CC0051B879 /* WatchAppUITestPlan.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = 6B2B622F2A7187CC0051B879 /* WatchAppUITestPlan.xctestplan */; };
 		6B2B62322A7187E70051B879 /* WatchAppUnitTestPlan.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = 6B2B62312A7187E70051B879 /* WatchAppUnitTestPlan.xctestplan */; };
 		6B37B4B72A714DDE00F26F1A /* AVExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B37B4B62A714DDE00F26F1A /* AVExtension.m */; };
@@ -125,6 +126,7 @@
 		6B0253E32A4F265100567986 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		6B0A562B2A714DB300D0CC32 /* AVExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVExtension.h; sourceTree = "<group>"; };
 		6B21E4502A72D7A00000C225 /* UserDynamicMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDynamicMainView.swift; sourceTree = "<group>"; };
+		6B2469B32A73DA5A00291AC6 /* LivePlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivePlayerView.swift; sourceTree = "<group>"; };
 		6B2773C02A599FE300950EB7 /* UIExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExt.swift; sourceTree = "<group>"; };
 		6B2B622F2A7187CC0051B879 /* WatchAppUITestPlan.xctestplan */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WatchAppUITestPlan.xctestplan; sourceTree = "<group>"; };
 		6B2B62312A7187E70051B879 /* WatchAppUnitTestPlan.xctestplan */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WatchAppUnitTestPlan.xctestplan; sourceTree = "<group>"; };
@@ -222,6 +224,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B0064DE2A73D5EE0093A423 /* Live */ = {
+			isa = PBXGroup;
+			children = (
+				6B2469B32A73DA5A00291AC6 /* LivePlayerView.swift */,
+			);
+			path = Live;
+			sourceTree = "<group>";
+		};
 		6B0253AD2A4EF59600567986 = {
 			isa = PBXGroup;
 			children = (
@@ -258,6 +268,7 @@
 				6B6790A12A52965900FAE216 /* PersonalCenter */,
 				6B4AF9E42A72D6C50046817D /* UserDynamic */,
 				6B6790A22A52968300FAE216 /* Video */,
+				6B0064DE2A73D5EE0093A423 /* Live */,
 				6B91C4A52A5597C20020259E /* Others */,
 				6B91C4A62A5597E10020259E /* Errors */,
 				6B0253C32A4EF59700567986 /* Assets.xcassets */,
@@ -688,6 +699,7 @@
 				6BFF29942A6C0E1D00914A8E /* SignalErrorView.swift in Sources */,
 				6BC8CB1C2A6CEC8400D2E9E9 /* MMCQ.swift in Sources */,
 				6BFF29822A6C0DFC00914A8E /* VideoDownloadView.swift in Sources */,
+				6B2469B42A73DA5A00291AC6 /* LivePlayerView.swift in Sources */,
 				6BFF297D2A6C0DF900914A8E /* PersonAccountView.swift in Sources */,
 				6BFF29762A6C0DF500914A8E /* MainView.swift in Sources */,
 				6BFF298A2A6C0E0B00914A8E /* Backtrace.swift in Sources */,
@@ -863,7 +875,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 157;
+				CURRENT_PROJECT_VERSION = 158;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0.0;
@@ -883,7 +895,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 157;
+				CURRENT_PROJECT_VERSION = 158;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0.0;
@@ -903,7 +915,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 157;
+				CURRENT_PROJECT_VERSION = 158;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0.0;
@@ -922,7 +934,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 157;
+				CURRENT_PROJECT_VERSION = 158;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0.0;
@@ -946,7 +958,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 157;
+				CURRENT_PROJECT_VERSION = 158;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -985,7 +997,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 157;
+				CURRENT_PROJECT_VERSION = 158;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1024,7 +1036,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 157;
+				CURRENT_PROJECT_VERSION = 158;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
@@ -1059,7 +1071,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 157;
+				CURRENT_PROJECT_VERSION = 158;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;

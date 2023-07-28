@@ -189,7 +189,7 @@ struct PersonAccountView: View {
                                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/acc/info?\(respStr.apiFixed())", headers: headers) { respJson, isSuccess in
                                         if isSuccess {
                                             debugPrint(respJson)
-                                            userFaceUrl = respJson["data"]["face"].string!
+                                            userFaceUrl = respJson["data"]["face"].string ?? "E"
                                         } else {
                                             isNetworkFixPresented = true
                                         }

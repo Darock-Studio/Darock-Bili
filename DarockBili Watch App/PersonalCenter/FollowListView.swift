@@ -86,7 +86,7 @@ struct FollowListView: View {
             if isSuccess {
                 let datas = respJson["data"]["list"]
                 for data in datas {
-                    users.append(["Name": data.1["uname"].string!, "Face": data.1["face"].string!, "Sign": data.1["sign"].string!, "UID": String(data.1["mid"].int!)])
+                    users.append(["Name": data.1["uname"].string ?? "[加载失败]", "Face": data.1["face"].string ?? "E", "Sign": data.1["sign"].string ?? "[加载失败]", "UID": String(data.1["mid"].int ?? 0)])
                 }
                 totalPage = respJson["data"]["total"].int ?? 0 / 20 + 1
             }
