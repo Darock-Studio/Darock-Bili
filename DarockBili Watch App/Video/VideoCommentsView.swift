@@ -18,10 +18,7 @@ struct VideoCommentsView: View {
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
     @AppStorage("bili_jct") var biliJct = ""
-    @State var avid = -1
     @State var isSendCommentPresented = false
-    @State var sendCommentCache = ""
-    @State var isSendingComment = false
     var body: some View {
         VStack {
             #if swift(>=5.9)
@@ -34,38 +31,7 @@ struct VideoCommentsView: View {
                             }, label: {
                                 Image(systemName: "square.and.pencil")
                             })
-                            .sheet(isPresented: $isSendCommentPresented, content: {
-                                @Environment(\.dismiss) var dismiss
-                                VStack {
-                                    if !isSendingComment {
-                                        TextField("发送评论...", text: $sendCommentCache)
-                                            .onSubmit {
-                                                if sendCommentCache != "" {
-                                                    let headers: HTTPHeaders = [
-                                                        "cookie": "SESSDATA=\(sessdata)"
-                                                    ]
-                                                    AF.request("https://api.bilibili.com/x/v2/reply/add", method: .post, parameters: BiliSubmitComment(oid: avid, message: sendCommentCache, csrf: biliJct), headers: headers).response { response in
-                                                        sendCommentCache = ""
-                                                        debugPrint(response)
-                                                        isSendingComment = false
-                                                        dismiss()
-                                                    }
-                                                }
-                                            }
-                                        Spacer()
-                                    } else {
-                                        ProgressView()
-                                    }
-                                }
-                                .onAppear {
-                                    DarockKit.Network.shared.requestString("https://api.darock.top/bili/toav/\(oid)") { respStr, isSuccess in
-                                        if isSuccess {
-                                            avid = Int(respStr)!
-                                            debugPrint(avid)
-                                        }
-                                    }
-                                }
-                            })
+                            .sheet(isPresented: $isSendCommentPresented, content: {CommentSendView(oid: oid)})
                         }
                     }
             } else {
@@ -93,9 +59,20 @@ struct VideoCommentsView: View {
         @State var nowPage = 1
         @State var isSenderDetailsPresented = [Bool]()
         @State var commentOffsets = [CGFloat]()
+        @State var isLoaded = false
+        @State var isSendCommentPresented = false
         var body: some View {
             ScrollView {
                 LazyVStack {
+                    Button(action: {
+                        isSendCommentPresented = true
+                    }, label: {
+                        HStack {
+                            Image(systemName: "square.and.pencil")
+                            Text("发送评论")
+                        }
+                    })
+                    .sheet(isPresented: $isSendCommentPresented, content: {CommentSendView(oid: oid)})
                     if comments.count != 0 {
                         ForEach(0...comments.count - 1, id: \.self) { i in
                             VStack {
@@ -215,11 +192,16 @@ struct VideoCommentsView: View {
                             Text("继续加载")
                                 .bold()
                         })
+                    } else {
+                        ProgressView()
                     }
                 }
             }
             .onAppear {
-                ContinueLoadComment()
+                if !isLoaded {
+                    ContinueLoadComment()
+                    isLoaded = true
+                }
             }
 //            .onDisappear {
 //                nowPage = 1
@@ -414,6 +396,48 @@ struct VideoCommentsView: View {
                                 isSenderDetailsPresented.append(false)
                             }
                         }
+                    }
+                }
+            }
+        }
+    }
+    struct CommentSendView: View {
+        var oid: String
+        @Environment(\.dismiss) var dismiss
+        @AppStorage("DedeUserID") var dedeUserID = ""
+        @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
+        @AppStorage("SESSDATA") var sessdata = ""
+        @AppStorage("bili_jct") var biliJct = ""
+        @State var sendCommentCache = ""
+        @State var isSendingComment = false
+        @State var avid = -1
+        var body: some View {
+            VStack {
+                if !isSendingComment {
+                    TextField("发送评论...", text: $sendCommentCache)
+                        .onSubmit {
+                            if sendCommentCache != "" {
+                                let headers: HTTPHeaders = [
+                                    "cookie": "SESSDATA=\(sessdata)"
+                                ]
+                                AF.request("https://api.bilibili.com/x/v2/reply/add", method: .post, parameters: BiliSubmitComment(oid: avid, message: sendCommentCache, csrf: biliJct), headers: headers).response { response in
+                                    sendCommentCache = ""
+                                    debugPrint(response)
+                                    isSendingComment = false
+                                    dismiss()
+                                }
+                            }
+                        }
+                    Spacer()
+                } else {
+                    ProgressView()
+                }
+            }
+            .onAppear {
+                DarockKit.Network.shared.requestString("https://api.darock.top/bili/toav/\(oid)") { respStr, isSuccess in
+                    if isSuccess {
+                        avid = Int(respStr)!
+                        debugPrint(avid)
                     }
                 }
             }

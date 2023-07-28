@@ -45,7 +45,7 @@ struct UserDetailView: View {
                     VStack {
                         NavigationLink("", isActive: $isSendbMessagePresented, destination: {bMessageSendView(uid: Int(uid)!, username: username)})
                             .frame(width: 0, height: 0)
-                        FirstPageBase(uid: uid, userFaceUrl: $userFaceUrl, followCount: $followCount, fansCount: $fansCount, coinCount: $coinCount)
+                        FirstPageBase(uid: uid, userFaceUrl: $userFaceUrl, username: $username, followCount: $followCount, fansCount: $fansCount, coinCount: $coinCount, isFollowed: $isFollowed, isSendbMessagePresented: $isSendbMessagePresented)
                             .toolbar {
                                 ToolbarItemGroup(placement: .bottomBar) {
                                     Button(action: {
@@ -100,7 +100,7 @@ struct UserDetailView: View {
                 .containerBackground(Color.accentColor.gradient, for: .navigation)
             } else {
                 ScrollView {
-                    FirstPageBase(uid: uid, userFaceUrl: $userFaceUrl, followCount: $followCount, fansCount: $fansCount, coinCount: $coinCount)
+                    FirstPageBase(uid: uid, userFaceUrl: $userFaceUrl, username: $username, followCount: $followCount, fansCount: $fansCount, coinCount: $coinCount, isFollowed: $isFollowed, isSendbMessagePresented: $isSendbMessagePresented)
                         .offset(y: -10)
                         .navigationTitle(username)
                         .tag(1)
@@ -110,7 +110,7 @@ struct UserDetailView: View {
             }
             #else
             ScrollView {
-                FirstPageBase(uid: uid, userFaceUrl: $userFaceUrl, followCount: $followCount, fansCount: $fansCount, coinCount: $coinCount)
+                FirstPageBase(uid: uid, userFaceUrl: $userFaceUrl, username: $username, followCount: $followCount, fansCount: $fansCount, coinCount: $coinCount, isFollowed: $isFollowed, isSendbMessagePresented: $isSendbMessagePresented)
                     .offset(y: -10)
                     .navigationTitle(username)
                     .tag(1)
@@ -194,9 +194,12 @@ struct UserDetailView: View {
     struct FirstPageBase: View {
         var uid: String
         @Binding var userFaceUrl: String
+        @Binding var username: String
         @Binding var followCount: Int
         @Binding var fansCount: Int
         @Binding var coinCount: Int
+        @Binding var isFollowed: Bool
+        @Binding var isSendbMessagePresented: Bool
         @AppStorage("DedeUserID") var dedeUserID = ""
         @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
         @AppStorage("SESSDATA") var sessdata = ""
@@ -254,15 +257,30 @@ struct UserDetailView: View {
                         }
                     }
                     Button(action: {
-                        
+                        let headers: HTTPHeaders = [
+                            "cookie": "SESSDATA=\(sessdata);"
+                        ]
+                        AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
+                            debugPrint(response)
+                            let json = try! JSON(data: response.data!)
+                            let code = json["code"].int!
+                            if code == 0 {
+                                tipWithText(isFollowed ? "取关成功" : "关注成功", symbol: "checkmark.circle.fill")
+                                isFollowed.toggle()
+                            } else {
+                                tipWithText(json["message"].string!, symbol: "xmark.circle.fill")
+                            }
+                        }
                     }, label: {
                         HStack {
-                            Image(systemName: "bell")
-                            Text("关注")
+                            Image(systemName: isFollowed ? "person.badge.minus" : "person.badge.plus")
+                            Text(isFollowed ? "取消关注" : "关注")
                         }
                     })
+                    NavigationLink("", isActive: $isSendbMessagePresented, destination: {bMessageSendView(uid: Int(uid)!, username: username)})
+                        .frame(width: 0, height: 0)
                     Button(action: {
-                        
+                        isSendbMessagePresented = true
                     }, label: {
                         HStack {
                             Image(systemName: "ellipsis.bubble")

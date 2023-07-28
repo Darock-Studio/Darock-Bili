@@ -185,7 +185,6 @@ struct VideoDetailView: View {
                     Group {
                         ScrollView {
                             DetailViewFirstPageBase(videoDetails: $videoDetails, honors: $honors, isLoading: $isLoading)
-                                .offset(y: 16)
                             DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, honors: $honors, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount)
                         }
                     }
@@ -203,7 +202,6 @@ struct VideoDetailView: View {
                 Group {
                     ScrollView {
                         DetailViewFirstPageBase(videoDetails: $videoDetails, honors: $honors, isLoading: $isLoading)
-                            .offset(y: 16)
                         DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, honors: $honors, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount)
                     }
                 }
@@ -438,7 +436,7 @@ struct VideoDetailView: View {
                             }
                         }
                     }, label: {
-                        Image(systemName: "play.fill")
+                        Label("播放", systemImage: "play.fill")
                     })
                     .sheet(isPresented: $isVideoPlayerPresented, content: {VideoPlayerView()})
                     NavigationLink("", isActive: $isNowPlayingPresented, destination: {AudioPlayerView(videoDetails: videoDetails)})
@@ -460,12 +458,12 @@ struct VideoDetailView: View {
                             }
                         }
                     }, label: {
-                        Image(systemName: "waveform")
+                        Label("以音频播放", systemImage: "waveform")
                     })
                     Button(action: {
-                        
+                        isMoreMenuPresented = true
                     }, label: {
-                        Image(systemName: "ellipsis")
+                        Label("更多", systemImage: "ellipsis")
                     })
                     .sheet(isPresented: $isMoreMenuPresented, content: {
                         List {

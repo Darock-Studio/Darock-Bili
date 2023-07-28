@@ -9,6 +9,7 @@ import SwiftUI
 import DarockKit
 
 struct ContentView: View {
+    @AppStorage("IsNetworkGetted") var isNetworkGetted = false
     var body: some View {
         NStack {
             VStack {
@@ -18,6 +19,7 @@ struct ContentView: View {
                     DarockKit.Network.shared.requestString("https://api.darock.top") { respStr, isSuccess in
                         if isSuccess {
                             debugPrint(respStr)
+                            isNetworkGetted = true
                         }
                     }
                 }, label: {
@@ -25,6 +27,10 @@ struct ContentView: View {
                         .font(.system(size: 20, weight: .bold))
                         .padding(.horizontal, 5)
                 })
+                if isNetworkGetted {
+                    NeuText("已授权", fontSize: 22)
+                        .multilineTextAlignment(.center)
+                }
             }
             .padding()
         }

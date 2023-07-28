@@ -95,17 +95,17 @@ struct bMessageSendView: View {
                     }
                 }
                 HStack {
-                    Button(action: {
-                        
-                    }, label: {
-                        ZStack {
-                            Circle()
-                                .foregroundStyle(Color(red: 31/255, green: 31/255, blue: 31/255))
-                            Image(systemName: "plus")
-                                .font(.title3)
-                        }
-                    })
-                    .frame(width: 50, height: 30)
+//                    Button(action: {
+//                        
+//                    }, label: {
+//                        ZStack {
+//                            Circle()
+//                                .foregroundStyle(Color(red: 31/255, green: 31/255, blue: 31/255))
+//                            Image(systemName: "plus")
+//                                .font(.title3)
+//                        }
+//                    })
+//                    .frame(width: 50, height: 30)
                     TextField("私信", text: $sendTextCache)
                         .opacity(0.0100000002421438702673861521)
                         .background {
