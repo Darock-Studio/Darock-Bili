@@ -807,25 +807,19 @@ struct VideoDetailView: View {
                             }
                         Spacer()
                             .frame(height: 15)
-                        HStack {
-                            VStack {
-                                Image(systemName: "tag")
-                                Spacer()
+                        Text(tagText)
+                            .font(.system(size: 13))
+                            .padding(.horizontal, 8)
+                            .opacity(0.6)
+                            .offset(y: tagOffset)
+                            .animation(.easeOut(duration: 0.3), value: tagOffset)
+                            .onAppear {
+                                tagOffset = 0
+                                tagText = ""
+                                for text in tags {
+                                    tagText += text + "  "
+                                }
                             }
-                            Text(tagText)
-                        }
-                        .font(.system(size: 13))
-                        .padding(.horizontal, 8)
-                        .opacity(0.6)
-                        .offset(y: tagOffset)
-                        .animation(.easeOut(duration: 0.3), value: tagOffset)
-                        .onAppear {
-                            tagOffset = 0
-                            tagText = ""
-                            for text in tags {
-                                tagText += text + "  "
-                            }
-                        }
                     }
                 }
             }

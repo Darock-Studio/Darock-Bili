@@ -19,6 +19,9 @@ struct SettingsView: View {
                 NavigationLink(destination: {AppBehaviorSettingsView()}, label: {
                     Text("App 行为")
                 })
+                NavigationLink(destination: {SkinSettingsView()}, label: {
+                    Text("个性装扮")
+                })
             }
             Section {
                 NavigationLink(destination: {PlayerSettingsView()}, label: {
@@ -99,6 +102,17 @@ struct SettingsView: View {
 //                        Text("第三方").tag("injahow")
 //                    }
 //                }
+            }
+        }
+    }
+    
+    struct SkinSettingsView: View {
+        @AppStorage("IsSkinNoBlur") var isSkinNoBlur = false
+        var body: some View {
+            List {
+                Section(footer: Text("不推荐，可能导致页面上字符难以辨别")) {
+                    Toggle("不模糊背景装扮", isOn: $isSkinNoBlur)
+                }
             }
         }
     }

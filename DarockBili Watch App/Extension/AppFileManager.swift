@@ -14,19 +14,19 @@ class AppFileManager {
         self.path = path
     }
     
-    /// 获取单个图片路径
+    /// 获取单个文件路径
     /// - Parameters:
-    ///   - name: 图片名
+    ///   - name: 文件名
     ///   - folder: 文件夹名，默认根目录
-    /// - Returns: 图片URL
-    public func GetImagePath(name: String, folder: String = "root") -> URL {
+    /// - Returns: 文件URL
+    public func GetFilePath(name: String, folder: String = "root") -> URL {
         let manager = FileManager.default
         let urlForDocument = manager.urls(for: .documentDirectory, in: .userDomainMask)
         if folder == "root" {
-            let url = URL(string: ((urlForDocument[0] as URL).absoluteString + "\(path)/\(name).png"))!
+            let url = URL(string: ((urlForDocument[0] as URL).absoluteString + "\(path)/\(name)"))!
             return url
         } else {
-            let url = URL(string: ((urlForDocument[0] as URL).absoluteString + "\(path)/\(folder)/\(name).png"))!
+            let url = URL(string: ((urlForDocument[0] as URL).absoluteString + "\(path)/\(folder)/\(name)"))!
             return url
         }
     }

@@ -16,6 +16,10 @@
 		6B37B4BD2A715EF900F26F1A /* SFSymbol in Frameworks */ = {isa = PBXBuildFile; productRef = 6B37B4BC2A715EF900F26F1A /* SFSymbol */; };
 		6B4FC0572A6FA49B00164A5B /* bMessageSendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4FC0562A6FA49B00164A5B /* bMessageSendView.swift */; };
 		6B4FC05A2A7016CE00164A5B /* CodingTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4FC0592A7016CE00164A5B /* CodingTime.m */; };
+		6B853FE52A74D9C20067B55C /* SkinChooserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B853FE42A74D9C10067B55C /* SkinChooserView.swift */; };
+		6B853FE72A7507CD0067B55C /* SkinDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B853FE62A7507CD0067B55C /* SkinDownloadView.swift */; };
+		6B853FEA2A7509DC0067B55C /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = 6B853FE92A7509DC0067B55C /* ZipArchive */; };
+		6B853FEC2A750BD80067B55C /* SkinExplorerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B853FEB2A750BD70067B55C /* SkinExplorerView.swift */; };
 		6B9943862A6E257100E2F5D5 /* MemoryWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9943852A6E257100E2F5D5 /* MemoryWarningView.swift */; };
 		6BA20BC82A7185B100AAD0C7 /* DarockBili_Watch_App_Unit_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA20BC72A7185B100AAD0C7 /* DarockBili_Watch_App_Unit_Tests.swift */; };
 		6BA20BD52A7185D300AAD0C7 /* DarockBili_Watch_App_UI_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA20BD42A7185D300AAD0C7 /* DarockBili_Watch_App_UI_Tests.swift */; };
@@ -148,6 +152,9 @@
 		6B56A9242A53CFC10089DD31 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		6B56A9262A53E6850089DD31 /* WatchLaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchLaterView.swift; sourceTree = "<group>"; };
 		6B6790A32A5296FB00FAE216 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		6B853FE42A74D9C10067B55C /* SkinChooserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkinChooserView.swift; sourceTree = "<group>"; };
+		6B853FE62A7507CD0067B55C /* SkinDownloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinDownloadView.swift; sourceTree = "<group>"; };
+		6B853FEB2A750BD70067B55C /* SkinExplorerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinExplorerView.swift; sourceTree = "<group>"; };
 		6B8858012A72DC2200DBEA21 /* Dynamic_Feed_All.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Dynamic_Feed_All.json; sourceTree = "<group>"; };
 		6B8C2AFC2A6019B6001FEC85 /* FeedbackLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackLoginView.swift; sourceTree = "<group>"; };
 		6B8C2AFE2A601E36001FEC85 /* FeedbackEnterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackEnterView.swift; sourceTree = "<group>"; };
@@ -216,6 +223,7 @@
 				6BC8CB282A6D758000D2E9E9 /* EFQRCode in Frameworks */,
 				6BC8CB2C2A6D758000D2E9E9 /* SDWebImageWebPCoder in Frameworks */,
 				6BC8CB302A6D758000D2E9E9 /* SDWebImagePDFCoder in Frameworks */,
+				6B853FEA2A7509DC0067B55C /* ZipArchive in Frameworks */,
 				6BC8CB342A6D758000D2E9E9 /* DarockKit in Frameworks */,
 				6B37B4BD2A715EF900F26F1A /* SFSymbol in Frameworks */,
 				6BC8CB2E2A6D758000D2E9E9 /* SDWebImageSVGCoder in Frameworks */,
@@ -375,6 +383,7 @@
 		6B91C4A52A5597C20020259E /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				6BEB13812A74D88D00422FC9 /* Skins */,
 				6B4FC0582A70169800164A5B /* CCodes */,
 				6B0253E32A4F265100567986 /* LoginView.swift */,
 				6BBFA2C42A515D8B00FE61D1 /* FirstUsingView.swift */,
@@ -446,6 +455,16 @@
 				6BC8CB1B2A6CEC8400D2E9E9 /* MMCQ.swift */,
 			);
 			path = ColorThief;
+			sourceTree = "<group>";
+		};
+		6BEB13812A74D88D00422FC9 /* Skins */ = {
+			isa = PBXGroup;
+			children = (
+				6B853FEB2A750BD70067B55C /* SkinExplorerView.swift */,
+				6B853FE42A74D9C10067B55C /* SkinChooserView.swift */,
+				6B853FE62A7507CD0067B55C /* SkinDownloadView.swift */,
+			);
+			path = Skins;
 			sourceTree = "<group>";
 		};
 		6BFF29032A6C0B3A00914A8E /* DarockBili */ = {
@@ -559,6 +578,7 @@
 				6BC8CB332A6D758000D2E9E9 /* DarockKit */,
 				6BC8CB352A6D758000D2E9E9 /* CachedAsyncImage */,
 				6B37B4BC2A715EF900F26F1A /* SFSymbol */,
+				6B853FE92A7509DC0067B55C /* ZipArchive */,
 			);
 			productName = "DarockBili WatchKit App Watch App";
 			productReference = 6BFF295C2A6C0D1C00914A8E /* DarockBili Watch App.app */;
@@ -610,6 +630,7 @@
 				6BA1E5492A6AF2A900293B2C /* XCRemoteSwiftPackageReference "DarockKit" */,
 				6BC8CB1D2A6CF48400D2E9E9 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 				6B37B4BB2A715EF800F26F1A /* XCRemoteSwiftPackageReference "SFSymbol" */,
+				6B853FE82A7509DC0067B55C /* XCRemoteSwiftPackageReference "ZipArchive" */,
 			);
 			productRefGroup = 6B0253B52A4EF59600567986 /* Products */;
 			projectDirPath = "";
@@ -699,6 +720,7 @@
 				6BFF29732A6C0DE600914A8E /* CodeExt.swift in Sources */,
 				6BFF29832A6C0DFC00914A8E /* VideoDetailView.swift in Sources */,
 				6BFF29782A6C0DF900914A8E /* FollowListView.swift in Sources */,
+				6B853FEC2A750BD80067B55C /* SkinExplorerView.swift in Sources */,
 				6BFF29942A6C0E1D00914A8E /* SignalErrorView.swift in Sources */,
 				6BC8CB1C2A6CEC8400D2E9E9 /* MMCQ.swift in Sources */,
 				6BFF29822A6C0DFC00914A8E /* VideoDownloadView.swift in Sources */,
@@ -713,6 +735,7 @@
 				6BFF29752A6C0DF500914A8E /* ContentView.swift in Sources */,
 				6BFF297C2A6C0DF900914A8E /* DownloadsView.swift in Sources */,
 				6B4FC05A2A7016CE00164A5B /* CodingTime.m in Sources */,
+				6B853FE72A7507CD0067B55C /* SkinDownloadView.swift in Sources */,
 				6BFF297F2A6C0DF900914A8E /* ArticleView.swift in Sources */,
 				6BFF298E2A6C0E1D00914A8E /* NetworkFixView.swift in Sources */,
 				6BFF29912A6C0E1D00914A8E /* FeedbackEnterView.swift in Sources */,
@@ -732,6 +755,7 @@
 				6BFF297A2A6C0DF900914A8E /* FavoriteView.swift in Sources */,
 				6BFF298D2A6C0E1D00914A8E /* ErrorGetView.swift in Sources */,
 				6B9943862A6E257100E2F5D5 /* MemoryWarningView.swift in Sources */,
+				6B853FE52A74D9C20067B55C /* SkinChooserView.swift in Sources */,
 				6BFF297B2A6C0DF900914A8E /* WatchLaterView.swift in Sources */,
 				6BFF296F2A6C0DE500914A8E /* UIExt.swift in Sources */,
 				6BFF298F2A6C0E1D00914A8E /* FeedbackView.swift in Sources */,
@@ -879,7 +903,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 160;
+				CURRENT_PROJECT_VERSION = 161;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0.0;
@@ -899,7 +923,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 160;
+				CURRENT_PROJECT_VERSION = 161;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0.0;
@@ -919,7 +943,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 160;
+				CURRENT_PROJECT_VERSION = 161;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0.0;
@@ -938,7 +962,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 160;
+				CURRENT_PROJECT_VERSION = 161;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0.0;
@@ -962,7 +986,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 160;
+				CURRENT_PROJECT_VERSION = 161;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1001,7 +1025,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 160;
+				CURRENT_PROJECT_VERSION = 161;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1040,7 +1064,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 160;
+				CURRENT_PROJECT_VERSION = 161;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
@@ -1075,7 +1099,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 160;
+				CURRENT_PROJECT_VERSION = 161;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
@@ -1163,6 +1187,14 @@
 				minimumVersion = 2.2.0;
 			};
 		};
+		6B853FE82A7509DC0067B55C /* XCRemoteSwiftPackageReference "ZipArchive" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ZipArchive/ZipArchive";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.4;
+			};
+		};
 		6BA1E5492A6AF2A900293B2C /* XCRemoteSwiftPackageReference "DarockKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Darock-Studio/DarockKit";
@@ -1234,6 +1266,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6B37B4BB2A715EF800F26F1A /* XCRemoteSwiftPackageReference "SFSymbol" */;
 			productName = SFSymbol;
+		};
+		6B853FE92A7509DC0067B55C /* ZipArchive */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B853FE82A7509DC0067B55C /* XCRemoteSwiftPackageReference "ZipArchive" */;
+			productName = ZipArchive;
 		};
 		6BC8CB272A6D758000D2E9E9 /* EFQRCode */ = {
 			isa = XCSwiftPackageProductDependency;

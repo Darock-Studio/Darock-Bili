@@ -5,14 +5,19 @@
 //  Created by WindowsMEMZ on 2023/6/30.
 //
 
+import AVKit
 import SwiftUI
+import Combine
 import DarockKit
 import Alamofire
 import SwiftyJSON
-import SDWebImageSwiftUI
+import AVFoundation
 import CachedAsyncImage
+import SDWebImageSwiftUI
 
 struct PersonAccountView: View {
+    @AppStorage("UsingSkin") var usingSkin = ""
+    @AppStorage("IsSkinNoBlur") var isSkinNoBlur = false
     var body: some View {
         NavigationStack {
             #if swift(>=5.9)
@@ -24,6 +29,44 @@ struct PersonAccountView: View {
                                 Image(systemName: "gear")
                                     .foregroundColor(.accentColor)
                             })
+                        }
+                        ToolbarItem(placement: .topBarTrailing) {
+                            NavigationLink(destination: {SkinExplorerView()}, label: {
+                                Image(systemName: "paintbrush")
+                                    .foregroundColor(.accentColor)
+                            })
+                        }
+                    }
+                    .containerBackground(for: .navigation) {
+                        if usingSkin != "" {
+                            let playerItem = AVPlayerItem(url: AppFileManager(path: "skin/\(usingSkin)").GetFilePath(name: "head_myself_mp4_bg.mp4"))
+                            let player = AVPlayer(playerItem: playerItem)
+                            var finishObserver: AnyCancellable?
+                            ZStack {
+                                VideoPlayer(player: player)
+                                    .ignoresSafeArea()
+                                    .scaleEffect(1.5)
+                                    .onAppear {
+                                        finishObserver = NotificationCenter.default
+                                            .publisher(for: .AVPlayerItemDidPlayToEndTime, object: playerItem)
+                                            .sink { _ in
+                                                player.seek(to: CMTime.zero)
+                                                player.play()
+                                            }
+                                        
+                                        debugPrint(AppFileManager(path: "skin/\(usingSkin)").GetFilePath(name: "head_myself_mp4_bg.mp4"))
+                                        player.play()
+                                    }
+                                    .onDisappear {
+                                        finishObserver?.cancel()
+                                    }
+                                if !isSkinNoBlur {
+                                    Color.black
+                                        .ignoresSafeArea()
+                                        .opacity(0.4)
+                                }
+                            }
+                            .blur(radius: isSkinNoBlur ? 0 : 16)
                         }
                     }
             } else {

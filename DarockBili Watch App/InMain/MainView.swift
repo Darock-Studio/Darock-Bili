@@ -52,6 +52,7 @@ struct MainView: View {
         @State var isFirstLoaded = false
         @State var newMajorVer = ""
         @State var newBuildVer = ""
+        @State var isLoadingNew = false
         var body: some View {
             Group {
                 List {
@@ -106,8 +107,12 @@ struct MainView: View {
                             Button(action: {
                                 LoadNewVideos()
                             }, label: {
-                                Text("加载更多")
-                                    .bold()
+                                if !isLoadingNew {
+                                    Text("加载更多")
+                                        .bold()
+                                } else {
+                                    ProgressView()
+                                }
                             })
                         }
                     } else {
@@ -137,22 +142,10 @@ struct MainView: View {
         }
         
         func LoadNewVideos(clearWhenFinish: Bool = false) {
+            isLoadingNew = true
             let headers: HTTPHeaders = [
                 "cookie": "SESSDATA=\(sessdata)"
             ]
-//            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/dynamic/region?ps=50&rid=1", headers: headers) { respJson, isSuccess in
-//                if isSuccess {
-//                    let datas = respJson["data"]["archives"]
-//                    debugPrint(datas)
-//                    autoreleasepool {
-//                        for videoInfo in datas {
-//                            videos.append(["Pic": videoInfo.1["pic"].string!, "Title": videoInfo.1["title"].string!, "BV": videoInfo.1["bvid"].string!, "UP": videoInfo.1["owner"]["name"].string!, "View": String(videoInfo.1["stat"]["view"].int!), "Danmaku": String(videoInfo.1["stat"]["danmaku"].int!)])
-//                        }
-//                    }
-//                } else {
-//                    isNetworkFixPresented = true
-//                }
-//            }
             DarockKit.Network.shared.requestString("https://api.darock.top/bili/wbi/sign/\("ps=10".base64Encoded())") { respStr, isSuccess in
                 if isSuccess {
                     debugPrint(respStr.apiFixed())
@@ -166,6 +159,7 @@ struct MainView: View {
                             for videoInfo in datas {
                                 videos.append(["Pic": videoInfo.1["pic"].string ?? "E", "Title": videoInfo.1["title"].string ?? "[加载失败]", "BV": videoInfo.1["bvid"].string ?? "E", "UP": videoInfo.1["owner"]["name"].string ?? "[加载失败]", "View": String(videoInfo.1["stat"]["view"].int ?? -1), "Danmaku": String(videoInfo.1["stat"]["danmaku"].int ?? -1)])
                             }
+                            isLoadingNew = false
                         } else {
                             isNetworkFixPresented = true
                         }
