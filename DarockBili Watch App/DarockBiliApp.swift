@@ -20,6 +20,8 @@ var pShowTipText = ""
 var pShowTipSymbol = ""
 var pTipBoxOffset: CGFloat = 80
 
+var isShowMemoryInScreen = false
+
 @main
 struct DarockBili_Watch_AppApp: App {
     @WKApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
@@ -31,6 +33,7 @@ struct DarockBili_Watch_AppApp: App {
     @State var isShowingDebugControls = false
     @State var systemResourceRefreshTimer: Timer?
     @State var memoryUsage: Float = 0.0
+    @State var isShowMemoryUsage = false
     var body: some Scene {
         WindowGroup {
             if UserDefaults.standard.string(forKey: "NewSignalError") ?? "" != "" {
@@ -109,13 +112,35 @@ struct DarockBili_Watch_AppApp: App {
                         }
                         
                         Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { timer in
-                            if getMemory() > 140.0 {
+                            if getMemory() > 240.0 {
                                 isMemoryWarningPresented = true
+                                timer.invalidate()
+                            }
+                        }
+                        
+                        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+                            if isShowMemoryInScreen {
+                                isShowMemoryUsage = true
+                                Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
+                                    memoryUsage = getMemory()
+                                }
                                 timer.invalidate()
                             }
                         }
                     }
                     .overlay {
+                        if isShowMemoryUsage {
+                            VStack {
+                                HStack {
+                                    Spacer()
+                                    Text("内存占用: \(String(format: "%.2f", memoryUsage)) MB / 300 MB")
+                                        .font(.system(size: 10, weight: .medium))
+                                        .offset(y: 26)
+                                }
+                                Spacer()
+                            }
+                            .ignoresSafeArea()
+                        }
                         if debug {
                             HStack {
                                 VStack {

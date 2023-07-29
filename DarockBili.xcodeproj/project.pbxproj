@@ -11,6 +11,7 @@
 		6B2469B42A73DA5A00291AC6 /* LivePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2469B32A73DA5A00291AC6 /* LivePlayerView.swift */; };
 		6B2B62302A7187CC0051B879 /* WatchAppUITestPlan.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = 6B2B622F2A7187CC0051B879 /* WatchAppUITestPlan.xctestplan */; };
 		6B2B62322A7187E70051B879 /* WatchAppUnitTestPlan.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = 6B2B62312A7187E70051B879 /* WatchAppUnitTestPlan.xctestplan */; };
+		6B2BCA702A7412F9002195BB /* ImageViewerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2BCA6F2A7412F9002195BB /* ImageViewerView.swift */; };
 		6B37B4B72A714DDE00F26F1A /* AVExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B37B4B62A714DDE00F26F1A /* AVExtension.m */; };
 		6B37B4BD2A715EF900F26F1A /* SFSymbol in Frameworks */ = {isa = PBXBuildFile; productRef = 6B37B4BC2A715EF900F26F1A /* SFSymbol */; };
 		6B4FC0572A6FA49B00164A5B /* bMessageSendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4FC0562A6FA49B00164A5B /* bMessageSendView.swift */; };
@@ -130,6 +131,7 @@
 		6B2773C02A599FE300950EB7 /* UIExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExt.swift; sourceTree = "<group>"; };
 		6B2B622F2A7187CC0051B879 /* WatchAppUITestPlan.xctestplan */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WatchAppUITestPlan.xctestplan; sourceTree = "<group>"; };
 		6B2B62312A7187E70051B879 /* WatchAppUnitTestPlan.xctestplan */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WatchAppUnitTestPlan.xctestplan; sourceTree = "<group>"; };
+		6B2BCA6F2A7412F9002195BB /* ImageViewerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewerView.swift; sourceTree = "<group>"; };
 		6B2D76472A610E7000AA57DA /* Backtrace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backtrace.swift; sourceTree = "<group>"; };
 		6B2D764A2A610EC800AA57DA /* backtrace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = backtrace.h; sourceTree = "<group>"; };
 		6B2D764B2A610EC800AA57DA /* backtrace.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = backtrace.c; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				6B21E4502A72D7A00000C225 /* UserDynamicMainView.swift */,
+				6B2BCA6F2A7412F9002195BB /* ImageViewerView.swift */,
 			);
 			path = UserDynamic;
 			sourceTree = "<group>";
@@ -717,6 +720,7 @@
 				6BFF29712A6C0DE500914A8E /* DarockBiliApp.swift in Sources */,
 				6BFF29932A6C0E1D00914A8E /* FeedbackLoginView.swift in Sources */,
 				6BFF296E2A6C0DE500914A8E /* AppFileManager.swift in Sources */,
+				6B2BCA702A7412F9002195BB /* ImageViewerView.swift in Sources */,
 				6BFF29922A6C0E1D00914A8E /* FeedbackDetailsView.swift in Sources */,
 				6BFF29792A6C0DF900914A8E /* HistoryView.swift in Sources */,
 				6BFF298B2A6C0E1900914A8E /* backtrace.c in Sources */,
@@ -875,7 +879,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 158;
+				CURRENT_PROJECT_VERSION = 160;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0.0;
@@ -895,7 +899,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 158;
+				CURRENT_PROJECT_VERSION = 160;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0.0;
@@ -915,7 +919,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 158;
+				CURRENT_PROJECT_VERSION = 160;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0.0;
@@ -934,7 +938,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 158;
+				CURRENT_PROJECT_VERSION = 160;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0.0;
@@ -958,7 +962,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 158;
+				CURRENT_PROJECT_VERSION = 160;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -997,7 +1001,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 158;
+				CURRENT_PROJECT_VERSION = 160;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1036,7 +1040,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 158;
+				CURRENT_PROJECT_VERSION = 160;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
@@ -1071,7 +1075,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 158;
+				CURRENT_PROJECT_VERSION = 160;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;

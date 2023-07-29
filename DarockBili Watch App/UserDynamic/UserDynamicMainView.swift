@@ -18,6 +18,7 @@ struct UserDynamicMainView: View {
     @AppStorage("bili_jct") var biliJct = ""
     @State var dynamics = [[String: Any?]]()
     @State var isSenderDetailsPresented = [Bool]()
+    @State var isDynamicImagePresented = [[Bool]]()
     @State var isLoaded = false
     @State var nextLoadPage = 1
     @State var lastDynamicID = ""
@@ -68,8 +69,15 @@ struct UserDynamicMainView: View {
                                     if let draws = dynamics[i]["Draws"] as? [[String: String]] {
                                         LazyVGrid(columns: [GridItem(.fixed(50)), GridItem(.fixed(50)), GridItem(.fixed(50))]) {
                                             ForEach(0..<draws.count, id: \.self) { j in
-                                                WebImage(url: URL(string: draws[j]["Src"]! + "@60w_40h"), options: [.progressiveLoad])
-                                                    .cornerRadius(5)
+                                                VStack {
+                                                    NavigationLink("", isActive: $isDynamicImagePresented[i][j], destination: {ImageViewerView(url: draws[j]["Src"]!)})
+                                                        .frame(width: 0, height: 0)
+                                                    WebImage(url: URL(string: draws[j]["Src"]! + "@60w_40h"), options: [.progressiveLoad])
+                                                        .cornerRadius(5)
+                                                        .onTapGesture {
+                                                            isDynamicImagePresented[i][j] = true
+                                                        }
+                                                }
                                             }
                                         }
                                     }
@@ -146,8 +154,10 @@ struct UserDynamicMainView: View {
             if isSuccess {
                 debugPrint(respJson)
                 let items = respJson["data"]["items"]
+                var itemForCount = 0
                 for item in items {
                     isSenderDetailsPresented.append(false)
+                    isDynamicImagePresented.append([])
                     dynamics.append([
                         "WithText": item.1["modules"]["module_dynamic"]["desc"]["text"].string ?? "",
                         "MajorType": BiliDynamicMajorType(rawValue: item.1["modules"]["module_dynamic"]["major"]["type"].string ?? "MAJOR_TYPE_DRAW") ?? .majorTypeDraw,
@@ -155,6 +165,7 @@ struct UserDynamicMainView: View {
                             if BiliDynamicMajorType(rawValue: item.1["modules"]["module_dynamic"]["major"]["type"].string ?? "MAJOR_TYPE_DRAW") == .majorTypeDraw {
                                 var dTmp = [[String: String]]()
                                 for draw in item.1["modules"]["module_dynamic"]["major"]["draw"]["items"] {
+                                    isDynamicImagePresented[itemForCount].append(false)
                                     dTmp.append(["Src": draw.1["src"].string!])
                                 }
                                 return dTmp
@@ -193,6 +204,7 @@ struct UserDynamicMainView: View {
                         "CommentCount": String(item.1["modules"]["module_stat"]["comment"]["count"].int!),
                         "DynamicID": item.1["id_str"].string!
                     ])
+                    itemForCount += 1
                 }
                 lastDynamicID = dynamics.last?["DynamicID"] as! String
                 nextLoadPage += 1

@@ -58,3 +58,52 @@ struct VolumeControlView: WKInterfaceObjectRepresentable {
         
     }
 }
+
+struct zoomable: ViewModifier {
+    @AppStorage("MaxmiumScale") var maxmiumScale = 6.0
+    @State var scale: CGFloat = 1.0
+    @State var offset = CGSize.zero
+    @State var lastOffset = CGSize.zero
+    func body(content: Content) -> some View {
+            content
+                .scaleEffect(self.scale)
+                .focusable()
+                .digitalCrownRotation($scale, from: 0.5, through: maxmiumScale, by: 0.02, sensitivity: .low, isHapticFeedbackEnabled: true)
+                .offset(x: offset.width, y: offset.height)
+                .gesture(
+                    DragGesture()
+                        .onChanged { gesture in
+                            offset = CGSize(width: gesture.translation.width + lastOffset.width, height: gesture.translation.height + lastOffset.height)
+                        }
+                        .onEnded { _ in
+                            lastOffset = offset
+                        }
+                )
+                .onDisappear {
+                    offset = CGSize.zero
+                    lastOffset = CGSize.zero
+                }
+                .onChange(of: scale) { value in
+                    if value < 2.0 {
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            offset = CGSize.zero
+                            lastOffset = CGSize.zero
+                        }
+                    }
+                }
+    }
+}
+
+extension Indicator where T == ProgressView<EmptyView, EmptyView> {
+    static var activity: Indicator {
+        Indicator { isAnimating, progress in
+            ProgressView()
+        }
+    }
+    
+    static var progress: Indicator {
+        Indicator { isAnimating, progress in
+            ProgressView(value: progress.wrappedValue)
+        }
+    }
+}

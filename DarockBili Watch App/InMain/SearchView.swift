@@ -85,7 +85,7 @@ struct SearchView: View {
                         let videoDatas = respJson["data"]["result"][11]["data"]
                         debugPrint(videoDatas)
                         for video in videoDatas {
-                            videos.append(["Pic": "https:" + video.1["pic"].string!, "Title": video.1["title"].string!, "View": String(video.1["play"].int!), "Danmaku": String(video.1["danmaku"].int!), "UP": video.1["author"].string!, "BV": video.1["bvid"].string!])
+                            videos.append(["Pic": "https:" + video.1["pic"].string!, "Title": video.1["title"].string!.replacingOccurrences(of: "<em class=\"keyword\">", with: "").replacingOccurrences(of: "</em>", with: ""), "View": String(video.1["play"].int!), "Danmaku": String(video.1["danmaku"].int!), "UP": video.1["author"].string!, "BV": video.1["bvid"].string!])
                         }
                     }
                 }
