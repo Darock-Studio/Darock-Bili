@@ -565,7 +565,7 @@ struct VideoDetailView: View {
                     Label("播放", systemImage: "play.fill")
                 })
                 .sheet(isPresented: $isVideoPlayerPresented, content: {VideoPlayerView()})
-                NavigationLink("", isActive: $isNowPlayingPresented, destination: {AudioPlayerView(videoDetails: videoDetails)})
+                NavigationLink("", isActive: $isNowPlayingPresented, destination: {AudioPlayerView(subTitles: subTitles, videoDetails: videoDetails)})
                     .frame(width: 0, height: 0)
                 Button(action: {
                     isLoading = true
