@@ -609,7 +609,7 @@ struct VideoDetailView: View {
                         }, label: {
                             Label("下载视频", image: "arrow.down.doc")
                         })
-                        .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails, subTitles: subTitles)})
+                        .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
                     }
                 })
                 #endif
