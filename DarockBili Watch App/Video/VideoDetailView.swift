@@ -37,6 +37,7 @@ struct VideoDetailView: View {
     @State var stat = [String: String]()
     @State var honors = [String]()
     @State var tags = [String]()
+    @State var subTitles = [[String: String]]()
     @State var ownerFansCount = 0
     @State var nowPlayingCount = "0"
     @State var videoDesc = ""
@@ -53,10 +54,10 @@ struct VideoDetailView: View {
                     Group {
                         TabView {
                             VStack {
-                                NavigationLink("", isActive: $isNowPlayingPresented, destination: {AudioPlayerView(videoDetails: videoDetails)})
+                                NavigationLink("", isActive: $isNowPlayingPresented, destination: {AudioPlayerView(videoDetails: videoDetails, subTitles: subTitles)})
                                     .frame(width: 0, height: 0)
                                 
-                                DetailViewFirstPageBase(videoDetails: $videoDetails, honors: $honors, isLoading: $isLoading)
+                                DetailViewFirstPageBase(videoDetails: $videoDetails, honors: $honors, subTitles: $subTitles, isLoading: $isLoading)
                                     .offset(y: 16)
                                     .toolbar {
                                         ToolbarItem(placement: .topBarTrailing) {
@@ -118,7 +119,7 @@ struct VideoDetailView: View {
                                                         }
                                                     }
                                                 } else if videoGetterSource == "injahow" {
-                                                    DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!)&p=1&type=bangumi&q=16&otype=url") { respStr, isSuccess in
+                                                    DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=1&type=video&q=32&format=mp4&otype=url") { respStr, isSuccess in
                                                         if isSuccess {
                                                             VideoDetailView.willPlayVideoLink = respStr
                                                             VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
@@ -149,7 +150,7 @@ struct VideoDetailView: View {
                                                         }
                                                     }
                                                 } else if videoGetterSource == "injahow" {
-                                                    DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=1&type=bangumi&q=16&otype=url") { respStr, isSuccess in
+                                                    DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=1&type=video&q=32&format=mp4&otype=url") { respStr, isSuccess in
                                                         if isSuccess {
                                                             VideoDetailView.willPlayVideoLink = respStr
                                                             VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
@@ -207,7 +208,7 @@ struct VideoDetailView: View {
                 ZStack {
                     Group {
                         ScrollView {
-                            DetailViewFirstPageBase(videoDetails: $videoDetails, honors: $honors, isLoading: $isLoading)
+                            DetailViewFirstPageBase(videoDetails: $videoDetails, honors: $honors, subTitles: $subTitles, isLoading: $isLoading)
                             DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, honors: $honors, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount)
                         }
                     }
@@ -224,7 +225,7 @@ struct VideoDetailView: View {
             ZStack {
                 Group {
                     ScrollView {
-                        DetailViewFirstPageBase(videoDetails: $videoDetails, honors: $honors, isLoading: $isLoading)
+                        DetailViewFirstPageBase(videoDetails: $videoDetails, honors: $honors, subTitles: $subTitles, isLoading: $isLoading)
                         DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, honors: $honors, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount)
                     }
                 }
@@ -331,7 +332,14 @@ struct VideoDetailView: View {
                         DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/v2?bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers) { respJson, isSuccess in
                             debugPrint("----------Prints from VideoDetailView.onAppear.*.requsetJSON(*/player/v2)----------")
                             debugPrint(respJson)
-                            
+                            if let subTitleUrl = respJson["data"]["subtitle"]["subtitles"][0]["subtitle_url"].string {
+                                DarockKit.Network.shared.requestJSON(subTitleUrl) { respJson, isSuccess in
+                                    let subTitles = respJson["body"]
+                                    for subTitle in subTitles {
+                                        self.subTitles.append(["Start": String(subTitle.1["from"].double!), "End": String(subTitle.1["to"].double!), "Content": subTitle.1["content"].string!])
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -367,6 +375,7 @@ struct VideoDetailView: View {
     struct DetailViewFirstPageBase: View {
         @Binding var videoDetails: [String: String]
         @Binding var honors: [String]
+        @Binding var subTitles: [[String: String]]
         @Binding var isLoading: Bool
         @AppStorage("DedeUserID") var dedeUserID = ""
         @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
@@ -462,7 +471,7 @@ struct VideoDetailView: View {
                                 }
                             }
                         } else if videoGetterSource == "injahow" {
-                            DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!)&p=1&type=bangumi&q=16&otype=url") { respStr, isSuccess in
+                            DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=1&type=video&q=32&format=mp4&otype=url") { respStr, isSuccess in
                                 if isSuccess {
                                     VideoDetailView.willPlayVideoLink = respStr
                                     VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
@@ -475,7 +484,7 @@ struct VideoDetailView: View {
                         Label("播放", systemImage: "play.fill")
                     })
                     .sheet(isPresented: $isVideoPlayerPresented, content: {VideoPlayerView()})
-                    NavigationLink("", isActive: $isNowPlayingPresented, destination: {AudioPlayerView(videoDetails: videoDetails)})
+                    NavigationLink("", isActive: $isNowPlayingPresented, destination: {AudioPlayerView(videoDetails: videoDetails, subTitles: subTitles)})
                         .frame(width: 0, height: 0)
                     Button(action: {
                         isLoading = true
@@ -495,7 +504,7 @@ struct VideoDetailView: View {
                                 }
                             }
                         } else if videoGetterSource == "injahow" {
-                            DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!)&p=1&type=bangumi&q=16&otype=url") { respStr, isSuccess in
+                            DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=1&type=video&q=32&format=mp4&otype=url") { respStr, isSuccess in
                                 if isSuccess {
                                     VideoDetailView.willPlayVideoLink = respStr
                                     VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
@@ -543,7 +552,7 @@ struct VideoDetailView: View {
                             }
                         }
                     } else if videoGetterSource == "injahow" {
-                        DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!)&p=1&type=bangumi&q=16&otype=url") { respStr, isSuccess in
+                        DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=1&type=video&q=32&format=mp4&otype=url") { respStr, isSuccess in
                             if isSuccess {
                                 VideoDetailView.willPlayVideoLink = respStr
                                 VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
@@ -576,7 +585,7 @@ struct VideoDetailView: View {
                             }
                         }
                     } else if videoGetterSource == "injahow" {
-                        DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!)&p=1&type=bangumi&q=16&otype=url") { respStr, isSuccess in
+                        DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=1&type=video&q=32&format=mp4&otype=url") { respStr, isSuccess in
                             if isSuccess {
                                 VideoDetailView.willPlayVideoLink = respStr
                                 VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
@@ -600,7 +609,7 @@ struct VideoDetailView: View {
                         }, label: {
                             Label("下载视频", image: "arrow.down.doc")
                         })
-                        .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
+                        .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails, subTitles: subTitles)})
                     }
                 })
                 #endif

@@ -63,8 +63,10 @@ struct SkinExplorerView: View {
                 skinNames.removeAll()
                 let files = AppFileManager(path: "skin").GetRoot() ?? [[:]]
                 for file in files {
-                    if file["isDirectory"]! == "true" {
-                        skinNames.append(file["name"]!)
+                    if let isDirectory = file["isDirectory"] {
+                        if isDirectory == "true" {
+                            skinNames.append(file["name"]!)
+                        }
                     }
                 }
             }

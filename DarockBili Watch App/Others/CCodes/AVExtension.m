@@ -13,7 +13,9 @@
 
 - (instancetype)init: (NSString *) playerUrl {
     self = [super init];
-    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL: [[NSURL alloc] initWithString: playerUrl] options: @{AVURLAssetHTTPUserAgentKey: @"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"}];
+    NSMutableDictionary *headers = [NSMutableDictionary dictionary];
+    [headers setObject:@"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15" forKey:@"User-Agent"];
+    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL: [[NSURL alloc] initWithString: playerUrl] options: headers];
     AVPlayerItem *item = [[AVPlayerItem alloc] initWithAsset: asset];
     AVPlayer *player = [[AVPlayer alloc] initWithPlayerItem: item];
     networkPlayer = player;

@@ -63,19 +63,24 @@ struct VideoPlayerView: View {
                     .ignoresSafeArea()
                     .onAppear {
                         hideDigitalTime(true)
-                        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
+                        Timer.scheduledTimer(withTimeInterval: 15, repeats: true) { timer in
                             playerTimer = timer
 //                                                debugPrint(player.currentTime())
 //                                                debugPrint(player.currentItem!.status)
 //                                                danmakuWallOffsetX = player.currentTime().seconds * 20
-                            debugPrint(pExtension.getCurrentPlayTime())
+                            
+                            debugPrint(pExtension.getCurrentPlayTimeSeconds())
+                            let headers: HTTPHeaders = [
+                                "cookie": "SESSDATA=\(sessdata)"
+                            ]
+                            AF.request("https://api.bilibili.com/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": VideoDetailView.willPlayVideoBV, "mid": dedeUserID, "played_time": Int(pExtension.getCurrentPlayTimeSeconds()), "type": 3, "dt": 2, "play_type": 0, "csrf": biliJct], headers: headers).response { response in
+                                debugPrint(response)
+                            }
                         }
                     }
                     .onDisappear {
                         hideDigitalTime(false)
-                        if playerTimer != nil {
-                            playerTimer!.invalidate()
-                        }
+                        playerTimer?.invalidate()
                     }
                     .tag(1)
                 ScrollView {

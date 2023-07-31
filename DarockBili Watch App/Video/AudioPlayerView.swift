@@ -16,11 +16,13 @@ import CachedAsyncImage
 
 struct AudioPlayerView: View {
     var videoDetails: [String: String]
+    var subTitles: [[String: String]]
     @AppStorage("AudioPlayBehavior") var audioPlayBehavior = AudioPlayerBehavior.singleLoop.rawValue
     @State var isPlaying = true
     @State var finishObserver: AnyCancellable?
     @State var startObserver: AnyCancellable?
     @State var backgroundPicOpacity = 0.0
+    @State var nowPlayTimeTimer: Timer?
     var body: some View {
         let asset = AVURLAsset(url: URL(string: VideoDetailView.willPlayVideoLink)!, options: [AVURLAssetHTTPUserAgentKey: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"])
         let playerItem = AVPlayerItem(asset: asset)
@@ -231,12 +233,19 @@ struct AudioPlayerView: View {
                     }
                 }
             
+            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
+                nowPlayTimeTimer = timer
+                debugPrint(audioPlayer.currentTime().seconds)
+            }
+            
             RefreshPlayerBehavior(player: audioPlayer, playerItem: playerItem)
+            
             
         }
         .onDisappear {
             startObserver?.cancel()
             finishObserver?.cancel()
+            nowPlayTimeTimer?.invalidate()
         }
     }
     
@@ -268,6 +277,6 @@ public enum AudioPlayerBehavior: String {
 
 struct AudioPlayerView_Previews: PreviewProvider {
     static var previews: some View {
-        AudioPlayerView(videoDetails: ["Pic": "http://i1.hdslb.com/bfs/archive/453a7f8deacb98c3b083ead733291f080383723a.jpg", "Title": "解压视频：20000个小球Marble run动画", "BV": "BV1PP41137Px", "UP": "小球模拟", "View": "114514", "Danmaku": "1919810"])
+        AudioPlayerView(videoDetails: ["Pic": "http://i1.hdslb.com/bfs/archive/453a7f8deacb98c3b083ead733291f080383723a.jpg", "Title": "解压视频：20000个小球Marble run动画", "BV": "BV1PP41137Px", "UP": "小球模拟", "View": "114514", "Danmaku": "1919810"], subTitles: [[:]])
     }
 }

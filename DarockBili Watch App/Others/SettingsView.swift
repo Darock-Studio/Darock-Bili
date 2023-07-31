@@ -19,9 +19,11 @@ struct SettingsView: View {
                 NavigationLink(destination: {AppBehaviorSettingsView()}, label: {
                     Text("App 行为")
                 })
+                #if swift(>=5.9)
                 NavigationLink(destination: {SkinSettingsView()}, label: {
                     Text("个性装扮")
                 })
+                #endif
             }
             Section {
                 NavigationLink(destination: {PlayerSettingsView()}, label: {
@@ -96,12 +98,12 @@ struct SettingsView: View {
                         Text("关闭").tag("never")
                     }
                 }
-//                Section(footer: Text("解析失败或无法播放视频时可尝试更换")) {
-//                    Picker("解析源", selection: $videoGetterSource) {
-//                        Text("官方").tag("official")
-//                        Text("第三方").tag("injahow")
-//                    }
-//                }
+                Section(footer: Text("解析失败或无法播放视频时可尝试更换")) {
+                    Picker("解析源", selection: $videoGetterSource) {
+                        Text("官方").tag("official")
+                        Text("第三方").tag("injahow")
+                    }
+                }
             }
         }
     }

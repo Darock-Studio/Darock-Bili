@@ -84,6 +84,7 @@ struct DownloadsView: View {
 
 struct OfflineVideoPlayer: View {
     var path: String? = nil
+    @State var timeUpdateTimer: Timer?
     var body: some View {
         let asset = AVAsset(url: URL(fileURLWithPath: path == nil ? DownloadsView.willPlayVideoPath : path!))
         let item = AVPlayerItem(asset: asset)
@@ -95,9 +96,15 @@ struct OfflineVideoPlayer: View {
         .onAppear {
             hideDigitalTime(true)
             debugPrint(DownloadsView.willPlayVideoPath)
+            
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+                timeUpdateTimer = timer
+                debugPrint(player.currentTime().seconds)
+            }
         }
         .onDisappear {
             hideDigitalTime(false)
+            timeUpdateTimer?.invalidate()
         }
     }
 }
