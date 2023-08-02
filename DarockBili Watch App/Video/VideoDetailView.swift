@@ -68,12 +68,12 @@ struct VideoDetailView: View {
                                             })
                                             .sheet(isPresented: $isMoreMenuPresented, content: {
                                                 List {
-                                                    Button(action: {
-                                                        isDownloadPresented = true
-                                                    }, label: {
-                                                        Label("下载视频", systemImage: "arrow.down.doc")
-                                                    })
-                                                    .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
+//                                                    Button(action: {
+//                                                        isDownloadPresented = true
+//                                                    }, label: {
+//                                                        Label("下载视频", systemImage: "arrow.down.doc")
+//                                                    })
+//                                                    .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
                                                     Button(action: {
                                                         let headers: HTTPHeaders = [
                                                             "cookie": "SESSDATA=\(sessdata)"
@@ -523,12 +523,35 @@ struct VideoDetailView: View {
                     })
                     .sheet(isPresented: $isMoreMenuPresented, content: {
                         List {
+//                            Button(action: {
+//                                isDownloadPresented = true
+//                            }, label: {
+//                                Label("下载视频", image: "arrow.down.doc")
+//                            })
+//                            .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
                             Button(action: {
-                                isDownloadPresented = true
+                                let headers: HTTPHeaders = [
+                                    "cookie": "SESSDATA=\(sessdata)"
+                                ]
+                                AF.request("https://api.bilibili.com/x/v2/history/toview/add", method: .post, parameters: ["bvid": videoDetails["BV"]!, "csrf": biliJct], headers: headers).response { response in
+                                    do {
+                                        let json = try JSON(data: response.data ?? Data())
+                                        if let code = json["code"].int {
+                                            if code == 0 {
+                                                tipWithText("添加成功", symbol: SFSymbol.Checkmark.circleFill.rawValue)
+                                            } else {
+                                                tipWithText(json["message"].string ?? "未知错误", symbol: SFSymbol.Xmark.circleFill.rawValue)
+                                            }
+                                        } else {
+                                            tipWithText("未知错误", symbol: SFSymbol.Xmark.circleFill.rawValue)
+                                        }
+                                    } catch {
+                                        tipWithText("未知错误", symbol: SFSymbol.Xmark.circleFill.rawValue)
+                                    }
+                                }
                             }, label: {
-                                Label("下载视频", image: "arrow.down.doc")
+                                Label("添加到稍后再看", systemImage: "memories.badge.plus")
                             })
-                            .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
                         }
                     })
                 }
@@ -604,12 +627,35 @@ struct VideoDetailView: View {
                 })
                 .sheet(isPresented: $isMoreMenuPresented, content: {
                     List {
+//                        Button(action: {
+//                            isDownloadPresented = true
+//                        }, label: {
+//                            Label("下载视频", image: "arrow.down.doc")
+//                        })
+//                        .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
                         Button(action: {
-                            isDownloadPresented = true
+                            let headers: HTTPHeaders = [
+                                "cookie": "SESSDATA=\(sessdata)"
+                            ]
+                            AF.request("https://api.bilibili.com/x/v2/history/toview/add", method: .post, parameters: ["bvid": videoDetails["BV"]!, "csrf": biliJct], headers: headers).response { response in
+                                do {
+                                    let json = try JSON(data: response.data ?? Data())
+                                    if let code = json["code"].int {
+                                        if code == 0 {
+                                            tipWithText("添加成功", symbol: SFSymbol.Checkmark.circleFill.rawValue)
+                                        } else {
+                                            tipWithText(json["message"].string ?? "未知错误", symbol: SFSymbol.Xmark.circleFill.rawValue)
+                                        }
+                                    } else {
+                                        tipWithText("未知错误", symbol: SFSymbol.Xmark.circleFill.rawValue)
+                                    }
+                                } catch {
+                                    tipWithText("未知错误", symbol: SFSymbol.Xmark.circleFill.rawValue)
+                                }
+                            }
                         }, label: {
-                            Label("下载视频", image: "arrow.down.doc")
+                            Label("添加到稍后再看", systemImage: "memories.badge.plus")
                         })
-                        .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
                     }
                 })
                 #endif

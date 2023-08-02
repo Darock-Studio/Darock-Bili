@@ -184,6 +184,7 @@
 		6BE4AA792A56798600F18565 /* CodeExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeExt.swift; sourceTree = "<group>"; };
 		6BF45C272A760C2C006E7A34 /* LyricerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricerView.swift; sourceTree = "<group>"; };
 		6BF6B5CE2A544A1F004A31BC /* NetworkFixView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFixView.swift; sourceTree = "<group>"; };
+		6BFC824A2A78F3CB00E1FD20 /* Search_With_UP_V2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Search_With_UP_V2.json; sourceTree = "<group>"; };
 		6BFF29022A6C0B3A00914A8E /* DarockBili.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarockBili.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BFF29042A6C0B3A00914A8E /* DarockBiliApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarockBiliApp.swift; sourceTree = "<group>"; };
 		6BFF29062A6C0B3A00914A8E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -301,6 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				6B8858012A72DC2200DBEA21 /* Dynamic_Feed_All.json */,
+				6BFC824A2A78F3CB00E1FD20 /* Search_With_UP_V2.json */,
 			);
 			path = JSONReturnExamples;
 			sourceTree = "<group>";

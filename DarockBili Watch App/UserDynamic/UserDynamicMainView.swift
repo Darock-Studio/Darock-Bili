@@ -36,22 +36,28 @@ struct UserDynamicMainView: View {
                                     VStack {
                                         NavigationLink("", isActive: $isSenderDetailsPresented[i], destination: {UserDetailView(uid: dynamics[i]["SenderID"]! as! String)})
                                             .frame(width: 0, height: 0)
-                                        Text(dynamics[i]["SenderName"]! as! String)
-                                            .font(.system(size: 14, weight: .bold))
-                                            .lineLimit(1)
-                                        Text(dynamics[i]["SendTimeStr"]! as! String + { () -> String in
-                                            switch dynamics[i]["MajorType"]! as! BiliDynamicMajorType {
-                                            case .majorTypeDraw:
-                                                return ""
-                                            case .majorTypeArchive:
-                                                return " · 投稿了视频"
-                                            case .majorTypeLiveRcmd:
-                                                return "直播了"
-                                            }
-                                        }())
+                                        HStack {
+                                            Text(dynamics[i]["SenderName"]! as! String)
+                                                .font(.system(size: 14, weight: .bold))
+                                                .lineLimit(1)
+                                            Spacer()
+                                        }
+                                        HStack {
+                                            Text(dynamics[i]["SendTimeStr"]! as! String + { () -> String in
+                                                switch dynamics[i]["MajorType"]! as! BiliDynamicMajorType {
+                                                case .majorTypeDraw:
+                                                    return ""
+                                                case .majorTypeArchive:
+                                                    return " · 投稿了视频"
+                                                case .majorTypeLiveRcmd:
+                                                    return "直播了"
+                                                }
+                                            }())
                                             .font(.system(size: 10))
                                             .foregroundColor(.gray)
                                             .lineLimit(1)
+                                            Spacer()
+                                        }
                                     }
                                     Spacer()
                                 }
@@ -69,14 +75,16 @@ struct UserDynamicMainView: View {
                                     if let draws = dynamics[i]["Draws"] as? [[String: String]] {
                                         LazyVGrid(columns: [GridItem(.fixed(50)), GridItem(.fixed(50)), GridItem(.fixed(50))]) {
                                             ForEach(0..<draws.count, id: \.self) { j in
-                                                VStack {
-                                                    NavigationLink("", isActive: $isDynamicImagePresented[i][j], destination: {ImageViewerView(url: draws[j]["Src"]!)})
-                                                        .frame(width: 0, height: 0)
-                                                    WebImage(url: URL(string: draws[j]["Src"]! + "@60w_40h"), options: [.progressiveLoad])
-                                                        .cornerRadius(5)
-                                                        .onTapGesture {
-                                                            isDynamicImagePresented[i][j] = true
-                                                        }
+                                                if isDynamicImagePresented[i].count > j {
+                                                    VStack {
+                                                        NavigationLink("", isActive: $isDynamicImagePresented[i][j], destination: {ImageViewerView(url: draws[j]["Src"]!)})
+                                                            .frame(width: 0, height: 0)
+                                                        WebImage(url: URL(string: draws[j]["Src"]! + "@60w_40h"), options: [.progressiveLoad])
+                                                            .cornerRadius(5)
+                                                            .onTapGesture {
+                                                                isDynamicImagePresented[i][j] = true
+                                                            }
+                                                    }
                                                 }
                                             }
                                         }
