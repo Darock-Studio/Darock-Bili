@@ -76,7 +76,7 @@ struct MainView: View {
                             let nowMajorVer = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
                             let nowBuildVer = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
                             if nowMajorVer < newMajorVer || nowBuildVer < newBuildVer {
-                                Text("喵哩喵哩新版本(v\(newMajorVer) Build \(newBuildVer))已发布！可前往 TestFlight 更新")
+                                Text("喵哩喵哩新版本(v\(newMajorVer) Build \(newBuildVer))已发布！现可更新")
                             }
                         }
                     }

@@ -19,9 +19,9 @@ struct ContentView: View {
             TabView {
                 MainView()
                     .tag(1)
-                PersonAccountView()
-                    .tag(2)
                 UserDynamicMainView()
+                    .tag(2)
+                PersonAccountView()
                     .tag(3)
             }
 //            .sheet(isPresented: $isGuidePresented, onDismiss: {

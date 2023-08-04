@@ -147,12 +147,24 @@ struct PersonAccountView: View {
                                         }
                                     })
                                     .buttonBorderShape(.roundedRectangle(radius: 13))
-                                    NavigationLink(destination: {DownloadsView()}, label: {
+//                                    NavigationLink(destination: {DownloadsView()}, label: {
+//                                        HStack {
+//                                            HStack {
+//                                                Image(systemName: "square.and.arrow.down.fill")
+//                                                    .foregroundColor(.accentColor)
+//                                                Text("离线缓存")
+//                                            }
+//                                            .font(.system(size: 16))
+//                                            Spacer()
+//                                        }
+//                                    })
+//                                    .buttonBorderShape(.roundedRectangle(radius: 13))
+                                    NavigationLink(destination: {FavoriteView()}, label: {
                                         HStack {
                                             HStack {
-                                                Image(systemName: "square.and.arrow.down.fill")
+                                                Image(systemName: "star.fill")
                                                     .foregroundColor(.accentColor)
-                                                Text("离线缓存")
+                                                Text("我的收藏")
                                             }
                                             .font(.system(size: 16))
                                             Spacer()
@@ -165,18 +177,6 @@ struct PersonAccountView: View {
                                                 Image(systemName: "clock.arrow.circlepath")
                                                     .foregroundColor(.accentColor)
                                                 Text("历史记录")
-                                            }
-                                            .font(.system(size: 16))
-                                            Spacer()
-                                        }
-                                    })
-                                    .buttonBorderShape(.roundedRectangle(radius: 13))
-                                    NavigationLink(destination: {FavoriteView()}, label: {
-                                        HStack {
-                                            HStack {
-                                                Image(systemName: "star.fill")
-                                                    .foregroundColor(.accentColor)
-                                                Text("我的收藏")
                                             }
                                             .font(.system(size: 16))
                                             Spacer()
