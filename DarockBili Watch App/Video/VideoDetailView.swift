@@ -48,7 +48,6 @@ struct VideoDetailView: View {
     @State var backgroundPicOpacity = 0.0
     var body: some View {
         TabView {
-            #if swift(>=5.9)
             if #available(watchOS 10, *) {
                 ZStack {
                     Group {
@@ -68,12 +67,12 @@ struct VideoDetailView: View {
                                             })
                                             .sheet(isPresented: $isMoreMenuPresented, content: {
                                                 List {
-//                                                    Button(action: {
-//                                                        isDownloadPresented = true
-//                                                    }, label: {
-//                                                        Label("下载视频", systemImage: "arrow.down.doc")
-//                                                    })
-//                                                    .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
+                                                    Button(action: {
+                                                        isDownloadPresented = true
+                                                    }, label: {
+                                                        Label("下载视频", systemImage: "arrow.down.doc")
+                                                    })
+                                                    .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
                                                     Button(action: {
                                                         let headers: HTTPHeaders = [
                                                             "cookie": "SESSDATA=\(sessdata)"
@@ -221,24 +220,6 @@ struct VideoDetailView: View {
                 }
                 .tag(1)
             }
-            #else
-            ZStack {
-                Group {
-                    ScrollView {
-                        DetailViewFirstPageBase(videoDetails: $videoDetails, honors: $honors, subTitles: $subTitles, isLoading: $isLoading)
-                        DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, honors: $honors, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount)
-                    }
-                }
-                .blur(radius: isLoading ? 14 : 0)
-                if isLoading {
-                    Text("正在解析...")
-                        .font(.title2)
-                        .bold()
-                }
-            }
-            .tag(1)
-            #endif
-            #if swift(>=5.9)
             if #available(watchOS 10, *) {
                 VideoCommentsView(oid: String(videoDetails["BV"]!.dropFirst().dropFirst()))
                     .containerBackground(for: .navigation) {
@@ -253,9 +234,6 @@ struct VideoDetailView: View {
             } else {
                 VideoCommentsView(oid: String(videoDetails["BV"]!.dropFirst().dropFirst()))
             }
-            #else
-            VideoCommentsView(oid: String(videoDetails["BV"]!.dropFirst().dropFirst()))
-            #endif
             if goodVideos.count != 0 {
                 List {
                     ForEach(0...goodVideos.count - 1, id: \.self) { i in
@@ -450,7 +428,6 @@ struct VideoDetailView: View {
                     .opacity(0.65)
                 Spacer()
                     .frame(height: 20)
-                #if swift(>=5.9)
                 if #unavailable(watchOS 10) {
                     Button(action: {
                         isLoading = true
@@ -523,12 +500,12 @@ struct VideoDetailView: View {
                     })
                     .sheet(isPresented: $isMoreMenuPresented, content: {
                         List {
-//                            Button(action: {
-//                                isDownloadPresented = true
-//                            }, label: {
-//                                Label("下载视频", image: "arrow.down.doc")
-//                            })
-//                            .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
+                            Button(action: {
+                                isDownloadPresented = true
+                            }, label: {
+                                Label("下载视频", image: "arrow.down.doc")
+                            })
+                            .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
                             Button(action: {
                                 let headers: HTTPHeaders = [
                                     "cookie": "SESSDATA=\(sessdata)"
@@ -555,110 +532,6 @@ struct VideoDetailView: View {
                         }
                     })
                 }
-                #else
-                Button(action: {
-                    isLoading = true
-                    
-                    if videoGetterSource == "official" {
-                        let headers: HTTPHeaders = [
-                            "cookie": "SESSDATA=\(sessdata)"
-                        ]
-                        AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
-                            let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
-                            VideoDetailView.willPlayVideoCID = String(cid)
-                            AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
-                                VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
-                                //debugPrint(response)
-                                VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                                isVideoPlayerPresented = true
-                                isLoading = false
-                            }
-                        }
-                    } else if videoGetterSource == "injahow" {
-                        DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=1&type=video&q=32&format=mp4&otype=url") { respStr, isSuccess in
-                            if isSuccess {
-                                VideoDetailView.willPlayVideoLink = respStr
-                                VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                                isVideoPlayerPresented = true
-                                isLoading = false
-                            }
-                        }
-                    }
-                }, label: {
-                    Label("播放", systemImage: "play.fill")
-                })
-                .sheet(isPresented: $isVideoPlayerPresented, content: {VideoPlayerView()})
-                NavigationLink("", isActive: $isNowPlayingPresented, destination: {AudioPlayerView(videoDetails: videoDetails, subTitles: subTitles)})
-                    .frame(width: 0, height: 0)
-                Button(action: {
-                    isLoading = true
-                    
-                    if videoGetterSource == "official" {
-                        let headers: HTTPHeaders = [
-                            "cookie": "SESSDATA=\(sessdata)"
-                        ]
-                        AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
-                            let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
-                            VideoDetailView.willPlayVideoCID = String(cid)
-                            AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
-                                VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
-                                VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                                isNowPlayingPresented = true
-                                isLoading = false
-                            }
-                        }
-                    } else if videoGetterSource == "injahow" {
-                        DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=1&type=video&q=32&format=mp4&otype=url") { respStr, isSuccess in
-                            if isSuccess {
-                                VideoDetailView.willPlayVideoLink = respStr
-                                VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                                isNowPlayingPresented = true
-                                isLoading = false
-                            }
-                        }
-                    }
-                }, label: {
-                    Label("以音频播放", systemImage: "waveform")
-                })
-                Button(action: {
-                    isMoreMenuPresented = true
-                }, label: {
-                    Label("更多", systemImage: "ellipsis")
-                })
-                .sheet(isPresented: $isMoreMenuPresented, content: {
-                    List {
-//                        Button(action: {
-//                            isDownloadPresented = true
-//                        }, label: {
-//                            Label("下载视频", image: "arrow.down.doc")
-//                        })
-//                        .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
-                        Button(action: {
-                            let headers: HTTPHeaders = [
-                                "cookie": "SESSDATA=\(sessdata)"
-                            ]
-                            AF.request("https://api.bilibili.com/x/v2/history/toview/add", method: .post, parameters: ["bvid": videoDetails["BV"]!, "csrf": biliJct], headers: headers).response { response in
-                                do {
-                                    let json = try JSON(data: response.data ?? Data())
-                                    if let code = json["code"].int {
-                                        if code == 0 {
-                                            tipWithText("添加成功", symbol: SFSymbol.Checkmark.circleFill.rawValue)
-                                        } else {
-                                            tipWithText(json["message"].string ?? "未知错误", symbol: SFSymbol.Xmark.circleFill.rawValue)
-                                        }
-                                    } else {
-                                        tipWithText("未知错误", symbol: SFSymbol.Xmark.circleFill.rawValue)
-                                    }
-                                } catch {
-                                    tipWithText("未知错误", symbol: SFSymbol.Xmark.circleFill.rawValue)
-                                }
-                            }
-                        }, label: {
-                            Label("添加到稍后再看", systemImage: "memories.badge.plus")
-                        })
-                    }
-                })
-                #endif
             }
         }
     }

@@ -20,7 +20,6 @@ struct PersonAccountView: View {
     @AppStorage("IsSkinNoBlur") var isSkinNoBlur = false
     var body: some View {
         NavigationStack {
-            #if swift(>=5.9)
             if #available(watchOS 10, *) {
                 MainView()
                     .toolbar {
@@ -30,51 +29,48 @@ struct PersonAccountView: View {
                                     .foregroundColor(.accentColor)
                             })
                         }
-                        ToolbarItem(placement: .topBarTrailing) {
-                            NavigationLink(destination: {SkinExplorerView()}, label: {
-                                Image(systemName: "paintbrush")
-                                    .foregroundColor(.accentColor)
-                            })
-                        }
+//                        ToolbarItem(placement: .topBarTrailing) {
+//                            NavigationLink(destination: {SkinExplorerView()}, label: {
+//                                Image(systemName: "paintbrush")
+//                                    .foregroundColor(.accentColor)
+//                            })
+//                        }
                     }
-                    .containerBackground(for: .navigation) {
-                        if usingSkin != "" {
-                            let playerItem = AVPlayerItem(url: AppFileManager(path: "skin/\(usingSkin)").GetFilePath(name: "head_myself_mp4_bg.mp4"))
-                            let player = AVPlayer(playerItem: playerItem)
-                            var finishObserver: AnyCancellable?
-                            ZStack {
-                                VideoPlayer(player: player)
-                                    .ignoresSafeArea()
-                                    .scaleEffect(1.5)
-                                    .onAppear {
-                                        finishObserver = NotificationCenter.default
-                                            .publisher(for: .AVPlayerItemDidPlayToEndTime, object: playerItem)
-                                            .sink { _ in
-                                                player.seek(to: CMTime.zero)
-                                                player.play()
-                                            }
-                                        
-                                        debugPrint(AppFileManager(path: "skin/\(usingSkin)").GetFilePath(name: "head_myself_mp4_bg.mp4"))
-                                        player.play()
-                                    }
-                                    .onDisappear {
-                                        finishObserver?.cancel()
-                                    }
-                                if !isSkinNoBlur {
-                                    Color.black
-                                        .ignoresSafeArea()
-                                        .opacity(0.4)
-                                }
-                            }
-                            .blur(radius: isSkinNoBlur ? 0 : 16)
-                        }
-                    }
+//                    .containerBackground(for: .navigation) {
+//                        if usingSkin != "" {
+//                            let playerItem = AVPlayerItem(url: AppFileManager(path: "skin/\(usingSkin)").GetFilePath(name: "head_myself_mp4_bg.mp4"))
+//                            let player = AVPlayer(playerItem: playerItem)
+//                            var finishObserver: AnyCancellable?
+//                            ZStack {
+//                                VideoPlayer(player: player)
+//                                    .ignoresSafeArea()
+//                                    .scaleEffect(1.5)
+//                                    .onAppear {
+//                                        finishObserver = NotificationCenter.default
+//                                            .publisher(for: .AVPlayerItemDidPlayToEndTime, object: playerItem)
+//                                            .sink { _ in
+//                                                player.seek(to: CMTime.zero)
+//                                                player.play()
+//                                            }
+//                                        
+//                                        debugPrint(AppFileManager(path: "skin/\(usingSkin)").GetFilePath(name: "head_myself_mp4_bg.mp4"))
+//                                        player.play()
+//                                    }
+//                                    .onDisappear {
+//                                        finishObserver?.cancel()
+//                                    }
+//                                if !isSkinNoBlur {
+//                                    Color.black
+//                                        .ignoresSafeArea()
+//                                        .opacity(0.4)
+//                                }
+//                            }
+//                            .blur(radius: isSkinNoBlur ? 0 : 16)
+//                        }
+//                    }
             } else {
                 MainView(isShowSettingsButton: true)
             }
-            #else
-            MainView(isShowSettingsButton: true)
-            #endif
         }
     }
     
@@ -147,18 +143,18 @@ struct PersonAccountView: View {
                                         }
                                     })
                                     .buttonBorderShape(.roundedRectangle(radius: 13))
-//                                    NavigationLink(destination: {DownloadsView()}, label: {
-//                                        HStack {
-//                                            HStack {
-//                                                Image(systemName: "square.and.arrow.down.fill")
-//                                                    .foregroundColor(.accentColor)
-//                                                Text("离线缓存")
-//                                            }
-//                                            .font(.system(size: 16))
-//                                            Spacer()
-//                                        }
-//                                    })
-//                                    .buttonBorderShape(.roundedRectangle(radius: 13))
+                                    NavigationLink(destination: {DownloadsView()}, label: {
+                                        HStack {
+                                            HStack {
+                                                Image(systemName: "square.and.arrow.down.fill")
+                                                    .foregroundColor(.accentColor)
+                                                Text("离线缓存")
+                                            }
+                                            .font(.system(size: 16))
+                                            Spacer()
+                                        }
+                                    })
+                                    .buttonBorderShape(.roundedRectangle(radius: 13))
                                     NavigationLink(destination: {FavoriteView()}, label: {
                                         HStack {
                                             HStack {

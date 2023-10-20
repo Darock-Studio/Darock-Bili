@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-#if swift(>=5.9)
 @available(watchOS 10.0, *)
 struct LyricerView: View {
     var lyrics: [[String: String]]
@@ -78,4 +77,3 @@ struct LyricerView_Previews: PreviewProvider {
         LyricerView(lyrics: [["Start": "22.3", "End": "26.025", "content": "chunzhenboidontsmoke is on the track."], ["Start": "30", "End": "32", "content": "chunzhenboidontsmoke is on the track."], ["Start": "32.8", "End": "34", "content": "chunzhenboidontsmoke is on the track."], ["Start": "35.3", "End": "37.1", "content": "chunzhenboidontsmoke is on the track."], ["Start": "38", "End": "39.4", "content": "chunzhenboidontsmoke is on the track."], ["Start": "40.2", "End": "43.8", "content": "chunzhenboidontsmoke is on the track."]])
     }
 }
-#endif

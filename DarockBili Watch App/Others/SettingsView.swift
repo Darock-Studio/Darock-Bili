@@ -19,11 +19,9 @@ struct SettingsView: View {
                 NavigationLink(destination: {AppBehaviorSettingsView()}, label: {
                     Text("App 行为")
                 })
-                #if swift(>=5.9)
-                NavigationLink(destination: {SkinSettingsView()}, label: {
-                    Text("个性装扮")
-                })
-                #endif
+//                NavigationLink(destination: {SkinSettingsView()}, label: {
+//                    Text("个性装扮")
+//                })
             }
             Section {
                 NavigationLink(destination: {PlayerSettingsView()}, label: {

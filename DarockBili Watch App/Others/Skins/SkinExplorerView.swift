@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SkinExplorerView: View {
     var body: some View {
-        #if swift(>=5.9)
         if #available(watchOS 10, *) {
             MainView()
                 .toolbar {
@@ -22,9 +21,6 @@ struct SkinExplorerView: View {
         } else {
             MainView()
         }
-        #else
-        MainView()
-        #endif
     }
     
     struct MainView: View {

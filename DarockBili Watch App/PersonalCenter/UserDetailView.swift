@@ -39,7 +39,6 @@ struct UserDetailView: View {
     @State var isSendbMessagePresented = false
     var body: some View {
         TabView {
-            #if swift(>=5.9)
             if #available(watchOS 10, *) {
                 TabView {
                     VStack {
@@ -108,18 +107,7 @@ struct UserDetailView: View {
                         .tag(2)
                 }
             }
-            #else
             ScrollView {
-                FirstPageBase(uid: uid, userFaceUrl: $userFaceUrl, username: $username, followCount: $followCount, fansCount: $fansCount, coinCount: $coinCount, isFollowed: $isFollowed, isSendbMessagePresented: $isSendbMessagePresented)
-                    .offset(y: -10)
-                    .navigationTitle(username)
-                    .tag(1)
-                SecondPageBase(officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign)
-                    .tag(2)
-            }
-            #endif
-            ScrollView {
-                #if swift(>=5.9)
                 if #available(watchOS 10, *) {
                     VideosListBase(uid: uid, username: $username, videos: $videos, articles: $articles, viewSelector: $viewSelector, videoCount: $videoCount, articalCount: $articalCount)
                         .tag(2)
@@ -142,11 +130,6 @@ struct UserDetailView: View {
                         .tag(2)
                         .navigationTitle(viewSelector == .video ? "\(videoCount) 视频" : "\(articalCount) 专栏")
                 }
-                #else
-                VideosListBase(uid: uid, username: $username, videos: $videos, articles: $articles, viewSelector: $viewSelector, videoCount: $videoCount, articalCount: $articalCount)
-                    .tag(2)
-                    .navigationTitle(viewSelector == .video ? "\(videoCount) 视频" : "\(articalCount) 专栏")
-                #endif
             }
         }
         .onAppear {
@@ -245,7 +228,6 @@ struct UserDetailView: View {
                     }
                 }
                 .padding(.horizontal, 40)
-                #if swift(>=5.9)
                 if #unavailable(watchOS 10) {
                     if dedeUserID == uid {
                         HStack {
@@ -289,49 +271,6 @@ struct UserDetailView: View {
                         }
                     })
                 }
-                #else
-                if dedeUserID == uid {
-                    HStack {
-                        Image(systemName: "b.circle")
-                            .font(.system(size: 12))
-                            .opacity(0.55)
-                            .offset(y: 1)
-                        Text(String(coinCount))
-                            .font(.system(size: 14))
-                    }
-                }
-                Button(action: {
-                    let headers: HTTPHeaders = [
-                        "cookie": "SESSDATA=\(sessdata);"
-                    ]
-                    AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
-                        debugPrint(response)
-                        let json = try! JSON(data: response.data!)
-                        let code = json["code"].int!
-                        if code == 0 {
-                            tipWithText(isFollowed ? "取关成功" : "关注成功", symbol: "checkmark.circle.fill")
-                            isFollowed.toggle()
-                        } else {
-                            tipWithText(json["message"].string!, symbol: "xmark.circle.fill")
-                        }
-                    }
-                }, label: {
-                    HStack {
-                        Image(systemName: isFollowed ? "person.badge.minus" : "person.badge.plus")
-                        Text(isFollowed ? "取消关注" : "关注")
-                    }
-                })
-                NavigationLink("", isActive: $isSendbMessagePresented, destination: {bMessageSendView(uid: Int(uid)!, username: username)})
-                    .frame(width: 0, height: 0)
-                Button(action: {
-                    isSendbMessagePresented = true
-                }, label: {
-                    HStack {
-                        Image(systemName: "ellipsis.bubble")
-                        Text("私信")
-                    }
-                })
-                #endif
             }
         }
     }
@@ -392,7 +331,6 @@ struct UserDetailView: View {
         var body: some View {
             VStack {
                 Group {
-                    #if swift(>=5.9)
                     if #unavailable(watchOS 10) {
                         Button(action: {
                             if viewSelector == .video {
@@ -409,22 +347,6 @@ struct UserDetailView: View {
                         Spacer()
                             .frame(height: 20)
                     }
-                    #else
-                    Button(action: {
-                        if viewSelector == .video {
-                            viewSelector = .article
-                        } else if viewSelector == .article {
-                            viewSelector = .video
-                        }
-                    }, label: {
-                        HStack {
-                            Image(systemName: viewSelector == .video ? "play.circle" : "doc.text.image")
-                            Text(viewSelector == .video ? "查看视频" : "查看专栏")
-                        }
-                    })
-                    Spacer()
-                        .frame(height: 20)
-                    #endif
                     if viewSelector == .video {
                         VStack {
                             if videos.count != 0 {

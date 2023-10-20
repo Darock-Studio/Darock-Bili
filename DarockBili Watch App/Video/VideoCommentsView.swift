@@ -21,7 +21,6 @@ struct VideoCommentsView: View {
     @State var isSendCommentPresented = false
     var body: some View {
         VStack {
-            #if swift(>=5.9)
             if #available(watchOS 10, *) {
                 CommentMainView(oid: oid)
                     .toolbar {
@@ -37,9 +36,6 @@ struct VideoCommentsView: View {
             } else {
                 CommentMainView(oid: oid)
             }
-            #else
-            CommentMainView(oid: oid)
-            #endif
         }
         
     }

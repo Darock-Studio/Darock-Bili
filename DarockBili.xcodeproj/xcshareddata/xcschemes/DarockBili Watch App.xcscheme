@@ -90,7 +90,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "cd /Users/WindowsMEMZ/Desktop/DarockBili&#10;agvtool next-version -all&#10;">
+               scriptText = "cd /Users/memz233/Desktop/Darock-Bili&#10;agvtool next-version -all&#10;">
             </ActionContent>
          </ExecutionAction>
       </PostActions>
@@ -133,7 +133,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "cd /Users/WindowsMEMZ/Desktop/DarockBili&#10;agvtool next-version -all&#10;">
+               scriptText = "cd /Users/memz233/Desktop/Darock-Bili&#10;agvtool next-version -all&#10;">
             </ActionContent>
          </ExecutionAction>
       </PostActions>

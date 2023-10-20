@@ -1,0 +1,62 @@
+name: iOS starter workflow
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build and Archive App
+    runs-on: macos-13
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Set Xcode Version
+        run: sudo xcode-select -s /Applications/Xcode_15.0.app
+
+      - name: Get App Store Connect API Key File
+        env:
+          ASCAPI_KEY: ${{ secrets.ASCAPI_KEY }}
+        run: |
+          KEY_PATH=$RUNNER_TEMP/ascapi-key.p8
+          
+          echo -n "$ASCAPI_KEY" > $KEY_PATH
+
+      - name: Resolve Swift dependencies
+        run: |
+          xcodebuild -resolvePackageDependencies -scheme DarockBili -configuration Debug
+          xcodebuild -resolvePackageDependencies -scheme DarockBili -configuration Release
+
+      - name: Archive DarockBili App
+        env:
+          ASCAPI_KEY_ID: ${{ secrets.ASCAPI_KEY_ID }}
+          ASCAPI_ISSUER_ID: ${{ secrets.ASCAPI_ISSUER_ID }}
+        run: |
+          KEY_PATH=$RUNNER_TEMP/ascapi-key.p8
+          
+          xcodebuild -scheme DarockBili -configuration Debug DEVELOPMENT_TEAM=B57D8PP775 -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath DarockBili_Debug.xcarchive clean archive CODE_SIGN_IDENTITY="Apple Development" -allowProvisioningUpdates -authenticationKeyPath $KEY_PATH -authenticationKeyID $ASCAPI_KEY_ID -authenticationKeyIssuerID $ASCAPI_ISSUER_ID
+          xcodebuild -scheme DarockBili -configuration Release DEVELOPMENT_TEAM=B57D8PP775 -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath DarockBili_Release.xcarchive clean archive CODE_SIGN_IDENTITY="Apple Development" -allowProvisioningUpdates -authenticationKeyPath $KEY_PATH -authenticationKeyID $ASCAPI_KEY_ID -authenticationKeyIssuerID $ASCAPI_ISSUER_ID
+          
+      - name: Export IPA
+        run: |
+          mkdir ./Export_Debug
+          mkdir ./Export_Release
+          xcodebuild -exportArchive -archivePath DarockBili_Debug.xcarchive -exportPath ./Export_Debug -exportOptionsPlist ExportOptions.plist
+          xcodebuild -exportArchive -archivePath DarockBili_Release.xcarchive -exportPath ./Export_Release -exportOptionsPlist ExportOptions.plist
+
+      - name: Upload Debug IPA
+        uses: actions/upload-artifact@v3
+        with:
+          name: Debug.ipa
+          path: ./Export_Debug/DarockBili.ipa
+
+      - name: Upload Release IPA
+        uses: actions/upload-artifact@v3
+        with:
+          name: Release.ipa
+          path: ./Export_Release/DarockBili.ipa
+  

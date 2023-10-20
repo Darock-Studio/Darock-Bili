@@ -18,17 +18,15 @@ struct AudioPlayerView: View {
     var videoDetails: [String: String]
     var subTitles: [[String: String]]
     @AppStorage("AudioPlayBehavior") var audioPlayBehavior = AudioPlayerBehavior.singleLoop.rawValue
+    @State var audioPlayer = AVPlayer()
+    @State var playerItem: AVPlayerItem! = nil
     @State var isPlaying = true
     @State var finishObserver: AnyCancellable?
     @State var startObserver: AnyCancellable?
     @State var backgroundPicOpacity = 0.0
     @State var nowPlayTimeTimer: Timer?
     var body: some View {
-        let asset = AVURLAsset(url: URL(string: VideoDetailView.willPlayVideoLink)!, options: [AVURLAssetHTTPUserAgentKey: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"])
-        let playerItem = AVPlayerItem(asset: asset)
-        let audioPlayer = AVPlayer(playerItem: playerItem)
         VStack {
-            #if swift(>=5.9)
             if #available(watchOS 10, *) {
                 VStack {
                     AsyncImage(url: URL(string: videoDetails["Pic"]! + "@110w_85h"))
@@ -96,11 +94,9 @@ struct AudioPlayerView: View {
                         Button(action: {
                             isPlaying.toggle()
                             if isPlaying {
-                                //audioPlayer.play()
-                                AVExtension.avPlayerStartPlay(audioPlayer)
+                                audioPlayer.play()
                             } else {
-                                //audioPlayer.pause()
-                                AVExtension.avPlayerPausePlay(audioPlayer)
+                                audioPlayer.pause()
                             }
                         }, label: {
                             Image(systemName: isPlaying ? "pause.fill" : "play.fill")
@@ -155,11 +151,9 @@ struct AudioPlayerView: View {
                     Button(action: {
                         isPlaying.toggle()
                         if isPlaying {
-                            //audioPlayer.play()
-                            AVExtension.avPlayerStartPlay(audioPlayer)
+                            audioPlayer.play()
                         } else {
-                            //audioPlayer.pause()
-                            AVExtension.avPlayerPausePlay(audioPlayer)
+                            audioPlayer.pause()
                         }
                     }, label: {
                         Image(systemName: isPlaying ? "pause.fill" : "play.fill")
@@ -167,65 +161,12 @@ struct AudioPlayerView: View {
                     VolumeControlView()
                 }
             }
-            #else
-            VStack {
-                AsyncImage(url: URL(string: videoDetails["Pic"]! + "@110w_85h"))
-                    .cornerRadius(10)
-                Text(videoDetails["Title"]!)
-                    .font(.system(size: 14, weight: .bold))
-                    .lineLimit(1)
-                    .padding(.vertical, 7)
-                    .padding(.horizontal, 20)
-                Text(videoDetails["Title"]!)
-                    .font(.system(size: 14, weight: .bold))
-                    .lineLimit(1)
-                    .padding(.vertical, 7)
-                    .padding(.horizontal, 20)
-                Button(action: {
-                    let behaviorCase = AudioPlayerBehavior(rawValue: audioPlayBehavior)!
-                    switch behaviorCase {
-                    case .singleLoop:
-                        audioPlayBehavior = AudioPlayerBehavior.pauseWhenFinish.rawValue
-                    case .pauseWhenFinish:
-                        audioPlayBehavior = AudioPlayerBehavior.singleLoop.rawValue
-                    case .listLoop:
-                        audioPlayBehavior = AudioPlayerBehavior.singleLoop.rawValue
-                    case .exitWhenFinish:
-                        audioPlayBehavior = AudioPlayerBehavior.singleLoop.rawValue
-                    }
-                    RefreshPlayerBehavior(player: audioPlayer, playerItem: playerItem)
-                }, label: {
-                    Image(systemName: { () -> String in
-                        let behaviorCase = AudioPlayerBehavior(rawValue: audioPlayBehavior)!
-                        switch behaviorCase {
-                        case .singleLoop:
-                            return "repeat.1"
-                        case .pauseWhenFinish:
-                            return "pause"
-                        case .listLoop:
-                            return "repeat"
-                        case .exitWhenFinish:
-                            return "rectangle.portrait.and.arrow.forward"
-                        }
-                    }())
-                })
-                Button(action: {
-                    isPlaying.toggle()
-                    if isPlaying {
-                        //audioPlayer.play()
-                        AVExtension.avPlayerStartPlay(audioPlayer)
-                    } else {
-                        //audioPlayer.pause()
-                        AVExtension.avPlayerPausePlay(audioPlayer)
-                    }
-                }, label: {
-                    Image(systemName: isPlaying ? "pause.fill" : "play.fill")
-                })
-                VolumeControlView()
-            }
-            #endif
         }
         .onAppear {
+            let asset = AVURLAsset(url: URL(string: VideoDetailView.willPlayVideoLink)!, options: [AVURLAssetHTTPUserAgentKey: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"])
+            playerItem = AVPlayerItem(asset: asset)
+            audioPlayer = AVPlayer(playerItem: playerItem)
+            
             startObserver = playerItem.publisher(for: \.status)
                 .sink { status in
                     if status == .readyToPlay {
@@ -239,8 +180,6 @@ struct AudioPlayerView: View {
             }
             
             RefreshPlayerBehavior(player: audioPlayer, playerItem: playerItem)
-            
-            
         }
         .onDisappear {
             startObserver?.cancel()
