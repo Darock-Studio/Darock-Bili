@@ -8,6 +8,7 @@
 import SwiftUI
 import DarockKit
 import SwiftyJSON
+import Dynamic
 import Alamofire
 import SDWebImageSwiftUI
 
@@ -56,7 +57,8 @@ struct MainView: View {
                             Text("Debug Version. DO NOT Release!!")
                                 .bold()
                             Button(action: {
-                                tipWithText("Test")
+                                //tipWithText("Test")
+                                Dynamic.PUICApplication.sharedPUICApplication._setStatusBarTimeHidden(true, animated: false, completion: nil)
                             }, label: {
                                 Text("Debug")
                             })

@@ -103,8 +103,9 @@ struct PersonAccountView: View {
                                 .frame(width: 0, height: 0)
                             HStack {
                                 if userFaceUrl != "" {
-                                    CachedAsyncImage(url: URL(string: userFaceUrl + "@28w"))
-                                        .cornerRadius(.infinity)
+                                    CachedAsyncImage(url: URL(string: userFaceUrl + "@30w"))
+                                        .frame(width: 28, height: 28)
+                                        .clipShape(Circle())
                                 } else {
                                     Image("Placeholder")
                                         .resizable()

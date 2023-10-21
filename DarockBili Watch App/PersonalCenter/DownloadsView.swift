@@ -45,15 +45,12 @@ struct DownloadsView: View {
                                     .cornerRadius(5)
                                 VStack {
                                     Text(metadatas[i]["Title"]!)
-                                        .font(.system(size: 15, weight: .bold))
+                                        .font(.system(size: 14, weight: .bold))
                                         .lineLimit(3)
-                                    HStack {
-                                        Label(metadatas[i]["View"]!, systemImage: "play.circle")
-                                        Label(metadatas[i]["UP"]!, systemImage: "person")
-                                    }
-                                    .font(.system(size: 11))
-                                    .foregroundColor(.gray)
-                                    .lineLimit(1)
+                                    Label(metadatas[i]["UP"]!, systemImage: "person")
+                                        .font(.system(size: 11))
+                                        .foregroundColor(.gray)
+                                        .lineLimit(1)
                                 }
                             }
                         })

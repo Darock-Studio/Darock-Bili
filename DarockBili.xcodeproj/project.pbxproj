@@ -80,6 +80,7 @@
 		6BFF29952A6C0E2200914A8E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B0253C62A4EF59700567986 /* Preview Assets.xcassets */; };
 		6BFF29A62A6C10EB00914A8E /* DarockKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6BFF29A52A6C10EB00914A8E /* DarockKit */; };
 		8CA4537F2AE408A700138CE4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 8CA4537E2AE408A700138CE4 /* README.md */; };
+		8CA453822AE42A3E00138CE4 /* Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA453812AE42A3E00138CE4 /* Dynamic */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -231,6 +232,7 @@
 				6B853FEA2A7509DC0067B55C /* ZipArchive in Frameworks */,
 				6BC8CB342A6D758000D2E9E9 /* DarockKit in Frameworks */,
 				6B37B4BD2A715EF900F26F1A /* SFSymbol in Frameworks */,
+				8CA453822AE42A3E00138CE4 /* Dynamic in Frameworks */,
 				6BC8CB2E2A6D758000D2E9E9 /* SDWebImageSVGCoder in Frameworks */,
 				6BC8CB322A6D758000D2E9E9 /* SwiftSoup in Frameworks */,
 			);
@@ -587,6 +589,7 @@
 				6BC8CB352A6D758000D2E9E9 /* CachedAsyncImage */,
 				6B37B4BC2A715EF900F26F1A /* SFSymbol */,
 				6B853FE92A7509DC0067B55C /* ZipArchive */,
+				8CA453812AE42A3E00138CE4 /* Dynamic */,
 			);
 			productName = "DarockBili WatchKit App Watch App";
 			productReference = 6BFF295C2A6C0D1C00914A8E /* DarockBili Watch App.app */;
@@ -639,6 +642,7 @@
 				6BC8CB1D2A6CF48400D2E9E9 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 				6B37B4BB2A715EF800F26F1A /* XCRemoteSwiftPackageReference "SFSymbol" */,
 				6B853FE82A7509DC0067B55C /* XCRemoteSwiftPackageReference "ZipArchive" */,
+				8CA453802AE42A3E00138CE4 /* XCRemoteSwiftPackageReference "Dynamic" */,
 			);
 			productRefGroup = 6B0253B52A4EF59600567986 /* Products */;
 			projectDirPath = "";
@@ -913,7 +917,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 167;
+				CURRENT_PROJECT_VERSION = 168;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0.0;
@@ -933,7 +937,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 167;
+				CURRENT_PROJECT_VERSION = 168;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0.0;
@@ -953,7 +957,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 167;
+				CURRENT_PROJECT_VERSION = 168;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0.0;
@@ -972,7 +976,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 167;
+				CURRENT_PROJECT_VERSION = 168;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0.0;
@@ -996,7 +1000,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 167;
+				CURRENT_PROJECT_VERSION = 168;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1035,7 +1039,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 167;
+				CURRENT_PROJECT_VERSION = 168;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1074,7 +1078,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 167;
+				CURRENT_PROJECT_VERSION = 168;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
@@ -1109,7 +1113,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 167;
+				CURRENT_PROJECT_VERSION = 168;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
@@ -1269,6 +1273,14 @@
 				minimumVersion = 2.1.1;
 			};
 		};
+		8CA453802AE42A3E00138CE4 /* XCRemoteSwiftPackageReference "Dynamic" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mhdhejazi/Dynamic";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1326,6 +1338,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6BA1E5492A6AF2A900293B2C /* XCRemoteSwiftPackageReference "DarockKit" */;
 			productName = DarockKit;
+		};
+		8CA453812AE42A3E00138CE4 /* Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8CA453802AE42A3E00138CE4 /* XCRemoteSwiftPackageReference "Dynamic" */;
+			productName = Dynamic;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
