@@ -20,39 +20,64 @@ struct FollowListView: View {
     @State var nowPage = 1
     @State var totalPage = 1
     @State var isLoadedFollows = false
+    @State var isLoadingNew = false
+    @State var pinnedUsers = [String]()
     var body: some View {
-        TabView {
-            List {
+        List {
+            if users.count != 0 {
                 Section {
-                    if users.count != 0 {
-                        ForEach(0...users.count - 1, id: \.self) { i in
-                            NavigationLink(destination: {UserDetailView(uid: users[i]["UID"]!)}, label: {
-                                HStack {
-                                    WebImage(url: URL(string: users[i]["Face"]! + "@28w"), options: [.progressiveLoad])
-                                        .cornerRadius(100)
-                                    VStack {
-                                        HStack {
-                                            Text(users[i]["Name"]!)
-                                                .font(.system(size: 16))
-                                                .lineLimit(2)
-                                            Spacer()
-                                        }
-//                                        HStack {
-//                                            Text(users[i]["Sign"]!)
-//                                                .font(.system(size: 14))
-//                                                .foregroundColor(.gray)
-//                                                .lineLimit(2)
-//                                            Spacer()
-//                                        }
+                    ForEach(0...users.count - 1, id: \.self) { i in
+                        NavigationLink(destination: {UserDetailView(uid: users[i]["UID"]!)}, label: {
+                            HStack {
+                                if pinnedUsers.contains(users[i]["UID"]!) {
+                                    Image(systemName: "pin.fill")
+                                        .foregroundColor(.gray)
+                                }
+                                WebImage(url: URL(string: users[i]["Face"]! + "@28w"), options: [.progressiveLoad])
+                                    .cornerRadius(100)
+                                VStack {
+                                    HStack {
+                                        Text(users[i]["Name"]!)
+                                            .font(.system(size: 16))
+                                            .lineLimit(2)
+                                        Spacer()
                                     }
+                                }
+                            }
+                        })
+                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                            Button(action: {
+                                if pinnedUsers.contains(users[i]["UID"]!) {
+                                    for j in 0..<pinnedUsers.count {
+                                        if pinnedUsers[j] == users[i]["UID"]! {
+                                            pinnedUsers.remove(at: j)
+                                            break
+                                        }
+                                    }
+                                } else {
+                                    pinnedUsers.append(users[i]["UID"]!)
+                                    let ud = users.remove(at: i)
+                                    users.insert(ud, at: 0)
+                                }
+                                UserDefaults.standard.set(pinnedUsers, forKey: "PinnedFollows")
+                            }, label: {
+                                if pinnedUsers.contains(users[i]["UID"]!) {
+                                    Image(systemName: "pin.slash.fill")
+                                } else {
+                                    Image(systemName: "pin.fill")
                                 }
                             })
                         }
                     }
                 }
-                if nowPage < totalPage {
-                    Section {
+            } else {
+                ProgressView()
+            }
+            if nowPage < totalPage {
+                Section {
+                    if !isLoadingNew {
                         Button(action: {
+                            isLoadingNew = true
                             nowPage += 1
                             RefreshNew()
                         }, label: {
@@ -62,23 +87,20 @@ struct FollowListView: View {
                                 Spacer()
                             }
                         })
+                    } else {
+                        ProgressView()
                     }
                 }
             }
-            .navigationTitle("关注")
-            .navigationBarTitleDisplayMode(.large)
-            .onAppear {
-                if !isLoadedFollows {
-                    RefreshNew()
-                    isLoadedFollows = true
-                }
+        }
+        .navigationTitle("关注")
+        .navigationBarTitleDisplayMode(.large)
+        .onAppear {
+            pinnedUsers = UserDefaults.standard.stringArray(forKey: "PinnedFollows") ?? [String]()
+            if !isLoadedFollows {
+                RefreshNew()
+                isLoadedFollows = true
             }
-            .tag(1)
-            List {
-                
-            }
-            .navigationTitle("粉丝")
-            .navigationBarTitleDisplayMode(.large)
         }
     }
     func RefreshNew() {
@@ -86,9 +108,14 @@ struct FollowListView: View {
             if isSuccess {
                 let datas = respJson["data"]["list"]
                 for data in datas {
-                    users.append(["Name": data.1["uname"].string ?? "[加载失败]", "Face": data.1["face"].string ?? "E", "Sign": data.1["sign"].string ?? "[加载失败]", "UID": String(data.1["mid"].int ?? 0)])
+                    if pinnedUsers.contains(String(data.1["mid"].int ?? 0)) {
+                        users.insert(["Name": data.1["uname"].string ?? "[加载失败]", "Face": data.1["face"].string ?? "E", "Sign": data.1["sign"].string ?? "[加载失败]", "UID": String(data.1["mid"].int ?? 0)], at: 0)
+                    } else {
+                        users.append(["Name": data.1["uname"].string ?? "[加载失败]", "Face": data.1["face"].string ?? "E", "Sign": data.1["sign"].string ?? "[加载失败]", "UID": String(data.1["mid"].int ?? 0)])
+                    }
                 }
                 totalPage = respJson["data"]["total"].int ?? 0 / 20 + 1
+                isLoadingNew = false
             }
         }
     }

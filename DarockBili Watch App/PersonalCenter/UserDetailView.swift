@@ -328,6 +328,10 @@ struct UserDetailView: View {
         @State var videoNowPage = 1
         @State var articleTotalPage = 1
         @State var articleNowPage = 1
+        @State var isVideoPageJumpPresented = false
+        @State var videoTargetJumpPageCache = ""
+        @State var isArticalPageJumpPresented = false
+        @State var articleTargetJumpPageCache = ""
         var body: some View {
             VStack {
                 Group {
@@ -367,6 +371,41 @@ struct UserDetailView: View {
                                     }
                                     Text("\(videoNowPage) / \(videoTotalPage)")
                                         .font(.system(size: 18, weight: .bold))
+                                        .sheet(isPresented: $isVideoPageJumpPresented, content: {
+                                            VStack {
+                                                Text("跳转到...")
+                                                    .font(.system(size: 20, weight: .bold))
+                                                HStack {
+                                                    TextField("目标页", text: $videoTargetJumpPageCache)
+                                                        .onSubmit {
+                                                            if let cInt = Int(videoTargetJumpPageCache) {
+                                                                if cInt <= 0 {
+                                                                    videoTargetJumpPageCache = "1"
+                                                                }
+                                                                if cInt > videoTotalPage {
+                                                                    videoTargetJumpPageCache = String(videoTotalPage)
+                                                                }
+                                                            } else {
+                                                                videoTargetJumpPageCache = String(videoNowPage)
+                                                            }
+                                                        }
+                                                    Text(" / \(videoTotalPage)")
+                                                }
+                                                Button(action: {
+                                                    if let cInt = Int(videoTargetJumpPageCache) {
+                                                        videoNowPage = cInt
+                                                        RefreshVideos()
+                                                    }
+                                                    isVideoPageJumpPresented = false
+                                                }, label: {
+                                                    Text("跳转")
+                                                })
+                                            }
+                                        })
+                                        .onTapGesture {
+                                            videoTargetJumpPageCache = String(videoNowPage)
+                                            isVideoPageJumpPresented = true
+                                        }
                                     if videoNowPage != videoTotalPage {
                                         Button(action: {
                                             videoNowPage += 1
@@ -440,6 +479,41 @@ struct UserDetailView: View {
                                 }
                                 Text("\(articleNowPage) / \(articleTotalPage)")
                                     .font(.system(size: 18, weight: .bold))
+                                    .sheet(isPresented: $isArticalPageJumpPresented, content: {
+                                        VStack {
+                                            Text("跳转到...")
+                                                .font(.system(size: 20, weight: .bold))
+                                            HStack {
+                                                TextField("目标页", text: $articleTargetJumpPageCache)
+                                                    .onSubmit {
+                                                        if let cInt = Int(articleTargetJumpPageCache) {
+                                                            if cInt <= 0 {
+                                                                articleTargetJumpPageCache = "1"
+                                                            }
+                                                            if cInt > articleTotalPage {
+                                                                articleTargetJumpPageCache = String(articleTotalPage)
+                                                            }
+                                                        } else {
+                                                            articleTargetJumpPageCache = String(articleNowPage)
+                                                        }
+                                                    }
+                                                Text(" / \(articleTotalPage)")
+                                            }
+                                            Button(action: {
+                                                if let cInt = Int(articleTargetJumpPageCache) {
+                                                    articleNowPage = cInt
+                                                    RefreshArticles()
+                                                }
+                                                isArticalPageJumpPresented = false
+                                            }, label: {
+                                                Text("跳转")
+                                            })
+                                        }
+                                    })
+                                    .onTapGesture {
+                                        articleTargetJumpPageCache = String(articleNowPage)
+                                        isArticalPageJumpPresented = true
+                                    }
                                 if articleNowPage != articleTotalPage {
                                     Button(action: {
                                         articleNowPage += 1

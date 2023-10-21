@@ -15,13 +15,16 @@ import SDWebImageSwiftUI
     NavigationLink(destination: {VideoDetailView(videoDetails: videoDetails)}, label: {
         VStack {
             HStack {
-                WebImage(url: URL(string: videoDetails["Pic"]! + "@50w")!, options: [.progressiveLoad, .scaleDownLargeImages])
+                WebImage(url: URL(string: videoDetails["Pic"]! + "@100w")!, options: [.progressiveLoad, .scaleDownLargeImages])
                     .placeholder {
                         RoundedRectangle(cornerRadius: 7)
-                            .frame(width: 50)
+                            .frame(width: 50, height: 30)
                             .foregroundColor(Color(hex: 0x3D3D3D))
                             .redacted(reason: .placeholder)
                     }
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 50)
                     .cornerRadius(7)
                 Text(videoDetails["Title"]!)
                     .font(.system(size: 14, weight: .bold))

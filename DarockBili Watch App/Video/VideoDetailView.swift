@@ -364,22 +364,26 @@ struct VideoDetailView: View {
         @State var isMoreMenuPresented = false
         @State var isDownloadPresented = false
         @State var isNowPlayingPresented = false
+        @State var isCoverImageViewPresented = false
         var body: some View {
             VStack {
                 Spacer()
-                CachedAsyncImage(url: URL(string: videoDetails["Pic"]! + "@120w_90h")) { phase in
+                CachedAsyncImage(url: URL(string: videoDetails["Pic"]! + "@240w_160h")) { phase in
                     switch phase {
                     case .empty:
                         Image("Placeholder")
                             .fixedSize()
-                            .frame(width: 120, height: 90)
+                            .frame(width: 120, height: 80)
                             .redacted(reason: .placeholder)
                     case .success(let image):
                         image
+                            .resizable()
+                            .fixedSize()
+                            .frame(width: 120, height: 80)
                     case .failure(let error):
                         Image("Placeholder")
                             .fixedSize()
-                            .frame(width: 120, height: 90)
+                            .frame(width: 120, height: 80)
                             .redacted(reason: .placeholder)
                             .onAppear {
                                 debugPrint(error)
@@ -387,14 +391,17 @@ struct VideoDetailView: View {
                     @unknown default:
                         Image("Placeholder")
                             .fixedSize()
-                            .frame(width: 120, height: 90)
+                            .frame(width: 120, height: 80)
                             .redacted(reason: .placeholder)
                     }
                 }
                 .cornerRadius(5)
                 .shadow(color: .black.opacity(0.5), radius: 5, x: 1, y: 2)
                 .offset(y: 8)
-                    
+                .sheet(isPresented: $isCoverImageViewPresented, content: {ImageViewerView(url: videoDetails["Pic"]!)})
+                .onTapGesture {
+                    isCoverImageViewPresented = true
+                }
                 Spacer()
                     .frame(height: 20)
                 HStack {
@@ -414,11 +421,15 @@ struct VideoDetailView: View {
                             }
                         }
                     }
-                    Text(videoDetails["Title"]!)
-                        .lineLimit(2)
-                        .font(.system(size: 12, weight: .bold))
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 5)
+                    ScrollView(.horizontal) {
+                        Text(videoDetails["Title"]!)
+                        
+                            .lineLimit(1)
+                            .font(.system(size: 12, weight: .bold))
+                            .multilineTextAlignment(.center)
+                    }
+                    .scrollIndicators(.never)
+                    .padding(.horizontal, 5)
                 }
                 Text(videoDetails["UP"]!)
                     .lineLimit(1)
