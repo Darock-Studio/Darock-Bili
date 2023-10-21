@@ -79,6 +79,7 @@
 		6BFF29942A6C0E1D00914A8E /* SignalErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2D764D2A61154300AA57DA /* SignalErrorView.swift */; };
 		6BFF29952A6C0E2200914A8E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B0253C62A4EF59700567986 /* Preview Assets.xcassets */; };
 		6BFF29A62A6C10EB00914A8E /* DarockKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6BFF29A52A6C10EB00914A8E /* DarockKit */; };
+		8CA4537F2AE408A700138CE4 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 8CA4537E2AE408A700138CE4 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -192,6 +193,7 @@
 		6BFF290B2A6C0B3F00914A8E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6BFF295C2A6C0D1C00914A8E /* DarockBili Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DarockBili Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BFF29A72A6C25FC00914A8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8CA4537E2AE408A700138CE4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,6 +250,7 @@
 		6B0253AD2A4EF59600567986 = {
 			isa = PBXGroup;
 			children = (
+				8CA4537E2AE408A700138CE4 /* README.md */,
 				6BFF29032A6C0B3A00914A8E /* DarockBili */,
 				6B0253BE2A4EF59600567986 /* DarockBili Watch App */,
 				6BA20BC62A7185B100AAD0C7 /* DarockBili Watch App Unit Tests */,
@@ -670,6 +673,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CA4537F2AE408A700138CE4 /* README.md in Resources */,
 				6BFF290C2A6C0B3F00914A8E /* Preview Assets.xcassets in Resources */,
 				6BFF29092A6C0B3F00914A8E /* Assets.xcassets in Resources */,
 			);
@@ -909,7 +913,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 164;
+				CURRENT_PROJECT_VERSION = 167;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0.0;
@@ -929,7 +933,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 164;
+				CURRENT_PROJECT_VERSION = 167;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0.0;
@@ -949,7 +953,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 164;
+				CURRENT_PROJECT_VERSION = 167;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0.0;
@@ -968,7 +972,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 164;
+				CURRENT_PROJECT_VERSION = 167;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0.0;
@@ -992,7 +996,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 164;
+				CURRENT_PROJECT_VERSION = 167;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1031,7 +1035,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 164;
+				CURRENT_PROJECT_VERSION = 167;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1070,7 +1074,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 164;
+				CURRENT_PROJECT_VERSION = 167;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
@@ -1105,7 +1109,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 164;
+				CURRENT_PROJECT_VERSION = 167;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
