@@ -18,6 +18,8 @@ struct VideoDownloadView: View {
     @AppStorage("bili_jct") var biliJct = ""
     @State var isLoading = true
     @State var downloadProgress = 0.0
+    @State var downloadedSize: Int64 = 0
+    @State var totalSize: Int64 = 0
     var body: some View {
         List {
             if isLoading {
@@ -34,7 +36,12 @@ struct VideoDownloadView: View {
                     ProgressView(value: downloadProgress * 100, total: 100.0)
                     HStack {
                         Spacer()
-                        Text(String(format: "%.2f", downloadProgress * 100) + " %")
+                        Text("\(String(format: "%.2f", downloadProgress * 100) + " %")")
+                        Spacer()
+                    }
+                    HStack {
+                        Spacer()
+                        Text("\(String(format: "%.2f", Double(downloadedSize) / 1024 / 1024))MB / \(String(format: "%.2f", Double(totalSize) / 1024 / 1024))MB")
                         Spacer()
                     }
                 }
@@ -71,6 +78,8 @@ struct VideoDownloadView: View {
                     AF.download((String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&"), headers: headers, to: destination)
                         .downloadProgress { p in
                             downloadProgress = p.fractionCompleted
+                            downloadedSize = p.completedUnitCount
+                            totalSize = p.totalUnitCount
                         }
                         .response { r in
                             if r.error == nil, let filePath = r.fileURL?.path {
@@ -78,6 +87,7 @@ struct VideoDownloadView: View {
                                 debugPrint(bvid)
                                 var detTmp = videoDetails
                                 detTmp.updateValue(filePath, forKey: "Path")
+                                detTmp.updateValue(String(Date.now.timeIntervalSince1970), forKey: "Time")
                                 UserDefaults.standard.set(detTmp, forKey: bvid)
                             } else {
                                 debugPrint(r.error as Any)

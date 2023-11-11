@@ -38,42 +38,6 @@ struct AboutView: View {
                             isEasterEgg2Presented = true
                         }
                         .sheet(isPresented: $isEasterEgg2Presented, content: {EasterEgg2View()})
-                    Text("ReX")
-                        .foregroundColor(rexEasterEggColor)
-                        .onTapGesture {
-                            if easterEggText == "继续？" || easterEggText == "不是这里！" {
-                                rexEasterEggCount += 1
-                                if rexEasterEggCount == 6 {
-                                    rexEasterEggColor = .red
-                                } else if rexEasterEggCount == 7 {
-                                    rexEasterEggColor = .orange
-                                } else if rexEasterEggCount == 8 {
-                                    rexEasterEggColor = .yellow
-                                } else if rexEasterEggCount == 9 {
-                                    rexEasterEggColor = .green
-                                } else if rexEasterEggCount == 10 {
-                                    rexEasterEggColor = .cyan
-                                } else if rexEasterEggCount == 11 {
-                                    rexEasterEggColor = .blue
-                                } else if rexEasterEggCount == 12 {
-                                    rexEasterEggColor = .purple
-                                } else if rexEasterEggCount == 13 {
-                                    rexEasterEggColor = .white
-                                    isEasterEggPresented = true
-                                }
-                            }
-                            debugPrint(rexEasterEggCount)
-                        }
-                        .sheet(isPresented: $isEasterEggPresented, content: {EasterEggView()})
-                    Button(action: {
-                        let session = ASWebAuthenticationSession(url: URL(string: "https://wear.rexwe.net")!, callbackURLScheme: nil) { _, _ in
-                            
-                        }
-                        session.prefersEphemeralWebBrowserSession = true
-                        session.start()
-                    }, label: {
-                        Label("来自ReX的消息：界面与交互设计来自 腕上生花 - ReX Design（wear.rexwe.net）", systemImage: "arrowshape.up")
-                    })
                 }
                 Section {
                     NavigationLink(destination: {OpenSource()}, label: {

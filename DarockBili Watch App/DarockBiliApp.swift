@@ -7,6 +7,7 @@
 
 import Darwin
 import SwiftUI
+import WatchKit
 import DarockKit
 import SDWebImage
 import SDWebImagePDFCoder
@@ -14,7 +15,7 @@ import SDWebImageSVGCoder
 import SDWebImageWebPCoder
 
 //!!!: Debug Setting, Set false Before Release
-let debug = false
+var debug = false
 
 var pShowTipText = ""
 var pShowTipSymbol = ""
@@ -22,14 +23,23 @@ var pTipBoxOffset: CGFloat = 80
 
 var isShowMemoryInScreen = false
 
+var isInOfflineMode = false
+
+var isInLowBatteryMode = false
+
 @main
 struct DarockBili_Watch_AppApp: App {
     @WKApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @Environment(\.scenePhase) var scenePhase
+    // Screen Time
+    @State var screenTimeCaculateTimer: Timer? = nil
     @State var isMemoryWarningPresented = false
     @State var showTipText = ""
     @State var showTipSymbol = ""
     @State var tipBoxOffset: CGFloat = 80
-    //Debug Controls
+    @State var isOfflineMode = false
+    @State var isLowBatteryMode = false
+    // Debug Controls
     @State var isShowingDebugControls = false
     @State var systemResourceRefreshTimer: Timer?
     @State var memoryUsage: Float = 0.0
@@ -40,7 +50,11 @@ struct DarockBili_Watch_AppApp: App {
                 SignalErrorView()
             } else {
                 ZStack {
-                    ContentView()
+                    if isOfflineMode {
+                        OfflineMainView()
+                    } else {
+                        ContentView()
+                    }
                     VStack {
                         Spacer()
                         if #available(watchOS 10, *) {
@@ -80,13 +94,19 @@ struct DarockBili_Watch_AppApp: App {
                 }
                     .sheet(isPresented: $isMemoryWarningPresented, content: {MemoryWarningView()})
                     .onAppear {
+                        isInLowBatteryMode = UserDefaults.standard.bool(forKey: "IsInLowBatteryMode")
+                        
                         Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
                             showTipText = pShowTipText
                             showTipSymbol = pShowTipSymbol
+                            isLowBatteryMode = isInLowBatteryMode
+                            UserDefaults.standard.set(isLowBatteryMode, forKey: "IsInLowBatteryMode")
                             Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { timer in
                                 tipBoxOffset = pTipBoxOffset
                                 timer.invalidate()
                             }
+                            
+                            isOfflineMode = isInOfflineMode
                         }
                         
                         Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { timer in
@@ -105,8 +125,22 @@ struct DarockBili_Watch_AppApp: App {
                                 timer.invalidate()
                             }
                         }
+                        
+                        WKInterfaceDevice.current().isBatteryMonitoringEnabled = true
                     }
                     .overlay {
+                        VStack {
+                            HStack {
+                                if isLowBatteryMode {
+                                    Image(systemName: "circle")
+                                        .font(.system(size: 17, weight: .heavy))
+                                        .foregroundColor(.accentColor)
+                                        .offset(y: 10)
+                                }
+                            }
+                            Spacer()
+                        }
+                        .ignoresSafeArea()
                         if isShowMemoryUsage {
                             VStack {
                                 HStack {
@@ -159,6 +193,28 @@ struct DarockBili_Watch_AppApp: App {
                             .ignoresSafeArea()
                         }
                     }
+            }
+        }
+        .onChange(of: scenePhase) { value in
+            switch value {
+            case .background:
+                screenTimeCaculateTimer?.invalidate()
+            case .inactive:
+                break
+            case .active:
+                if screenTimeCaculateTimer == nil {
+                    Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+                        screenTimeCaculateTimer = timer
+                        let df = DateFormatter()
+                        df.dateFormat = "yyyy-MM-dd"
+                        let dateStr = df.string(from: Date.now)
+                        UserDefaults.standard.set(UserDefaults.standard.integer(forKey: "ScreenTime\(dateStr)") + 1, forKey: "ScreenTime\(dateStr)")
+                    }
+                } else {
+                    screenTimeCaculateTimer!.fire()
+                }
+            @unknown default:
+                break
             }
         }
     }

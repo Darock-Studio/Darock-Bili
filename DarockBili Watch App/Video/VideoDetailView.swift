@@ -7,6 +7,7 @@
 
 import AVKit
 import SwiftUI
+import Marquee
 import SFSymbol
 import WatchKit
 import DarockKit
@@ -32,6 +33,7 @@ struct VideoDetailView: View {
     @State var isCoined = false
     @State var isFavoured = false
     @State var isCoinViewPresented = false
+    @State var videoPages = [[String: String]]()
     @State var goodVideos = [[String: String]]()
     @State var owner = [String: String]()
     @State var stat = [String: String]()
@@ -46,17 +48,18 @@ struct VideoDetailView: View {
     @State var isDownloadPresented = false
     @State var isNowPlayingPresented = false
     @State var backgroundPicOpacity = 0.0
+    @State var mainVerticalTabViewSelection = 1
     var body: some View {
         TabView {
             if #available(watchOS 10, *) {
                 ZStack {
                     Group {
-                        TabView {
+                        TabView(selection: $mainVerticalTabViewSelection) {
                             VStack {
                                 NavigationLink("", isActive: $isNowPlayingPresented, destination: {AudioPlayerView(videoDetails: videoDetails, subTitles: subTitles)})
                                     .frame(width: 0, height: 0)
                                 
-                                DetailViewFirstPageBase(videoDetails: $videoDetails, honors: $honors, subTitles: $subTitles, isLoading: $isLoading)
+                                DetailViewFirstPageBase(videoDetails: $videoDetails, videoPages: $videoPages, honors: $honors, subTitles: $subTitles, isLoading: $isLoading)
                                     .offset(y: 16)
                                     .toolbar {
                                         ToolbarItem(placement: .topBarTrailing) {
@@ -130,44 +133,56 @@ struct VideoDetailView: View {
                                             }, label: {
                                                 Image(systemName: "waveform")
                                             })
-                                            Button(action: {
-                                                isLoading = true
-                                                debugPrint(videoDetails["BV"]!)
-                                                if videoGetterSource == "official" {
-                                                    let headers: HTTPHeaders = [
-                                                        "cookie": "SESSDATA=\(sessdata)"
-                                                    ]
-                                                    AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
-                                                        let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
-                                                        VideoDetailView.willPlayVideoCID = String(cid)
-                                                        AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
-                                                            VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
-                                                            //debugPrint(response)
-                                                            VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                                                            isVideoPlayerPresented = true
-                                                            isLoading = false
+                                            if videoPages.count == 1 {
+                                                Button(action: {
+                                                    isLoading = true
+                                                    debugPrint(videoDetails["BV"]!)
+                                                    if videoGetterSource == "official" {
+                                                        let headers: HTTPHeaders = [
+                                                            "cookie": "SESSDATA=\(sessdata)"
+                                                        ]
+                                                        AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
+                                                            let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
+                                                            VideoDetailView.willPlayVideoCID = String(cid)
+                                                            AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
+                                                                VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
+                                                                //debugPrint(response)
+                                                                VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                                                                isVideoPlayerPresented = true
+                                                                isLoading = false
+                                                            }
+                                                        }
+                                                    } else if videoGetterSource == "injahow" {
+                                                        DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=1&type=video&q=32&format=mp4&otype=url") { respStr, isSuccess in
+                                                            if isSuccess {
+                                                                VideoDetailView.willPlayVideoLink = respStr
+                                                                VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                                                                isVideoPlayerPresented = true
+                                                                isLoading = false
+                                                            }
                                                         }
                                                     }
-                                                } else if videoGetterSource == "injahow" {
-                                                    DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=1&type=video&q=32&format=mp4&otype=url") { respStr, isSuccess in
-                                                        if isSuccess {
-                                                            VideoDetailView.willPlayVideoLink = respStr
-                                                            VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                                                            isVideoPlayerPresented = true
-                                                            isLoading = false
-                                                        }
-                                                    }
-                                                }
-                                            }, label: {
-                                                Image(systemName: "play.fill")
-                                            })
-                                            .sheet(isPresented: $isVideoPlayerPresented, content: {VideoPlayerView()})
+                                                }, label: {
+                                                    Image(systemName: "play.fill")
+                                                })
+                                                .sheet(isPresented: $isVideoPlayerPresented, content: {VideoPlayerView()})
+                                            } else {
+                                                Button(action: {
+                                                    mainVerticalTabViewSelection = 3
+                                                }, label: {
+                                                    Image(systemName: "rectangle.stack")
+                                                })
+                                            }
                                         }
                                     }
                                     .tag(1)
                             }
                             DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, honors: $honors, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount)
                                 .tag(2)
+                            if videoPages.count != 1 {
+                                DetailViewVideoPartPageBase(videoDetails: $videoDetails, videoPages: $videoPages, isLoading: $isLoading)
+                                    .tag(3)
+                            }
                         }
                         .tabViewStyle(.verticalPage)
                     }
@@ -179,27 +194,29 @@ struct VideoDetailView: View {
                     }
                 }
                 .containerBackground(for: .navigation) {
-                    ZStack {
-                        CachedAsyncImage(url: URL(string: videoDetails["Pic"]!)) { phase in
-                            switch phase {
-                            case .empty:
-                                Color.black
-                            case .success(let image):
-                                image
-                                    .onAppear {
-                                        backgroundPicOpacity = 1.0
-                                    }
-                            case .failure:
-                                Color.black
-                            @unknown default:
-                                Color.black
+                    if !isInLowBatteryMode {
+                        ZStack {
+                            CachedAsyncImage(url: URL(string: videoDetails["Pic"]!)) { phase in
+                                switch phase {
+                                case .empty:
+                                    Color.black
+                                case .success(let image):
+                                    image
+                                        .onAppear {
+                                            backgroundPicOpacity = 1.0
+                                        }
+                                case .failure:
+                                    Color.black
+                                @unknown default:
+                                    Color.black
+                                }
                             }
+                            .blur(radius: 20)
+                            .opacity(backgroundPicOpacity)
+                            .animation(.easeOut(duration: 1.2), value: backgroundPicOpacity)
+                            Color.black
+                                .opacity(0.4)
                         }
-                        .blur(radius: 20)
-                        .opacity(backgroundPicOpacity)
-                        .animation(.easeOut(duration: 1.2), value: backgroundPicOpacity)
-                        Color.black
-                            .opacity(0.4)
                     }
                 }
                 .tag(1)
@@ -207,7 +224,7 @@ struct VideoDetailView: View {
                 ZStack {
                     Group {
                         ScrollView {
-                            DetailViewFirstPageBase(videoDetails: $videoDetails, honors: $honors, subTitles: $subTitles, isLoading: $isLoading)
+                            DetailViewFirstPageBase(videoDetails: $videoDetails, videoPages: $videoPages, honors: $honors, subTitles: $subTitles, isLoading: $isLoading)
                             DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, honors: $honors, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount)
                         }
                     }
@@ -294,6 +311,9 @@ struct VideoDetailView: View {
                     for honor in respJson["data"]["honor_reply"]["honor"] {
                         honors[honor.1["type"].int! - 1] = honor.1["desc"].string ?? "[加载失败]"
                     }
+                    for page in respJson["data"]["pages"] {
+                        videoPages.append(["CID": String(page.1["cid"].int ?? 0), "Index": String(page.1["page"].int ?? 0), "Title": page.1["part"].string ?? "[加载失败]"])
+                    }
                     if let mid = respJson["data"]["owner"]["mid"].int {
                         DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation/stat?vmid=\(mid)", headers: headers) { respJson, isSuccess in
                             if isSuccess {
@@ -352,6 +372,7 @@ struct VideoDetailView: View {
     
     struct DetailViewFirstPageBase: View {
         @Binding var videoDetails: [String: String]
+        @Binding var videoPages: [[String: String]]
         @Binding var honors: [String]
         @Binding var subTitles: [[String: String]]
         @Binding var isLoading: Bool
@@ -421,15 +442,18 @@ struct VideoDetailView: View {
                             }
                         }
                     }
-                    ScrollView(.horizontal) {
-                        Text(videoDetails["Title"]!)
-                        
-                            .lineLimit(1)
-                            .font(.system(size: 12, weight: .bold))
-                            .multilineTextAlignment(.center)
+                    Marquee {
+                        HStack {
+                            Text(videoDetails["Title"]!)
+                                .lineLimit(1)
+                                .font(.system(size: 12, weight: .bold))
+                                .multilineTextAlignment(.center)
+                        }
                     }
-                    .scrollIndicators(.never)
-                    .padding(.horizontal, 5)
+                    .marqueeWhenNotFit(true)
+                    .marqueeDuration(10)
+                    .frame(height: 20)
+                    .padding(.horizontal, 10)
                 }
                 Text(videoDetails["UP"]!)
                     .lineLimit(1)
@@ -762,6 +786,57 @@ struct VideoDetailView: View {
                     }
                 }
             }
+        }
+    }
+    struct DetailViewVideoPartPageBase: View {
+        @Binding var videoDetails: [String: String]
+        @Binding var videoPages: [[String: String]]
+        @Binding var isLoading: Bool
+        @AppStorage("DedeUserID") var dedeUserID = ""
+        @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
+        @AppStorage("SESSDATA") var sessdata = ""
+        @AppStorage("bili_jct") var biliJct = ""
+        @AppStorage("VideoGetterSource") var videoGetterSource = "official"
+        @State var isVideoPlayerPresented = false
+        var body: some View {
+            List {
+                if videoPages.count != 0 {
+                    ForEach(0..<videoPages.count, id: \.self) { i in
+                        Button(action: {
+                            isLoading = true
+                            
+                            if videoGetterSource == "official" {
+                                let headers: HTTPHeaders = [
+                                    "cookie": "SESSDATA=\(sessdata)"
+                                ]
+                                let cid = videoPages[i]["CID"]!
+                                VideoDetailView.willPlayVideoCID = cid
+                                AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
+                                    VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
+                                    VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                                    isVideoPlayerPresented = true
+                                    isLoading = false
+                                }
+                            } else if videoGetterSource == "injahow" {
+                                DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=\(i + 1)&type=video&q=32&format=mp4&otype=url") { respStr, isSuccess in
+                                    if isSuccess {
+                                        VideoDetailView.willPlayVideoLink = respStr
+                                        VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                                        isVideoPlayerPresented = true
+                                        isLoading = false
+                                    }
+                                }
+                            }
+                        }, label: {
+                            HStack {
+                                Text(String(i + 1))
+                                Text(videoPages[i]["Title"]!)
+                            }
+                        })
+                    }
+                }
+            }
+            .sheet(isPresented: $isVideoPlayerPresented, content: {VideoPlayerView()})
         }
     }
 }
