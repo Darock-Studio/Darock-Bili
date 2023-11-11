@@ -280,7 +280,7 @@ struct SettingsView: View {
                 }
                 .navigationTitle("电池")
                 .onAppear {
-                    batteryLevel = Double(WKInterfaceDevice.current().batteryLevel)
+                    batteryLevel = Double(WKInterfaceDevice.current().batteryLevel * 100.0)
                     batteryState = WKInterfaceDevice.current().batteryState
                     debugPrint(batteryLevel)
                 }

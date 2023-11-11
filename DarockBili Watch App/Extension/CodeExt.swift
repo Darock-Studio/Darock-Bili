@@ -208,3 +208,19 @@ public class WbiSign: ObservableObject {
         }
     }
 }
+
+postfix operator ++
+postfix operator --
+extension Int {
+    @discardableResult
+    static postfix func ++ (num: inout Int) -> Int {
+        num += 1
+        return num
+    }
+    
+    @discardableResult
+    static postfix func -- (num: inout Int) -> Int {
+        num -= 1
+        return num
+    }
+}

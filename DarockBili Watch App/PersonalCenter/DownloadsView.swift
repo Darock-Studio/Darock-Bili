@@ -65,7 +65,7 @@ struct DownloadsView: View {
                                 }
                             }
                         })
-                        .sheet(isPresented: $isPlayerPresented, content: {OfflineVideoPlayer()})
+                        
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button(role: .destructive, action: {
                                 try! FileManager.default.removeItem(atPath: vRootPath + metadatas[i]["Path"]!)
@@ -79,8 +79,10 @@ struct DownloadsView: View {
                 }
             }
         }
+        .sheet(isPresented: $isPlayerPresented, content: {OfflineVideoPlayer()})
         .onAppear {
             vRootPath = String(AppFileManager(path: "dlds").GetPath("").path)
+            metadatas.removeAll()
             let files = AppFileManager(path: "dlds").GetRoot() ?? [[String: String]]()
             for file in files {
                 debugPrint(file)
