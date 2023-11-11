@@ -8,11 +8,13 @@
 import AVKit
 import SwiftUI
 import AVFoundation
+import SDWebImageSwiftUI
 
 struct DownloadsView: View {
     public static var willPlayVideoPath = ""
     @State var metadatas = [[String: String]]()
     @State var isPlayerPresented = false
+    @State var vRootPath = ""
     var body: some View {
         List {
             if metadatas.count != 0 {
@@ -37,12 +39,21 @@ struct DownloadsView: View {
 //                            }
 //                        })
                         Button(action: {
-                            DownloadsView.willPlayVideoPath = metadatas[i]["Path"]!
+                            DownloadsView.willPlayVideoPath = vRootPath + metadatas[i]["Path"]!
                             isPlayerPresented = true
                         }, label: {
                             HStack {
-                                AsyncImage(url: URL(string: metadatas[i]["Pic"]! + "@40w"))
-                                    .cornerRadius(5)
+                                WebImage(url: URL(string: metadatas[i]["Pic"]! + "@100w")!, options: [.progressiveLoad, .scaleDownLargeImages])
+                                    .placeholder {
+                                        RoundedRectangle(cornerRadius: 7)
+                                            .frame(width: 50, height: 30)
+                                            .foregroundColor(Color(hex: 0x3D3D3D))
+                                            .redacted(reason: .placeholder)
+                                    }
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 50)
+                                    .cornerRadius(7)
                                 VStack {
                                     Text(metadatas[i]["Title"]!)
                                         .font(.system(size: 14, weight: .bold))
@@ -55,6 +66,13 @@ struct DownloadsView: View {
                             }
                         })
                         .sheet(isPresented: $isPlayerPresented, content: {OfflineVideoPlayer()})
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button(role: .destructive, action: {
+                                try! FileManager.default.removeItem(atPath: vRootPath + metadatas[i]["Path"]!)
+                            }, label: {
+                                Image(systemName: "xmark.bin.fill")
+                            })
+                        }
                     } else {
                         
                     }
@@ -62,6 +80,7 @@ struct DownloadsView: View {
             }
         }
         .onAppear {
+            vRootPath = String(AppFileManager(path: "dlds").GetPath("").path)
             let files = AppFileManager(path: "dlds").GetRoot() ?? [[String: String]]()
             for file in files {
                 debugPrint(file)
@@ -69,12 +88,19 @@ struct DownloadsView: View {
                     let name = file["name"]!
                     let nameWithOutSuffix = String(name.split(separator: ".")[0])
                     if UserDefaults.standard.dictionary(forKey: nameWithOutSuffix) != nil {
-                        metadatas.append(UserDefaults.standard.dictionary(forKey: nameWithOutSuffix)! as! [String: String])
+                        var dicV = UserDefaults.standard.dictionary(forKey: nameWithOutSuffix)! as! [String: String]
+                        if let p = dicV["Path"] {
+                            if p.contains("/") {
+                                dicV.updateValue(String(p.split(separator: "/").last!), forKey: "Path")
+                            }
+                        }
+                        metadatas.append(dicV)
                     } else {
                         metadatas.append(["notGet": "true"])
                     }
                 }
             }
+            metadatas.sort { Int($0["Date"] ?? "0")! < Int($1["Date"] ?? "0")! }
         }
     }
 }

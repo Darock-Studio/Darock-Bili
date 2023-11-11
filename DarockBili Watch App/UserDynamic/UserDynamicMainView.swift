@@ -26,7 +26,7 @@ struct UserDynamicMainView: View {
     var body: some View {
         if sessdata != "" {
             ScrollView {
-                VStack {
+                LazyVStack {
                     if dynamics.count != 0 {
                         ForEach(0..<dynamics.count, id: \.self) { i in
                             VStack {

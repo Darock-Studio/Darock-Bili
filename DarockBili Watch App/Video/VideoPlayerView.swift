@@ -19,6 +19,7 @@ struct VideoPlayerView: View {
     @AppStorage("bili_jct") var biliJct = ""
     @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
     @AppStorage("IsPlayerAutoRotating") var isPlayerAutoRotating = true
+    @AppStorage("IsVideoPlayerGestureEnabled") var isVideoPlayerGestureEnabled = true
     @State var currentTime: Double = 0.0
     @State var playerTimer: Timer?
     @State var showDanmakus = [[String: String]]()
@@ -81,6 +82,15 @@ struct VideoPlayerView: View {
                     .onDisappear {
                         hideDigitalTime(false)
                         playerTimer?.invalidate()
+                    }
+                    .accessibilityQuickAction(style: .prompt) {
+                        if isVideoPlayerGestureEnabled {
+                            Button(action: {
+                                player?.pause()
+                            }, label: {
+                                
+                            })
+                        }
                     }
                     .tag(1)
                 ScrollView {

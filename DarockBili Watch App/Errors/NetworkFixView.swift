@@ -10,6 +10,7 @@ import DarockKit
 import Foundation
 
 struct NetworkFixView: View {
+    @Environment(\.dismiss) var dismiss
     @State var fixingItem = ""
     @State var isProgressAdding = true
     @State var progressTimer: Timer?
@@ -50,6 +51,13 @@ struct NetworkFixView: View {
                                     NavigationLink(destination: {UserNetworkGuide()}, label: {
                                         Text("问题来自您的网络连接，点此查看网络说明")
                                     })
+                                    Button(action: {
+                                        isInOfflineMode = true
+                                        dismiss()
+                                    }, label: {
+                                        Text("进入离线模式")
+                                            .foregroundColor(.blue)
+                                    })
                                 }
                             }
                             if isDarockIssue {
@@ -81,7 +89,7 @@ struct NetworkFixView: View {
                 }
             }
             fixingItem = "检查：网络连接"
-            let randTime = Double.random(in: 3.5...7.0)
+            let randTime = Double.random(in: 2.5...5.0)
             Timer.scheduledTimer(withTimeInterval: randTime, repeats: false) { timer in
                 timer.invalidate()
                 

@@ -49,6 +49,7 @@ struct MainView: View {
         @State var newMajorVer = ""
         @State var newBuildVer = ""
         @State var isLoadingNew = false
+        @State var isFailedToLoad = false
         var body: some View {
             Group {
                 List {
@@ -58,7 +59,8 @@ struct MainView: View {
                                 .bold()
                             Button(action: {
                                 //tipWithText("Test")
-                                Dynamic.PUICApplication.sharedPUICApplication._setStatusBarTimeHidden(true, animated: false, completion: nil)
+//                                Dynamic.PUICApplication.sharedPUICApplication._setStatusBarTimeHidden(true, animated: false, completion: nil)
+                                Dynamic.WatchKit.sharedPUICApplication._setStatusBarTimeHidden(true, animated: false)
                             }, label: {
                                 Text("Debug")
                             })
@@ -104,11 +106,15 @@ struct MainView: View {
                             Button(action: {
                                 LoadNewVideos()
                             }, label: {
-                                if !isLoadingNew {
-                                    Text("加载更多")
-                                        .bold()
+                                if !isFailedToLoad {
+                                    if !isLoadingNew {
+                                        Text("加载更多")
+                                            .bold()
+                                    } else {
+                                        ProgressView()
+                                    }
                                 } else {
-                                    ProgressView()
+                                    Label("加载失败 轻触重试", systemImage: "xmark")
                                 }
                             })
                         }
@@ -140,10 +146,11 @@ struct MainView: View {
         
         func LoadNewVideos(clearWhenFinish: Bool = false) {
             isLoadingNew = true
+            isFailedToLoad = false
             let headers: HTTPHeaders = [
                 "cookie": "SESSDATA=\(sessdata)"
             ]
-            DarockKit.Network.shared.requestString("https://api.darock.top/bili/wbi/sign/\("ps=30".base64Encoded())") { respStr, isSuccess in
+            DarockKit.Network.shared.requestString("https://api.darock.top/bili/wbi/sign/\("ps=\(isInLowBatteryMode ? 10 :  30)".base64Encoded())") { respStr, isSuccess in
                 if isSuccess {
                     debugPrint(respStr.apiFixed())
                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/wbi/index/top/feed/rcmd?\(respStr.apiFixed())", headers: headers) { respJson, isSuccess in
@@ -158,10 +165,12 @@ struct MainView: View {
                             }
                             isLoadingNew = false
                         } else {
+                            isFailedToLoad = true
                             isNetworkFixPresented = true
                         }
                     }
                 } else {
+                    isFailedToLoad = true
                     isNetworkFixPresented = true
                 }
             }

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C56762A2AFF67AC00E58541 /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = 5C5676292AFF67AC00E58541 /* Marquee */; };
+		5C56762D2AFF72E900E58541 /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 5C56762C2AFF72E900E58541 /* SwiftDate */; };
+		5CD61C9E2AF52144002D2097 /* OfflineMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD61C9D2AF52144002D2097 /* OfflineMainView.swift */; };
 		6B21E4512A72D7A10000C225 /* UserDynamicMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B21E4502A72D7A00000C225 /* UserDynamicMainView.swift */; };
 		6B2469B42A73DA5A00291AC6 /* LivePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2469B32A73DA5A00291AC6 /* LivePlayerView.swift */; };
 		6B2B62302A7187CC0051B879 /* WatchAppUITestPlan.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = 6B2B622F2A7187CC0051B879 /* WatchAppUITestPlan.xctestplan */; };
@@ -122,6 +125,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5CD61C9D2AF52144002D2097 /* OfflineMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineMainView.swift; sourceTree = "<group>"; };
 		6B0253BF2A4EF59600567986 /* DarockBiliApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarockBiliApp.swift; sourceTree = "<group>"; };
 		6B0253C12A4EF59600567986 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6B0253C32A4EF59700567986 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -227,12 +231,14 @@
 				6BC8CB2A2A6D758000D2E9E9 /* SDWebImageSwiftUI in Frameworks */,
 				6BC8CB362A6D758000D2E9E9 /* CachedAsyncImage in Frameworks */,
 				6BC8CB282A6D758000D2E9E9 /* EFQRCode in Frameworks */,
+				5C56762A2AFF67AC00E58541 /* Marquee in Frameworks */,
 				6BC8CB2C2A6D758000D2E9E9 /* SDWebImageWebPCoder in Frameworks */,
 				6BC8CB302A6D758000D2E9E9 /* SDWebImagePDFCoder in Frameworks */,
 				6B853FEA2A7509DC0067B55C /* ZipArchive in Frameworks */,
 				6BC8CB342A6D758000D2E9E9 /* DarockKit in Frameworks */,
 				6B37B4BD2A715EF900F26F1A /* SFSymbol in Frameworks */,
 				8CA453822AE42A3E00138CE4 /* Dynamic in Frameworks */,
+				5C56762D2AFF72E900E58541 /* SwiftDate in Frameworks */,
 				6BC8CB2E2A6D758000D2E9E9 /* SDWebImageSVGCoder in Frameworks */,
 				6BC8CB322A6D758000D2E9E9 /* SwiftSoup in Frameworks */,
 			);
@@ -241,6 +247,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5CD61C9C2AF52102002D2097 /* Offline */ = {
+			isa = PBXGroup;
+			children = (
+				5CD61C9D2AF52144002D2097 /* OfflineMainView.swift */,
+			);
+			path = Offline;
+			sourceTree = "<group>";
+		};
 		6B0064DE2A73D5EE0093A423 /* Live */ = {
 			isa = PBXGroup;
 			children = (
@@ -286,6 +300,7 @@
 				6B6790A12A52965900FAE216 /* PersonalCenter */,
 				6B4AF9E42A72D6C50046817D /* UserDynamic */,
 				6B6790A22A52968300FAE216 /* Video */,
+				5CD61C9C2AF52102002D2097 /* Offline */,
 				6B0064DE2A73D5EE0093A423 /* Live */,
 				6B91C4A52A5597C20020259E /* Others */,
 				6B91C4A62A5597E10020259E /* Errors */,
@@ -590,6 +605,8 @@
 				6B37B4BC2A715EF900F26F1A /* SFSymbol */,
 				6B853FE92A7509DC0067B55C /* ZipArchive */,
 				8CA453812AE42A3E00138CE4 /* Dynamic */,
+				5C5676292AFF67AC00E58541 /* Marquee */,
+				5C56762C2AFF72E900E58541 /* SwiftDate */,
 			);
 			productName = "DarockBili WatchKit App Watch App";
 			productReference = 6BFF295C2A6C0D1C00914A8E /* DarockBili Watch App.app */;
@@ -643,6 +660,8 @@
 				6B37B4BB2A715EF800F26F1A /* XCRemoteSwiftPackageReference "SFSymbol" */,
 				6B853FE82A7509DC0067B55C /* XCRemoteSwiftPackageReference "ZipArchive" */,
 				8CA453802AE42A3E00138CE4 /* XCRemoteSwiftPackageReference "Dynamic" */,
+				5C5676282AFF67AC00E58541 /* XCRemoteSwiftPackageReference "Marquee" */,
+				5C56762B2AFF72E900E58541 /* XCRemoteSwiftPackageReference "SwiftDate" */,
 			);
 			productRefGroup = 6B0253B52A4EF59600567986 /* Products */;
 			projectDirPath = "";
@@ -774,6 +793,7 @@
 				6BFF296F2A6C0DE500914A8E /* UIExt.swift in Sources */,
 				6BFF298F2A6C0E1D00914A8E /* FeedbackView.swift in Sources */,
 				6BFF29802A6C0DFC00914A8E /* VideoPlayerView.swift in Sources */,
+				5CD61C9E2AF52144002D2097 /* OfflineMainView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1193,6 +1213,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5C5676282AFF67AC00E58541 /* XCRemoteSwiftPackageReference "Marquee" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftUIKit/Marquee";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.0;
+			};
+		};
+		5C56762B2AFF72E900E58541 /* XCRemoteSwiftPackageReference "SwiftDate" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/malcommac/SwiftDate";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		6B37B4BB2A715EF800F26F1A /* XCRemoteSwiftPackageReference "SFSymbol" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Nirma/SFSymbol";
@@ -1284,6 +1320,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5C5676292AFF67AC00E58541 /* Marquee */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5C5676282AFF67AC00E58541 /* XCRemoteSwiftPackageReference "Marquee" */;
+			productName = Marquee;
+		};
+		5C56762C2AFF72E900E58541 /* SwiftDate */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5C56762B2AFF72E900E58541 /* XCRemoteSwiftPackageReference "SwiftDate" */;
+			productName = SwiftDate;
+		};
 		6B37B4BC2A715EF900F26F1A /* SFSymbol */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6B37B4BB2A715EF800F26F1A /* XCRemoteSwiftPackageReference "SFSymbol" */;
