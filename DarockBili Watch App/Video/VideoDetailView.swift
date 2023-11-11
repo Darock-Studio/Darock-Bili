@@ -165,7 +165,7 @@ struct VideoDetailView: View {
                                                 }, label: {
                                                     Image(systemName: "play.fill")
                                                 })
-                                                .sheet(isPresented: $isVideoPlayerPresented, content: {VideoPlayerView()})
+                                                
                                             } else {
                                                 Button(action: {
                                                     mainVerticalTabViewSelection = 3
@@ -193,6 +193,7 @@ struct VideoDetailView: View {
                             .bold()
                     }
                 }
+                .sheet(isPresented: $isVideoPlayerPresented, content: {VideoPlayerView()})
                 .containerBackground(for: .navigation) {
                     if !isInLowBatteryMode {
                         ZStack {

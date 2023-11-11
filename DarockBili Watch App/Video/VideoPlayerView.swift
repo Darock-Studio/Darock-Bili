@@ -23,9 +23,14 @@ struct VideoPlayerView: View {
     @State var currentTime: Double = 0.0
     @State var playerTimer: Timer?
     @State var showDanmakus = [[String: String]]()
-    @State var danmakuWallOffsetX: CGFloat = 0
+    @State var showedDanmakus: [[(danmaku: Int, offset: Double)]?] = [nil, nil, nil, nil]
     @State var tabviewChoseTab = 1
     @State var playerRotate = 0.0
+    @State var player: AVPlayer!
+    @State var danmakuOffset = 0.0
+    @State var lastDanmakuOffset = 0.0
+    @State var lastDanmakuLine = 0
+    @State var lastDanmakuIndex = 0
     var body: some View {
 //        let asset = AVURLAsset(url: URL(string: VideoDetailView.willPlayVideoLink)!/*, options: ["AVURLAssetHTTPHeaderFieldsKey": [
 //            "Referer": "https://www.bilibili.com/video/\(VideoDetailView.willPlayVideoBV)",
@@ -34,8 +39,7 @@ struct VideoPlayerView: View {
 //                                                                                    ]]*/, options: [AVURLAssetHTTPUserAgentKey: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"])
 //        let item = AVPlayerItem(asset: asset)
 //        let player = AVPlayer(playerItem: item)
-        let pExtension = AVExtension(VideoDetailView.willPlayVideoLink)!
-        let player = pExtension.getPlayer()
+        
         ZStack {
             TabView(selection: $tabviewChoseTab) {
                 ScrollView {
@@ -62,6 +66,7 @@ struct VideoPlayerView: View {
                 VideoPlayer(player: player)
                     .rotationEffect(.degrees(playerRotate))
                     .ignoresSafeArea()
+                    .modifier(zoomable())
                     .onAppear {
                         hideDigitalTime(true)
                         Timer.scheduledTimer(withTimeInterval: 15, repeats: true) { timer in
@@ -70,14 +75,38 @@ struct VideoPlayerView: View {
 //                                                debugPrint(player.currentItem!.status)
 //                                                danmakuWallOffsetX = player.currentTime().seconds * 20
                             
-                            debugPrint(pExtension.getCurrentPlayTimeSeconds())
+                            debugPrint(player.currentTime())
                             let headers: HTTPHeaders = [
                                 "cookie": "SESSDATA=\(sessdata)"
                             ]
-                            AF.request("https://api.bilibili.com/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": VideoDetailView.willPlayVideoBV, "mid": dedeUserID, "played_time": Int(pExtension.getCurrentPlayTimeSeconds()), "type": 3, "dt": 2, "play_type": 0, "csrf": biliJct], headers: headers).response { response in
+                            AF.request("https://api.bilibili.com/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": VideoDetailView.willPlayVideoBV, "mid": dedeUserID, "played_time": Int(player.currentTime().seconds), "type": 3, "dt": 2, "play_type": 0, "csrf": biliJct], headers: headers).response { response in
                                 debugPrint(response)
                             }
                         }
+//                        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+//                            danmakuOffset = -(player.currentTime().seconds * 2.0)
+//                            for i in 0..<showDanmakus.count {
+//                                let appTime = Double(showDanmakus[i]["Appear"]!)!
+//                                var nextLineIndex: Int
+//                                if player.currentTime().seconds - appTime < 1.0 {
+//                                    if lastDanmakuLine + 1 > 4 {
+//                                        nextLineIndex = 1
+//                                        lastDanmakuLine = 0
+//                                    } else {
+//                                        lastDanmakuLine++
+//                                        nextLineIndex = lastDanmakuLine
+//                                    }
+//                                } else {
+//                                    nextLineIndex = 1
+//                                }
+//                                nextLineIndex--
+//                                if showedDanmakus[nextLineIndex] == nil {
+//                                    showedDanmakus[nextLineIndex] = [(i, Double(showDanmakus[i]["Appear"]!)! * 10.0)]
+//                                } else {
+//                                    showedDanmakus[nextLineIndex]?.append((i, Double(showDanmakus[i]["Appear"]!)! * 10.0))
+//                                }
+//                            }
+//                        }
                     }
                     .onDisappear {
                         hideDigitalTime(false)
@@ -121,30 +150,46 @@ struct VideoPlayerView: View {
             }
             .tabViewStyle(.page)
 //            if showDanmakus.count != 0 {
-//                Group {
-//                    ForEach(0...showDanmakus.count - 1, id: \.self) { i in
-//                        if i != 0 {
-//                            let danmakuLast = showDanmakus[i - 1]
-//                            let danmakuThis = showDanmakus[i]
-//                            if (Double(danmakuThis["Appear"]!)! - Double(danmakuLast["Appear"]!)!) <= 3 {
-//                                HStack {
-//                                    Text(danmakuThis["Text"]!)
-//                                        .offset(x: Double(danmakuThis["Appear"]!)! * 300)
+//                VStack {
+//                    ZStack {
+//                        LazyVStack {
+//                            if showedDanmakus[0] != nil {
+//                                ZStack {
+//                                    ForEach(0..<showedDanmakus[0]!.count, id: \.self) { i in
+//                                        Text(showDanmakus[showedDanmakus[0]![i].danmaku]["Text"]!)
+//                                            .offset(x: showedDanmakus[0]![i].offset)
+//                                    }
 //                                }
-//                            } else {
-//                                VStack {
-//                                    Text(danmakuThis["Text"]!)
-//                                        .offset(x: Double(danmakuThis["Appear"]!)! * 300)
+//                            }
+//                            if showedDanmakus[1] != nil {
+//                                ZStack {
+//                                    
+//                                }
+//                            }
+//                            if showedDanmakus[2] != nil {
+//                                ZStack {
+//                                    
+//                                }
+//                            }
+//                            if showedDanmakus[3] != nil {
+//                                ZStack {
+//                                    
 //                                }
 //                            }
 //                        }
 //                    }
+//                    Spacer()
 //                }
-//                .offset(x: danmakuWallOffsetX)
+//                .ignoresSafeArea()
+//                .allowsHitTesting(false)
+//                .offset(x: danmakuOffset)
 //            }
         }
         .ignoresSafeArea()
         .onAppear {
+            let pExtension = AVExtension(VideoDetailView.willPlayVideoLink)!
+            player = pExtension.getPlayer()
+            
             if isPlayerAutoRotating {
                 WKApplication.shared().isAutorotating = true
             }

@@ -142,6 +142,21 @@ struct UserDynamicMainView: View {
                 }
             }
             .navigationTitle("动态")
+            .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+                if #available(watchOS 10, *) {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button(action: {
+                            lastDynamicID = ""
+                            dynamics.removeAll()
+                            ContinueLoadDynamic()
+                        }, label: {
+                            Image(systemName: "arrow.clockwise")
+                                .foregroundColor(.accentColor)
+                        })
+                    }
+                }
+            }
             .onAppear {
                 if !isLoaded {
                     ContinueLoadDynamic()
