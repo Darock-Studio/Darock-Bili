@@ -6,15 +6,8 @@
 //
 
 import SwiftUI
-import EFQRCode
-import AuthenticationServices
 
 struct AboutView: View {
-    @State var easterEggText = ""
-    @State var rexEasterEggColor = Color.white
-    @State var rexEasterEggCount = 0
-    @State var isEasterEggPresented = false
-    @State var isEasterEgg2Presented = false
     var body: some View {
          NavigationStack {
             List {
@@ -26,18 +19,8 @@ struct AboutView: View {
                 Section {
                     Text("Credits:")
                     Text("Darock Studio")
-                        .onTapGesture(count: 5) {
-                            if easterEggText == "" {
-                                easterEggText = "继续？"
-                            } else {
-                                easterEggText = "不是这里！"
-                            }
-                        }
                     Label("来自 \(Text("Darock Studio").bold()) 的消息：欢迎加群 248036605 获取最新消息谢谢喵！", systemImage: "arrowshape.up")
-                        .onTapGesture(count: 14) {
-                            isEasterEgg2Presented = true
-                        }
-                        .sheet(isPresented: $isEasterEgg2Presented, content: {EasterEgg2View()})
+                    Text("ReX\n\(Text("帮助了点UI").font(.system(size: 14, weight: .regular)).foregroundColor(.gray))")
                 }
                 Section {
                     NavigationLink(destination: {OpenSource()}, label: {
@@ -45,7 +28,6 @@ struct AboutView: View {
                     })
                 }
             }
-            .navigationTitle(easterEggText)
             .bold()
         }
     }
@@ -101,55 +83,6 @@ struct AboutView: View {
                 Licensed under MIT license
                 ------------------
                 """)
-            }
-        }
-    }
-    struct EasterEggView: View {
-        @State var isDetailPresented = false
-        var body: some View {
-            VStack {
-                Text("是...边缘的风景。")
-                    .onTapGesture(count: 10) {
-                        isDetailPresented = true
-                    }
-                    .sheet(isPresented: $isDetailPresented, content: {UserDetailView(uid: "342729006")})
-            }
-            .padding()
-        }
-    }
-    struct EasterEgg2View: View {
-        @State var inputPwdCache = ""
-        @State var tipText = ""
-        @State var errTimes = 0
-        @State var isArchivePresented = false
-        var body: some View {
-            VStack {
-                Text("您有一份惊喜礼包可领取！")
-                TextField("输入密码", text: $inputPwdCache)
-                    .onSubmit {
-                        if inputPwdCache == "114514" {
-                            isArchivePresented = true
-                        } else {
-                            errTimes += 1
-                            tipText = "密码错误！"
-                        }
-                    }
-                    .sheet(isPresented: $isArchivePresented, content: {ArchiveView()})
-                Text(tipText)
-                if errTimes >= 3 {
-                    Text("密码提示：纯数字")
-                }
-            }
-        }
-        
-        struct ArchiveView: View {
-            var body: some View {
-                VStack {
-                    Image(uiImage: UIImage(cgImage: EFQRCode.generate(for: "https://darock.top/Archive.zip")!))
-                        .resizable()
-                        .frame(width: 120, height: 120)
-                    Text("手机扫码领取")
-                }
             }
         }
     }
