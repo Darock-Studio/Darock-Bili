@@ -239,21 +239,21 @@ extension Int {
     }
 }
 
-postfix operator ?
+postfix operator /
 extension Optional {
-    static postfix func ? (opt: Int?) -> Int {
+    static postfix func / (opt: Int?) -> Int {
         return opt ?? 0
     }
-    static postfix func ? (opt: String?) -> String {
+    static postfix func / (opt: String?) -> String {
         return opt ?? ""
     }
-    static postfix func ? (opt: Double?) -> Double {
+    static postfix func / (opt: Double?) -> Double {
         return opt ?? 0.0
     }
-    static postfix func ? (opt: Float?) -> Float {
+    static postfix func / (opt: Float?) -> Float {
         return opt ?? 0.0
     }
-    static postfix func ? (opt: Bool?) -> Bool {
+    static postfix func / (opt: Bool?) -> Bool {
         return opt ?? false
     }
 }
