@@ -14,6 +14,7 @@ struct AboutView: View {
                 Section {
                     Text("喵哩喵哩 v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)")
                     Text("编译时间: \(CodingTime.getCodingTime())")
+                    Text("版本签名：\n#1: \("*Darock \(CodingTime.getCodingTime()) \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String) Salt*".DDMD5Encrypt(.lowercase16))\n#2: \("*Darock \(CodingTime.getCodingTime()) \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String) Salt*".DDMD5Encrypt(.lowercase32))")
                     Text("遇到问题？在设置页面点击“反馈问题”进行反馈，感谢您的支持！")
                 }
                 Section {
