@@ -66,7 +66,7 @@ struct VideoPlayerView: View {
                 VideoPlayer(player: player)
                     .rotationEffect(.degrees(playerRotate))
                     .ignoresSafeArea()
-                    .modifier(zoomable())
+                    //.modifier(zoomable())
                     .onAppear {
                         hideDigitalTime(true)
                         Timer.scheduledTimer(withTimeInterval: 15, repeats: true) { timer in
