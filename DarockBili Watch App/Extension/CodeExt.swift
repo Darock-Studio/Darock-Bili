@@ -8,7 +8,7 @@
 
 import OSLog
 import SwiftUI
-//import Dynamic
+import Dynamic
 import CryptoKit
 import Alamofire
 import Foundation
@@ -123,8 +123,8 @@ public func getMemory() -> Float {
 /// 切换时间显示
 /// - Parameter b: 是否显示
 public func hideDigitalTime(_ b: Bool) {
-//    let app = Dynamic.PUICApplication.sharedPUICApplication()
-//    app._setStatusBarTimeHidden(b, animated: true, completion: nil)
+    let app = Dynamic.PUICApplication.sharedPUICApplication()
+    app._setStatusBarTimeHidden(b, animated: true, completion: nil)
 }
 
 public class WbiSign: ObservableObject {
@@ -211,16 +211,52 @@ public class WbiSign: ObservableObject {
 
 postfix operator ++
 postfix operator --
+prefix operator ++
+prefix operator --
 extension Int {
     @discardableResult
     static postfix func ++ (num: inout Int) -> Int {
         num += 1
-        return num
+        return num - 1
     }
     
     @discardableResult
     static postfix func -- (num: inout Int) -> Int {
         num -= 1
+        return num + 1
+    }
+
+    @discardableResult
+    static prefix func ++ (num: inout Int) -> Int {
+        num += 1
+        return num
+    }
+
+    @discardableResult
+    static prefix func -- (num: inout Int) -> Int {
+        num -= 1
         return num
     }
 }
+
+postfix operator ?
+extension Optional {
+    static postfix func ? (opt: Int?) -> Int {
+        return opt ?? 0
+    }
+    static postfix func ? (opt: String?) -> String {
+        return opt ?? ""
+    }
+    static postfix func ? (opt: Double?) -> Double {
+        return opt ?? 0.0
+    }
+    static postfix func ? (opt: Float?) -> Float {
+        return opt ?? 0.0
+    }
+    static postfix func ? (opt: Bool?) -> Bool {
+        return opt ?? false
+    }
+}
+
+
+
