@@ -34,7 +34,7 @@ struct AboutView: View {
             .bold()
         }
         .onAppear {
-            DarockKit.Network.shared.requestString("https://api.darock.top/bili/verify/list") { isSuccess, respStr in
+            DarockKit.Network.shared.requestString("https://api.darock.top/bili/verify/list") { respStr, isSuccess in
                 if isSuccess {
                     if respStr.contains(verSign) {
                         signVerifyStatus = "OK"
