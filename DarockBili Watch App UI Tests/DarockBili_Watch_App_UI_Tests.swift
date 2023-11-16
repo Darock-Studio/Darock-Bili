@@ -27,7 +27,7 @@ final class DarockBili_Watch_App_UI_Tests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         
-        app.tabBars.buttons[2].tap()
+        app.tabBars.buttons.element(boundBy: 1).tap()
         app.buttons["AppSettingsButton"].tap()
     }
 
