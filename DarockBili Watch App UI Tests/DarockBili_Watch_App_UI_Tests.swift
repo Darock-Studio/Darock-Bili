@@ -29,9 +29,11 @@ final class DarockBili_Watch_App_UI_Tests: XCTestCase {
 
         takeScreenshot(of: app, named: "Launch")
         
-        app.tabBars["MainTabView"].swipeLeft()
+        app.otherElements["MainTabView"].swipeLeft()
         sleep(1)
         app.buttons["AppSettingsButton"].tap()
+
+        takeScreenshot(of: app, named: "PC")
     }
 
     func testLaunchPerformance() throws {
