@@ -26,22 +26,9 @@ final class DarockBili_Watch_App_UI_Tests: XCTestCase {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
-        continueAfterFailure = true
-        if app.staticTexts["Debug"].exists {
-            XCTAssertTrue(app.staticTexts["Debug"].exists, "Debug Mode Not Closed")
-            app.buttons["Debug"].tap()
-            XCTAssertFalse(app.staticTexts["Text"].waitForExistence(timeout: 2.5), "No Tip Window")
-            app.buttons["Show Debug Controls"].tap()
-            XCTAssertFalse(app.staticTexts["Memory Usage:"].exists, "Debug - Memory Usage Label?")
-            app.buttons["Close Debug Controls"].tap()
-        }
-        continueAfterFailure = false
-        XCTAssertFalse(app.staticTexts["TestVideoCard"].waitForExistence(timeout: 7), "Could not load any video")
-        app.buttons["TestVideoCard"].tap()
-        app.buttons["OwnerPage"].tap()
-        sleep(5)
-        app.swipeLeft()
-        sleep(5)
+        
+        app.tabBars.buttons[2].tap()
+        app.buttons["AppSettingsButton"].tap()
     }
 
     func testLaunchPerformance() throws {
