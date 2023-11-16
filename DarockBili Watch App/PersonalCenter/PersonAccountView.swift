@@ -28,6 +28,7 @@ struct PersonAccountView: View {
                                 Image(systemName: "gear")
                                     .foregroundColor(.accentColor)
                             })
+                            .accessibility(identifier: "AppSettingsButton")
                         }
 //                        ToolbarItem(placement: .topBarTrailing) {
 //                            NavigationLink(destination: {SkinExplorerView()}, label: {
