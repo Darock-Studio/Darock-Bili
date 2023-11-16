@@ -24,6 +24,7 @@ struct ContentView: View {
                 UserDynamicMainView()
                     .tag(3)
             }
+            .accessibility(identifier: "MainTabView")
 //            .sheet(isPresented: $isGuidePresented, onDismiss: {
 //                isFirstUsing = false
 //            }, content: {FirstUsingView()})
