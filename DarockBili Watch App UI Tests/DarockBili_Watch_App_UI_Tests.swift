@@ -26,8 +26,11 @@ final class DarockBili_Watch_App_UI_Tests: XCTestCase {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
+
+        takeScreenshot(of: app, named: "Launch")
         
-        app.tabBars.buttons.element(boundBy: 1).tap()
+        app.tabBars["MainTabView"].swipeLeft()
+        sleep(1)
         app.buttons["AppSettingsButton"].tap()
     }
 
@@ -38,5 +41,23 @@ final class DarockBili_Watch_App_UI_Tests: XCTestCase {
                 XCUIApplication().launch()
             }
         }
+    }
+}
+
+extension XCTestCase {
+    /// Take a screenshot of a given app and add it to the test attachements.
+    /// - Parameters:
+    ///   - app: The app to take a screenshot of.
+    ///   - name: The name of the screenshot.
+    func takeScreenshot(of app: XCUIApplication, named name: String) {
+        let screenshot = app.windows.firstMatch.screenshot()
+        let attachment = XCTAttachment(screenshot: screenshot)
+        #if os(iOS)
+        attachment.name = "Screenshot-\(name)-\(UIDevice.current.name).png"
+        #else
+        attachment.name = "Screenshot-\(name)-macOS.png"
+        #endif
+        attachment.lifetime = .keepAlways
+        add(attachment)
     }
 }
