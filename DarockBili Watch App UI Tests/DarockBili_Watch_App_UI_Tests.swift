@@ -31,8 +31,8 @@ final class DarockBili_Watch_App_UI_Tests: XCTestCase {
         
         app.otherElements["MainTabView"].swipeLeft()
         sleep(1)
-        app.buttons["AppSettingsButton"].tap()
-
+        app.buttons["AppSettingsButton"].firstMatch.tap()
+        
         takeScreenshot(of: app, named: "PC")
     }
 
