@@ -40,13 +40,16 @@ jobs:
           
           xcodebuild -scheme DarockBili -configuration Debug DEVELOPMENT_TEAM=B57D8PP775 -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath DarockBili_Debug.xcarchive clean archive CODE_SIGN_IDENTITY="Apple Development" -allowProvisioningUpdates -authenticationKeyPath $KEY_PATH -authenticationKeyID $ASCAPI_KEY_ID -authenticationKeyIssuerID $ASCAPI_ISSUER_ID
           xcodebuild -scheme DarockBili -configuration Release DEVELOPMENT_TEAM=B57D8PP775 -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath DarockBili_Release.xcarchive clean archive CODE_SIGN_IDENTITY="Apple Development" -allowProvisioningUpdates -authenticationKeyPath $KEY_PATH -authenticationKeyID $ASCAPI_KEY_ID -authenticationKeyIssuerID $ASCAPI_ISSUER_ID
+          xcodebuild -scheme DarockBili -configuration Release DEVELOPMENT_TEAM=B57D8PP775 -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath DarockBili_Release_d.xcarchive clean archive CODE_SIGN_IDENTITY="Apple Distribution" -allowProvisioningUpdates -authenticationKeyPath $KEY_PATH -authenticationKeyID $ASCAPI_KEY_ID -authenticationKeyIssuerID $ASCAPI_ISSUER_ID
           
       - name: Export IPA
         run: |
           mkdir ./Export_Debug
           mkdir ./Export_Release
+          mkdir ./Export_Release_d
           xcodebuild -exportArchive -archivePath DarockBili_Debug.xcarchive -exportPath ./Export_Debug -exportOptionsPlist ExportOptions.plist
           xcodebuild -exportArchive -archivePath DarockBili_Release.xcarchive -exportPath ./Export_Release -exportOptionsPlist ExportOptions.plist
+          xcodebuild -exportArchive -archivePath DarockBili_Release_d.xcarchive -exportPath ./Export_Release_d -exportOptionsPlist ExportOptions.plist
 
       - name: Upload Debug IPA
         uses: actions/upload-artifact@v3
@@ -60,3 +63,8 @@ jobs:
           name: Release.ipa
           path: ./Export_Release/DarockBili.ipa
   
+      - name: Upload Release Distribution IPA
+        uses: actions/upload-artifact@v3
+        with:
+          name: Release_Distribution.ipa
+          path: ./Export_Release_d/DarockBili.ipa
