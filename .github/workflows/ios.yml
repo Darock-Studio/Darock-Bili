@@ -82,10 +82,22 @@ jobs:
         run: xcodebuild -resolvePackageDependencies -scheme 'DarockBili Watch App' -configuration Release
       
       - name: Build for Testing
-        run: xcodebuild build-for-testing -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -configuration Release -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm)' -destination 'platform=watchOS Simulator,name=Apple Watch Series 9 (45mm)' -testPlan WatchAppUITestPlan 
+        run: xcodebuild build-for-testing -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -configuration Release -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -destination 'platform=watchOS Simulator,name=Apple Watch Series 9 (45mm)' -testPlan WatchAppUITestPlan | tee TestBuilding.log
+
+      - name: Upload Building Log
+        uses: actions/upload-artifact@v3
+        with:
+          name: Watch Test Building Log
+          path: ./TestBuilding.log
 
       - name: Test for Watch
-        run: xcodebuild test-without-building -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -configuration Release -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm)' -destination 'platform=watchOS Simulator,name=Apple Watch Series 9 (45mm)' -testPlan WatchAppUITestPlan 
+        run: xcodebuild test-without-building -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -configuration Release -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -destination 'platform=watchOS Simulator,name=Apple Watch Series 9 (45mm)' -testPlan WatchAppUITestPlan | tee WatchTest.log
+
+      - name: Upload Testing Log
+        uses: actions/upload-artifact@v3
+        with:
+          name: Watch Testing Log
+          path: ./WatchTest.log
 
       - name: Upload Full Code
         uses: actions/upload-artifact@v3
