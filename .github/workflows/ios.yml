@@ -87,9 +87,14 @@ jobs:
       - name: Test for Watch
         run: xcodebuild test-without-building -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -configuration Release -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm)' -destination 'platform=watchOS Simulator,name=Apple Watch Series 9 (45mm)' -testPlan WatchAppUITestPlan 
 
-      - name: Upload Artifacts
+      - name: Upload Full Code
         uses: actions/upload-artifact@v3
         with:
           name: Full
           path: ./
-          
+
+      - name: Upload Downloads Folder
+        uses: actions/upload-artifact@v3
+        with:
+          name: Files in Downloads Folder
+          path: ~/Downloads
