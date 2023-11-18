@@ -22,25 +22,18 @@ jobs:
         run: |
           xcodebuild -scheme 'DarockBili Watch App' -configuration Debug -archivePath DarockBili_Debug.xcarchive clean archive CODE_SIGN_IDENTITY=""
           xcodebuild -scheme 'DarockBili Watch App' -configuration Release -archivePath DarockBili_Release.xcarchive clean archive CODE_SIGN_IDENTITY=""
-          
-      - name: Export IPA
-        run: |
-          mkdir ./Export_Debug
-          mkdir ./Export_Release
-          xcodebuild -exportArchive -archivePath DarockBili_Debug.xcarchive -exportPath ./Export_Debug -exportOptionsPlist ExportOptions.plist
-          xcodebuild -exportArchive -archivePath DarockBili_Release.xcarchive -exportPath ./Export_Release -exportOptionsPlist ExportOptions.plist
-          
-      - name: Upload Debug IPA
-        uses: actions/upload-artifact@v3
-        with:
-          name: Debug.ipa
-          path: ./Export_Debug/DarockBili.ipa
 
-      - name: Upload Release IPA
+      - name: Upload Debug Archive
         uses: actions/upload-artifact@v3
         with:
-          name: Release.ipa
-          path: ./Export_Release/DarockBili.ipa
+          name: Debug XCArchive
+          path: ./DarockBili_Debug.xcarchive
+
+      - name: Upload Release Archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: Release XCArchive
+          path: ./DarockBili_Release.xcarchive
   
   build_for_testing:
     runs-on: macos-13
@@ -74,5 +67,3 @@ jobs:
         with:
           name: Test Attachments
           path: ./Caches/DerivedData/Logs/Test
-
-  

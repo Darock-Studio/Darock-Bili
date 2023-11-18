@@ -4,6 +4,16 @@
 //
 //  Created by WindowsMEMZ on 2023/7/27.
 //
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the MeowBili open source project
+//
+// Copyright (c) 2023 Darock Studio and the MeowBili project authors
+// Licensed under GNU General Public License v3
+//
+// See https://darock.top/LICENSE.txt for license information
+//
+//===----------------------------------------------------------------------===//
 
 import XCTest
 
@@ -26,7 +36,7 @@ final class DarockBili_Watch_App_UI_Tests: XCTestCase {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
-
+        sleep(2)
         takeScreenshot(of: app, named: "Launch")
         app.buttons["SuggestVideo"].firstMatch.tap()
         sleep(1)
