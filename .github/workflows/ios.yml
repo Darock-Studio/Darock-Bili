@@ -116,10 +116,13 @@ jobs:
           name: Watch Testing Log
           path: ./TestBuilding.log
 
-      - name: Upload DerivedData
+      - name: Rename Test Attachments
+        run: for file in ./Caches/DerivedData/Logs/Test/Test-*.xcresult/Data/*; do if [ ! -f "$file" ]; then continue; fi; file_type=$(file -b --mime-type "$file"); extension=""; case "$file_type" in "image/jpeg" | "image/jpg") extension=".jpg";; "image/png") extension=".png";; "text/plain") extension=".txt";; *) extension=".dat";; esac; mv "$file" "$file$extension"; done
+
+      - name: Upload Test Attachments
         uses: actions/upload-artifact@v3
         with:
-          name: DerivedData
-          path: ./Caches/DerivedData
+          name: Test Attachments
+          path: ./Caches/DerivedData/Logs/Test
 
   
