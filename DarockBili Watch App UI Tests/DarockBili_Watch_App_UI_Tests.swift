@@ -55,11 +55,26 @@ extension XCTestCase {
         let screenshot = app.windows.firstMatch.screenshot()
         let attachment = XCTAttachment(screenshot: screenshot)
         #if os(iOS)
-        attachment.name = "Screenshot-\(name)-\(UIDevice.current.name).png"
+        let name = "Screenshot-\(name)-\(UIDevice.current.name).png"
         #else
-        attachment.name = "Screenshot-\(name)-macOS.png"
+        let name = "Screenshot-\(name)-watchOS.png"
         #endif
+        attachment.name = name
         attachment.lifetime = .keepAlways
         add(attachment)
+
+        let url = downloadsFolder.appendingPathComponent("appshot.png")
+        try! appshot.pngRepresentation.write(to: url)
     }
 }
+
+var downloadsFolder: URL = {
+    let fm = FileManager.default
+    let folder = fm.urls(for: .downloadsDirectory, in: .userDomainMask)[0]
+
+    var isDirectory: ObjCBool = false
+    if !(fm.fileExists(atPath: folder.path, isDirectory: &isDirectory) && isDirectory.boolValue) {
+        try! fm.createDirectory(at: folder, withIntermediateDirectories: false, attributes: nil)
+    }
+    return folder
+}()
