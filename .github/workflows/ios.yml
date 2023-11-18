@@ -68,3 +68,28 @@ jobs:
         with:
           name: Release_Distribution.ipa
           path: ./Export_Release_d/DarockBili.ipa
+
+  run_tests:
+    runs-on: macos-13
+    name: Test App
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set Xcode Version
+        run: sudo xcode-select -s /Applications/Xcode_15.0.app
+
+      - name: Resolve Swift dependencies
+        run: xcodebuild -resolvePackageDependencies -scheme 'DarockBili Watch App' -configuration Release
+      
+      - name: Build for Testing
+        run: xcodebuild build-for-testing -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -configuration Release -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm)' -destination 'platform=watchOS Simulator,name=Apple Watch Series 9 (45mm)' -testPlan WatchAppUITestPlan 
+
+      - name: Test for Watch
+        run: xcodebuild test-without-building -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -configuration Release -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm)' -destination 'platform=watchOS Simulator,name=Apple Watch Series 9 (45mm)' -testPlan WatchAppUITestPlan 
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Full
+          path: ./
+          
