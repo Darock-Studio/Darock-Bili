@@ -18,62 +18,18 @@ jobs:
       - name: Set Xcode Version
         run: sudo xcode-select -s /Applications/Xcode_15.0.app
 
-      - name: Get App Store Connect API Key File
-        env:
-          ASCAPI_KEY: ${{ secrets.ASCAPI_KEY }}
-        run: |
-          KEY_PATH=$RUNNER_TEMP/ascapi-key.p8
-          
-          echo -n "$ASCAPI_KEY" > $KEY_PATH
-
-      - name: Install the Apple certificate
-        env:
-          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
-          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
-          KEYCHAIN_PASSWORD: 12345678
-        run: |
-          # create variables
-          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
-          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
-
-          # import certificate from secrets
-          echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
-
-          # create temporary keychain
-          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
-          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-
-          # import certificate to keychain
-          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
-          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k ~/Library/Keychains/login.keychain
-          security list-keychain -d user -s $KEYCHAIN_PATH
-
-      - name: Resolve Swift dependencies
-        run: |
-          xcodebuild -resolvePackageDependencies -scheme DarockBili -configuration Debug
-          xcodebuild -resolvePackageDependencies -scheme DarockBili -configuration Release
-
       - name: Archive DarockBili App
-        env:
-          ASCAPI_KEY_ID: ${{ secrets.ASCAPI_KEY_ID }}
-          ASCAPI_ISSUER_ID: ${{ secrets.ASCAPI_ISSUER_ID }}
         run: |
-          KEY_PATH=$RUNNER_TEMP/ascapi-key.p8
-          
-          xcodebuild -scheme DarockBili -configuration Debug DEVELOPMENT_TEAM=B57D8PP775 -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath DarockBili_Debug.xcarchive clean archive CODE_SIGN_IDENTITY="Apple Development" -allowProvisioningUpdates -authenticationKeyPath $KEY_PATH -authenticationKeyID $ASCAPI_KEY_ID -authenticationKeyIssuerID $ASCAPI_ISSUER_ID
-          xcodebuild -scheme DarockBili -configuration Release DEVELOPMENT_TEAM=B57D8PP775 -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath DarockBili_Release.xcarchive clean archive CODE_SIGN_IDENTITY="Apple Development" -allowProvisioningUpdates -authenticationKeyPath $KEY_PATH -authenticationKeyID $ASCAPI_KEY_ID -authenticationKeyIssuerID $ASCAPI_ISSUER_ID
-          xcodebuild -scheme DarockBili -configuration Release DEVELOPMENT_TEAM=B57D8PP775 -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath DarockBili_Release_d.xcarchive clean archive CODE_SIGN_IDENTITY="Apple Distribution" -allowProvisioningUpdates -authenticationKeyPath $KEY_PATH -authenticationKeyID $ASCAPI_KEY_ID -authenticationKeyIssuerID $ASCAPI_ISSUER_ID
+          xcodebuild -scheme DarockBili -configuration Debug DEVELOPMENT_TEAM=B57D8PP775 -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath DarockBili_Debug.xcarchive clean archive CODE_SIGN_IDENTITY=""
+          xcodebuild -scheme DarockBili -configuration Release DEVELOPMENT_TEAM=B57D8PP775 -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath DarockBili_Release.xcarchive clean archive CODE_SIGN_IDENTITY=""
           
       - name: Export IPA
         run: |
           mkdir ./Export_Debug
           mkdir ./Export_Release
-          mkdir ./Export_Release_d
           xcodebuild -exportArchive -archivePath DarockBili_Debug.xcarchive -exportPath ./Export_Debug -exportOptionsPlist ExportOptions.plist
           xcodebuild -exportArchive -archivePath DarockBili_Release.xcarchive -exportPath ./Export_Release -exportOptionsPlist ExportOptions.plist
-          xcodebuild -exportArchive -archivePath DarockBili_Release_d.xcarchive -exportPath ./Export_Release_d -exportOptionsPlist ExportOptions.plist
-
+          
       - name: Upload Debug IPA
         uses: actions/upload-artifact@v3
         with:
@@ -86,12 +42,6 @@ jobs:
           name: Release.ipa
           path: ./Export_Release/DarockBili.ipa
   
-      - name: Upload Release Distribution IPA
-        uses: actions/upload-artifact@v3
-        with:
-          name: Release_Distribution.ipa
-          path: ./Export_Release_d/DarockBili.ipa
-
   build_for_testing:
     runs-on: macos-13
     name: Test App
