@@ -69,7 +69,7 @@ jobs:
           name: Release_Distribution.ipa
           path: ./Export_Release_d/DarockBili.ipa
 
-  run_tests:
+  build_for_testing:
     runs-on: macos-13
     name: Test App
     steps:
@@ -80,9 +80,12 @@ jobs:
 
       - name: Resolve Swift dependencies
         run: xcodebuild -resolvePackageDependencies -scheme 'DarockBili Watch App' -configuration Release
+
+      - name: Prepare Cache Folder
+        run: mkdir Caches
       
-      - name: Build for Testing
-        run: xcodebuild build-for-testing -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -configuration Release -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -destination 'platform=watchOS Simulator,name=Apple Watch Series 9 (45mm)' -testPlan WatchAppUITestPlan | tee TestBuilding.log
+      - name: Build
+        run: xcodebuild build-for-testing -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -configuration Release -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -destination 'platform=watchOS Simulator,name=Apple Watch Series 9 (45mm),OS=10.0' -testPlan WatchAppUITestPlan -testProductsPath ./Caches/TestProducts.xctestproducts -derivedDataPath ./Caches/DerivedData -resultBundleVersion 3 -resultBundlePath ./Caches/resultbundle.xcresult | tee TestBuilding.log
 
       - name: Upload Building Log
         uses: actions/upload-artifact@v3
@@ -90,23 +93,56 @@ jobs:
           name: Watch Test Building Log
           path: ./TestBuilding.log
 
-      - name: Test for Watch
-        run: xcodebuild test-without-building -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -configuration Release -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -destination 'platform=watchOS Simulator,name=Apple Watch Series 9 (45mm)' -testPlan WatchAppUITestPlan | tee WatchTest.log
-
-      - name: Upload Testing Log
-        uses: actions/upload-artifact@v3
+      - name: Update Caches
+        uses: actions/cache@v3
         with:
-          name: Watch Testing Log
-          path: ./WatchTest.log
+          key: XCTest-Build-Cache-${{ github.sha }}
+          path: ./Caches
 
-      - name: Upload Full Code
-        uses: actions/upload-artifact@v3
+  test_watch1:
+    runs-on: macos13
+    name: Test on Apple Watch Series 7 (41mm)
+    needs:
+      - build_for_testing
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Restore Caches
+        uses: actions/cache@v3
         with:
-          name: Full
-          path: ./
-
+          key: XCTest-Build-Cache-${{ github.sha }}
+          path: ./Caches
+          
+      - name: Test
+        run: xcodebuild test-without-building -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -configuration Release -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -testPlan WatchAppUITestPlan -testProductsPath ./Caches/TestProducts.xctestproducts -derivedDataPath ./Caches/DerivedData -resultBundleVersion 3 -resultBundlePath ./Caches/resultbundle.xcresult
+        
       - name: Upload Downloads Folder
         uses: actions/upload-artifact@v3
         with:
-          name: Files in Downloads Folder
+          name: Files in Downloads Folder1
           path: ~/Downloads
+
+  test_watch2:
+    runs-on: macos13
+    name: Test on Apple Watch Series 9 (45mm)
+    needs:
+      - build_for_testing
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Restore Caches
+        uses: actions/cache@v3
+        with:
+          key: XCTest-Build-Cache-${{ github.sha }}
+          path: ./Caches
+          
+      - name: Test
+        run: xcodebuild test-without-building -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -configuration Release -destination 'platform=watchOS Simulator,name=Apple Watch Series 9 (45mm),OS=10.0' -testPlan WatchAppUITestPlan -testProductsPath ./Caches/TestProducts.xctestproducts -derivedDataPath ./Caches/DerivedData -resultBundleVersion 3 -resultBundlePath ./Caches/resultbundle.xcresult
+        
+      - name: Upload Downloads Folder
+        uses: actions/upload-artifact@v3
+        with:
+          name: Files in Downloads Folder2
+          path: ~/Downloads
+
+  
