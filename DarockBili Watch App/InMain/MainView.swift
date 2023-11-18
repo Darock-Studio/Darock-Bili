@@ -98,7 +98,7 @@ struct MainView: View {
                             autoreleasepool {
                                 ForEach(0...videos.count - 1, id: \.self) { i in
                                     VideoCard(videos[i])
-                                        .accessibilityIdentifier(i == 0 ? "TestVideoCard" : "")
+                                        .accessibility(identifier: "SuggestVideo")
                                 }
                             }
                         }
