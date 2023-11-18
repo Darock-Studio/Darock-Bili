@@ -60,9 +60,9 @@ jobs:
         run: |
           KEY_PATH=$RUNNER_TEMP/ascapi-key.p8
           
-          xcodebuild -scheme DarockBili -configuration Debug DEVELOPMENT_TEAM=B57D8PP775 -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath DarockBili_Debug.xcarchive clean archive CODE_SIGN_IDENTITY="Apple Development" -allowProvisioningUpdates -authenticationKeyPath $KEY_PATH -authenticationKeyID $ASCAPI_KEY_ID -authenticationKeyIssuerID $ASCAPI_ISSUER_ID
-          xcodebuild -scheme DarockBili -configuration Release DEVELOPMENT_TEAM=B57D8PP775 -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath DarockBili_Release.xcarchive clean archive CODE_SIGN_IDENTITY="Apple Development" -allowProvisioningUpdates -authenticationKeyPath $KEY_PATH -authenticationKeyID $ASCAPI_KEY_ID -authenticationKeyIssuerID $ASCAPI_ISSUER_ID
-          xcodebuild -scheme DarockBili -configuration Release DEVELOPMENT_TEAM=B57D8PP775 -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath DarockBili_Release_d.xcarchive clean archive CODE_SIGN_IDENTITY="Apple Distribution" -allowProvisioningUpdates -authenticationKeyPath $KEY_PATH -authenticationKeyID $ASCAPI_KEY_ID -authenticationKeyIssuerID $ASCAPI_ISSUER_ID
+          xcodebuild -scheme DarockBili -configuration Debug DEVELOPMENT_TEAM=B57D8PP775 -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath DarockBili_Debug.xcarchive clean archive CODE_SIGN_IDENTITY="Apple Development: Yuxuan Chen" -allowProvisioningUpdates -authenticationKeyPath $KEY_PATH -authenticationKeyID $ASCAPI_KEY_ID -authenticationKeyIssuerID $ASCAPI_ISSUER_ID
+          xcodebuild -scheme DarockBili -configuration Release DEVELOPMENT_TEAM=B57D8PP775 -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath DarockBili_Release.xcarchive clean archive CODE_SIGN_IDENTITY="Apple Development: Yuxuan Chen" -allowProvisioningUpdates -authenticationKeyPath $KEY_PATH -authenticationKeyID $ASCAPI_KEY_ID -authenticationKeyIssuerID $ASCAPI_ISSUER_ID
+          xcodebuild -scheme DarockBili -configuration Release DEVELOPMENT_TEAM=B57D8PP775 -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath DarockBili_Release_d.xcarchive clean archive CODE_SIGN_IDENTITY="Apple Distribution: Yuxuan Chen" -allowProvisioningUpdates -authenticationKeyPath $KEY_PATH -authenticationKeyID $ASCAPI_KEY_ID -authenticationKeyIssuerID $ASCAPI_ISSUER_ID
           
       - name: Export IPA
         run: |
