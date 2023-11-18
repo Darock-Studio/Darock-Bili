@@ -75,4 +75,9 @@ jobs:
           name: Test Attachments
           path: ./Caches/DerivedData/Logs/Test
 
-  
+      - name: Upload Derived Datas
+        uses: actions/upload-artifact@v3
+        with:
+          name: Derived Datas
+          path: ./Caches/DerivedData
+
