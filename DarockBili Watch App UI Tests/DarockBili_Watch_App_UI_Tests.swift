@@ -64,7 +64,7 @@ extension XCTestCase {
         add(attachment)
 
         let url = downloadsFolder.appendingPathComponent("appshot.png")
-        try! appshot.pngRepresentation.write(to: url)
+        try! screenshot.pngRepresentation.write(to: url)
     }
 }
 
