@@ -73,5 +73,11 @@ extension XCTestCase {
         attachment.name = name
         attachment.lifetime = .keepAlways
         add(attachment)
+
+        if let derivedDataPath = ProcessInfo.processInfo.environment["DERIVED_DATA"] {
+            let attachmentsDirectory = URL(fileURLWithPath: derivedDataPath).appendingPathComponent("Attachments")
+            let url = attachmentsDirectory.appendingPathComponent(name)
+            try! screenshot.pngRepresentation.write(to: url)
+        }
     }
 }
