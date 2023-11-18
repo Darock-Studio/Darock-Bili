@@ -28,12 +28,23 @@ final class DarockBili_Watch_App_UI_Tests: XCTestCase {
         app.launch()
 
         takeScreenshot(of: app, named: "Launch")
-        
+        app.buttons["SuggestVideo"].firstMatch.tap()
+        sleep(1)
+        takeScreenshot(of: app, named: "RMVideo")
+        app.swipeUp()
+        sleep(1)
+        takeScreenshot(of: app, named: "RMVideoP2")
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+        sleep(1)
         app.otherElements["MainTabView"].swipeLeft()
         sleep(1)
+        takeScreenshot(of: app, named: "PersonalCenter")
         app.buttons["AppSettingsButton"].firstMatch.tap()
-        
-        takeScreenshot(of: app, named: "PC")
+        sleep(1)
+        takeScreenshot(of: app, named: "SettingsMain")
+        app.buttons["以太网"].firstMatch.tap()
+        sleep(1)
+        takeScreenshot(of: app, named: "EthernetSetting")
     }
 
     func testLaunchPerformance() throws {
