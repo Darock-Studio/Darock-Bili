@@ -20,8 +20,8 @@ jobs:
 
       - name: Archive DarockBili App
         run: |
-          xcodebuild -scheme DarockBili -configuration Debug DEVELOPMENT_TEAM=B57D8PP775 -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath DarockBili_Debug.xcarchive clean archive CODE_SIGN_IDENTITY=""
-          xcodebuild -scheme DarockBili -configuration Release DEVELOPMENT_TEAM=B57D8PP775 -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath DarockBili_Release.xcarchive clean archive CODE_SIGN_IDENTITY=""
+          xcodebuild -scheme 'DarockBili Watch App' -configuration Debug -archivePath DarockBili_Debug.xcarchive clean archive CODE_SIGN_IDENTITY=""
+          xcodebuild -scheme 'DarockBili Watch App' -configuration Release -archivePath DarockBili_Release.xcarchive clean archive CODE_SIGN_IDENTITY=""
           
       - name: Export IPA
         run: |
