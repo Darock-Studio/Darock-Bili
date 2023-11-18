@@ -175,7 +175,10 @@ struct SettingsView: View {
             var body: some View {
                 List {
                     Section {
-                        Toggle("显示网络疑难解答", isOn: $isShowNetworkFixing)
+                        NavigationLink(destination: {NetworkFixView()}, label: {
+                            Text("网络检查")
+                        })
+                        Toggle("自动显示网络检查", isOn: $isShowNetworkFixing)
                     }
                 }
                 .navigationTitle("以太网")
