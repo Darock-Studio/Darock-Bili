@@ -84,61 +84,15 @@ jobs:
       - name: Prepare Cache Folder
         run: mkdir Caches
       
-      - name: Build
-        run: xcodebuild build-for-testing -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -configuration Release -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -destination 'platform=watchOS Simulator,name=Apple Watch Series 9 (45mm),OS=10.0' -testPlan WatchAppUITestPlan -testProductsPath ./Caches/TestProducts.xctestproducts -derivedDataPath ./Caches/DerivedData | tee TestBuilding.log
+      - name: Build and Test
+        run: xcodebuild test -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -configuration Release -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -destination 'platform=watchOS Simulator,name=Apple Watch Series 9 (45mm),OS=10.0' -testPlan WatchAppUITestPlan -testProductsPath ./Caches/TestProducts.xctestproducts -derivedDataPath ./Caches/DerivedData | tee TestBuilding.log
 
       - name: Upload Building Log
         uses: actions/upload-artifact@v3
         with:
-          name: Watch Test Building Log
+          name: Watch Testing Log
           path: ./TestBuilding.log
 
-      - name: Update Caches
-        uses: actions/cache@v3
-        with:
-          key: XCTest-Build-Cache-${{ github.sha }}
-          path: ./Caches
-
-  test_watch1:
-    runs-on: macos-13
-    name: Test on Apple Watch Series 7 (41mm)
-    needs:
-      - build_for_testing
-    steps:
-      - uses: actions/checkout@v3
-      
-      - name: Restore Caches
-        uses: actions/cache@v3
-        with:
-          key: XCTest-Build-Cache-${{ github.sha }}
-          path: ./Caches
-          
-      - name: Test
-        run: xcodebuild test-without-building -configuration Release -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -testPlan WatchAppUITestPlan -testProductsPath ./Caches/TestProducts.xctestproducts -derivedDataPath ./Caches/DerivedData
-        
-      - name: Upload Downloads Folder
-        uses: actions/upload-artifact@v3
-        with:
-          name: Files in Downloads Folder1
-          path: ~/Downloads
-
-  test_watch2:
-    runs-on: macos-13
-    name: Test on Apple Watch Series 9 (45mm)
-    needs:
-      - build_for_testing
-    steps:
-      - uses: actions/checkout@v3
-      
-      - name: Restore Caches
-        uses: actions/cache@v3
-        with:
-          key: XCTest-Build-Cache-${{ github.sha }}
-          path: ./Caches
-          
-      - name: Test
-        run: xcodebuild test-without-building -configuration Release -destination 'platform=watchOS Simulator,name=Apple Watch Series 9 (45mm),OS=10.0' -testPlan WatchAppUITestPlan -testProductsPath ./Caches/TestProducts.xctestproducts -derivedDataPath ./Caches/DerivedData
-        
       - name: Upload Downloads Folder
         uses: actions/upload-artifact@v3
         with:
