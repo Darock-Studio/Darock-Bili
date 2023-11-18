@@ -62,19 +62,5 @@ extension XCTestCase {
         attachment.name = name
         attachment.lifetime = .keepAlways
         add(attachment)
-
-        let url = downloadsFolder.appendingPathComponent("appshot.png")
-        try! screenshot.pngRepresentation.write(to: url)
     }
 }
-
-var downloadsFolder: URL = {
-    let fm = FileManager.default
-    let folder = fm.urls(for: .downloadsDirectory, in: .userDomainMask)[0]
-
-    var isDirectory: ObjCBool = false
-    if !(fm.fileExists(atPath: folder.path, isDirectory: &isDirectory) && isDirectory.boolValue) {
-        try! fm.createDirectory(at: folder, withIntermediateDirectories: false, attributes: nil)
-    }
-    return folder
-}()
