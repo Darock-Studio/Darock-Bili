@@ -187,7 +187,7 @@ struct NetworkFixView: View {
                             }
                         }
                     }, label: {
-                        Text(isTroubleshooting ? "Troubleshooter.troubleshooting" : "Troubleshooter.re-troubleshoot")
+                        Text(isTroubleshooting ? "正在检查..." : "重新检查")
                     })
                     .disabled(isTroubleshooting)
                 }
