@@ -125,8 +125,6 @@ struct DarockBili_Watch_AppApp: App {
                                 timer.invalidate()
                             }
                         }
-                        
-                        WKInterfaceDevice.current().isBatteryMonitoringEnabled = true
                     }
                     .overlay {
                         VStack {
@@ -198,10 +196,12 @@ struct DarockBili_Watch_AppApp: App {
         .onChange(of: scenePhase) { value in
             switch value {
             case .background:
-                screenTimeCaculateTimer?.invalidate()
+                //screenTimeCaculateTimer?.invalidate()
+                break
             case .inactive:
                 break
             case .active:
+                WKInterfaceDevice.current().isBatteryMonitoringEnabled = true
                 if screenTimeCaculateTimer == nil {
                     Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
                         screenTimeCaculateTimer = timer
@@ -211,7 +211,7 @@ struct DarockBili_Watch_AppApp: App {
                         UserDefaults.standard.set(UserDefaults.standard.integer(forKey: "ScreenTime\(dateStr)") + 1, forKey: "ScreenTime\(dateStr)")
                     }
                 } else {
-                    screenTimeCaculateTimer!.fire()
+                    //screenTimeCaculateTimer!.fire()
                 }
             @unknown default:
                 break
