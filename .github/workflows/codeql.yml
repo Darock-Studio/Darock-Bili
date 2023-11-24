@@ -4,7 +4,6 @@ on:
   push:
     branches: [ "main" ]
   pull_request:
-    # The branches below must be a subset of the branches above
     branches: [ "main" ]
 
 jobs:
@@ -44,7 +43,7 @@ jobs:
 
     - name: Build
       run: |
-        xcodebuild build -project DarockBili.xcodeproj -scheme "DarockBili Watch App"
+        xcodebuild build -project DarockBili.xcodeproj -scheme "DarockBili Watch App" CODE_SIGN_IDENTITY=""
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
