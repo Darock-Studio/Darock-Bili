@@ -22,6 +22,6 @@ jobs:
             echo "shouldc=true" >> $GITHUB_ENV
           fi
   call-check-workflow:
-    if: $shouldc
+    if: ${{ env.shouldc }}
     uses: Darock-Studio/Darock-Bili/.github/workflows/status-check.yml@main
     
