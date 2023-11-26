@@ -60,7 +60,6 @@ struct VideoCommentsView: View {
         var body: some View {
             ScrollView {
                 LazyVStack {
-                    #if swift(>=5.9)
                     if #unavailable(watchOS 10) {
                         Button(action: {
                             isSendCommentPresented = true
@@ -72,17 +71,6 @@ struct VideoCommentsView: View {
                         })
                         .sheet(isPresented: $isSendCommentPresented, content: {CommentSendView(oid: oid)})
                     }
-                    #else
-                    Button(action: {
-                        isSendCommentPresented = true
-                    }, label: {
-                        HStack {
-                            Image(systemName: "square.and.pencil")
-                            Text("发送评论")
-                        }
-                    })
-                    .sheet(isPresented: $isSendCommentPresented, content: {CommentSendView(oid: oid)})
-                    #endif
                     if comments.count != 0 {
                         ForEach(0...comments.count - 1, id: \.self) { i in
                             VStack {
