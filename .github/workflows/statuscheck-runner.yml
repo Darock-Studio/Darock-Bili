@@ -5,24 +5,26 @@ on:
     types:
       - created
 
-env:
-  shouldc: false
-
 jobs:
   checkif:
     runs-on: ubuntu-latest
     name: Check Comment Content
+    outputs:
+      shouldc: ${{ steps.checkc.outputs.shouldc }}
     steps:
       - name: Check
+        id: checkc
         run: |
           if [[ "${{ github.event.comment.body }}" != *"!Run check"* ]]; then
             echo "The comment content does not contain the specified text. Cancelling workflow."
+            echo "::set-output name=shouldc::false"
           else
             echo "The comment content contains the specified text. Continuing with further actions."
-            echo "shouldc=true" >> $GITHUB_ENV
+            echo "::set-output name=shouldc::true"
           fi
   call-check-workflow:
+    name: Run
     needs: checkif
-    if: ${{ env.shouldc }}
+    if: ${{ needs.checkif.outputs.shouldc == 'true' }}
     uses: Darock-Studio/Darock-Bili/.github/workflows/status-check.yml@main
     
