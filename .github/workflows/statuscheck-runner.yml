@@ -1,0 +1,27 @@
+name: Status Check Runner
+
+on:
+  issue_comment:
+    types:
+      - created
+
+env:
+  shouldc: false
+
+jobs:
+  checkif:
+    runs-on: ubuntu-latest
+    name: Check Comment Content
+    steps:
+      - name: Check
+        run: |
+          if [[ "${{ github.event.comment.body }}" != *"!Run check"* ]]; then
+            echo "The comment content does not contain the specified text. Cancelling workflow."
+          else
+            echo "The comment content contains the specified text. Continuing with further actions."
+            echo "shouldc=true" >> $GITHUB_ENV
+          fi
+  call-check-workflow:
+    if: $shouldc
+    uses: Darock-Studio/Darock-Bili/.github/workflows/status-check.yml@main
+    
