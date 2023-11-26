@@ -1,10 +1,6 @@
 name: Status Check Workflow
 
-on:
-  push:
-    branches: [ "**" ]
-  pull_request:
-    branches: [ "**" ]
+on: workflow_call
 
 jobs:
   build:
