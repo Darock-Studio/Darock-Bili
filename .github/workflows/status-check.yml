@@ -17,6 +17,13 @@ jobs:
       - name: Set Xcode Version
         run: sudo xcode-select -s /Applications/Xcode_15.0.app
 
+      - name: Cache Build Caches
+        uses: actions/cache@v3
+        with:
+          key: check-build-cache
+          path: |
+            ~/Library/Developer/Xcode/DerivedData
+
       - name: Build DarockBili App
         run: |
           xcodebuild -scheme 'DarockBili Watch App' -configuration Release build CODE_SIGN_IDENTITY=""
