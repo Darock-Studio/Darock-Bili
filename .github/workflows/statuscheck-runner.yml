@@ -27,4 +27,5 @@ jobs:
     needs: checkif
     if: ${{ needs.checkif.outputs.shouldc == 'true' }}
     uses: Darock-Studio/Darock-Bili/.github/workflows/status-check.yml@main
-    
+    with:
+      psha: ${{ github.event.comment.pull_request.head.sha }}
