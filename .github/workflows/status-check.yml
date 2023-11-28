@@ -1,6 +1,10 @@
 name: Status Check Workflow
 
-on: workflow_call
+on: 
+  workflow_dispatch:
+    inputs:
+      psha:
+        required: true
 
 jobs:
   build:
@@ -9,6 +13,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.psha }}
         
       - name: Set Xcode Version
         run: sudo xcode-select -s /Applications/Xcode_15.0.app
