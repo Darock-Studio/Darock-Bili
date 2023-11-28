@@ -1,10 +1,11 @@
 name: Status Check Workflow
 
 on: 
-  workflow_dispatch:
+  workflow_call:
     inputs:
       psha:
         required: true
+        type: string
 
 jobs:
   build:
