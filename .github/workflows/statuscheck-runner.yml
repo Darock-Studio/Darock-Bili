@@ -26,6 +26,21 @@ jobs:
     name: Get Pull Request Head SHA
     needs: checkif
     if: ${{ needs.checkif.outputs.shouldc == 'true' }}
+    runs-on: ubuntu-latest
+    outputs:
+      psha: ${{ steps.getsha.outputs.psha }}
+    env:
+      slink: ${{ github.event.issue.pull_request.url }}
+    steps:
+      - name: Get SHA
+        id: getsha
+        run: |
+          json_data=$(curl -s "$slink")
+          sha=$(echo "$json_data" | jq -r '.head.sha')
+          echo "psha=$sha" >> $GITHUB_OUTPUT
+  call-check-workflow:
+    name: Run
+    needs: get-head-sha
     uses: Darock-Studio/Darock-Bili/.github/workflows/status-check.yml@main
     with:
-      psha: ${{ github.event.issue.pull_request.url }}
+      psha: ${{ needs.get-head-sha.outputs.psha }}
