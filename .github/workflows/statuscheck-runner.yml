@@ -36,7 +36,7 @@ jobs:
         id: getsha
         run: |
           json_data=$(curl -s "$slink")
-          sha=$(echo "$json_data" | jq -r '.head.sha')
+          sha=$(echo "$json_data" | jq -r '.head.ref')
           echo "psha=$sha" >> $GITHUB_OUTPUT
   call-check-workflow:
     name: Run
