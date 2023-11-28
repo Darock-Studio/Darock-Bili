@@ -41,6 +41,6 @@ jobs:
   call-check-workflow:
     name: Run
     needs: get-head-sha
-    uses: Darock-Studio/Darock-Bili/.github/workflows/status-check.yml@main
+    uses: Darock-Studio/Darock-Bili/.github/workflows/status-check.yml@${{ needs.get-head-sha.outputs.psha }}
     with:
       psha: ${{ needs.get-head-sha.outputs.psha }}
