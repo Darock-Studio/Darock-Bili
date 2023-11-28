@@ -28,4 +28,4 @@ jobs:
     if: ${{ needs.checkif.outputs.shouldc == 'true' }}
     uses: Darock-Studio/Darock-Bili/.github/workflows/status-check.yml@main
     with:
-      psha: ${{ github.event.issue.pull_request.head.sha }}
+      psha: ${{ github.event.issue.pull_request.url }}
