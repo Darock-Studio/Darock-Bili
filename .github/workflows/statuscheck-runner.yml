@@ -39,8 +39,14 @@ jobs:
           sha=$(echo "$json_data" | jq -r '.head.ref')
           echo "psha=$sha" >> $GITHUB_OUTPUT
   call-check-workflow:
-    name: Run
+    name: Call Check Overflow
     needs: get-head-sha
-    uses: Darock-Studio/Darock-Bili/.github/workflows/status-check.yml@${{ needs.get-head-sha.outputs.psha }}
-    with:
-      psha: ${{ needs.get-head-sha.outputs.psha }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: status-check.yml
+          ref: ${{ needs.get-head-sha.outputs.psha }}
+          inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}"}'
+    
