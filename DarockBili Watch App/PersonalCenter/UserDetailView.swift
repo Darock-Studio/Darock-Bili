@@ -569,7 +569,7 @@ struct UserDetailView: View {
                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/arc/search?\(respStr.apiFixed())", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             debugPrint(respJson)
-                            if respJson["code"].int/ != 0 {
+                            if (respJson["code"].int ?? 0) != 0 {
                                 tipWithText("加载失败：\(respJson["message"].string/)", symbol: "xmark.circle.fill")
                                 return
                             }
@@ -577,7 +577,7 @@ struct UserDetailView: View {
                             for video in vlist {
                                 videos.append(["Title": video.1["title"].string ?? "[加载失败]", "Length": video.1["length"].string ?? "E", "PlayCount": String(video.1["play"].int ?? -1), "PicUrl": video.1["pic"].string ?? "E", "BV": video.1["bvid"].string ?? "E", "Timestamp": String(video.1["created"].int ?? 0), "DanmakuCount": String(video.1["video_review"].int ?? -1)])
                             }
-                            debugPrint(respJson["data"]["page"]["count"].int/)
+                            debugPrint(respJson["data"]["page"]["count"].int ?? 0)
                             videoTotalPage = Int((respJson["data"]["page"]["count"].int ?? 0) / 50) + 1
                             videoCount = respJson["data"]["page"]["count"].int ?? 0
                             if !isVideosLoaded {
