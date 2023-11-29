@@ -23,7 +23,7 @@ jobs:
             --method POST \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/$GITHUB_REF/statuses/$GITHUB_SHA \
+            /repos/${{ github.repository }}/statuses/$GITHUB_SHA \
             -f state='pending' \
             -f target_url='https://github.com/Darock-Studio/Darock-Bili/actions/runs/${{ github.run_id }}' \
             -f description='Building...' \
@@ -65,7 +65,7 @@ jobs:
             --method POST \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/$GITHUB_REF/statuses/$GITHUB_SHA \
+            /repos/${{ github.repository }}/statuses/$GITHUB_SHA \
             -f state='$FIN_STATUS' \
             -f target_url='https://github.com/Darock-Studio/Darock-Bili/actions/runs/${{ github.run_id }}' \
             -f context='API Status Checker' 
