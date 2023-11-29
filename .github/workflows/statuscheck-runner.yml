@@ -22,9 +22,31 @@ jobs:
             echo "The comment content contains the specified text. Continuing with further actions."
             echo "::set-output name=shouldc::true"
           fi
-  call-check-workflow:
-    name: Run
+  get-head-sha:
+    name: Get Pull Request Head SHA
     needs: checkif
     if: ${{ needs.checkif.outputs.shouldc == 'true' }}
-    uses: Darock-Studio/Darock-Bili/.github/workflows/status-check.yml@main
+    runs-on: ubuntu-latest
+    outputs:
+      psha: ${{ steps.getsha.outputs.psha }}
+    env:
+      slink: ${{ github.event.issue.pull_request.url }}
+    steps:
+      - name: Get SHA
+        id: getsha
+        run: |
+          json_data=$(curl -s "$slink")
+          sha=$(echo "$json_data" | jq -r '.head.ref')
+          echo "psha=$sha" >> $GITHUB_OUTPUT
+  call-check-workflow:
+    name: Call Check Overflow
+    needs: get-head-sha
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: status-check.yml
+          ref: ${{ needs.get-head-sha.outputs.psha }}
+          inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}"}'
     

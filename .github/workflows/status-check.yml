@@ -1,12 +1,34 @@
 name: Status Check Workflow
 
-on: workflow_call
+on: 
+  workflow_dispatch:
+    inputs:
+      psha:
+        required: true
 
 jobs:
   build:
     name: Check Build
     runs-on: macos-13
+    permissions:
+      checks: write
+      statuses: write
+    env:
+      FIN_STATUS: "error"
+      GH_TOKEN: ${{ github.token }}
     steps:
+      - name: Update Check Status
+        run: |
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            /repos/${{ github.repository }}/statuses/$GITHUB_SHA \
+            -f state='pending' \
+            -f target_url='https://github.com/Darock-Studio/Darock-Bili/actions/runs/${{ github.run_id }}' \
+            -f description='Building...' \
+            -f context='API Status Checker' 
+    
       - name: Checkout
         uses: actions/checkout@v3
         
@@ -19,8 +41,32 @@ jobs:
           key: check-build-cache
           path: |
             ~/Library/Developer/Xcode/DerivedData
+      
+      - name: Cache Package Caches
+        uses: actions/cache@v3
+        with:
+          path: .build
+          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
+
+      - name: Update Status Env
+        run: echo "FIN_STATUS=failure" >> $GITHUB_ENV
 
       - name: Build DarockBili App
         run: |
           xcodebuild -scheme 'DarockBili Watch App' -configuration Release build CODE_SIGN_IDENTITY=""
-          
+          echo "FIN_STATUS=success" >> $GITHUB_ENV
+
+      - name: Update Check Status
+        if: always()
+        run: |
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            /repos/${{ github.repository }}/statuses/$GITHUB_SHA \
+            -f state='${{ env.FIN_STATUS }}' \
+            -f target_url='https://github.com/Darock-Studio/Darock-Bili/actions/runs/${{ github.run_id }}' \
+            -f context='API Status Checker' 
+    

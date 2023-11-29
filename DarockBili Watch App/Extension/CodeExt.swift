@@ -248,24 +248,4 @@ extension Int {
     }
 }
 
-postfix operator /
-extension Optional {
-    static postfix func / (opt: Int?) -> Int {
-        return opt ?? 0
-    }
-    static postfix func / (opt: String?) -> String {
-        return opt ?? ""
-    }
-    static postfix func / (opt: Double?) -> Double {
-        return opt ?? 0.0
-    }
-    static postfix func / (opt: Float?) -> Float {
-        return opt ?? 0.0
-    }
-    static postfix func / (opt: Bool?) -> Bool {
-        return opt ?? false
-    }
-}
-
-
 
