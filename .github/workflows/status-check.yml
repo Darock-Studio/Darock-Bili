@@ -10,6 +10,9 @@ jobs:
   build:
     name: Check Build
     runs-on: macos-13
+    permissions:
+      checks: write
+      statuses: write
     env:
       FIN_STATUS: "error"
     steps:
