@@ -570,7 +570,7 @@ struct UserDetailView: View {
                         if isSuccess {
                             debugPrint(respJson)
                             if (respJson["code"].int ?? 0) != 0 {
-                                tipWithText("加载失败：\(respJson["message"].string/)", symbol: "xmark.circle.fill")
+                                tipWithText("加载失败：\(respJson["message"].string ?? "")", symbol: "xmark.circle.fill")
                                 return
                             }
                             let vlist = respJson["data"]["list"]["vlist"]
@@ -602,8 +602,8 @@ struct UserDetailView: View {
                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/article?\(respStr.apiFixed())", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             debugPrint(respJson)
-                            if respJson["code"].int/ != 0 {
-                                tipWithText("加载失败：\(respJson["message"].string/)", symbol: "xmark.circle.fill")
+                            if (respJson["code"].int ?? 0) != 0 {
+                                tipWithText("加载失败：\(respJson["message"].string ?? "")", symbol: "xmark.circle.fill")
                                 return
                             }
                             let articlesJson = respJson["data"]["articles"]
