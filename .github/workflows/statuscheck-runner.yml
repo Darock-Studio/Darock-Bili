@@ -44,9 +44,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Call
-        uses: benc-uk/workflow-dispatch@v1
+        uses: benc-uk/workflow-dispatch@v1.2.2
         with:
           workflow: status-check.yml
           ref: ${{ needs.get-head-sha.outputs.psha }}
           inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}"}'
+          
     
