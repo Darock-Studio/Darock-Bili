@@ -15,6 +15,7 @@ jobs:
       statuses: write
     env:
       FIN_STATUS: "error"
+      GH_TOKEN: ${{ github.token }}
     steps:
       - name: Update Check Status
         run: |
