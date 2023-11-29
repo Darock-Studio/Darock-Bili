@@ -25,6 +25,14 @@ jobs:
           key: check-build-cache
           path: |
             ~/Library/Developer/Xcode/DerivedData
+      
+      - name: Cache Package Caches
+        uses: actions/cache@v3
+        with:
+          path: .build
+          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
 
       - name: Build DarockBili App
         run: |
