@@ -41,6 +41,8 @@ jobs:
   call-check-workflow:
     name: Call Check Overflow
     needs: get-head-sha
+    permissions:
+      actions: write
     runs-on: ubuntu-latest
     steps:
       - name: Call
@@ -50,4 +52,3 @@ jobs:
           ref: ${{ needs.get-head-sha.outputs.psha }}
           inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}"}'
           
-    
