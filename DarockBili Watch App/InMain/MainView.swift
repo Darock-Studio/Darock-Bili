@@ -160,10 +160,10 @@ struct MainView: View {
             let headers: HTTPHeaders = [
                 "cookie": "SESSDATA=\(sessdata)"
             ]
-            DarockKit.Network.shared.requestString("https://api.darock.top/bili/wbi/sign/\("ps=\(isInLowBatteryMode ? 10 :  30)".base64Encoded())") { respStr, isSuccess in
-                if isSuccess {
-                    debugPrint(respStr.apiFixed())
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/wbi/index/top/feed/rcmd?\(respStr.apiFixed())", headers: headers) { respJson, isSuccess in
+            biliWbiSign(paramEncoded: "ps=\(isInLowBatteryMode ? 10 :  30)".base64Encoded()) { signed in
+                if let signed {
+                    debugPrint(signed)
+                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/wbi/index/top/feed/rcmd?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             debugPrint(respJson)
                             let datas = respJson["data"]["item"]
