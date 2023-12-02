@@ -146,10 +146,10 @@ struct UserDetailView: View {
             let headers: HTTPHeaders = [
                 "cookie": "SESSDATA=\(sessdata);"
             ]
-            DarockKit.Network.shared.requestString("https://api.darock.top/bili/wbi/sign/\("mid=\(uid)".base64Encoded())") { respStr, isSuccess in
-                if isSuccess {
-                    debugPrint(respStr.apiFixed())
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/acc/info?\(respStr.apiFixed())", headers: headers) { respJson, isSuccess in
+            biliWbiSign(paramEncoded: "mid=\(uid)".base64Encoded()) { signed in
+                if let signed {
+                    debugPrint(signed)
+                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             debugPrint(respJson)
                             userFaceUrl = respJson["data"]["face"].string ?? "E"
@@ -563,10 +563,10 @@ struct UserDetailView: View {
                 "cookie": "SESSDATA=\(sessdata);",
                 "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
             ]
-            DarockKit.Network.shared.requestString("https://api.darock.top/bili/wbi/sign/\("mid=\(uid)&ps=50&pn=\(videoNowPage)".base64Encoded())") { respStr, isSuccess in
-                if isSuccess {
-                    debugPrint(respStr.apiFixed())
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/arc/search?\(respStr.apiFixed())", headers: headers) { respJson, isSuccess in
+            biliWbiSign(paramEncoded: "mid=\(uid)&ps=50&pn=\(videoNowPage)".base64Encoded()) { signed in
+                if let signed {
+                    debugPrint(signed)
+                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/arc/search?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             debugPrint(respJson)
                             if (respJson["code"].int ?? 0) != 0 {
@@ -594,12 +594,13 @@ struct UserDetailView: View {
         func RefreshArticles() {
             articles = [[String: String]]()
             let headers: HTTPHeaders = [
-                "cookie": "SESSDATA=\(sessdata);"
+                "cookie": "SESSDATA=\(sessdata);",
+                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
             ]
-            DarockKit.Network.shared.requestString("https://api.darock.top/bili/wbi/sign/\("mid=\(uid)&ps=30&pn=\(articleNowPage)&sort=publish_time&platform=web".base64Encoded())") { respStr, isSuccess in
-                if isSuccess {
-                    debugPrint(respStr.apiFixed())
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/article?\(respStr.apiFixed())", headers: headers) { respJson, isSuccess in
+            biliWbiSign(paramEncoded: "mid=\(uid)&ps=30&pn=\(articleNowPage)&sort=publish_time&platform=web".base64Encoded()) { signed in
+                if let signed {
+                    debugPrint(signed)
+                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/article?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             debugPrint(respJson)
                             if (respJson["code"].int ?? 0) != 0 {
