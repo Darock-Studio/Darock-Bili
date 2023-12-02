@@ -51,4 +51,3 @@ jobs:
           workflow: status-check.yml
           ref: ${{ needs.get-head-sha.outputs.psha }}
           inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}"}'
-          
