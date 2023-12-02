@@ -211,6 +211,38 @@ func biliWbiSign(paramEncoded: String, completion: @escaping (String?) -> Void) 
     }
 }
 
+// AV & BV ID Convert Logic
+fileprivate let XOR = 177451812
+fileprivate let ADD = 100618342136696320
+fileprivate let TABLE = "fZodR9XQDSUm21yCkr6zBqiveYah8bt4xsWpHnJE7jL5VG3guMTKNPAwcF"
+fileprivate let MAP = [
+    0:9,
+    1:8,
+    2:1,
+    3:6,
+    4:2,
+    5:4,
+    6:0,
+    7:7,
+    8:3,
+    9:5
+]
+func avid(bvid: String) -> Int {
+    var av = 0
+    for i in 0..<10 {
+        av += TABLE.firstIndex(of: code[MAP![i]!])! * Int(pow(58.0, Double(i)))
+    }
+    return (av - ADD) ^ XOR
+}
+func bvid(avid: Int) -> String {
+    var code = (code ^ XOR) + ADD
+    var bv = Array(repeating: "", count: 10)
+    for i in 0..<10 {
+        bv[MAP![i]!] = String(TABLE[TABLE.index(TABLE.startIndex, offsetBy: (code / Int(pow(58.0, Double(i)))) % 58)])
+    }
+    return bv.joined()
+}
+
 postfix operator ++
 postfix operator --
 prefix operator ++
