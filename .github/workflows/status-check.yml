@@ -35,21 +35,19 @@ jobs:
       - name: Set Xcode Version
         run: sudo xcode-select -s /Applications/Xcode_15.0.app
 
+      - name: Get Current Time
+        id: current-time
+        run: echo "time=$(date +"%Y%m%d%H%M%S")" >> $GITHUB_OUTPUT
+
       - name: Cache Build Caches
         uses: actions/cache@v3
         with:
-          key: check-build-cache
+          key: ${{ runner.os }}-check-build-cache-${{ steps.current-time.outputs.time }}
           path: |
             ~/Library/Developer/Xcode/DerivedData
-      
-      - name: Cache Package Caches
-        uses: actions/cache@v3
-        with:
-          path: .build
-          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
           restore-keys: |
-            ${{ runner.os }}-spm-
-
+            ${{ runner.os }}-check-build-cache-
+      
       - name: Update Status Env
         run: echo "FIN_STATUS=failure" >> $GITHUB_ENV
 
