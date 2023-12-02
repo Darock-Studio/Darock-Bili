@@ -139,11 +139,6 @@ public func hideDigitalTime(_ b: Bool) {
 }
 
 func biliWbiSign(paramEncoded: String, completion: @escaping (String?) -> Void) {
-    let XOR = 177451812
-    let ADD = 100618342136696320
-    let TABLE = "fZodR9XQDSUm21yCkr6zBqiveYah8bt4xsWpHnJE7jL5VG3guMTKNPAwcF"
-    let MAP = [0:9, 1:8, 2:1, 3:6, 4:2, 5:4, 6:0, 7:7, 8:3, 9:5]
-    
     func getMixinKey(orig: String) -> String {
         return String(mixinKeyEncTab.map { orig[orig.index(orig.startIndex, offsetBy: $0)] }.prefix(32))
     }
