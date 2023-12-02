@@ -196,7 +196,7 @@ func biliWbiSign(paramEncoded: String, completion: @escaping (String?) -> Void) 
     getWbiKeys { result in
         switch result {
         case .success(let keys):
-            let decParam = paramEncoded.base64Decoded ?? ""
+            let decParam = paramEncoded.base64Decoded() ?? ""
             let spdParam = decParam.components(separatedBy: "&")
             var spdDicParam = [String: String]()
             spdParam.forEach { pair in
