@@ -55,7 +55,7 @@ jobs:
 
       - name: Build DarockBili App
         run: |
-          xcodebuild -scheme 'DarockBili Watch App' -configuration Release build CODE_SIGN_IDENTITY=""
+          output=$(xcodebuild -scheme 'DarockBili Watch App' -configuration Release build CODE_SIGN_IDENTITY=""); exit_code=$?; while IFS= read -r line; do if [[ $line =~ ^/Users/runner/work/Darock-Bili/Darock-Bili/.*:[0-9]+:[0-9]+: (error|warning|note): ]]; then type="${BASH_REMATCH[1]}"; case $type in "error") color='\e[91m';; "warning") color='\e[93m';; "note") color='\e[94m';; esac; echo -e "${color}$line\e[0m"; IFS= read -r line; echo "$line"; IFS= read -r line; echo "$line"; echo; fi; done <<< "$output"; exit $exit_code
           echo "FIN_STATUS=success" >> $GITHUB_ENV
 
       - name: Update Check Status
