@@ -227,15 +227,16 @@ fileprivate let MAP = [
     8:3,
     9:5
 ]
-func avid(bvid: String) -> Int {
+public func avid(bvid: String) -> Int {
     var av = 0
     for i in 0..<10 {
-        av += TABLE.firstIndex(of: code[MAP![i]!])! * Int(pow(58.0, Double(i)))
+        let charIndex = TABLE.firstIndex(of: bvid[bvid.index(bvid.startIndex, offsetBy: MAP![i]!)])!
+        av += charIndex * Int(pow(58.0, Double(i)))
     }
     return (av - ADD) ^ XOR
 }
-func bvid(avid: Int) -> String {
-    var code = (code ^ XOR) + ADD
+public func bvid(avid: Int) -> String {
+    var code = (avid ^ XOR) + ADD
     var bv = Array(repeating: "", count: 10)
     for i in 0..<10 {
         bv[MAP![i]!] = String(TABLE[TABLE.index(TABLE.startIndex, offsetBy: (code / Int(pow(58.0, Double(i)))) % 58)])
