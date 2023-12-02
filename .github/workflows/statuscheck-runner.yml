@@ -1,0 +1,53 @@
+name: Status Check Runner
+
+on:
+  issue_comment:
+    types:
+      - created
+
+jobs:
+  checkif:
+    runs-on: ubuntu-latest
+    name: Check Comment Content
+    outputs:
+      shouldc: ${{ steps.checkc.outputs.shouldc }}
+    steps:
+      - name: Check
+        id: checkc
+        run: |
+          if [[ "${{ github.event.comment.body }}" != *"!Run check"* ]]; then
+            echo "The comment content does not contain the specified text. Cancelling workflow."
+            echo "::set-output name=shouldc::false"
+          else
+            echo "The comment content contains the specified text. Continuing with further actions."
+            echo "::set-output name=shouldc::true"
+          fi
+  get-head-sha:
+    name: Get Pull Request Head SHA
+    needs: checkif
+    if: ${{ needs.checkif.outputs.shouldc == 'true' }}
+    runs-on: ubuntu-latest
+    outputs:
+      psha: ${{ steps.getsha.outputs.psha }}
+    env:
+      slink: ${{ github.event.issue.pull_request.url }}
+    steps:
+      - name: Get SHA
+        id: getsha
+        run: |
+          json_data=$(curl -s "$slink")
+          sha=$(echo "$json_data" | jq -r '.head.ref')
+          echo "psha=$sha" >> $GITHUB_OUTPUT
+  call-check-workflow:
+    name: Call Check Overflow
+    needs: get-head-sha
+    permissions:
+      actions: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call
+        uses: benc-uk/workflow-dispatch@v1.2.2
+        with:
+          workflow: status-check.yml
+          ref: ${{ needs.get-head-sha.outputs.psha }}
+          inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}"}'

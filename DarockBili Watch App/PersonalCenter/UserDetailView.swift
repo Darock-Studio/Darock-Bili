@@ -4,6 +4,16 @@
 //
 //  Created by WindowsMEMZ on 2023/7/1.
 //
+//===----------------------------------------------------------------------===//
+//
+// This source file is part of the MeowBili open source project
+//
+// Copyright (c) 2023 Darock Studio and the MeowBili project authors
+// Licensed under GNU General Public License v3
+//
+// See https://darock.top/LICENSE.txt for license information
+//
+//===----------------------------------------------------------------------===//
 
 // UserDetailView 对于 watchOS 10 和其他版本是两套独立代码，更改时记得同时更改！
 
@@ -136,10 +146,10 @@ struct UserDetailView: View {
             let headers: HTTPHeaders = [
                 "cookie": "SESSDATA=\(sessdata);"
             ]
-            DarockKit.Network.shared.requestString("https://api.darock.top/bili/wbi/sign/\("mid=\(uid)".base64Encoded())") { respStr, isSuccess in
-                if isSuccess {
-                    debugPrint(respStr.apiFixed())
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/acc/info?\(respStr.apiFixed())", headers: headers) { respJson, isSuccess in
+            biliWbiSign(paramEncoded: "mid=\(uid)".base64Encoded()) { signed in
+                if let signed {
+                    debugPrint(signed)
+                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             debugPrint(respJson)
                             userFaceUrl = respJson["data"]["face"].string ?? "E"
@@ -550,19 +560,24 @@ struct UserDetailView: View {
         func RefreshVideos() {
             videos = [[String: String]]()
             let headers: HTTPHeaders = [
-                "cookie": "SESSDATA=\(sessdata);"
+                "cookie": "SESSDATA=\(sessdata);",
+                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
             ]
-            DarockKit.Network.shared.requestString("https://api.darock.top/bili/wbi/sign/\("mid=\(uid)&ps=50&pn=\(videoNowPage)".base64Encoded())") { respStr, isSuccess in
-                if isSuccess {
-                    debugPrint(respStr.apiFixed())
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/arc/search?\(respStr.apiFixed())", headers: headers) { respJson, isSuccess in
+            biliWbiSign(paramEncoded: "mid=\(uid)&ps=50&pn=\(videoNowPage)".base64Encoded()) { signed in
+                if let signed {
+                    debugPrint(signed)
+                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/arc/search?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             debugPrint(respJson)
+                            if (respJson["code"].int ?? 0) != 0 {
+                                tipWithText("加载失败：\(respJson["message"].string ?? "")", symbol: "xmark.circle.fill")
+                                return
+                            }
                             let vlist = respJson["data"]["list"]["vlist"]
                             for video in vlist {
                                 videos.append(["Title": video.1["title"].string ?? "[加载失败]", "Length": video.1["length"].string ?? "E", "PlayCount": String(video.1["play"].int ?? -1), "PicUrl": video.1["pic"].string ?? "E", "BV": video.1["bvid"].string ?? "E", "Timestamp": String(video.1["created"].int ?? 0), "DanmakuCount": String(video.1["video_review"].int ?? -1)])
                             }
-                            debugPrint(respJson["data"]["page"]["count"].int!)
+                            debugPrint(respJson["data"]["page"]["count"].int ?? 0)
                             videoTotalPage = Int((respJson["data"]["page"]["count"].int ?? 0) / 50) + 1
                             videoCount = respJson["data"]["page"]["count"].int ?? 0
                             if !isVideosLoaded {
@@ -579,14 +594,19 @@ struct UserDetailView: View {
         func RefreshArticles() {
             articles = [[String: String]]()
             let headers: HTTPHeaders = [
-                "cookie": "SESSDATA=\(sessdata);"
+                "cookie": "SESSDATA=\(sessdata);",
+                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
             ]
-            DarockKit.Network.shared.requestString("https://api.darock.top/bili/wbi/sign/\("mid=\(uid)&ps=30&pn=\(articleNowPage)&sort=publish_time&platform=web".base64Encoded())") { respStr, isSuccess in
-                if isSuccess {
-                    debugPrint(respStr.apiFixed())
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/article?\(respStr.apiFixed())", headers: headers) { respJson, isSuccess in
+            biliWbiSign(paramEncoded: "mid=\(uid)&ps=30&pn=\(articleNowPage)&sort=publish_time&platform=web".base64Encoded()) { signed in
+                if let signed {
+                    debugPrint(signed)
+                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/article?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             debugPrint(respJson)
+                            if (respJson["code"].int ?? 0) != 0 {
+                                tipWithText("加载失败：\(respJson["message"].string ?? "")", symbol: "xmark.circle.fill")
+                                return
+                            }
                             let articlesJson = respJson["data"]["articles"]
                             for article in articlesJson {
                                 articles.append(["Title": article.1["title"].string ?? "[加载失败]", "Summary": article.1["summary"].string ?? "[加载失败]", "Type": article.1["categories"][0]["name"].string ?? "[加载失败]", "View": String(article.1["stats"]["view"].int ?? -1), "Like": String(article.1["stats"]["like"].int ?? -1), "Pic": article.1["image_urls"][0].string ?? "E", "CV": String(article.1["id"].int ?? 0)])

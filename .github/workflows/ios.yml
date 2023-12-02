@@ -4,11 +4,8 @@ on:
   push:
     branches: [ "main" ]
     paths-ignore:
-      - '.github/workflows/codeql.yml'
-  pull_request:
-    branches: [ "main" ]
-    paths-ignore:
-      - '.github/workflows/codeql.yml'
+      - '.github/workflows/*'
+      - '!.github/workflows/ios.yml'
 
 jobs:
   build:
