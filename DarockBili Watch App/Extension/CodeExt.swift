@@ -19,6 +19,7 @@ import OSLog
 import SwiftUI
 import Dynamic
 import CryptoKit
+import DarockKit
 import Alamofire
 import SwiftyJSON
 import Foundation
@@ -165,8 +166,8 @@ func biliWbiSign(paramEncoded: String, completion: @escaping (String?) -> Void) 
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                let imgURL = json["data"]["wbi_img"]["img_url"].stringValue
-                let subURL = json["data"]["wbi_img"]["sub_url"].stringValue
+                let imgURL = json["data"]["wbi_img"]["img_url"].string ?? ""
+                let subURL = json["data"]["wbi_img"]["sub_url"].string ?? ""
                 let imgKey = imgURL.components(separatedBy: "/").last?.components(separatedBy: ".").first ?? ""
                 let subKey = subURL.components(separatedBy: "/").last?.components(separatedBy: ".").first ?? ""
                 completion(.success((imgKey, subKey)))
@@ -195,7 +196,7 @@ func biliWbiSign(paramEncoded: String, completion: @escaping (String?) -> Void) 
     getWbiKeys { result in
         switch result {
         case .success(let keys):
-            let decParam = Data(base64Encoded: paramEncoded)!.string
+            let decParam = paramEncoded.base64Decoded ?? ""
             let spdParam = decParam.components(separatedBy: "&")
             var spdDicParam = [String: String]()
             spdParam.forEach { pair in
