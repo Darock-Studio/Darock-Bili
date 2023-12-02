@@ -37,7 +37,7 @@ jobs:
 
       - name: Get Current Time
         id: current-time
-        run: echo "time=$(date +"%Y%m%d%H%M%S")" >> $GITHUB_OUT
+        run: echo "time=$(date +"%Y%m%d%H%M%S")" >> $GITHUB_OUTPUT
 
       - name: Cache Build Caches
         uses: actions/cache@v3
