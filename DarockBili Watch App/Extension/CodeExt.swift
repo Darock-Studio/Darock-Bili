@@ -230,7 +230,7 @@ fileprivate let MAP = [
 public func avid(bvid: String) -> Int {
     var av = 0
     for i in 0..<10 {
-        let charIndex = TABLE.firstIndex(of: bvid[bvid.index(bvid.startIndex, offsetBy: MAP![i]!)])!
+        let charIndex = TABLE.firstIndex(of: bvid[bvid.index(bvid.startIndex, offsetBy: MAP[i]!)])!
         av += charIndex * Int(pow(58.0, Double(i)))
     }
     return (av - ADD) ^ XOR
@@ -239,7 +239,7 @@ public func bvid(avid: Int) -> String {
     var code = (avid ^ XOR) + ADD
     var bv = Array(repeating: "", count: 10)
     for i in 0..<10 {
-        bv[MAP![i]!] = String(TABLE[TABLE.index(TABLE.startIndex, offsetBy: (code / Int(pow(58.0, Double(i)))) % 58)])
+        bv[MAP[i]!] = String(TABLE[TABLE.index(TABLE.startIndex, offsetBy: (code / Int(pow(58.0, Double(i)))) % 58)])
     }
     return bv.joined()
 }
