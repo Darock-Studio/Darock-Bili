@@ -56,7 +56,7 @@ struct VideoCommentsView: View {
         @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
         @AppStorage("SESSDATA") var sessdata = ""
         @AppStorage("bili_jct") var biliJct = ""
-        @State var avid = -1
+        @State var avid: UInt64 = 0
         @State var comments = [[String: String]]()
         @State var sepTexts = [[String]]()
         @State var emojiUrls = [[String]]()
@@ -231,7 +231,7 @@ struct VideoCommentsView: View {
         }
         
         func ContinueLoadComment() {
-            avid = avid(bvid: oid)
+            avid = bv2av(bvid: oid)
             debugPrint(avid)
             let headers: HTTPHeaders = [
                 "cookie": "SESSDATA=\(sessdata);"
