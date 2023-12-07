@@ -212,36 +212,50 @@ func biliWbiSign(paramEncoded: String, completion: @escaping (String?) -> Void) 
 }
 
 // AV & BV ID Convert Logic
-fileprivate let XOR = 177451812
-fileprivate let ADD = 100618342136696320
-fileprivate let TABLE = "fZodR9XQDSUm21yCkr6zBqiveYah8bt4xsWpHnJE7jL5VG3guMTKNPAwcF"
-fileprivate let MAP = [
-    0:9,
-    1:8,
-    2:1,
-    3:6,
-    4:2,
-    5:4,
-    6:0,
-    7:7,
-    8:3,
-    9:5
-]
-public func avid(bvid: String) -> Int {
-    var av = 0
-    for i in 0..<10 {
-        let charIndex = TABLE.firstIndex(of: bvid[bvid.index(bvid.startIndex, offsetBy: MAP[i]!)])!
-        av += charIndex * Int(pow(58.0, Double(i)))
+fileprivate let XOR_CODE: UInt64 = 23442827791579
+fileprivate let MASK_CODE: UInt64 = 2251799813685247
+fileprivate let MAX_AID: UInt64 = 1 << 51
+
+fileprivate let data: [UInt8] = [70, 99, 119, 65, 80, 78, 75, 84, 77, 117, 103, 51, 71, 86, 53, 76, 106, 55, 69, 74, 110, 72, 112, 87, 115, 120, 52, 116, 98, 56, 104, 97, 89, 101, 118, 105, 113, 66, 122, 54, 114, 107, 67, 121, 49, 50, 109, 85, 83, 68, 81, 88, 57, 82, 100, 111, 90, 102]
+
+fileprivate let BASE: UInt64 = 58
+fileprivate let BV_LEN: Int = 12
+fileprivate let PREFIX: String = "BV1"
+
+func bvid(avid: UInt64) -> String {
+    var bytes: [UInt8] = [66, 86, 49, 48, 48, 48, 48, 48, 48, 48, 48, 48]
+    var bvIdx = BV_LEN - 1
+    var tmp = (MAX_AID | aid) ^ XOR_CODE
+    
+    while tmp != 0 {
+        bytes[bvIdx] = data[Int(tmp % BASE)]
+        tmp /= BASE
+        bvIdx -= 1
     }
-    return (av - ADD) ^ XOR
+    
+    swap(&bytes[3], &bytes[9])
+    swap(&bytes[4], &bytes[7])
+    
+    return String(bytes: bytes, encoding: .utf8)!
 }
-public func bvid(avid: Int) -> String {
-    var code = (avid ^ XOR) + ADD
-    var bv = Array(repeating: "", count: 10)
-    for i in 0..<10 {
-        bv[MAP[i]!] = String(TABLE[TABLE.index(TABLE.startIndex, offsetBy: (code / Int(pow(58.0, Double(i)))) % 58)])
+
+func avid(bvid: String) -> UInt64 {
+    var bvidArray = Array(bvid.utf8)
+    
+    swap(&bvidArray[3], &bvidArray[9])
+    swap(&bvidArray[4], &bvidArray[7])
+    
+    let trimmedBvid = String(bvidArray[3...])
+    
+    var tmp: UInt64 = 0
+    
+    for char in trimmedBvid {
+        if let idx = data.firstIndex(of: char.utf8.first!) {
+            tmp = tmp * BASE + UInt64(idx)
+        }
     }
-    return bv.joined()
+    
+    return (tmp & MASK_CODE) ^ XOR_CODE
 }
 
 postfix operator ++
