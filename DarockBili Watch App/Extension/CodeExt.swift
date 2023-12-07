@@ -222,10 +222,10 @@ fileprivate let BASE: UInt64 = 58
 fileprivate let BV_LEN: Int = 12
 fileprivate let PREFIX: String = "BV1"
 
-func bvid(avid: UInt64) -> String {
+func av2bv(avid: UInt64) -> String {
     var bytes: [UInt8] = [66, 86, 49, 48, 48, 48, 48, 48, 48, 48, 48, 48]
     var bvIdx = BV_LEN - 1
-    var tmp = (MAX_AID | aid) ^ XOR_CODE
+    var tmp = (MAX_AID | avid) ^ XOR_CODE
     
     while tmp != 0 {
         bytes[bvIdx] = data[Int(tmp % BASE)]
@@ -239,7 +239,7 @@ func bvid(avid: UInt64) -> String {
     return String(bytes: bytes, encoding: .utf8)!
 }
 
-func avid(bvid: String) -> UInt64 {
+func bv2av(bvid: String) -> UInt64 {
     var bvidArray = Array(bvid.utf8)
     
     swap(&bvidArray[3], &bvidArray[9])
