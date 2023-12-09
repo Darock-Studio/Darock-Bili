@@ -245,7 +245,7 @@ func bv2av(bvid: String) -> UInt64 {
     swap(&bvidArray[3], &bvidArray[9])
     swap(&bvidArray[4], &bvidArray[7])
     
-    let trimmedBvid = String(bvidArray[3...])
+    let trimmedBvid = String(bvidArray).dropFirst(3)
     
     var tmp: UInt64 = 0
     
