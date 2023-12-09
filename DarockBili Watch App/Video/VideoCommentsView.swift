@@ -457,7 +457,7 @@ struct VideoCommentsView: View {
 
 struct BiliCommentLike: Codable {
     var type: Int = 1
-    let oid: Int
+    let oid: UInt64
     let rpid: Int
     let action: Int
     let csrf: String
@@ -465,7 +465,7 @@ struct BiliCommentLike: Codable {
 
 struct BiliSubmitComment: Codable {
     var type: Int = 1
-    let oid: Int
+    let oid: UInt64
     var root: Int? = nil
     var parent: Int? = nil
     let message: String
