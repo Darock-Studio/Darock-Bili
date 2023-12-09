@@ -233,19 +233,25 @@ func av2bv(avid: UInt64) -> String {
         bvIdx -= 1
     }
     
-    swap(&bytes[3], &bytes[9])
-    swap(&bytes[4], &bytes[7])
+    bytes.swapAt(3, 9)
+    bytes.swapAt(4, 7)
     
-    return String(bytes: bytes, encoding: .utf8)!
+    return String(decoding: bytes, as: UTF8.self)
 }
 
 func bv2av(bvid: String) -> UInt64 {
-    var bvidArray = Array(bvid.utf8)
+    let fixedBvid: String
+    if bvid.hasPrefix("BV") {
+        fixedBvid = bvid
+    } else {
+        fixedBvid = "BV" + bvid
+    }
+    var bvidArray = Array(fixedBvid.utf8)
     
-    swap(&bvidArray[3], &bvidArray[9])
-    swap(&bvidArray[4], &bvidArray[7])
+    bvidArray.swapAt(3, 9)
+    bvidArray.swapAt(4, 7)
     
-    let trimmedBvid = String(bvidArray).dropFirst(3)
+    let trimmedBvid = String(decoding: bvidArray[3...], as: UTF8.self)
     
     var tmp: UInt64 = 0
     
