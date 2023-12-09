@@ -56,7 +56,7 @@ struct VideoCommentsView: View {
         @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
         @AppStorage("SESSDATA") var sessdata = ""
         @AppStorage("bili_jct") var biliJct = ""
-        @State var avid = -1
+        @State var avid: UInt64 = 0
         @State var comments = [[String: String]]()
         @State var sepTexts = [[String]]()
         @State var emojiUrls = [[String]]()
@@ -231,74 +231,68 @@ struct VideoCommentsView: View {
         }
         
         func ContinueLoadComment() {
-            DarockKit.Network.shared.requestString("https://api.darock.top/bili/toav/\(oid)") { respStr, isSuccess in
+            avid = bv2av(bvid: oid)
+            debugPrint(avid)
+            let headers: HTTPHeaders = [
+                "cookie": "SESSDATA=\(sessdata);"
+            ]
+            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v2/reply?type=1&oid=\(avid)&sort=1&ps=20&pn=\(nowPage)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
-                    avid = Int(respStr)!
-                    debugPrint(avid)
-                    let headers: HTTPHeaders = [
-                        "cookie": "SESSDATA=\(sessdata);"
-                    ]
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v2/reply?type=1&oid=\(avid)&sort=1&ps=20&pn=\(nowPage)", headers: headers) { respJson, isSuccess in
-                        if isSuccess {
-                            debugPrint(respJson)
-                            let replies = respJson["data"]["replies"]
-                            var calNum = 0
-                            for reply in replies {
-                                isSenderDetailsPresented.append(false)
-                                commentOffsets.append(20)
-                                let repliesInComment = reply.1["replies"]
-                                commentReplies.append([])
-                                for sigReply in repliesInComment {
-                                    commentReplies[calNum].append(["Text": sigReply.1["content"]["message"].string ?? "[加载失败]", "Sender": sigReply.1["member"]["uname"].string ?? "[加载失败]", "SenderPic": sigReply.1["member"]["avatar"].string ?? "E", "SenderID": sigReply.1["member"]["mid"].string ?? "E", "IP": sigReply.1["reply_control"]["location"].string ?? "", "UserAction": String(sigReply.1["action"].int ?? 0), "Rpid": String(sigReply.1["rpid"].int ?? -1), "Like": String(sigReply.1["like"].int ?? -1)])
-                                }
-                                let text = reply.1["content"]["message"].string ?? "[加载失败]"
-                                comments.append(["Text": text, "Sender": reply.1["member"]["uname"].string ?? "[加载失败]", "SenderPic": reply.1["member"]["avatar"].string ?? "E", "SenderID": reply.1["member"]["mid"].string ?? "E", "IP": reply.1["reply_control"]["location"].string ?? "", "UserAction": String(reply.1["action"].int ?? 0), "Rpid": String(reply.1["rpid"].int ?? -1), "Like": String(reply.1["like"].int ?? -1)])
-//                                sepTexts.append([])
-//                                isEmoted.append(false)
-//                                // 文本中包含表情
-//                                if text.range(of: "\\[(.*?)\\]", options: .regularExpression) != nil {
-//                                    let regex = try! NSRegularExpression(pattern: "\\[(.*?)\\]")
-//                                    debugPrint("Contains")
-//                                    // 分割文本，同时去除表情
-//                                    let tmpSpdText = regex.stringByReplacingMatches(in: text, range: NSRange(text.startIndex..<text.endIndex, in: text), withTemplate: "|").split(separator: "|").map {
-//                                        String($0)
-//                                    }
-//                                    debugPrint(tmpSpdText)
-//                                    for text in tmpSpdText {
-//                                        sepTexts[calNum].append(String(text))
-//                                    }
-//                                    // 正则获取表情
-//                                    let emojis = regex.matches(in: text, range: NSRange(text.startIndex..., in: text)).map {
-//                                        String(text[Range($0.range, in: text)!])
-//                                    }
-//                                    let jEmotes = reply.1["content"]["emote"]
-//                                    debugPrint(jEmotes)
-//                                    // 获取表情对应URL
-//                                    emojiUrls.append([])
-//                                    for emoji in emojis {
-//                                        if let sigEUrl = jEmotes[emoji].string {
-//                                            emojiUrls[calNum].append(sigEUrl)
-//                                        }
-//                                    }
-//                                    isEmoted[calNum] = true
-//                                    debugPrint(emojiUrls)
-//                                } else {
-//                                    
-//                                }
-                                calNum += 1
-                            }
-                        } else {
-                            Logger().error("There is a error when request comments from Bilibili server")
+                    debugPrint(respJson)
+                    let replies = respJson["data"]["replies"]
+                    var calNum = 0
+                    for reply in replies {
+                        isSenderDetailsPresented.append(false)
+                        commentOffsets.append(20)
+                        let repliesInComment = reply.1["replies"]
+                        commentReplies.append([])
+                        for sigReply in repliesInComment {
+                            commentReplies[calNum].append(["Text": sigReply.1["content"]["message"].string ?? "[加载失败]", "Sender": sigReply.1["member"]["uname"].string ?? "[加载失败]", "SenderPic": sigReply.1["member"]["avatar"].string ?? "E", "SenderID": sigReply.1["member"]["mid"].string ?? "E", "IP": sigReply.1["reply_control"]["location"].string ?? "", "UserAction": String(sigReply.1["action"].int ?? 0), "Rpid": String(sigReply.1["rpid"].int ?? -1), "Like": String(sigReply.1["like"].int ?? -1)])
                         }
+                        let text = reply.1["content"]["message"].string ?? "[加载失败]"
+                        comments.append(["Text": text, "Sender": reply.1["member"]["uname"].string ?? "[加载失败]", "SenderPic": reply.1["member"]["avatar"].string ?? "E", "SenderID": reply.1["member"]["mid"].string ?? "E", "IP": reply.1["reply_control"]["location"].string ?? "", "UserAction": String(reply.1["action"].int ?? 0), "Rpid": String(reply.1["rpid"].int ?? -1), "Like": String(reply.1["like"].int ?? -1)])
+//                      sepTexts.append([])
+//                      isEmoted.append(false)
+//                      // 文本中包含表情
+//                      if text.range(of: "\\[(.*?)\\]", options: .regularExpression) != nil {
+//                          let regex = try! NSRegularExpression(pattern: "\\[(.*?)\\]")
+//                          debugPrint("Contains")
+//                          // 分割文本，同时去除表情
+//                          let tmpSpdText = regex.stringByReplacingMatches(in: text, range: NSRange(text.startIndex..<text.endIndex, in: text), withTemplate: "|").split(separator: "|").map {
+//                              String($0)
+//                          }
+//                          debugPrint(tmpSpdText)
+//                          for text in tmpSpdText {
+//                              sepTexts[calNum].append(String(text))
+//                          }
+//                          // 正则获取表情
+//                          let emojis = regex.matches(in: text, range: NSRange(text.startIndex..., in: text)).map {
+//                              String(text[Range($0.range, in: text)!])
+//                          }
+//                          let jEmotes = reply.1["content"]["emote"]
+//                          debugPrint(jEmotes)
+//                          // 获取表情对应URL
+//                          emojiUrls.append([])
+//                          for emoji in emojis {
+//                              if let sigEUrl = jEmotes[emoji].string {
+//                                  emojiUrls[calNum].append(sigEUrl)
+//                              }
+//                          }
+//                          isEmoted[calNum] = true
+//                          debugPrint(emojiUrls)
+//                      } else {
+//                          
+//                      }
+                        calNum += 1
                     }
                 } else {
-                    Logger().error("There is a error when request avid from Darock server")
+                    Logger().error("There is an error when request comments from Bilibili server")
                 }
             }
         }
         
         struct CommentRepliesView: View {
-            var avid: Int
+            var avid: UInt64
             @State var replies: [[String: String]]
             var goto: String? = nil
             @AppStorage("DedeUserID") var dedeUserID = ""
@@ -430,7 +424,7 @@ struct VideoCommentsView: View {
         @AppStorage("bili_jct") var biliJct = ""
         @State var sendCommentCache = ""
         @State var isSendingComment = false
-        @State var avid = -1
+        @State var avid: UInt64 = 0
         var body: some View {
             VStack {
                 if !isSendingComment {
@@ -454,12 +448,8 @@ struct VideoCommentsView: View {
                 }
             }
             .onAppear {
-                DarockKit.Network.shared.requestString("https://api.darock.top/bili/toav/\(oid)") { respStr, isSuccess in
-                    if isSuccess {
-                        avid = Int(respStr)!
-                        debugPrint(avid)
-                    }
-                }
+                avid = bv2av(bvid: oid)
+                debugPrint(avid)
             }
         }
     }
@@ -467,7 +457,7 @@ struct VideoCommentsView: View {
 
 struct BiliCommentLike: Codable {
     var type: Int = 1
-    let oid: Int
+    let oid: UInt64
     let rpid: Int
     let action: Int
     let csrf: String
@@ -475,7 +465,7 @@ struct BiliCommentLike: Codable {
 
 struct BiliSubmitComment: Codable {
     var type: Int = 1
-    let oid: Int
+    let oid: UInt64
     var root: Int? = nil
     var parent: Int? = nil
     let message: String
