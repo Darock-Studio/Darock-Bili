@@ -142,7 +142,7 @@ func biliWbiSign(paramEncoded: String, completion: @escaping (String?) -> Void) 
     func getMixinKey(orig: String) -> String {
         return String(mixinKeyEncTab.map { orig[orig.index(orig.startIndex, offsetBy: $0)] }.prefix(32))
     }
-    
+
     func encWbi(params: [String: Any], imgKey: String, subKey: String) -> [String: Any] {
         var params = params
         let mixinKey = getMixinKey(orig: imgKey + subKey)

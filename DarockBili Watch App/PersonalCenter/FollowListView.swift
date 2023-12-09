@@ -119,9 +119,9 @@ struct FollowListView: View {
                 let datas = respJson["data"]["list"]
                 for data in datas {
                     if pinnedUsers.contains(String(data.1["mid"].int ?? 0)) {
-                        users.insert(["Name": data.1["uname"].string ?? "[加载失败]", "Face": data.1["face"].string ?? "E", "Sign": data.1["sign"].string ?? "[加载失败]", "UID": String(data.1["mid"].int ?? 0)], at: 0)
+                        users.insert(["Name": data.1["uname"].string ?? "[加载失败]", "Face": data.1["face"].string ?? "E", "Sign": data.1["sign"].string ?? "[加载失败]", "UID": String(data.1["mid"].int64 ?? 0)], at: 0)
                     } else {
-                        users.append(["Name": data.1["uname"].string ?? "[加载失败]", "Face": data.1["face"].string ?? "E", "Sign": data.1["sign"].string ?? "[加载失败]", "UID": String(data.1["mid"].int ?? 0)])
+                        users.append(["Name": data.1["uname"].string ?? "[加载失败]", "Face": data.1["face"].string ?? "E", "Sign": data.1["sign"].string ?? "[加载失败]", "UID": String(data.1["mid"].int64 ?? 0)])
                     }
                 }
                 totalPage = respJson["data"]["total"].int ?? 0 / 20 + 1

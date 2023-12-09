@@ -11,6 +11,9 @@ jobs:
     name: Check Comment Content
     outputs:
       shouldc: ${{ steps.checkc.outputs.shouldc }}
+      shouldtun: ${{ steps.checkc.outputs.shouldtun }}
+      shouldtui: ${{ steps.checkc.outputs.shouldtui }}
+      shouldta: ${{ steps.checkc.outputs.shouldta }}
     steps:
       - name: Check
         id: checkc
@@ -22,10 +25,24 @@ jobs:
             echo "The comment content contains the specified text. Continuing with further actions."
             echo "::set-output name=shouldc::true"
           fi
+          if [[ "${{ github.event.comment.body }}" != *"!Run unit test"* ]]; then
+            echo "::set-output name=shouldtun::false"
+          else
+            echo "::set-output name=shouldtun::true"
+          fi
+          if [[ "${{ github.event.comment.body }}" != *"!Run UI test"* ]]; then
+            echo "::set-output name=shouldtui::false"
+          else
+            echo "::set-output name=shouldtui::true"
+          fi
+          if [[ "${{ github.event.comment.body }}" != *"!Run test"* ]]; then
+            echo "::set-output name=shouldta::false"
+          else
+            echo "::set-output name=shouldta::true"
+          fi
   get-head-sha:
     name: Get Pull Request Head SHA
     needs: checkif
-    if: ${{ needs.checkif.outputs.shouldc == 'true' }}
     runs-on: ubuntu-latest
     outputs:
       psha: ${{ steps.getsha.outputs.psha }}
@@ -40,7 +57,10 @@ jobs:
           echo "psha=$sha" >> $GITHUB_OUTPUT
   call-check-workflow:
     name: Call Check Overflow
-    needs: get-head-sha
+    needs: 
+      - get-head-sha
+      - checkif
+    if: ${{ needs.checkif.outputs.shouldc == 'true' }}
     permissions:
       actions: write
     runs-on: ubuntu-latest
