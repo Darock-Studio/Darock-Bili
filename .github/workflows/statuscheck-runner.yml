@@ -60,7 +60,7 @@ jobs:
     needs: 
       - get-head-sha
       - checkif
-    if: ${{ needs.checkif.output.shouldc == 'true' }}
+    if: ${{ needs.checkif.outputs.shouldc == 'true' }}
     permissions:
       actions: write
     runs-on: ubuntu-latest
