@@ -292,7 +292,7 @@ struct VideoCommentsView: View {
         }
         
         struct CommentRepliesView: View {
-            var avid: Int
+            var avid: UInt64
             @State var replies: [[String: String]]
             var goto: String? = nil
             @AppStorage("DedeUserID") var dedeUserID = ""
@@ -424,7 +424,7 @@ struct VideoCommentsView: View {
         @AppStorage("bili_jct") var biliJct = ""
         @State var sendCommentCache = ""
         @State var isSendingComment = false
-        @State var avid = -1
+        @State var avid: UInt64 = 0
         var body: some View {
             VStack {
                 if !isSendingComment {
@@ -448,12 +448,8 @@ struct VideoCommentsView: View {
                 }
             }
             .onAppear {
-                DarockKit.Network.shared.requestString("https://api.darock.top/bili/toav/\(oid)") { respStr, isSuccess in
-                    if isSuccess {
-                        avid = Int(respStr)!
-                        debugPrint(avid)
-                    }
-                }
+                avid = bv2av(bvid: oid)
+                debugPrint(avid)
             }
         }
     }
