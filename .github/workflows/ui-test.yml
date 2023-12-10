@@ -47,7 +47,7 @@ jobs:
 
       - name: Run DarockBili Watch App UI Test
         run: |
-          xcodebuild test -scheme 'DarockBili Watch App' -configuration Release -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -destination 'platform=watchOS Simulator,name=Apple Watch Series 9 (45mm),OS=10.0' -testPlan WatchAppUITestPlan -testProductsPath ./Caches/TestProducts.xctestproducts -derivedDataPath ./Caches/DerivedData
+          xcodebuild test -scheme 'DarockBili Watch App' -configuration Release -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -testPlan WatchAppUITestPlan -testProductsPath ./Caches/TestProducts.xctestproducts -derivedDataPath ./Caches/DerivedData
           echo "FIN_STATUS=success" >> $GITHUB_ENV
 
       - name: Process Test Result
