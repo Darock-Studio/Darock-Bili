@@ -71,3 +71,19 @@ jobs:
           workflow: status-check.yml
           ref: ${{ needs.get-head-sha.outputs.psha }}
           inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}"}'
+  call-unit-test-workflow:
+    name: Call Unit Test Overflow
+    needs: 
+      - get-head-sha
+      - checkif
+    if: ${{ needs.checkif.outputs.shouldtun == 'true' }}
+    permissions:
+      actions: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call
+        uses: benc-uk/workflow-dispatch@v1.2.2
+        with:
+          workflow: unit-test.yml
+          ref: ${{ needs.get-head-sha.outputs.psha }}
+          inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}"}'
