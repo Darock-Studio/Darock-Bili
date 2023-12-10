@@ -1,0 +1,12 @@
+name: SSH Debugger
+
+on: workflow_dispatch
+
+jobs:
+  Debug:
+    runs-on: macos-13
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Debug Session
+        uses: csexton/debugger-action@master
+        
