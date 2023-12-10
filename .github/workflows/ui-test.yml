@@ -72,5 +72,5 @@ jobs:
             /repos/${{ github.repository }}/statuses/$GITHUB_SHA \
             -f state='${{ env.FIN_STATUS }}' \
             -f target_url='https://github.com/Darock-Studio/Darock-Bili/actions/runs/${{ github.run_id }}' \
-            -f context='Unit Test' 
+            -f context='UI Test' 
     
