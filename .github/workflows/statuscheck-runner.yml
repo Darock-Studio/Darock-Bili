@@ -87,3 +87,19 @@ jobs:
           workflow: unit-test.yml
           ref: ${{ needs.get-head-sha.outputs.psha }}
           inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}"}'
+  call-ui-test-workflow:
+    name: Call UI Test Overflow
+    needs: 
+      - get-head-sha
+      - checkif
+    if: ${{ needs.checkif.outputs.shouldtui == 'true' }}
+    permissions:
+      actions: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call
+        uses: benc-uk/workflow-dispatch@v1.2.2
+        with:
+          workflow: ui-test.yml
+          ref: ${{ needs.get-head-sha.outputs.psha }}
+          inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}"}'
