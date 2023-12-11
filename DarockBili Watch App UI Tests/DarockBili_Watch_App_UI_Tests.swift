@@ -38,6 +38,7 @@ final class DarockBili_Watch_App_UI_Tests: XCTestCase {
         app.launch()
         sleep(2)
         takeScreenshot(of: app, named: "Launch")
+        // In main tabview first page (suggestions)
         app.buttons["SuggestVideo"].firstMatch.tap()
         sleep(1)
         takeScreenshot(of: app, named: "RMVideo")
@@ -49,6 +50,7 @@ final class DarockBili_Watch_App_UI_Tests: XCTestCase {
         takeScreenshot(of: app, named: "RMVideoComments")
         app.navigationBars.buttons.element(boundBy: 0).tap()
         sleep(1)
+        // Backed to suggestions view
         app.otherElements["MainTabView"].swipeLeft()
         sleep(1)
         takeScreenshot(of: app, named: "PersonalCenter")
@@ -75,6 +77,8 @@ final class DarockBili_Watch_App_UI_Tests: XCTestCase {
     }
 }
 
+var screenshotCount = 1
+
 extension XCTestCase {
     /// Take a screenshot of a given app and add it to the test attachements.
     /// - Parameters:
@@ -84,12 +88,13 @@ extension XCTestCase {
         let screenshot = app.windows.firstMatch.screenshot()
         let attachment = XCTAttachment(screenshot: screenshot)
         #if os(iOS)
-        let name = "Screenshot-\(name)-\(UIDevice.current.name).png"
+        let name = "Screenshot-\(screenshotCount)-\(name)-\(UIDevice.current.name).png"
         #else
-        let name = "Screenshot-\(name)-watchOS.png"
+        let name = "Screenshot-\(screenshotCount)-\(name)-watchOS.png"
         #endif
         attachment.name = name
         attachment.lifetime = .keepAlways
         add(attachment)
+        screenshotCount += 1
     }
 }
