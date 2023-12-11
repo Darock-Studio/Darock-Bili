@@ -68,6 +68,7 @@ struct SearchView: View {
     @State var users = [[String: Any]]()
     @State var isUserDetailPresented = [Bool]()
     @State var isLoaded = false
+    @State var debugResponse = ""
     var body: some View {
         ScrollView {
             VStack {
@@ -112,11 +113,15 @@ struct SearchView: View {
                     ForEach(0...videos.count - 1, id: \.self) { i in
                         VideoCard(videos[i])
                     }
+                } else if debugResponse != "" {
+                    Text("似乎在搜索时遇到了一些问题，以下是详细信息")
+                    Text(debugResponse)
                 }
             }
         }
         .onAppear {
             if !isLoaded {
+                debugResponse = ""
                 AF.request("bilibili.com").response { response in
                     let headers: HTTPHeaders = [
                         "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
@@ -149,6 +154,7 @@ struct SearchView: View {
                             for video in videoDatas {
                                 videos.append(["Pic": "https:" + video.1["pic"].string!, "Title": video.1["title"].string!.replacingOccurrences(of: "<em class=\"keyword\">", with: "").replacingOccurrences(of: "</em>", with: ""), "View": String(video.1["play"].int!), "Danmaku": String(video.1["danmaku"].int!), "UP": video.1["author"].string!, "BV": video.1["bvid"].string!])
                             }
+                            debugResponse = respJson.debugDescription
                         }
                     }
                 }
