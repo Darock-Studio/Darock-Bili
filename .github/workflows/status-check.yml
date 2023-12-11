@@ -55,7 +55,7 @@ jobs:
 
       - name: Build DarockBili App
         run: |
-          xcodebuild -scheme 'DarockBili Watch App' -configuration Release build CODE_SIGN_IDENTITY=""
+          xcodebuild -scheme 'DarockBili Watch App' -configuration Release build CODE_SIGN_IDENTITY="" -quiet
           echo "FIN_STATUS=success" >> $GITHUB_ENV
 
       - name: Update Check Status
