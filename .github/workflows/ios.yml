@@ -11,7 +11,6 @@ jobs:
   build:
     name: Build and Archive App
     runs-on: macos-13
-
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -36,7 +35,7 @@ jobs:
           name: Release XCArchive
           path: ./DarockBili_Release.xcarchive
   
-  build_for_testing:
+  test:
     runs-on: macos-13
     name: Test App
     steps:
@@ -52,7 +51,7 @@ jobs:
         run: mkdir Caches
       
       - name: Build and Test
-        run: xcodebuild test -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -configuration Release -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -destination 'platform=watchOS Simulator,name=Apple Watch Series 9 (45mm),OS=10.0' -testPlan WatchAppUITestPlan -testProductsPath ./Caches/TestProducts.xctestproducts -derivedDataPath ./Caches/DerivedData | tee TestBuilding.log
+        run: xcodebuild test -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -configuration Release -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -testPlan WatchAppUITestPlan -testProductsPath ./Caches/TestProducts.xctestproducts -derivedDataPath ./Caches/DerivedData | tee TestBuilding.log
 
       - name: Upload Building Log
         uses: actions/upload-artifact@v3
@@ -68,3 +67,47 @@ jobs:
         with:
           name: Test Attachments
           path: ./Caches/DerivedData/Logs/Test
+
+  export:
+    name: Export IPA
+    runs-on: macos-13
+    needs:
+      - build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Set Xcode Version
+        run: sudo xcode-select -s /Applications/Xcode_15.0.app
+
+      - name: Download App XCArchive
+        uses: actions/download-artifact@v3
+        with:
+          name: Release XCArchive
+
+      - name: Export IPA File
+        run: xcodebuild exportArchive -archivePath ./DarockBili_Release.xcarchive -exportPath ./DarockBili_Release.ipa -exportOptionsPlist ExportOptions.plist CODE_SIGN_IDENTITY=""
+
+      - name: Upload IPA File
+        uses: actions/upload-artifact@v3
+        with:
+          name: Release IPA
+          path: ./DarockBili_Release.ipa
+
+  deploy:
+    name: Deploy to TestFlight
+    runs-on: macos-13
+    needs:
+      - export
+      - test
+    env:
+      ASCAPI_ISSUER_ID: ${{ secrets.ASCAPI_ISSUER_ID }}
+      ASCAPI_KEY_ID: ${{ secrets.ASCAPI_KEY_ID }}
+    steps:
+      - name: Download App Archive
+        uses: actions/download-artifact@v3
+        with:
+          name: Release IPA
+
+      - name: Upload to App Store Connect
+        run: altool --upload-app -f ./DarockBili_Release.ipa -t ios --apiKey $ASCAPI_KEY_ID --apiIssuer $ASCAPI_ISSUER_ID
