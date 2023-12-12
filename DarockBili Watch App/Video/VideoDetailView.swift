@@ -691,14 +691,11 @@ struct VideoDetailView: View {
                                     "cookie": "SESSDATA=\(sessdata)",
                                     "referer": "bilibili.com/video/\(videoDetails["BV"]!)"
                                 ]
-                                DarockKit.Network.shared.requestString("https://api.darock.top/bili/toav/\(videoDetails["BV"]!)") { respStr, isSuccess in
-                                    if isSuccess {
-                                        AF.request("https://api.bilibili.com/medialist/gateway/coll/resource/deal", method: .post, parameters: BiliVideoFavourite(rid: Int(respStr)!, csrf: biliJct), headers: headers).response { response in
-                                            debugPrint(response)
-                                            isLiked ? tipWithText("取消成功", symbol: "checkmark.circle.fill") : tipWithText("收藏成功", symbol: "checkmark.circle.fill")
-                                            isFavoured.toggle()
-                                        }
-                                    }
+                                let avid = bv2av(bvid: videoDetails["BV"]!)
+                                AF.request("https://api.bilibili.com/medialist/gateway/coll/resource/deal", method: .post, parameters: BiliVideoFavourite(rid: avid, csrf: biliJct), headers: headers).response { response in
+                                    debugPrint(response)
+                                    isLiked ? tipWithText("取消成功", symbol: "checkmark.circle.fill") : tipWithText("收藏成功", symbol: "checkmark.circle.fill")
+                                    isFavoured.toggle()
                                 }
                             }, label: {
                                 VStack {
@@ -909,7 +906,7 @@ struct BiliVideoCoin: Codable {
     let csrf: String
 }
 struct BiliVideoFavourite: Codable {
-    let rid: Int
+    let rid: UInt64
     var type: Int = 2
     var add_media_ids: Int? = nil
     var del_media_ids: Int? = nil
