@@ -86,7 +86,7 @@ jobs:
           name: Release XCArchive
 
       - name: Export IPA File
-        run: xcodebuild exportArchive -archivePath ./DarockBili_Release.xcarchive -exportPath ./DarockBili_Release.ipa -exportOptionsPlist ExportOptions.plist CODE_SIGN_IDENTITY=""
+        run: xcodebuild -exportArchive -archivePath ./DarockBili_Release.xcarchive -exportPath ./DarockBili_Release.ipa -exportOptionsPlist ExportOptions.plist CODE_SIGN_IDENTITY=""
 
       - name: Upload IPA File
         uses: actions/upload-artifact@v3
