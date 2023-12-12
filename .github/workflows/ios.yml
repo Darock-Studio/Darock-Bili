@@ -84,6 +84,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: Release XCArchive
+          path: ./DarockBili_Release.xcarchive
 
       - name: Export IPA File
         run: xcodebuild -exportArchive -archivePath ./DarockBili_Release.xcarchive -exportPath ./DarockBili_Release.ipa -exportOptionsPlist ExportOptions.plist CODE_SIGN_IDENTITY=""
