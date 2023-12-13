@@ -57,11 +57,12 @@ final class DarockBili_Watch_App_UI_Tests: XCTestCase {
             app.buttons["SearchDebugButton"].tap()
             sleep(5)
             takeScreenshot(of: app, named: "DebugSearch")
-            app.navigationBars.buttons.element(boundBy: 0).tap()
+            app.buttons["Dismiss"].firstMatch.tap()
             sleep(1)
         }
-        app.navigationBars.buttons.element(boundBy: 0).tap()
+        app.buttons["Dismiss"].firstMatch.tap()
         sleep(1)
+        // Backed to suggestions view
         app.otherElements["MainTabView"].swipeLeft()
         sleep(1)
         takeScreenshot(of: app, named: "PersonalCenter")
