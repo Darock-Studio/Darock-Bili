@@ -18,6 +18,39 @@ jobs:
       - name: Set Xcode Version
         run: sudo xcode-select -s /Applications/Xcode_15.0.app
 
+      - name: Prepare Version Folder
+        run: mkdir ../vers
+
+      - name: Checkout Version Files
+        uses: actions/checkout@v3
+        with:
+          ref: release-vers
+          persist-credentials: false
+          fetch-depth: 0
+          path: ../vers
+
+      - name: Change Project Version
+        run: |
+          read MVER < ../vers/ver.txt
+          MVER = $MVER+1
+          rm ../vers/ver.txt
+          echo $MVER >> ../vers/ver.txt
+          agvtool new-version -all $MVER
+
+      - name: Commit Files
+        working-directory: ../vers
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -a -m "Updated versions"
+
+      - name: Push Changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: release-vers
+          directory: ../vers
+
       - name: Archive DarockBili App
         run: |
           xcodebuild -scheme 'DarockBili Watch App' -configuration Debug -archivePath DarockBili_Debug.xcarchive clean archive CODE_SIGN_IDENTITY=""
