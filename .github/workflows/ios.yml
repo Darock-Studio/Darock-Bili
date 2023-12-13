@@ -89,7 +89,7 @@ jobs:
       - name: Export IPA File
         run: |
           mkdir Payload
-          cp DarockBili_Release.xcarchive/Products/Applications/DarockBili.app Payload
+          cp -r DarockBili_Release.xcarchive/Products/Applications/DarockBili.app Payload
           zip -q -r DarockBili_Release.ipa Payload
           
       - name: Upload IPA File
