@@ -87,8 +87,11 @@ jobs:
           path: ./DarockBili_Release.xcarchive
 
       - name: Export IPA File
-        run: xcodebuild -exportArchive -archivePath ./DarockBili_Release.xcarchive -exportPath ./DarockBili_Release.ipa -exportOptionsPlist ExportOptions.plist CODE_SIGN_IDENTITY=""
-
+        run: |
+          mkdir Payload
+          cp DarockBili_Release.xcarchive/Products/Applications/DarockBili.app Payload
+          zip -q -r DarockBili_Release.ipa Payload
+          
       - name: Upload IPA File
         uses: actions/upload-artifact@v3
         with:
