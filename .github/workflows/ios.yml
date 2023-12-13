@@ -114,4 +114,4 @@ jobs:
           name: Release IPA
 
       - name: Upload to App Store Connect
-        run: altool --upload-app -f ./DarockBili_Release.ipa -t ios --apiKey $ASCAPI_KEY_ID --apiIssuer $ASCAPI_ISSUER_ID
+        run: xcrun altool --upload-app -f ./DarockBili_Release.ipa -t ios --apiKey $ASCAPI_KEY_ID --apiIssuer $ASCAPI_ISSUER_ID
