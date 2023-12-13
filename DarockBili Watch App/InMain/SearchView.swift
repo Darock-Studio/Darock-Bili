@@ -39,6 +39,15 @@ struct SearchMainView: View {
                             searchText = ""
                         }
                         .accessibilityIdentifier("SearchInput")
+                    if debug {
+                        Button(action: {
+                            searchText = "Darock"
+                            isSearchPresented = true
+                        }, label: {
+                            Text("Debug Search")
+                        })
+                        .accessibilityIdentifier("SearchDebugButton")
+                    }
                 }
                 if searchHistory.count != 0 {
                     Section(header: Text("历史记录")) {
