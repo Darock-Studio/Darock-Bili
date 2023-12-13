@@ -117,7 +117,7 @@ jobs:
       - name: Prepare API Key
         run: |
           mkdir ~/.private_keys
-          echo "$ASCAPI_KEY" >> ~/.private_keys/AuthKey_1.p8
+          echo "$ASCAPI_KEY" >> ~/.private_keys/AuthKey_${ASCAPI_KEY_ID}.p8
 
       - name: Upload to App Store Connect
         run: xcrun altool --upload-app -f ./DarockBili_Release.ipa -t ios --apiKey $ASCAPI_KEY_ID --apiIssuer $ASCAPI_ISSUER_ID
