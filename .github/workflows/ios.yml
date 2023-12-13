@@ -32,7 +32,7 @@ jobs:
       - name: Change Project Version
         run: |
           read MVER < vers/ver.txt
-          MVER = $MVER+1
+          MVER=$[MVER+1]
           rm vers/ver.txt
           echo $MVER >> vers/ver.txt
           agvtool new-version -all $MVER
