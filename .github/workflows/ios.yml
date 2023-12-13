@@ -107,11 +107,17 @@ jobs:
     env:
       ASCAPI_ISSUER_ID: ${{ secrets.ASCAPI_ISSUER_ID }}
       ASCAPI_KEY_ID: ${{ secrets.ASCAPI_KEY_ID }}
+      ASCAPI_KEY: ${{ secrets.ASCAPI_KEY }}
     steps:
       - name: Download App Archive
         uses: actions/download-artifact@v3
         with:
           name: Release IPA
+
+      - name: Prepare API Key
+        run: |
+          mkdir ~/.private_keys
+          echo "$ASCAPI_KEY" >> ~/.private_keys/AuthKey_1.p8
 
       - name: Upload to App Store Connect
         run: xcrun altool --upload-app -f ./DarockBili_Release.ipa -t ios --apiKey $ASCAPI_KEY_ID --apiIssuer $ASCAPI_ISSUER_ID
