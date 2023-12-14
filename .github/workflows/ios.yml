@@ -11,6 +11,11 @@ jobs:
   build:
     name: Build and Archive App
     runs-on: macos-13
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      repository-projects: write
     steps:
       - name: Checkout
         uses: actions/checkout@v3
