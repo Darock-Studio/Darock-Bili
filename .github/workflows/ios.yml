@@ -72,6 +72,7 @@ jobs:
           apple-key-content: ${{ secrets.ASCAPI_KEY }}
           team-id: B57D8PP775
           team-name: Yuxuan Chen
+          fastlane-env: stage
           ios-app-id: com.darock.DarockBili
     
       #- name: Archive DarockBili App
