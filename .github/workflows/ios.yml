@@ -69,7 +69,7 @@ jobs:
           ASCAPI_ISSUER_ID: ${{ secrets.ASCAPI_ISSUER_ID }}
         run: |
           KEY_PATH=$RUNNER_TEMP/ascapi-key.p8
-          xcodebuild -scheme 'DarockBili Watch App' -configuration Release DEVELOPMENT_TEAM=B57D8PP775 -archivePath DarockBili_Release.xcarchive clean archive CODE_SIGN_IDENTITY="Apple Destribution" -allowProvisioningUpdates -authenticationKeyPath $KEY_PATH -authenticationKeyID $ASCAPI_KEY_ID -authenticationKeyIssuerID $ASCAPI_ISSUER_ID
+          xcodebuild -scheme 'DarockBili Watch App' -configuration Release DEVELOPMENT_TEAM=B57D8PP775 -archivePath DarockBili_Release.xcarchive clean archive CODE_SIGN_IDENTITY="Apple Development" -allowProvisioningUpdates -authenticationKeyPath $KEY_PATH -authenticationKeyID $ASCAPI_KEY_ID -authenticationKeyIssuerID $ASCAPI_ISSUER_ID
 
       - name: Upload Debug Archive
         uses: actions/upload-artifact@v3
