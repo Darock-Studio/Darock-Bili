@@ -57,6 +57,7 @@ final class DarockBili_Watch_App_UI_Tests: XCTestCase {
             app.buttons["SearchDebugButton"].tap()
             sleep(5)
             takeScreenshot(of: app, named: "DebugSearch")
+            print(app.debugDescription)
             app.buttons["dismiss"].firstMatch.tap()
             sleep(1)
         }
