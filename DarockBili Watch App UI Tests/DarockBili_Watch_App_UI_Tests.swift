@@ -58,10 +58,10 @@ final class DarockBili_Watch_App_UI_Tests: XCTestCase {
             sleep(5)
             takeScreenshot(of: app, named: "DebugSearch")
             print(app.debugDescription)
-            app.buttons["dismiss"].firstMatch.tap()
+            app.buttons["关闭"].firstMatch.tap()
             sleep(1)
         }
-        app.buttons["dismiss"].firstMatch.tap()
+        app.buttons["关闭"].firstMatch.tap()
         sleep(1)
         // Backed to suggestions view
         app.otherElements["MainTabView"].swipeLeft()
