@@ -56,10 +56,20 @@ jobs:
           branch: release-vers
           directory: vers
 
-      - name: Archive DarockBili App
+      - name: Get App Store Connect API Key File
+        env:
+          ASCAPI_KEY: ${{ secrets.ASCAPI_KEY }}
         run: |
-          xcodebuild -scheme 'DarockBili Watch App' -configuration Debug -archivePath DarockBili_Debug.xcarchive clean archive CODE_SIGN_IDENTITY=""
-          xcodebuild -scheme 'DarockBili Watch App' -configuration Release -archivePath DarockBili_Release.xcarchive clean archive CODE_SIGN_IDENTITY=""
+          KEY_PATH=$RUNNER_TEMP/ascapi-key.p8
+          echo -n "$ASCAPI_KEY" > $KEY_PATH
+
+      - name: Archive DarockBili App
+        env:
+          ASCAPI_KEY_ID: ${{ secrets.ASCAPI_KEY_ID }}
+          ASCAPI_ISSUER_ID: ${{ secrets.ASCAPI_ISSUER_ID }}
+        run: |
+          KEY_PATH=$RUNNER_TEMP/ascapi-key.p8
+          xcodebuild -scheme 'DarockBili Watch App' -configuration Release DEVELOPMENT_TEAM=B57D8PP775 -archivePath DarockBili_Release.xcarchive clean archive CODE_SIGN_IDENTITY="Apple Destribution" -allowProvisioningUpdates -authenticationKeyPath $KEY_PATH -authenticationKeyID $ASCAPI_KEY_ID -authenticationKeyIssuerID $ASCAPI_ISSUER_ID
 
       - name: Upload Debug Archive
         uses: actions/upload-artifact@v3
