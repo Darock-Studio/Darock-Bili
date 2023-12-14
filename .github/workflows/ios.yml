@@ -56,12 +56,8 @@ jobs:
           branch: release-vers
           directory: vers
 
-      - name: Get App Store Connect API Key File
-        env:
-          ASCAPI_KEY: ${{ secrets.ASCAPI_KEY }}
-        run: |
-          KEY_PATH=$RUNNER_TEMP/ascapi-key.p8
-          echo -n "$ASCAPI_KEY" > $KEY_PATH
+      - name: Prepare Environment
+        run: gem install fastlane
 
       - name: Build and Archive
         uses: sparkfabrik/ios-build-action@v2.3.0
