@@ -145,25 +145,29 @@ struct SearchView: View {
                         "referer": "https://www.bilibili.com/",
                         "cookie": "SESSDATA=\(sessdata); bili_jct=\(biliJct); DedeUserID=\(dedeUserID); DedeUserID__ckMd5=\(dedeUserID__ckMd5)"
                     ]
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/search/all/v2?keyword=\(keyword)", headers: headers) { respJson, isSuccess in
-                        if isSuccess {
-                            debugPrint(respJson)
-                            let userDatas = respJson["data"]["result"][8]["data"]
-                            for user in userDatas {
-                                isUserDetailPresented.append(false)
-                                users.append(["Name": user.1["uname"].string ?? "[加载失败]", "Pic": "https:" + (user.1["upic"].string ?? "E"), "ID": String(user.1["mid"].int ?? -1), "Fans": String(user.1["fans"].int ?? -1), "VideoCount": String(user.1["videos"].int ?? -1), "Videos": { () -> [[String: String]] in
-                                    var tVideos = [[String: String]]()
-                                    for video in user.1["res"] {
-                                        tVideos.append(["Pic": "https:" + (video.1["pic"].string ?? "E"), "Title": video.1["title"].string ?? "[加载失败]", "BV": video.1["bvid"].string ?? "E", "UP": user.1["uname"].string ?? "[加载失败]", "View": video.1["play"].string ?? "-1", "Danmaku": String(video.1["coin"].int ?? -1)])
+                    biliWbiSign(paramEncoded: "keyword=\(keyword)") { signed in
+                        if let signed {
+                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/wbi/search/all/v2?\(signed)", headers: headers) { respJson, isSuccess in
+                                if isSuccess {
+                                    debugPrint(respJson)
+                                    let userDatas = respJson["data"]["result"][8]["data"]
+                                    for user in userDatas {
+                                        isUserDetailPresented.append(false)
+                                        users.append(["Name": user.1["uname"].string ?? "[加载失败]", "Pic": "https:" + (user.1["upic"].string ?? "E"), "ID": String(user.1["mid"].int ?? -1), "Fans": String(user.1["fans"].int ?? -1), "VideoCount": String(user.1["videos"].int ?? -1), "Videos": { () -> [[String: String]] in
+                                            var tVideos = [[String: String]]()
+                                            for video in user.1["res"] {
+                                                tVideos.append(["Pic": "https:" + (video.1["pic"].string ?? "E"), "Title": video.1["title"].string ?? "[加载失败]", "BV": video.1["bvid"].string ?? "E", "UP": user.1["uname"].string ?? "[加载失败]", "View": video.1["play"].string ?? "-1", "Danmaku": String(video.1["coin"].int ?? -1)])
+                                            }
+                                            return tVideos
+                                        }()])
                                     }
-                                    return tVideos
-                                }()])
+                                    let videoDatas = respJson["data"]["result"][11]["data"]
+                                    for video in videoDatas {
+                                        videos.append(["Pic": "https:" + video.1["pic"].string!, "Title": video.1["title"].string!.replacingOccurrences(of: "<em class=\"keyword\">", with: "").replacingOccurrences(of: "</em>", with: ""), "View": String(video.1["play"].int!), "Danmaku": String(video.1["danmaku"].int!), "UP": video.1["author"].string!, "BV": video.1["bvid"].string!])
+                                    }
+                                    debugResponse = respJson.debugDescription
+                                }
                             }
-                            let videoDatas = respJson["data"]["result"][11]["data"]
-                            for video in videoDatas {
-                                videos.append(["Pic": "https:" + video.1["pic"].string!, "Title": video.1["title"].string!.replacingOccurrences(of: "<em class=\"keyword\">", with: "").replacingOccurrences(of: "</em>", with: ""), "View": String(video.1["play"].int!), "Danmaku": String(video.1["danmaku"].int!), "UP": video.1["author"].string!, "BV": video.1["bvid"].string!])
-                            }
-                            debugResponse = respJson.debugDescription
                         }
                     }
                 }
