@@ -173,6 +173,14 @@ struct AudioPlayerView: View {
             }
         }
         .onAppear {
+            // Background Session
+            do {
+                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers])
+                try AVAudioSession.sharedInstance().setActive(true)
+            } catch {
+                print(error)
+            }
+            
             let asset = AVURLAsset(url: URL(string: VideoDetailView.willPlayVideoLink)!, options: [AVURLAssetHTTPUserAgentKey: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"])
             playerItem = AVPlayerItem(asset: asset)
             audioPlayer = AVPlayer(playerItem: playerItem)
