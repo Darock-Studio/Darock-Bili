@@ -186,9 +186,8 @@ jobs:
 
       - name: Export IPA File
         run: |
-          mkdir Payload
-          cp -r DarockBili_Release.xcarchive/Products/Applications/DarockBili.app Payload
-          zip -q -r DarockBili_Release.ipa Payload
+          xcodebuild -exportArchive -archivePath ./DarockBili_Release.xcarchive -exportPath ./ -exportOptionsPlist ./ExportOptions.plist -DVTProvisioningIsManaged=YES -DVTSkipCertificateValidityCheck=YES
+          ls
           
       - name: Upload IPA File
         uses: actions/upload-artifact@v3
