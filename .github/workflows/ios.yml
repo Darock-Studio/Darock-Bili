@@ -56,13 +56,6 @@ jobs:
           branch: release-vers
           directory: vers
 
-      - name: Get App Store Connect API Key File
-        env:
-          ASCAPI_KEY: ${{ secrets.ASCAPI_KEY }}
-        run: |
-          KEY_PATH=$RUNNER_TEMP/ascapi-key.p8
-          echo -n "$ASCAPI_KEY" > $KEY_PATH
-          
       - name: Install the Apple certificate and provisioning profile for Xcode
         env:
           BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
@@ -124,7 +117,6 @@ jobs:
           ASCAPI_KEY_ID: ${{ secrets.ASCAPI_KEY_ID }}
           ASCAPI_ISSUER_ID: ${{ secrets.ASCAPI_ISSUER_ID }}
         run: |
-          KEY_PATH=$RUNNER_TEMP/ascapi-key.p8
           xcodebuild archive -project ./DarockBili.xcodeproj -scheme DarockBili -destination generic/platform=iOS -archivePath ./build.xcarchive -IDEPostProgressNotifications=YES CODE_SIGN_IDENTITY=- AD_HOC_CODE_SIGNING_ALLOWED=YES CODE_SIGN_STYLE=Automatic DEVELOPMENT_TEAM=B57D8PP775 COMPILER_INDEX_STORE_ENABLE=NO
           
       - name: Upload Xcode Archive
@@ -157,14 +149,42 @@ jobs:
           name: Watch Testing Log
           path: ./TestBuilding.log
 
-      - name: Rename Test Attachments
-        run: for file in ./Caches/DerivedData/Logs/Test/Test-*.xcresult/Data/*; do if [ ! -f "$file" ]; then continue; fi; file_type=$(file -b --mime-type "$file"); extension=""; case "$file_type" in "image/jpeg" | "image/jpg") extension=".jpg";; "image/png") extension=".png";; "text/plain") extension=".txt";; *) extension=".dat";; esac; mv "$file" "$file$extension"; done
-
       - name: Upload Test Attachments
         uses: actions/upload-artifact@v3
         with:
           name: Test Attachments
           path: ./Caches/DerivedData/Logs/Test
+
+  process_test_result:
+    runs-on: macos-13
+    name: Process Test Result
+    needs:
+      - test
+    steps:
+      - name: Set Xcode Version
+        run: sudo xcode-select -s /Applications/Xcode_15.0.app
+
+      - name: Prepare Environment
+        run: |
+          brew install chargepoint/xcparse/xcparse
+
+      - name: Download Test Attachments
+        uses: actions/download-artifact@v3
+        with:
+          name: Test Attachments
+          path: ./
+
+      - name: Process
+        run: |
+          mv ./Test-*.xcresult ./Test-1.xcresult
+          mkdir ExportFiles
+          xcparse -s ./Test-1.xcresult ./ExportFiles
+          
+      - name: Upload Parsed Test Attachments
+        uses: actions/upload-artifact@v3
+        with:
+          name: Parsed Test Attachments
+          path: ./ExportFiles
 
   export:
     name: Export IPA
@@ -231,6 +251,33 @@ jobs:
         with:
           name: Release IPA
           path: ./DarockBili_Release.ipa
+
+  export_unsigned:
+    name: Export Unsigned IPA
+    runs-on: macos-13
+    needs:
+      - build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Download App XCArchive
+        uses: actions/download-artifact@v3
+        with:
+          name: Xcode Archive
+          path: ./DarockBili_Release.xcarchive
+
+      - name: Export IPA File
+        run: |
+          mkdir Payload
+          cp -r DarockBili_Release.xcarchive/Products/Applications/DarockBili.app Payload
+          zip -q -r DarockBili_Unsigned.ipa Payload
+          
+      - name: Upload IPA File
+        uses: actions/upload-artifact@v3
+        with:
+          name: Unsigned IPA
+          path: ./DarockBili_Unsigned.ipa
 
   deploy:
     name: Deploy to TestFlight
