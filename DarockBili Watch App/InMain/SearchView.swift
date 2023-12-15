@@ -146,7 +146,7 @@ struct SearchView: View {
                             "referer": "https://www.bilibili.com/",
                             "cookie": "SESSDATA=\(sessdata); bili_jct=\(biliJct); DedeUserID=\(dedeUserID); DedeUserID__ckMd5=\(dedeUserID__ckMd5); buvid3=\(respJson["data"]["b_3"].string ?? ""); buvid4=\(respJson["data"]["b_4"].string ?? "")"
                         ]
-                        biliWbiSign(paramEncoded: "keyword=\(keyword)") { signed in
+                        biliWbiSign(paramEncoded: "keyword=\(keyword)".base64Encoded()) { signed in
                             if let signed {
                                 DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/wbi/search/all/v2?\(signed)", headers: headers) { respJson, isSuccess in
                                     if isSuccess {
