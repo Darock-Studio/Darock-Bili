@@ -41,18 +41,40 @@ jobs:
         run: |
           brew install chargepoint/xcparse/xcparse
           mkdir Caches
+
+      - name: Restore Caches
+        uses: actions/cache/restore@v3
+        with:
+          key: ${{ runner.os }}-ui-test-cache-
+          path: ~/Library/Developer/Xcode/DerivedData
       
       - name: Update Status Env
         run: echo "FIN_STATUS=failure" >> $GITHUB_ENV
 
+      - name: Resolve Package Dependencies
+        run: xcodebuild -resolvePackageDependencies -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App'
+
+      - name: Build for Testing
+        run: xcodebuild build-for-testing -scheme 'DarockBili Watch App' -project ./DarockBili.xcodeproj -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -testProductsPath ./Caches/TestProducts.xctestproducts -testPlan WatchAppUITestPlan -IDEPostProgressNotifications=YES COMPILER_INDEX_STORE_ENABLE=NO
+
+      - name: Get Current Time
+        id: current-time
+        run: echo "time=$(date +"%Y%m%d%H%M%S")" >> $GITHUB_OUTPUT
+
+      - name: Save Caches
+        uses: actions/cache/save@v3
+        with:
+          key: ${{ runner.os }}-ui-test-cache-${{ steps.current-time.outputs.time }}
+          path: ~/Library/Developer/Xcode/DerivedData
+
       - name: Run DarockBili Watch App UI Test
         run: |
-          xcodebuild test -scheme 'DarockBili Watch App' -configuration Release -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -testPlan WatchAppUITestPlan -testProductsPath ./Caches/TestProducts.xctestproducts -derivedDataPath ./Caches/DerivedData
+          xcodebuild test-without-building -scheme 'DarockBili Watch App -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -testPlan WatchAppUITestPlan -testProductsPath ./Caches/TestProducts.xctestproducts IDEPostProgressNotifications=YES -DTDKDisableSymbolCopying=YES
           echo "FIN_STATUS=success" >> $GITHUB_ENV
 
       - name: Process Test Result
         run: |
-          mv ./Caches/DerivedData/Logs/Test/Test-*.xcresult ./Caches/DerivedData/Logs/Test/Test-1.xcresult
+          mv ~/Library/Developer/Xcode/DerivedData/Logs/Test/Test-*.xcresult ./Caches/DerivedData/Logs/Test/Test-1.xcresult
           mkdir Caches/ExportFiles
           xcparse -s ./Caches/DerivedData/Logs/Test/Test-1.xcresult ./Caches/ExportFiles
 
