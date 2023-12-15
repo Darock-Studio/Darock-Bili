@@ -99,6 +99,25 @@ jobs:
           CI_XCODE_PROJECT=DarockBili.xcodeproj
           CI_XCODE_SCHEME=DarockBili
           TMPDIR=$RUNNER_TEMP
+
+      - name: Restore Caches
+        uses: actions/cache/restore@v3
+        with:
+          key: ${{ runner.os }}-main-archive-cache-
+          path: ~/Library/Developer/Xcode/DerivedData
+
+      - name: Resolve Package Dependencies
+        run: xcodebuild -resolvePackageDependencies -project ./DarockBili.xcodeproj -scheme DarockBili
+
+      - name: Get Current Time
+        id: current-time
+        run: echo "time=$(date +"%Y%m%d%H%M%S")" >> $GITHUB_OUTPUT
+
+      - name: Save Caches
+        uses: actions/cache/save@v3
+        with:
+          key: ${{ runner.os }}-main-archive-cache-${{ steps.current-time.outputs.time }}
+          path: ~/Library/Developer/Xcode/DerivedData
           
       - name: Archive DarockBili App
         env:
@@ -108,17 +127,11 @@ jobs:
           KEY_PATH=$RUNNER_TEMP/ascapi-key.p8
           xcodebuild archive -project ./DarockBili.xcodeproj -scheme DarockBili -destination generic/platform=iOS -archivePath ./build.xcarchive -IDEPostProgressNotifications=YES CODE_SIGN_IDENTITY=- AD_HOC_CODE_SIGNING_ALLOWED=YES CODE_SIGN_STYLE=Automatic DEVELOPMENT_TEAM=B57D8PP775 COMPILER_INDEX_STORE_ENABLE=NO
           
-      - name: Upload Debug Archive
+      - name: Upload Xcode Archive
         uses: actions/upload-artifact@v3
         with:
-          name: Debug XCArchive
-          path: ./DarockBili_Debug.xcarchive
-
-      - name: Upload Release Archive
-        uses: actions/upload-artifact@v3
-        with:
-          name: Release XCArchive
-          path: ./DarockBili_Release.xcarchive
+          name: Xcode Archive
+          path: ./build.xcarchive
   
   test:
     runs-on: macos-13
@@ -168,7 +181,7 @@ jobs:
       - name: Download App XCArchive
         uses: actions/download-artifact@v3
         with:
-          name: Release XCArchive
+          name: Xcode Archive
           path: ./DarockBili_Release.xcarchive
 
       - name: Export IPA File
