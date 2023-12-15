@@ -41,12 +41,14 @@ jobs:
           rm vers/ver.txt
           echo $MVER >> vers/ver.txt
           agvtool new-version -all $MVER
+          
       - name: Commit Files
         working-directory: vers
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git commit -a -m "Updated versions"
+          
       - name: Push Changes
         uses: ad-m/github-push-action@master
         with:
@@ -60,6 +62,7 @@ jobs:
         run: |
           KEY_PATH=$RUNNER_TEMP/ascapi-key.p8
           echo -n "$ASCAPI_KEY" > $KEY_PATH
+          
       - name: Install the Apple certificate and provisioning profile for Xcode
         env:
           BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
@@ -84,13 +87,27 @@ jobs:
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+
+      - name: Set Environment Varibles
+        run: |
+          CI=TRUE
+          CI_ARCHIVE_PATH=/Volumes/workspace/build.xcarchive
+          CI_BUNDLE_ID=com.darock.DarockBili
+          CI_PRODUCT=DarockBili
+          CI_PRODUCT_PLATFORM=iOS
+          CI_XCODEBUILD_ACTION=archive
+          CI_XCODE_PROJECT=DarockBili.xcodeproj
+          CI_XCODE_SCHEME=DarockBili
+          TMPDIR=$RUNNER_TEMP
+          
       - name: Archive DarockBili App
         env:
           ASCAPI_KEY_ID: ${{ secrets.ASCAPI_KEY_ID }}
           ASCAPI_ISSUER_ID: ${{ secrets.ASCAPI_ISSUER_ID }}
         run: |
           KEY_PATH=$RUNNER_TEMP/ascapi-key.p8
-          xcodebuild -scheme 'DarockBili Watch App' -configuration Release DEVELOPMENT_TEAM=B57D8PP775 -archivePath DarockBili_Release.xcarchive clean archive CODE_SIGN_IDENTITY="Apple Development"
+          xcodebuild archive -project ./DarockBili.xcodeproj -scheme DarockBili -destination generic/platform=iOS -archivePath ./build.xcarchive -IDEPostProgressNotifications=YES CODE_SIGN_IDENTITY=- AD_HOC_CODE_SIGNING_ALLOWED=YES CODE_SIGN_STYLE=Automatic DEVELOPMENT_TEAM=B57D8PP775 COMPILER_INDEX_STORE_ENABLE=NO
+          
       - name: Upload Debug Archive
         uses: actions/upload-artifact@v3
         with:
