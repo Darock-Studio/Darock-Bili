@@ -65,7 +65,7 @@ jobs:
           upload-to-testflight: false
           configuration: Release
           export-method: app-store
-          project-path: ./Darock-Bili.xcodeproj
+          project-path: ./DarockBili.xcodeproj
           scheme: DarockBili Watch App
           output-path: MeowBili-Release.ipa
           apple-key-id: ${{ secrets.ASCAPI_KEY_ID }}
