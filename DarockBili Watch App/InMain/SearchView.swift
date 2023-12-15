@@ -131,41 +131,43 @@ struct SearchView: View {
         .onAppear {
             if !isLoaded {
                 debugResponse = ""
-                AF.request("bilibili.com").response { response in
-                    let headers: HTTPHeaders = [
-                        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-                        "accept-encoding": "gzip, deflate, br",
-                        "accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
-                        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.30 Safari/537.36 Edg/84.0.522.11",
-                        "sec-fetch-dest": "document",
-                        "sec-fetch-mode": "navigate",
-                        "sec-fetch-site": "none",
-                        "sec-fetch-user": "?1",
-                        "upgrade-insecure-requests": "1",
-                        "referer": "https://www.bilibili.com/",
-                        "cookie": "SESSDATA=\(sessdata); bili_jct=\(biliJct); DedeUserID=\(dedeUserID); DedeUserID__ckMd5=\(dedeUserID__ckMd5)"
-                    ]
-                    biliWbiSign(paramEncoded: "keyword=\(keyword)") { signed in
-                        if let signed {
-                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/wbi/search/all/v2?\(signed)", headers: headers) { respJson, isSuccess in
-                                if isSuccess {
-                                    debugPrint(respJson)
-                                    let userDatas = respJson["data"]["result"][8]["data"]
-                                    for user in userDatas {
-                                        isUserDetailPresented.append(false)
-                                        users.append(["Name": user.1["uname"].string ?? "[加载失败]", "Pic": "https:" + (user.1["upic"].string ?? "E"), "ID": String(user.1["mid"].int ?? -1), "Fans": String(user.1["fans"].int ?? -1), "VideoCount": String(user.1["videos"].int ?? -1), "Videos": { () -> [[String: String]] in
-                                            var tVideos = [[String: String]]()
-                                            for video in user.1["res"] {
-                                                tVideos.append(["Pic": "https:" + (video.1["pic"].string ?? "E"), "Title": video.1["title"].string ?? "[加载失败]", "BV": video.1["bvid"].string ?? "E", "UP": user.1["uname"].string ?? "[加载失败]", "View": video.1["play"].string ?? "-1", "Danmaku": String(video.1["coin"].int ?? -1)])
-                                            }
-                                            return tVideos
-                                        }()])
+                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/frontend/finger/spi") { respJson, isSuccess in
+                    if isSuccess {
+                        let headers: HTTPHeaders = [
+                            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                            "accept-encoding": "gzip, deflate, br",
+                            "accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
+                            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.30 Safari/537.36 Edg/84.0.522.11",
+                            "sec-fetch-dest": "document",
+                            "sec-fetch-mode": "navigate",
+                            "sec-fetch-site": "none",
+                            "sec-fetch-user": "?1",
+                            "upgrade-insecure-requests": "1",
+                            "referer": "https://www.bilibili.com/",
+                            "cookie": "SESSDATA=\(sessdata); bili_jct=\(biliJct); DedeUserID=\(dedeUserID); DedeUserID__ckMd5=\(dedeUserID__ckMd5); buvid3=\(respJson["data"]["b_3"].string ?? ""); buvid4=\(respJson["data"]["b_4"].string ?? "")"
+                        ]
+                        biliWbiSign(paramEncoded: "keyword=\(keyword)") { signed in
+                            if let signed {
+                                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/wbi/search/all/v2?\(signed)", headers: headers) { respJson, isSuccess in
+                                    if isSuccess {
+                                        debugPrint(respJson)
+                                        let userDatas = respJson["data"]["result"][8]["data"]
+                                        for user in userDatas {
+                                            isUserDetailPresented.append(false)
+                                            users.append(["Name": user.1["uname"].string ?? "[加载失败]", "Pic": "https:" + (user.1["upic"].string ?? "E"), "ID": String(user.1["mid"].int ?? -1), "Fans": String(user.1["fans"].int ?? -1), "VideoCount": String(user.1["videos"].int ?? -1), "Videos": { () -> [[String: String]] in
+                                                var tVideos = [[String: String]]()
+                                                for video in user.1["res"] {
+                                                    tVideos.append(["Pic": "https:" + (video.1["pic"].string ?? "E"), "Title": video.1["title"].string ?? "[加载失败]", "BV": video.1["bvid"].string ?? "E", "UP": user.1["uname"].string ?? "[加载失败]", "View": video.1["play"].string ?? "-1", "Danmaku": String(video.1["coin"].int ?? -1)])
+                                                }
+                                                return tVideos
+                                            }()])
+                                        }
+                                        let videoDatas = respJson["data"]["result"][11]["data"]
+                                        for video in videoDatas {
+                                            videos.append(["Pic": "https:" + video.1["pic"].string!, "Title": video.1["title"].string!.replacingOccurrences(of: "<em class=\"keyword\">", with: "").replacingOccurrences(of: "</em>", with: ""), "View": String(video.1["play"].int!), "Danmaku": String(video.1["danmaku"].int!), "UP": video.1["author"].string!, "BV": video.1["bvid"].string!])
+                                        }
+                                        debugResponse = respJson.debugDescription
                                     }
-                                    let videoDatas = respJson["data"]["result"][11]["data"]
-                                    for video in videoDatas {
-                                        videos.append(["Pic": "https:" + video.1["pic"].string!, "Title": video.1["title"].string!.replacingOccurrences(of: "<em class=\"keyword\">", with: "").replacingOccurrences(of: "</em>", with: ""), "View": String(video.1["play"].int!), "Danmaku": String(video.1["danmaku"].int!), "UP": video.1["author"].string!, "BV": video.1["bvid"].string!])
-                                    }
-                                    debugResponse = respJson.debugDescription
                                 }
                             }
                         }
