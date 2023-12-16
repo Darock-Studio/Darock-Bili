@@ -68,9 +68,9 @@ struct MainView: View {
                             Text("Debug Version. DO NOT Release!!")
                                 .bold()
                             Button(action: {
-                                //tipWithText("Test")
+                                tipWithText("Test")
 //                                Dynamic.PUICApplication.sharedPUICApplication._setStatusBarTimeHidden(true, animated: false, completion: nil)
-                                Dynamic.WatchKit.sharedPUICApplication._setStatusBarTimeHidden(true, animated: false)
+                                //Dynamic.WatchKit.sharedPUICApplication._setStatusBarTimeHidden(true, animated: false)
                             }, label: {
                                 Text("Debug")
                             })
