@@ -25,7 +25,7 @@ import SDWebImageSVGCoder
 import SDWebImageWebPCoder
 
 //!!!: Debug Setting, Set false Before Release
-var debug = false
+var debug = true
 
 var pShowTipText = ""
 var pShowTipSymbol = ""
@@ -76,7 +76,7 @@ struct DarockBili_Watch_AppApp: App {
                             .frame(width: 110, height: 40)
                             .lineLimit(1)
                             .minimumScaleFactor(0.1)
-                            .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
                             .offset(y: tipBoxOffset)
                             .animation(.easeOut(duration: 0.4), value: tipBoxOffset)
                         } else {
