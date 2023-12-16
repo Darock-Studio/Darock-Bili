@@ -64,6 +64,11 @@ final class DarockBili_Watch_App_UI_Tests: XCTestCase {
         app.buttons["关闭"].firstMatch.tap()
         sleep(1)
         // Backed to suggestions view
+        if app.buttons["Debug"].exists {
+            app.buttons["Debug"].firstMatch.tap()
+            sleep(1)
+            takeScreenshot(of: app, named: "MainDebugged")
+        }
         app.otherElements["MainTabView"].swipeLeft()
         sleep(1)
         takeScreenshot(of: app, named: "PersonalCenter")
