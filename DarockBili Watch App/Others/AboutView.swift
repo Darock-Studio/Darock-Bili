@@ -112,7 +112,7 @@ struct AboutView: View {
 struct DebugUITestView: View {
     var body: some View {
         List {
-            NavigationLink(destination: {OpenSource()}, label: {
+            NavigationLink(destination: {UserDetailView(uid: "3546572635768935")}, label: {
                 Text("LongUIDUserTest")
             })
         }
