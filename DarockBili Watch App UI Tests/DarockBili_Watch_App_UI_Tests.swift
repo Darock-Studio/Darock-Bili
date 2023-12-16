@@ -75,7 +75,7 @@ final class DarockBili_Watch_App_UI_Tests: XCTestCase {
         app.buttons["关于"].firstMatch.tap()
         sleep(1)
         for _ in 1...10 {
-            app.otherElements["DebugUITestButton10"].tap()
+            app.staticTexts["DebugUITestButton10"].tap()
         }
         sleep(1)
         app.buttons["LongUIDUserTest"].tap()
