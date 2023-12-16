@@ -74,7 +74,7 @@ jobs:
 
       - name: Process Test Result
         run: |
-          mv ~/Library/Developer/Xcode/DerivedData/Logs/Test/Test-*.xcresult ./Caches/Test-1.xcresult
+          mv ~/Library/Developer/Xcode/DerivedData/DarockBili-*/Logs/Test/Test-*.xcresult ./Caches/Test-1.xcresult
           mkdir Caches/ExportFiles
           xcparse -s ./Caches/Test-1.xcresult ./Caches/ExportFiles
 
