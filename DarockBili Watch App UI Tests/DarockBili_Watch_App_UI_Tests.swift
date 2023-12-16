@@ -82,6 +82,9 @@ final class DarockBili_Watch_App_UI_Tests: XCTestCase {
         app.buttons["LongUIDUserTest"].tap()
         sleep(1)
         takeScreenshot(of: app, named: "LongUIDUserDetail")
+        app.swipeLeft()
+        sleep(3)
+        takeScreenshot(of: app, named: "LongUIDUserVideos")
     }
 
     func testLaunchPerformance() throws {
