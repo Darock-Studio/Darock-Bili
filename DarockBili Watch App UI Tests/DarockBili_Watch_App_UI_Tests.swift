@@ -70,15 +70,17 @@ final class DarockBili_Watch_App_UI_Tests: XCTestCase {
         app.buttons["AppSettingsButton"].firstMatch.tap()
         sleep(1)
         takeScreenshot(of: app, named: "SettingsMain")
-        app.buttons["以太网"].firstMatch.tap()
+        app.buttons["通用"].firstMatch.tap()
         sleep(1)
-        takeScreenshot(of: app, named: "EthernetSetting")
-        app.buttons["网络检查"].firstMatch.tap()
-        sleep(2)
-        takeScreenshot(of: app, named: "NetworkFix1")
-        sleep(5)
-        takeScreenshot(of: app, named: "NetworkFix2")
-        
+        app.buttons["关于"].firstMatch.tap()
+        sleep(1)
+        for _ in 1...10 {
+            app.otherElements["DebugUITestButton10"].tap()
+        }
+        sleep(1)
+        app.buttons["LongUIDUserTest"].tap()
+        sleep(1)
+        takeScreenshot(of: app, named: "LongUIDUserDetail")
     }
 
     func testLaunchPerformance() throws {
