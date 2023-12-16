@@ -55,7 +55,7 @@ jobs:
         run: xcodebuild -resolvePackageDependencies -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App'
 
       - name: Build for Testing
-        run: xcodebuild build-for-testing -scheme 'DarockBili Watch App' -project ./DarockBili.xcodeproj -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -testProductsPath ./Caches/TestProducts.xctestproducts -testPlan WatchAppUITestPlan -IDEPostProgressNotifications=YES COMPILER_INDEX_STORE_ENABLE=NO
+        run: xcodebuild build-for-testing -scheme 'DarockBili Watch App' -project ./DarockBili.xcodeproj -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -testProductsPath ./Caches/TestProducts.xctestproducts -testPlan WatchAppUITestPlan -IDEPostProgressNotifications=YES COMPILER_INDEX_STORE_ENABLE=NO -quiet
 
       - name: Get Current Time
         id: current-time
@@ -74,9 +74,9 @@ jobs:
 
       - name: Process Test Result
         run: |
-          mv ~/Library/Developer/Xcode/DerivedData/Logs/Test/Test-*.xcresult ./Caches/DerivedData/Logs/Test/Test-1.xcresult
+          mv ~/Library/Developer/Xcode/DerivedData/Logs/Test/Test-*.xcresult ./Caches/Test-1.xcresult
           mkdir Caches/ExportFiles
-          xcparse -s ./Caches/DerivedData/Logs/Test/Test-1.xcresult ./Caches/ExportFiles
+          xcparse -s ./Caches/Test-1.xcresult ./Caches/ExportFiles
 
       - name: Upload Test Attachments
         uses: actions/upload-artifact@v3
