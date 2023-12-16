@@ -19,20 +19,11 @@ import SwiftUI
 import DarockKit
 
 struct AboutView: View {
-     @State var isUiTestViewPresented = false
      var body: some View {
          NavigationStack {
             List {
                 Section {
-                    VStack {
-                        NavigationLink("", isActive: $isUiTestViewPresented, destination: {DebugUITestView()})
-                            .frame(width: 0, height: 0)
-                        Text("喵哩喵哩 v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)")
-                            .accessibilityIdentifier("DebugUITestButton10")
-                            .onTapGesture(count: 10) {
-                                isUiTestViewPresented = true
-                            }
-                    }
+                    Text("喵哩喵哩 v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)")
                     Text("编译时间: \(CodingTime.getCodingTime())")
                     Text("遇到问题？在设置页面点击“反馈问题”进行反馈，感谢您的支持！")
                 }
@@ -46,6 +37,11 @@ struct AboutView: View {
                 Section {
                     NavigationLink(destination: {OpenSource()}, label: {
                         Text("开源组件许可")
+                    })
+                }
+                Section {
+                    NavigationLink(destination: {DebugUITestView()}, label: {
+                        Text("调试")
                     })
                 }
             }
