@@ -70,13 +70,11 @@ final class DarockBili_Watch_App_UI_Tests: XCTestCase {
         app.buttons["AppSettingsButton"].firstMatch.tap()
         sleep(1)
         takeScreenshot(of: app, named: "SettingsMain")
-        app.buttons["通用"].firstMatch.tap()
+        app.buttons["通用"].tap()
         sleep(1)
-        app.buttons["关于"].firstMatch.tap()
+        app.buttons["关于"].tap()
         sleep(1)
-        for _ in 1...10 {
-            app.buttons["DebugUITestButton10"].tap()
-        }
+        app.buttons["调试"].tap()
         sleep(1)
         app.buttons["LongUIDUserTest"].tap()
         sleep(1)
