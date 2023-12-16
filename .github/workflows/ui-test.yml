@@ -69,7 +69,7 @@ jobs:
 
       - name: Run DarockBili Watch App UI Test
         run: |
-          xcodebuild test-without-building -scheme 'DarockBili Watch App' -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -testPlan WatchAppUITestPlan -testProductsPath ./Caches/TestProducts.xctestproducts IDEPostProgressNotifications=YES -DTDKDisableSymbolCopying=YES
+          xcodebuild test-without-building -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -testPlan WatchAppUITestPlan -testProductsPath ./Caches/TestProducts.xctestproducts IDEPostProgressNotifications=YES -DTDKDisableSymbolCopying=YES
           echo "FIN_STATUS=success" >> $GITHUB_ENV
 
       - name: Process Test Result
