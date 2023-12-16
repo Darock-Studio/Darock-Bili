@@ -25,7 +25,7 @@ import SDWebImageSVGCoder
 import SDWebImageWebPCoder
 
 //!!!: Debug Setting, Set false Before Release
-var debug = false
+var debug = true
 
 var pShowTipText = ""
 var pShowTipSymbol = ""
