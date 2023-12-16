@@ -28,6 +28,7 @@ struct AboutView: View {
                         NavigationLink("", isActive: $isUiTestViewPresented, destination: {DebugUITestView()})
                             .frame(width: 0, height: 0)
                         Text("喵哩喵哩 v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)")
+                            .accessibilityIdentifier("DebugUITestButton10")
                             .onTapGesture(count: 10) {
                                 isUiTestViewPresented = true
                             }
