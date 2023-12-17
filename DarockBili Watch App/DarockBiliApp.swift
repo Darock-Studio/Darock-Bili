@@ -27,6 +27,9 @@ import SDWebImageWebPCoder
 //!!!: Debug Setting, Set false Before Release
 var debug = false
 
+//!!!: Set true Before Requesting App Store Review
+var isAppStoreVersion = true
+
 var pShowTipText = ""
 var pShowTipSymbol = ""
 var pTipBoxOffset: CGFloat = 80
