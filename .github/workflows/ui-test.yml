@@ -7,8 +7,8 @@ on:
         required: true
 
 jobs:
-  test:
-    name: UI Test
+  test_1:
+    name: UI Test on Watch S7 (41mm)
     runs-on: macos-13
     permissions:
       checks: write
@@ -45,7 +45,7 @@ jobs:
       - name: Restore Caches
         uses: actions/cache/restore@v3
         with:
-          key: ${{ runner.os }}-ui-test-cache-
+          key: ${{ runner.os }}-ui-test-1-cache-
           path: ~/Library/Developer/Xcode/DerivedData
       
       - name: Update Status Env
@@ -55,7 +55,7 @@ jobs:
         run: xcodebuild -resolvePackageDependencies -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App'
 
       - name: Build for Testing
-        run: xcodebuild build-for-testing -scheme 'DarockBili Watch App' -project ./DarockBili.xcodeproj -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -destination 'platform=watchOS Simulator,name=Apple Watch Series 8 (45mm),OS=10.0' -testProductsPath ./Caches/TestProducts.xctestproducts -testPlan WatchAppUITestPlan -IDEPostProgressNotifications=YES COMPILER_INDEX_STORE_ENABLE=NO -quiet
+        run: xcodebuild build-for-testing -scheme 'DarockBili Watch App' -project ./DarockBili.xcodeproj -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -testProductsPath ./Caches/TestProducts.xctestproducts -testPlan WatchAppUITestPlan -IDEPostProgressNotifications=YES COMPILER_INDEX_STORE_ENABLE=NO -quiet
 
       - name: Get Current Time
         id: current-time
@@ -64,12 +64,12 @@ jobs:
       - name: Save Caches
         uses: actions/cache/save@v3
         with:
-          key: ${{ runner.os }}-ui-test-cache-${{ steps.current-time.outputs.time }}
+          key: ${{ runner.os }}-ui-test-1-cache-${{ steps.current-time.outputs.time }}
           path: ~/Library/Developer/Xcode/DerivedData
 
       - name: Run DarockBili Watch App UI Test
         run: |
-          xcodebuild test-without-building -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -destination 'platform=watchOS Simulator,name=Apple Watch Series 8 (45mm),OS=10.0' -testPlan WatchAppUITestPlan -testProductsPath ./Caches/TestProducts.xctestproducts IDEPostProgressNotifications=YES -DTDKDisableSymbolCopying=YES
+          xcodebuild test-without-building -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -testPlan WatchAppUITestPlan -testProductsPath ./Caches/TestProducts.xctestproducts IDEPostProgressNotifications=YES -DTDKDisableSymbolCopying=YES
           echo "FIN_STATUS=success" >> $GITHUB_ENV
 
       - name: Process Test Result
@@ -81,7 +81,7 @@ jobs:
       - name: Upload Test Attachments
         uses: actions/upload-artifact@v3
         with:
-          name: Test Attachments
+          name: Test Attachments Watch S7 (41mm)
           path: ./Caches/ExportFiles
       
       - name: Update Check Status
@@ -96,3 +96,63 @@ jobs:
             -f target_url='https://github.com/Darock-Studio/Darock-Bili/actions/runs/${{ github.run_id }}' \
             -f context='UI Test' 
     
+  test_2:
+    name: UI Test on Watch S9 (45mm)
+    runs-on: macos-13
+    permissions:
+      checks: write
+      statuses: write
+    env:
+      FIN_STATUS: "error"
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.psha }}
+        
+      - name: Set Xcode Version
+        run: sudo xcode-select -s /Applications/Xcode_15.0.app
+
+      - name: Prepare Environment
+        run: |
+          brew install chargepoint/xcparse/xcparse
+          mkdir Caches
+
+      - name: Restore Caches
+        uses: actions/cache/restore@v3
+        with:
+          key: ${{ runner.os }}-ui-test-2-cache-
+          path: ~/Library/Developer/Xcode/DerivedData
+      
+      - name: Resolve Package Dependencies
+        run: xcodebuild -resolvePackageDependencies -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App'
+
+      - name: Build for Testing
+        run: xcodebuild build-for-testing -scheme 'DarockBili Watch App' -project ./DarockBili.xcodeproj -destination 'platform=watchOS Simulator,name=Apple Watch Series 9 (45mm),OS=10.0' -testProductsPath ./Caches/TestProducts.xctestproducts -testPlan WatchAppUITestPlan -IDEPostProgressNotifications=YES COMPILER_INDEX_STORE_ENABLE=NO -quiet
+
+      - name: Get Current Time
+        id: current-time
+        run: echo "time=$(date +"%Y%m%d%H%M%S")" >> $GITHUB_OUTPUT
+
+      - name: Save Caches
+        uses: actions/cache/save@v3
+        with:
+          key: ${{ runner.os }}-ui-test-2-cache-${{ steps.current-time.outputs.time }}
+          path: ~/Library/Developer/Xcode/DerivedData
+
+      - name: Run DarockBili Watch App UI Test
+        run: xcodebuild test-without-building -destination 'platform=watchOS Simulator,name=Apple Watch Series 9 (45mm),OS=10.0' -testPlan WatchAppUITestPlan -testProductsPath ./Caches/TestProducts.xctestproducts IDEPostProgressNotifications=YES -DTDKDisableSymbolCopying=YES
+
+      - name: Process Test Result
+        run: |
+          mv ~/Library/Developer/Xcode/DerivedData/DarockBili-*/Logs/Test/Test-*.xcresult ./Caches/Test-1.xcresult
+          mkdir Caches/ExportFiles
+          xcparse -s ./Caches/Test-1.xcresult ./Caches/ExportFiles
+
+      - name: Upload Test Attachments
+        uses: actions/upload-artifact@v3
+        with:
+          name: Test Attachments Watch S9 (45mm)
+          path: ./Caches/ExportFiles
+      
