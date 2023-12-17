@@ -644,80 +644,83 @@ struct VideoDetailView: View {
                         .accessibilityIdentifier("OwnerPage")
                     }
                     LazyVStack {
-                        HStack {
-                            Button(action: {
-                                let headers: HTTPHeaders = [
-                                    "cookie": "SESSDATA=\(sessdata)"
-                                ]
-                                AF.request("https://api.bilibili.com/x/web-interface/archive/like", method: .post, parameters: BiliVideoLike(bvid: videoDetails["BV"]!, like: isLiked ? 2 : 1, csrf: biliJct), headers: headers).response { response in
-                                    debugPrint(response)
-                                    isLiked ? tipWithText("取消成功", symbol: "checkmark.circle.fill") : tipWithText("点赞成功", symbol: "checkmark.circle.fill")
-                                    isLiked.toggle()
-                                }
-                            }, label: {
-                                VStack {
-                                    Image(systemName: isLiked ? "hand.thumbsup.fill" : "hand.thumbsup")
+                        //TODO: Unlock it after Unlocking Login Feature
+                        if !isAppStoreVersion {
+                            HStack {
+                                Button(action: {
+                                    let headers: HTTPHeaders = [
+                                        "cookie": "SESSDATA=\(sessdata)"
+                                    ]
+                                    AF.request("https://api.bilibili.com/x/web-interface/archive/like", method: .post, parameters: BiliVideoLike(bvid: videoDetails["BV"]!, like: isLiked ? 2 : 1, csrf: biliJct), headers: headers).response { response in
+                                        debugPrint(response)
+                                        isLiked ? tipWithText("取消成功", symbol: "checkmark.circle.fill") : tipWithText("点赞成功", symbol: "checkmark.circle.fill")
+                                        isLiked.toggle()
+                                    }
+                                }, label: {
+                                    VStack {
+                                        Image(systemName: isLiked ? "hand.thumbsup.fill" : "hand.thumbsup")
                                         .foregroundColor(isLiked ? Color(hex: 0xfa678e)  : .white)
-                                    Text(stat["Like"]?.shorter() ?? "")
-                                        .font(.system(size: 11))
-                                        .foregroundColor(isLiked ? Color(hex: 0xfa678e)  : .white)
-                                        .opacity(isLiked ? 1 : 0.6)
-                                        .minimumScaleFactor(0.1)
-                                        .scaledToFit()
-                                }
-                            })
+                                        Text(stat["Like"]?.shorter() ?? "")
+                                            .font(.system(size: 11))
+                                            .foregroundColor(isLiked ? Color(hex: 0xfa678e)  : .white)
+                                            .opacity(isLiked ? 1 : 0.6)
+                                            .minimumScaleFactor(0.1)
+                                            .scaledToFit()
+                                    }
+                                })
+                                .buttonBorderShape(.roundedRectangle(radius: 18))
+                                Button(action: {
+                                    if !isCoined {
+                                        isCoinViewPresented = true
+                                    }
+                                }, label: {
+                                    VStack {
+                                        Image(systemName: isCoined ? "b.circle.fill" : "b.circle")
+                                            .foregroundColor(isCoined ? Color(hex: 0xfa678e)  : .white)
+                                            .bold()
+                                        Text(stat["Coin"]?.shorter() ?? "")
+                                            .font(.system(size: 11))
+                                            .foregroundColor(isCoined ? Color(hex: 0xfa678e)  : .white)
+                                            .opacity(isCoined ? 1 : 0.6)
+                                            .minimumScaleFactor(0.1)
+                                            .scaledToFit()
+                                    }
+                                })
+                                .buttonBorderShape(.roundedRectangle(radius: 18))
+                                .sheet(isPresented: $isCoinViewPresented, content: {VideoThrowCoinView(bvid: videoDetails["BV"]!)})
+                                Button(action: {
+                                    let headers: HTTPHeaders = [
+                                        "cookie": "SESSDATA=\(sessdata)",
+                                        "referer": "bilibili.com/video/\(videoDetails["BV"]!)"
+                                    ]
+                                    let avid = bv2av(bvid: videoDetails["BV"]!)
+                                    AF.request("https://api.bilibili.com/medialist/gateway/coll/resource/deal", method: .post, parameters: BiliVideoFavourite(rid: avid, csrf: biliJct), headers: headers).response { response in
+                                        debugPrint(response)
+                                        isLiked ? tipWithText("取消成功", symbol: "checkmark.circle.fill") : tipWithText("收藏成功", symbol: "checkmark.circle.fill")
+                                        isFavoured.toggle()
+                                    }
+                                }, label: {
+                                    VStack {
+                                        Image(systemName: isFavoured ? "star.fill" : "star")
+                                            .foregroundColor(isFavoured ? Color(hex: 0xf9678f) : .white)
+                                        Text(stat["Favorite"]?.shorter() ?? "")
+                                            .font(.system(size: 11))
+                                            .foregroundColor(isFavoured ? Color(hex: 0xfa678e)  : .white)
+                                            .opacity(isFavoured ? 1 : 0.6)
+                                            .minimumScaleFactor(0.1)
+                                            .scaledToFit()
+                                    }
+                                })
+                            }
                             .buttonBorderShape(.roundedRectangle(radius: 18))
-                            Button(action: {
-                                if !isCoined {
-                                    isCoinViewPresented = true
-                                }
-                            }, label: {
-                                VStack {
-                                    Image(systemName: isCoined ? "b.circle.fill" : "b.circle")
-                                        .foregroundColor(isCoined ? Color(hex: 0xfa678e)  : .white)
-                                        .bold()
-                                    Text(stat["Coin"]?.shorter() ?? "")
-                                        .font(.system(size: 11))
-                                        .foregroundColor(isCoined ? Color(hex: 0xfa678e)  : .white)
-                                        .opacity(isCoined ? 1 : 0.6)
-                                        .minimumScaleFactor(0.1)
-                                        .scaledToFit()
-                                }
-                            })
-                            .buttonBorderShape(.roundedRectangle(radius: 18))
-                            .sheet(isPresented: $isCoinViewPresented, content: {VideoThrowCoinView(bvid: videoDetails["BV"]!)})
-                            Button(action: {
-                                let headers: HTTPHeaders = [
-                                    "cookie": "SESSDATA=\(sessdata)",
-                                    "referer": "bilibili.com/video/\(videoDetails["BV"]!)"
-                                ]
-                                let avid = bv2av(bvid: videoDetails["BV"]!)
-                                AF.request("https://api.bilibili.com/medialist/gateway/coll/resource/deal", method: .post, parameters: BiliVideoFavourite(rid: avid, csrf: biliJct), headers: headers).response { response in
-                                    debugPrint(response)
-                                    isLiked ? tipWithText("取消成功", symbol: "checkmark.circle.fill") : tipWithText("收藏成功", symbol: "checkmark.circle.fill")
-                                    isFavoured.toggle()
-                                }
-                            }, label: {
-                                VStack {
-                                    Image(systemName: isFavoured ? "star.fill" : "star")
-                                        .foregroundColor(isFavoured ? Color(hex: 0xf9678f) : .white)
-                                    Text(stat["Favorite"]?.shorter() ?? "")
-                                        .font(.system(size: 11))
-                                        .foregroundColor(isFavoured ? Color(hex: 0xfa678e)  : .white)
-                                        .opacity(isFavoured ? 1 : 0.6)
-                                        .minimumScaleFactor(0.1)
-                                        .scaledToFit()
-                                }
-                            })
+                            .offset(y: statLineOffset)
+                            .animation(.easeOut(duration: 0.4), value: statLineOffset)
+                            .onAppear {
+                                statLineOffset = 0
+                            }
+                            Spacer()
+                                .frame(height: 10)
                         }
-                        .buttonBorderShape(.roundedRectangle(radius: 18))
-                        .offset(y: statLineOffset)
-                        .animation(.easeOut(duration: 0.4), value: statLineOffset)
-                        .onAppear {
-                            statLineOffset = 0
-                        }
-                        Spacer()
-                            .frame(height: 10)
                         VStack {
                             HStack {
                                 Image(systemName: "text.word.spacing")
