@@ -17,6 +17,8 @@
 
 import XCTest
 
+let isas = true
+
 final class DarockBili_Watch_App_UI_Tests: XCTestCase {
 
     override func setUpWithError() throws {
@@ -69,21 +71,22 @@ final class DarockBili_Watch_App_UI_Tests: XCTestCase {
             sleep(1)
             takeScreenshot(of: app, named: "MainDebugged")
         }
-        app.otherElements["MainTabView"].swipeLeft()
-        sleep(1)
-        takeScreenshot(of: app, named: "PersonalCenter")
-        app.buttons["AppSettingsButton"].firstMatch.tap()
-        sleep(1)
-        takeScreenshot(of: app, named: "SettingsMain")
-        app.buttons["以太网"].firstMatch.tap()
-        sleep(1)
-        takeScreenshot(of: app, named: "EthernetSetting")
-        app.buttons["网络检查"].firstMatch.tap()
-        sleep(2)
-        takeScreenshot(of: app, named: "NetworkFix1")
-        sleep(5)
-        takeScreenshot(of: app, named: "NetworkFix2")
-        
+        if !isas {
+            app.otherElements["MainTabView"].swipeLeft()
+            sleep(1)
+            takeScreenshot(of: app, named: "PersonalCenter")
+            app.buttons["AppSettingsButton"].firstMatch.tap()
+            sleep(1)
+            takeScreenshot(of: app, named: "SettingsMain")
+            app.buttons["以太网"].firstMatch.tap()
+            sleep(1)
+            takeScreenshot(of: app, named: "EthernetSetting")
+            app.buttons["网络检查"].firstMatch.tap()
+            sleep(2)
+            takeScreenshot(of: app, named: "NetworkFix1")
+            sleep(5)
+            takeScreenshot(of: app, named: "NetworkFix2")
+        }
     }
 
     func testLaunchPerformance() throws {
