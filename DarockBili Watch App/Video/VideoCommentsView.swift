@@ -34,13 +34,16 @@ struct VideoCommentsView: View {
             if #available(watchOS 10, *) {
                 CommentMainView(oid: oid)
                     .toolbar {
-                        ToolbarItem(placement: .topBarTrailing) {
-                            Button(action: {
-                                isSendCommentPresented = true
-                            }, label: {
-                                Image(systemName: "square.and.pencil")
-                            })
-                            .sheet(isPresented: $isSendCommentPresented, content: {CommentSendView(oid: oid)})
+                        //TODO: Unlock it after Unlocking Login Feature
+                        if !isAppStoreVersion {
+                            ToolbarItem(placement: .topBarTrailing) {
+                                Button(action: {
+                                    isSendCommentPresented = true
+                                }, label: {
+                                    Image(systemName: "square.and.pencil")
+                                })
+                                .sheet(isPresented: $isSendCommentPresented, content: {CommentSendView(oid: oid)})
+                            }
                         }
                     }
             } else {
@@ -70,7 +73,8 @@ struct VideoCommentsView: View {
         var body: some View {
             ScrollView {
                 LazyVStack {
-                    if #unavailable(watchOS 10) {
+                    //TODO: Unlock it after Unlocking Login Feature
+                    if #unavailable(watchOS 10), !isAppStoreVersion {
                         Button(action: {
                             isSendCommentPresented = true
                         }, label: {
