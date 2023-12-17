@@ -29,10 +29,13 @@ struct ContentView: View {
             TabView {
                 MainView()
                     .tag(1)
-                PersonAccountView()
-                    .tag(2)
-                UserDynamicMainView()
-                    .tag(3)
+                //TODO: Unlock Features Step by Step after First Accepting
+                if !isAppStoreVersion {
+                    PersonAccountView()
+                        .tag(2)
+                    UserDynamicMainView()
+                        .tag(3)
+                }
             }
             .accessibility(identifier: "MainTabView")
 //            .sheet(isPresented: $isGuidePresented, onDismiss: {
