@@ -410,7 +410,7 @@ struct VideoDetailView: View {
                 Spacer()
                 WebImage(url: URL(string: videoDetails["Pic"]! + "@240w_160h")!, options: [.progressiveLoad, .scaleDownLargeImages])
                     .placeholder {
-                        RoundedRectangle(cornerRadius: 7)
+                        RoundedRectangle(cornerRadius: 14)
                             .frame(width: 120, height: 80)
                             .foregroundColor(Color(hex: 0x3D3D3D))
                             .redacted(reason: .placeholder)
@@ -418,7 +418,7 @@ struct VideoDetailView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 120, height: 80)
-                    .cornerRadius(17)
+                    .cornerRadius(14)
                     .shadow(color: .black.opacity(0.5), radius: 5, x: 1, y: 2)
                     .offset(y: 8)
                     .sheet(isPresented: $isCoverImageViewPresented, content: {ImageViewerView(url: videoDetails["Pic"]!)})
