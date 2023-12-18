@@ -52,6 +52,7 @@ struct VideoDetailView: View {
     @State var subTitles = [[String: String]]()
     @State var ownerFansCount = 0
     @State var nowPlayingCount = "0"
+    @State var publishTime = ""
     @State var videoDesc = ""
     @State var isVideoPlayerPresented = false
     @State var isMoreMenuPresented = false
@@ -187,7 +188,7 @@ struct VideoDetailView: View {
                                     }
                                     .tag(1)
                             }
-                            DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, honors: $honors, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount)
+                            DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, honors: $honors, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount, publishTime: $publishTime)
                                 .tag(2)
                             if videoPages.count != 1 {
                                 DetailViewVideoPartPageBase(videoDetails: $videoDetails, videoPages: $videoPages, isLoading: $isLoading)
@@ -236,7 +237,7 @@ struct VideoDetailView: View {
                     Group {
                         ScrollView {
                             DetailViewFirstPageBase(videoDetails: $videoDetails, videoPages: $videoPages, honors: $honors, subTitles: $subTitles, isLoading: $isLoading)
-                            DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, honors: $honors, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount)
+                            DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, honors: $honors, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount, publishTime: $publishTime)
                         }
                     }
                     .blur(radius: isLoading ? 14 : 0)
@@ -316,6 +317,13 @@ struct VideoDetailView: View {
                     owner = ["Name": respJson["data"]["owner"]["name"].string ?? "[加载失败]", "Face": respJson["data"]["owner"]["face"].string ?? "E", "ID": String(respJson["data"]["owner"]["mid"].int64 ?? -1)]
                     stat = ["Like": String(respJson["data"]["stat"]["like"].int ?? -1), "Coin": String(respJson["data"]["stat"]["coin"].int ?? -1), "Favorite": String(respJson["data"]["stat"]["favorite"].int ?? -1)]
                     videoDesc = respJson["data"]["desc"].string ?? "[加载失败]".replacingOccurrences(of: "\\n", with: "\n")
+
+                    // Publish time calculation
+                    let df = DateFormatter()
+                    df.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                    let pubTimestamp = respJson["data"]["pubdate"].int ?? 1
+                    publishTime = df.string(pubTimestamp)
+                    
                     for _ in 1...4 {
                         honors.append("")
                     }
@@ -594,6 +602,7 @@ struct VideoDetailView: View {
         @Binding var isCoinViewPresented: Bool
         @Binding var ownerFansCount: Int
         @Binding var nowPlayingCount: String
+        @Binding var publishTime: String
         @AppStorage("DedeUserID") var dedeUserID = ""
         @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
         @AppStorage("SESSDATA") var sessdata = ""
@@ -604,6 +613,7 @@ struct VideoDetailView: View {
         @State var danmakuCountOffset: CGFloat = 20
         @State var nowWatchingCountOffset: CGFloat = 20
         @State var totalPlayedCountOffset: CGFloat = 20
+        @State var publishTimeTextOffset: CGFloat = 20
         @State var bvidTextOffset: CGFloat = 20
         @State var descOffset: CGFloat = 20
         @State var tagOffset: CGFloat = 20
@@ -752,12 +762,22 @@ struct VideoDetailView: View {
                                 totalPlayedCountOffset = 0
                             }
                             HStack {
+                                Image(systemName: "clock")
+                                Text(publishTime)
+                                Spacer()
+                            }
+                            .offset(x: -1, y: publishTimeTextOffset)
+                            .animation(.easeOut(duration: 0.85), value: publishTimeTextOffset)
+                            .onAppear {
+                                publishTimeTextOffset = 0
+                            }
+                            HStack {
                                 Image(systemName: "movieclapper")
                                 Text(videoDetails["BV"]!)
                                 Spacer()
                             }
                             .offset(x: -1, y: bvidTextOffset)
-                            .animation(.easeOut(duration: 0.85), value: bvidTextOffset)
+                            .animation(.easeOut(duration: 0.95), value: bvidTextOffset)
                             .onAppear {
                                 bvidTextOffset = 0
                             }
