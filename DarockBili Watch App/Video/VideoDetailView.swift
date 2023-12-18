@@ -322,7 +322,7 @@ struct VideoDetailView: View {
                     let df = DateFormatter()
                     df.dateFormat = "yyyy-MM-dd HH:mm:ss"
                     let pubTimestamp = respJson["data"]["pubdate"].int ?? 1
-                    publishTime = df.string(for: pubTimestamp) ?? "[转换失败]"
+                    publishTime = df.string(Date(timeIntervalSince1970: pubTimestamp)) ?? "[转换失败]"
                     
                     for _ in 1...4 {
                         honors.append("")
