@@ -418,7 +418,7 @@ struct VideoDetailView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 120, height: 80)
-                    .cornerRadius(7)
+                    .cornerRadius(17)
                     .shadow(color: .black.opacity(0.5), radius: 5, x: 1, y: 2)
                     .offset(y: 8)
                     .sheet(isPresented: $isCoverImageViewPresented, content: {ImageViewerView(url: videoDetails["Pic"]!)})
@@ -749,7 +749,7 @@ struct VideoDetailView: View {
                                 Text(publishTime)
                                 Spacer()
                             }
-                            .offset(x: -1, y: publishTimeTextOffset)
+                            .offset(y: publishTimeTextOffset)
                             .animation(.easeOut(duration: 0.85), value: publishTimeTextOffset)
                             .onAppear {
                                 publishTimeTextOffset = 0
