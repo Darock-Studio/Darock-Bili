@@ -158,7 +158,8 @@ struct MainView: View {
             isLoadingNew = true
             isFailedToLoad = false
             let headers: HTTPHeaders = [
-                "cookie": "SESSDATA=\(sessdata)"
+                "cookie": "SESSDATA=\(sessdata)",
+                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             ]
             biliWbiSign(paramEncoded: "ps=\(isInLowBatteryMode ? 10 :  30)".base64Encoded()) { signed in
                 if let signed {

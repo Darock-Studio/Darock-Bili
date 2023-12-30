@@ -159,7 +159,8 @@ struct VideoCommentsView: View {
                                         .opacity(comments[i]["UserAction"]! == "1" ? 1 : 0.6)
                                         .onTapGesture {
                                             let headers: HTTPHeaders = [
-                                                "cookie": "SESSDATA=\(sessdata)"
+                                                "cookie": "SESSDATA=\(sessdata)",
+                                                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                             ]
                                             AF.request("https://api.bilibili.com/x/v2/reply/action", method: .post, parameters: BiliCommentLike(oid: avid, rpid: Int(comments[i]["Rpid"]!)!, action: comments[i]["UserAction"]! == "1" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
                                                 debugPrint(response)
@@ -174,7 +175,8 @@ struct VideoCommentsView: View {
                                         .opacity(comments[i]["UserAction"]! == "2" ? 1 : 0.6)
                                         .onTapGesture {
                                             let headers: HTTPHeaders = [
-                                                "cookie": "SESSDATA=\(sessdata)"
+                                                "cookie": "SESSDATA=\(sessdata)",
+                                                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                             ]
                                             AF.request("https://api.bilibili.com/x/v2/reply/hate", method: .post, parameters: BiliCommentLike(oid: avid, rpid: Int(comments[i]["Rpid"]!)!, action: comments[i]["UserAction"]! == "2" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
                                                 debugPrint(response)
@@ -222,7 +224,8 @@ struct VideoCommentsView: View {
             avid = bv2av(bvid: oid)
             debugPrint(avid)
             let headers: HTTPHeaders = [
-                "cookie": "SESSDATA=\(sessdata);"
+                "cookie": "SESSDATA=\(sessdata);",
+                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             ]
             DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v2/reply?type=1&oid=\(avid)&sort=1&ps=20&pn=\(nowPage)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
@@ -352,7 +355,8 @@ struct VideoCommentsView: View {
                                                 .opacity(replies[i]["UserAction"]! == "1" ? 1 : 0.6)
                                                 .onTapGesture {
                                                     let headers: HTTPHeaders = [
-                                                        "cookie": "SESSDATA=\(sessdata)"
+                                                        "cookie": "SESSDATA=\(sessdata)",
+                                                        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                                     ]
                                                     AF.request("https://api.bilibili.com/x/v2/reply/action", method: .post, parameters: BiliCommentLike(oid: avid, rpid: Int(replies[i]["Rpid"]!)!, action: replies[i]["UserAction"]! == "1" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
                                                         debugPrint(response)
@@ -367,7 +371,8 @@ struct VideoCommentsView: View {
                                                 .opacity(replies[i]["UserAction"]! == "2" ? 1 : 0.6)
                                                 .onTapGesture {
                                                     let headers: HTTPHeaders = [
-                                                        "cookie": "SESSDATA=\(sessdata)"
+                                                        "cookie": "SESSDATA=\(sessdata)",
+                                                        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                                     ]
                                                     AF.request("https://api.bilibili.com/x/v2/reply/hate", method: .post, parameters: BiliCommentLike(oid: avid, rpid: Int(replies[i]["Rpid"]!)!, action: replies[i]["UserAction"]! == "2" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
                                                         debugPrint(response)
@@ -420,7 +425,8 @@ struct VideoCommentsView: View {
                         .onSubmit {
                             if sendCommentCache != "" {
                                 let headers: HTTPHeaders = [
-                                    "cookie": "SESSDATA=\(sessdata)"
+                                    "cookie": "SESSDATA=\(sessdata)",
+                                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                 ]
                                 AF.request("https://api.bilibili.com/x/v2/reply/add", method: .post, parameters: BiliSubmitComment(oid: avid, message: sendCommentCache, csrf: biliJct), headers: headers).response { response in
                                     sendCommentCache = ""

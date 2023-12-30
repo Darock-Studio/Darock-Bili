@@ -224,7 +224,8 @@ struct PersonAccountView: View {
                             .navigationBarTitleDisplayMode(.large)
                         .onAppear {
                             let headers: HTTPHeaders = [
-                                "cookie": "SESSDATA=\(sessdata);"
+                                "cookie": "SESSDATA=\(sessdata);",
+                                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                             ]
                             DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/member/web/account", headers: headers) { respJson, isSuccess in
                                 if isSuccess {
