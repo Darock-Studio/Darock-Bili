@@ -73,6 +73,7 @@ jobs:
           echo "FIN_STATUS=success" >> $GITHUB_ENV
 
       - name: Process Test Result
+        if: always()
         run: |
           mv ~/Library/Developer/Xcode/DerivedData/DarockBili-*/Logs/Test/Test-*.xcresult ./Caches/Test-1.xcresult
           mkdir Caches/ExportFiles
