@@ -201,7 +201,7 @@ struct LoginView: View {
                 let headers: HTTPHeaders = [
                     "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                 ]
-                DarockKit.Network.shared.requestJSON("https://passport.bilibili.com/x/passport-login/captcha?source=main_web") { respJson, isSuccess in
+                DarockKit.Network.shared.requestJSON("https://passport.bilibili.com/x/passport-login/captcha?source=main_web", headers: headers) { respJson, isSuccess in
                     if isSuccess {
                         challenge = respJson["data"]["geetest"]["challenge"].string!
                         gt = respJson["data"]["geetest"]["gt"].string!

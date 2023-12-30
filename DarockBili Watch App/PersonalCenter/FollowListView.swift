@@ -17,6 +17,7 @@
 
 import SwiftUI
 import DarockKit
+import Alamofire
 import SwiftyJSON
 import SDWebImageSwiftUI
 
