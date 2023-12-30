@@ -79,6 +79,7 @@ jobs:
           xcparse -s ./Caches/Test-1.xcresult ./Caches/ExportFiles
 
       - name: Upload Test Attachments
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: Test Attachments
