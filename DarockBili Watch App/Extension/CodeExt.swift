@@ -157,7 +157,10 @@ func biliWbiSign(paramEncoded: String, completion: @escaping (String?) -> Void) 
     }
     
     func getWbiKeys(completion: @escaping (Result<(imgKey: String, subKey: String), Error>) -> Void) {
-        AF.request("https://api.bilibili.com/x/web-interface/nav").responseJSON { response in
+        let headers: HTTPHeaders = [
+            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        ]
+        AF.request("https://api.bilibili.com/x/web-interface/nav", headers: headers).responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)

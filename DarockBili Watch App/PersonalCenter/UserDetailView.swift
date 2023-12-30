@@ -144,7 +144,8 @@ struct UserDetailView: View {
         }
         .onAppear {
             let headers: HTTPHeaders = [
-                "cookie": "SESSDATA=\(sessdata);"
+                "cookie": "SESSDATA=\(sessdata);",
+                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             ]
             biliWbiSign(paramEncoded: "mid=\(uid)".base64Encoded()) { signed in
                 if let signed {
@@ -164,7 +165,7 @@ struct UserDetailView: View {
                             officialTitle = respJson["data"]["official"]["title"].string ?? ""
                             userSign = respJson["data"]["sign"].string ?? "[加载失败]"
                             coinCount = respJson["data"]["coins"].int ?? -1
-                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation/stat?vmid=\(uid)") { respJson, isSuccess in
+                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation/stat?vmid=\(uid)", headers: headers) { respJson, isSuccess in
                                 if isSuccess {
                                     followCount = respJson["data"]["following"].int ?? -1
                                     fansCount = respJson["data"]["follower"].int ?? -1
@@ -174,7 +175,7 @@ struct UserDetailView: View {
                     }
                 }
             }
-            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation?fid=\(uid)") { respJson, isSuccess in
+            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation?fid=\(uid)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
                     if respJson["data"]["attribute"].int ?? 0 == 2 || respJson["data"]["attribute"].int ?? 0 == 6 {
                         isFollowed = true
@@ -251,7 +252,8 @@ struct UserDetailView: View {
                     }
                     Button(action: {
                         let headers: HTTPHeaders = [
-                            "cookie": "SESSDATA=\(sessdata);"
+                            "cookie": "SESSDATA=\(sessdata);",
+                            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                         ]
                         AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
                             debugPrint(response)

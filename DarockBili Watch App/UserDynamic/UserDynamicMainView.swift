@@ -181,7 +181,8 @@ struct UserDynamicMainView: View {
     
     func ContinueLoadDynamic() {
         let headers: HTTPHeaders = [
-            "cookie": "SESSDATA=\(sessdata);"
+            "cookie": "SESSDATA=\(sessdata);",
+            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         ]
         DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/polymer/web-dynamic/v1/feed/all?type=all\({ () -> String in if lastDynamicID != "" { return "&offset=\(lastDynamicID)"; } else { return ""; }; }())&page=\(nextLoadPage)", headers: headers) { respJson, isSuccess in
             if isSuccess {
