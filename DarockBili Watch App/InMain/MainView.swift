@@ -51,6 +51,7 @@ struct MainView: View {
         @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
         @AppStorage("SESSDATA") var sessdata = ""
         @AppStorage("bili_jct") var biliJct = ""
+        @AppStorage("UpdateTipIgnoreVersion") var updateTipIgnoreVersion = ""
         @State var videos = [[String: String]]()
         @State var isSearchPresented = false
         @State var notice = ""
@@ -58,6 +59,7 @@ struct MainView: View {
         @State var isFirstLoaded = false
         @State var newMajorVer = ""
         @State var newBuildVer = ""
+        @State var isShowDisableNewVerTip = false
         @State var isLoadingNew = false
         @State var isFailedToLoad = false
         var body: some View {
@@ -84,8 +86,22 @@ struct MainView: View {
                         if newMajorVer != "" && newBuildVer != "" {
                             let nowMajorVer = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
                             let nowBuildVer = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
-                            if nowMajorVer < newMajorVer || nowBuildVer < newBuildVer {
-                                Text("喵哩喵哩新版本(v\(newMajorVer) Build \(newBuildVer))已发布！现可更新")
+                            if (nowMajorVer < newMajorVer || nowBuildVer < newBuildVer) && updateTipIgnoreVersion != "\(newMajorVer)\(newBuildVer)" {
+                                VStack {
+                                    Text("喵哩喵哩新版本(v\(newMajorVer) Build \(newBuildVer))已发布！现可更新")
+                                    if isShowDisableNewVerTip {
+                                        Text("再次轻触以在下次更新前禁用此提示")
+                                            .font(.system(size: 12))
+                                            .foregroundColor(.gray)
+                                    }
+                                }
+                                .onTapGesture {
+                                    if isShowDisableNewVerTip {
+                                        updateTipIgnoreVersion = "\(newMajorVer)\(newBuildVer)"
+                                    } else {
+                                        isShowDisableNewVerTip = true
+                                    }
+                                }
                             }
                         }
                     }
