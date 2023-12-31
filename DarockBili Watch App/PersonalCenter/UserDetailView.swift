@@ -63,7 +63,6 @@ struct UserDetailView: View {
                                         ]
                                         AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
                                             debugPrint(response)
-                                            if !CheckBApiError(from: respJson) { return }
                                             let json = try! JSON(data: response.data!)
                                             let code = json["code"].int!
                                             if code == 0 {
@@ -260,7 +259,6 @@ struct UserDetailView: View {
                         ]
                         AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
                             debugPrint(response)
-                            if !CheckBApiError(from: respJson) { return }
                             let json = try! JSON(data: response.data!)
                             let code = json["code"].int!
                             if code == 0 {
