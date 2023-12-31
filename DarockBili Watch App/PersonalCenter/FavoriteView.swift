@@ -48,6 +48,7 @@ struct FavoriteView: View {
                 DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v3/fav/folder/created/list-all?up_mid=\(dedeUserID)", headers: headers) { respJson, isSuccess in
                     if isSuccess {
                         debugPrint(respJson)
+                        if !CheckBApiError(from: respJson) { return }
                         isLoaded = true
                         let datas = respJson["data"]["list"]
                         for data in datas {
@@ -116,6 +117,7 @@ struct FavoriteDetailView: View {
         DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v3/fav/resource/list?media_id=\(folderDatas["ID"]!)&ps=20&pn=\(nowPage)", headers: headers) { respJson, isSuccess in
             if isSuccess {
                 debugPrint(respJson)
+                if !CheckBApiError(from: respJson) { return }
                 let datas = respJson["data"]["medias"]
                 for data in datas {
                     details.append(["Title": data.1["title"].string!, "Pic": data.1["cover"].string!, "UP": data.1["upper"]["name"].string!, "BV": data.1["bvid"].string!, "View": String(data.1["cnt_info"]["play"].int!), "Danmaku": String(data.1["cnt_info"]["danmaku"].int!)])

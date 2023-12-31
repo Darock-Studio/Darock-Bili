@@ -152,6 +152,7 @@ struct SearchView: View {
                                 DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/wbi/search/all/v2?\(signed)", headers: headers) { respJson, isSuccess in
                                     if isSuccess {
                                         debugPrint(respJson)
+                                        if !CheckBApiError(from: respJson) { return }
                                         debugControlStdout += "SEARCH/ALL/V2 SUCCEEDED: \n\(respJson.debugDescription)"
                                         let userDatas = respJson["data"]["result"][8]["data"]
                                         for user in userDatas {
