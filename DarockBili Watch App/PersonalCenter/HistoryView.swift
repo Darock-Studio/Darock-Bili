@@ -74,6 +74,7 @@ struct HistoryView: View {
                 DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v2/history", headers: headers) { respJson, isSuccess in
                     if isSuccess {
                         debugPrint(respJson)
+                        if !CheckBApiError(from: respJson) { return }
                         let datas = respJson["data"]
                         for data in datas {
                             histories.append(["Type": data.1["business"].string!, "Pic": data.1["pic"].string!, "Title": data.1["title"].string!, "UP": data.1["owner"]["name"].string!, "Device": String(data.1["device"].int!), "BV": data.1["bvid"].string!, "View": String(data.1["stat"]["view"].int!), "Danmaku": String(data.1["stat"]["danmaku"].int!)])

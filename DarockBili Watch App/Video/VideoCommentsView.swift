@@ -164,7 +164,6 @@ struct VideoCommentsView: View {
                                             ]
                                             AF.request("https://api.bilibili.com/x/v2/reply/action", method: .post, parameters: BiliCommentLike(oid: avid, rpid: Int(comments[i]["Rpid"]!)!, action: comments[i]["UserAction"]! == "1" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
                                                 debugPrint(response)
-                                                
                                                 comments[i]["UserAction"]! = comments[i]["UserAction"]! == "1" ? "0" : "1"
                                             }
                                         }
@@ -180,7 +179,6 @@ struct VideoCommentsView: View {
                                             ]
                                             AF.request("https://api.bilibili.com/x/v2/reply/hate", method: .post, parameters: BiliCommentLike(oid: avid, rpid: Int(comments[i]["Rpid"]!)!, action: comments[i]["UserAction"]! == "2" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
                                                 debugPrint(response)
-                                                
                                                 comments[i]["UserAction"]! = comments[i]["UserAction"]! == "2" ? "0" : "2"
                                             }
                                         }
@@ -230,6 +228,7 @@ struct VideoCommentsView: View {
             DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v2/reply?type=1&oid=\(avid)&sort=1&ps=20&pn=\(nowPage)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
                     debugPrint(respJson)
+                    if !CheckBApiError(from: respJson) { return }
                     let replies = respJson["data"]["replies"]
                     var calNum = 0
                     for reply in replies {
@@ -360,7 +359,6 @@ struct VideoCommentsView: View {
                                                     ]
                                                     AF.request("https://api.bilibili.com/x/v2/reply/action", method: .post, parameters: BiliCommentLike(oid: avid, rpid: Int(replies[i]["Rpid"]!)!, action: replies[i]["UserAction"]! == "1" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
                                                         debugPrint(response)
-                                                        
                                                         replies[i]["UserAction"]! = replies[i]["UserAction"]! == "1" ? "0" : "1"
                                                     }
                                                 }
@@ -376,7 +374,6 @@ struct VideoCommentsView: View {
                                                     ]
                                                     AF.request("https://api.bilibili.com/x/v2/reply/hate", method: .post, parameters: BiliCommentLike(oid: avid, rpid: Int(replies[i]["Rpid"]!)!, action: replies[i]["UserAction"]! == "2" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
                                                         debugPrint(response)
-                                                        
                                                         replies[i]["UserAction"]! = replies[i]["UserAction"]! == "2" ? "0" : "2"
                                                     }
                                                 }

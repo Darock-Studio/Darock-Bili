@@ -229,6 +229,7 @@ struct PersonAccountView: View {
                             ]
                             DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/member/web/account", headers: headers) { respJson, isSuccess in
                                 if isSuccess {
+                                    if !CheckBApiError(from: respJson) { return }
                                     username = respJson["data"]["uname"].string ?? ""
                                     userSign = respJson["data"]["sign"].string ?? ""
                                 } else {
@@ -241,6 +242,7 @@ struct PersonAccountView: View {
                                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
                                         if isSuccess {
                                             debugPrint(respJson)
+                                            if !CheckBApiError(from: respJson) { return }
                                             userFaceUrl = respJson["data"]["face"].string ?? "E"
                                         } else {
                                             isNetworkFixPresented = true

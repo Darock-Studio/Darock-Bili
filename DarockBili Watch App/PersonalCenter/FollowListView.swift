@@ -121,6 +121,7 @@ struct FollowListView: View {
         ]
         DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation/followings?vmid=\(viewUserId)&order_type=&ps=20&pn=\(nowPage)", headers: headers) { respJson, isSuccess in
             if isSuccess {
+                if !CheckBApiError(from: respJson) { return }
                 let datas = respJson["data"]["list"]
                 for data in datas {
                     if pinnedUsers.contains(String(data.1["mid"].int ?? 0)) {
