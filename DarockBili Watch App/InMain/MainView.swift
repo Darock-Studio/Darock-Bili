@@ -167,6 +167,7 @@ struct MainView: View {
                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/wbi/index/top/feed/rcmd?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             debugPrint(respJson)
+                            if !CheckBApiError(from: respJson) { return }
                             let datas = respJson["data"]["item"]
                             if clearWhenFinish {
                                 videos = [[String: String]]()
