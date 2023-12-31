@@ -224,10 +224,12 @@ struct PersonAccountView: View {
                             .navigationBarTitleDisplayMode(.large)
                         .onAppear {
                             let headers: HTTPHeaders = [
-                                "cookie": "SESSDATA=\(sessdata);"
+                                "cookie": "SESSDATA=\(sessdata);",
+                                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                             ]
                             DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/member/web/account", headers: headers) { respJson, isSuccess in
                                 if isSuccess {
+                                    if !CheckBApiError(from: respJson) { return }
                                     username = respJson["data"]["uname"].string ?? ""
                                     userSign = respJson["data"]["sign"].string ?? ""
                                 } else {
@@ -240,6 +242,7 @@ struct PersonAccountView: View {
                                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
                                         if isSuccess {
                                             debugPrint(respJson)
+                                            if !CheckBApiError(from: respJson) { return }
                                             userFaceUrl = respJson["data"]["face"].string ?? "E"
                                         } else {
                                             isNetworkFixPresented = true

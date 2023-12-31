@@ -17,6 +17,7 @@
 
 import SwiftUI
 import DarockKit
+import Alamofire
 import SwiftyJSON
 import SDWebImageSwiftUI
 
@@ -114,8 +115,13 @@ struct FollowListView: View {
         }
     }
     func RefreshNew() {
-        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation/followings?vmid=\(viewUserId)&order_type=&ps=20&pn=\(nowPage)") { respJson, isSuccess in
+        let headers: HTTPHeaders = [
+            "cookie": "SESSDATA=\(sessdata);",
+            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        ]
+        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation/followings?vmid=\(viewUserId)&order_type=&ps=20&pn=\(nowPage)", headers: headers) { respJson, isSuccess in
             if isSuccess {
+                if !CheckBApiError(from: respJson) { return }
                 let datas = respJson["data"]["list"]
                 for data in datas {
                     if pinnedUsers.contains(String(data.1["mid"].int ?? 0)) {

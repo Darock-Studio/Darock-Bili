@@ -73,7 +73,10 @@ struct LoginView: View {
             }
             .tag(0)
             .onAppear {
-                DarockKit.Network.shared.requestJSON("https://passport.bilibili.com/x/passport-login/web/qrcode/generate") { respJson, isSuccess in
+                let headers: HTTPHeaders = [
+                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                ]
+                DarockKit.Network.shared.requestJSON("https://passport.bilibili.com/x/passport-login/web/qrcode/generate", headers: headers) { respJson, isSuccess in
                     if isSuccess {
                         let qrUrl = respJson["data"]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
                         debugPrint(qrUrl)
@@ -83,7 +86,7 @@ struct LoginView: View {
                         qrKey = respJson["data"]["qrcode_key"].string!
                         Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
                             qrTimer = timer
-                            DarockKit.Network.shared.requestJSON("https://passport.bilibili.com/x/passport-login/web/qrcode/poll?qrcode_key=\(qrKey)") { respJson, isSuccess in
+                            DarockKit.Network.shared.requestJSON("https://passport.bilibili.com/x/passport-login/web/qrcode/poll?qrcode_key=\(qrKey)", headers: headers) { respJson, isSuccess in
                                 if respJson["data"]["code"].int == 86090 {
                                     isScanned = true
                                 } else if respJson["data"]["code"].int == 0 {
@@ -195,7 +198,10 @@ struct LoginView: View {
             }
             .tag(1)
             .onAppear {
-                DarockKit.Network.shared.requestJSON("https://passport.bilibili.com/x/passport-login/captcha?source=main_web") { respJson, isSuccess in
+                let headers: HTTPHeaders = [
+                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                ]
+                DarockKit.Network.shared.requestJSON("https://passport.bilibili.com/x/passport-login/captcha?source=main_web", headers: headers) { respJson, isSuccess in
                     if isSuccess {
                         challenge = respJson["data"]["geetest"]["challenge"].string!
                         gt = respJson["data"]["geetest"]["gt"].string!

@@ -133,6 +133,7 @@ struct SearchView: View {
                 debugResponse = ""
                 DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/frontend/finger/spi") { respJson, isSuccess in
                     if isSuccess {
+                        debugControlStdout += "SEARCH/FINGER/SPI SUCCEEDED: \n\(respJson.debugDescription)"
                         let headers: HTTPHeaders = [
                             "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
                             "accept-encoding": "gzip, deflate, br",
@@ -151,6 +152,8 @@ struct SearchView: View {
                                 DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/wbi/search/all/v2?\(signed)", headers: headers) { respJson, isSuccess in
                                     if isSuccess {
                                         debugPrint(respJson)
+                                        if !CheckBApiError(from: respJson) { return }
+                                        debugControlStdout += "SEARCH/ALL/V2 SUCCEEDED: \n\(respJson.debugDescription)"
                                         let userDatas = respJson["data"]["result"][8]["data"]
                                         for user in userDatas {
                                             isUserDetailPresented.append(false)

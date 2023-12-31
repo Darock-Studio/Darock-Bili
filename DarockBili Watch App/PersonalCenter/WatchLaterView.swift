@@ -36,11 +36,13 @@ struct WatchLaterView: View {
         }
         .onAppear {
             let headers: HTTPHeaders = [
-                "cookie": "SESSDATA=\(sessdata);"
+                "cookie": "SESSDATA=\(sessdata);",
+                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             ]
             DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v2/history/toview", headers: headers) { respJson, isSuccess in
                 if isSuccess {
                     debugPrint(respJson)
+                    if !CheckBApiError(from: respJson) { return }
                     let datas = respJson["data"]["list"]
                     for data in datas {
                         laters.append(["Title": data.1["title"].string!, "Pic": data.1["pic"].string!, "UP": data.1["owner"]["name"].string!, "View": String(data.1["stat"]["view"].int!), "Danmaku": String(data.1["stat"]["danmaku"].int!), "BV": data.1["bvid"].string!])

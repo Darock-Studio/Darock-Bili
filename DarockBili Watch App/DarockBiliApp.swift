@@ -27,6 +27,8 @@ import SDWebImageWebPCoder
 //!!!: Debug Setting, Set false Before Release
 var debug = false
 
+var debugControlStdout = "stdo\n"
+
 var pShowTipText = ""
 var pShowTipSymbol = ""
 var pTipBoxOffset: CGFloat = 80
@@ -174,14 +176,20 @@ struct DarockBili_Watch_AppApp: App {
                                     .buttonStyle(.plain)
                                     .offset(x: 15, y: 5)
                                     if isShowingDebugControls {
-                                        HStack {
-                                            VStack {
+                                        VStack {
+                                            HStack {
                                                 Text("Memory Usage: \(memoryUsage) MB")
-                                                
+                                                Spacer()
                                             }
-                                            .font(.system(size: 10))
-                                            Spacer()
+                                            .allowsHitTesting(false)
+                                            ScrollView {
+                                                Text(debugControlStdout)
+                                            }
+                                            .frame(height: 180)
+                                            .border(Color.blue, width: 2)
                                         }
+                                        .font(.system(size: 10))
+                                        
                                         .onAppear {
                                             Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
                                                 systemResourceRefreshTimer = timer
