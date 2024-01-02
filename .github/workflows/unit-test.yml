@@ -5,6 +5,10 @@ on:
     inputs:
       psha:
         required: true
+      repository:
+        required: true
+      lsha:
+        required: true
 
 jobs:
   build:
@@ -23,7 +27,7 @@ jobs:
             --method POST \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/${{ github.repository }}/statuses/$GITHUB_SHA \
+            /repos/${{ inputs.repository }}/statuses/${{ inputs.lsha }} \
             -f state='pending' \
             -f target_url='https://github.com/Darock-Studio/Darock-Bili/actions/runs/${{ github.run_id }}' \
             -f description='Testing...' \
@@ -32,6 +36,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
+          repository: ${{ inputs.repository }}
           ref: ${{ inputs.psha }}
         
       - name: Set Xcode Version
@@ -65,7 +70,7 @@ jobs:
             --method POST \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/${{ github.repository }}/statuses/$GITHUB_SHA \
+            /repos/${{ inputs.repository }}/statuses/${{ inputs.lsha }} \
             -f state='${{ env.FIN_STATUS }}' \
             -f target_url='https://github.com/Darock-Studio/Darock-Bili/actions/runs/${{ github.run_id }}' \
             -f context='Unit Test' 
