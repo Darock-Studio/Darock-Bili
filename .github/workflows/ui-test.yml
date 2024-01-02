@@ -27,7 +27,7 @@ jobs:
             --method POST \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/${{ inputs.repository }}/statuses/${{ inputs.lsha }} \
+            /repos/${{ github.repository }}/statuses/${{ inputs.lsha }} \
             -f state='pending' \
             -f target_url='https://github.com/Darock-Studio/Darock-Bili/actions/runs/${{ github.run_id }}' \
             -f description='Testing...' \
@@ -98,7 +98,7 @@ jobs:
             --method POST \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/${{ inputs.repository }}/statuses/${{ inputs.lsha }} \
+            /repos/${{ github.repository }}/statuses/${{ inputs.lsha }} \
             -f state='${{ env.FIN_STATUS }}' \
             -f target_url='https://github.com/Darock-Studio/Darock-Bili/actions/runs/${{ github.run_id }}' \
             -f context='UI Test' 
