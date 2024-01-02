@@ -144,6 +144,12 @@ struct MainView: View {
                                 }
                             })
                         }
+                    } else if isFailedToLoad {
+                        Button {
+                            LoadNewVideos()
+                        } label: {
+                            Label("加载失败，点击重试", systemImage: "wifi.exclamationmark")
+                        }
                     } else {
                         ProgressView()
                     }
