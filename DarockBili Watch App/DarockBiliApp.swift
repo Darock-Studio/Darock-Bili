@@ -19,6 +19,7 @@ import Darwin
 import SwiftUI
 import WatchKit
 import DarockKit
+import SwiftyJSON
 import SDWebImage
 import SDWebImagePDFCoder
 import SDWebImageSVGCoder
@@ -38,6 +39,10 @@ var isShowMemoryInScreen = false
 var isInOfflineMode = false
 
 var isInLowBatteryMode = false
+
+// BUVID
+var globalBuvid3 = ""
+var globalBuvid4 = ""
 
 @main
 struct DarockBili_Watch_AppApp: App {
@@ -219,6 +224,8 @@ struct DarockBili_Watch_AppApp: App {
             case .inactive:
                 break
             case .active:
+                updateBuvid()
+                
                 WKInterfaceDevice.current().isBatteryMonitoringEnabled = true
                 if screenTimeCaculateTimer == nil {
                     Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
@@ -313,4 +320,13 @@ func signalErrorRecord(_ errorNum: Int32, _ errorSignal: String) {
     let urlForDocument = manager.urls(for: .documentDirectory, in: .userDomainMask)
     try! fullString.write(to: URL(string: (urlForDocument[0] as URL).absoluteString + "\(dateStr.replacingOccurrences(of: " ", with: "_").replacingOccurrences(of: "/", with: "-").replacingOccurrences(of: ":", with: "__")).ddf")!, atomically: true, encoding: .utf8)
     UserDefaults.standard.set("\(dateStr).ddf", forKey: "NewSignalError")
+}
+
+public func updateBuvid() {
+    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/frontend/finger/spi") { respJson, isSuccess in
+        if isSuccess {
+            globalBuvid3 = respJson["data"]["b_3"].string ?? globalBuvid3
+            globalBuvid4 = respJson["data"]["b_4"].string ?? globalBuvid4
+        }
+    }
 }
