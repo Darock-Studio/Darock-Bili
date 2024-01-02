@@ -564,7 +564,8 @@ struct UserDetailView: View {
         func RefreshVideos() {
             videos = [[String: String]]()
             let headers: HTTPHeaders = [
-                "cookie": "SESSDATA=\(sessdata);",
+                "accept-language": "en,zh-CN;q=0.9,zh;q=0.8",
+                "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3); buvid4=\(globalBuvid4);",
                 "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
             ]
             biliWbiSign(paramEncoded: "mid=\(uid)&ps=50&pn=\(videoNowPage)".base64Encoded()) { signed in
@@ -595,7 +596,8 @@ struct UserDetailView: View {
         func RefreshArticles() {
             articles = [[String: String]]()
             let headers: HTTPHeaders = [
-                "cookie": "SESSDATA=\(sessdata);",
+                "accept-language": "en,zh-CN;q=0.9,zh;q=0.8",
+                "cookie": "SESSDATA=\(sessdata);buvid3=\(globalBuvid3); buvid4=\(globalBuvid4);",
                 "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
             ]
             biliWbiSign(paramEncoded: "mid=\(uid)&ps=30&pn=\(articleNowPage)&sort=publish_time&platform=web".base64Encoded()) { signed in
