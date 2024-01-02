@@ -126,6 +126,7 @@ struct SearchView: View {
                     Text("似乎在搜索时遇到了一些问题，以下是详细信息")
                     Text(debugResponse)
                 }
+                progressView()
             }
         }
         .onAppear {
@@ -170,14 +171,32 @@ struct SearchView: View {
                                             videos.append(["Pic": "https:" + video.1["pic"].string!, "Title": video.1["title"].string!.replacingOccurrences(of: "<em class=\"keyword\">", with: "").replacingOccurrences(of: "</em>", with: ""), "View": String(video.1["play"].int!), "Danmaku": String(video.1["danmaku"].int!), "UP": video.1["author"].string!, "BV": video.1["bvid"].string!])
                                         }
                                         debugResponse = respJson.debugDescription
+                                    } else {
+                                        debugResponse = "请检查您的网络连接状态"
                                     }
                                 }
                             }
                         }
+                    } else {
+                        debugResponse = "请检查您的网络连接状态"
                     }
                 }
                 isLoaded = true
             }
+        }
+    }
+    @ViewBuilder
+    func progressView() -> some View {
+        let showError:Bool = {
+            if debugResponse.isEmpty {//这样是加载中或加载成功
+                return users.isEmpty && videos.isEmpty//两个都没有的话那肯定是加载中了，否则就是加载成功了
+            } else {//加载失败，有错误信息，不需要ProgressView
+                return false
+            }
+        }()
+        if showError {
+            ProgressView()
+                .padding(.top)
         }
     }
 }
