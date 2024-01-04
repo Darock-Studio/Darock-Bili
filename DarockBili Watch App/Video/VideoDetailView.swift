@@ -642,7 +642,7 @@ struct VideoDetailView: View {
                         .onAppear {
                             ownerBlockOffset = 0
                         }
-                        .accessibilityIdentifier("OwnerPage")
+                        .accessibilityIdentifier("AuthorDetailButton")
                     }
                     LazyVStack {
                         HStack {
