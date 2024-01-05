@@ -564,10 +564,11 @@ struct UserDetailView: View {
         func RefreshVideos() {
             videos = [[String: String]]()
             let headers: HTTPHeaders = [
-                "accept-language": "en,zh-CN;q=0.9,zh;q=0.8",
-                "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3); buvid4=\(globalBuvid4);",
-                "User-Agent": "Mozilla/5.0" // Bypass? drdar://gh/SocialSisterYi/bilibili-API-collect/issues/868/1859065874
+               // "accept-language": "zh-CN,zh;q=0.9",
+                "cookie": "SESSDATA=\(sessdata);", // buvid3=\(globalBuvid3);buvid4=\(globalBuvid4);
+                //"User-Agent": "Mozilla/5.0" // Bypass? drdar://gh/SocialSisterYi/bilibili-API-collect/issues/868/1859065874
             ]
+            // FIXME: Apply changes to RefreshArticles method after checking ability.
             biliWbiSign(paramEncoded: "mid=\(uid)&ps=50&pn=\(videoNowPage)".base64Encoded()) { signed in
                 if let signed {
                     debugPrint(signed)
