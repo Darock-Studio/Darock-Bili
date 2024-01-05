@@ -568,9 +568,8 @@ struct UserDetailView: View {
                 "cookie": "SESSDATA=\(sessdata);", // buvid3=\(globalBuvid3); buvid4=\(globalBuvid4);
                 //"User-Agent": "Mozilla/5.0" // Bypass? drdar://gh/SocialSisterYi/bilibili-API-collect/issues/868/1859065874
             ]
-            // TODO: Check Wbi Sign ability when encoding array args.
             // FIXME: Apply changes to RefreshArticles method after checking ability.
-            biliWbiSign(paramEncoded: "mid=\(uid)&ps=50&pn=\(videoNowPage)&dm_img_list=[]".base64Encoded()) { signed in
+            biliWbiSign(paramEncoded: "mid=\(uid)&ps=50&pn=\(videoNowPage)".base64Encoded()) { signed in
                 if let signed {
                     debugPrint(signed)
                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/arc/search?\(signed)", headers: headers) { respJson, isSuccess in
