@@ -648,10 +648,10 @@ struct VideoDetailView: View {
                         HStack {
                             Button(action: {
                                 let headers: HTTPHeaders = [
-                                    "cookie": "SESSDATA=\(sessdata)",
+                                    "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3)",
                                     "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                 ]
-                                AF.request("https://api.bilibili.com/x/web-interface/archive/like", method: .post, parameters: BiliVideoLike(bvid: videoDetails["BV"]!, like: isLiked ? 2 : 1, csrf: biliJct), headers: headers).response { response in
+                                AF.request("https://api.bilibili.com/x/web-interface/archive/like", method: .post, parameters: ["bvid": videoDetails["BV"]!, "like": isLiked ? 2 : 1, "eab_x": 2, "ramval": 0, "source": "web_normal", "ga": 1, "csrf": biliJct], headers: headers).response { response in
                                     debugPrint(response)
                                     isLiked ? tipWithText("取消成功", symbol: "checkmark.circle.fill") : tipWithText("点赞成功", symbol: "checkmark.circle.fill")
                                     isLiked.toggle()
@@ -690,15 +690,18 @@ struct VideoDetailView: View {
                             .sheet(isPresented: $isCoinViewPresented, content: {VideoThrowCoinView(bvid: videoDetails["BV"]!)})
                             Button(action: {
                                 let headers: HTTPHeaders = [
-                                    "cookie": "SESSDATA=\(sessdata)",
-                                    "referer": "bilibili.com/video/\(videoDetails["BV"]!)",
+                                    "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3)",
+                                    "referer": "https://www.bilibili.com/video/\(videoDetails["BV"]!)/",
                                     "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                 ]
                                 let avid = bv2av(bvid: videoDetails["BV"]!)
-                                AF.request("https://api.bilibili.com/medialist/gateway/coll/resource/deal", method: .post, parameters: BiliVideoFavourite(rid: avid, csrf: biliJct), headers: headers).response { response in
+                                AF.request("https://api.bilibili.com/x/v3/fav/resource/deal", method: .post, parameters: BiliVideoFavourite(rid: avid, csrf: biliJct), headers: headers).response { response in
                                     debugPrint(response)
-                                    isLiked ? tipWithText("取消成功", symbol: "checkmark.circle.fill") : tipWithText("收藏成功", symbol: "checkmark.circle.fill")
-                                    isFavoured.toggle()
+                                    if let rpd = response.data {
+                                        if !CheckBApiError(from: JSON(data: rpd)) { return }
+                                        isLiked ? tipWithText("取消成功", symbol: "checkmark.circle.fill") : tipWithText("收藏成功", symbol: "checkmark.circle.fill")
+                                        isFavoured.toggle()
+                                    }
                                 }
                             }, label: {
                                 VStack {
