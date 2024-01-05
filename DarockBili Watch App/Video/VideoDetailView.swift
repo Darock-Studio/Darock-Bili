@@ -698,7 +698,7 @@ struct VideoDetailView: View {
                                 AF.request("https://api.bilibili.com/x/v3/fav/resource/deal", method: .post, parameters: BiliVideoFavourite(rid: avid, csrf: biliJct), headers: headers).response { response in
                                     debugPrint(response)
                                     if let rpd = response.data {
-                                        if !CheckBApiError(from: JSON(data: rpd)) { return }
+                                        if !CheckBApiError(from: try! JSON(data: rpd)) { return }
                                         isLiked ? tipWithText("取消成功", symbol: "checkmark.circle.fill") : tipWithText("收藏成功", symbol: "checkmark.circle.fill")
                                         isFavoured.toggle()
                                     }
