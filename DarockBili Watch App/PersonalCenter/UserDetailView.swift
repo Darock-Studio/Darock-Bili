@@ -564,12 +564,16 @@ struct UserDetailView: View {
         func RefreshVideos() {
             videos = [[String: String]]()
             let headers: HTTPHeaders = [
-               // "accept-language": "zh-CN,zh;q=0.9",
-                "cookie": "SESSDATA=\(sessdata);", // buvid3=\(globalBuvid3);buvid4=\(globalBuvid4);
-                //"User-Agent": "Mozilla/5.0" // Bypass? drdar://gh/SocialSisterYi/bilibili-API-collect/issues/868/1859065874
+                "accept": "*/*",
+                "accept-encoding": "gzip, deflate, br",
+                "accept-language": "zh-CN,zh;q=0.9",
+                "cookie": "\(sessdata == "" ? "" : "SESSDATA=\(sessdata); ")buvid3=\(globalBuvid3); b_nut=\(Date.now.timeStamp); buvid4=\(globalBuvid4);", 
+                "origin": "https://space.bilibili.com",
+                "referer": "https://space.bilibili.com/\(uid)/video",
+                "User-Agent": "Mozilla/5.0" // Bypass? drdar://gh/SocialSisterYi/bilibili-API-collect/issues/868/1859065874
             ]
-            // FIXME: Apply changes to RefreshArticles method after checking ability.
-            biliWbiSign(paramEncoded: "mid=\(uid)&ps=50&pn=\(videoNowPage)".base64Encoded()) { signed in
+            // FIXME: Official Wbi crypto logic for this request seems different from other APIs, some IP can get but some can't. It's hard to fix ~_~
+            biliWbiSign(paramEncoded: "mid=\(uid)&ps=50&tid=0&pn=\(videoNowPage)&keyword=&order=pubdate&platform=web&web_location=1550101&order_avoided=true&dm_img_list=[]&dm_img_str=V2ViR0wgMS4wIChPcGVuR0wgRVMgMi4wIENocm9taXVtKQ&dm_cover_img_str=VjNEIDQuMkJyb2FkY2".base64Encoded()) { signed in
                 if let signed {
                     debugPrint(signed)
                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/arc/search?\(signed)", headers: headers) { respJson, isSuccess in
