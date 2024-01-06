@@ -78,7 +78,7 @@ import EFQRCode
 //    }
 //}
 
-struct FeedbackView: some View {
+struct FeedbackView: View {
     @State var qrImage: CGImage?
     var body: some View {
         VStack {
