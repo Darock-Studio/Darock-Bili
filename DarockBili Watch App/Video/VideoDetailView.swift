@@ -876,7 +876,7 @@ struct VideoDetailView: View {
                         "User-Agent": "Mozilla/5.0"
                     ]
                     let avid = bv2av(bvid: videoDetails["BV"]!)
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v3/fav/folder/created/list-all?type=2&rid=\(avid)&up_mid=\(dedeUserID)") { respJson, isSuccess in
+                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v3/fav/folder/created/list-all?type=2&rid=\(avid)&up_mid=\(dedeUserID)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             if !CheckBApiError(from: respJson) { return }
                             for folder in respJson["data"]["list"] {
