@@ -570,9 +570,9 @@ struct UserDetailView: View {
                 "cookie": "\(sessdata == "" ? "" : "SESSDATA=\(sessdata); ")buvid3=\(globalBuvid3); b_nut=\(Date.now.timeStamp); buvid4=\(globalBuvid4);", 
                 "origin": "https://space.bilibili.com",
                 "referer": "https://space.bilibili.com/\(uid)/video",
-                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" /// Bypass? drdar://gh/SocialSisterYi/bilibili-API-collect/issues/868/1859065874
+                "User-Agent": "Mozilla/5.0" // Bypass? drdar://gh/SocialSisterYi/bilibili-API-collect/issues/868/1859065874
             ]
-            // FIXME: Apply changes to RefreshArticles method after checking ability.
+            // FIXME: Official Wbi crypto logic for this request seems different from other APIs, some IP can get but some can't. It's hard to fix ~_~
             biliWbiSign(paramEncoded: "mid=\(uid)&ps=50&tid=0&pn=\(videoNowPage)&keyword=&order=pubdate&platform=web&web_location=1550101&order_avoided=true&dm_img_list=[]&dm_img_str=V2ViR0wgMS4wIChPcGVuR0wgRVMgMi4wIENocm9taXVtKQ&dm_cover_img_str=VjNEIDQuMkJyb2FkY2".base64Encoded()) { signed in
                 if let signed {
                     debugPrint(signed)
