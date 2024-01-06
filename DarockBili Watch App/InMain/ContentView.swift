@@ -21,8 +21,8 @@ struct ContentView: View {
     public static var nowAppVer = "1.0.0|106"
     @AppStorage("IsFirstUsing") var isFirstUsing = true
     @AppStorage("LastUsingVer") var lastUsingVer = ""
-    //@AppStorage("IsNoTipSystemVer") var isNoTipSystemVer = false
-    @State var isGuidePresented = false
+    @AppStorage("IsReadTerms") var isReadTerms = false
+    @State var isTermsPresented = false
     //@State var isSystemVerTipPresented = false
     var body: some View {
         NavigationStack {
@@ -35,18 +35,16 @@ struct ContentView: View {
                     .tag(3)
             }
             .accessibility(identifier: "MainTabView")
-//            .sheet(isPresented: $isGuidePresented, onDismiss: {
-//                isFirstUsing = false
-//            }, content: {FirstUsingView()})
+            .sheet(isPresented: $isTermsPresented, onDismiss: {
+                isReadTerms = true
+            }, content: {TermsListView()})
             .onAppear {
 //                if isFirstUsing {
 //                    isGuidePresented = true
 //                }
-//                if !isNoTipSystemVer {
-//                    if #unavailable(watchOS 10) {
-//                        isSystemVerTipPresented = true
-//                    }
-//                }
+                if !isReadTerms {
+                    isTermsPresented = true
+                }
             }
 //            .sheet(isPresented: $isSystemVerTipPresented, onDismiss: {
 //                isNoTipSystemVer = true
@@ -62,6 +60,27 @@ struct ContentView: View {
 //                    }
 //                }
 //            })
+        }
+    }
+}
+
+struct TermsListView: View {
+    @Environment(\.dismiss) var dismiss
+    @AppStorage("IsReadTerms") var isReadTerms = false
+    var body: some View {
+        ScrollView {
+            Text("""
+                 在使用本 App 前，您需要先知晓以下信息：
+                 · 本 App 由第三方开发者以及部分社区用户贡献，与哔哩哔哩无合作关系。
+                 · 本 App 并不是哔哩哔哩的替代品，我们建议您在能够使用官方客户端时尽量使用官方客户端。
+                 · 本 App 均使用来源于网络的公开信息进行开发。
+                 """)
+            Button(action: {
+                isReadTerms = true
+                dismiss()
+            }, label: {
+                Text("我已了解")
+            })
         }
     }
 }
