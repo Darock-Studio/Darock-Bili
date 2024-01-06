@@ -608,6 +608,7 @@ struct VideoDetailView: View {
         @State var bvidTextOffset: CGFloat = 20
         @State var descOffset: CGFloat = 20
         @State var tagOffset: CGFloat = 20
+        @State var isFavoriteChoosePresented = false
         var body: some View {
             ScrollView {
                 VStack {
@@ -689,20 +690,7 @@ struct VideoDetailView: View {
                             .buttonBorderShape(.roundedRectangle(radius: 18))
                             .sheet(isPresented: $isCoinViewPresented, content: {VideoThrowCoinView(bvid: videoDetails["BV"]!)})
                             Button(action: {
-                                let headers: HTTPHeaders = [
-                                    "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3)",
-                                    "referer": "https://www.bilibili.com/video/\(videoDetails["BV"]!)/",
-                                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                                ]
-                                let avid = bv2av(bvid: videoDetails["BV"]!)
-                                AF.request("https://api.bilibili.com/x/v3/fav/resource/deal", method: .post, parameters: BiliVideoFavourite(rid: avid, csrf: biliJct), headers: headers).response { response in
-                                    debugPrint(response)
-                                    if let rpd = response.data {
-                                        if !CheckBApiError(from: try! JSON(data: rpd)) { return }
-                                        isLiked ? tipWithText("取消成功", symbol: "checkmark.circle.fill") : tipWithText("收藏成功", symbol: "checkmark.circle.fill")
-                                        isFavoured.toggle()
-                                    }
-                                }
+                                isFavoriteChoosePresented = true
                             }, label: {
                                 VStack {
                                     Image(systemName: isFavoured ? "star.fill" : "star")
@@ -722,6 +710,7 @@ struct VideoDetailView: View {
                         .onAppear {
                             statLineOffset = 0
                         }
+                        .sheet(isPresented: $isFavoriteChoosePresented, content: {VideoFavoriteAddView(videoDetails: $videoDetails, isFavoured: $isFavoured)})
                         Spacer()
                             .frame(height: 10)
                         VStack {
@@ -807,6 +796,95 @@ struct VideoDetailView: View {
                                     tagText += text + "  "
                                 }
                             }
+                    }
+                }
+            }
+        }
+
+        struct VideoFavoriteAddView: View {
+            @Binding var videoDetails: [String: String]
+            @Binding var isFavoured: Bool
+            @Environment(\.dismiss) var dismiss
+            @AppStorage("DedeUserID") var dedeUserID = ""
+            @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
+            @AppStorage("SESSDATA") var sessdata = ""
+            @AppStorage("bili_jct") var biliJct = ""
+            @State var favoriteFolderList = [[String: String]]()
+            @State var isFavoriteTargetIn = [Bool]()
+            @State var isItemLoading = [Bool]()
+            var body: some View {
+                NavigationStack {
+                    List {
+                        if isItemLoading.count != 0 {
+                            ForEach(0..<favoriteFolderList.count, id: \.self) { i in
+                                Button(action: {
+                                    isItemLoading[i] = true
+                                    let headers: HTTPHeaders = [
+                                        "cookie": "SESSDATA=\(sessdata);",
+                                        "referer": "https://www.bilibili.com/video/\(videoDetails["BV"]!)/",
+                                        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                    ]
+                                    let avid = bv2av(bvid: videoDetails["BV"]!)
+                                    AF.request("https://api.bilibili.com/x/v3/fav/resource/deal", method: .post, parameters: ["rid": avid, "type": 2, "\(isFavoriteTargetIn[i] ? "del" : "add")_media_ids": Int(favoriteFolderList[i]["ID"]!)!, "csrf": biliJct], headers: headers).response { response in
+                                        debugPrint(response)
+                                        if let rpd = response.data {
+                                            if !CheckBApiError(from: try! JSON(data: rpd)) {
+                                                isItemLoading[i] = false
+                                                return
+                                            }
+                                            isFavoriteTargetIn[i].toggle()
+                                            isFavoured = false
+                                            for i in isFavoriteTargetIn {
+                                                if i {
+                                                    isFavoured = true
+                                                    break
+                                                }
+                                            }
+                                        }
+                                        isItemLoading[i] = false
+                                     }
+                                }, label: {
+                                    HStack {
+                                        if !isItemLoading[i] {
+                                            if isFavoriteTargetIn[i] {
+                                                Image(systemName: "checkmark")
+                                                    .foregroundColor(Color.blue)
+                                            }
+                                            Text(favoriteFolderList[i]["Title"]!)
+                                        } else {
+                                            Spacer()
+                                            ProgressView()
+                                            Spacer()
+                                        }
+                                    }
+                                })
+                            }
+                        } else {
+                            HStack {
+                                Spacer()
+                                ProgressView()
+                                Spacer()
+                            }
+                        }
+                    }
+                    .navigationTitle("添加到收藏夹")
+                    .navigationBarTitleDisplayMode(.inline)
+                }
+                .onAppear {
+                    let headers: HTTPHeaders = [
+                        "cookie": "SESSDATA=\(sessdata);",
+                        "User-Agent": "Mozilla/5.0"
+                    ]
+                    let avid = bv2av(bvid: videoDetails["BV"]!)
+                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v3/fav/folder/created/list-all?type=2&rid=\(avid)&up_mid=\(dedeUserID)") { respJson, isSuccess in
+                        if isSuccess {
+                            if !CheckBApiError(from: respJson) { return }
+                            for folder in respJson["data"]["list"] {
+                                favoriteFolderList.append(["ID": String(folder.1["id"].int ?? 0), "Title": folder.1["title"].string ?? "", "Count": String(folder.1["media_count"].int ?? 0)])
+                                isFavoriteTargetIn.append((folder.1["fav_state"].int ?? 0) == 0 ? false : true)
+                                isItemLoading.append(false)
+                            }
+                        }
                     }
                 }
             }
