@@ -447,7 +447,7 @@ public func CheckBApiError(from input: JSON) -> Bool {
     }
     let msg = errorCodeTextDic[code] ?? (input["message"].string ?? "")
     tipWithText(msg, symbol: "xmark.circle.fill")
-    DarockKit.Network.shared.requestString("https://api.darock.top/bili/error/upload/\("Code: \(code)|Message: \(msg)|Build: \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)|IsLoggedIn: \((UserDefaults.standard.string(forKey: "DedeUserID") ?? "") == "" ? "Yes" : "No")".base64Encoded().replacingOccurrences(of: "/", with: "{slash}"))")
+    DarockKit.Network.shared.requestString("https://api.darock.top/bili/error/upload/\("Code: \(code)|Message: \(msg)|Build: \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)|IsLoggedIn: \((UserDefaults.standard.string(forKey: "DedeUserID") ?? "") == "" ? "Yes" : "No")".base64Encoded().replacingOccurrences(of: "/", with: "{slash}"))") { _, _ in return}
     return false
 }
 
