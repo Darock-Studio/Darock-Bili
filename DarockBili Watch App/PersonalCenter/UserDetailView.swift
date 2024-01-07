@@ -52,7 +52,7 @@ struct UserDetailView: View {
             if #available(watchOS 10, *) {
                 TabView {
                     VStack {
-                        NavigationLink("", isActive: $isSendbMessagePresented, destination: {bMessageSendView(uid: Int(uid)!, username: username)})
+                        NavigationLink("", isActive: $isSendbMessagePresented, destination: {bMessageSendView(uid: Int64(uid)!, username: username)})
                             .frame(width: 0, height: 0)
                         FirstPageBase(uid: uid, userFaceUrl: $userFaceUrl, username: $username, followCount: $followCount, fansCount: $fansCount, coinCount: $coinCount, isFollowed: $isFollowed, isSendbMessagePresented: $isSendbMessagePresented)
                             .toolbar {
@@ -61,7 +61,7 @@ struct UserDetailView: View {
                                         let headers: HTTPHeaders = [
                                             "cookie": "SESSDATA=\(sessdata);"
                                         ]
-                                        AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
+                                        AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
                                             debugPrint(response)
                                             let json = try! JSON(data: response.data!)
                                             let code = json["code"].int!
@@ -632,7 +632,7 @@ struct UserDetailView: View {
     }
     
     struct ModifyUserRelation: Codable {
-        let fid: Int
+        let fid: Int64
         let act: Int
         var re_src: Int = 11
         let csrf: String
