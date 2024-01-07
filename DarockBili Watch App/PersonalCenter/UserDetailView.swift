@@ -152,7 +152,7 @@ struct UserDetailView: View {
                     debugPrint(signed)
                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
-                            debugPrint(respJson)
+                            //debugPrint(respJson)
                             if !CheckBApiError(from: respJson) { return }
                             userFaceUrl = respJson["data"]["face"].string ?? "E"
 //                            AF.request(respJson["data"]["face"].string ?? "E").response { response in
