@@ -15,6 +15,8 @@ jobs:
       P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: archives
       - name: Setup Debug Session
         uses: csexton/debugger-action@master
         
