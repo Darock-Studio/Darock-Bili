@@ -42,10 +42,10 @@ struct AboutView: View {
                         Text("开源组件许可")
                     })
                 }
-                ／／Section {
-                ／／    NavigationLink(destination: {DebugUITestView()}, label: {
-                ／／        Text("调试")
-                ／／    })
+                //Section {
+                //    NavigationLink(destination: {DebugUITestView()}, label: {
+                //        Text("调试")
+                //    })
                 }
             }
             .bold()
