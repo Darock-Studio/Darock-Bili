@@ -46,7 +46,7 @@ struct AboutView: View {
                 //    NavigationLink(destination: {DebugUITestView()}, label: {
                 //        Text("调试")
                 //    })
-                }
+                //}
             }
             .bold()
         }
