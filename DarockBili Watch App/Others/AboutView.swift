@@ -42,6 +42,11 @@ struct AboutView: View {
                         Text("开源组件许可")
                     })
                 }
+                //Section {
+                //    NavigationLink(destination: {DebugUITestView()}, label: {
+                //        Text("调试")
+                //    })
+                //}
             }
             .bold()
         }
@@ -102,6 +107,16 @@ struct AboutView: View {
             }
         }
     }
+}
+
+struct DebugUITestView: View {
+    var body: some View {
+        List {
+            NavigationLink(destination: {UserDetailView(uid: "3546572635768935")}, label: {
+                Text("LongUIDUserTest")
+            })
+        }
+   }
 }
 
 struct AboutView_Previews: PreviewProvider {
