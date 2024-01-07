@@ -52,7 +52,7 @@ struct UserDetailView: View {
             if #available(watchOS 10, *) {
                 TabView {
                     VStack {
-                        NavigationLink("", isActive: $isSendbMessagePresented, destination: {bMessageSendView(uid: Int(uid)!, username: username)})
+                        NavigationLink("", isActive: $isSendbMessagePresented, destination: {bMessageSendView(uid: Int64(uid)!, username: username)})
                             .frame(width: 0, height: 0)
                         FirstPageBase(uid: uid, userFaceUrl: $userFaceUrl, username: $username, followCount: $followCount, fansCount: $fansCount, coinCount: $coinCount, isFollowed: $isFollowed, isSendbMessagePresented: $isSendbMessagePresented)
                             .toolbar {
@@ -61,7 +61,7 @@ struct UserDetailView: View {
                                         let headers: HTTPHeaders = [
                                             "cookie": "SESSDATA=\(sessdata);"
                                         ]
-                                        AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
+                                        AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
                                             debugPrint(response)
                                             let json = try! JSON(data: response.data!)
                                             let code = json["code"].int!
@@ -152,7 +152,7 @@ struct UserDetailView: View {
                     debugPrint(signed)
                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
-                            debugPrint(respJson)
+                            //debugPrint(respJson)
                             if !CheckBApiError(from: respJson) { return }
                             userFaceUrl = respJson["data"]["face"].string ?? "E"
 //                            AF.request(respJson["data"]["face"].string ?? "E").response { response in
@@ -257,7 +257,7 @@ struct UserDetailView: View {
                             "cookie": "SESSDATA=\(sessdata);",
                             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                         ]
-                        AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
+                        AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
                             debugPrint(response)
                             let json = try! JSON(data: response.data!)
                             let code = json["code"].int!
@@ -274,7 +274,7 @@ struct UserDetailView: View {
                             Text(isFollowed ? "取消关注" : "关注")
                         }
                     })
-                    NavigationLink("", isActive: $isSendbMessagePresented, destination: {bMessageSendView(uid: Int(uid)!, username: username)})
+                    NavigationLink("", isActive: $isSendbMessagePresented, destination: {bMessageSendView(uid: Int64(uid)!, username: username)})
                         .frame(width: 0, height: 0)
                     Button(action: {
                         isSendbMessagePresented = true
@@ -564,16 +564,17 @@ struct UserDetailView: View {
         func RefreshVideos() {
             videos = [[String: String]]()
             let headers: HTTPHeaders = [
-                "accept": "*/*",
-                "accept-encoding": "gzip, deflate, br",
-                "accept-language": "zh-CN,zh;q=0.9",
-                "cookie": "\(sessdata == "" ? "" : "SESSDATA=\(sessdata); ")buvid3=\(globalBuvid3); b_nut=\(Date.now.timeStamp); buvid4=\(globalBuvid4);", 
-                "origin": "https://space.bilibili.com",
-                "referer": "https://space.bilibili.com/\(uid)/video",
-                "User-Agent": "Mozilla/5.0" // Bypass? drdar://gh/SocialSisterYi/bilibili-API-collect/issues/868/1859065874
+                //"accept": "*/*",
+                //"accept-encoding": "gzip, deflate, br",
+                //"accept-language": "zh-CN,zh;q=0.9",
+                //"cookie": "\(sessdata == "" ? "" : "SESSDATA=\(sessdata); ")buvid3=\(globalBuvid3); b_nut=\(Date.now.timeStamp); buvid4=\(globalBuvid4);", 
+                "cookie": "SESSDATA=\(sessdata);"
+                //"origin": "https://space.bilibili.com",
+                //"referer": "https://space.bilibili.com/\(uid)/video",
+                //"User-Agent": "Mozilla/5.0" // Bypass? drdar://gh/SocialSisterYi/bilibili-API-collect/issues/868/1859065874
             ]
             // FIXME: Official Wbi crypto logic for this request seems different from other APIs, some IP can get but some can't. It's hard to fix ~_~
-            biliWbiSign(paramEncoded: "mid=\(uid)&ps=50&tid=0&pn=\(videoNowPage)&keyword=&order=pubdate&platform=web&web_location=1550101&order_avoided=true&dm_img_list=[]&dm_img_str=V2ViR0wgMS4wIChPcGVuR0wgRVMgMi4wIENocm9taXVtKQ&dm_cover_img_str=VjNEIDQuMkJyb2FkY2".base64Encoded()) { signed in
+            biliWbiSign(paramEncoded: "mid=\(uid)&ps=50&pn=\(videoNowPage)".base64Encoded()) { signed in
                 if let signed {
                     debugPrint(signed)
                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/arc/search?\(signed)", headers: headers) { respJson, isSuccess in
@@ -632,7 +633,7 @@ struct UserDetailView: View {
     }
     
     struct ModifyUserRelation: Codable {
-        let fid: Int
+        let fid: Int64
         let act: Int
         var re_src: Int = 11
         let csrf: String

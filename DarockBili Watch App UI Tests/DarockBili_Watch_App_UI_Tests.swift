@@ -37,8 +37,12 @@ final class DarockBili_Watch_App_UI_Tests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         sleep(2)
+        // In Terms Page
         takeScreenshot(of: app, named: "Launch")
+        app.buttons["关闭"].firstMatch.tap()
+        sleep(1)
         // In main tabview first page (suggestions)
+        takeScreenshot(of: app, named: "Suggestions")
         app.buttons["SuggestVideo"].firstMatch.tap()
         sleep(1)
         takeScreenshot(of: app, named: "RMVideo")
@@ -90,7 +94,6 @@ final class DarockBili_Watch_App_UI_Tests: XCTestCase {
         app.swipeUp()
         sleep(1)
         takeScreenshot(of: app, named: "AboutView")
-        
     }
 
     func testLaunchPerformance() throws {
