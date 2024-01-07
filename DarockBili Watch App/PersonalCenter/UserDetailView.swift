@@ -257,7 +257,7 @@ struct UserDetailView: View {
                             "cookie": "SESSDATA=\(sessdata);",
                             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                         ]
-                        AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
+                        AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
                             debugPrint(response)
                             let json = try! JSON(data: response.data!)
                             let code = json["code"].int!
@@ -274,7 +274,7 @@ struct UserDetailView: View {
                             Text(isFollowed ? "取消关注" : "关注")
                         }
                     })
-                    NavigationLink("", isActive: $isSendbMessagePresented, destination: {bMessageSendView(uid: Int(uid)!, username: username)})
+                    NavigationLink("", isActive: $isSendbMessagePresented, destination: {bMessageSendView(uid: Int64(uid)!, username: username)})
                         .frame(width: 0, height: 0)
                     Button(action: {
                         isSendbMessagePresented = true
