@@ -181,11 +181,13 @@ struct UserDynamicMainView: View {
     
     func ContinueLoadDynamic() {
         let headers: HTTPHeaders = [
-            "cookie": "SESSDATA=\(sessdata);"
+            "cookie": "SESSDATA=\(sessdata);",
+            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         ]
         DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/polymer/web-dynamic/v1/feed/all?type=all\({ () -> String in if lastDynamicID != "" { return "&offset=\(lastDynamicID)"; } else { return ""; }; }())&page=\(nextLoadPage)", headers: headers) { respJson, isSuccess in
             if isSuccess {
                 debugPrint(respJson)
+                if !CheckBApiError(from: respJson) { return }
                 let items = respJson["data"]["items"]
                 var itemForCount = 0
                 for item in items {
@@ -199,7 +201,7 @@ struct UserDynamicMainView: View {
                                 var dTmp = [[String: String]]()
                                 for draw in item.1["modules"]["module_dynamic"]["major"]["draw"]["items"] {
                                     isDynamicImagePresented[itemForCount].append(false)
-                                    dTmp.append(["Src": draw.1["src"].string!])
+                                    dTmp.append(["Src": draw.1["src"].string ?? ""])
                                 }
                                 return dTmp
                             } else {
@@ -209,7 +211,7 @@ struct UserDynamicMainView: View {
                         "Archive": { () -> [String: String]? in
                             if BiliDynamicMajorType(rawValue: item.1["modules"]["module_dynamic"]["major"]["type"].string ?? "MAJOR_TYPE_DRAW") == .majorTypeArchive {
                                 let archive = item.1["modules"]["module_dynamic"]["major"]["archive"]
-                                return ["Pic": archive["cover"].string!, "Title": archive["title"].string!, "BV": archive["bvid"].string!, "UP": item.1["modules"]["module_author"]["name"].string!, "View": archive["stat"]["play"].string!, "Danmaku": archive["stat"]["danmaku"].string!]
+                                return ["Pic": archive["cover"].string ?? "", "Title": archive["title"].string ?? "", "BV": archive["bvid"].string ?? "", "UP": item.1["modules"]["module_author"]["name"].string ?? "", "View": archive["stat"]["play"].string ?? "-1", "Danmaku": archive["stat"]["danmaku"].string ?? "-1"]
                             } else {
                                 return nil
                             }
@@ -219,7 +221,7 @@ struct UserDynamicMainView: View {
                                 do {
                                     let liveContentJson = try JSON(data: (item.1["modules"]["module_dynamic"]["major"]["live_rcmd"]["content"].string ?? "").data(using: .utf8) ?? Data())
                                     debugPrint(liveContentJson)
-                                    return ["Cover": liveContentJson["live_play_info"]["cover"].string!, "Title": liveContentJson["live_play_info"]["title"].string!, "ID": String(liveContentJson["live_play_info"]["room_id"].int!), "Type": liveContentJson["live_play_info"]["area_name"].string!, "ViewStr": liveContentJson["live_play_info"]["watched_show"]["text_large"].string!]
+                                    return ["Cover": liveContentJson["live_play_info"]["cover"].string ?? "", "Title": liveContentJson["live_play_info"]["title"].string ?? "", "ID": String(liveContentJson["live_play_info"]["room_id"].int ?? 0), "Type": liveContentJson["live_play_info"]["area_name"].string ?? "", "ViewStr": liveContentJson["live_play_info"]["watched_show"]["text_large"].string ?? "-1"]
                                 } catch {
                                     return nil
                                 }
@@ -227,15 +229,15 @@ struct UserDynamicMainView: View {
                                 return nil
                             }
                         }(),
-                        "SenderPic": item.1["modules"]["module_author"]["face"].string!,
-                        "SenderName": item.1["modules"]["module_author"]["name"].string!,
-                        "SenderID": String(item.1["modules"]["module_author"]["mid"].int!),
-                        "SendTimeStr": item.1["modules"]["module_author"]["pub_time"].string!,
-                        "SharedCount": String(item.1["modules"]["module_stat"]["forward"]["count"].int!),
-                        "LikedCount": String(item.1["modules"]["module_stat"]["like"]["count"].int!),
-                        "IsLiked": item.1["modules"]["module_stat"]["like"]["status"].bool!,
-                        "CommentCount": String(item.1["modules"]["module_stat"]["comment"]["count"].int!),
-                        "DynamicID": item.1["id_str"].string!
+                        "SenderPic": item.1["modules"]["module_author"]["face"].string ?? "",
+                        "SenderName": item.1["modules"]["module_author"]["name"].string ?? "",
+                        "SenderID": String(item.1["modules"]["module_author"]["mid"].int ?? 0),
+                        "SendTimeStr": item.1["modules"]["module_author"]["pub_time"].string ?? "0000/00/00",
+                        "SharedCount": String(item.1["modules"]["module_stat"]["forward"]["count"].int ?? -1),
+                        "LikedCount": String(item.1["modules"]["module_stat"]["like"]["count"].int ?? -1),
+                        "IsLiked": item.1["modules"]["module_stat"]["like"]["status"].bool ?? false,
+                        "CommentCount": String(item.1["modules"]["module_stat"]["comment"]["count"].int ?? -1),
+                        "DynamicID": item.1["id_str"].string ?? ""
                     ])
                     itemForCount += 1
                 }

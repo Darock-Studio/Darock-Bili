@@ -144,7 +144,8 @@ struct UserDetailView: View {
         }
         .onAppear {
             let headers: HTTPHeaders = [
-                "cookie": "SESSDATA=\(sessdata);"
+                "cookie": "SESSDATA=\(sessdata);",
+                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             ]
             biliWbiSign(paramEncoded: "mid=\(uid)".base64Encoded()) { signed in
                 if let signed {
@@ -152,6 +153,7 @@ struct UserDetailView: View {
                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             debugPrint(respJson)
+                            if !CheckBApiError(from: respJson) { return }
                             userFaceUrl = respJson["data"]["face"].string ?? "E"
 //                            AF.request(respJson["data"]["face"].string ?? "E").response { response in
 //                                let data = response.data!
@@ -164,7 +166,7 @@ struct UserDetailView: View {
                             officialTitle = respJson["data"]["official"]["title"].string ?? ""
                             userSign = respJson["data"]["sign"].string ?? "[加载失败]"
                             coinCount = respJson["data"]["coins"].int ?? -1
-                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation/stat?vmid=\(uid)") { respJson, isSuccess in
+                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation/stat?vmid=\(uid)", headers: headers) { respJson, isSuccess in
                                 if isSuccess {
                                     followCount = respJson["data"]["following"].int ?? -1
                                     fansCount = respJson["data"]["follower"].int ?? -1
@@ -174,8 +176,9 @@ struct UserDetailView: View {
                     }
                 }
             }
-            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation?fid=\(uid)") { respJson, isSuccess in
+            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation?fid=\(uid)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
+                    if !CheckBApiError(from: respJson) { return }
                     if respJson["data"]["attribute"].int ?? 0 == 2 || respJson["data"]["attribute"].int ?? 0 == 6 {
                         isFollowed = true
                     }
@@ -251,7 +254,8 @@ struct UserDetailView: View {
                     }
                     Button(action: {
                         let headers: HTTPHeaders = [
-                            "cookie": "SESSDATA=\(sessdata);"
+                            "cookie": "SESSDATA=\(sessdata);",
+                            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                         ]
                         AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
                             debugPrint(response)
@@ -560,20 +564,22 @@ struct UserDetailView: View {
         func RefreshVideos() {
             videos = [[String: String]]()
             let headers: HTTPHeaders = [
-                "accept-language": "en,zh-CN;q=0.9,zh;q=0.8",
-                "cookie": "SESSDATA=\(sessdata);",
-                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
+                "accept": "*/*",
+                "accept-encoding": "gzip, deflate, br",
+                "accept-language": "zh-CN,zh;q=0.9",
+                "cookie": "\(sessdata == "" ? "" : "SESSDATA=\(sessdata); ")buvid3=\(globalBuvid3); b_nut=\(Date.now.timeStamp); buvid4=\(globalBuvid4);", 
+                "origin": "https://space.bilibili.com",
+                "referer": "https://space.bilibili.com/\(uid)/video",
+                "User-Agent": "Mozilla/5.0" // Bypass? drdar://gh/SocialSisterYi/bilibili-API-collect/issues/868/1859065874
             ]
-            biliWbiSign(paramEncoded: "mid=\(uid)&ps=50&pn=\(videoNowPage)".base64Encoded()) { signed in
+            // FIXME: Official Wbi crypto logic for this request seems different from other APIs, some IP can get but some can't. It's hard to fix ~_~
+            biliWbiSign(paramEncoded: "mid=\(uid)&ps=50&tid=0&pn=\(videoNowPage)&keyword=&order=pubdate&platform=web&web_location=1550101&order_avoided=true&dm_img_list=[]&dm_img_str=V2ViR0wgMS4wIChPcGVuR0wgRVMgMi4wIENocm9taXVtKQ&dm_cover_img_str=VjNEIDQuMkJyb2FkY2".base64Encoded()) { signed in
                 if let signed {
                     debugPrint(signed)
                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/arc/search?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             debugPrint(respJson)
-                            if (respJson["code"].int ?? 0) != 0 {
-                                tipWithText("加载失败：\(respJson["message"].string ?? "")", symbol: "xmark.circle.fill")
-                                return
-                            }
+                            if !CheckBApiError(from: respJson) { return } 
                             let vlist = respJson["data"]["list"]["vlist"]
                             for video in vlist {
                                 videos.append(["Title": video.1["title"].string ?? "[加载失败]", "Length": video.1["length"].string ?? "E", "PlayCount": String(video.1["play"].int ?? -1), "PicUrl": video.1["pic"].string ?? "E", "BV": video.1["bvid"].string ?? "E", "Timestamp": String(video.1["created"].int ?? 0), "DanmakuCount": String(video.1["video_review"].int ?? -1)])
@@ -595,8 +601,9 @@ struct UserDetailView: View {
         func RefreshArticles() {
             articles = [[String: String]]()
             let headers: HTTPHeaders = [
-                "cookie": "SESSDATA=\(sessdata);",
-                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
+                "accept-language": "en,zh-CN;q=0.9,zh;q=0.8",
+                "cookie": "SESSDATA=\(sessdata);buvid3=\(globalBuvid3); buvid4=\(globalBuvid4);",
+                "User-Agent": "Mozilla/5.0" // Bypass? drdar://gh/SocialSisterYi/bilibili-API-collect/issues/868/1859065874
             ]
             biliWbiSign(paramEncoded: "mid=\(uid)&ps=30&pn=\(articleNowPage)&sort=publish_time&platform=web".base64Encoded()) { signed in
                 if let signed {
@@ -604,10 +611,7 @@ struct UserDetailView: View {
                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/article?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             debugPrint(respJson)
-                            if (respJson["code"].int ?? 0) != 0 {
-                                tipWithText("加载失败：\(respJson["message"].string ?? "")", symbol: "xmark.circle.fill")
-                                return
-                            }
+                            if !CheckBApiError(from: respJson) { return } 
                             let articlesJson = respJson["data"]["articles"]
                             for article in articlesJson {
                                 articles.append(["Title": article.1["title"].string ?? "[加载失败]", "Summary": article.1["summary"].string ?? "[加载失败]", "Type": article.1["categories"][0]["name"].string ?? "[加载失败]", "View": String(article.1["stats"]["view"].int ?? -1), "Like": String(article.1["stats"]["like"].int ?? -1), "Pic": article.1["image_urls"][0].string ?? "E", "CV": String(article.1["id"].int ?? 0)])

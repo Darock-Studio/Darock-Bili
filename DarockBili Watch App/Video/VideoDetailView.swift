@@ -52,6 +52,7 @@ struct VideoDetailView: View {
     @State var subTitles = [[String: String]]()
     @State var ownerFansCount = 0
     @State var nowPlayingCount = "0"
+    @State var publishTime = ""
     @State var videoDesc = ""
     @State var isVideoPlayerPresented = false
     @State var isMoreMenuPresented = false
@@ -88,7 +89,8 @@ struct VideoDetailView: View {
                                                     .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
                                                     Button(action: {
                                                         let headers: HTTPHeaders = [
-                                                            "cookie": "SESSDATA=\(sessdata)"
+                                                            "cookie": "SESSDATA=\(sessdata)",
+                                                            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                                         ]
                                                         AF.request("https://api.bilibili.com/x/v2/history/toview/add", method: .post, parameters: ["bvid": videoDetails["BV"]!, "csrf": biliJct], headers: headers).response { response in
                                                             do {
@@ -118,9 +120,10 @@ struct VideoDetailView: View {
                                                 
                                                 if videoGetterSource == "official" {
                                                     let headers: HTTPHeaders = [
-                                                        "cookie": "SESSDATA=\(sessdata)"
+                                                        "cookie": "SESSDATA=\(sessdata)",
+                                                        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                                     ]
-                                                    AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
+                                                    AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers).response { response in
                                                         let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
                                                         VideoDetailView.willPlayVideoCID = String(cid)
                                                         AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
@@ -149,9 +152,10 @@ struct VideoDetailView: View {
                                                     debugPrint(videoDetails["BV"]!)
                                                     if videoGetterSource == "official" {
                                                         let headers: HTTPHeaders = [
-                                                            "cookie": "SESSDATA=\(sessdata)"
+                                                            "cookie": "SESSDATA=\(sessdata)",
+                                                            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                                         ]
-                                                        AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
+                                                        AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers).response { response in
                                                             let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
                                                             VideoDetailView.willPlayVideoCID = String(cid)
                                                             AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
@@ -187,7 +191,7 @@ struct VideoDetailView: View {
                                     }
                                     .tag(1)
                             }
-                            DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, honors: $honors, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount)
+                            DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, honors: $honors, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount, publishTime: $publishTime)
                                 .tag(2)
                             if videoPages.count != 1 {
                                 DetailViewVideoPartPageBase(videoDetails: $videoDetails, videoPages: $videoPages, isLoading: $isLoading)
@@ -236,7 +240,7 @@ struct VideoDetailView: View {
                     Group {
                         ScrollView {
                             DetailViewFirstPageBase(videoDetails: $videoDetails, videoPages: $videoPages, honors: $honors, subTitles: $subTitles, isLoading: $isLoading)
-                            DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, honors: $honors, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount)
+                            DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, honors: $honors, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount, publishTime: $publishTime)
                         }
                     }
                     .blur(radius: isLoading ? 14 : 0)
@@ -274,7 +278,8 @@ struct VideoDetailView: View {
         .accentColor(.white)
         .onAppear {
             let headers: HTTPHeaders = [
-                "cookie": "SESSDATA=\(sessdata)"
+                "cookie": "SESSDATA=\(sessdata)",
+                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             ]
             DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/archive/has/like?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
@@ -313,9 +318,17 @@ struct VideoDetailView: View {
                 if isSuccess {
                     debugPrint("----------Prints from VideoDetailView.onAppear.*.requsetJSON(*/view)----------")
                     debugPrint(respJson)
+                    if !CheckBApiError(from: respJson) { return }
                     owner = ["Name": respJson["data"]["owner"]["name"].string ?? "[加载失败]", "Face": respJson["data"]["owner"]["face"].string ?? "E", "ID": String(respJson["data"]["owner"]["mid"].int64 ?? -1)]
                     stat = ["Like": String(respJson["data"]["stat"]["like"].int ?? -1), "Coin": String(respJson["data"]["stat"]["coin"].int ?? -1), "Favorite": String(respJson["data"]["stat"]["favorite"].int ?? -1)]
                     videoDesc = respJson["data"]["desc"].string ?? "[加载失败]".replacingOccurrences(of: "\\n", with: "\n")
+
+                    // Publish time calculation
+                    let df = DateFormatter()
+                    df.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                    let pubTimestamp = respJson["data"]["pubdate"].int ?? 1
+                    publishTime = df.string(from: Date(timeIntervalSince1970: Double(pubTimestamp)))
+                    
                     for _ in 1...4 {
                         honors.append("")
                     }
@@ -333,7 +346,7 @@ struct VideoDetailView: View {
                         }
                     }
                     if let cid = respJson["data"]["pages"][0]["cid"].int {
-                        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/online/total?bvid=\(videoDetails["BV"]!)&cid=\(cid)") { respJson, isSuccess in
+                        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/online/total?bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers) { respJson, isSuccess in
                             if isSuccess {
                                 nowPlayingCount = respJson["data"]["total"].string ?? "[加载失败]"
                             }
@@ -400,40 +413,23 @@ struct VideoDetailView: View {
         var body: some View {
             VStack {
                 Spacer()
-                CachedAsyncImage(url: URL(string: videoDetails["Pic"]! + "@240w_160h")) { phase in
-                    switch phase {
-                    case .empty:
-                        Image("Placeholder")
-                            .fixedSize()
+                WebImage(url: URL(string: videoDetails["Pic"]! + "@240w_160h")!, options: [.progressiveLoad, .scaleDownLargeImages])
+                    .placeholder {
+                        RoundedRectangle(cornerRadius: 14)
                             .frame(width: 120, height: 80)
-                            .redacted(reason: .placeholder)
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .fixedSize()
-                            .frame(width: 120, height: 80)
-                    case .failure(let error):
-                        Image("Placeholder")
-                            .fixedSize()
-                            .frame(width: 120, height: 80)
-                            .redacted(reason: .placeholder)
-                            .onAppear {
-                                debugPrint(error)
-                            }
-                    @unknown default:
-                        Image("Placeholder")
-                            .fixedSize()
-                            .frame(width: 120, height: 80)
+                            .foregroundColor(Color(hex: 0x3D3D3D))
                             .redacted(reason: .placeholder)
                     }
-                }
-                .cornerRadius(5)
-                .shadow(color: .black.opacity(0.5), radius: 5, x: 1, y: 2)
-                .offset(y: 8)
-                .sheet(isPresented: $isCoverImageViewPresented, content: {ImageViewerView(url: videoDetails["Pic"]!)})
-                .onTapGesture {
-                    isCoverImageViewPresented = true
-                }
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 120, height: 80)
+                    .cornerRadius(14)
+                    .shadow(color: .black.opacity(0.5), radius: 5, x: 1, y: 2)
+                    .offset(y: 8)
+                    .sheet(isPresented: $isCoverImageViewPresented, content: {ImageViewerView(url: videoDetails["Pic"]!)})
+                    .onTapGesture {
+                        isCoverImageViewPresented = true
+                    }
                 Spacer()
                     .frame(height: 20)
                 HStack {
@@ -480,9 +476,10 @@ struct VideoDetailView: View {
                         
                         if videoGetterSource == "official" {
                             let headers: HTTPHeaders = [
-                                "cookie": "SESSDATA=\(sessdata)"
+                                "cookie": "SESSDATA=\(sessdata)",
+                                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                             ]
-                            AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
+                            AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers).response { response in
                                 let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
                                 VideoDetailView.willPlayVideoCID = String(cid)
                                 AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
@@ -514,9 +511,10 @@ struct VideoDetailView: View {
                         
                         if videoGetterSource == "official" {
                             let headers: HTTPHeaders = [
-                                "cookie": "SESSDATA=\(sessdata)"
+                                "cookie": "SESSDATA=\(sessdata)",
+                                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                             ]
-                            AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)").response { response in
+                            AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers).response { response in
                                 let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
                                 VideoDetailView.willPlayVideoCID = String(cid)
                                 AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
@@ -554,7 +552,8 @@ struct VideoDetailView: View {
                             .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
                             Button(action: {
                                 let headers: HTTPHeaders = [
-                                    "cookie": "SESSDATA=\(sessdata)"
+                                    "cookie": "SESSDATA=\(sessdata)",
+                                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                 ]
                                 AF.request("https://api.bilibili.com/x/v2/history/toview/add", method: .post, parameters: ["bvid": videoDetails["BV"]!, "csrf": biliJct], headers: headers).response { response in
                                     do {
@@ -594,6 +593,7 @@ struct VideoDetailView: View {
         @Binding var isCoinViewPresented: Bool
         @Binding var ownerFansCount: Int
         @Binding var nowPlayingCount: String
+        @Binding var publishTime: String
         @AppStorage("DedeUserID") var dedeUserID = ""
         @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
         @AppStorage("SESSDATA") var sessdata = ""
@@ -604,9 +604,11 @@ struct VideoDetailView: View {
         @State var danmakuCountOffset: CGFloat = 20
         @State var nowWatchingCountOffset: CGFloat = 20
         @State var totalPlayedCountOffset: CGFloat = 20
+        @State var publishTimeTextOffset: CGFloat = 20
         @State var bvidTextOffset: CGFloat = 20
         @State var descOffset: CGFloat = 20
         @State var tagOffset: CGFloat = 20
+        @State var isFavoriteChoosePresented = false
         var body: some View {
             ScrollView {
                 VStack {
@@ -641,15 +643,16 @@ struct VideoDetailView: View {
                         .onAppear {
                             ownerBlockOffset = 0
                         }
-                        .accessibilityIdentifier("OwnerPage")
+                        .accessibilityIdentifier("AuthorDetailButton")
                     }
                     LazyVStack {
                         HStack {
                             Button(action: {
                                 let headers: HTTPHeaders = [
-                                    "cookie": "SESSDATA=\(sessdata)"
+                                    "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3)",
+                                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                 ]
-                                AF.request("https://api.bilibili.com/x/web-interface/archive/like", method: .post, parameters: BiliVideoLike(bvid: videoDetails["BV"]!, like: isLiked ? 2 : 1, csrf: biliJct), headers: headers).response { response in
+                                AF.request("https://api.bilibili.com/x/web-interface/archive/like", method: .post, parameters: ["bvid": videoDetails["BV"]!, "like": isLiked ? 2 : 1, "eab_x": 2, "ramval": 0, "source": "web_normal", "ga": 1, "csrf": biliJct], headers: headers).response { response in
                                     debugPrint(response)
                                     isLiked ? tipWithText("取消成功", symbol: "checkmark.circle.fill") : tipWithText("点赞成功", symbol: "checkmark.circle.fill")
                                     isLiked.toggle()
@@ -687,16 +690,7 @@ struct VideoDetailView: View {
                             .buttonBorderShape(.roundedRectangle(radius: 18))
                             .sheet(isPresented: $isCoinViewPresented, content: {VideoThrowCoinView(bvid: videoDetails["BV"]!)})
                             Button(action: {
-                                let headers: HTTPHeaders = [
-                                    "cookie": "SESSDATA=\(sessdata)",
-                                    "referer": "bilibili.com/video/\(videoDetails["BV"]!)"
-                                ]
-                                let avid = bv2av(bvid: videoDetails["BV"]!)
-                                AF.request("https://api.bilibili.com/medialist/gateway/coll/resource/deal", method: .post, parameters: BiliVideoFavourite(rid: avid, csrf: biliJct), headers: headers).response { response in
-                                    debugPrint(response)
-                                    isLiked ? tipWithText("取消成功", symbol: "checkmark.circle.fill") : tipWithText("收藏成功", symbol: "checkmark.circle.fill")
-                                    isFavoured.toggle()
-                                }
+                                isFavoriteChoosePresented = true
                             }, label: {
                                 VStack {
                                     Image(systemName: isFavoured ? "star.fill" : "star")
@@ -716,6 +710,7 @@ struct VideoDetailView: View {
                         .onAppear {
                             statLineOffset = 0
                         }
+                        .sheet(isPresented: $isFavoriteChoosePresented, content: {VideoFavoriteAddView(videoDetails: $videoDetails, isFavoured: $isFavoured)})
                         Spacer()
                             .frame(height: 10)
                         VStack {
@@ -752,12 +747,22 @@ struct VideoDetailView: View {
                                 totalPlayedCountOffset = 0
                             }
                             HStack {
+                                Image(systemName: "clock")
+                                Text(publishTime)
+                                Spacer()
+                            }
+                            .offset(y: publishTimeTextOffset)
+                            .animation(.easeOut(duration: 0.85), value: publishTimeTextOffset)
+                            .onAppear {
+                                publishTimeTextOffset = 0
+                            }
+                            HStack {
                                 Image(systemName: "movieclapper")
                                 Text(videoDetails["BV"]!)
                                 Spacer()
                             }
                             .offset(x: -1, y: bvidTextOffset)
-                            .animation(.easeOut(duration: 0.85), value: bvidTextOffset)
+                            .animation(.easeOut(duration: 0.95), value: bvidTextOffset)
                             .onAppear {
                                 bvidTextOffset = 0
                             }
@@ -795,6 +800,95 @@ struct VideoDetailView: View {
                 }
             }
         }
+
+        struct VideoFavoriteAddView: View {
+            @Binding var videoDetails: [String: String]
+            @Binding var isFavoured: Bool
+            @Environment(\.dismiss) var dismiss
+            @AppStorage("DedeUserID") var dedeUserID = ""
+            @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
+            @AppStorage("SESSDATA") var sessdata = ""
+            @AppStorage("bili_jct") var biliJct = ""
+            @State var favoriteFolderList = [[String: String]]()
+            @State var isFavoriteTargetIn = [Bool]()
+            @State var isItemLoading = [Bool]()
+            var body: some View {
+                NavigationStack {
+                    List {
+                        if isItemLoading.count != 0 {
+                            ForEach(0..<favoriteFolderList.count, id: \.self) { i in
+                                Button(action: {
+                                    isItemLoading[i] = true
+                                    let headers: HTTPHeaders = [
+                                        "cookie": "SESSDATA=\(sessdata);",
+                                        "referer": "https://www.bilibili.com/video/\(videoDetails["BV"]!)/",
+                                        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                    ]
+                                    let avid = bv2av(bvid: videoDetails["BV"]!)
+                                    AF.request("https://api.bilibili.com/x/v3/fav/resource/deal", method: .post, parameters: ["rid": avid, "type": 2, "\(isFavoriteTargetIn[i] ? "del" : "add")_media_ids": Int(favoriteFolderList[i]["ID"]!)!, "csrf": biliJct], headers: headers).response { response in
+                                        debugPrint(response)
+                                        if let rpd = response.data {
+                                            if !CheckBApiError(from: try! JSON(data: rpd)) {
+                                                isItemLoading[i] = false
+                                                return
+                                            }
+                                            isFavoriteTargetIn[i].toggle()
+                                            isFavoured = false
+                                            for i in isFavoriteTargetIn {
+                                                if i {
+                                                    isFavoured = true
+                                                    break
+                                                }
+                                            }
+                                        }
+                                        isItemLoading[i] = false
+                                     }
+                                }, label: {
+                                    HStack {
+                                        if !isItemLoading[i] {
+                                            if isFavoriteTargetIn[i] {
+                                                Image(systemName: "checkmark")
+                                                    .foregroundColor(Color.blue)
+                                            }
+                                            Text(favoriteFolderList[i]["Title"]!)
+                                        } else {
+                                            Spacer()
+                                            ProgressView()
+                                            Spacer()
+                                        }
+                                    }
+                                })
+                            }
+                        } else {
+                            HStack {
+                                Spacer()
+                                ProgressView()
+                                Spacer()
+                            }
+                        }
+                    }
+                    .navigationTitle("添加到收藏夹")
+                    .navigationBarTitleDisplayMode(.inline)
+                }
+                .onAppear {
+                    let headers: HTTPHeaders = [
+                        "cookie": "SESSDATA=\(sessdata);",
+                        "User-Agent": "Mozilla/5.0"
+                    ]
+                    let avid = bv2av(bvid: videoDetails["BV"]!)
+                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v3/fav/folder/created/list-all?type=2&rid=\(avid)&up_mid=\(dedeUserID)", headers: headers) { respJson, isSuccess in
+                        if isSuccess {
+                            if !CheckBApiError(from: respJson) { return }
+                            for folder in respJson["data"]["list"] {
+                                favoriteFolderList.append(["ID": String(folder.1["id"].int ?? 0), "Title": folder.1["title"].string ?? "", "Count": String(folder.1["media_count"].int ?? 0)])
+                                isFavoriteTargetIn.append((folder.1["fav_state"].int ?? 0) == 0 ? false : true)
+                                isItemLoading.append(false)
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     struct DetailViewVideoPartPageBase: View {
         @Binding var videoDetails: [String: String]
@@ -815,7 +909,8 @@ struct VideoDetailView: View {
                             
                             if videoGetterSource == "official" {
                                 let headers: HTTPHeaders = [
-                                    "cookie": "SESSDATA=\(sessdata)"
+                                    "cookie": "SESSDATA=\(sessdata)",
+                                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                 ]
                                 let cid = videoPages[i]["CID"]!
                                 VideoDetailView.willPlayVideoCID = cid
@@ -881,7 +976,8 @@ struct VideoThrowCoinView: View {
             }
             Button(action: {
                 let headers: HTTPHeaders = [
-                    "cookie": "SESSDATA=\(sessdata)"
+                    "cookie": "SESSDATA=\(sessdata)",
+                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                 ]
                 AF.request("https://api.bilibili.com/x/web-interface/coin/add", method: .post, parameters: BiliVideoCoin(bvid: bvid, multiply: choseCoin, csrf: biliJct), headers: headers).response { response in
                     debugPrint(response)

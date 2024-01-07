@@ -28,10 +28,15 @@
 - 稍后再看（查看、添加）
 - 动态查看
 
-## 重要信息
-当前仍处于Beta版，可能存在问题，欢迎提交Issue。
-
 ## 安装
 ### TestFlight
 [此处](https://testflight.apple.com/join/TbuBT6ig)
+
+## 贡献
+欢迎提交Issue和Pull Request帮助我们变得更好！
+
+## 版本号
+喵哩喵哩在GitHub和TestFlight(与关于页上相同)上的版本号**不同**，因为如果在TestFlight上递增版本号，App 需要重新接受审核，而递增 Build 版本则不用。
+
+因此，我们在TestFlight上仅仅递增 Build 号，而GitHub上尽可能使用语义化版本，我们更推荐使用GitHub上的版本号来引用喵哩喵哩程序。
 

@@ -46,6 +46,8 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       psha: ${{ steps.getsha.outputs.psha }}
+      repository: ${{ steps.getsha.outputs.repository }}
+      lsha: ${{ steps.getsha.outputs.lsha }}
     env:
       slink: ${{ github.event.issue.pull_request.url }}
     steps:
@@ -54,7 +56,11 @@ jobs:
         run: |
           json_data=$(curl -s "$slink")
           sha=$(echo "$json_data" | jq -r '.head.ref')
+          repo=$(echo "$json_data" | jq -r '.head.repo.full_name')
+          lsha=$(echo "$json_data" | jq -r '.head.sha')
           echo "psha=$sha" >> $GITHUB_OUTPUT
+          echo "repository=$repo" >> $GITHUB_OUTPUT
+          echo "lsha=$lsha" >> $GITHUB_OUTPUT
   call-check-workflow:
     name: Call Check Overflow
     needs: 
@@ -70,7 +76,7 @@ jobs:
         with:
           workflow: status-check.yml
           ref: ${{ needs.get-head-sha.outputs.psha }}
-          inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}"}'
+          inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}", "repository": "${{ needs.get-head-sha.outputs.repository }}", "lsha": "${{ needs.get-head-sha.outputs.lsha }}" }'
   call-unit-test-workflow:
     name: Call Unit Test Overflow
     needs: 
@@ -86,7 +92,7 @@ jobs:
         with:
           workflow: unit-test.yml
           ref: ${{ needs.get-head-sha.outputs.psha }}
-          inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}"}'
+          inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}", "repository": "${{ needs.get-head-sha.outputs.repository }}", "lsha": "${{ needs.get-head-sha.outputs.lsha }}" }'
   call-ui-test-workflow:
     name: Call UI Test Overflow
     needs: 
@@ -102,4 +108,4 @@ jobs:
         with:
           workflow: ui-test.yml
           ref: ${{ needs.get-head-sha.outputs.psha }}
-          inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}"}'
+          inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}", "repository": "${{ needs.get-head-sha.outputs.repository }}", "lsha": "${{ needs.get-head-sha.outputs.lsha }}" }'
