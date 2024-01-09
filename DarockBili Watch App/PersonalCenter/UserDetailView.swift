@@ -567,7 +567,7 @@ struct UserDetailView: View {
             biliWbiSign(paramEncoded: "mid=\(uid)&ps=50&pn=\(videoNowPage)".base64Encoded()) { signed in
                 if let signed {
                     debugPrint(signed)
-                    retryCounter = 0
+                    var retryCounter = 0
                     reqData(signedParam: signed, retryCounter: &retryCounter, retryLimit: 200)
                 }
             }
