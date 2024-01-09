@@ -586,7 +586,15 @@ struct UserDetailView: View {
                 DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/arc/search?\(signed)", headers: headers) { respJson, isSuccess in
                     if isSuccess {
                         //debugPrint(respJson)
-                        if !CheckBApiError(from: respJson) { return } 
+                        if (respJson["code"].int ?? -1) != 0 {
+                            if retryCounter.pointee < retryLimit {
+                                retryCounter.pointee++
+                                reqData(signedParam: signed, retryCounter: retryCounter, retryLimit: retryLimit)
+                            } else {
+                                tipWithText(respJson["message"].string ?? "", symbol: "xmark.circle.fill")
+                            }
+                            return
+                        }
                         let vlist = respJson["data"]["list"]["vlist"]
                         for video in vlist {
                             videos.append(["Title": video.1["title"].string ?? "[加载失败]", "Length": video.1["length"].string ?? "E", "PlayCount": String(video.1["play"].int ?? -1), "PicUrl": video.1["pic"].string ?? "E", "BV": video.1["bvid"].string ?? "E", "Timestamp": String(video.1["created"].int ?? 0), "DanmakuCount": String(video.1["video_review"].int ?? -1)])
@@ -599,13 +607,6 @@ struct UserDetailView: View {
                                 isNoVideo = true
                             }
                             isVideosLoaded = true
-                        }
-                    } else {
-                        if retryCounter.pointee < retryLimit {
-                            retryCounter.pointee++
-                            reqData(signedParam: signed, retryCounter: retryCounter, retryLimit: retryLimit)
-                        } else {
-                            tipWithText("访问失败", symbol: "xmark.circle.fill")
                         }
                     }
                 }
