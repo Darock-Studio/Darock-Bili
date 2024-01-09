@@ -563,37 +563,49 @@ struct UserDetailView: View {
         
         func RefreshVideos() {
             videos = [[String: String]]()
-            let headers: HTTPHeaders = [
-                //"accept": "*/*",
-                //"accept-encoding": "gzip, deflate, br",
-                //"accept-language": "zh-CN,zh;q=0.9",
-                //"cookie": "\(sessdata == "" ? "" : "SESSDATA=\(sessdata); ")buvid3=\(globalBuvid3); b_nut=\(Date.now.timeStamp); buvid4=\(globalBuvid4);", 
-                "cookie": "SESSDATA=\(sessdata);"
-                //"origin": "https://space.bilibili.com",
-                //"referer": "https://space.bilibili.com/\(uid)/video",
-                //"User-Agent": "Mozilla/5.0" // Bypass? drdar://gh/SocialSisterYi/bilibili-API-collect/issues/868/1859065874
-            ]
             // FIXME: Official Wbi crypto logic for this request seems different from other APIs, some IP can get but some can't. It's hard to fix ~_~
             biliWbiSign(paramEncoded: "mid=\(uid)&ps=50&pn=\(videoNowPage)".base64Encoded()) { signed in
                 if let signed {
                     debugPrint(signed)
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/arc/search?\(signed)", headers: headers) { respJson, isSuccess in
-                        if isSuccess {
-                            debugPrint(respJson)
-                            if !CheckBApiError(from: respJson) { return } 
-                            let vlist = respJson["data"]["list"]["vlist"]
-                            for video in vlist {
-                                videos.append(["Title": video.1["title"].string ?? "[加载失败]", "Length": video.1["length"].string ?? "E", "PlayCount": String(video.1["play"].int ?? -1), "PicUrl": video.1["pic"].string ?? "E", "BV": video.1["bvid"].string ?? "E", "Timestamp": String(video.1["created"].int ?? 0), "DanmakuCount": String(video.1["video_review"].int ?? -1)])
+                    retryCounter = 0
+                    reqData(signedParam: signed, retryCounter: &retryCounter, retryLimit: 200)
+                }
+            }
+
+            func reqData(signedParam signed: String, inout retryCounter: Int, retryLimit: Int) {
+                let headers: HTTPHeaders = [
+                    //"accept": "*/*",
+                    //"accept-encoding": "gzip, deflate, br",
+                    //"accept-language": "zh-CN,zh;q=0.9",
+                    //"cookie": "\(sessdata == "" ? "" : "SESSDATA=\(sessdata); ")buvid3=\(globalBuvid3); b_nut=\(Date.now.timeStamp); buvid4=\(globalBuvid4);", 
+                    "cookie": "SESSDATA=\(sessdata);"
+                    //"origin": "https://space.bilibili.com",
+                    //"referer": "https://space.bilibili.com/\(uid)/video",
+                    //"User-Agent": "Mozilla/5.0" // Bypass? drdar://gh/SocialSisterYi/bilibili-API-collect/issues/868/1859065874
+                ]
+                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/arc/search?\(signed)", headers: headers) { respJson, isSuccess in
+                    if isSuccess {
+                        //debugPrint(respJson)
+                        if !CheckBApiError(from: respJson) { return } 
+                        let vlist = respJson["data"]["list"]["vlist"]
+                        for video in vlist {
+                            videos.append(["Title": video.1["title"].string ?? "[加载失败]", "Length": video.1["length"].string ?? "E", "PlayCount": String(video.1["play"].int ?? -1), "PicUrl": video.1["pic"].string ?? "E", "BV": video.1["bvid"].string ?? "E", "Timestamp": String(video.1["created"].int ?? 0), "DanmakuCount": String(video.1["video_review"].int ?? -1)])
+                        }
+                        debugPrint(respJson["data"]["page"]["count"].int ?? 0)
+                        videoTotalPage = Int((respJson["data"]["page"]["count"].int ?? 0) / 50) + 1
+                        videoCount = respJson["data"]["page"]["count"].int ?? 0
+                        if !isVideosLoaded {
+                            if videos.count == 0 {
+                                isNoVideo = true
                             }
-                            debugPrint(respJson["data"]["page"]["count"].int ?? 0)
-                            videoTotalPage = Int((respJson["data"]["page"]["count"].int ?? 0) / 50) + 1
-                            videoCount = respJson["data"]["page"]["count"].int ?? 0
-                            if !isVideosLoaded {
-                                if videos.count == 0 {
-                                    isNoVideo = true
-                                }
-                                isVideosLoaded = true
-                            }
+                            isVideosLoaded = true
+                        }
+                    } else {
+                        if retryCounter < retryLimit {
+                            retryCounter++
+                            reqData(signedParam: signed, retryCounter: &retryCounter, retryLimit: retryLimit)
+                        } else {
+                            tipWithText("访问失败", symbol: "xmark.circle.fill")
                         }
                     }
                 }
