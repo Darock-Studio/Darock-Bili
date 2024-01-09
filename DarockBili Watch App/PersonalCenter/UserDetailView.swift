@@ -572,7 +572,7 @@ struct UserDetailView: View {
                 }
             }
 
-            func reqData(signedParam signed: String, retryCounter: inout Int, retryLimit: Int) {
+            func reqData(signedParam signed: String, retryCounter: UnsafeMutablePointer<Int>, retryLimit: Int) {
                 let headers: HTTPHeaders = [
                     //"accept": "*/*",
                     //"accept-encoding": "gzip, deflate, br",
@@ -601,9 +601,9 @@ struct UserDetailView: View {
                             isVideosLoaded = true
                         }
                     } else {
-                        if retryCounter < retryLimit {
-                            retryCounter++
-                            reqData(signedParam: signed, retryCounter: &retryCounter, retryLimit: retryLimit)
+                        if retryCounter.pointee < retryLimit {
+                            retryCounter.pointee++
+                            reqData(signedParam: signed, retryCounter: retryCounter, retryLimit: retryLimit)
                         } else {
                             tipWithText("访问失败", symbol: "xmark.circle.fill")
                         }
