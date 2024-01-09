@@ -572,7 +572,7 @@ struct UserDetailView: View {
                 }
             }
 
-            func reqData(signedParam signed: String, inout retryCounter: Int, retryLimit: Int) {
+            func reqData(signedParam signed: String, retryCounter: inout Int, retryLimit: Int) {
                 let headers: HTTPHeaders = [
                     //"accept": "*/*",
                     //"accept-encoding": "gzip, deflate, br",
