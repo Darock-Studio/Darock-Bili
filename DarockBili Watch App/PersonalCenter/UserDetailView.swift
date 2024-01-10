@@ -581,7 +581,7 @@ struct UserDetailView: View {
                     "cookie": "SESSDATA=\(sessdata);"
                     //"origin": "https://space.bilibili.com",
                     //"referer": "https://space.bilibili.com/\(uid)/video",
-                    //"User-Agent": "Mozilla/5.0" // Bypass? drdar://gh/SocialSisterYi/bilibili-API-collect/issues/868/1859065874
+                    "User-Agent": "Mozilla/5.0" // Bypass? drdar://gh/SocialSisterYi/bilibili-API-collect/issues/868/1859065874
                 ]
                 DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/arc/search?\(signed)", headers: headers) { respJson, isSuccess in
                     if isSuccess {
