@@ -578,7 +578,7 @@ struct UserDetailView: View {
                     //"accept-encoding": "gzip, deflate, br",
                     //"accept-language": "zh-CN,zh;q=0.9",
                     //"cookie": "\(sessdata == "" ? "" : "SESSDATA=\(sessdata); ")buvid3=\(globalBuvid3); b_nut=\(Date.now.timeStamp); buvid4=\(globalBuvid4);", 
-                    "cookie": "SESSDATA=\(sessdata);"
+                    "cookie": "SESSDATA=\(sessdata);",
                     //"origin": "https://space.bilibili.com",
                     //"referer": "https://space.bilibili.com/\(uid)/video",
                     "User-Agent": "Mozilla/5.0" // Bypass? drdar://gh/SocialSisterYi/bilibili-API-collect/issues/868/1859065874
