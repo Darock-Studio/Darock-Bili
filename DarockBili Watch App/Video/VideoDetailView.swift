@@ -207,7 +207,8 @@ struct VideoDetailView: View {
                             .bold()
                     }
                 }
-                .sheet(isPresented: $isVideoPlayerPresented, content: {VideoPlayerView()})
+                .sheet(isPresented: $isVideoPlayerPresented, content: {VideoPlayerView()
+                    .navigationBarHidden(true)})
                 .containerBackground(for: .navigation) {
                     if !isInLowBatteryMode {
                         ZStack {
@@ -322,7 +323,7 @@ struct VideoDetailView: View {
                     owner = ["Name": respJson["data"]["owner"]["name"].string ?? "[加载失败]", "Face": respJson["data"]["owner"]["face"].string ?? "E", "ID": String(respJson["data"]["owner"]["mid"].int64 ?? -1)]
                     stat = ["Like": String(respJson["data"]["stat"]["like"].int ?? -1), "Coin": String(respJson["data"]["stat"]["coin"].int ?? -1), "Favorite": String(respJson["data"]["stat"]["favorite"].int ?? -1)]
                     videoDesc = respJson["data"]["desc"].string ?? "[加载失败]".replacingOccurrences(of: "\\n", with: "\n")
-
+                    
                     // Publish time calculation
                     let df = DateFormatter()
                     df.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -392,6 +393,9 @@ struct VideoDetailView: View {
             videoDesc = ""
             SDImageCache.shared.clearMemory()
         }
+        .animation(.smooth, value: isLoading)
+        
+        
     }
     
     struct DetailViewFirstPageBase: View {

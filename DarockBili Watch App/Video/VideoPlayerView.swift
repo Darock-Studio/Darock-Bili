@@ -135,6 +135,12 @@ struct VideoPlayerView: View {
                 ScrollView {
                     VStack {
                         HStack {
+                            Text("本旋转功能目前还不完善")
+                                .font(.footnote)
+                            Spacer()
+                        }
+                        .scenePadding(.horizontal)
+                        HStack {
                             Button(action: {
                                 if playerRotate - 90 > 0 {
                                     playerRotate -= 90

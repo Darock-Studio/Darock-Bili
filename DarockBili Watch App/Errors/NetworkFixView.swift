@@ -36,6 +36,9 @@ struct NetworkFixView: View {
     var body: some View {
         NavigationStack {
             List {
+                Section("注意") {
+                    Text("使用本app，您需要将iPhone关机。\n（在iPhone关机后）\n打开Apple Watch的设置，打开并连接Wi-Fi或者蜂窝。")
+                }
                 Section {
                     if !isTroubleshooting {
                         if networkState == 3 && darockAPIState == 3 && bilibiliAPIState == 3 {

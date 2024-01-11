@@ -25,22 +25,30 @@ import SDWebImageSwiftUI
     NavigationLink(destination: {VideoDetailView(videoDetails: videoDetails)}, label: {
         VStack {
             HStack {
-                WebImage(url: URL(string: videoDetails["Pic"]! + "@100w")!, options: [.progressiveLoad, .scaleDownLargeImages])
-                    .placeholder {
-                        RoundedRectangle(cornerRadius: 7)
-                            .frame(width: 50, height: 30)
-                            .foregroundColor(Color(hex: 0x3D3D3D))
-                            .redacted(reason: .placeholder)
-                    }
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 50)
-                    .cornerRadius(7)
+                if let iamge = videoDetails["Pic"],let imageURL = URL(string: iamge + "@100w") {
+                    WebImage(url: imageURL, options: [.progressiveLoad, .scaleDownLargeImages])
+                        .onFailure(perform: { err in
+                            Image(systemName: "photo.fill")
+                        })
+                        .placeholder {
+                            RoundedRectangle(cornerRadius: 7)
+                                .frame(width: 50, height: 30)
+                                .foregroundColor(Color(hex: 0x3D3D3D))
+                                .redacted(reason: .placeholder)
+                        }
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 50)
+                        .cornerRadius(7)
+                } else {
+                    Image(systemName: "photo.badge.arrow.down")
+                }
                 Text(videoDetails["Title"]!)
                     .font(.system(size: 14, weight: .bold))
                     .lineLimit(2)
                 Spacer()
             }
+            .animation(.smooth)
             HStack {
                 Image(systemName: "play.circle")
                 Text(videoDetails["View"]!.shorter())

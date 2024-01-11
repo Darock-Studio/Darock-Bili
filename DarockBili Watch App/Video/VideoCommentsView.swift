@@ -87,6 +87,7 @@ struct VideoCommentsView: View {
                                 HStack {
                                     WebImage(url: URL(string: comments[i]["SenderPic"]! + "@30w"), options: [.progressiveLoad])
                                         .cornerRadius(100)
+                                    
                                     VStack {
                                         NavigationLink("", isActive: $isSenderDetailsPresented[i], destination: {UserDetailView(uid: comments[i]["SenderID"]!)})
                                             .frame(width: 0, height: 0)
@@ -102,6 +103,7 @@ struct VideoCommentsView: View {
                                     }
                                     Spacer()
                                 }
+                               
                                 .onTapGesture {
                                     isSenderDetailsPresented[i] = true
                                 }
