@@ -36,6 +36,9 @@ struct NetworkFixView: View {
     var body: some View {
         NavigationStack {
             List {
+                Section("注意") {
+                    Text("为允许本 App 连接网络，当您的 Apple Watch 在 iPhone 附近时，请在 iPhone 设置中关闭 WiFi 与蓝牙。")
+                }
                 Section {
                     if !isTroubleshooting {
                         if networkState == 3 && darockAPIState == 3 && bilibiliAPIState == 3 {

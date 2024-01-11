@@ -207,7 +207,10 @@ struct VideoDetailView: View {
                             .bold()
                     }
                 }
-                .sheet(isPresented: $isVideoPlayerPresented, content: {VideoPlayerView()})
+                .sheet(isPresented: $isVideoPlayerPresented, content: {
+                    VideoPlayerView()
+                        .navigationBarHidden(true)
+                })
                 .containerBackground(for: .navigation) {
                     if !isInLowBatteryMode {
                         ZStack {
@@ -503,7 +506,10 @@ struct VideoDetailView: View {
                     }, label: {
                         Label("播放", systemImage: "play.fill")
                     })
-                    .sheet(isPresented: $isVideoPlayerPresented, content: {VideoPlayerView()})
+                    .sheet(isPresented: $isVideoPlayerPresented, content: {
+                        VideoPlayerView()
+                            .navigationBarHidden(true)
+                    })
                     NavigationLink("", isActive: $isNowPlayingPresented, destination: {AudioPlayerView(videoDetails: videoDetails, subTitles: subTitles)})
                         .frame(width: 0, height: 0)
                     Button(action: {
@@ -939,7 +945,10 @@ struct VideoDetailView: View {
                     }
                 }
             }
-            .sheet(isPresented: $isVideoPlayerPresented, content: {VideoPlayerView()})
+            .sheet(isPresented: $isVideoPlayerPresented, content: {
+                VideoPlayerView()
+                    .navigationBarHidden(true)
+            })
         }
     }
 }
