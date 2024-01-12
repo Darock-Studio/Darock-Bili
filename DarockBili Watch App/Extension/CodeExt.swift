@@ -274,7 +274,7 @@ enum BuvidFpError: Error {
 struct BuvidFp {
     static func gen(key: String, seed: UInt32) throws -> String {
         let m = try murmur3_x64_128(key: key, seed: seed)
-        return String(format: "%016llx%016llx", m & ((1 << 64) - 1), m >> 64)
+        return String(format: "%016llx%016llx" as NSString, m.low, m.high)
     }
     
     private static func murmur3_x64_128(key: String, seed: UInt32) throws -> UInt128 {
@@ -298,7 +298,9 @@ struct BuvidFp {
             let remaining = key.distance(from: index, to: key.endIndex)
             let read = min(remaining, 16)
             
-            key.copyBytes(to: &buf, from: index..<key.index(index, offsetBy: read))
+            withUnsafeMutableBytes(of: &buf) { buffer in
+                key.copyBytes(to: buffer, from: index..<key.index(index, offsetBy: read))
+            }
             
             processed += read
             if read == 16 {
@@ -319,7 +321,7 @@ struct BuvidFp {
                 h1 = h1 &+ h2
                 h2 = h2 &+ h1
                 
-                let x: UInt128 = (UInt128(h2) &<< 64) | UInt128(h1)
+                let x: UInt128 = UInt128(high: h2, low: h1)
                 return x
             } else {
                 var k1: UInt64 = 0
@@ -393,12 +395,7 @@ struct UInt128 {
     let low: UInt64
     let high: UInt64
     
-    init(_ value: UInt64) {
-        low = value
-        high = 0
-    }
-    
-    init(_ high: UInt64, _ low: UInt64) {
+    init(high: UInt64, low: UInt64) {
         self.high = high
         self.low = low
     }
@@ -407,11 +404,11 @@ struct UInt128 {
         if rhs == 0 {
             return lhs
         } else if rhs < 64 {
-            return UInt128(lhs.high << rhs | lhs.low >> (64 - rhs), lhs.low << rhs)
+            return UInt128(high: lhs.high << rhs | lhs.low >> (64 - rhs), low: lhs.low << rhs)
         } else if rhs < 128 {
-            return UInt128(lhs.low << (rhs - 64), 0)
+            return UInt128(high: lhs.low << (rhs - 64), low: 0)
         } else {
-            return UInt128(0, 0)
+            return UInt128(high: 0, low: 0)
         }
     }
 }
