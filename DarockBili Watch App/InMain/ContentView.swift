@@ -69,18 +69,25 @@ struct TermsListView: View {
     @AppStorage("IsReadTerms") var isReadTerms = false
     var body: some View {
         ScrollView {
-            Text("""
-                 在使用本 App 前，您需要先知晓以下信息：
-                 · 本 App 由第三方开发者以及部分社区用户贡献，与哔哩哔哩无合作关系。
-                 · 本 App 并不是哔哩哔哩的替代品，我们建议您在能够使用官方客户端时尽量使用官方客户端。
-                 · 本 App 均使用来源于网络的公开信息进行开发。
-                 """)
-            Button(action: {
-                isReadTerms = true
-                dismiss()
-            }, label: {
-                Text("我已了解")
-            })
+            VStack {
+                Text("""
+                    在使用本 App 前，您需要先知晓以下信息：
+                    · 本 App 由第三方开发者以及部分社区用户贡献，与哔哩哔哩无合作关系，哔哩哔哩是上海宽娱数码科技有限公司的商标。
+                    · 本 App 并不是哔哩哔哩的替代品，我们建议您在能够使用官方客户端时尽量使用官方客户端。
+                    · 本 App 均使用来源于网络的公开信息进行开发。
+                    · 本 App 中和B站相关的功能完全免费
+                    · 本 App 中所呈现的B站内容来自哔哩哔哩官方。
+                    · 本 App 的开发者、负责人和实际责任人是\(Text("WindowsMEMZ").foregroundColor(Color.accentColor))\n  联系QQ：3245146430
+                    """)
+                Button(action: {
+                    isReadTerms = true
+                    dismiss()
+                }, label: {
+                    Text("我已了解")
+                })
+                .buttonStyle(.borderedProminent)
+            }
+            .scenePadding(.horizontal)
         }
     }
 }
