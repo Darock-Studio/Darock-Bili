@@ -267,6 +267,155 @@ func bv2av(bvid: String) -> UInt64 {
     return (tmp & MASK_CODE) ^ XOR_CODE
 }
 
+enum BuvidFpError: Error {
+    case readError
+}
+
+struct BuvidFp {
+    static func gen(key: String, seed: UInt32) throws -> String {
+        let m = try murmur3_x64_128(key: key, seed: seed)
+        return String(format: "%016llx%016llx", m & ((1 << 64) - 1), m >> 64)
+    }
+    
+    private static func murmur3_x64_128(key: String, seed: UInt32) throws -> UInt128 {
+        let C1: UInt64 = 0x87c3_7b91_1142_53d5
+        let C2: UInt64 = 0x4cf5_ad43_2745_937f
+        let C3: UInt64 = 0x52dc_e729
+        let C4: UInt64 = 0x3849_5ab5
+        let R1: UInt32 = 27
+        let R2: UInt32 = 31
+        let R3: UInt32 = 33
+        let M: UInt64 = 5
+        
+        var h1: UInt64 = UInt64(seed)
+        var h2: UInt64 = UInt64(seed)
+        var processed: Int = 0
+        var index = key.startIndex
+        
+        var buf = [UInt8](repeating: 0, count: 16)
+        
+        while index < key.endIndex {
+            let remaining = key.distance(from: index, to: key.endIndex)
+            let read = min(remaining, 16)
+            
+            key.copyBytes(to: &buf, from: index..<key.index(index, offsetBy: read))
+            
+            processed += read
+            if read == 16 {
+                let k1 = UInt64(bitPattern: Int64(littleEndianBytes: buf[0..<8]))
+                let k2 = UInt64(bitPattern: Int64(littleEndianBytes: buf[8..<16]))
+                
+                h1 ^= k1.multipliedFullWidth(by: C1).high &<< R2
+                h1 = h1 &<< R1 &+ h2 &* M &+ C3
+                h2 ^= k2.multipliedFullWidth(by: C2).high &<< R3
+                h2 = h2 &<< R2 &+ h1 &* M &+ C4
+            } else if read == 0 {
+                h1 ^= UInt64(processed)
+                h2 ^= UInt64(processed)
+                h1 = h1 &+ h2
+                h2 = h2 &+ h1
+                h1 = fmix64(k: h1)
+                h2 = fmix64(k: h2)
+                h1 = h1 &+ h2
+                h2 = h2 &+ h1
+                
+                let x: UInt128 = (UInt128(h2) &<< 64) | UInt128(h1)
+                return x
+            } else {
+                var k1: UInt64 = 0
+                var k2: UInt64 = 0
+                
+                if read >= 15 { k2 ^= UInt64(buf[14]) &<< 48 }
+                if read >= 14 { k2 ^= UInt64(buf[13]) &<< 40 }
+                if read >= 13 { k2 ^= UInt64(buf[12]) &<< 32 }
+                if read >= 12 { k2 ^= UInt64(buf[11]) &<< 24 }
+                if read >= 11 { k2 ^= UInt64(buf[10]) &<< 16 }
+                if read >= 10 { k2 ^= UInt64(buf[9]) &<< 8 }
+                if read >= 9 {
+                    k2 ^= UInt64(buf[8])
+                    k2 = k2.multipliedFullWidth(by: C2).high &<< 33
+                    k2 = k2.multipliedFullWidth(by: C1).high &<< 32
+                    h2 ^= k2
+                }
+                if read >= 8 { k1 ^= UInt64(buf[7]) &<< 56 }
+                if read >= 7 { k1 ^= UInt64(buf[6]) &<< 48 }
+                if read >= 6 { k1 ^= UInt64(buf[5]) &<< 40 }
+                if read >= 5 { k1 ^= UInt64(buf[4]) &<< 32 }
+                if read >= 4 { k1 ^= UInt64(buf[3]) &<< 24 }
+                if read >= 3 { k1 ^= UInt64(buf[2]) &<< 16 }
+                if read >= 2 { k1 ^= UInt64(buf[1]) &<< 8 }
+                if read >= 1 { k1 ^= UInt64(buf[0]) }
+                
+                k1 = k1.multipliedFullWidth(by: C1).high &<< 31
+                k1 = k1.multipliedFullWidth(by: C2).high &<< 32
+                h1 ^= k1
+            }
+            
+            index = key.index(index, offsetBy: read)
+        }
+        
+        throw BuvidFpError.readError
+    }
+    
+    private static func fmix64(k: UInt64) -> UInt64 {
+        let C1: UInt64 = 0xff51_afd7_ed55_8ccd
+        let C2: UInt64 = 0xc4ce_b9fe_1a85_ec53
+        let R: UInt32 = 33
+        var tmp = k
+        tmp ^= tmp &>> R
+        tmp = tmp.multipliedFullWidth(by: C1).high
+        tmp ^= tmp &>> R
+        tmp = tmp.multipliedFullWidth(by: C2).high
+        tmp ^= tmp &>> R
+        return tmp
+    }
+}
+
+extension Int64 {
+    init(littleEndianBytes bytes: ArraySlice<UInt8>) {
+        self = Int64(bitPattern: UInt64(littleEndianBytes: bytes))
+    }
+}
+
+extension UInt64 {
+    init(littleEndianBytes bytes: ArraySlice<UInt8>) {
+        var value: UInt64 = 0
+        withUnsafeMutableBytes(of: &value) { buffer in
+            for (index, byte) in bytes.enumerated() {
+                buffer[index] = byte
+            }
+        }
+        self = UInt64(littleEndian: value)
+    }
+}
+
+struct UInt128 {
+    let low: UInt64
+    let high: UInt64
+    
+    init(_ value: UInt64) {
+        low = value
+        high = 0
+    }
+    
+    init(_ high: UInt64, _ low: UInt64) {
+        self.high = high
+        self.low = low
+    }
+    
+    static func &<< (lhs: UInt128, rhs: UInt64) -> UInt128 {
+        if rhs == 0 {
+            return lhs
+        } else if rhs < 64 {
+            return UInt128(lhs.high << rhs | lhs.low >> (64 - rhs), lhs.low << rhs)
+        } else if rhs < 128 {
+            return UInt128(lhs.low << (rhs - 64), 0)
+        } else {
+            return UInt128(0, 0)
+        }
+    }
+}
+
 postfix operator ++
 postfix operator --
 prefix operator ++
