@@ -1,0 +1,1534 @@
+{
+  "sourceLanguage" : "zh-Hans",
+  "strings" : {
+    "" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    " / %lld" : {
+
+    },
+    "-- And You --" : {
+
+    },
+    "--- Alamofire ---\nLicensed under MIT license\n-----------------\n\n--- Dynamic ---\nLicensed under Apache License 2.0\n---------------\n\n--- EFQRCode ---\nLicensed under MIT license\n----------------\n\n--- libwebp ---\nLicensed under BSD-3-Clause license\n---------------\n\n--- SDWebImage ---\nLicensed under MIT license\n------------------\n\n--- SDWebImagePDFCoder ---\nLicensed under MIT license\n--------------------------\n\n--- SDWebImageSVGCoder ---\nLicensed under MIT license\n--------------------------\n\n--- SDWebImageSwiftUI ---\nLicensed under MIT license\n-------------------------\n\n--- SDWebImageWebPCoder ---\nLicensed under MIT license\n---------------------------\n\n--- SFSymbol ---\nLicensed under MIT license\n----------------\n\n--- swift_qrcodejs ---\nLicensed under MIT license\n----------------------\n\n--- SwiftyJSON ---\nLicensed under MIT license\n------------------" : {
+
+    },
+    "--- Alamofire ---\nLicensed under MIT license\n-----------------\n\n--- EFQRCode ---\nLicensed under MIT license\n----------------\n\n--- libwebp ---\nLicensed under BSD-3-Clause license\n---------------\n\n--- SDWebImage ---\nLicensed under MIT license\n------------------\n\n--- SDWebImagePDFCoder ---\nLicensed under MIT license\n--------------------------\n\n--- SDWebImageSVGCoder ---\nLicensed under MIT license\n--------------------------\n\n--- SDWebImageSwiftUI ---\nLicensed under MIT license\n-------------------------\n\n--- SDWebImageWebPCoder ---\nLicensed under MIT license\n---------------------------\n\n--- swift_qrcodejs ---\nLicensed under MIT license\n----------------------\n\n--- SwiftyJSON ---\nLicensed under MIT license\n------------------" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "--- Alamofire ---\nLicensed under MIT license\n-----------------\n\n--- EFQRCode ---\nLicensed under MIT license\n----------------\n\n--- libwebp ---\nLicensed under BSD-3-Clause license\n---------------\n\n--- SDWebImage ---\nLicensed under MIT license\n------------------\n\n--- SDWebImagePDFCoder ---\nLicensed under MIT license\n--------------------------\n\n--- SDWebImageSVGCoder ---\nLicensed under MIT license\n--------------------------\n\n--- SDWebImageSwiftUI ---\nLicensed under MIT license\n-------------------------\n\n--- SDWebImageWebPCoder ---\nLicensed under MIT license\n---------------------------\n\n--- swift_qrcodejs ---\nLicensed under MIT license\n----------------------\n\n--- SwiftyJSON ---\nLicensed under MIT license\n------------------"
+          }
+        }
+      }
+    },
+    "“喵哩喵哩”" : {
+
+    },
+    "#%lld" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "%@" : {
+
+    },
+    "%@\n%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@\n%2$@"
+          }
+        }
+      }
+    },
+    "%@ · %@" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ · %2$@"
+          }
+        }
+      }
+    },
+    "%@ %@" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@"
+          }
+        }
+      }
+    },
+    "%@ 人在看" : {
+
+    },
+    "%@ 搜索..." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Search..."
+          }
+        }
+      }
+    },
+    "%@ 视频" : {
+
+    },
+    "%@%@%@" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@%2$@%3$@"
+          }
+        }
+      }
+    },
+    "%@MB / %@MB" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@MB / %2$@MB"
+          }
+        }
+      }
+    },
+    "%lld / %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld / %2$lld"
+          }
+        }
+      }
+    },
+    "%lld 专栏" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld Articles"
+          }
+        }
+      }
+    },
+    "%lld 视频" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld Videos"
+          }
+        }
+      }
+    },
+    "%lld%%" : {
+
+    },
+    "%lld分钟" : {
+
+    },
+    "114" : {
+
+    },
+    "114 人在看" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "114 people are watching"
+          }
+        }
+      }
+    },
+    "Apple Watch 目前无法连接到互联网" : {
+
+    },
+    "Bilibili API 无法访问" : {
+
+    },
+    "Bilibili API 问题" : {
+
+    },
+    "Bilibili API：" : {
+
+    },
+    "Bilibili API：不可用" : {
+
+    },
+    "Bilibili API：可用" : {
+
+    },
+    "Bilibili API：正在检查" : {
+
+    },
+    "bilibili UP主认证：%@" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bilibili Uploaders Certification: %@"
+          }
+        }
+      }
+    },
+    "Close Debug Controls" : {
+
+    },
+    "Credits" : {
+
+    },
+    "Credits:" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "Darock API" : {
+
+    },
+    "Darock API 响应无效" : {
+
+    },
+    "Darock API 无法访问" : {
+
+    },
+    "Darock API 服务器目前出现了问题" : {
+
+    },
+    "Darock API 问题" : {
+
+    },
+    "Darock API：不可用" : {
+
+    },
+    "Darock API：可用" : {
+
+    },
+    "Darock API：无效响应" : {
+
+    },
+    "Darock API：正在检查" : {
+
+    },
+    "Darock Studio" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Darock Studio"
+          }
+        }
+      }
+    },
+    "Darock 正在努力开发，将会很快更新" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Darock is working hard and will update soon."
+          }
+        }
+      }
+    },
+    "Debug" : {
+
+    },
+    "Debug Search" : {
+
+    },
+    "Debug Version. DO NOT Release!!" : {
+
+    },
+    "Hello, world!" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "Jst Placeholder" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "Lightning-Lion" : {
+
+    },
+    "Linecom" : {
+
+    },
+    "LongUIDUserTest" : {
+
+    },
+    "Memory Usage: %f MB" : {
+
+    },
+    "name" : {
+
+    },
+    "ReX" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "Show Debug Controls" : {
+
+    },
+    "ThreeManager785" : {
+
+    },
+    "time" : {
+
+    },
+    "UP 主认证" : {
+
+    },
+    "WindowsMEMZ" : {
+
+    },
+    "一切正常" : {
+
+    },
+    "上一页" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previous Page"
+          }
+        }
+      }
+    },
+    "下一页" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next Page"
+          }
+        }
+      }
+    },
+    "下载视频" : {
+
+    },
+    "下面是错误详情：" : {
+
+    },
+    "不使用装扮" : {
+
+    },
+    "不发送" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Don't send"
+          }
+        }
+      }
+    },
+    "不想登录？直接反馈 ->" : {
+
+    },
+    "专栏" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Essays"
+          }
+        }
+      }
+    },
+    "个性装扮" : {
+
+    },
+    "了解！" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Got it!"
+          }
+        }
+      }
+    },
+    "互点两下播放/暂停视频" : {
+
+    },
+    "人机验证已完成" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CAPTCHA finished."
+          }
+        }
+      }
+    },
+    "仍有问题？" : {
+
+    },
+    "以下为错误详情：" : {
+
+    },
+    "以太网" : {
+
+    },
+    "以太网：在线" : {
+
+    },
+    "以太网：正在检查" : {
+
+    },
+    "以太网：离线" : {
+
+    },
+    "以音频播放" : {
+
+    },
+    "似乎在搜索时遇到了一些问题，以下是详细信息" : {
+
+    },
+    "位置：%@" : {
+
+    },
+    "低电量模式" : {
+
+    },
+    "你好，欢迎使用我的app。" : {
+
+    },
+    "使用本app，您需要将iPhone关机。\n（在iPhone关机后）\n打开Apple Watch的设置，打开并连接Wi-Fi或者蜂窝。" : {
+
+    },
+    "使用本app，您需要将iPhone关机。（在iPhone关机后）打开Apple Watch的设置，打开并连接Wi-Fi或者蜂窝" : {
+
+    },
+    "关于" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About"
+          }
+        }
+      }
+    },
+    "关注" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Follow"
+          }
+        }
+      }
+    },
+    "关注列表" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uploaders"
+          }
+        }
+      }
+    },
+    "关闭" : {
+
+    },
+    "关闭 iPhone 的 Wi-Fi 以及蓝牙" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn off Wi-Fi and Bluetooth of iPhone"
+          }
+        }
+      }
+    },
+    "内存占用: %@ MB / 300 MB" : {
+
+    },
+    "再次轻触以在下次更新前禁用此提示" : {
+
+    },
+    "出现问题！" : {
+
+    },
+    "加载失败 轻触重试" : {
+
+    },
+    "加载失败，点击重试" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading failed, tap to retry."
+          }
+        }
+      }
+    },
+    "加载更多" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Load more"
+          }
+        }
+      }
+    },
+    "动态" : {
+
+    },
+    "即将退出..." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Will exit..."
+          }
+        }
+      }
+    },
+    "历史记录" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "History"
+          }
+        }
+      }
+    },
+    "反馈成功！后续可使用反馈 ID：%@ 跟进情况" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feedback successful! In the future, feedback ID: %@ can be used to follow up on the situation"
+          }
+        }
+      }
+    },
+    "反馈类型" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feedback Type"
+          }
+        }
+      }
+    },
+    "反馈问题" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feedback Issues"
+          }
+        }
+      }
+    },
+    "发生错误前..." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Before the error..."
+          }
+        }
+      }
+    },
+    "发生问题前...(选填)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Before the error...(Optional)"
+          }
+        }
+      }
+    },
+    "发送" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send"
+          }
+        }
+      }
+    },
+    "发送的信息中不含任何您的个人信息" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The message sent does not contain any personal information about you"
+          }
+        }
+      }
+    },
+    "发送的反馈中不含任何您的个人信息" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The feedback sent does not contain any personal information about you"
+          }
+        }
+      }
+    },
+    "发送评论" : {
+
+    },
+    "发送评论..." : {
+
+    },
+    "发送验证码" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send verification code"
+          }
+        }
+      }
+    },
+    "取消" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
+    },
+    "取消关注" : {
+
+    },
+    "可在 TestFlight 中反馈，感谢您的支持！" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can report in TestFlight, thanks for your supporting."
+          }
+        }
+      }
+    },
+    "呜啊！" : {
+
+    },
+    "喵哩喵哩 v%@ Build %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meowbili v %1$@ Build %2$@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "喵哩喵哩 v%1$@ Build %2$@"
+          }
+        }
+      }
+    },
+    "喵哩喵哩可能会被系统终止" : {
+
+    },
+    "喵哩喵哩在上次运行时出现了一些问题" : {
+
+    },
+    "喵哩喵哩新版本(v%@ Build %@)已发布！现可更新" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "喵哩喵哩新版本(v%1$@ Build %2$@)已发布！现可更新"
+          }
+        }
+      }
+    },
+    "国际冠字码" : {
+
+    },
+    "在使用本 App 前，您需要先知晓以下信息：\n· 本 App 由第三方开发者以及部分社区用户贡献，与哔哩哔哩无合作关系。\n· 本 App 并不是哔哩哔哩的替代品，我们建议您在能够使用官方客户端时尽量使用官方客户端。\n· 本 App 均使用来源于网络的公开信息进行开发。" : {
+
+    },
+    "在右上角显示占用（仅本次启动）" : {
+
+    },
+    "在手机上继续" : {
+
+    },
+    "在视频播放器使用互点两下手势(Apple Watch Series 9 及以上)或快速操作(其他机型)暂停或播放视频" : {
+
+    },
+    "基本操作：" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Basics:"
+          }
+        }
+      }
+    },
+    "官方" : {
+
+    },
+    "密码" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password"
+          }
+        }
+      }
+    },
+    "密码提示：纯数字" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password prompt: numbers only"
+          }
+        }
+      }
+    },
+    "将上方信息发送到 Darock 可以帮助我们改进喵哩喵哩" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sending the above information to Darock can help us improve Meowbili"
+          }
+        }
+      }
+    },
+    "屏幕使用时间" : {
+
+    },
+    "已发送" : {
+
+    },
+    "已扫描" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scanned"
+          }
+        }
+      }
+    },
+    "建议" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suggestion"
+          }
+        }
+      }
+    },
+    "开始使用" : {
+
+    },
+    "开始播放时" : {
+
+    },
+    "开源组件许可" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open-source resources permission"
+          }
+        }
+      }
+    },
+    "当前内存占用大于 240 MB\n内存占用超过 300 MB 后会被系统终止" : {
+
+    },
+    "当前占用内存过高" : {
+
+    },
+    "很快到来" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Coming Soon"
+          }
+        }
+      }
+    },
+    "您可以将此信息发送至 Darock 以帮助我们改进喵哩喵哩" : {
+
+    },
+    "感谢您的支持！" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thank you for your support!"
+          }
+        }
+      }
+    },
+    "我已了解" : {
+
+    },
+    "我应当怎么做？" : {
+
+    },
+    "我的" : {
+
+    },
+    "我的好友" : {
+
+    },
+    "我的收藏" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My favorites:"
+          }
+        }
+      }
+    },
+    "我知道了！" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Got It!"
+          }
+        }
+      }
+    },
+    "手势" : {
+
+    },
+    "手机号" : {
+
+    },
+    "扫码登录" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scan to Login"
+          }
+        }
+      }
+    },
+    "找到了以下问题：" : {
+
+    },
+    "投币" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Give Coin"
+          }
+        }
+      }
+    },
+    "推荐" : {
+
+    },
+    "提交反馈" : {
+
+    },
+    "搜索" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search"
+          }
+        }
+      }
+    },
+    "搜索..." : {
+
+    },
+    "播放" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Play"
+          }
+        }
+      }
+    },
+    "播放设置" : {
+
+    },
+    "无反馈" : {
+
+    },
+    "无法连接到网络" : {
+
+    },
+    "日均" : {
+
+    },
+    "时间：%@" : {
+
+    },
+    "暗礁反馈" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Darock Feedback"
+          }
+        }
+      }
+    },
+    "更多" : {
+
+    },
+    "本app是非官方的B站客户端，哔哩哔哩是上海宽娱数码科技有限公司的商标。本app强烈建议您登录账号，以便B站官方可以正常收获网络流量，并且鼓励您尽可能使用官方app。本app中和B站相关的功能完全免费，请您再次确认本app与B站官方没有任何合作关系，认可并且尊重本app中所呈现的B站内容来自哔哩哔哩官方。" : {
+
+    },
+    "本app的名字叫%@" : {
+
+    },
+    "本app的开发者、负责人和实际责任人是%@\n联系QQ：3245146430" : {
+
+    },
+    "本旋转功能目前还不完善" : {
+
+    },
+    "来自 %@ 的消息：欢迎加群 248036605 获取最新消息谢谢喵！" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Message from %@: Join QQ group 238036605 for the lastest news."
+          }
+        }
+      }
+    },
+    "来自ReX的消息：界面与交互设计来自 腕上生花 - ReX Design（wear.rexwe.net）" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Message from ReX: The interface and Interaction design come from ReX Design (wear.rexwe.net)"
+          }
+        }
+      }
+    },
+    "查看专栏" : {
+
+    },
+    "查看视频" : {
+
+    },
+    "标题" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Title"
+          }
+        }
+      }
+    },
+    "案例编号为 %@ 后续可通过此编号跟进状态" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feedback ID: %@"
+          }
+        }
+      }
+    },
+    "检查网络或稍后重试" : {
+
+    },
+    "欢迎使用腕上哔哩！" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome to Meowbili"
+          }
+        }
+      }
+    },
+    "正在下载..." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Downloading…"
+          }
+        }
+      }
+    },
+    "正在发送..." : {
+
+    },
+    "正在检查..." : {
+
+    },
+    "正在解压..." : {
+
+    },
+    "正在解析..." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Decoding…"
+          }
+        }
+      }
+    },
+    "正在预加载..." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preloading…"
+          }
+        }
+      }
+    },
+    "此错误无需或无法发送至 Darock" : {
+
+    },
+    "注册" : {
+
+    },
+    "注册 Darock 通行证" : {
+
+    },
+    "注意" : {
+
+    },
+    "注意！" : {
+
+    },
+    "添加到收藏夹" : {
+
+    },
+    "添加到稍后再看" : {
+
+    },
+    "添加装扮" : {
+
+    },
+    "点击登录" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap to Login"
+          }
+        }
+      }
+    },
+    "热门" : {
+
+    },
+    "电池" : {
+
+    },
+    "登录" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login"
+          }
+        }
+      }
+    },
+    "登录 Darock 通行证" : {
+
+    },
+    "目前无法连接到 Bilibili 服务器，可能是您的网络出现问题。在少部分情况下，Bilibili 服务器可能已宕机" : {
+
+    },
+    "目标页" : {
+
+    },
+    "确定" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm"
+          }
+        }
+      }
+    },
+    "确定吗？" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure?"
+          }
+        }
+      }
+    },
+    "确认 Apple Watch 已连接到互联网" : {
+
+    },
+    "确认密码" : {
+
+    },
+    "确认已在手机端同意网络权限" : {
+
+    },
+    "视频" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video"
+          }
+        }
+      }
+    },
+    "离线缓存" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Downloads"
+          }
+        }
+      }
+    },
+    "私信" : {
+
+    },
+    "稍后再看" : {
+
+    },
+    "第三方" : {
+
+    },
+    "简单地描述问题" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Simply describe the problem"
+          }
+        }
+      }
+    },
+    "粉丝" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fans"
+          }
+        }
+      }
+    },
+    "继续加载" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue loading"
+          }
+        }
+      }
+    },
+    "编译时间: %@" : {
+
+    },
+    "网络检查" : {
+
+    },
+    "网络环境：" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Internet Connection:"
+          }
+        }
+      }
+    },
+    "网络问题" : {
+
+    },
+    "联系 Darock 或等待修复" : {
+
+    },
+    "腕上哔哩 v%@ Build %@" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Darock Bill v%1$@ Build %2$@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "腕上哔哩 v%1$@ Build %2$@"
+          }
+        }
+      }
+    },
+    "腕上哔哩切换页面主要靠点击和滑动，当您发现屏幕下方有小点时可尝试左右滑动切换页面" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Darock Bill navigate by tapping and swiping, you can swipe to change views if you see spots at the button of the scr"
+          }
+        }
+      }
+    },
+    "腕上哔哩现在还处于测试阶段，遇到问题可以使用暗礁反馈（将在晚些时候上线）帮助我们改进" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Darock Bill is still in Beta, if you ran into a problem you can report in Darock Feedback (coming later) to help us improve."
+          }
+        }
+      }
+    },
+    "自动旋转（仅竖向）" : {
+
+    },
+    "自动显示网络检查" : {
+
+    },
+    "范围：%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Range: %@"
+          }
+        }
+      }
+    },
+    "获取验证码" : {
+
+    },
+    "解析失败或无法播放视频时可尝试更换" : {
+
+    },
+    "解析源" : {
+
+    },
+    "记录历史记录" : {
+
+    },
+    "设置" : {
+
+    },
+    "该用户无专栏" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This user has no articles"
+          }
+        }
+      }
+    },
+    "该用户无视频" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This user has no videos"
+          }
+        }
+      }
+    },
+    "详细信息：%@" : {
+
+    },
+    "请确定 Watch 的状态栏（控制中心上方）显示为%@而不是%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please check Watch’s Status Bar (at the top of the Control Center) had shown %@ instead of %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "请确定 Watch 的状态栏（控制中心上方）显示为%1$@而不是%2$@"
+          }
+        }
+      }
+    },
+    "账号" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account"
+          }
+        }
+      }
+    },
+    "跳转" : {
+
+    },
+    "跳转到..." : {
+
+    },
+    "轻点问题以查看详细信息" : {
+
+    },
+    "返回" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Back"
+          }
+        }
+      }
+    },
+    "还没有装扮呢，去添加一个吧！" : {
+
+    },
+    "这代表什么？" : {
+
+    },
+    "这里有一些值得注意的地方：" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tips:"
+          }
+        }
+      }
+    },
+    "进入详情页时" : {
+
+    },
+    "进行人机验证" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CAPTCHA"
+          }
+        }
+      }
+    },
+    "连接状态" : {
+
+    },
+    "退出登录" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Log out"
+          }
+        }
+      }
+    },
+    "退出程序" : {
+
+    },
+    "通用" : {
+
+    },
+    "遇到问题？下载%@（暂未上线），附带上方文本进行反馈" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ran into a problem? Report your problem with the text above via %@ (coming soon)"
+          }
+        }
+      }
+    },
+    "遇到问题？在设置页面点击“反馈问题”进行反馈，感谢您的支持！" : {
+
+    },
+    "邮箱" : {
+
+    },
+    "重新检查" : {
+
+    },
+    "错误/异常行为" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error"
+          }
+        }
+      }
+    },
+    "错误与网络有关，您应当先点此尝试 网络疑难解答" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The error is about network. You should click here to fix your network."
+          }
+        }
+      }
+    },
+    "问题反馈：" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Report bugs:"
+          }
+        }
+      }
+    },
+    "需要登录" : {
+
+    },
+    "非常抱歉，喵哩喵哩在 %@ 时出现了问题。%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There was a problem with Meowbili at %1$@ %2$@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "非常抱歉，喵哩喵哩在 %1$@ 时出现了问题。%2$@"
+          }
+        }
+      }
+    },
+    "验证码" : {
+
+    }
+  },
+  "version" : "1.0"
+}

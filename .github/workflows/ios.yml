@@ -1,0 +1,304 @@
+name: Meowbili iDevice Workflow
+
+on:
+  push:
+    branches: [ "main" ]
+    paths-ignore:
+      - '.github/workflows/*'
+      - '!.github/workflows/ios.yml'
+
+jobs:
+  build:
+    name: Build and Archive App
+    runs-on: macos-13
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      repository-projects: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Set Xcode Version
+        run: sudo xcode-select -s /Applications/Xcode_15.0.app
+
+      - name: Prepare Version Folder
+        run: mkdir vers
+
+      - name: Checkout Version Files
+        uses: actions/checkout@v3
+        with:
+          ref: release-vers
+          persist-credentials: false
+          fetch-depth: 0
+          path: vers
+
+      - name: Change Project Version
+        run: |
+          read MVER < vers/ver.txt
+          MVER=$[MVER+1]
+          rm vers/ver.txt
+          echo $MVER >> vers/ver.txt
+          agvtool new-version -all $MVER
+          
+      - name: Commit Files
+        working-directory: vers
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -a -m "Updated versions"
+          
+      - name: Push Changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: release-vers
+          directory: vers
+
+      - name: Install the Apple certificate and provisioning profile for Xcode
+        env:
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+        run: |
+          # create variables
+          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+          PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+          # import certificate and provisioning profile from secrets
+          echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
+          echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode -o $PP_PATH
+          # create temporary keychain
+          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          # import certificate to keychain
+          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security list-keychain -d user -s $KEYCHAIN_PATH
+          # apply provisioning profile
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+
+      - name: Set Environment Varibles
+        run: |
+          CI=TRUE
+          CI_ARCHIVE_PATH=/Volumes/workspace/build.xcarchive
+          CI_BUNDLE_ID=com.darock.DarockBili
+          CI_PRODUCT=DarockBili
+          CI_PRODUCT_PLATFORM=iOS
+          CI_XCODEBUILD_ACTION=archive
+          CI_XCODE_PROJECT=DarockBili.xcodeproj
+          CI_XCODE_SCHEME=DarockBili
+          TMPDIR=$RUNNER_TEMP
+
+      - name: Restore Caches
+        uses: actions/cache/restore@v3
+        with:
+          key: ${{ runner.os }}-main-archive-cache-
+          path: ~/Library/Developer/Xcode/DerivedData
+
+      - name: Resolve Package Dependencies
+        run: xcodebuild -resolvePackageDependencies -project ./DarockBili.xcodeproj -scheme DarockBili
+
+      - name: Get Current Time
+        id: current-time
+        run: echo "time=$(date +"%Y%m%d%H%M%S")" >> $GITHUB_OUTPUT
+
+      - name: Save Caches
+        uses: actions/cache/save@v3
+        with:
+          key: ${{ runner.os }}-main-archive-cache-${{ steps.current-time.outputs.time }}
+          path: ~/Library/Developer/Xcode/DerivedData
+          
+      - name: Archive DarockBili App
+        env:
+          ASCAPI_KEY_ID: ${{ secrets.ASCAPI_KEY_ID }}
+          ASCAPI_ISSUER_ID: ${{ secrets.ASCAPI_ISSUER_ID }}
+        run: |
+          xcodebuild archive -project ./DarockBili.xcodeproj -scheme DarockBili -destination generic/platform=iOS -archivePath ./build.xcarchive -IDEPostProgressNotifications=YES CODE_SIGN_IDENTITY=- AD_HOC_CODE_SIGNING_ALLOWED=YES CODE_SIGN_STYLE=Automatic DEVELOPMENT_TEAM=B57D8PP775 COMPILER_INDEX_STORE_ENABLE=NO
+          
+      - name: Upload Xcode Archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: Xcode Archive
+          path: ./build.xcarchive
+  
+  test:
+    runs-on: macos-13
+    name: Test App
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set Xcode Version
+        run: sudo xcode-select -s /Applications/Xcode_15.0.app
+
+      - name: Resolve Swift dependencies
+        run: xcodebuild -resolvePackageDependencies -scheme 'DarockBili Watch App' -configuration Release
+
+      - name: Prepare Cache Folder
+        run: mkdir Caches
+      
+      - name: Build and Test
+        run: xcodebuild test -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -configuration Release -destination 'platform=watchOS Simulator,name=Apple Watch Series 7 (41mm),OS=10.0' -testPlan WatchAppUITestPlan -testProductsPath ./Caches/TestProducts.xctestproducts -derivedDataPath ./Caches/DerivedData | tee TestBuilding.log
+
+      - name: Upload Building Log
+        uses: actions/upload-artifact@v3
+        with:
+          name: Watch Testing Log
+          path: ./TestBuilding.log
+
+      - name: Upload Test Attachments
+        uses: actions/upload-artifact@v3
+        with:
+          name: Test Attachments
+          path: ./Caches/DerivedData/Logs/Test
+
+  process_test_result:
+    runs-on: macos-13
+    name: Process Test Result
+    needs:
+      - test
+    steps:
+      - name: Set Xcode Version
+        run: sudo xcode-select -s /Applications/Xcode_15.0.app
+
+      - name: Prepare Environment
+        run: |
+          brew install chargepoint/xcparse/xcparse
+
+      - name: Download Test Attachments
+        uses: actions/download-artifact@v3
+        with:
+          name: Test Attachments
+          path: ./
+
+      - name: Process
+        run: |
+          mv ./Test-*.xcresult ./Test-1.xcresult
+          mkdir ExportFiles
+          xcparse -s ./Test-1.xcresult ./ExportFiles
+          
+      - name: Upload Parsed Test Attachments
+        uses: actions/upload-artifact@v3
+        with:
+          name: Parsed Test Attachments
+          path: ./ExportFiles
+
+  export:
+    name: Export App Store IPA
+    runs-on: macos-13
+    needs:
+      - build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Set Xcode Version
+        run: sudo xcode-select -s /Applications/Xcode_15.0.app
+
+      - name: Download App XCArchive
+        uses: actions/download-artifact@v3
+        with:
+          name: Xcode Archive
+          path: ./DarockBili_Release.xcarchive
+
+      - name: Install the Apple certificate and provisioning profile for Xcode
+        env:
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+        run: |
+          # create variables
+          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+          PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+          # import certificate and provisioning profile from secrets
+          echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
+          echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode -o $PP_PATH
+          # create temporary keychain
+          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          # import certificate to keychain
+          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security list-keychain -d user -s $KEYCHAIN_PATH
+          # apply provisioning profile
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+
+      - name: Set Environment Varibles
+        run: |
+          CI=TRUE
+          CI_ARCHIVE_PATH=/Volumes/workspace/build.xcarchive
+          CI_BUNDLE_ID=com.darock.DarockBili
+          CI_PRODUCT=DarockBili
+          CI_PRODUCT_PLATFORM=iOS
+          CI_XCODEBUILD_ACTION=archive
+          CI_XCODE_PROJECT=DarockBili.xcodeproj
+          CI_XCODE_SCHEME=DarockBili
+          TMPDIR=$RUNNER_TEMP
+
+      - name: Export IPA File
+        run: |
+          xcodebuild -exportArchive -archivePath ./DarockBili_Release.xcarchive -exportPath ./ -exportOptionsPlist ./ExportOptions/app-store.plist -DVTProvisioningIsManaged=YES -DVTSkipCertificateValidityCheck=YES
+          mv DarockBili.ipa DarockBili_Release.ipa
+          
+      - name: Upload IPA File
+        uses: actions/upload-artifact@v3
+        with:
+          name: Release IPA
+          path: ./DarockBili_Release.ipa
+
+  export_unsigned:
+    name: Export Unsigned IPA
+    runs-on: macos-13
+    needs:
+      - build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Download App XCArchive
+        uses: actions/download-artifact@v3
+        with:
+          name: Xcode Archive
+          path: ./DarockBili_Release.xcarchive
+
+      - name: Export IPA File
+        run: |
+          mkdir Payload
+          cp -r DarockBili_Release.xcarchive/Products/Applications/DarockBili.app Payload
+          zip -q -r DarockBili_Unsigned.ipa Payload
+          
+      - name: Upload IPA File
+        uses: actions/upload-artifact@v3
+        with:
+          name: Unsigned IPA
+          path: ./DarockBili_Unsigned.ipa
+
+#  deploy:
+#    name: Deploy to TestFlight
+#    runs-on: macos-13
+#    needs:
+#      - export
+#      - test
+#    env:
+#      ASCAPI_ISSUER_ID: ${{ secrets.ASCAPI_ISSUER_ID }}
+#      ASCAPI_KEY_ID: ${{ secrets.ASCAPI_KEY_ID }}
+#      ASCAPI_KEY: ${{ secrets.ASCAPI_KEY }}
+#    steps:
+#      - name: Download App Archive
+#        uses: actions/download-artifact@v3
+#        with:
+#          name: Release IPA
+#
+#      - name: Prepare API Key
+#        run: |
+#          mkdir ~/.private_keys
+#          echo "$ASCAPI_KEY" >> ~/.private_keys/AuthKey_${ASCAPI_KEY_ID}.p8
+#      - name: Upload to App Store Connect
+#        run: xcrun altool --upload-app -f ./DarockBili_Release.ipa -t ios --apiKey $ASCAPI_KEY_ID --apiIssuer $ASCAPI_ISSUER_ID
+        

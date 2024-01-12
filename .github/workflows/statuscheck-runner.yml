@@ -1,0 +1,111 @@
+name: Status Check Runner
+
+on:
+  issue_comment:
+    types:
+      - created
+
+jobs:
+  checkif:
+    runs-on: ubuntu-latest
+    name: Check Comment Content
+    outputs:
+      shouldc: ${{ steps.checkc.outputs.shouldc }}
+      shouldtun: ${{ steps.checkc.outputs.shouldtun }}
+      shouldtui: ${{ steps.checkc.outputs.shouldtui }}
+      shouldta: ${{ steps.checkc.outputs.shouldta }}
+    steps:
+      - name: Check
+        id: checkc
+        run: |
+          if [[ "${{ github.event.comment.body }}" != *"!Run check"* ]]; then
+            echo "The comment content does not contain the specified text. Cancelling workflow."
+            echo "::set-output name=shouldc::false"
+          else
+            echo "The comment content contains the specified text. Continuing with further actions."
+            echo "::set-output name=shouldc::true"
+          fi
+          if [[ "${{ github.event.comment.body }}" != *"!Run unit test"* ]]; then
+            echo "::set-output name=shouldtun::false"
+          else
+            echo "::set-output name=shouldtun::true"
+          fi
+          if [[ "${{ github.event.comment.body }}" != *"!Run UI test"* ]]; then
+            echo "::set-output name=shouldtui::false"
+          else
+            echo "::set-output name=shouldtui::true"
+          fi
+          if [[ "${{ github.event.comment.body }}" != *"!Run test"* ]]; then
+            echo "::set-output name=shouldta::false"
+          else
+            echo "::set-output name=shouldta::true"
+          fi
+  get-head-sha:
+    name: Get Pull Request Head SHA
+    needs: checkif
+    runs-on: ubuntu-latest
+    outputs:
+      psha: ${{ steps.getsha.outputs.psha }}
+      repository: ${{ steps.getsha.outputs.repository }}
+      lsha: ${{ steps.getsha.outputs.lsha }}
+    env:
+      slink: ${{ github.event.issue.pull_request.url }}
+    steps:
+      - name: Get SHA
+        id: getsha
+        run: |
+          json_data=$(curl -s "$slink")
+          sha=$(echo "$json_data" | jq -r '.head.ref')
+          repo=$(echo "$json_data" | jq -r '.head.repo.full_name')
+          lsha=$(echo "$json_data" | jq -r '.head.sha')
+          echo "psha=$sha" >> $GITHUB_OUTPUT
+          echo "repository=$repo" >> $GITHUB_OUTPUT
+          echo "lsha=$lsha" >> $GITHUB_OUTPUT
+  call-check-workflow:
+    name: Call Check Overflow
+    needs: 
+      - get-head-sha
+      - checkif
+    if: ${{ needs.checkif.outputs.shouldc == 'true' }}
+    permissions:
+      actions: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call
+        uses: benc-uk/workflow-dispatch@v1.2.2
+        with:
+          workflow: status-check.yml
+          ref: ${{ needs.get-head-sha.outputs.psha }}
+          inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}", "repository": "${{ needs.get-head-sha.outputs.repository }}", "lsha": "${{ needs.get-head-sha.outputs.lsha }}" }'
+  call-unit-test-workflow:
+    name: Call Unit Test Overflow
+    needs: 
+      - get-head-sha
+      - checkif
+    if: ${{ needs.checkif.outputs.shouldtun == 'true' }}
+    permissions:
+      actions: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call
+        uses: benc-uk/workflow-dispatch@v1.2.2
+        with:
+          workflow: unit-test.yml
+          ref: ${{ needs.get-head-sha.outputs.psha }}
+          inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}", "repository": "${{ needs.get-head-sha.outputs.repository }}", "lsha": "${{ needs.get-head-sha.outputs.lsha }}" }'
+  call-ui-test-workflow:
+    name: Call UI Test Overflow
+    needs: 
+      - get-head-sha
+      - checkif
+    if: ${{ needs.checkif.outputs.shouldtui == 'true' }}
+    permissions:
+      actions: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call
+        uses: benc-uk/workflow-dispatch@v1.2.2
+        with:
+          workflow: ui-test.yml
+          ref: ${{ needs.get-head-sha.outputs.psha }}
+          inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}", "repository": "${{ needs.get-head-sha.outputs.repository }}", "lsha": "${{ needs.get-head-sha.outputs.lsha }}" }'
