@@ -227,18 +227,20 @@ struct PersonAccountView: View {
                                 "cookie": "SESSDATA=\(sessdata);",
                                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                             ]
-                            biliWbiSign(paramEncoded: "mid=\(dedeUserID)".base64Encoded()) { signed in
-                                if let signed {
-                                    debugPrint(signed)
-                                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
-                                        if isSuccess {
-                                            debugPrint(respJson)
-                                            if !CheckBApiError(from: respJson) { return }
-                                            username = respJson["data"]["name"].string ?? ""
-                                            userSign = respJson["data"]["sign"].string ?? ""
-                                            userFaceUrl = respJson["data"]["face"].string ?? "E"
-                                        } else {
-                                            isNetworkFixPresented = true
+                            if username == "" {
+                                biliWbiSign(paramEncoded: "mid=\(dedeUserID)".base64Encoded()) { signed in
+                                    if let signed {
+                                        debugPrint(signed)
+                                        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
+                                            if isSuccess {
+                                                debugPrint(respJson)
+                                                if !CheckBApiError(from: respJson) { return }
+                                                username = respJson["data"]["name"].string ?? ""
+                                                userSign = respJson["data"]["sign"].string ?? ""
+                                                userFaceUrl = respJson["data"]["face"].string ?? "E"
+                                            } else {
+                                                isNetworkFixPresented = true
+                                            }
                                         }
                                     }
                                 }
