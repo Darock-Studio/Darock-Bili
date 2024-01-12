@@ -37,6 +37,9 @@ struct NetworkFixView: View {
         NavigationStack {
             List {
                 Section {
+                    Text("如果无法正常访问网络，请尝试在设置中关闭 iPhone 的 WiFi 和蓝牙开关")
+                }
+                Section {
                     if !isTroubleshooting {
                         if networkState == 3 && darockAPIState == 3 && bilibiliAPIState == 3 {
                             HStack {
