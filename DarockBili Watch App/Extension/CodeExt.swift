@@ -267,6 +267,7 @@ func bv2av(bvid: String) -> UInt64 {
     return (tmp & MASK_CODE) ^ XOR_CODE
 }
 
+
 enum BuvidFpError: Error {
     case readError
 }
@@ -298,8 +299,9 @@ struct BuvidFp {
             let remaining = key.distance(from: index, to: key.endIndex)
             let read = min(remaining, 16)
             
-            withUnsafeMutableBytes(of: &buf) { buffer in
-                key.copyBytes(to: buffer, from: index..<key.index(index, offsetBy: read))
+            _ = key.withCString { cString in
+                // Using withCString to convert the Swift String to a C-style string
+                memcpy(&buf, cString + index.utf16Offset(in: key), read)
             }
             
             processed += read
