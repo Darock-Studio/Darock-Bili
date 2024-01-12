@@ -274,7 +274,7 @@ enum BuvidFpError: Error {
 struct BuvidFp {
     static func gen(key: String, seed: UInt32) throws -> String {
         let m = try murmur3_x64_128(key: key, seed: seed)
-        return String(format: "%016llx%016llx" as NSString, m.low, m.high)
+        return String(format: "%016llx%016llx", m.low, m.high)
     }
     
     private static func murmur3_x64_128(key: String, seed: UInt32) throws -> UInt128 {

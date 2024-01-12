@@ -42,11 +42,13 @@ struct AboutView: View {
                         Text("开源组件许可")
                     })
                 }
-                //Section {
-                //    NavigationLink(destination: {DebugUITestView()}, label: {
-                //        Text("调试")
-                //    })
-                //}
+                if debug {
+                    Section {
+                        NavigationLink(destination: {DebugMenuView()}, label: {
+                            Text("调试")
+                        })
+                    }
+                }
             }
             .bold()
         }
@@ -109,14 +111,37 @@ struct AboutView: View {
     }
 }
 
-struct DebugUITestView: View {
+struct DebugMenuView: View {
     var body: some View {
         List {
             NavigationLink(destination: {UserDetailView(uid: "3546572635768935")}, label: {
                 Text("LongUIDUserTest")
             })
+            NavigationLink(destination: {BuvidFpDebug()}, label: {
+                Text("buvid_fpTest")
+            })
         }
-   }
+    }
+
+    struct BuvidFpDebug: View {
+        @State var fp = ""
+        @State var resu = ""
+        var body: some View {
+            List {
+                TextField("fp", text: $fp)
+                Button(action: {
+                    do {
+                        resu = try BuvidFp.gen(key: fp, seed: 31)
+                    } catch {
+                        resu = "Failed: \(error)"
+                    }
+                }, label: {
+                    Text("Gen")
+                })
+                Text(resu)
+            }
+        }
+    }
 }
 
 struct AboutView_Previews: PreviewProvider {
