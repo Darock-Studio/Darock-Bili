@@ -120,6 +120,12 @@ struct DebugMenuView: View {
             NavigationLink(destination: {BuvidFpDebug()}, label: {
                 Text("buvid_fpTest")
             })
+            NavigationLink(destination: {UuidDebug()}, label: {
+                Text("_uuid_Gen")
+            })
+            NavigationLink(destination: {Buvid34Debug()}, label: {
+                Text("buvid3_4_actived")
+            })
         }
     }
 
@@ -139,6 +145,48 @@ struct DebugMenuView: View {
                     Text("Gen")
                 })
                 Text(resu)
+            }
+        }
+    }
+    struct UuidDebug: View {
+        @State var uuid = ""
+        var body: some View {
+            List {
+                Button(action: {
+                    uuid = UuidInfoc.gen()
+                }, label: {
+                    Text("Gen")
+                })
+                Text(uuid)
+            }
+        }
+    }
+    struct Buvid34Debug: View {
+        @State var activeBdUrl = "https://www.bilibili.com/"
+        @State var locBuvid3 = ""
+        @State var locBuvid4 = ""
+        @State var locUplResp = ""
+        var body: some View {
+            List {
+                Section {
+                    Text("Current Global Buvid3: \(globalBuvid3)")
+                    Text("Current Global Buvid4: \(globalBuvid4)")
+                }
+                Section {
+                    TextField("activeBdUrl", text: $activeBdUrl)
+                    Button(action: {
+                        getBuvid(url: activeBdUrl.urlEncoded()) { buvid3, buvid4, resp in
+                            locBuvid3 = buvid3
+                            locBuvid4 = buvid4
+                            locUplResp = resp
+                        }
+                    }, label: {
+                        Text("Get new & active")
+                    })
+                    Text(locBuvid3)
+                    Text(locBuvid4)
+                    Text(locUplResp)
+                }
             }
         }
     }
