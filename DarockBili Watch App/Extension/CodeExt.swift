@@ -421,7 +421,7 @@ struct UuidInfoc {
         let digitMap: [String] = [
             "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "10"
         ]
-        let t = Int(Date().timeIntervalSince1970 * 1000) % 100_000
+        let t = Int64(Date().timeIntervalSince1970 * 1000) % 100_000
 
         return randomChoice(range: [8, 4, 4, 4, 12], separator: "-", choices: digitMap) + String(format: "%05d", t) + "infoc"
     }
