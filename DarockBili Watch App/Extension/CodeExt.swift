@@ -415,6 +415,34 @@ struct UInt128 {
     }
 }
 
+struct UuidInfoc {
+    static func gen() -> String {
+        let digitMap: [String] = [
+            "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "10"
+        ]
+        let t = Int(Date().timeIntervalSince1970 * 1000) % 100_000
+
+        return randomChoice(range: [8, 4, 4, 4, 12], separator: "-", choices: digitMap)
+            + String(format: "%05d", t)
+            + "infoc"
+    }
+}
+
+func randomChoice(range: [Int], separator: String, choices: [String]) -> String {
+    var result = ""
+    let rng = SystemRandomNumberGenerator()
+
+    for r in range {
+        for _ in 0..<r {
+            result += choices[Int.random(in: 0..<choices.count, using: &rng)]
+        }
+        result += separator
+    }
+
+    result.removeLast(separator.count)
+    return result
+}
+
 postfix operator ++
 postfix operator --
 prefix operator ++
