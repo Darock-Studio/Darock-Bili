@@ -123,16 +123,19 @@ struct VideoDetailView: View {
                                                         "cookie": "SESSDATA=\(sessdata)",
                                                         "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                                     ]
-                                                    AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers).response { response in
-                                                        let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
-                                                        VideoDetailView.willPlayVideoCID = String(cid)
-                                                        AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
-                                                            VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
-                                                            VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                                                            isNowPlayingPresented = true
-                                                            isLoading = false
+                                                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
+                                                            if !CheckBApiError(from: respJson) { return }
+                                                            let cid = respJson["data"]["pages"][0]["cid"].int!
+                                                            VideoDetailView.willPlayVideoCID = String(cid)
+                                                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers) { respJson, isSuccess in
+                                                                if !CheckBApiError(from: respJson) { return }
+                                                                VideoDetailView.willPlayVideoLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
+                                                                //debugPrint(response)
+                                                                VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                                                                isVideoPlayerPresented = true
+                                                                isLoading = false
+                                                            }
                                                         }
-                                                    }
                                                 } else if videoGetterSource == "injahow" {
                                                     DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=1&type=video&q=32&format=mp4&otype=url") { respStr, isSuccess in
                                                         if isSuccess {
@@ -485,11 +488,13 @@ struct VideoDetailView: View {
                                 "cookie": "SESSDATA=\(sessdata)",
                                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                             ]
-                            AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers).response { response in
-                                let cid = Int((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
+                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
+                                if !CheckBApiError(from: respJson) { return }
+                                let cid = respJson["data"]["pages"][0]["cid"].int!
                                 VideoDetailView.willPlayVideoCID = String(cid)
-                                AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
-                                    VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
+                                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers) { respJson, isSuccess in
+                                    if !CheckBApiError(from: respJson) { return }
+                                    VideoDetailView.willPlayVideoLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
                                     //debugPrint(response)
                                     VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
                                     isVideoPlayerPresented = true
@@ -923,8 +928,9 @@ struct VideoDetailView: View {
                                 ]
                                 let cid = videoPages[i]["CID"]!
                                 VideoDetailView.willPlayVideoCID = cid
-                                AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
-                                    VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
+                                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers) { respJson, isSuccess in
+                                    if !CheckBApiError(from: respJson) { return }
+                                    VideoDetailView.willPlayVideoLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
                                     VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
                                     isVideoPlayerPresented = true
                                     isLoading = false
