@@ -138,6 +138,51 @@ public func hideDigitalTime(_ b: Bool) {
     app._setStatusBarTimeHidden(b, animated: true, completion: nil)
 }
 
+// MARK: Networking
+public func autoRetryRequestApi(_ url: String, headers: HTTPHeaders?, reqConCount: Int = 5, callback: @escaping (JSON, Bool) -> Void) {
+    DispatchQueue.global().async {
+        let concurrentQueue = DispatchQueue(label: "com.darock.auto-ret-concurrent", attributes: .concurrent)
+        let group = DispatchGroup()
+        var cbJson = JSON()
+        var erJson = JSON()
+        for _ in 1...reqConCount {
+            group.enter()
+            singalReq(url, headers: headers) { respJson, isSuccess in
+                if isSuccess {
+                    cbJson = respJson
+                    group.leave()
+                    break
+                } else if respJson != JSON() {
+                    erJson = respJson
+                }
+            }
+            group.leave()
+        }
+        group.wait()
+        if cbJson != JSON() {
+            callback(cbJson, true)
+        } else if erJson != JSON() {
+            callback(erJson, true)
+        } else {
+            callback(JSON(), false)
+        }
+    }
+
+    func singalReq(_ url: String, headers: HTTPHeaders?, callback: @escaping (JSON, Bool) -> Void) {
+        DarockKit.Network.shared.requestJSON(url, headers: headers) { respJson, isSuccess in
+            if isSuccess {
+                if CheckBApiError(from: respJson) {
+                    callback(respJson, true)
+                } else {
+                    callback(respJson, false)
+                }
+            } else {
+                callback(JSON(), false)
+            }
+        }
+    }
+}
+
 func biliWbiSign(paramEncoded: String, completion: @escaping (String?) -> Void) {
     func getMixinKey(orig: String) -> String {
         return String(mixinKeyEncTab.map { orig[orig.index(orig.startIndex, offsetBy: $0)] }.prefix(32))
