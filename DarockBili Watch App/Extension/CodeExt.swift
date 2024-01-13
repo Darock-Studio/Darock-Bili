@@ -587,7 +587,7 @@ public func getBuvid(url: String, callback: (String, String, String) -> Void) {
             let buvid3 = respJson["data"]["b_3"].string ?? ""
             let buvid4 = respJson["data"]["b_4"].string ?? ""
             let postHeaders: HTTPHeaders = [
-                "cookie": "innersign=0; buvid3=\(buvid3); b_nut=\(Date.now.timestamp); i-wanna-go-back=-1; b_ut=7; b_lsid=9910433CB_18CF260AB89; _uuid=\(_uuid); enable_web_push=DISABLE; header_theme_version=undefined; home_feed_column=4; browser_resolution=3440-1440; buvid4=\(buvid4); buvid_fp=e651c1a382430ea93631e09474e0b395"
+                "cookie": "innersign=0; buvid3=\(buvid3); b_nut=\(Date.now.timeStamp); i-wanna-go-back=-1; b_ut=7; b_lsid=9910433CB_18CF260AB89; _uuid=\(_uuid); enable_web_push=DISABLE; header_theme_version=undefined; home_feed_column=4; browser_resolution=3440-1440; buvid4=\(buvid4); buvid_fp=e651c1a382430ea93631e09474e0b395"
             ]
             AF.request("https://api.bilibili.com/x/internal/gaia-gateway/ExClimbWuzhi", method: .post, parameters: postParams, encoding: JSONEncoding.default, headers: postHeaders).response { response in
                 callback(buvid3, buvid4, response.debugDescription)
