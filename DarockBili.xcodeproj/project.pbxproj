@@ -79,8 +79,11 @@
 		B4468A9C2B4FC8B7002CCEB2 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = B4468A9B2B4FC8B7002CCEB2 /* SwiftSoup */; };
 		B4468A9E2B4FC8B7002CCEB2 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = B4468A9D2B4FC8B7002CCEB2 /* CachedAsyncImage */; };
 		B4468AA02B4FC8B7002CCEB2 /* Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = B4468A9F2B4FC8B7002CCEB2 /* Dynamic */; };
-		B4468AA62B4FCD59002CCEB2 /* EnterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4468AA52B4FCD59002CCEB2 /* EnterPage.swift */; };
-		B4C5E9552B4FD0BD00E2605B /* NetTipPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C5E9542B4FD0BD00E2605B /* NetTipPage.swift */; };
+		E2565AF32B52BFDF000E01ED /* BangumiDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2565AF22B52BFDF000E01ED /* BangumiDetailView.swift */; };
+		E2565AF52B52C017000E01ED /* BangumiDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2565AF42B52C017000E01ED /* BangumiDownloadView.swift */; };
+		E2565AF72B52C06D000E01ED /* BangumiCommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2565AF62B52C06D000E01ED /* BangumiCommentsView.swift */; };
+		E2565AF92B52C076000E01ED /* BangumiPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2565AF82B52C076000E01ED /* BangumiPlayerView.swift */; };
+		E2565AFB2B52C114000E01ED /* LiveDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2565AFA2B52C114000E01ED /* LiveDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,9 +172,12 @@
 		B4468A302B4FC24A002CCEB2 /* WatchLaterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchLaterView.swift; sourceTree = "<group>"; };
 		B4468A662B4FC286002CCEB2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B4468A692B4FC2A4002CCEB2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		B4468AA52B4FCD59002CCEB2 /* EnterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPage.swift; sourceTree = "<group>"; };
-		B4C5E9542B4FD0BD00E2605B /* NetTipPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetTipPage.swift; sourceTree = "<group>"; };
 		B4C5E9562B4FD60600E2605B /* DarockBili-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "DarockBili-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
+		E2565AF22B52BFDF000E01ED /* BangumiDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BangumiDetailView.swift; sourceTree = "<group>"; };
+		E2565AF42B52C017000E01ED /* BangumiDownloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BangumiDownloadView.swift; sourceTree = "<group>"; };
+		E2565AF62B52C06D000E01ED /* BangumiCommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BangumiCommentsView.swift; sourceTree = "<group>"; };
+		E2565AF82B52C076000E01ED /* BangumiPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BangumiPlayerView.swift; sourceTree = "<group>"; };
+		E2565AFA2B52C114000E01ED /* LiveDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,12 +229,11 @@
 			isa = PBXGroup;
 			children = (
 				B4C5E9562B4FD60600E2605B /* DarockBili-Watch-App-Info.plist */,
-				B4C5E9532B4FD0B300E2605B /* NetTip */,
-				B4468AA42B4FCD4A002CCEB2 /* EnterPage */,
 				B4468A682B4FC2A4002CCEB2 /* Preview Content */,
 				B4468A662B4FC286002CCEB2 /* Assets.xcassets */,
 				B4468A042B4FC249002CCEB2 /* DarockBili-Bridging-Header.h */,
 				B44689FF2B4FC249002CCEB2 /* DarockBiliApp.swift */,
+				E2565AF12B52BF0F000E01ED /* Bangumi */,
 				B44689E72B4FC249002CCEB2 /* Errors */,
 				B44689F62B4FC249002CCEB2 /* Extension */,
 				B4468A002B4FC249002CCEB2 /* InMain */,
@@ -312,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				B44689FE2B4FC249002CCEB2 /* LivePlayerView.swift */,
+				E2565AFA2B52C114000E01ED /* LiveDetailView.swift */,
 			);
 			path = Live;
 			sourceTree = "<group>";
@@ -447,20 +453,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B4468AA42B4FCD4A002CCEB2 /* EnterPage */ = {
+		E2565AF12B52BF0F000E01ED /* Bangumi */ = {
 			isa = PBXGroup;
 			children = (
-				B4468AA52B4FCD59002CCEB2 /* EnterPage.swift */,
+				E2565AF22B52BFDF000E01ED /* BangumiDetailView.swift */,
+				E2565AF42B52C017000E01ED /* BangumiDownloadView.swift */,
+				E2565AF62B52C06D000E01ED /* BangumiCommentsView.swift */,
+				E2565AF82B52C076000E01ED /* BangumiPlayerView.swift */,
 			);
-			path = EnterPage;
-			sourceTree = "<group>";
-		};
-		B4C5E9532B4FD0B300E2605B /* NetTip */ = {
-			isa = PBXGroup;
-			children = (
-				B4C5E9542B4FD0BD00E2605B /* NetTipPage.swift */,
-			);
-			path = NetTip;
+			path = Bangumi;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -602,11 +603,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4468A552B4FC24A002CCEB2 /* SettingsView.swift in Sources */,
-				B4C5E9552B4FD0BD00E2605B /* NetTipPage.swift in Sources */,
+				E2565AFB2B52C114000E01ED /* LiveDetailView.swift in Sources */,
+				E2565AF92B52C076000E01ED /* BangumiPlayerView.swift in Sources */,
 				B4468A592B4FC24A002CCEB2 /* SkinDownloadView.swift in Sources */,
 				B4468A462B4FC24A002CCEB2 /* ImageViewerView.swift in Sources */,
 				B4468A5B2B4FC24A002CCEB2 /* AVExtension.m in Sources */,
+				E2565AF72B52C06D000E01ED /* BangumiCommentsView.swift in Sources */,
 				B4468A412B4FC24A002CCEB2 /* LivePlayerView.swift in Sources */,
+				E2565AF32B52BFDF000E01ED /* BangumiDetailView.swift in Sources */,
 				B4468A342B4FC24A002CCEB2 /* backtrace.c in Sources */,
 				B4468A372B4FC24A002CCEB2 /* FeedbackLoginView.swift in Sources */,
 				B4468A642B4FC24A002CCEB2 /* HistoryView.swift in Sources */,
@@ -644,12 +648,12 @@
 				B4468A322B4FC24A002CCEB2 /* SignalErrorView.swift in Sources */,
 				B4468A3B2B4FC24A002CCEB2 /* ErrorGetView.swift in Sources */,
 				B4468A562B4FC24A002CCEB2 /* LoginView.swift in Sources */,
+				E2565AF52B52C017000E01ED /* BangumiDownloadView.swift in Sources */,
 				B4468A4A2B4FC24A002CCEB2 /* VideoPlayerView.swift in Sources */,
 				B4468A3D2B4FC24A002CCEB2 /* AppFileManager.swift in Sources */,
 				B4468A622B4FC24A002CCEB2 /* ArticleView.swift in Sources */,
 				B4468A4B2B4FC24A002CCEB2 /* LyricerView.swift in Sources */,
 				B4468A392B4FC24A002CCEB2 /* FeedbackMainView.swift in Sources */,
-				B4468AA62B4FCD59002CCEB2 /* EnterPage.swift in Sources */,
 				B4468A3F2B4FC24A002CCEB2 /* MMCQ.swift in Sources */,
 				B4468A5D2B4FC24A002CCEB2 /* DownloadsView.swift in Sources */,
 			);
@@ -790,17 +794,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 180;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = A8JPM89CK8;
+				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "DarockBili-Watch-App-Info.plist";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili.watchkitapp;
 				PRODUCT_NAME = "喵哩喵哩";
 				SDKROOT = watchos;
@@ -821,17 +826,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 180;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = A8JPM89CK8;
+				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "DarockBili-Watch-App-Info.plist";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili.watchkitapp;
 				PRODUCT_NAME = "喵哩喵哩";
 				SDKROOT = watchos;
@@ -851,9 +857,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = A8JPM89CK8;
+				DEVELOPMENT_TEAM = B57D8PP775;
 				INFOPLIST_KEY_CFBundleDisplayName = DarockBili;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -867,9 +873,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = A8JPM89CK8;
+				DEVELOPMENT_TEAM = B57D8PP775;
 				INFOPLIST_KEY_CFBundleDisplayName = DarockBili;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
