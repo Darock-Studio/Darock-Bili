@@ -62,126 +62,119 @@ struct MainView: View {
         @State var isShowDisableNewVerTip = false
         @State var isLoadingNew = false
         @State var isFailedToLoad = false
-        @AppStorage("showEnterPage") var showEnterPage = true
         var body: some View {
             VStack {
-                if showEnterPage {
-                    EnterPage()
-                } else {
-                    
-                        Group {
-                            List {
-                                Section {
-                                    if debug {
-                                        Text("Debug Version. DO NOT Release!!")
-                                            .bold()
-                                        Button(action: {
+                Group {
+                    List {
+                        Section {
+                            if debug {
+                                Text("Debug Version. DO NOT Release!!")
+                                    .bold()
+                                Button(action: {
                                             tipWithText("Test")
-            //                                Dynamic.PUICApplication.sharedPUICApplication._setStatusBarTimeHidden(true, animated: false, completion: nil)
-                                            //Dynamic.WatchKit.sharedPUICApplication._setStatusBarTimeHidden(true, animated: false)
-                                        }, label: {
-                                            Text("Debug")
-                                        })
+    //                                Dynamic.PUICApplication.sharedPUICApplication._setStatusBarTimeHidden(true, animated: false, completion: nil)
+                                    //Dynamic.WatchKit.sharedPUICApplication._setStatusBarTimeHidden(true, animated: false)
+                                }, label: {
+                                    Text("Debug")
+                                })
+                            }
+                            if notice != "" {
+                                NavigationLink(destination: {NoticeView()}, label: {
+                                    Text(notice)
+                                        .bold()
+                                })
+                            }
+                            if newMajorVer != "" && newBuildVer != "" {
+                                let nowMajorVer = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+                                let nowBuildVer = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
+                                if (nowMajorVer < newMajorVer || nowBuildVer < newBuildVer) && updateTipIgnoreVersion != "\(newMajorVer)\(newBuildVer)" {
+                                    VStack {
+                                        Text("喵哩喵哩新版本(v\(newMajorVer) Build \(newBuildVer))已发布！现可更新")
+                                        if isShowDisableNewVerTip {
+                                            Text("再次轻触以在下次更新前禁用此提示")
+                                                .font(.system(size: 12))
+                                                .foregroundColor(.gray)
+                                        }
                                     }
-                                    if notice != "" {
-                                        NavigationLink(destination: {NoticeView()}, label: {
-                                            Text(notice)
+                                    .onTapGesture {
+                                        if isShowDisableNewVerTip {
+                                            updateTipIgnoreVersion = "\(newMajorVer)\(newBuildVer)"
+                                        } else {
+                                            isShowDisableNewVerTip = true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if isShowSearchButton {
+                            Section {
+                                Button(action: {
+                                    isSearchPresented = true
+                                }, label: {
+                                    HStack {
+                                        Image(systemName: "magnifyingglass")
+                                        Text("搜索...")
+                                    }
+                                    .foregroundColor(.gray)
+                                })
+                                .sheet(isPresented: $isSearchPresented, content: {SearchMainView()})
+                            }
+                        }
+                        if videos.count != 0 {
+                            Section {
+                                autoreleasepool {
+                                    ForEach(0...videos.count - 1, id: \.self) { i in
+                                        VideoCard(videos[i])
+                                            .accessibility(identifier: "SuggestVideo")
+                                    }
+                                }
+                            }
+                            Section {
+                                Button(action: {
+                                    LoadNewVideos()
+                                }, label: {
+                                    if !isFailedToLoad {
+                                        if !isLoadingNew {
+                                            Text("加载更多")
                                                 .bold()
-                                        })
-                                    }
-                                    if newMajorVer != "" && newBuildVer != "" {
-                                        let nowMajorVer = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
-                                        let nowBuildVer = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
-                                        if (nowMajorVer < newMajorVer || nowBuildVer < newBuildVer) && updateTipIgnoreVersion != "\(newMajorVer)\(newBuildVer)" {
-                                            VStack {
-                                                Text("喵哩喵哩新版本(v\(newMajorVer) Build \(newBuildVer))已发布！现可更新")
-                                                if isShowDisableNewVerTip {
-                                                    Text("再次轻触以在下次更新前禁用此提示")
-                                                        .font(.system(size: 12))
-                                                        .foregroundColor(.gray)
-                                                }
-                                            }
-                                            .onTapGesture {
-                                                if isShowDisableNewVerTip {
-                                                    updateTipIgnoreVersion = "\(newMajorVer)\(newBuildVer)"
-                                                } else {
-                                                    isShowDisableNewVerTip = true
-                                                }
-                                            }
+                                        } else {
+                                            ProgressView()
                                         }
+                                    } else {
+                                        Label("加载失败 轻触重试", systemImage: "xmark")
                                     }
-                                }
-                                if isShowSearchButton {
-                                    Section {
-                                        Button(action: {
-                                            isSearchPresented = true
-                                        }, label: {
-                                            HStack {
-                                                Image(systemName: "magnifyingglass")
-                                                Text("搜索...")
-                                            }
-                                            .foregroundColor(.gray)
-                                        })
-                                        .sheet(isPresented: $isSearchPresented, content: {SearchMainView()})
-                                    }
-                                }
-                                if videos.count != 0 {
-                                    Section {
-                                        autoreleasepool {
-                                            ForEach(0...videos.count - 1, id: \.self) { i in
-                                                VideoCard(videos[i])
-                                                    .accessibility(identifier: "SuggestVideo")
-                                            }
-                                        }
-                                    }
-                                    Section {
-                                        Button(action: {
-                                            LoadNewVideos()
-                                        }, label: {
-                                            if !isFailedToLoad {
-                                                if !isLoadingNew {
-                                                    Text("加载更多")
-                                                        .bold()
-                                                } else {
-                                                    ProgressView()
-                                                }
-                                            } else {
-                                                Label("加载失败 轻触重试", systemImage: "xmark")
-                                            }
-                                        })
-                                    }
-                                } else if isFailedToLoad {
-                                    NetTipPage()
-                                    Button {
-                                        LoadNewVideos()
-                                    } label: {
-                                        Label("加载失败，点击重试", systemImage: "wifi.exclamationmark")
-                                    }
-                                } else {
-                                    ProgressView()
-                                }
+                                })
                             }
-                        }
-                        .navigationTitle("推荐")
-                        .onAppear {
-                            if !isFirstLoaded {
+                        } else if isFailedToLoad {
+                            Button {
                                 LoadNewVideos()
-                                isFirstLoaded = true
+                            } label: {
+                                Label("加载失败，点击重试", systemImage: "wifi.exclamationmark")
                             }
-                            DarockKit.Network.shared.requestString("https://api.darock.top/bili/notice") { respStr, isSuccess in
-                                if isSuccess {
-                                    notice = respStr.apiFixed()
-                                }
-                            }
-                            DarockKit.Network.shared.requestString("https://api.darock.top/bili/newver") { respStr, isSuccess in
-                                if isSuccess && respStr.apiFixed().contains("|") {
-                                    newMajorVer = String(respStr.apiFixed().split(separator: "|")[0])
-                                    newBuildVer = String(respStr.apiFixed().split(separator: "|")[1])
-                                }
-                            }
+                        } else {
+                            ProgressView()
                         }
-                        .sheet(isPresented: $isNetworkFixPresented, content: {NetworkFixView()})
-                    
+                    }
+                }
+                .navigationTitle("推荐")
+                .onAppear {
+                    if !isFirstLoaded {
+                        LoadNewVideos()
+                        isFirstLoaded = true
+                    }
+                    DarockKit.Network.shared.requestString("https://api.darock.top/bili/notice") { respStr, isSuccess in
+                        if isSuccess {
+                            notice = respStr.apiFixed()
+                        }
+                    }
+                    DarockKit.Network.shared.requestString("https://api.darock.top/bili/newver") { respStr, isSuccess in
+                        if isSuccess && respStr.apiFixed().contains("|") {
+                            newMajorVer = String(respStr.apiFixed().split(separator: "|")[0])
+                            newBuildVer = String(respStr.apiFixed().split(separator: "|")[1])
+                        }
+                    }
+                }
+                .sheet(isPresented: $isNetworkFixPresented, content: {NetworkFixView()})
                 }
             }
         }
