@@ -423,9 +423,7 @@ struct UuidInfoc {
         ]
         let t = Int(Date().timeIntervalSince1970 * 1000) % 100_000
 
-        return randomChoice(range: [8, 4, 4, 4, 12], separator: "-", choices: digitMap)
-            + String(format: "%05d", t)
-            + "infoc"
+        return randomChoice(range: [8, 4, 4, 4, 12], separator: "-", choices: digitMap) + String(format: "%05d", t) + "infoc"
     }
 }
 
@@ -434,7 +432,7 @@ func randomChoice(range: [Int], separator: String, choices: [String]) -> String 
 
     for r in range {
         for _ in 0..<r {
-            let randomIndex = Int(UInt32.random(in: 0..<UInt32(choices.count)))
+            let randomIndex = Int.random(in: 0..<choices.count)
             result += choices[randomIndex]
         }
         result += separator
