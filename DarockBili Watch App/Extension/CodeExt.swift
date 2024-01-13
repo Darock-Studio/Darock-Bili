@@ -150,8 +150,6 @@ public func autoRetryRequestApi(_ url: String, headers: HTTPHeaders?, reqConCoun
             singalReq(url, headers: headers) { respJson, isSuccess in
                 if isSuccess {
                     cbJson = respJson
-                    group.leave()
-                    break
                 } else if respJson != JSON() {
                     erJson = respJson
                 }
