@@ -322,12 +322,16 @@ struct UserDetailView: View {
                         Spacer()
                     }
                     .padding(.horizontal, 8)
-                    Image("Lv\(userLevel)Icon")
-                        .padding(.horizontal, 8)
+                    HStack {
+                        Image("Lv\(userLevel)Icon")
+                        Spacer()
+                    }
+                    .padding(.horizontal, 8)
                     if vipLabel != "" {
                         HStack {
                             Image("VIPIcon")
                             Text(vipLabel)
+                            Spacer()
                         }
                     }
                 }
