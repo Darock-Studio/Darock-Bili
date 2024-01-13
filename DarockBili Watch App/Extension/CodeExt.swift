@@ -444,7 +444,7 @@ func randomChoice(range: [Int], separator: String, choices: [String]) -> String 
     return result
 }
 
-public func getBuvid(url: String, callback: (String, String, String) -> Void) {
+public func getBuvid(url: String, callback: @escaping (String, String, String) -> Void) {
     let _uuid = UuidInfoc.gen()
     let postParams: [String: Any] = [
         "3064":1, // ptype, mobile => 2, others => 1
