@@ -431,11 +431,11 @@ struct UuidInfoc {
 
 func randomChoice(range: [Int], separator: String, choices: [String]) -> String {
     var result = ""
-    var rng = SystemRandomNumberGenerator()
 
     for r in range {
         for _ in 0..<r {
-            result += choices[Int.random(in: 0..<choices.count, using: &rng)]
+            let randomIndex = Int(arc4random_uniform(UInt32(choices.count)))
+            result += choices[randomIndex]
         }
         result += separator
     }
