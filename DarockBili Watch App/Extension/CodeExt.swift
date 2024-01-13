@@ -434,7 +434,7 @@ func randomChoice(range: [Int], separator: String, choices: [String]) -> String 
 
     for r in range {
         for _ in 0..<r {
-            let randomIndex = Int(arc4random_uniform(UInt32(choices.count)))
+            let randomIndex = Int(UInt32.random(in: 0..<UInt32(choices.count)))
             result += choices[randomIndex]
         }
         result += separator
