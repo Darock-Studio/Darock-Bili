@@ -175,7 +175,7 @@ struct DebugMenuView: View {
                 Section {
                     TextField("activeBdUrl", text: $activeBdUrl)
                     Button(action: {
-                        getBuvid(url: activeBdUrl.urlEncoded()) { buvid3, buvid4, resp in
+                        getBuvid(url: activeBdUrl.urlEncoded()) { buvid3, buvid4, _, resp in
                             locBuvid3 = buvid3
                             locBuvid4 = buvid4
                             locUplResp = resp

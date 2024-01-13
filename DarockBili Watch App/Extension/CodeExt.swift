@@ -442,7 +442,7 @@ func randomChoice(range: [Int], separator: String, choices: [String]) -> String 
     return result
 }
 
-public func getBuvid(url: String, callback: @escaping (String, String, String) -> Void) {
+public func getBuvid(url: String, callback: @escaping (String, String, String, String) -> Void) {
     let _uuid = UuidInfoc.gen()
     let postParams: [String: Any] = [
         "3064":1, // ptype, mobile => 2, others => 1
@@ -588,7 +588,7 @@ public func getBuvid(url: String, callback: @escaping (String, String, String) -
                 "cookie": "innersign=0; buvid3=\(buvid3); b_nut=\(Date.now.timeStamp); i-wanna-go-back=-1; b_ut=7; b_lsid=9910433CB_18CF260AB89; _uuid=\(_uuid); enable_web_push=DISABLE; header_theme_version=undefined; home_feed_column=4; browser_resolution=3440-1440; buvid4=\(buvid4); buvid_fp=e651c1a382430ea93631e09474e0b395"
             ]
             AF.request("https://api.bilibili.com/x/internal/gaia-gateway/ExClimbWuzhi", method: .post, parameters: postParams, encoding: JSONEncoding.default, headers: postHeaders).response { response in
-                callback(buvid3, buvid4, response.debugDescription)
+                callback(buvid3, buvid4, _uuid, response.debugDescription)
             }
         }
     } 
