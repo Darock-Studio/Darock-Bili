@@ -103,7 +103,7 @@ struct UserDetailView: View {
                             .navigationTitle(username)
                             .tag(1)
                     }
-                    SecondPageBase(officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign, userLevel: $userLevel, vipLabel: vipLabel)
+                    SecondPageBase(officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign, userLevel: $userLevel, vipLabel: $vipLabel)
                         .tag(2)
                 }
                 .tabViewStyle(.verticalPage)
@@ -114,7 +114,7 @@ struct UserDetailView: View {
                         .offset(y: -10)
                         .navigationTitle(username)
                         .tag(1)
-                    SecondPageBase(officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign, userLevel: userLevel, vipLabel: vipLabel)
+                    SecondPageBase(officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign, userLevel: $userLevel, vipLabel: $vipLabel)
                         .tag(2)
                 }
             }
