@@ -156,10 +156,12 @@ struct VideoDetailView: View {
                                                             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                                         ]
                                                         DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
+                                                            if !CheckBApiError(from: respJson) { return }
                                                             let cid = respJson["data"]["pages"]["cid"].int!
                                                             VideoDetailView.willPlayVideoCID = String(cid)
                                                             biliWbiSign(paramEncoded: "platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)".base64Encoded()) { signed in
                                                                 DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/wbi/playurl?\(signed)", headers: headers) { respJson, isSuccess in
+                                                                    if !CheckBApiError(from: respJson) { return }
                                                                     VideoDetailView.willPlayVideoLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
                                                                     //debugPrint(response)
                                                                     VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
