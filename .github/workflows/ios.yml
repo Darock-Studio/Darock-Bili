@@ -138,7 +138,7 @@ jobs:
           ASCAPI_KEY_ID: ${{ secrets.ASCAPI_KEY_ID }}
           ASCAPI_ISSUER_ID: ${{ secrets.ASCAPI_ISSUER_ID }}
         run: |
-          xcodebuild archive -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -destination generic/platform=iOS -archivePath ./build.xcarchive -IDEPostProgressNotifications=YES CODE_SIGN_IDENTITY=- AD_HOC_CODE_SIGNING_ALLOWED=YES CODE_SIGN_STYLE=Automatic DEVELOPMENT_TEAM=B57D8PP775 COMPILER_INDEX_STORE_ENABLE=NO
+          xcodebuild archive -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -archivePath ./build.xcarchive -IDEPostProgressNotifications=YES CODE_SIGN_IDENTITY=- AD_HOC_CODE_SIGNING_ALLOWED=YES CODE_SIGN_STYLE=Automatic DEVELOPMENT_TEAM=B57D8PP775 COMPILER_INDEX_STORE_ENABLE=NO
           
       - name: Upload Xcode Archive
         uses: actions/upload-artifact@v3
@@ -212,7 +212,7 @@ jobs:
         env: 
           PROF_UUID: ${{ secrets.COMPANY_PROV_UUID }}
         run: |
-          xcodebuild archive -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -destination generic/platform=watchOS -archivePath ./build.xcarchive -IDEPostProgressNotifications=YES CODE_SIGN_IDENTITY=$PROF_UUID AD_HOC_CODE_SIGNING_ALLOWED=YES COMPILER_INDEX_STORE_ENABLE=NO
+          xcodebuild archive -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -archivePath ./build.xcarchive -IDEPostProgressNotifications=YES CODE_SIGN_IDENTITY=$PROF_UUID AD_HOC_CODE_SIGNING_ALLOWED=YES COMPILER_INDEX_STORE_ENABLE=NO
           
       - name: Upload Xcode Archive
         uses: actions/upload-artifact@v3
