@@ -175,7 +175,6 @@ struct MainView: View {
                     }
                 }
                 .sheet(isPresented: $isNetworkFixPresented, content: {NetworkFixView()})
-                }
             }
         }
         
