@@ -164,6 +164,7 @@ jobs:
       - name: Install Apple certificate and provisioning profile for Xcode
         env:
           BUILD_CERTIFICATE_BASE64: ${{ secrets.COMPANY_P12 }}
+          P12_PASSWORD: ${{ secrets.COMPANY_P12_PASSWORD }}
           BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.COMPANY_PROV }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
         run: |
@@ -179,7 +180,7 @@ jobs:
           security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
           # import certificate to keychain
-          security import $CERTIFICATE_PATH -P "" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
           security list-keychain -d user -s $KEYCHAIN_PATH
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
@@ -333,6 +334,7 @@ jobs:
       - name: Install Apple certificate and provisioning profile for Xcode
         env:
           BUILD_CERTIFICATE_BASE64: ${{ secrets.COMPANY_P12 }}
+          P12_PASSWORD: ${{ secrets.COMPANY_P12_PASSWORD }}
           BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.COMPANY_PROV }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
         run: |
@@ -348,7 +350,7 @@ jobs:
           security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
           # import certificate to keychain
-          security import $CERTIFICATE_PATH -P "" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
           security list-keychain -d user -s $KEYCHAIN_PATH
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
