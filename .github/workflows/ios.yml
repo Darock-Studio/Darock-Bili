@@ -8,8 +8,8 @@ on:
       - '!.github/workflows/ios.yml'
 
 jobs:
-  build:
-    name: Build and Archive App
+  prepare:
+    name: Prepare App Version
     runs-on: macos-13
     permissions:
       contents: write
@@ -55,6 +55,27 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: release-vers
           directory: vers
+
+      - name: Upload Proj
+        uses: actions/upload-artifact@v3
+        with:
+          name: Versioned Project
+          path: ./
+
+  build:
+    name: Build and Archive App
+    runs-on: macos-13
+    needs: 
+      - prepare
+    steps:
+      - name: Download Versioned Project
+        uses: actions/download-artifact@v3
+        with:
+          name: Versioned Project
+          path: ./
+        
+      - name: Set Xcode Version
+        run: sudo xcode-select -s /Applications/Xcode_15.0.app
 
       - name: Install the Apple certificate and provisioning profile for Xcode
         env:
@@ -128,50 +149,17 @@ jobs:
   build_comp:
     name: Build Company App
     runs-on: macos-13
-    permissions:
-      contents: write
-      pull-requests: write
-      issues: write
-      repository-projects: write
+    needs:
+      - prepare
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: Download Versioned Project
+        uses: actions/download-artifact@v3
+        with:
+          name: Versioned Project
+          path: ./
         
       - name: Set Xcode Version
         run: sudo xcode-select -s /Applications/Xcode_15.0.app
-
-      - name: Prepare Version Folder
-        run: mkdir vers
-
-      - name: Checkout Version Files
-        uses: actions/checkout@v3
-        with:
-          ref: release-vers
-          persist-credentials: false
-          fetch-depth: 0
-          path: vers
-
-      - name: Change Project Version
-        run: |
-          read MVER < vers/ver.txt
-          MVER=$[MVER+1]
-          rm vers/ver.txt
-          echo $MVER >> vers/ver.txt
-          agvtool new-version -all $MVER
-          
-      - name: Commit Files
-        working-directory: vers
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git commit -a -m "Updated versions"
-          
-      - name: Push Changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: release-vers
-          directory: vers
 
       - name: Install the Apple certificate and provisioning profile for Xcode
         env:
