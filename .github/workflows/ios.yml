@@ -163,7 +163,7 @@ jobs:
 
       - name: Install Apple certificate and provisioning profile for Xcode
         env:
-          BUILD_CERTIFICATE_BASE64: ${{ secrets.COMPANY_CER }}
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.COMPANY_P12 }}
           BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.COMPANY_PROV }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
         run: |
@@ -332,7 +332,7 @@ jobs:
 
       - name: Install Apple certificate and provisioning profile for Xcode
         env:
-          BUILD_CERTIFICATE_BASE64: ${{ secrets.COMPANY_CER }}
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.COMPANY_P12 }}
           BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.COMPANY_PROV }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
         run: |
