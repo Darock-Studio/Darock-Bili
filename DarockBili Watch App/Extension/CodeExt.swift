@@ -139,33 +139,30 @@ public func hideDigitalTime(_ b: Bool) {
 }
 
 // MARK: Networking
-public func autoRetryRequestApi(_ url: String, headers: HTTPHeaders?, reqConCount: Int = 5, callback: @escaping (JSON, Bool) -> Void) {
+public func autoRetryRequestApi(_ url: String, headers: HTTPHeaders?, maxReqCount: Int = 5, callback: @escaping (JSON, Bool) -> Void) {
     DispatchQueue.global().async {
-        let concurrentQueue = DispatchQueue(label: "com.darock.auto-ret-concurrent", attributes: .concurrent)
-        let group = DispatchGroup()
-        var cbJson = JSON()
-        var erJson = JSON()
-        for _ in 1...reqConCount {
-            group.enter()
-            singalReq(url, headers: headers) { respJson, isSuccess in
-                if isSuccess {
-                    cbJson = respJson
-                } else if respJson != JSON() {
-                    erJson = respJson
-                }
-            }
-            group.leave()
-        }
-        group.wait()
-        if cbJson != JSON() {
-            callback(cbJson, true)
-        } else if erJson != JSON() {
-            callback(erJson, true)
-        } else {
-            callback(JSON(), false)
+        var counter = 0
+        repeatReq(url, headers: headers, counter: &counter, maxReqCount: maxReqCount) { respJson, isSuccess in
+            callback(respJson, isSuccess)
         }
     }
 
+    func repeatReq(_ url: String, headers: HTTPHeaders?, counter: UnsafeMutablePointer<Int>, maxReqCount: Int, callback: @escaping (JSON, Bool) -> Void {
+        singalReq(url, headers: headers) { respJson, isSuccess in
+            if isSuccess {
+                callback(respJson, true)
+            } else if counter.pointee < maxReqCount {
+                counter.pointee++
+                repeatReq(url, headers: headers, counter: counter, maxReqCount: maxReqCount, callback: callback)
+            } else if respJson != JSON() {
+                counter.pointee = 0
+                callback(respJson, true)
+            } else {
+                counter.pointee = 0
+                callback(respJson, false)
+            }
+        }
+    }
     func singalReq(_ url: String, headers: HTTPHeaders?, callback: @escaping (JSON, Bool) -> Void) {
         DarockKit.Network.shared.requestJSON(url, headers: headers) { respJson, isSuccess in
             if isSuccess {
