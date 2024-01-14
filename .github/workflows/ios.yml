@@ -161,7 +161,7 @@ jobs:
       - name: Set Xcode Version
         run: sudo xcode-select -s /Applications/Xcode_15.0.app
 
-      - name: Install the Apple certificate and provisioning profile for Xcode
+      - name: Install Apple certificate and provisioning profile for Xcode
         env:
           BUILD_CERTIFICATE_BASE64: ${{ secrets.COMPANY_CER }}
           BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.COMPANY_PROV }}
@@ -179,7 +179,7 @@ jobs:
           security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
           # import certificate to keychain
-          security import $CERTIFICATE_PATH -P "" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security import $CERTIFICATE_PATH -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
           security list-keychain -d user -s $KEYCHAIN_PATH
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
@@ -330,7 +330,7 @@ jobs:
           name: Company Xcode Archive
           path: ./DarockBili_Release.xcarchive
 
-      - name: Install the Apple certificate and provisioning profile for Xcode
+      - name: Install Apple certificate and provisioning profile for Xcode
         env:
           BUILD_CERTIFICATE_BASE64: ${{ secrets.COMPANY_CER }}
           BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.COMPANY_PROV }}
@@ -348,7 +348,7 @@ jobs:
           security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
           # import certificate to keychain
-          security import $CERTIFICATE_PATH -P "" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security import $CERTIFICATE_PATH -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
           security list-keychain -d user -s $KEYCHAIN_PATH
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
