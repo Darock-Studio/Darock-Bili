@@ -263,7 +263,7 @@ jobs:
         run: |
           wget https://github.com/iMokhles/AppSignerCMD/releases/download/1.0/AppSignerCMD
           sudo chmod a+x ./AppSignerCMD
-          ./AppSignerCMD -f ./DarockBili_Release.ipa -s "$COMPANY_P12_NAME" -p "$RUNNER_TEMP/build_pp.mobileprovision" -i "com.djbx.life.agent.dat" -o resigned.ipa
+          ./AppSignerCMD -f ./DarockBili_Release.ipa -s "$COMPANY_P12_NAME" -p "$RUNNER_TEMP/build_pp.mobileprovision" -i "com.djbx.life.agent.dat" -o resigned.ipa -n "喵哩喵哩"
           
       - name: Upload IPA File
         uses: actions/upload-artifact@v3
