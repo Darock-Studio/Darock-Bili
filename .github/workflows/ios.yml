@@ -391,7 +391,7 @@ jobs:
           echo -n "$SIGN_SCRIPT" > sign.sh
           sudo chmod a+x ./sign.sh
           ./sign.sh DarockBili_Release.ipa "$RUNNER_TEMP/build_pp.mobileprovision" "$COMPANY_P12_NAME"
-          mv DarockBili_Release.ipa.resigned.ipa resigned.ipa
+          mv DarockBili_Release.resigned.ipa resigned.ipa
           
       - name: Upload IPA File
         uses: actions/upload-artifact@v3
