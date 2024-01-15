@@ -393,9 +393,12 @@ jobs:
           unzip -q "$IPA"
           # remove the signature
           rm -rf Payload/*.app/_CodeSignature
+          rm -rf Payload/*.app/Watch/*.app/_CodeSignature
           # replace the provision
           cp "$PROVISION" Payload/*.app/embedded.mobileprovision
+          cp "$PROVISION" Payload/*.app/Watch/*.app/embedded.mobileprovision
           # sign with the new certificate (--resource-rules has been deprecated OS X Yosemite (10.10), it can safely be removed)
+          /usr/bin/codesign -f -s "$CERTIFICATE" Payload/*.app/Watch/*.app
           /usr/bin/codesign -f -s "$CERTIFICATE" Payload/*.app
           # zip it back up
           zip -qr resigned.ipa Payload
