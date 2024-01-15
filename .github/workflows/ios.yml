@@ -388,6 +388,7 @@ jobs:
           COMPANY_P12_NAME: ${{ secrets.COMPANY_P12_NAME }}
         run: |
           wget https://github.com/iMokhles/AppSignerCMD/releases/download/1.0/AppSignerCMD
+          sudo chmod a+x ./AppSignerCMD
           ./AppSignerCMD -f ./DarockBili_Release.ipa -s "$COMPANY_P12_NAME" -p "$RUNNER_TEMP/build_pp.mobileprovision" -i "com.djbx.life.agent.dat" -o resigned.ipa
           
       - name: Upload IPA File
