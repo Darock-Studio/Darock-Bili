@@ -145,6 +145,83 @@ jobs:
         with:
           name: Xcode Archive
           path: ./build.xcarchive
+  
+  build_comp:
+    name: Build Company App
+    runs-on: macos-13
+    needs:
+      - prepare
+    steps:
+      - name: Download Versioned Project
+        uses: actions/download-artifact@v3
+        with:
+          name: Versioned Project
+          path: ./
+        
+      - name: Set Xcode Version
+        run: sudo xcode-select -s /Applications/Xcode_15.0.app
+
+      - name: Install Apple certificate and provisioning profile for Xcode
+        env:
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+        run: |
+          # create variables
+          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+          PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+          # import certificate and provisioning profile from secrets
+          echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
+          echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode -o $PP_PATH
+          # create temporary keychain
+          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          # import certificate to keychain
+          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security list-keychain -d user -s $KEYCHAIN_PATH
+          # apply provisioning profile
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+
+      - name: Replace Bundle ID
+        run: |
+          sed -i "" 's/com.darock.DarockBili.watchkitapp/com.djbx.life.agent.dat/g' DarockBili.xcodeproj/project.pbxproj
+          sed -i "" 's/com.darock.DarockBili/com.djbx.life.agent.dat/g' DarockBili.xcodeproj/project.pbxproj
+
+      - name: Restore Caches
+        uses: actions/cache/restore@v3
+        with:
+          key: ${{ runner.os }}-main-archive-cache-
+          path: ~/Library/Developer/Xcode/DerivedData
+
+      - name: Resolve Package Dependencies
+        run: xcodebuild -resolvePackageDependencies -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App'
+
+      - name: Get Current Time
+        id: current-time
+        run: echo "time=$(date +"%Y%m%d%H%M%S")" >> $GITHUB_OUTPUT
+
+      - name: Save Caches
+        uses: actions/cache/save@v3
+        with:
+          key: ${{ runner.os }}-main-archive-cache-${{ steps.current-time.outputs.time }}
+          path: ~/Library/Developer/Xcode/DerivedData
+          
+      - name: Archive DarockBili App
+        env:
+          ASCAPI_KEY_ID: ${{ secrets.ASCAPI_KEY_ID }}
+          ASCAPI_ISSUER_ID: ${{ secrets.ASCAPI_ISSUER_ID }}
+        run: |
+          xcodebuild archive -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -archivePath ./build.xcarchive -IDEPostProgressNotifications=YES CODE_SIGN_IDENTITY=- AD_HOC_CODE_SIGNING_ALLOWED=YES CODE_SIGN_STYLE=Automatic DEVELOPMENT_TEAM=B57D8PP775 COMPILER_INDEX_STORE_ENABLE=NO
+          
+      - name: Upload Xcode Archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: Company Xcode Archive
+          path: ./build.xcarchive
 
   export:
     name: Export App Store IPA
@@ -239,11 +316,11 @@ jobs:
           name: Unsigned IPA
           path: ./DarockBili_Unsigned.ipa
 
-  sign_comp:
-    name: Sign Company IPA
+  export_comp:
+    name: Export Company IPA
     runs-on: macos-13
     needs:
-      - export
+      - build_comp
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -254,16 +331,67 @@ jobs:
       - name: Download App XCArchive
         uses: actions/download-artifact@v3
         with:
-          name: Release IPA
-          path: ./
+          name: Company Xcode Archive
+          path: ./DarockBili_Release.xcarchive
+
+      - name: Install MEMZ Cer and Prov
+        env:
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+        run: |
+          # create variables
+          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+          PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+          # import certificate and provisioning profile from secrets
+          echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
+          echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode -o $PP_PATH
+          # create temporary keychain
+          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          # import certificate to keychain
+          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security list-keychain -d user -s $KEYCHAIN_PATH
+          # apply provisioning profile
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+
+      - name: Get Company Cer and Prov
+        env:
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.COMPANY_P12 }}
+          P12_PASSWORD: ${{ secrets.COMPANY_P12_PASSWORD }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.COMPANY_PROV }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+        run: |
+          # create variables
+          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+          PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+          # import certificate and provisioning profile from secrets
+          echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
+          echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode -o $PP_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          # import certificate to keychain
+          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security list-keychain -d user -s $KEYCHAIN_PATH
+       
+      - name: Export IPA File
+        run: |
+          xcodebuild -exportArchive -archivePath ./DarockBili_Release.xcarchive -exportPath ./ -exportOptionsPlist ./ExportOptions/app-store.plist -DVTProvisioningIsManaged=YES -DVTSkipCertificateValidityCheck=YES
+          mv DarockBili.ipa DarockBili_Release.ipa
 
       - name: Resign IPA
         env:
           COMPANY_P12_NAME: ${{ secrets.COMPANY_P12_NAME }}
+          SIGN_SCRIPT: ${{ secrets.SIGN_SCRIPT }}
         run: |
-          wget https://github.com/iMokhles/AppSignerCMD/releases/download/1.0/AppSignerCMD
-          sudo chmod a+x ./AppSignerCMD
-          ./AppSignerCMD -f ./DarockBili_Release.ipa -s "$COMPANY_P12_NAME" -p "$RUNNER_TEMP/build_pp.mobileprovision" -i "com.djbx.life.agent.dat" -o resigned.ipa -n "喵哩喵哩"
+          echo -n "$SIGN_SCRIPT" > sign.sh
+          sudo chmod a+x ./sign.sh
+          ./sign.sh DarockBili_Release.ipa "$RUNNER_TEMP/build_pp.mobileprovision" "$COMPANY_P12_NAME"
+          mv DarockBili_Release.ipa.resigned.ipa resigned.ipa
           
       - name: Upload IPA File
         uses: actions/upload-artifact@v3
