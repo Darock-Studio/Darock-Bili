@@ -187,7 +187,7 @@ jobs:
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
       - name: Replace Bundle ID
-        run: sed '1s/com.darock.DarockBili.watchkitapp/com.djbx.life.agent.dat/g' DarockBili.xcodeproj/project.pbxproj
+        run: sed -i 's/com.darock.DarockBili.watchkitapp/com.djbx.life.agent.dat/g' DarockBili.xcodeproj/project.pbxproj
 
       - name: Restore Caches
         uses: actions/cache/restore@v3
