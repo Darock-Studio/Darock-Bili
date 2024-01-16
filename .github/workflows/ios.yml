@@ -188,7 +188,7 @@ jobs:
 
       - name: Replace Bundle ID
         run: |
-          sed -i "" 's/com.darock.DarockBili.watchkitapp/com.djbx.life.agent.dat/g' DarockBili.xcodeproj/project.pbxproj
+          #sed -i "" 's/com.darock.DarockBili.watchkitapp/com.djbx.life.agent.dat/g' DarockBili.xcodeproj/project.pbxproj
 
       - name: Restore Caches
         uses: actions/cache/restore@v3
@@ -402,8 +402,9 @@ jobs:
           cp "$PROVISION" Payload/*.app/embedded.mobileprovision
           plutil -convert xml1 Payload/*.app/Info.plist -o Info.plist
           mv Info.plist Payload/*.app/Info.plist
+          sed -i "" 's/com.darock.DarockBili.watchkitapp/com.djbx.life.agent.dat/g' Payload/*.app/Info.plist
           # sign with the new certificate (--resource-rules has been deprecated OS X Yosemite (10.10), it can safely be removed)
-          /usr/bin/codesign -f -s "$CERTIFICATE" Payload/*.app
+          codesign -f -s "$CERTIFICATE" Payload/*.app
           # zip it back up
           zip -qr resigned.ipa Payload
           
