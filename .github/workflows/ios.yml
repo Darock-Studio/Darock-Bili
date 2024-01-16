@@ -214,7 +214,7 @@ jobs:
           COMPANY_PROV_UUID: ${{ secrets.COMPANY_PROV_UUID }}
           COMPANY_P12_NAME: ${{ secrets.COMPANY_P12_NAME }}
         run: |
-          xcodebuild archive -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -archivePath ./build.xcarchive -IDEPostProgressNotifications=YES CODE_SIGN_IDENTITY="$COMPANY_P12_NAME" -provisioningProfile "$COMPANY_PROV_UUID" AD_HOC_CODE_SIGNING_ALLOWED=YES CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM=H5SM6ZV38F COMPILER_INDEX_STORE_ENABLE=NO
+          xcodebuild archive -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -archivePath ./build.xcarchive -IDEPostProgressNotifications=YES CODE_SIGN_IDENTITY="$COMPANY_P12_NAME" PROVISIONING_PROFILE="$COMPANY_PROV_UUID" AD_HOC_CODE_SIGNING_ALLOWED=YES CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM=H5SM6ZV38F COMPILER_INDEX_STORE_ENABLE=NO
           
       - name: Upload Xcode Archive
         uses: actions/upload-artifact@v3
