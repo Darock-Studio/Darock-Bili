@@ -163,9 +163,9 @@ jobs:
 
       - name: Install Apple certificate and provisioning profile for Xcode
         env:
-          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
-          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
-          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.COMPANY_P12 }}
+          P12_PASSWORD: ${{ secrets.COMPANY_P12_PASSWORD }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.COMPANY_PROV }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
         run: |
           # create variables
@@ -211,10 +211,9 @@ jobs:
           
       - name: Archive DarockBili App
         env:
-          ASCAPI_KEY_ID: ${{ secrets.ASCAPI_KEY_ID }}
-          ASCAPI_ISSUER_ID: ${{ secrets.ASCAPI_ISSUER_ID }}
+          COMPANY_PROV_UUID: ${{ secrets.COMPANY_PROV_UUID }}
         run: |
-          xcodebuild archive -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -archivePath ./build.xcarchive -IDEPostProgressNotifications=YES CODE_SIGN_IDENTITY=- AD_HOC_CODE_SIGNING_ALLOWED=YES CODE_SIGN_STYLE=Automatic DEVELOPMENT_TEAM=B57D8PP775 COMPILER_INDEX_STORE_ENABLE=NO
+          xcodebuild archive -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -archivePath ./build.xcarchive -IDEPostProgressNotifications=YES CODE_SIGN_IDENTITY=$COMPANY_PROV_UUID AD_HOC_CODE_SIGNING_ALLOWED=YES CODE_SIGN_STYLE=Automatic DEVELOPMENT_TEAM=H5SM6ZV38F COMPILER_INDEX_STORE_ENABLE=NO
           
       - name: Upload Xcode Archive
         uses: actions/upload-artifact@v3
