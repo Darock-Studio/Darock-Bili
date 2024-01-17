@@ -16,7 +16,7 @@
       "location" : "https://github.com/Darock-Studio/DarockKit",
       "state" : {
         "branch" : "main",
-        "revision" : "8653ae946660d0669fc2bbbd40a40f62dc192308"
+        "revision" : "eee2eb242a2008d628990cbdaf7ee27b400df2d9"
       }
     },
     {
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/libwebp-Xcode.git",
       "state" : {
-        "revision" : "1cdddb80ccef6d30e869c4abe1f9f3d3871a25b5",
-        "version" : "1.3.1"
+        "revision" : "b2b1d20a90b14d11f6ef4241da6b81c1d3f171e4",
+        "version" : "1.3.2"
       }
     },
     {
@@ -60,8 +60,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
       "state" : {
-        "revision" : "633996a807442ec28df9d33b0f88ce57a0e2fdbf",
-        "version" : "5.17.0"
+        "revision" : "59730af512c06fb569c119d737df4c1c499e001d",
+        "version" : "5.18.10"
       }
     },
     {
@@ -69,8 +69,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImagePDFCoder",
       "state" : {
-        "revision" : "d9139666985f93292caa8971c7892870bd700cd8",
-        "version" : "1.0.0"
+        "revision" : "2aecb0a16e4d054c7f36a140f7feef6e1ede7bb6",
+        "version" : "1.0.1"
       }
     },
     {
@@ -85,10 +85,10 @@
     {
       "identity" : "sdwebimageswiftui",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SDWebImage/SDWebImageSwiftUI",
+      "location" : "https://github.com/SDWebImage/SDWebImageSwiftUI.git",
       "state" : {
-        "revision" : "e837c37d45449fbd3b4745c10c5b5274e73edead",
-        "version" : "2.2.3"
+        "revision" : "261b6cec35686d2dc192b809ab50742b4502a73b",
+        "version" : "2.2.6"
       }
     },
     {
@@ -96,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImageWebPCoder",
       "state" : {
-        "revision" : "3819cb70faa2454b54d8364779bfacd8c216a6e2",
-        "version" : "0.13.0"
+        "revision" : "db4603921b31a6ce0f8c26d36d6a3fffc2dba481",
+        "version" : "0.14.2"
       }
     },
     {
@@ -105,8 +105,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Nirma/SFSymbol",
       "state" : {
-        "revision" : "c18f260b9b69d1c24e40ad367e8a589563fb8f3d",
-        "version" : "2.2.0"
+        "revision" : "1b127194b976a58ea460a2cbe10f00fa994b1ece",
+        "version" : "2.3.0"
       }
     },
     {
@@ -132,8 +132,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/scinfu/SwiftSoup",
       "state" : {
-        "revision" : "8b6cf29eead8841a1fa7822481cb3af4ddaadba6",
-        "version" : "2.6.1"
+        "revision" : "f83c097597094a04124eb6e0d1e894d24129af87",
+        "version" : "2.7.0"
       }
     },
     {
@@ -148,7 +148,7 @@
     {
       "identity" : "swiftyjson",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SwiftyJSON/SwiftyJSON",
+      "location" : "https://github.com/SwiftyJSON/SwiftyJSON.git",
       "state" : {
         "revision" : "2b6054efa051565954e1d2b9da831680026cd768",
         "version" : "4.3.0"
@@ -159,8 +159,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ZipArchive/ZipArchive",
       "state" : {
-        "revision" : "b56f8c605a233fb25fe8d49f1b9ed50912c2d1b7",
-        "version" : "2.5.4"
+        "revision" : "79d4dc9729096c6ad83dd3cee2b9f354d1b4ab7b",
+        "version" : "2.5.5"
       }
     }
   ],
