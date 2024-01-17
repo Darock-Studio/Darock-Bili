@@ -147,7 +147,7 @@ public func autoRetryRequestApi(_ url: String, headers: HTTPHeaders?, maxReqCoun
         }
     }
 
-    func repeatReq(_ url: String, headers: HTTPHeaders?, counter: UnsafeMutablePointer<Int>, maxReqCount: Int, callback: @escaping (JSON, Bool) -> Void {
+    func repeatReq(_ url: String, headers: HTTPHeaders?, counter: UnsafeMutablePointer<Int>, maxReqCount: Int, callback: @escaping (JSON, Bool) -> Void) {
         singalReq(url, headers: headers) { respJson, isSuccess in
             if isSuccess {
                 callback(respJson, true)
