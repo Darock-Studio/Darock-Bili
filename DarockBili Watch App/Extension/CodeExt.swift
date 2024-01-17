@@ -139,41 +139,35 @@ public func hideDigitalTime(_ b: Bool) {
 }
 
 // MARK: Networking
-public func autoRetryRequestApi(_ url: String, headers: HTTPHeaders?, maxReqCount: Int = 30, callback: @escaping (JSON, Bool) -> Void) {
+public func autoRetryRequestApi(_ url: String, headers: HTTPHeaders?, maxReqCount: Int = 10, callback: @escaping (JSON, Bool) -> Void) {
     DispatchQueue.global().async {
-        var counter = 0
-        repeatReq(url, headers: headers, counter: &counter, maxReqCount: maxReqCount) { respJson, isSuccess in
-            callback(respJson, isSuccess)
-        }
-    }
-
-    func repeatReq(_ url: String, headers: HTTPHeaders?, counter: UnsafeMutablePointer<Int>, maxReqCount: Int, callback: @escaping (JSON, Bool) -> Void) {
-        singalReq(url, headers: headers) { respJson, isSuccess in
-            if isSuccess {
-                callback(respJson, true)
-            } else if counter.pointee < maxReqCount {
-                if debug {
-                    tipWithText("\(counter.pointee)")
+        var reqResults = [JSON]()
+        var forTotal = 0
+        for i in 1...maxReqCount {
+            singalReq(url, headers: headers) { respJson, isSuccess in
+                DarockKit.Network.shared.requestJSON(url, headers: headers) { respJson, _ in 
+                    reqResults.append(respJson)
+                    forTotal++
                 }
-                counter.pointee++
-                repeatReq(url, headers: headers, counter: counter, maxReqCount: maxReqCount, callback: callback)
-            } else if respJson != JSON() {
-                counter.pointee = 0
-                callback(respJson, true)
-            } else {
-                counter.pointee = 0
-                callback(respJson, false)
             }
         }
-    }
-    func singalReq(_ url: String, headers: HTTPHeaders?, callback: @escaping (JSON, Bool) -> Void) {
-        DarockKit.Network.shared.requestJSON(url, headers: headers) { respJson, isSuccess in
-            if isSuccess {
-                if CheckBApiError(from: respJson) {
-                    callback(respJson, true)
+        while forTotal < maxReqCount { }
+        var isCalledback = false
+        var anyValidJson: JSON?
+        for result in reqResults {
+            if result != JSON() {
+                if CheckBApiError(from: result) {
+                    callback(result, true)
+                    isCalledback = true
+                    break
                 } else {
-                    callback(respJson, false)
+                    anyValidJson = result
                 }
+            }
+        }
+        if !isCalledback {
+            if let vj = anyValidJson {
+                callback(vj, true)
             } else {
                 callback(JSON(), false)
             }
