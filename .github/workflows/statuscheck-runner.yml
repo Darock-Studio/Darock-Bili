@@ -25,12 +25,12 @@ jobs:
             echo "The comment content contains the specified text. Continuing with further actions."
             echo "::set-output name=shouldc::true"
           fi
-          if [[ "${{ github.event.comment.body }}" != *"!Run unit test"* ]]; then
+          if [[ "${{ github.event.comment.body }}" != *"!Export IPA"* ]]; then
             echo "::set-output name=shouldtun::false"
           else
             echo "::set-output name=shouldtun::true"
           fi
-          if [[ "${{ github.event.comment.body }}" != *"!Run UI test"* ]]; then
+          if [[ "${{ github.event.comment.body }}" != *"!Run UI Test"* ]]; then
             echo "::set-output name=shouldtui::false"
           else
             echo "::set-output name=shouldtui::true"
@@ -77,8 +77,8 @@ jobs:
           workflow: status-check.yml
           ref: ${{ needs.get-head-sha.outputs.psha }}
           inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}", "repository": "${{ needs.get-head-sha.outputs.repository }}", "lsha": "${{ needs.get-head-sha.outputs.lsha }}" }'
-  call-unit-test-workflow:
-    name: Call Unit Test Overflow
+  call-company-export-workflow:
+    name: Call Company Export Overflow
     needs: 
       - get-head-sha
       - checkif
@@ -90,7 +90,7 @@ jobs:
       - name: Call
         uses: benc-uk/workflow-dispatch@v1.2.2
         with:
-          workflow: unit-test.yml
+          workflow: company-export.yml
           ref: ${{ needs.get-head-sha.outputs.psha }}
           inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}", "repository": "${{ needs.get-head-sha.outputs.repository }}", "lsha": "${{ needs.get-head-sha.outputs.lsha }}" }'
   call-ui-test-workflow:
