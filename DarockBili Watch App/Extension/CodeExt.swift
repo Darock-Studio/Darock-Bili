@@ -142,32 +142,31 @@ public func hideDigitalTime(_ b: Bool) {
 public func autoRetryRequestApi(_ url: String, headers: HTTPHeaders?, maxReqCount: Int = 10, callback: @escaping (JSON, Bool) -> Void) {
     DispatchQueue.global().async {
         var reqResults = [JSON]()
-        var forTotal = 0
         for i in 1...maxReqCount {
             DarockKit.Network.shared.requestJSON(url, headers: headers) { respJson, _ in 
                 reqResults.append(respJson)
-                forTotal++
-            }
-        }
-        while forTotal < maxReqCount { }
-        var isCalledback = false
-        var anyValidJson: JSON?
-        for result in reqResults {
-            if result != JSON() {
-                if CheckBApiError(from: result) {
-                    callback(result, true)
-                    isCalledback = true
-                    break
-                } else {
-                    anyValidJson = result
+                if i == maxReqCount {
+                    var isCalledback = false
+                    var anyValidJson: JSON?
+                    for result in reqResults {
+                        if result != JSON() {
+                            if CheckBApiError(from: result) {
+                                callback(result, true)
+                                isCalledback = true
+                                break
+                            } else {
+                                anyValidJson = result
+                            }
+                        }
+                    }
+                    if !isCalledback {
+                        if let vj = anyValidJson {
+                            callback(vj, true)
+                        } else {
+                            callback(JSON(), false)
+                        }
+                    }
                 }
-            }
-        }
-        if !isCalledback {
-            if let vj = anyValidJson {
-                callback(vj, true)
-            } else {
-                callback(JSON(), false)
             }
         }
     }
