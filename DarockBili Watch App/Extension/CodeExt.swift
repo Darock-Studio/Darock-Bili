@@ -139,7 +139,7 @@ public func hideDigitalTime(_ b: Bool) {
 }
 
 // MARK: Networking
-public func autoRetryRequestApi(_ url: String, headers: HTTPHeaders?, maxReqCount: Int = 10, callback: @escaping (JSON, Bool) -> Void) {
+public func autoRetryRequestApi(_ url: String, headers: HTTPHeaders?, maxReqCount: Int = 100, callback: @escaping (JSON, Bool) -> Void) {
     DispatchQueue.global().async {
         var reqResults = [JSON]()
         for i in 1...maxReqCount {
