@@ -25,6 +25,9 @@ struct AboutView: View {
                 Section {
                     Text("喵哩喵哩 v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)")
                     Text("编译时间: \(CodingTime.getCodingTime())")
+                        .onTapGesture(count: 9) {
+                            debug = true
+                        }
                     Text("遇到问题？在设置页面点击“反馈问题”进行反馈，感谢您的支持！")
                 }
                 Section(header: Text("Credits")) {
