@@ -110,6 +110,9 @@ struct SettingsView: View {
                     NavigationLink(destination: {AboutView()}, label: {
                         Text("关于")
                     })
+                    NavigationLink(destination: {SoftwareUpdateView()}, label: {
+                        Text("软件更新")
+                    })
                     NavigationLink(destination: {PlayerSettingsView()}, label: {
                         Text("播放设置")
                     })
@@ -153,7 +156,65 @@ struct SettingsView: View {
                 }
                 .navigationTitle("通用")
             }
-            
+
+            struct SoftwareUpdateView: View {
+                @State var shouldUpdate = false
+                @State var isLoading = true
+                @State var latestVer = ""
+                @State var latestBuild = ""
+                @State var releaseNote = ""
+                var body: some View {
+                    ScrollView {
+                        VStack {
+                            if !isLoading {
+                                if shouldUpdate {
+                                    HStack {
+                                        Image("AppIcon")
+                                            .resizable()
+                                            .frame(width: 50, height: 50)
+                                        Spacer()
+                                            .frame(width: 20)
+                                        VStack {
+                                            Text("喵哩喵哩 v\(latestVer) Build \(latestBuild)")
+                                            Text("Darock Studio")
+                                                .font(.system(size: 13))
+                                                .foregroundColor(.gray)
+                                        }
+                                    }
+                                    Text(releaseNote)
+                                    Button(action: {
+                                        
+                                    }, label: {
+                                        Text("下载并安装")
+                                    })
+                                } else {
+                                    Text("喵哩喵哩已是最新版本")
+                                }
+                            } else {
+                                HStack {
+                                    Text("正在检查更新...")
+                                    Spacer()
+                                    ProgressView()
+                                }
+                            }
+                        }
+                    }
+                    .onAppear {
+                        DarockKit.Network.shared.requestString("https://api.darock.top/bili/newver") { respStr, isSuccess in
+                            if isSuccess && respStr.apiFixed().contains("|") {
+                                latestVer = String(respStr.apiFixed().split(separator: "|")[0])
+                                latestBuild = String(respStr.apiFixed().split(separator: "|")[1])
+                                let nowMajorVer = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+                                let nowBuildVer = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
+                                if nowMajorVer != latestVer || Int(nowBuildVer)! < Int(latestBuild)! {
+                                    shouldUpdate = true
+                                }
+                                isLoading = false
+                            }
+                        }
+                    }
+                }
+            }
             struct PlayerSettingsView: View {
                 @AppStorage("IsPlayerAutoRotating") var isPlayerAutoRotating = true
                 @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
