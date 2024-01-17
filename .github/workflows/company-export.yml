@@ -1,0 +1,126 @@
+name: Company IPA Export Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      psha:
+        required: true
+      repository:
+        required: true
+      lsha:
+        required: true
+
+jobs:  
+  build:
+    name: Build and Export Company App
+    runs-on: macos-13
+    permissions:
+      checks: write
+      statuses: write
+    env:
+      FIN_STATUS: "error"
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Update Check Status
+        run: |
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            /repos/${{ github.repository }}/statuses/${{ inputs.lsha }} \
+            -f state='pending' \
+            -f target_url='https://github.com/Darock-Studio/Darock-Bili/actions/runs/${{ github.run_id }}' \
+            -f description='Building...' \
+            -f context='Company IPA Export' 
+    
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ inputs.repository }}
+          ref: ${{ inputs.psha }}
+        
+      - name: Set Xcode Version
+        run: sudo xcode-select -s /Applications/Xcode_15.0.app
+
+      - name: Install Apple certificate and provisioning profile for Xcode
+        env:
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.COMPANY_P12 }}
+          P12_PASSWORD: ${{ secrets.COMPANY_P12_PASSWORD }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.COMPANY_PROV }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+        run: |
+          # create variables
+          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+          PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+          # import certificate and provisioning profile from secrets
+          echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
+          echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode -o $PP_PATH
+          # create temporary keychain
+          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          # import certificate to keychain
+          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security list-keychain -d user -s $KEYCHAIN_PATH
+          # apply provisioning profile
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+
+      - name: Replace Bundle ID
+        run: |
+          sed -i "" 's/com.darock.DarockBili.watchkitapp/com.djbx.life.agent.dat/g' DarockBili.xcodeproj/project.pbxproj
+          sed -i "" 's/com.darock.DarockBili/com.djbx.life.agent.dat/g' DarockBili.xcodeproj/project.pbxproj
+
+      - name: Restore Caches
+        uses: actions/cache/restore@v3
+        with:
+          key: ${{ runner.os }}-pr-company-export-cache-
+          path: ~/Library/Developer/Xcode/DerivedData
+
+      - name: Resolve Package Dependencies
+        run: xcodebuild -resolvePackageDependencies -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App'
+
+      - name: Get Current Time
+        id: current-time
+        run: echo "time=$(date +"%Y%m%d%H%M%S")" >> $GITHUB_OUTPUT
+
+      - name: Save Caches
+        uses: actions/cache/save@v3
+        with:
+          key: ${{ runner.os }}-pr-company-export-cache-${{ steps.current-time.outputs.time }}
+          path: ~/Library/Developer/Xcode/DerivedData
+
+      - name: Update Status Env
+        run: echo "FIN_STATUS=failure" >> $GITHUB_ENV
+          
+      - name: Archive DarockBili App
+        env:
+          COMPANY_PROV_UUID: ${{ secrets.COMPANY_PROV_UUID }}
+          COMPANY_P12_NAME: ${{ secrets.COMPANY_P12_NAME }}
+        run: |
+          xcodebuild archive -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -archivePath ./build.xcarchive -IDEPostProgressNotifications=YES CODE_SIGN_IDENTITY=- AD_HOC_CODE_SIGNING_ALLOWED=YES CODE_SIGN_STYLE=Automatic DEVELOPMENT_TEAM=H5SM6ZV38F COMPILER_INDEX_STORE_ENABLE=NO
+          
+      - name: Export IPA File
+        run: |
+          xcodebuild -exportArchive -archivePath ./build.xcarchive -exportPath ./ -exportOptionsPlist ./ExportOptions/ad-hoc.plist -DVTProvisioningIsManaged=YES -DVTSkipCertificateValidityCheck=YES
+          mv '喵哩喵哩.ipa' DarockBili_Company.ipa
+
+      - name: Upload IPA File
+        uses: actions/upload-artifact@v3
+        with:
+          name: Company IPA
+          path: ./DarockBili_Company.ipa
+
+      - name: Update Check Status
+        if: always()
+        run: |
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            /repos/${{ github.repository }}/statuses/${{ inputs.lsha }} \
+            -f state='${{ env.FIN_STATUS }}' \
+            -f target_url='https://github.com/Darock-Studio/Darock-Bili/actions/runs/${{ github.run_id }}' \
+            -f context='Company IPA Export'
+    

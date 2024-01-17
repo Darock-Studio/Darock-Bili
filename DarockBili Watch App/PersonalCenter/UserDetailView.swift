@@ -39,6 +39,7 @@ struct UserDetailView: View {
     @State var userSign = ""
     @State var followCount = -1
     @State var fansCount = -1
+    @State var vipLabel = ""
     @State var videos = [[String: String]]()
     @State var viewSelector: UserDetailViewPubsType = .video
     @State var articles = [[String: String]]()
@@ -102,7 +103,7 @@ struct UserDetailView: View {
                             .navigationTitle(username)
                             .tag(1)
                     }
-                    SecondPageBase(officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign)
+                    SecondPageBase(officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign, userLevel: $userLevel, vipLabel: $vipLabel)
                         .tag(2)
                 }
                 .tabViewStyle(.verticalPage)
@@ -113,7 +114,7 @@ struct UserDetailView: View {
                         .offset(y: -10)
                         .navigationTitle(username)
                         .tag(1)
-                    SecondPageBase(officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign)
+                    SecondPageBase(officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign, userLevel: $userLevel, vipLabel: $vipLabel)
                         .tag(2)
                 }
             }
@@ -144,7 +145,7 @@ struct UserDetailView: View {
         }
         .onAppear {
             let headers: HTTPHeaders = [
-                "cookie": "SESSDATA=\(sessdata);",
+                "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3);",
                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             ]
             biliWbiSign(paramEncoded: "mid=\(uid)".base64Encoded()) { signed in
@@ -166,6 +167,7 @@ struct UserDetailView: View {
                             officialTitle = respJson["data"]["official"]["title"].string ?? ""
                             userSign = respJson["data"]["sign"].string ?? "[加载失败]"
                             coinCount = respJson["data"]["coins"].int ?? -1
+                            vipLabel = respJson["data"]["vip"]["label"]["text"].string ?? ""
                             DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation/stat?vmid=\(uid)", headers: headers) { respJson, isSuccess in
                                 if isSuccess {
                                     followCount = respJson["data"]["following"].int ?? -1
@@ -292,6 +294,8 @@ struct UserDetailView: View {
         @Binding var officialType: Int
         @Binding var officialTitle: String
         @Binding var userSign: String
+        @Binding var userLevel: Int
+        @Binding var vipLabel: String
         var body: some View {
             ScrollView {
                 VStack {
@@ -318,6 +322,18 @@ struct UserDetailView: View {
                         Spacer()
                     }
                     .padding(.horizontal, 8)
+                    HStack {
+                        Image("Lv\(userLevel)Icon")
+                        Spacer()
+                    }
+                    .padding(.horizontal, 8)
+                    if vipLabel != "" {
+                        HStack {
+                            Image("VIPIcon")
+                            Text(vipLabel)
+                            Spacer()
+                        }
+                    }
                 }
             }
         }
