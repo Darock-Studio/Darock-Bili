@@ -105,6 +105,7 @@ jobs:
         run: |
           xcodebuild -exportArchive -archivePath ./build.xcarchive -exportPath ./ -exportOptionsPlist ./ExportOptions/ad-hoc.plist -DVTProvisioningIsManaged=YES -DVTSkipCertificateValidityCheck=YES
           mv '喵哩喵哩.ipa' DarockBili_Company.ipa
+          echo "FIN_STATUS=success" >> $GITHUB_ENV
 
       - name: Upload IPA File
         uses: actions/upload-artifact@v3
