@@ -144,11 +144,9 @@ public func autoRetryRequestApi(_ url: String, headers: HTTPHeaders?, maxReqCoun
         var reqResults = [JSON]()
         var forTotal = 0
         for i in 1...maxReqCount {
-            singalReq(url, headers: headers) { respJson, isSuccess in
-                DarockKit.Network.shared.requestJSON(url, headers: headers) { respJson, _ in 
-                    reqResults.append(respJson)
-                    forTotal++
-                }
+            DarockKit.Network.shared.requestJSON(url, headers: headers) { respJson, _ in 
+                reqResults.append(respJson)
+                forTotal++
             }
         }
         while forTotal < maxReqCount { }
