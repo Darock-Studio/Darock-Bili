@@ -145,6 +145,9 @@ public func autoRetryRequestApi(_ url: String, headers: HTTPHeaders?, maxReqCoun
         for i in 1...maxReqCount {
             DarockKit.Network.shared.requestJSON(url, headers: headers) { respJson, _ in 
                 reqResults.append(respJson)
+                if debug {
+                    tipWithText("Retry: \(i)", symbol: "hammer.circle.fill")
+                }
                 if i == maxReqCount {
                     var isCalledback = false
                     var anyValidJson: JSON?
