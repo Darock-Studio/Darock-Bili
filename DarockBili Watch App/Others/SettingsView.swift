@@ -19,6 +19,7 @@ import Charts
 import SwiftUI
 import WatchKit
 import SwiftDate
+import DarockKit
 
 struct SettingsView: View {
     var body: some View {
