@@ -101,7 +101,7 @@ struct SettingsView: View {
                                     Color.blue
                                         .frame(width: 20, height: 20)
                                         .clipShape(Circle())
-                                    Image(systemName: "hammer.circle.fill")
+                                    Image(systemName: "hammer.fill")
                                         .font(.system(size: 12))
                                 }
                                 Text("开发者")
