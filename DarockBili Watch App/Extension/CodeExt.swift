@@ -139,15 +139,12 @@ public func hideDigitalTime(_ b: Bool) {
 }
 
 // MARK: Networking
-public func autoRetryRequestApi(_ url: String, headers: HTTPHeaders?, maxReqCount: Int = 100, callback: @escaping (JSON, Bool) -> Void) {
+public func autoRetryRequestApi(_ url: String, headers: HTTPHeaders?, maxReqCount: Int = 233, callback: @escaping (JSON, Bool) -> Void) {
     DispatchQueue.global().async {
         var reqResults = [JSON]()
         for i in 1...maxReqCount {
             DarockKit.Network.shared.requestJSON(url, headers: headers) { respJson, _ in 
                 reqResults.append(respJson)
-                if debug {
-                    tipWithText("Retry: \(i)", symbol: "hammer.circle.fill")
-                }
                 if i == maxReqCount {
                     var isCalledback = false
                     var anyValidJson: JSON?
@@ -156,9 +153,15 @@ public func autoRetryRequestApi(_ url: String, headers: HTTPHeaders?, maxReqCoun
                             if CheckBApiError(from: result) {
                                 callback(result, true)
                                 isCalledback = true
+                                if debug {
+                                    tipWithText("Retry Hander: Callbacked without error, count: \(i)", symbol: "hammer.circle.fill")
+                                }
                                 break
                             } else {
                                 anyValidJson = result
+                                if debug {
+                                    tipWithText("Retry Hander: Callbacked with error, count: \(i)", symbol: "hammer.circle.fill")
+                                }
                             }
                         }
                     }
