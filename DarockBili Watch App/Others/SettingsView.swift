@@ -93,7 +93,22 @@ struct SettingsView: View {
                     })
                     
                 }
-                
+                if debug {
+                    Section {
+                        NavigationLink(destination: {DebugMenuView()}, label: {
+                            HStack {
+                                ZStack {
+                                    Color.blue
+                                        .frame(width: 20, height: 20)
+                                        .clipShape(Circle())
+                                    Image(systemName: "hammer.fill")
+                                        .font(.system(size: 12))
+                                }
+                                Text("开发者")
+                            }
+                        })
+                    }
+                }
             }
             .navigationTitle("设置")
             .navigationBarTitleDisplayMode(.large)
@@ -296,6 +311,86 @@ struct SettingsView: View {
                     batteryLevel = Double(WKInterfaceDevice.current().batteryLevel * 100.0)
                     batteryState = WKInterfaceDevice.current().batteryState
                     debugPrint(batteryLevel)
+                }
+            }
+        }
+        struct DebugMenuView: View {
+            var body: some View {
+                List {
+                    NavigationLink(destination: {UserDetailView(uid: "3546572635768935")}, label: {
+                        Text("LongUIDUserTest")
+                    })
+                    NavigationLink(destination: {BuvidFpDebug()}, label: {
+                        Text("buvid_fpTest")
+                    })
+                    NavigationLink(destination: {UuidDebug()}, label: {
+                        Text("_uuid_Gen")
+                    })
+                    NavigationLink(destination: {Buvid34Debug()}, label: {
+                        Text("buvid3_4_actived")
+                    })
+                }
+            }
+
+            struct BuvidFpDebug: View {
+                @State var fp = ""
+                @State var resu = ""
+                var body: some View {
+                    List {
+                        TextField("fp", text: $fp)
+                        Button(action: {
+                            do {
+                                resu = try BuvidFp.gen(key: fp, seed: 31)
+                            } catch {
+                                resu = "Failed: \(error)"
+                            }
+                        }, label: {
+                            Text("Gen")
+                        })
+                        Text(resu)
+                    }
+                }
+            }
+            struct UuidDebug: View {
+                @State var uuid = ""
+                var body: some View {
+                    List {
+                        Button(action: {
+                            uuid = UuidInfoc.gen()
+                        }, label: {
+                            Text("Gen")
+                        })
+                        Text(uuid)
+                    }
+                }
+            }
+            struct Buvid34Debug: View {
+                @State var activeBdUrl = "https://www.bilibili.com/"
+                @State var locBuvid3 = ""
+                @State var locBuvid4 = ""
+                @State var locUplResp = ""
+                var body: some View {
+                    List {
+                        Section {
+                            Text("Current Global Buvid3: \(globalBuvid3)")
+                            Text("Current Global Buvid4: \(globalBuvid4)")
+                        }
+                        Section {
+                            TextField("activeBdUrl", text: $activeBdUrl)
+                            Button(action: {
+                                getBuvid(url: activeBdUrl.urlEncoded()) { buvid3, buvid4, _, resp in
+                                    locBuvid3 = buvid3
+                                    locBuvid4 = buvid4
+                                    locUplResp = resp
+                                }
+                            }, label: {
+                                Text("Get new & active")
+                            })
+                            Text(locBuvid3)
+                            Text(locBuvid4)
+                            Text(locUplResp)
+                        }
+                    }
                 }
             }
         }

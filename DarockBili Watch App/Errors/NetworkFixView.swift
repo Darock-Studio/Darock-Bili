@@ -444,18 +444,14 @@ let errorCodeTextDic = [
     -8888: "对不起，服务器开小差了~"
 ]
 
-public func CheckBApiError(from input: JSON) -> Bool {
+public func CheckBApiError(from input: JSON, noTip: Bool = false) -> Bool {
     let code = input["code"].int ?? 0
     if code == 0 {
         return true
     }
     let msg = errorCodeTextDic[code] ?? (input["message"].string ?? "")
-    tipWithText(msg, symbol: "xmark.circle.fill")
-    let headers: HTTPHeaders = [
-        "User-Agent": "Mozilla/5.0"
-    ]
-    DarockKit.Network.shared.requestString("https://api.bilibili.com/x/web-interface/zone", headers: headers) { respStr, _ in
-        DarockKit.Network.shared.requestString("https://api.darock.top/bili/error/upload/\("Code: \(code)|Message: \(msg)|Build: \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)|IsLoggedIn: \((UserDefaults.standard.string(forKey: "DedeUserID") ?? "") == "" ? "Yes" : "No")|Loc: \(respStr)".base64Encoded().replacingOccurrences(of: "/", with: "{slash}"))") { _, _ in return}
+    if !noTip {
+        tipWithText(msg, symbol: "xmark.circle.fill")
     }
     return false
 }
