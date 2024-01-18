@@ -594,7 +594,7 @@ struct UserDetailView: View {
             biliWbiSign(paramEncoded: "mid=\(uid)&ps=50&pn=\(videoNowPage)".base64Encoded()) { signed in
                 if let signed {
                     debugPrint(signed)
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/arc/search?\(signed)", headers: headers) { respJson, isSuccess in
+                    autoRetryRequestApi("https://api.bilibili.com/x/space/wbi/arc/search?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             debugPrint(respJson)
                             if !CheckBApiError(from: respJson) { return } 
