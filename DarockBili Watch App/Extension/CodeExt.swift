@@ -139,40 +139,25 @@ public func hideDigitalTime(_ b: Bool) {
 }
 
 // MARK: Networking
-public func autoRetryRequestApi(_ url: String, headers: HTTPHeaders?, maxReqCount: Int = 233, callback: @escaping (JSON, Bool) -> Void) {
+public func autoRetryRequestApi(_ url: String, headers: HTTPHeaders?, maxReqCount: Int = 10, callback: @escaping (JSON, Bool) -> Void) {
+    var retryCount = 0
     DispatchQueue.global().async {
-        var reqResults = [JSON]()
-        for i in 1...maxReqCount {
-            DarockKit.Network.shared.requestJSON(url, headers: headers) { respJson, _ in 
-                reqResults.append(respJson)
-                if i == maxReqCount {
-                    var isCalledback = false
-                    var anyValidJson: JSON?
-                    for result in reqResults {
-                        if result != JSON() {
-                            if CheckBApiError(from: result) {
-                                callback(result, true)
-                                isCalledback = true
-                                if debug {
-                                    tipWithText("Retry Hander: Callbacked without error, count: \(i)", symbol: "hammer.circle.fill")
-                                }
-                                break
-                            } else {
-                                anyValidJson = result
-                                if debug {
-                                    tipWithText("Retry Hander: Callbacked with error, count: \(i)", symbol: "hammer.circle.fill")
-                                }
-                            }
-                        }
-                    }
-                    if !isCalledback {
-                        if let vj = anyValidJson {
-                            callback(vj, true)
-                        } else {
-                            callback(JSON(), false)
-                        }
-                    }
+        sigReq(url, headers: headers, maxReqCount: maxReqCount, callback: callback)
+    }
+
+    func sigReq(_ url: String, headers: HTTPHeaders?, maxReqCount: Int = 10, callback: @escaping (JSON, Bool) -> Void) {
+        DarockKit.Network.shared.requestJSON(url, headers: headers) { respJson, isSuccess in
+            if isSuccess {
+                if CheckBApiError(from: respJson, noTip: true) { // Requesting succeed
+                    callback(respJson, true)
+                } else if retryCount < maxReqCount { // Failed but can retry
+                    retryCount++
+                    sigReq(url, headers: headers, maxReqCount: maxReqCount, callback: callback)
+                } else { // Failed and not able to retry, callback json for next level code processing error.
+                    callback(respJson, true)
                 }
+            } else {
+                callback(respJson, isSuccess)
             }
         }
     }
