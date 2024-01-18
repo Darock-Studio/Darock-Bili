@@ -67,8 +67,6 @@ struct MainView: View {
                 List {
                     Section {
                         if debug {
-                            Text("Debug Version. DO NOT Release!!")
-                                .bold()
                             Button(action: {
                                 tipWithText("Test")
 //                                Dynamic.PUICApplication.sharedPUICApplication._setStatusBarTimeHidden(true, animated: false, completion: nil)
