@@ -29,7 +29,7 @@ struct NoticeView: View {
             DarockKit.Network.shared.requestString("https://api.darock.top/bili/notice/detail") { respStr, isSuccess in
                 if isSuccess {
                     if respStr.apiFixed() != "" {
-                        noticeDetail = respStr.apiFixed()
+                        noticeDetail = respStr.apiFixed().replacingOccurrences(of: "\\n", with: "\n")
                     } else {
                         DarockKit.Network.shared.requestString("https://api.darock.top/bili/notice") { respStr, isSuccess in
                             if isSuccess {
