@@ -27,6 +27,7 @@ struct AboutView: View {
                     Text("编译时间: \(CodingTime.getCodingTime())")
                         .onTapGesture(count: 9) {
                             debug = true
+                            tipWithText("You're now in Developer Mode", symbol: "hammer.circle.fill")
                         }
                     Text("遇到问题？在设置页面点击“反馈问题”进行反馈，感谢您的支持！")
                 }
