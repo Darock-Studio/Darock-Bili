@@ -187,11 +187,6 @@ struct DarockBili_Watch_AppApp: App {
                                                 Spacer()
                                             }
                                             .allowsHitTesting(false)
-                                            ScrollView {
-                                                Text(debugControlStdout)
-                                            }
-                                            .frame(height: 180)
-                                            .border(Color.blue, width: 2)
                                         }
                                         .font(.system(size: 10))
                                         
@@ -330,3 +325,6 @@ public func updateBuvid() {
         }
     }
 }
+
+
+
