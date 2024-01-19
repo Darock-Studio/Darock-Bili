@@ -800,8 +800,8 @@
 				INFOPLIST_FILE = "DarockBili-Watch-App-Info.plist";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
+        INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
-				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
