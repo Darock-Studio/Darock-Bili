@@ -83,9 +83,11 @@ struct SearchView: View {
     @State var isLoaded = false
     @State var debugResponse = ""
     @State var searchType = SearchType.video
+    @State var isNoResult = false
     var body: some View {
         ScrollView {
             VStack {
+                // FIXME: Wtf Apple doing? It shows a really fking bad view when the selecter presents.
                 Picker("搜索类型", selection: $searchType) {
                     Text("视频").tag(SearchType.video)
                     Text("用户").tag(SearchType.user)
@@ -103,6 +105,8 @@ struct SearchView: View {
                         ForEach(0...videos.count - 1, id: \.self) { i in
                             VideoCard(videos[i])
                         }
+                    } else if isNoResult {
+                        Text("无搜索结果")
                     } else if debugResponse != "" {
                         Text("似乎在搜索时遇到了一些问题，以下是详细信息")
                         Text(debugResponse)
@@ -144,6 +148,8 @@ struct SearchView: View {
                                 }
                             }
                         }
+                    } else if isNoResult {
+                        Text("无搜索结果")
                     } else if debugResponse != "" {
                         Text("似乎在搜索时遇到了一些问题，以下是详细信息")
                         Text(debugResponse)
@@ -190,6 +196,8 @@ struct SearchView: View {
                             })
                             .buttonBorderShape(.roundedRectangle(radius: 14))
                         }
+                    } else if isNoResult {
+                        Text("无搜索结果")
                     } else if debugResponse != "" {
                         Text("似乎在搜索时遇到了一些问题，以下是详细信息")
                         Text(debugResponse)
@@ -206,68 +214,77 @@ struct SearchView: View {
     }
 
     func NewSearch(keyword: String, type: SearchType, page: Int = 1, clear: Bool = false) {
-        debugResponse = ""
-        if clear {
+        // It takes a long period of time when changing search type and re-request,
+        // only gods know why, so we must make it async.
+        DispatchQueue.global().async {
             debugResponse = ""
-            videos.removeAll()
-            users.removeAll()
-            articles.removeAll()
-            bangumis.removeAll()
-            liverooms.removeAll()
-        }
-        let headers: HTTPHeaders = [
-            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-            "accept-encoding": "gzip, deflate, br",
-            "accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.30 Safari/537.36 Edg/84.0.522.11",
-            "sec-fetch-dest": "document",
-            "sec-fetch-mode": "navigate",
-            "sec-fetch-site": "none",
-            "sec-fetch-user": "?1",
-            "upgrade-insecure-requests": "1",
-            "referer": "https://www.bilibili.com/",
-            "cookie": "SESSDATA=\(sessdata); bili_jct=\(biliJct); DedeUserID=\(dedeUserID); DedeUserID__ckMd5=\(dedeUserID__ckMd5); buvid3=\(globalBuvid3); buvid4=\(globalBuvid4)"
-        ]
-        biliWbiSign(paramEncoded: "keyword=\(keyword)&search_type=\(type.rawValue)&page=\(page)".base64Encoded()) { signed in
-            if let signed {
-                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/wbi/search/type?\(signed)", headers: headers) { respJson, isSuccess in
-                    if isSuccess {
-                        debugPrint(respJson)
-                        if !CheckBApiError(from: respJson) { return }
-                        let result = respJson["data"]["result"]
-                        switch type {
-                        case .video:
-                            for video in result {
-                                videos.append(["Pic": "https:" + (video.1["pic"].string ?? "E"), "Title": (video.1["title"].string ?? "[加载失败]").replacingOccurrences(of: "<em class=\"keyword\">", with: "").replacingOccurrences(of: "</em>", with: ""), "View": String(video.1["play"].int ?? -1), "Danmaku": String(video.1["video_review"].int ?? -1), "UP": video.1["author"].string ?? "[加载失败]", "BV": video.1["bvid"].string ?? "E"])
+            if clear {
+                debugResponse = ""
+                isNoResult = false
+                videos.removeAll()
+                users.removeAll()
+                articles.removeAll()
+                bangumis.removeAll()
+                liverooms.removeAll()
+            }
+            let headers: HTTPHeaders = [
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                "accept-encoding": "gzip, deflate, br",
+                "accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.30 Safari/537.36 Edge/84.0.522.11",
+                "sec-fetch-dest": "document",
+                "sec-fetch-mode": "navigate",
+                "sec-fetch-site": "none",
+                "sec-fetch-user": "?1",
+                "upgrade-insecure-requests": "1",
+                "referer": "https://www.bilibili.com/",
+                "cookie": "SESSDATA=\(sessdata); bili_jct=\(biliJct); DedeUserID=\(dedeUserID); DedeUserID__ckMd5=\(dedeUserID__ckMd5); buvid3=\(globalBuvid3); buvid4=\(globalBuvid4)"
+            ]
+            biliWbiSign(paramEncoded: "keyword=\(keyword)&search_type=\(type.rawValue)&page=\(page)".base64Encoded()) { signed in
+                if let signed {
+                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/wbi/search/type?\(signed)", headers: headers) { respJson, isSuccess in
+                        if isSuccess {
+                            debugPrint(respJson)
+                            if !CheckBApiError(from: respJson) { return }
+                            if (respJson["data"]["numResults"].int ?? -1) == 0 {
+                                isNoResult = true
+                                return
                             }
-                        case .user:
-                            for user in result {
-                                isUserDetailPresented.append(false)
-                                users.append(["Name": user.1["uname"].string ?? "[加载失败]", "Pic": "https:" + (user.1["upic"].string ?? "E"), "ID": String(user.1["mid"].int ?? -1), "Fans": String(user.1["fans"].int ?? -1), "VideoCount": String(user.1["videos"].int ?? -1), "Videos": { () -> [[String: String]] in
-                                    var tVideos = [[String: String]]()
-                                    for video in user.1["res"] {
-                                        tVideos.append(["Pic": "https:" + (video.1["pic"].string ?? "E"), "Title": video.1["title"].string ?? "[加载失败]", "BV": video.1["bvid"].string ?? "E", "UP": user.1["uname"].string ?? "[加载失败]", "View": video.1["play"].string ?? "-1", "Danmaku": String(video.1["dm"].int ?? -1)])
-                                    }
-                                    return tVideos
-                                }()])
+                            let result = respJson["data"]["result"]
+                            switch type {
+                            case .video:
+                                for video in result {
+                                    videos.append(["Pic": "https:" + (video.1["pic"].string ?? "E"), "Title": (video.1["title"].string ?? "[加载失败]").replacingOccurrences(of: "<em class=\"keyword\">", with: "").replacingOccurrences(of: "</em>", with: ""), "View": String(video.1["play"].int ?? -1), "Danmaku": String(video.1["video_review"].int ?? -1), "UP": video.1["author"].string ?? "[加载失败]", "BV": video.1["bvid"].string ?? "E"])
+                                }
+                            case .user:
+                                for user in result {
+                                    isUserDetailPresented.append(false)
+                                    users.append(["Name": user.1["uname"].string ?? "[加载失败]", "Pic": "https:" + (user.1["upic"].string ?? "E"), "ID": String(user.1["mid"].int ?? -1), "Fans": String(user.1["fans"].int ?? -1), "VideoCount": String(user.1["videos"].int ?? -1), "Videos": { () -> [[String: String]] in
+                                        var tVideos = [[String: String]]()
+                                        for video in user.1["res"] {
+                                            tVideos.append(["Pic": "https:" + (video.1["pic"].string ?? "E"), "Title": video.1["title"].string ?? "[加载失败]", "BV": video.1["bvid"].string ?? "E", "UP": user.1["uname"].string ?? "[加载失败]", "View": video.1["play"].string ?? "-1", "Danmaku": String(video.1["dm"].int ?? -1)])
+                                        }
+                                        return tVideos
+                                    }()])
+                                }
+                            case .article:
+                                for article in result {
+                                    articles.append(["Title": (article.1["title"].string ?? "[加载失败]").replacingOccurrences(of: "<em class=\"keyword\">", with: "").replacingOccurrences(of: "</em>", with: ""), "Summary": article.1["desc"].string ?? "[加载失败]", "Type": article.1["category_name"].string ?? "[加载失败]", "View": String(article.1["view"].int ?? -1), "Like": String(article.1["like"].int ?? -1), "Pic": "https:" + (article.1["image_urls"][0].string ?? "E"), "CV": String(article.1["id"].int ?? 0)])
+                                }
+                            case .bangumi:
+                                break
+                            case .liveRoom:
+                                break
                             }
-                        case .article:
-                            for article in result {
-                                articles.append(["Title": (article.1["title"].string ?? "[加载失败]").replacingOccurrences(of: "<em class=\"keyword\">", with: "").replacingOccurrences(of: "</em>", with: ""), "Summary": article.1["desc"].string ?? "[加载失败]", "Type": article.1["category_name"].string ?? "[加载失败]", "View": String(article.1["view"].int ?? -1), "Like": String(article.1["like"].int ?? -1), "Pic": article.1["image_urls"][0].string ?? "E", "CV": String(article.1["id"].int ?? 0)])
-                            }
-                        case .bangumi:
-                            break
-                        case .liveRoom:
-                            break
+                            debugResponse = respJson.debugDescription
+                        } else {
+                            debugResponse = "请检查您的网络连接状态"
                         }
-                        debugResponse = respJson.debugDescription
-                    } else {
-                        debugResponse = "请检查您的网络连接状态"
                     }
                 }
             }
+            isLoaded = true
         }
-        isLoaded = true
     }
     enum SearchType: String {
         case video = "video"
