@@ -8,8 +8,7 @@
 #ifndef DarockBili_Bridging_Header_h
 #define DarockBili_Bridging_Header_h
 
-
-#endif /* DarockBili_Bridging_Header_h */
-
 #import "CodingTime.h"
 #import "AVExtension.h"
+
+#endif /* DarockBili_Bridging_Header_h */

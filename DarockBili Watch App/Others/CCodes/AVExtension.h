@@ -8,8 +8,6 @@
 #ifndef AVExtension_h
 #define AVExtension_h
 
-#endif /* AVExtension_h */
-
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
@@ -29,3 +27,5 @@
 + (void) AVPlayerStartPlay: (AVPlayer *) player;
 
 @end
+
+#endif /* AVExtension_h */
