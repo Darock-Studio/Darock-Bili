@@ -175,7 +175,7 @@ struct AudioPlayerView: View {
         .onAppear {
             // Background Session
             do {
-                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, policy: .longFormAudio, options: [.mixWithOthers])
+                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, policy: .longFormAudio, options: [.duckOthers])
                 try AVAudioSession.sharedInstance().setActive(true)
             } catch {
                 print(error)
