@@ -187,7 +187,7 @@ struct SettingsView: View {
                                     HStack {
                                         Image("AppIcon")
                                             .resizable()
-                                            .frame(width: 50, height: 50)
+                                            .frame(width: 30, height: 30)
                                         Spacer()
                                             .frame(width: 20)
                                         VStack {
@@ -210,6 +210,7 @@ struct SettingsView: View {
                                 HStack {
                                     Text("正在检查更新...")
                                     Spacer()
+                                        .frame(width: 75)
                                     ProgressView()
                                 }
                             }
