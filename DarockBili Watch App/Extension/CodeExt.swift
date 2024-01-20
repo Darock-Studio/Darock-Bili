@@ -233,7 +233,7 @@ func biliWbiSign(paramEncoded: String, completion: @escaping (String?) -> Void) 
             }
             
             let signedParams = encWbi(params: spdDicParam, imgKey: keys.imgKey, subKey: keys.subKey)
-            var query = param + "&w_rid=\(signedParams.w_rid)&wts=\(signedParams.wts)"
+            var query = decParam + "&w_rid=\(signedParams.w_rid)&wts=\(signedParams.wts)"
             query = query.urlEncoded()
             completion(query)
         case .failure(let error):
