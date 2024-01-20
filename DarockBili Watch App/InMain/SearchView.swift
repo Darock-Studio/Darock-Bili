@@ -246,7 +246,7 @@ struct SearchView: View {
                                 users.append(["Name": user.1["uname"].string ?? "[加载失败]", "Pic": "https:" + (user.1["upic"].string ?? "E"), "ID": String(user.1["mid"].int ?? -1), "Fans": String(user.1["fans"].int ?? -1), "VideoCount": String(user.1["videos"].int ?? -1), "Videos": { () -> [[String: String]] in
                                     var tVideos = [[String: String]]()
                                     for video in user.1["res"] {
-                                        tVideos.append(["Pic": "https:" + (video.1["pic"].string ?? "E"), "Title": video.1["title"].string ?? "[加载失败]", "BV": video.1["bvid"].string ?? "E", "UP": user.1["uname"].string ?? "[加载失败]", "View": video.1["play"].string ?? "-1", "Danmaku": String(video.1["dm"].int ?? -1)])
+                                        tVideos.append(["Pic": "https:" + (video["pic"].string ?? "E"), "Title": video["title"].string ?? "[加载失败]", "BV": video["bvid"].string ?? "E", "UP": user["uname"].string ?? "[加载失败]", "View": video["play"].string ?? "-1", "Danmaku": String(video["dm"].int ?? -1)])
                                     }
                                     return tVideos
                                 }()])
