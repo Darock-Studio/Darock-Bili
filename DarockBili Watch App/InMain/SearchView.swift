@@ -33,7 +33,9 @@ struct SearchMainView: View {
                     TextField("\(Image(systemName: "magnifyingglass")) 搜索...", text: $searchText)
                         .onSubmit {
                             isSearchPresented = true
-                            UserDefaults.standard.set([searchText] + (UserDefaults.standard.stringArray(forKey: "SearchHistory") ?? [String]()), forKey: "SearchHistory")
+                            if searchText != (searchHistory.first ?? "") {
+                                UserDefaults.standard.set([searchText] + searchHistory, forKey: "SearchHistory")
+                            }
                         }
                         .sheet(isPresented: $isSearchPresented, content: {NavigationStack { SearchView(keyword: searchText) }})
                         .onDisappear {
@@ -56,6 +58,14 @@ struct SearchMainView: View {
                             NavigationLink(destination: {SearchView(keyword: searchHistory[i])}, label: {
                                 Text(searchHistory[i])
                             })
+                            .swipeActions {
+                                Button(role: .destructive, action: {
+                                    searchHistory.remove(at: i)
+                                    UserDefaults.standard.set(searchHistory, forKey: "SearchHistory")
+                                }, label: {
+                                    Image(systemName: "trash")
+                                })
+                            }
                         }
                     }
                 }
@@ -92,8 +102,9 @@ struct SearchView: View {
                     Text("视频").tag(SearchType.video)
                     Text("用户").tag(SearchType.user)
                     Text("专栏").tag(SearchType.article)
-                    Text("番剧").tag(SearchType.bangumi)
-                    Text("直播").tag(SearchType.liveRoom)
+                    // TODO: Enable them after prepared
+                    //Text("番剧").tag(SearchType.bangumi)
+                    //Text("直播").tag(SearchType.liveRoom)
                 }
                 .pickerStyle(.navigationLink)
                 .onChange(of: searchType) { value in
