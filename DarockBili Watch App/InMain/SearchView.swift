@@ -78,7 +78,7 @@ struct SearchView: View {
     @State var users = [[String: Any]]()
     @State var articles = [[String: String]]()
     @State var bangumis = [[String: String]]()
-    @State var liverooms = [String: String]()
+    @State var liverooms = [[String: String]]()
     @State var isUserDetailPresented = [Bool]()
     @State var isLoaded = false
     @State var debugResponse = ""
@@ -237,22 +237,22 @@ struct SearchView: View {
                         let result = respJson["data"]["result"]
                         switch type {
                         case .video:
-                            for video in result {
+                            for video in result.1 {
                                 videos.append(["Pic": "https:" + video.1["pic"].string ?? "E", "Title": (video.1["title"].string ?? "[加载失败]").replacingOccurrences(of: "<em class=\"keyword\">", with: "").replacingOccurrences(of: "</em>", with: ""), "View": String(video.1["play"].int ?? -1), "Danmaku": String(video.1["video_review"].int ?? -1), "UP": video.1["author"].string ?? "[加载失败]", "BV": video.1["bvid"].string ?? "E"])
                             }
                         case .user:
-                            for user in result {
+                            for user in result.1 {
                                 isUserDetailPresented.append(false)
                                 users.append(["Name": user.1["uname"].string ?? "[加载失败]", "Pic": "https:" + (user.1["upic"].string ?? "E"), "ID": String(user.1["mid"].int ?? -1), "Fans": String(user.1["fans"].int ?? -1), "VideoCount": String(user.1["videos"].int ?? -1), "Videos": { () -> [[String: String]] in
                                     var tVideos = [[String: String]]()
                                     for video in user.1["res"] {
-                                        tVideos.append(["Pic": "https:" + (video["pic"].string ?? "E"), "Title": video["title"].string ?? "[加载失败]", "BV": video["bvid"].string ?? "E", "UP": user["uname"].string ?? "[加载失败]", "View": video["play"].string ?? "-1", "Danmaku": String(video["dm"].int ?? -1)])
+                                        tVideos.append(["Pic": "https:" + (video.1["pic"].string ?? "E"), "Title": video.1["title"].string ?? "[加载失败]", "BV": video.1["bvid"].string ?? "E", "UP": user.1["uname"].string ?? "[加载失败]", "View": video.1["play"].string ?? "-1", "Danmaku": String(video.1["dm"].int ?? -1)])
                                     }
                                     return tVideos
                                 }()])
                             }
                         case .article:
-                            for article in result {
+                            for article in result.1 {
                                 articles.append(["Title": (article.1["title"].string ?? "[加载失败]").replacingOccurrences(of: "<em class=\"keyword\">", with: "").replacingOccurrences(of: "</em>", with: ""), "Summary": article.1["desc"].string ?? "[加载失败]", "Type": article.1["category_name"].string ?? "[加载失败]", "View": String(article.1["view"].int ?? -1), "Like": String(article.1["like"].int ?? -1), "Pic": article.1["image_urls"][0].string ?? "E", "CV": String(article.1["id"].int ?? 0)])
                             }
                         case .bangumi:
