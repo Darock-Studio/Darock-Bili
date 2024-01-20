@@ -130,9 +130,8 @@ struct VideoDetailView: View {
                                                             DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers) { respJson, isSuccess in
                                                                 if !CheckBApiError(from: respJson) { return }
                                                                 VideoDetailView.willPlayVideoLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
-                                                                //debugPrint(response)
                                                                 VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                                                                isVideoPlayerPresented = true
+                                                                isNowPlayingPresented = true
                                                                 isLoading = false
                                                             }
                                                         }
