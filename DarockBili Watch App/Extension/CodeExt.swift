@@ -168,17 +168,20 @@ func biliWbiSign(paramEncoded: String, completion: @escaping (String?) -> Void) 
         return String(mixinKeyEncTab.map { orig[orig.index(orig.startIndex, offsetBy: $0)] }.prefix(32))
     }
 
-    func encWbi(params: [String: Any], imgKey: String, subKey: String) -> [String: Any] {
+    func encWbi(params: [String: Any], imgKey: String, subKey: String) -> (wts: String, w_rid: String) {
         var params = params
         let mixinKey = getMixinKey(orig: imgKey + subKey)
         let currTime = round(Date().timeIntervalSince1970)
-        params["wts"] = currTime
-        params = params.sorted { $0.key < $1.key }.reduce(into: [:]) { $0[$1.key] = $1.value }
-        params = params.mapValues { String(describing: $0).filter { !"!'()*".contains($0) } }
-        let query = params.map { "\($0.key)=\($0.value)" }.joined(separator: "&")
+        params["wts"] = Int(currTime)
+        let std = params.sorted { $0.key < $1.key }
+        var query = ""
+        for q in std {
+            query += "\(q.key)=\(q.value)&"
+        }
+        query.removeLast()
+        query = query.urlEncoded()
         let wbiSign = calculateMD5(string: query + mixinKey)
-        params["w_rid"] = wbiSign
-        return params
+        return (String(Int(currTime)), wbiSign)
     }
     
     func getWbiKeys(completion: @escaping (Result<(imgKey: String, subKey: String), Error>) -> Void) {
@@ -230,7 +233,8 @@ func biliWbiSign(paramEncoded: String, completion: @escaping (String?) -> Void) 
             }
             
             let signedParams = encWbi(params: spdDicParam, imgKey: keys.imgKey, subKey: keys.subKey)
-            let query = signedParams.map { "\($0.key)=\($0.value)" }.joined(separator: "&")
+            var query = decParam + "&w_rid=\(signedParams.w_rid)&wts=\(signedParams.wts)"
+            query = query.urlEncoded()
             completion(query)
         case .failure(let error):
             print("Error getting keys: \(error)")
