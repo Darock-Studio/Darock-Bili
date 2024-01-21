@@ -52,6 +52,7 @@ struct MainView: View {
         @AppStorage("SESSDATA") var sessdata = ""
         @AppStorage("bili_jct") var biliJct = ""
         @AppStorage("UpdateTipIgnoreVersion") var updateTipIgnoreVersion = ""
+        @AppStorage("IsShowNetworkFixing") var isShowNetworkFixing = true
         @State var videos = [[String: String]]()
         @State var isSearchPresented = false
         @State var notice = ""
@@ -199,12 +200,16 @@ struct MainView: View {
                             isLoadingNew = false
                         } else {
                             isFailedToLoad = true
-                            isNetworkFixPresented = true
+                            if isShowNetworkFixing {
+                                isNetworkFixPresented = true
+                            }
                         }
                     }
                 } else {
                     isFailedToLoad = true
-                    isNetworkFixPresented = true
+                    if isShowNetworkFixing {
+                        isNetworkFixPresented = true
+                    }
                 }
             }
         }
