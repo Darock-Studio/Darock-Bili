@@ -7,6 +7,7 @@ on:
       - '.github/workflows/*'
       - '!.github/workflows/ios.yml'
       - 'doc/**'
+      - 'Artwork/**'
 
 jobs:
   prepare:
