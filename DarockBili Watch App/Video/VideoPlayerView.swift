@@ -122,15 +122,6 @@ struct VideoPlayerView: View {
                         hideDigitalTime(false)
                         playerTimer?.invalidate()
                     }
-                    .accessibilityQuickAction(style: .prompt) {
-                        if isVideoPlayerGestureEnabled {
-                            Button(action: {
-                                player?.pause()
-                            }, label: {
-                                Text("Pause")
-                            })
-                        }
-                    }
                     .tag(1)
                 ScrollView {
                     VStack {
@@ -196,6 +187,15 @@ struct VideoPlayerView: View {
 //            }
         }
         .ignoresSafeArea()
+        .accessibilityQuickAction(style: .prompt) {
+            if isVideoPlayerGestureEnabled {
+                Button(action: {
+                    player?.pause()
+                }, label: {
+                    Text("Pause")
+                })
+            }
+        }
         .onAppear {
             let pExtension = AVExtension(VideoDetailView.willPlayVideoLink)!
             player = pExtension.getPlayer()
