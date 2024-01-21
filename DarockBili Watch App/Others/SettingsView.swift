@@ -176,6 +176,7 @@ struct SettingsView: View {
             struct SoftwareUpdateView: View {
                 @State var shouldUpdate = false
                 @State var isLoading = true
+                @State var isFailed = false
                 @State var latestVer = ""
                 @State var latestBuild = ""
                 @State var releaseNote = ""
@@ -198,19 +199,26 @@ struct SettingsView: View {
                                         }
                                     }
                                     Text(releaseNote)
-                                    Button(action: {
-                                        
-                                    }, label: {
-                                        Text("下载并安装")
-                                    })
+                                    if (Bundle.main.infoDictionary?["CFBundleIdentifier"] as! String) != "com.darock.DarockBili.watchkitapp" {
+                                        Button(action: {
+                                            
+                                        }, label: {
+                                            Text("下载并安装")
+                                        })
+                                    } else {
+                                        Text("您可于 iPhone 上的 TestFlight 更新 App")
+                                            .bold()
+                                    }
+                                } else if isFailed {
+                                    Text("检查更新时出错")
                                 } else {
                                     Text("喵哩喵哩已是最新版本")
                                 }
                             } else {
                                 HStack {
                                     Text("正在检查更新...")
+                                        .lineLimit(1)
                                     Spacer()
-                                        .frame(width: 75)
                                     ProgressView()
                                 }
                             }
@@ -226,7 +234,16 @@ struct SettingsView: View {
                                 if nowMajorVer != latestVer || Int(nowBuildVer)! < Int(latestBuild)! {
                                     shouldUpdate = true
                                 }
-                                isLoading = false
+                                DarockKit.Network.shared.requestString("https://api.darock.top/bili/newver/note") { respStr, isSuccess in
+                                    if isSuccess {
+                                        releaseNote = respStr.apiFixed()
+                                        isLoading = false
+                                    } else {
+                                        isFailed = true
+                                    }
+                                }
+                            } else {
+                                isFailed = true
                             }
                         }
                     }
