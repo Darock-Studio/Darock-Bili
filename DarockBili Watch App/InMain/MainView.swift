@@ -148,6 +148,7 @@ struct MainView: View {
                         } label: {
                             Label("加载失败，点击重试", systemImage: "wifi.exclamationmark")
                         }
+                        Text("您似乎未连接到网络。如果您的iPhone在附近，请在iPhone的\(Text("设置").bold())中关闭WiFi和蓝牙。")
                     } else {
                         ProgressView()
                     }
