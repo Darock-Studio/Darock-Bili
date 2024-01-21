@@ -91,6 +91,7 @@ struct PersonAccountView: View {
         @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
         @AppStorage("SESSDATA") var sessdata = ""
         @AppStorage("bili_jct") var biliJct = ""
+        @AppStorage("IsShowNetworkFixing") var isShowNetworkFixing = true
         @State var isLoginPresented = false
         @State var username = ""
         @State var userSign = ""
@@ -239,7 +240,7 @@ struct PersonAccountView: View {
                                                     username = respJson["data"]["name"].string ?? ""
                                                     userSign = respJson["data"]["sign"].string ?? ""
                                                     userFaceUrl = respJson["data"]["face"].string ?? "E"
-                                                } else {
+                                                } else if isShowNetworkFixing {
                                                     isNetworkFixPresented = true
                                                 }
                                             }
