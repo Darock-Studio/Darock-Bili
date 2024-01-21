@@ -6,6 +6,7 @@ on:
     paths-ignore:
       - '.github/workflows/*'
       - '!.github/workflows/ios.yml'
+      - 'doc/**'
 
 jobs:
   build:
