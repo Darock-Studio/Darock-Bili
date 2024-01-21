@@ -186,7 +186,7 @@ struct SettingsView: View {
                             if !isLoading {
                                 if shouldUpdate {
                                     HStack {
-                                        Image("AppIcon")
+                                        Image("AppIconImage")
                                             .resizable()
                                             .frame(width: 30, height: 30)
                                         Spacer()
@@ -198,6 +198,7 @@ struct SettingsView: View {
                                                 .foregroundColor(.gray)
                                         }
                                     }
+                                    Divider()
                                     Text(releaseNote)
                                     if (Bundle.main.infoDictionary?["CFBundleIdentifier"] as! String) != "com.darock.DarockBili.watchkitapp" {
                                         Button(action: {
@@ -216,10 +217,9 @@ struct SettingsView: View {
                                 }
                             } else {
                                 HStack {
-                                    Text("正在检查更新...")
-                                        .lineLimit(1)
-                                    Spacer()
                                     ProgressView()
+                                    Spacer()
+                                    Text("正在检查更新...")
                                 }
                             }
                         }
