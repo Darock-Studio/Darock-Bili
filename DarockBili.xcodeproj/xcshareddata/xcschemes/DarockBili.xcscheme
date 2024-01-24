@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1500"
+   LastUpgradeVersion = "1520"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6BFF29012A6C0B3A00914A8E"
+               BlueprintIdentifier = "B44689C92B4FC15A002CCEB2"
                BuildableName = "DarockBili.app"
                BlueprintName = "DarockBili"
                ReferencedContainer = "container:DarockBili.xcodeproj">
@@ -43,7 +43,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6BFF29012A6C0B3A00914A8E"
+            BlueprintIdentifier = "B44689C92B4FC15A002CCEB2"
             BuildableName = "DarockBili.app"
             BlueprintName = "DarockBili"
             ReferencedContainer = "container:DarockBili.xcodeproj">
@@ -60,7 +60,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6BFF29012A6C0B3A00914A8E"
+            BlueprintIdentifier = "B44689C92B4FC15A002CCEB2"
             BuildableName = "DarockBili.app"
             BlueprintName = "DarockBili"
             ReferencedContainer = "container:DarockBili.xcodeproj">

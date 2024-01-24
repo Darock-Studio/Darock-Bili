@@ -20,6 +20,7 @@ import SwiftUI
 import WatchKit
 import SwiftDate
 import DarockKit
+import AuthenticationServices
 
 struct SettingsView: View {
     var body: some View {
@@ -186,27 +187,40 @@ struct SettingsView: View {
                             if !isLoading {
                                 if shouldUpdate {
                                     HStack {
+                                        Spacer()
+                                            .frame(width: 10)
                                         Image("AppIconImage")
                                             .resizable()
-                                            .frame(width: 30, height: 30)
+                                            .frame(width: 40, height: 40)
+                                            .cornerRadius(8)
                                         Spacer()
-                                            .frame(width: 20)
+                                            .frame(width: 10)
                                         VStack {
-                                            Text("喵哩喵哩 v\(latestVer) Build \(latestBuild)")
-                                            Text("Darock Studio")
-                                                .font(.system(size: 13))
-                                                .foregroundColor(.gray)
+                                            Text("v\(latestVer) Build \(latestBuild)")
+                                                .font(.system(size: 14, weight: .medium))
+                                            HStack {
+                                                Text("Darock Studio")
+                                                    .font(.system(size: 13))
+                                                    .foregroundColor(.gray)
+                                                Spacer()
+                                            }
                                         }
                                     }
                                     Divider()
                                     Text(releaseNote)
                                     if (Bundle.main.infoDictionary?["CFBundleIdentifier"] as! String) != "com.darock.DarockBili.watchkitapp" {
                                         Button(action: {
-                                            
+                                            let session = ASWebAuthenticationSession(url: URL(string: "https://cd.darock.top:32767/meowbili/install.html")!, callbackURLScheme: "mlhd") { _, _ in
+                                                return
+                                            }
+                                            session.prefersEphemeralWebBrowserSession = true
+                                            session.start()
                                         }, label: {
                                             Text("下载并安装")
                                         })
                                     } else {
+                                        Spacer()
+                                            .frame(height: 10)
                                         Text("您可于 iPhone 上的 TestFlight 更新 App")
                                             .bold()
                                     }
@@ -217,9 +231,13 @@ struct SettingsView: View {
                                 }
                             } else {
                                 HStack {
-                                    ProgressView()
-                                    Spacer()
                                     Text("正在检查更新...")
+                                        .lineLimit(1)
+                                        .multilineTextAlignment(.leading)
+                                        .frame(width: 130)
+                                    Spacer()
+                                        .frame(maxWidth: .infinity)
+                                    ProgressView()
                                 }
                             }
                         }
@@ -479,6 +497,8 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        NavigationStack {
+            SettingsView()
+        }
     }
 }
