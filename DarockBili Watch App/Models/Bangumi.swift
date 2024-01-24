@@ -24,12 +24,12 @@ struct BangumiData {
     var title: String
     var originalTitle: String
     var cover: String
-    var area: String
-    var style: String
-    var cvs: [String]
-    var staffs: [String]
-    var description: String
-    var pubtime: Int
+    var area: String?
+    var style: String?
+    var cvs: [String]?
+    var staffs: [String]?
+    var description: String?
+    var pubtime: Int?
     var eps: [BangumiEp]?
     var score: Score?
     var isFollow: Bool = false
@@ -41,9 +41,11 @@ struct BangumiData {
 }
 
 struct BangumiEp {
+    var aid: Int64?
     var epid: Int64
+    var cid: Int64?
     var cover: String
     var title: String
-    var indexTitle: String
+    var indexTitle: String?
     var longTitle: String
 }

@@ -133,6 +133,9 @@
         }
       }
     },
+    "%f分" : {
+
+    },
     "%lld / %lld" : {
       "localizations" : {
         "en" : {
@@ -355,6 +358,9 @@
     "name" : {
 
     },
+    "Pause" : {
+
+    },
     "ReX" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -374,6 +380,16 @@
     },
     "UP 主认证" : {
 
+    },
+    "v%@ Build %@" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "v%1$@ Build %2$@"
+          }
+        }
+      }
     },
     "WindowsMEMZ" : {
 
@@ -427,7 +443,6 @@
 
     },
     "专栏" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -483,9 +498,6 @@
 
     },
     "以音频播放" : {
-
-    },
-    "似乎在搜索时遇到了一些问题，以下是详细信息" : {
 
     },
     "位置：%@" : {
@@ -875,6 +887,9 @@
         }
       }
     },
+    "您似乎未连接到网络。如果您的iPhone在附近，请在iPhone的%@中关闭WiFi和蓝牙。" : {
+
+    },
     "您可于 iPhone 上的 TestFlight 更新 App" : {
 
     },
@@ -969,6 +984,9 @@
     "搜索..." : {
 
     },
+    "搜索类型" : {
+
+    },
     "播放" : {
       "localizations" : {
         "en" : {
@@ -983,6 +1001,9 @@
 
     },
     "无反馈" : {
+
+    },
+    "无搜索结果" : {
 
     },
     "无法连接到网络" : {
@@ -1148,7 +1169,13 @@
     "热门" : {
 
     },
+    "用户" : {
+
+    },
     "电池" : {
+
+    },
+    "番剧" : {
 
     },
     "登录" : {
@@ -1200,7 +1227,6 @@
 
     },
     "视频" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

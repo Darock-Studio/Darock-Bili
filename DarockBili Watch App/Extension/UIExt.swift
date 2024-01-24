@@ -84,10 +84,12 @@ import SDWebImageSwiftUI
                     Text("\(score.score)分")
                         .offset(x: -3)
                 }
-                Image(systemName: "person")
-                Text(bangumiData.style)
-                    .lineLimit(1)
-                    .offset(x: -3)
+                if let style = bangumiData.style {
+                    Image(systemName: "sparkles")
+                    Text(style)
+                        .lineLimit(1)
+                        .offset(x: -3)
+                }
                 Spacer()
             }
             .lineLimit(1)
