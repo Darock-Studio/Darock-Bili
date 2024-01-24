@@ -653,4 +653,12 @@ extension Int {
     }
 }
 
-
+extension Bool {
+    init(_ input: Int) {
+        if input == 0 {
+            self = false
+        } else {
+            self = true
+        }
+    }
+}

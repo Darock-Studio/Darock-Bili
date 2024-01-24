@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C8CA05A2B6108460020DEDD /* Bangumi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8CA0592B6108460020DEDD /* Bangumi.swift */; };
 		B44689D12B4FC15A002CCEB2 /* 喵哩喵哩.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B44689D02B4FC15A002CCEB2 /* 喵哩喵哩.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B4468A312B4FC24A002CCEB2 /* NetworkFixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44689E82B4FC249002CCEB2 /* NetworkFixView.swift */; };
 		B4468A322B4FC24A002CCEB2 /* SignalErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44689E92B4FC249002CCEB2 /* SignalErrorView.swift */; };
@@ -108,6 +109,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8C8CA0592B6108460020DEDD /* Bangumi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bangumi.swift; sourceTree = "<group>"; };
 		B44689CA2B4FC15A002CCEB2 /* DarockBili.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarockBili.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B44689D02B4FC15A002CCEB2 /* 喵哩喵哩.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "喵哩喵哩.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B44689E82B4FC249002CCEB2 /* NetworkFixView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkFixView.swift; sourceTree = "<group>"; };
@@ -203,6 +205,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C8CA0562B6107C20020DEDD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8C8CA0592B6108460020DEDD /* Bangumi.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		B44689C32B4FC15A002CCEB2 = {
 			isa = PBXGroup;
 			children = (
@@ -229,6 +239,7 @@
 				B4C5E9562B4FD60600E2605B /* DarockBili-Watch-App-Info.plist */,
 				B4468A042B4FC249002CCEB2 /* DarockBili-Bridging-Header.h */,
 				B44689FF2B4FC249002CCEB2 /* DarockBiliApp.swift */,
+				8C8CA0562B6107C20020DEDD /* Models */,
 				E2565AF12B52BF0F000E01ED /* Bangumi */,
 				B44689E72B4FC249002CCEB2 /* Errors */,
 				B44689F62B4FC249002CCEB2 /* Extension */,
@@ -248,12 +259,12 @@
 		B44689E72B4FC249002CCEB2 /* Errors */ = {
 			isa = PBXGroup;
 			children = (
+				B44689EB2B4FC249002CCEB2 /* Backtrace */,
+				B44689F02B4FC249002CCEB2 /* DarockFeedback */,
 				B44689E82B4FC249002CCEB2 /* NetworkFixView.swift */,
 				B44689E92B4FC249002CCEB2 /* SignalErrorView.swift */,
 				B44689EA2B4FC249002CCEB2 /* MemoryWarningView.swift */,
-				B44689EB2B4FC249002CCEB2 /* Backtrace */,
 				B44689EF2B4FC249002CCEB2 /* FeedbackView.swift */,
-				B44689F02B4FC249002CCEB2 /* DarockFeedback */,
 				B44689F52B4FC249002CCEB2 /* ErrorGetView.swift */,
 			);
 			path = Errors;
@@ -283,10 +294,10 @@
 		B44689F62B4FC249002CCEB2 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				B44689F72B4FC249002CCEB2 /* CodeExt.swift */,
-				B44689F82B4FC249002CCEB2 /* AppFileManager.swift */,
 				B44689F92B4FC249002CCEB2 /* ColorThief */,
+				B44689F72B4FC249002CCEB2 /* CodeExt.swift */,
 				B44689FC2B4FC249002CCEB2 /* UIExt.swift */,
+				B44689F82B4FC249002CCEB2 /* AppFileManager.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -610,6 +621,7 @@
 				B4468A532B4FC24A002CCEB2 /* AboutView.swift in Sources */,
 				B4468A632B4FC24A002CCEB2 /* UserDetailView.swift in Sources */,
 				B4468A492B4FC24A002CCEB2 /* OfflineMainView.swift in Sources */,
+				8C8CA05A2B6108460020DEDD /* Bangumi.swift in Sources */,
 				B4468A4D2B4FC24A002CCEB2 /* VideoCommentsView.swift in Sources */,
 				B4468A3C2B4FC24A002CCEB2 /* CodeExt.swift in Sources */,
 				B4468A432B4FC24A002CCEB2 /* SearchView.swift in Sources */,

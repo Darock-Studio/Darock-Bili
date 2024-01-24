@@ -58,6 +58,46 @@ import SDWebImageSwiftUI
     .buttonBorderShape(.roundedRectangle(radius: 14))
 }
 
+@ViewBuilder func BangumiCard(_ bangumiData: BangumiData) -> some View {
+    NavigationLink(destination: {BangumiDetailView(bangumiData: bangumiData)}, label: {
+        VStack {
+            HStack {
+                WebImage(url: URL(string: bangumiData.cover + "@100w")!, options: [.progressiveLoad, .scaleDownLargeImages])
+                    .placeholder {
+                        RoundedRectangle(cornerRadius: 7)
+                            .frame(width: 50, height: 30)
+                            .foregroundColor(Color(hex: 0x3D3D3D))
+                            .redacted(reason: .placeholder)
+                    }
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 50)
+                    .cornerRadius(7)
+                Text(bangumiData.title)
+                    .font(.system(size: 14, weight: .bold))
+                    .lineLimit(2)
+                Spacer()
+            }
+            HStack {
+                if let score = bangumiData.score {
+                    Image(systemName: "star.fill")
+                    Text("\(score.score)分")
+                        .offset(x: -3)
+                }
+                Image(systemName: "person")
+                Text(bangumiData.style)
+                    .lineLimit(1)
+                    .offset(x: -3)
+                Spacer()
+            }
+            .lineLimit(1)
+            .font(.system(size: 11))
+            .foregroundColor(.gray)
+        }
+    })
+    .buttonBorderShape(.roundedRectangle(radius: 14))
+}
+
 struct VolumeControlView: WKInterfaceObjectRepresentable {
     typealias WKInterfaceObjectType = WKInterfaceVolumeControl
     

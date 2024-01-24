@@ -87,11 +87,10 @@ struct SearchView: View {
     @State var videos = [[String: String]]()
     @State var users = [[String: Any]]()
     @State var articles = [[String: String]]()
-    @State var bangumis = [[String: String]]()
+    @State var bangumis = [BangumiData]()
     @State var liverooms = [[String: String]]()
     @State var isUserDetailPresented = [Bool]()
     @State var isLoaded = false
-    @State var debugResponse = ""
     @State var searchType = SearchType.video
     @State var isNoResult = false
     var body: some View {
@@ -103,7 +102,7 @@ struct SearchView: View {
                     Text("用户").tag(SearchType.user)
                     Text("专栏").tag(SearchType.article)
                     // TODO: Enable them after prepared
-                    //Text("番剧").tag(SearchType.bangumi)
+                    Text("番剧").tag(SearchType.bangumi)
                     //Text("直播").tag(SearchType.liveRoom)
                 }
                 .pickerStyle(.navigationLink)
@@ -118,9 +117,6 @@ struct SearchView: View {
                         }
                     } else if isNoResult {
                         Text("无搜索结果")
-                    } else if debugResponse != "" {
-                        Text("似乎在搜索时遇到了一些问题，以下是详细信息")
-                        Text(debugResponse)
                     }
                 } else if searchType == .user {
                     if users.count != 0 {
@@ -161,9 +157,6 @@ struct SearchView: View {
                         }
                     } else if isNoResult {
                         Text("无搜索结果")
-                    } else if debugResponse != "" {
-                        Text("似乎在搜索时遇到了一些问题，以下是详细信息")
-                        Text(debugResponse)
                     }
                 } else if searchType == .article {
                     if articles.count != 0 {
@@ -209,12 +202,19 @@ struct SearchView: View {
                         }
                     } else if isNoResult {
                         Text("无搜索结果")
-                    } else if debugResponse != "" {
-                        Text("似乎在搜索时遇到了一些问题，以下是详细信息")
-                        Text(debugResponse)
+                    }
+                } else if searchType == .bangumi {
+                    if bangumis.count != 0 {
+                        ForEach(0..<bangumis.count, id: \.self) { i in
+                            BangumiCard(bangumis[i])
+                        }
+                    } else if isNoResult {
+                        Text("无搜索结果")
                     }
                 }
-                progressView()
+                if videos.isEmpty && users.isEmpty && articles.isEmpty && bangumis.isEmpty && liverooms.isEmpty {
+                    ProgressView()
+                }
             }
         }
         .onAppear {
@@ -228,9 +228,7 @@ struct SearchView: View {
         // It takes a long period of time when changing search type and re-request,
         // only gods know why, so we must make it async.
         DispatchQueue.global().async {
-            debugResponse = ""
             if clear {
-                debugResponse = ""
                 isNoResult = false
                 videos.removeAll()
                 users.removeAll()
@@ -283,13 +281,27 @@ struct SearchView: View {
                                     articles.append(["Title": (article.1["title"].string ?? "[加载失败]").replacingOccurrences(of: "<em class=\"keyword\">", with: "").replacingOccurrences(of: "</em>", with: ""), "Summary": article.1["desc"].string ?? "[加载失败]", "Type": article.1["category_name"].string ?? "[加载失败]", "View": String(article.1["view"].int ?? -1), "Like": String(article.1["like"].int ?? -1), "Pic": "https:" + (article.1["image_urls"][0].string ?? "E"), "CV": String(article.1["id"].int ?? 0)])
                                 }
                             case .bangumi:
-                                break
+                                for bangumi in result {
+                                    if (bangumi.1["type"].string ?? "") == "media_bangumi" {
+                                        bangumis.append(BangumiData(mediaId: bangumi.1["media_id"].int64 ?? 0, seasonId: bangumi.1["season_id"].int64 ?? 0, title: (bangumi.1["title"].string ?? "[加载失败]").replacingOccurrences(of: "<em class=\"keyword\">", with: "").replacingOccurrences(of: "</em>", with: ""), originalTitle: bangumi.1["org_title"].string ?? "[加载失败]", cover: "https:" + (bangumi.1["cover"].string ?? "E"), area: bangumi.1["areas"].string ?? "[加载失败]", style: bangumi.1["styles"].string ?? "[加载失败]", cvs: (bangumi.1["cv"].string ?? "[加载失败]").split(separator: "\\n").map { String($0) }, staffs: (bangumi.1["staff"].string ?? "[加载失败]").split(separator: "\\n").map { String($0) }, description: bangumi.1["desc"].string ?? "[加载失败]", pubtime: bangumi.1["pubtime"].int ?? 0, eps: { () -> [BangumiEp] in
+                                            let eps = bangumi.1["eps"]
+                                            var tmp = [BangumiEp]()
+                                            for ep in eps {
+                                                tmp.append(BangumiEp(epid: ep.1["id"].int64 ?? 0, cover: ep.1["cover"].string ?? "E", title: ep.1["title"].string ?? "[加载失败]", indexTitle: ep.1["index_title"].string ?? "[加载失败]", longTitle: ep.1["long_title"].string ?? "[加载失败]"))
+                                            }
+                                            return tmp
+                                        }(), score: { () -> BangumiData.Score? in
+                                            if let score = bangumi.1["media_score"]["score"].float {
+                                                return .init(userCount: bangumi.1["media_score"]["user_count"].int ?? 0, score: score)
+                                            } else {
+                                                return nil
+                                            }
+                                        }(), isFollow: Bool(bangumi.1["is_follow"].int ?? 0)))
+                                    }
+                                }
                             case .liveRoom:
                                 break
                             }
-                            debugResponse = respJson.debugDescription
-                        } else {
-                            debugResponse = "请检查您的网络连接状态"
                         }
                     }
                 }
@@ -303,20 +315,6 @@ struct SearchView: View {
         case liveRoom = "live_room"
         case article = "article"
         case user = "bili_user"
-    }
-    
-    @ViewBuilder func progressView() -> some View {
-        let showError: Bool = {
-            if debugResponse.isEmpty { //这样是加载中或加载成功
-                return !(users.isEmpty || videos.isEmpty || articles.isEmpty || bangumis.isEmpty || liverooms.isEmpty) //两个都没有的话那肯定是加载中了，否则就是加载成功了
-            } else { //加载失败，有错误信息，不需要ProgressView
-                return false
-            }
-        }()
-        if showError {
-            ProgressView()
-                .padding(.top)
-        }
     }
 }
 
