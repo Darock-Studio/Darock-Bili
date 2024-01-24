@@ -19,6 +19,8 @@ import Charts
 import SwiftUI
 import WatchKit
 import SwiftDate
+import DarockKit
+import AuthenticationServices
 
 struct SettingsView: View {
     var body: some View {
@@ -125,6 +127,9 @@ struct SettingsView: View {
                     NavigationLink(destination: {AboutView()}, label: {
                         Text("关于")
                     })
+                    NavigationLink(destination: {SoftwareUpdateView()}, label: {
+                        Text("软件更新")
+                    })
                     NavigationLink(destination: {PlayerSettingsView()}, label: {
                         Text("播放设置")
                     })
@@ -168,7 +173,100 @@ struct SettingsView: View {
                 }
                 .navigationTitle("通用")
             }
-            
+
+            struct SoftwareUpdateView: View {
+                @State var shouldUpdate = false
+                @State var isLoading = true
+                @State var isFailed = false
+                @State var latestVer = ""
+                @State var latestBuild = ""
+                @State var releaseNote = ""
+                var body: some View {
+                    ScrollView {
+                        VStack {
+                            if !isLoading {
+                                if shouldUpdate {
+                                    HStack {
+                                        Spacer()
+                                            .frame(width: 10)
+                                        Image("AppIconImage")
+                                            .resizable()
+                                            .frame(width: 40, height: 40)
+                                            .cornerRadius(8)
+                                        Spacer()
+                                            .frame(width: 10)
+                                        VStack {
+                                            Text("v\(latestVer) Build \(latestBuild)")
+                                                .font(.system(size: 14, weight: .medium))
+                                            HStack {
+                                                Text("Darock Studio")
+                                                    .font(.system(size: 13))
+                                                    .foregroundColor(.gray)
+                                                Spacer()
+                                            }
+                                        }
+                                    }
+                                    Divider()
+                                    Text(releaseNote)
+                                    if (Bundle.main.infoDictionary?["CFBundleIdentifier"] as! String) != "com.darock.DarockBili.watchkitapp" {
+                                        Button(action: {
+                                            let session = ASWebAuthenticationSession(url: URL(string: "https://cd.darock.top:32767/meowbili/install.html")!, callbackURLScheme: "mlhd") { _, _ in
+                                                return
+                                            }
+                                            session.prefersEphemeralWebBrowserSession = true
+                                            session.start()
+                                        }, label: {
+                                            Text("下载并安装")
+                                        })
+                                    } else {
+                                        Spacer()
+                                            .frame(height: 10)
+                                        Text("您可于 iPhone 上的 TestFlight 更新 App")
+                                            .bold()
+                                    }
+                                } else if isFailed {
+                                    Text("检查更新时出错")
+                                } else {
+                                    Text("喵哩喵哩已是最新版本")
+                                }
+                            } else {
+                                HStack {
+                                    Text("正在检查更新...")
+                                        .lineLimit(1)
+                                        .multilineTextAlignment(.leading)
+                                        .frame(width: 130)
+                                    Spacer()
+                                        .frame(maxWidth: .infinity)
+                                    ProgressView()
+                                }
+                            }
+                        }
+                    }
+                    .onAppear {
+                        DarockKit.Network.shared.requestString("https://api.darock.top/bili/newver") { respStr, isSuccess in
+                            if isSuccess && respStr.apiFixed().contains("|") {
+                                latestVer = String(respStr.apiFixed().split(separator: "|")[0])
+                                latestBuild = String(respStr.apiFixed().split(separator: "|")[1])
+                                let nowMajorVer = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+                                let nowBuildVer = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
+                                if nowMajorVer != latestVer || Int(nowBuildVer)! < Int(latestBuild)! {
+                                    shouldUpdate = true
+                                }
+                                DarockKit.Network.shared.requestString("https://api.darock.top/bili/newver/note") { respStr, isSuccess in
+                                    if isSuccess {
+                                        releaseNote = respStr.apiFixed()
+                                        isLoading = false
+                                    } else {
+                                        isFailed = true
+                                    }
+                                }
+                            } else {
+                                isFailed = true
+                            }
+                        }
+                    }
+                }
+            }
             struct PlayerSettingsView: View {
                 @AppStorage("IsPlayerAutoRotating") var isPlayerAutoRotating = true
                 @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
@@ -399,6 +497,8 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        NavigationStack {
+            SettingsView()
+        }
     }
 }
