@@ -268,13 +268,15 @@ struct SettingsView: View {
                 }
             }
             struct PlayerSettingsView: View {
-                @AppStorage("IsPlayerAutoRotating") var isPlayerAutoRotating = true
+                @AppStorage("IsUseModifiedPlayer") var isUseModifiedPlayer = true
                 @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
                 @AppStorage("VideoGetterSource") var videoGetterSource = "official"
                 var body: some View {
                     List {
                         Section {
-                            Toggle("自动旋转（仅竖向）", isOn: $isPlayerAutoRotating)
+                            Toggle("使用自定义播放器", isOn: $isUseModifiedPlayer)
+                        } footer: {
+                            Text("自定义播放器带来了更多功能, 但可能会消耗更多性能")
                         }
                         Section {
                             Picker("记录历史记录", selection: $recordHistoryTime) {
