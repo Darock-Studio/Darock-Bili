@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C81A8EA2B620D130045E986 /* BPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8C81A8E92B620D130045E986 /* BPlayer */; };
 		B44689D12B4FC15A002CCEB2 /* 喵哩喵哩.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B44689D02B4FC15A002CCEB2 /* 喵哩喵哩.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B4468A312B4FC24A002CCEB2 /* NetworkFixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44689E82B4FC249002CCEB2 /* NetworkFixView.swift */; };
 		B4468A322B4FC24A002CCEB2 /* SignalErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44689E92B4FC249002CCEB2 /* SignalErrorView.swift */; };
@@ -21,8 +22,6 @@
 		B4468A3B2B4FC24A002CCEB2 /* ErrorGetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44689F52B4FC249002CCEB2 /* ErrorGetView.swift */; };
 		B4468A3C2B4FC24A002CCEB2 /* CodeExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44689F72B4FC249002CCEB2 /* CodeExt.swift */; };
 		B4468A3D2B4FC24A002CCEB2 /* AppFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44689F82B4FC249002CCEB2 /* AppFileManager.swift */; };
-		B4468A3E2B4FC24A002CCEB2 /* ColorThief.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44689FA2B4FC249002CCEB2 /* ColorThief.swift */; };
-		B4468A3F2B4FC24A002CCEB2 /* MMCQ.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44689FB2B4FC249002CCEB2 /* MMCQ.swift */; };
 		B4468A402B4FC24A002CCEB2 /* UIExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44689FC2B4FC249002CCEB2 /* UIExt.swift */; };
 		B4468A412B4FC24A002CCEB2 /* LivePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44689FE2B4FC249002CCEB2 /* LivePlayerView.swift */; };
 		B4468A422B4FC24A002CCEB2 /* DarockBiliApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44689FF2B4FC249002CCEB2 /* DarockBiliApp.swift */; };
@@ -31,7 +30,6 @@
 		B4468A452B4FC24A002CCEB2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4468A032B4FC249002CCEB2 /* ContentView.swift */; };
 		B4468A462B4FC24A002CCEB2 /* ImageViewerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4468A062B4FC249002CCEB2 /* ImageViewerView.swift */; };
 		B4468A472B4FC24A002CCEB2 /* UserDynamicMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4468A072B4FC249002CCEB2 /* UserDynamicMainView.swift */; };
-		B4468A482B4FC24A002CCEB2 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B4468A082B4FC249002CCEB2 /* Localizable.xcstrings */; };
 		B4468A492B4FC24A002CCEB2 /* OfflineMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4468A0A2B4FC249002CCEB2 /* OfflineMainView.swift */; };
 		B4468A4A2B4FC24A002CCEB2 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4468A0C2B4FC24A002CCEB2 /* VideoPlayerView.swift */; };
 		B4468A4B2B4FC24A002CCEB2 /* LyricerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4468A0D2B4FC24A002CCEB2 /* LyricerView.swift */; };
@@ -124,8 +122,6 @@
 		B44689F52B4FC249002CCEB2 /* ErrorGetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorGetView.swift; sourceTree = "<group>"; };
 		B44689F72B4FC249002CCEB2 /* CodeExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeExt.swift; sourceTree = "<group>"; };
 		B44689F82B4FC249002CCEB2 /* AppFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFileManager.swift; sourceTree = "<group>"; };
-		B44689FA2B4FC249002CCEB2 /* ColorThief.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorThief.swift; sourceTree = "<group>"; };
-		B44689FB2B4FC249002CCEB2 /* MMCQ.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MMCQ.swift; sourceTree = "<group>"; };
 		B44689FC2B4FC249002CCEB2 /* UIExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExt.swift; sourceTree = "<group>"; };
 		B44689FE2B4FC249002CCEB2 /* LivePlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivePlayerView.swift; sourceTree = "<group>"; };
 		B44689FF2B4FC249002CCEB2 /* DarockBiliApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarockBiliApp.swift; sourceTree = "<group>"; };
@@ -135,7 +131,6 @@
 		B4468A042B4FC249002CCEB2 /* DarockBili-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DarockBili-Bridging-Header.h"; sourceTree = "<group>"; };
 		B4468A062B4FC249002CCEB2 /* ImageViewerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewerView.swift; sourceTree = "<group>"; };
 		B4468A072B4FC249002CCEB2 /* UserDynamicMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDynamicMainView.swift; sourceTree = "<group>"; };
-		B4468A082B4FC249002CCEB2 /* Localizable.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		B4468A0A2B4FC249002CCEB2 /* OfflineMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfflineMainView.swift; sourceTree = "<group>"; };
 		B4468A0C2B4FC24A002CCEB2 /* VideoPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		B4468A0D2B4FC24A002CCEB2 /* LyricerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LyricerView.swift; sourceTree = "<group>"; };
@@ -185,6 +180,7 @@
 				B4468A9A2B4FC8B7002CCEB2 /* SDWebImagePDFCoder in Frameworks */,
 				B4468A6D2B4FC2C8002CCEB2 /* Alamofire in Frameworks */,
 				B4468A8C2B4FC85A002CCEB2 /* SwiftyJSON in Frameworks */,
+				8C81A8EA2B620D130045E986 /* BPlayer in Frameworks */,
 				B4468A982B4FC8B7002CCEB2 /* SDWebImageSVGCoder in Frameworks */,
 				B4468A702B4FC5E7002CCEB2 /* Marquee in Frameworks */,
 				B4468A9E2B4FC8B7002CCEB2 /* CachedAsyncImage in Frameworks */,
@@ -225,7 +221,6 @@
 		B44689D42B4FC15A002CCEB2 /* DarockBili Watch App */ = {
 			isa = PBXGroup;
 			children = (
-				B4468A082B4FC249002CCEB2 /* Localizable.xcstrings */,
 				B4C5E9562B4FD60600E2605B /* DarockBili-Watch-App-Info.plist */,
 				B4468A042B4FC249002CCEB2 /* DarockBili-Bridging-Header.h */,
 				B44689FF2B4FC249002CCEB2 /* DarockBiliApp.swift */,
@@ -285,19 +280,9 @@
 			children = (
 				B44689F72B4FC249002CCEB2 /* CodeExt.swift */,
 				B44689F82B4FC249002CCEB2 /* AppFileManager.swift */,
-				B44689F92B4FC249002CCEB2 /* ColorThief */,
 				B44689FC2B4FC249002CCEB2 /* UIExt.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		B44689F92B4FC249002CCEB2 /* ColorThief */ = {
-			isa = PBXGroup;
-			children = (
-				B44689FA2B4FC249002CCEB2 /* ColorThief.swift */,
-				B44689FB2B4FC249002CCEB2 /* MMCQ.swift */,
-			);
-			path = ColorThief;
 			sourceTree = "<group>";
 		};
 		B44689FD2B4FC249002CCEB2 /* Live */ = {
@@ -493,6 +478,7 @@
 				B4468A9B2B4FC8B7002CCEB2 /* SwiftSoup */,
 				B4468A9D2B4FC8B7002CCEB2 /* CachedAsyncImage */,
 				B4468A9F2B4FC8B7002CCEB2 /* Dynamic */,
+				8C81A8E92B620D130045E986 /* BPlayer */,
 			);
 			productName = "DarockBili Watch App";
 			productReference = B44689D02B4FC15A002CCEB2 /* 喵哩喵哩.app */;
@@ -542,6 +528,7 @@
 				B4468A852B4FC6C6002CCEB2 /* XCRemoteSwiftPackageReference "Dynamic" */,
 				B4468A8A2B4FC85A002CCEB2 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				B4468A8D2B4FC8AC002CCEB2 /* XCRemoteSwiftPackageReference "DarockKit" */,
+				8C81A8E82B620D120045E986 /* XCLocalSwiftPackageReference "../BPlayer" */,
 			);
 			productRefGroup = B44689CB2B4FC15A002CCEB2 /* Products */;
 			projectDirPath = "";
@@ -566,7 +553,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4468A502B4FC24A002CCEB2 /* Preview Assets.xcassets in Resources */,
-				B4468A482B4FC24A002CCEB2 /* Localizable.xcstrings in Resources */,
 				B4468A672B4FC286002CCEB2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -617,7 +603,6 @@
 				B4468A4E2B4FC24A002CCEB2 /* VideoDetailView.swift in Sources */,
 				B4468A352B4FC24A002CCEB2 /* Backtrace.swift in Sources */,
 				B4468A362B4FC24A002CCEB2 /* FeedbackView.swift in Sources */,
-				B4468A3E2B4FC24A002CCEB2 /* ColorThief.swift in Sources */,
 				B4468A652B4FC24A002CCEB2 /* WatchLaterView.swift in Sources */,
 				B4468A332B4FC24A002CCEB2 /* MemoryWarningView.swift in Sources */,
 				B4468A452B4FC24A002CCEB2 /* ContentView.swift in Sources */,
@@ -630,7 +615,6 @@
 				B4468A622B4FC24A002CCEB2 /* ArticleView.swift in Sources */,
 				B4468A4B2B4FC24A002CCEB2 /* LyricerView.swift in Sources */,
 				B4468A392B4FC24A002CCEB2 /* FeedbackMainView.swift in Sources */,
-				B4468A3F2B4FC24A002CCEB2 /* MMCQ.swift in Sources */,
 				B4468A5D2B4FC24A002CCEB2 /* DownloadsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -772,7 +756,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 180;
+				CURRENT_PROJECT_VERSION = 391;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -804,7 +788,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 180;
+				CURRENT_PROJECT_VERSION = 391;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -836,7 +820,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 391;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				INFOPLIST_KEY_CFBundleDisplayName = DarockBili;
 				MARKETING_VERSION = 1.0.0;
@@ -852,7 +836,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 391;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				INFOPLIST_KEY_CFBundleDisplayName = DarockBili;
 				MARKETING_VERSION = 1.0.0;
@@ -895,6 +879,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		8C81A8E82B620D120045E986 /* XCLocalSwiftPackageReference "../BPlayer" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../BPlayer;
+		};
+/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
 		B4468A6B2B4FC2C8002CCEB2 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
@@ -1020,6 +1011,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8C81A8E92B620D130045E986 /* BPlayer */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BPlayer;
+		};
 		B4468A6C2B4FC2C8002CCEB2 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B4468A6B2B4FC2C8002CCEB2 /* XCRemoteSwiftPackageReference "Alamofire" */;

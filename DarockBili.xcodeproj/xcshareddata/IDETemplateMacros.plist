@@ -5,10 +5,10 @@
     <key>FILEHEADER</key>
     <string>
 //
-//  __FILENAME__
-//  __TARGETNAME__
+//  ___FILENAME___
+//  ___TARGETNAME___
 //
-//  Created by __USERNAME__ on __DATE__.
+//  Created by ___USERNAME___ on ___DATE___.
 //
 //===----------------------------------------------------------------------===//
 //
