@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C2337FA2B63DBF3009665B1 /* BPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8C2337F92B63DBF3009665B1 /* BPlayer */; };
 		8C81A8EA2B620D130045E986 /* BPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8C81A8E92B620D130045E986 /* BPlayer */; };
 		B44689D12B4FC15A002CCEB2 /* 喵哩喵哩.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B44689D02B4FC15A002CCEB2 /* 喵哩喵哩.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B4468A312B4FC24A002CCEB2 /* NetworkFixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44689E82B4FC249002CCEB2 /* NetworkFixView.swift */; };
@@ -182,6 +183,7 @@
 				B4468A8C2B4FC85A002CCEB2 /* SwiftyJSON in Frameworks */,
 				8C81A8EA2B620D130045E986 /* BPlayer in Frameworks */,
 				B4468A982B4FC8B7002CCEB2 /* SDWebImageSVGCoder in Frameworks */,
+				8C2337FA2B63DBF3009665B1 /* BPlayer in Frameworks */,
 				B4468A702B4FC5E7002CCEB2 /* Marquee in Frameworks */,
 				B4468A9E2B4FC8B7002CCEB2 /* CachedAsyncImage in Frameworks */,
 				B4468A782B4FC60B002CCEB2 /* SFSymbol in Frameworks */,
@@ -479,6 +481,7 @@
 				B4468A9D2B4FC8B7002CCEB2 /* CachedAsyncImage */,
 				B4468A9F2B4FC8B7002CCEB2 /* Dynamic */,
 				8C81A8E92B620D130045E986 /* BPlayer */,
+				8C2337F92B63DBF3009665B1 /* BPlayer */,
 			);
 			productName = "DarockBili Watch App";
 			productReference = B44689D02B4FC15A002CCEB2 /* 喵哩喵哩.app */;
@@ -507,7 +510,6 @@
 			developmentRegion = "zh-Hans";
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
 				"zh-Hans",
 			);
@@ -528,6 +530,7 @@
 				B4468A852B4FC6C6002CCEB2 /* XCRemoteSwiftPackageReference "Dynamic" */,
 				B4468A8A2B4FC85A002CCEB2 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				B4468A8D2B4FC8AC002CCEB2 /* XCRemoteSwiftPackageReference "DarockKit" */,
+				8C2337F82B63DBF3009665B1 /* XCRemoteSwiftPackageReference "bplayer" */,
 			);
 			productRefGroup = B44689CB2B4FC15A002CCEB2 /* Products */;
 			projectDirPath = "";
@@ -880,6 +883,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		8C2337F82B63DBF3009665B1 /* XCRemoteSwiftPackageReference "bplayer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WindowsMEMZ/bplayer";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		B4468A6B2B4FC2C8002CCEB2 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -1003,6 +1014,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8C2337F92B63DBF3009665B1 /* BPlayer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C2337F82B63DBF3009665B1 /* XCRemoteSwiftPackageReference "bplayer" */;
+			productName = BPlayer;
+		};
 		8C81A8E92B620D130045E986 /* BPlayer */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = BPlayer;
