@@ -33,20 +33,23 @@ struct BangumiDetailView: View {
     @AppStorage("SESSDATA") var sessdata = ""
     @AppStorage("bili_jct") var biliJct = ""
     @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
+    @State var paymentData: BangumiPayment? = nil
     @State var epDatas = [BangumiEp]()
     @State var isLoading = false
     @State var mainTabSelection = 1
     @State var isBangumiPlayerPresented = false
     @State var isMoreMenuPresented = false
     @State var backgroundPicOpacity = 0.0
+    @State var navigationSelectedEpdata: BangumiEp? = nil
     var body: some View {
         TabView {
             ZStack {
                 Group {
                     if #available(watchOS 10, *) {
+                        // FIXME: Why all pages in this TabView ignores safe area except the first one???
                         TabView(selection: $mainTabSelection) {
                             DetailViewFirstPageBase(bangumiData: $bangumiData, isBangumiPlayerPresented: $isBangumiPlayerPresented, isLoading: $isLoading)
-                                .offset(y: 16)
+                                .offset(y: 20)
                                 .tag(1)
                                 .toolbar {
                                     ToolbarItem(placement: .topBarTrailing) {
@@ -75,6 +78,8 @@ struct BangumiDetailView: View {
                                         })
                                     }
                                 }
+                            DetailViewSecondPageBase(bangumiData: $bangumiData, paymentData: $paymentData)
+                                .tag(2)
                             EpisodeListView(bangumiData: $bangumiData, epDatas: $epDatas, isBangumiPlayerPresented: $isBangumiPlayerPresented, isLoading: $isLoading)
                                 .tag(3)
                         }
@@ -107,7 +112,11 @@ struct BangumiDetailView: View {
                             }
                         }
                     } else {
-                        
+                        ScrollView {
+                            DetailViewFirstPageBase(bangumiData: $bangumiData, isBangumiPlayerPresented: $isBangumiPlayerPresented, isLoading: $isLoading)
+                            DetailViewSecondPageBase(bangumiData: $bangumiData, paymentData: $paymentData)
+                            EpisodeListView(bangumiData: $bangumiData, epDatas: $epDatas, isBangumiPlayerPresented: $isBangumiPlayerPresented, isLoading: $isLoading)
+                        }
                     }
                 }
                 .blur(radius: isLoading ? 14 : 0)
@@ -117,6 +126,67 @@ struct BangumiDetailView: View {
                         .bold()
                 }
             }
+            .tag(1)
+            
+            Group {
+                if #available(watchOS 10, *) {
+                    NavigationSplitView {
+                        Text("选择要查看评论的单集")
+                        List(epDatas, selection: $navigationSelectedEpdata) { data in
+                            Text(data.longTitle).tag(data)
+                        }
+                    } detail: {
+                        if let data = navigationSelectedEpdata, let aid = data.aid {
+                            VideoCommentsView(oid: av2bv(avid: UInt64(aid)))
+                        } else {
+                            Text("选择一项")
+                        }
+                    }
+                    .navigationBarHidden(true)
+                    .containerBackground(for: .navigation) {
+                        if !isInLowBatteryMode {
+                            ZStack {
+                                CachedAsyncImage(url: URL(string: bangumiData.cover)) { phase in
+                                    switch phase {
+                                    case .empty:
+                                        Color.black
+                                    case .success(let image):
+                                        image
+                                            .onAppear {
+                                                backgroundPicOpacity = 1.0
+                                            }
+                                    case .failure:
+                                        Color.black
+                                    @unknown default:
+                                        Color.black
+                                    }
+                                }
+                                .blur(radius: 20)
+                                .opacity(backgroundPicOpacity)
+                                .animation(.easeOut(duration: 1.2), value: backgroundPicOpacity)
+                                Color.black
+                                    .opacity(0.4)
+                            }
+                        }
+                    }
+                } else {
+                    if epDatas.count != 0 {
+                        List {
+                            Text("选择要查看评论的单集")
+                                .listRowBackground(Color.clear)
+                            ForEach(0..<epDatas.count, id: \.self) { i in
+                                if let aid = epDatas[i].aid {
+                                    NavigationLink(destination: {VideoCommentsView(oid: av2bv(avid: UInt64(aid)))}, label: {
+                                        Text(epDatas[i].longTitle)
+                                    })
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .tag(2)
+            .navigationTitle("评论")
         }
         .onAppear {
             let headers: HTTPHeaders = [
@@ -126,7 +196,11 @@ struct BangumiDetailView: View {
             DarockKit.Network.shared.requestJSON("https://api.bilibili.com/pgc/view/web/season?season_id=\(bangumiData.seasonId)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
                     if !CheckBApiError(from: respJson) { return }
-                    bangumiData = .init(mediaId: respJson["result"]["media_id"].int64 ?? 0, seasonId: respJson["result"]["season_id"].int64 ?? 0, title: respJson["result"]["title"].string ?? "[加载失败]", originalTitle: respJson["result"]["subtitle"].string ?? "[加载失败]", cover: respJson["result"]["cover"].string ?? "E", description: respJson["result"]["evaluate"].string ?? "[加载失败]", score: BangumiData.Score(userCount: respJson["result"]["rating"]["count"].int ?? 0, score: respJson["result"]["rating"]["count"].float ?? 0.0), isFollow: false)
+                    debugPrint(respJson)
+                    bangumiData = .init(mediaId: respJson["result"]["media_id"].int64 ?? 0, seasonId: respJson["result"]["season_id"].int64 ?? 0, title: respJson["result"]["title"].string ?? "[加载失败]", originalTitle: respJson["result"]["subtitle"].string ?? "[加载失败]", cover: respJson["result"]["cover"].string ?? "E", description: respJson["result"]["evaluate"].string ?? "[加载失败]", score: BangumiData.Score(userCount: respJson["result"]["rating"]["count"].int ?? 0, score: respJson["result"]["rating"]["score"].float ?? 0.0), isFollow: false)
+                    if let discount = respJson["result"]["payment"]["vip_discount"].int {
+                        paymentData = .init(discount: discount, tip: respJson["result"]["payment"]["tip"].string ?? "[加载失败]", promotion: respJson["result"]["payment"]["vip_promotion"].string ?? "[加载失败]")
+                    }
                 }
             }
             DarockKit.Network.shared.requestJSON("https://api.bilibili.com/pgc/web/season/section?season_id=\(bangumiData.seasonId)", headers: headers) { respJson, isSuccess in
@@ -141,7 +215,6 @@ struct BangumiDetailView: View {
     
     struct DetailViewFirstPageBase: View {
         @Binding var bangumiData: BangumiData
-        
         @Binding var isBangumiPlayerPresented: Bool
         @Binding var isLoading: Bool
         @AppStorage("DedeUserID") var dedeUserID = ""
@@ -153,17 +226,17 @@ struct BangumiDetailView: View {
         var body: some View {
             VStack {
                 Spacer()
-                WebImage(url: URL(string: bangumiData.cover + "@240w_160h")!, options: [.progressiveLoad, .scaleDownLargeImages])
+                WebImage(url: URL(string: bangumiData.cover + "@130w_180h")!, options: [.progressiveLoad, .scaleDownLargeImages])
                     .placeholder {
-                        RoundedRectangle(cornerRadius: 14)
-                            .frame(width: 120, height: 80)
+                        RoundedRectangle(cornerRadius: 13)
+                            .frame(width: 65, height: 90)
                             .foregroundColor(Color(hex: 0x3D3D3D))
                             .redacted(reason: .placeholder)
                     }
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 120, height: 80)
-                    .cornerRadius(14)
+                    .frame(width: 65, height: 90)
+                    .cornerRadius(13)
                     .shadow(color: .black.opacity(0.5), radius: 5, x: 1, y: 2)
                     .offset(y: 8)
                     .sheet(isPresented: $isCoverImageViewPresented, content: {ImageViewerView(url: bangumiData.cover)})
@@ -191,51 +264,39 @@ struct BangumiDetailView: View {
                     .opacity(0.65)
                 Spacer()
                     .frame(height: 20)
-                if #unavailable(watchOS 10) {
-                    Button(action: {
-                        
-                    }, label: {
-                        Label("播放", systemImage: "play.fill")
-                    })
-//                    Button(action: {
-//                        isMoreMenuPresented = true
-//                    }, label: {
-//                        Label("更多", systemImage: "ellipsis")
-//                    })
-//                    .sheet(isPresented: $isMoreMenuPresented, content: {
-//                        List {
-//                            Button(action: {
-//                                isDownloadPresented = true
-//                            }, label: {
-//                                Label("下载视频", image: "arrow.down.doc")
-//                            })
-//                            .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
-//                            Button(action: {
-//                                let headers: HTTPHeaders = [
-//                                    "cookie": "SESSDATA=\(sessdata)",
-//                                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-//                                ]
-//                                AF.request("https://api.bilibili.com/x/v2/history/toview/add", method: .post, parameters: ["bvid": videoDetails["BV"]!, "csrf": biliJct], headers: headers).response { response in
-//                                    do {
-//                                        let json = try JSON(data: response.data ?? Data())
-//                                        if let code = json["code"].int {
-//                                            if code == 0 {
-//                                                tipWithText("添加成功", symbol: SFSymbol.Checkmark.circleFill.rawValue)
-//                                            } else {
-//                                                tipWithText(json["message"].string ?? "未知错误", symbol: SFSymbol.Xmark.circleFill.rawValue)
-//                                            }
-//                                        } else {
-//                                            tipWithText("未知错误", symbol: SFSymbol.Xmark.circleFill.rawValue)
-//                                        }
-//                                    } catch {
-//                                        tipWithText("未知错误", symbol: SFSymbol.Xmark.circleFill.rawValue)
-//                                    }
-//                                }
-//                            }, label: {
-//                                Label("添加到稍后再看", systemImage: "memories.badge.plus")
-//                            })
-//                        }
-//                    })
+            }
+        }
+    }
+    struct DetailViewSecondPageBase: View {
+        @Binding var bangumiData: BangumiData
+        @Binding var paymentData: BangumiPayment?
+        var body: some View {
+            ScrollView {
+                VStack {
+                    if let score = bangumiData.score {
+                        HStack {
+                            Group {
+                                Image(systemName: "star.fill")
+                                Text("\(Int(score.score))\(Text(".\(Int((score.score - Float(Int(score.score))) * 10))").font(.system(size: 16)))")
+                            }
+                            .font(.system(size: 30))
+                            .foregroundColor(.yellow)
+                            Spacer()
+                        }
+                        HStack {
+                            Text("\(score.userCount) 人参与了评分")
+                                .font(.footnote)
+                                .opacity(0.65)
+                            Spacer()
+                        }
+                    }
+                    if let payment = paymentData {
+                        Spacer()
+                            .frame(height: 20)
+                        Text(payment.tip)
+                            .font(.system(size: 15, weight: .bold))
+                            .foregroundColor(.accentColor)
+                    }
                 }
             }
         }
@@ -250,7 +311,28 @@ struct BangumiDetailView: View {
         @AppStorage("SESSDATA") var sessdata = ""
         @AppStorage("bili_jct") var biliJct = ""
         var body: some View {
-            List {
+            if #available(watchOS 10, *) {
+                List {
+                    DetailCore(bangumiData: $bangumiData, epDatas: $epDatas, isBangumiPlayerPresented: $isBangumiPlayerPresented, isLoading: $isLoading)
+                }
+            } else {
+                VStack {
+                    DetailCore(bangumiData: $bangumiData, epDatas: $epDatas, isBangumiPlayerPresented: $isBangumiPlayerPresented, isLoading: $isLoading)
+                }
+            }
+        }
+        
+        // OS 10- support
+        struct DetailCore: View {
+            @Binding var bangumiData: BangumiData
+            @Binding var epDatas: [BangumiEp]
+            @Binding var isBangumiPlayerPresented: Bool
+            @Binding var isLoading: Bool
+            @AppStorage("DedeUserID") var dedeUserID = ""
+            @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
+            @AppStorage("SESSDATA") var sessdata = ""
+            @AppStorage("bili_jct") var biliJct = ""
+            var body: some View {
                 if epDatas.count != 0 {
                     ForEach(0..<epDatas.count, id: \.self) { i in
                         Button(action: {
@@ -260,12 +342,14 @@ struct BangumiDetailView: View {
                                 "cookie": "SESSDATA=\(sessdata)",
                                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                             ]
-                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/pgc/player/web/playurl?ep_id=\(epDatas[i].epid)&qn=\(sessdata == "" ? 64 : 80)", headers: headers) { respJson, isSuccess in
-                                if !CheckBApiError(from: respJson) { return }
-                                BangumiDetailView.willPlayBangumiLink = respJson["result"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
-                                BangumiDetailView.willPlayBangumiData = bangumiData
-                                isBangumiPlayerPresented = true
-                                isLoading = false
+                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/pgc/player/web/playurl?ep_id=\(epDatas[i].epid)&qn=16&fnval=1", headers: headers) { respJson, isSuccess in
+                                if isSuccess {
+                                    if !CheckBApiError(from: respJson) { return }
+                                    BangumiDetailView.willPlayBangumiLink = respJson["result"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
+                                    BangumiDetailView.willPlayBangumiData = bangumiData
+                                    isBangumiPlayerPresented = true
+                                    isLoading = false
+                                }
                             }
                         }, label: {
                             Text(epDatas[i].longTitle)

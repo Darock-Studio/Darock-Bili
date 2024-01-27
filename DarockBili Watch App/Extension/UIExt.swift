@@ -81,7 +81,7 @@ import SDWebImageSwiftUI
             HStack {
                 if let score = bangumiData.score {
                     Image(systemName: "star.fill")
-                    Text("\(score.score)分")
+                    Text("\(score.score ~ 1)分")
                         .offset(x: -3)
                 }
                 if let style = bangumiData.style {

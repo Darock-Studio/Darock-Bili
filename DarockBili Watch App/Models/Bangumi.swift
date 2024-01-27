@@ -40,7 +40,9 @@ struct BangumiData {
     }
 }
 
-struct BangumiEp {
+struct BangumiEp: Identifiable, Hashable {
+    var id: Int64
+    
     var aid: Int64?
     var epid: Int64
     var cid: Int64?
@@ -48,4 +50,21 @@ struct BangumiEp {
     var title: String
     var indexTitle: String?
     var longTitle: String
+    
+    init(aid: Int64? = nil, epid: Int64, cid: Int64? = nil, cover: String, title: String, indexTitle: String? = nil, longTitle: String) {
+        self.id = epid
+        self.aid = aid
+        self.epid = epid
+        self.cid = cid
+        self.cover = cover
+        self.title = title
+        self.indexTitle = indexTitle
+        self.longTitle = longTitle
+    }
+}
+
+struct BangumiPayment {
+    var discount: Int
+    var tip: String
+    var promotion: String
 }

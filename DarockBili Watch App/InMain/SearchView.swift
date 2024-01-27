@@ -16,6 +16,7 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
+import WatchKit
 import DarockKit
 import Alamofire
 import SwiftyJSON
@@ -23,7 +24,7 @@ import SDWebImageSwiftUI
 import AuthenticationServices
 
 struct SearchMainView: View {
-    @State var searchText = ""
+    @State var searchText = "小埋"
     @State var isSearchPresented = false
     @State var searchHistory = [String]()
     var body: some View {
@@ -101,11 +102,12 @@ struct SearchView: View {
                     Text("视频").tag(SearchType.video)
                     Text("用户").tag(SearchType.user)
                     Text("专栏").tag(SearchType.article)
-                    // TODO: Enable them after prepared
                     Text("番剧").tag(SearchType.bangumi)
+                    // TODO: Enable it after prepared
                     //Text("直播").tag(SearchType.liveRoom)
                 }
                 .pickerStyle(.navigationLink)
+                .buttonBorderShape(.roundedRectangle(radius: 16))
                 .onChange(of: searchType) { value in
                     NewSearch(keyword: keyword, type: value, clear: true)
                 }
@@ -283,7 +285,7 @@ struct SearchView: View {
                             case .bangumi:
                                 for bangumi in result {
                                     if (bangumi.1["type"].string ?? "") == "media_bangumi" {
-                                        bangumis.append(BangumiData(mediaId: bangumi.1["media_id"].int64 ?? 0, seasonId: bangumi.1["season_id"].int64 ?? 0, title: (bangumi.1["title"].string ?? "[加载失败]").replacingOccurrences(of: "<em class=\"keyword\">", with: "").replacingOccurrences(of: "</em>", with: ""), originalTitle: bangumi.1["org_title"].string ?? "[加载失败]", cover: "https:" + (bangumi.1["cover"].string ?? "E"), area: bangumi.1["areas"].string ?? "[加载失败]", style: bangumi.1["styles"].string ?? "[加载失败]", cvs: (bangumi.1["cv"].string ?? "[加载失败]").split(separator: "\\n").map { String($0) }, staffs: (bangumi.1["staff"].string ?? "[加载失败]").split(separator: "\\n").map { String($0) }, description: bangumi.1["desc"].string ?? "[加载失败]", pubtime: bangumi.1["pubtime"].int ?? 0, eps: { () -> [BangumiEp] in
+                                        bangumis.append(BangumiData(mediaId: bangumi.1["media_id"].int64 ?? 0, seasonId: bangumi.1["season_id"].int64 ?? 0, title: (bangumi.1["title"].string ?? "[加载失败]").replacingOccurrences(of: "<em class=\"keyword\">", with: "").replacingOccurrences(of: "</em>", with: ""), originalTitle: bangumi.1["org_title"].string ?? "[加载失败]", cover: /*"https:" + */(bangumi.1["cover"].string ?? "E"), area: bangumi.1["areas"].string ?? "[加载失败]", style: bangumi.1["styles"].string ?? "[加载失败]", cvs: (bangumi.1["cv"].string ?? "[加载失败]").split(separator: "\\n").map { String($0) }, staffs: (bangumi.1["staff"].string ?? "[加载失败]").split(separator: "\\n").map { String($0) }, description: bangumi.1["desc"].string ?? "[加载失败]", pubtime: bangumi.1["pubtime"].int ?? 0, eps: { () -> [BangumiEp] in
                                             let eps = bangumi.1["eps"]
                                             var tmp = [BangumiEp]()
                                             for ep in eps {

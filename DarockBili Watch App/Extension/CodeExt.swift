@@ -662,3 +662,15 @@ extension Bool {
         }
     }
 }
+
+infix operator ~
+extension Float {
+    static func ~ (lhs: Float, rhs: Int) -> String {
+        return String(format: "%.\(rhs)f", lhs)
+    }
+}
+extension Double {
+    static func ~ (lhs: Double, rhs: Int) -> String {
+        return String(format: "%.\(rhs)f", lhs)
+    }
+}
