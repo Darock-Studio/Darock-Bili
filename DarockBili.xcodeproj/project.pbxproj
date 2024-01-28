@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8C2337FA2B63DBF3009665B1 /* BPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8C2337F92B63DBF3009665B1 /* BPlayer */; };
 		8C81A8EA2B620D130045E986 /* BPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8C81A8E92B620D130045E986 /* BPlayer */; };
+		8C8CA05A2B6108460020DEDD /* Bangumi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8CA0592B6108460020DEDD /* Bangumi.swift */; };
 		B44689D12B4FC15A002CCEB2 /* 喵哩喵哩.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B44689D02B4FC15A002CCEB2 /* 喵哩喵哩.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B4468A312B4FC24A002CCEB2 /* NetworkFixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44689E82B4FC249002CCEB2 /* NetworkFixView.swift */; };
 		B4468A322B4FC24A002CCEB2 /* SignalErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44689E92B4FC249002CCEB2 /* SignalErrorView.swift */; };
@@ -77,7 +78,6 @@
 		B4468AA02B4FC8B7002CCEB2 /* Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = B4468A9F2B4FC8B7002CCEB2 /* Dynamic */; };
 		E2565AF32B52BFDF000E01ED /* BangumiDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2565AF22B52BFDF000E01ED /* BangumiDetailView.swift */; };
 		E2565AF52B52C017000E01ED /* BangumiDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2565AF42B52C017000E01ED /* BangumiDownloadView.swift */; };
-		E2565AF72B52C06D000E01ED /* BangumiCommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2565AF62B52C06D000E01ED /* BangumiCommentsView.swift */; };
 		E2565AF92B52C076000E01ED /* BangumiPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2565AF82B52C076000E01ED /* BangumiPlayerView.swift */; };
 		E2565AFB2B52C114000E01ED /* LiveDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2565AFA2B52C114000E01ED /* LiveDetailView.swift */; };
 /* End PBXBuildFile section */
@@ -107,6 +107,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8C8CA0592B6108460020DEDD /* Bangumi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bangumi.swift; sourceTree = "<group>"; };
+		8CD9463A2B64CD0F005D00D0 /* Bangumi_Detail_Season.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Bangumi_Detail_Season.json; sourceTree = "<group>"; };
 		B44689CA2B4FC15A002CCEB2 /* DarockBili.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarockBili.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B44689D02B4FC15A002CCEB2 /* 喵哩喵哩.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "喵哩喵哩.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B44689E82B4FC249002CCEB2 /* NetworkFixView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkFixView.swift; sourceTree = "<group>"; };
@@ -167,7 +169,6 @@
 		B4C5E9562B4FD60600E2605B /* DarockBili-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "DarockBili-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		E2565AF22B52BFDF000E01ED /* BangumiDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BangumiDetailView.swift; sourceTree = "<group>"; };
 		E2565AF42B52C017000E01ED /* BangumiDownloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BangumiDownloadView.swift; sourceTree = "<group>"; };
-		E2565AF62B52C06D000E01ED /* BangumiCommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BangumiCommentsView.swift; sourceTree = "<group>"; };
 		E2565AF82B52C076000E01ED /* BangumiPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BangumiPlayerView.swift; sourceTree = "<group>"; };
 		E2565AFA2B52C114000E01ED /* LiveDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -201,6 +202,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C8CA0562B6107C20020DEDD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8C8CA0592B6108460020DEDD /* Bangumi.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		B44689C32B4FC15A002CCEB2 = {
 			isa = PBXGroup;
 			children = (
@@ -226,6 +235,7 @@
 				B4C5E9562B4FD60600E2605B /* DarockBili-Watch-App-Info.plist */,
 				B4468A042B4FC249002CCEB2 /* DarockBili-Bridging-Header.h */,
 				B44689FF2B4FC249002CCEB2 /* DarockBiliApp.swift */,
+				8C8CA0562B6107C20020DEDD /* Models */,
 				E2565AF12B52BF0F000E01ED /* Bangumi */,
 				B44689E72B4FC249002CCEB2 /* Errors */,
 				B44689F62B4FC249002CCEB2 /* Extension */,
@@ -245,12 +255,12 @@
 		B44689E72B4FC249002CCEB2 /* Errors */ = {
 			isa = PBXGroup;
 			children = (
+				B44689EB2B4FC249002CCEB2 /* Backtrace */,
+				B44689F02B4FC249002CCEB2 /* DarockFeedback */,
 				B44689E82B4FC249002CCEB2 /* NetworkFixView.swift */,
 				B44689E92B4FC249002CCEB2 /* SignalErrorView.swift */,
 				B44689EA2B4FC249002CCEB2 /* MemoryWarningView.swift */,
-				B44689EB2B4FC249002CCEB2 /* Backtrace */,
 				B44689EF2B4FC249002CCEB2 /* FeedbackView.swift */,
-				B44689F02B4FC249002CCEB2 /* DarockFeedback */,
 				B44689F52B4FC249002CCEB2 /* ErrorGetView.swift */,
 			);
 			path = Errors;
@@ -281,8 +291,8 @@
 			isa = PBXGroup;
 			children = (
 				B44689F72B4FC249002CCEB2 /* CodeExt.swift */,
-				B44689F82B4FC249002CCEB2 /* AppFileManager.swift */,
 				B44689FC2B4FC249002CCEB2 /* UIExt.swift */,
+				B44689F82B4FC249002CCEB2 /* AppFileManager.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -349,6 +359,7 @@
 			children = (
 				B4468A152B4FC24A002CCEB2 /* Dynamic_Feed_All.json */,
 				B4468A162B4FC24A002CCEB2 /* Search_With_UP_V2.json */,
+				8CD9463A2B64CD0F005D00D0 /* Bangumi_Detail_Season.json */,
 			);
 			path = JSONReturnExamples;
 			sourceTree = "<group>";
@@ -424,7 +435,6 @@
 			children = (
 				E2565AF22B52BFDF000E01ED /* BangumiDetailView.swift */,
 				E2565AF42B52C017000E01ED /* BangumiDownloadView.swift */,
-				E2565AF62B52C06D000E01ED /* BangumiCommentsView.swift */,
 				E2565AF82B52C076000E01ED /* BangumiPlayerView.swift */,
 			);
 			path = Bangumi;
@@ -572,7 +582,6 @@
 				B4468A592B4FC24A002CCEB2 /* SkinDownloadView.swift in Sources */,
 				B4468A462B4FC24A002CCEB2 /* ImageViewerView.swift in Sources */,
 				B4468A5B2B4FC24A002CCEB2 /* AVExtension.m in Sources */,
-				E2565AF72B52C06D000E01ED /* BangumiCommentsView.swift in Sources */,
 				B4468A412B4FC24A002CCEB2 /* LivePlayerView.swift in Sources */,
 				E2565AF32B52BFDF000E01ED /* BangumiDetailView.swift in Sources */,
 				B4468A342B4FC24A002CCEB2 /* backtrace.c in Sources */,
@@ -598,6 +607,7 @@
 				B4468A532B4FC24A002CCEB2 /* AboutView.swift in Sources */,
 				B4468A632B4FC24A002CCEB2 /* UserDetailView.swift in Sources */,
 				B4468A492B4FC24A002CCEB2 /* OfflineMainView.swift in Sources */,
+				8C8CA05A2B6108460020DEDD /* Bangumi.swift in Sources */,
 				B4468A4D2B4FC24A002CCEB2 /* VideoCommentsView.swift in Sources */,
 				B4468A3C2B4FC24A002CCEB2 /* CodeExt.swift in Sources */,
 				B4468A432B4FC24A002CCEB2 /* SearchView.swift in Sources */,
@@ -758,7 +768,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 392;
+				CURRENT_PROJECT_VERSION = 394;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -790,7 +800,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 392;
+				CURRENT_PROJECT_VERSION = 394;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -822,7 +832,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 392;
+				CURRENT_PROJECT_VERSION = 394;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				INFOPLIST_KEY_CFBundleDisplayName = DarockBili;
 				MARKETING_VERSION = 1.0.0;
@@ -838,7 +848,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 392;
+				CURRENT_PROJECT_VERSION = 394;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				INFOPLIST_KEY_CFBundleDisplayName = DarockBili;
 				MARKETING_VERSION = 1.0.0;

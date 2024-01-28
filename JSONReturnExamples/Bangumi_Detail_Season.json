@@ -1,0 +1,1228 @@
+// From URL: https://api.bilibili.com/pgc/view/web/season?season_id=38876
+// From File: BangumiDetailView/BangumiDetailView.onAppear
+
+{
+  "result" : {
+    "evaluate" : "我的妹妹小埋16岁，完美的妹妹，完美的高中生，但在家里却是个超懒的干物妹。\n然而妹妹在家的一切她生活中的朋友并不知道，居住在同一栋楼的天然少女，以及无意间来到我家的冷酷少女，她们会发现小埋的真实面目吗？",
+    "total" : 12,
+    "square_cover" : "http:\/\/i0.hdslb.com\/bfs\/bangumi\/image\/014c526d0bd828a0911b7fc545e0b8280ba12830.png",
+    "publish" : {
+      "is_finish" : 1,
+      "weekday" : 0,
+      "pub_time" : "2021-07-17 11:00:00",
+      "unknow_pub_date" : 0,
+      "is_started" : 1,
+      "pub_time_show" : "2021年07月17日11:00"
+    },
+    "freya" : {
+      "icon_show" : 1,
+      "bubble_desc" : "",
+      "bubble_show_cnt" : 0
+    },
+    "media_id" : 28234567,
+    "payment" : {
+      "vip_discount" : 100,
+      "price" : "0.0",
+      "vip_first_promotion" : "",
+      "view_start_time" : 0,
+      "vip_price" : "0",
+      "tip" : "大会员专享观看特权哦~",
+      "promotion" : "",
+      "vip_promotion" : "开通大会员观看",
+      "pay_type" : {
+        "allow_vip_discount" : 0,
+        "allow_ticket" : 0,
+        "forbid_bb" : 0,
+        "allow_pack" : 0,
+        "allow_discount" : 0,
+        "allow_time_limit" : 0
+      },
+      "discount" : 100
+    },
+    "cover" : "http:\/\/i0.hdslb.com\/bfs\/bangumi\/image\/382b395e09fca6b382d92ba583913f240dec9666.png",
+    "episodes" : [
+      {
+        "status" : 2,
+        "bvid" : "BV1Bh41167xr",
+        "title" : "1",
+        "aid" : 206644261,
+        "is_view_hide" : false,
+        "badge_info" : {
+          "bg_color_night" : "#BB5B76",
+          "text" : "",
+          "bg_color" : "#FB7299"
+        },
+        "cid" : 371198287,
+        "long_title" : "小埋和哥哥",
+        "rights" : {
+          "allow_download" : 0,
+          "allow_dm" : 1,
+          "area_limit" : 0,
+          "allow_demand" : 0
+        },
+        "link" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep411772",
+        "pub_time" : 1626490801,
+        "dimension" : {
+          "width" : 1920,
+          "rotate" : 0,
+          "height" : 1080
+        },
+        "ep_id" : 411772,
+        "badge_type" : 0,
+        "badge" : "",
+        "id" : 411772,
+        "from" : "bangumi",
+        "pv" : 0,
+        "skip" : {
+          "op" : {
+            "end" : 144,
+            "start" : 54
+          },
+          "ed" : {
+            "start" : 1335,
+            "end" : 1425
+          }
+        },
+        "enable_vt" : false,
+        "short_link" : "https:\/\/b23.tv\/ep411772",
+        "cover" : "http:\/\/i0.hdslb.com\/bfs\/archive\/6b892785f1f93702fa7e2852d0d4e7710b8c4d46.png",
+        "vid" : "",
+        "release_date" : "",
+        "subtitle" : "已观看2360.4万次",
+        "duration" : 1441000,
+        "share_url" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep411772",
+        "showDrmLoginDialog" : false,
+        "share_copy" : "《干物妹！小埋 中配版》第1话 小埋和哥哥"
+      },
+      {
+        "status" : 13,
+        "bvid" : "BV1Bw411d7bG",
+        "title" : "2",
+        "aid" : 334194931,
+        "is_view_hide" : false,
+        "badge_info" : {
+          "text" : "会员",
+          "bg_color_night" : "#BB5B76",
+          "bg_color" : "#FB7299"
+        },
+        "cid" : 371198975,
+        "long_title" : "小埋和海老名",
+        "rights" : {
+          "allow_download" : 0,
+          "allow_dm" : 1,
+          "area_limit" : 0,
+          "allow_demand" : 0
+        },
+        "link" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep411773",
+        "pub_time" : 1626490801,
+        "dimension" : {
+          "height" : 1080,
+          "width" : 1920,
+          "rotate" : 0
+        },
+        "ep_id" : 411773,
+        "badge_type" : 0,
+        "badge" : "会员",
+        "id" : 411773,
+        "from" : "bangumi",
+        "pv" : 0,
+        "skip" : {
+          "ed" : {
+            "start" : 1335,
+            "end" : 1425
+          },
+          "op" : {
+            "end" : 90,
+            "start" : 0
+          }
+        },
+        "enable_vt" : false,
+        "short_link" : "https:\/\/b23.tv\/ep411773",
+        "cover" : "http:\/\/i0.hdslb.com\/bfs\/archive\/3f7c4e2ac578894030c11fc7de882baf63f00a23.png",
+        "vid" : "",
+        "release_date" : "",
+        "subtitle" : "已观看2360.4万次",
+        "duration" : 1441000,
+        "share_url" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep411773",
+        "showDrmLoginDialog" : false,
+        "share_copy" : "《干物妹！小埋 中配版》第2话 小埋和海老名"
+      },
+      {
+        "release_date" : "",
+        "skip" : {
+          "ed" : {
+            "end" : 0,
+            "start" : 0
+          },
+          "op" : {
+            "start" : 52,
+            "end" : 142
+          }
+        },
+        "short_link" : "https:\/\/b23.tv\/ep411774",
+        "title" : "3",
+        "link" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep411774",
+        "cover" : "http:\/\/i0.hdslb.com\/bfs\/archive\/0954bda63c705f9e4a327ca4705bbbdd363df944.png",
+        "badge_type" : 0,
+        "share_url" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep411774",
+        "showDrmLoginDialog" : false,
+        "vid" : "",
+        "ep_id" : 411774,
+        "rights" : {
+          "allow_download" : 0,
+          "allow_demand" : 0,
+          "allow_dm" : 1,
+          "area_limit" : 0
+        },
+        "subtitle" : "已观看2360.4万次",
+        "share_copy" : "《干物妹！小埋 中配版》第3话 小埋与弟子",
+        "aid" : 376826604,
+        "from" : "bangumi",
+        "pv" : 0,
+        "status" : 13,
+        "badge_info" : {
+          "bg_color_night" : "#BB5B76",
+          "text" : "会员",
+          "bg_color" : "#FB7299"
+        },
+        "pub_time" : 1627095601,
+        "bvid" : "BV19o4y1D7YU",
+        "duration" : 1441000,
+        "id" : 411774,
+        "cid" : 375360045,
+        "badge" : "会员",
+        "long_title" : "小埋与弟子",
+        "enable_vt" : false,
+        "is_view_hide" : false,
+        "dimension" : {
+          "height" : 1080,
+          "width" : 1920,
+          "rotate" : 0
+        }
+      },
+      {
+        "release_date" : "",
+        "skip" : {
+          "ed" : {
+            "end" : 1425,
+            "start" : 1335
+          },
+          "op" : {
+            "start" : 0,
+            "end" : 90
+          }
+        },
+        "short_link" : "https:\/\/b23.tv\/ep411775",
+        "title" : "4",
+        "link" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep411775",
+        "cover" : "http:\/\/i0.hdslb.com\/bfs\/archive\/39856e1d5f7b0c654187832f6c3fcd0c64d171d1.png",
+        "badge_type" : 0,
+        "share_url" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep411775",
+        "showDrmLoginDialog" : false,
+        "vid" : "",
+        "ep_id" : 411775,
+        "rights" : {
+          "allow_dm" : 1,
+          "allow_demand" : 0,
+          "allow_download" : 0,
+          "area_limit" : 0
+        },
+        "subtitle" : "已观看2360.4万次",
+        "share_copy" : "《干物妹！小埋 中配版》第4话 小埋与竞争对手",
+        "aid" : 206863924,
+        "from" : "bangumi",
+        "pv" : 0,
+        "status" : 13,
+        "badge_info" : {
+          "bg_color_night" : "#BB5B76",
+          "text" : "会员",
+          "bg_color" : "#FB7299"
+        },
+        "pub_time" : 1627095601,
+        "bvid" : "BV1Xh411B7Rx",
+        "duration" : 1441000,
+        "id" : 411775,
+        "cid" : 375362555,
+        "badge" : "会员",
+        "long_title" : "小埋与竞争对手",
+        "enable_vt" : false,
+        "is_view_hide" : false,
+        "dimension" : {
+          "height" : 1080,
+          "width" : 1920,
+          "rotate" : 0
+        }
+      },
+      {
+        "release_date" : "",
+        "skip" : {
+          "ed" : {
+            "start" : 1335,
+            "end" : 1425
+          },
+          "op" : {
+            "start" : 0,
+            "end" : 90
+          }
+        },
+        "short_link" : "https:\/\/b23.tv\/ep411776",
+        "title" : "5",
+        "link" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep411776",
+        "cover" : "http:\/\/i0.hdslb.com\/bfs\/archive\/963a2d7d836996ed1a84738ee54332b7d87a1702.png",
+        "badge_type" : 0,
+        "share_url" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep411776",
+        "showDrmLoginDialog" : false,
+        "vid" : "",
+        "ep_id" : 411776,
+        "rights" : {
+          "area_limit" : 0,
+          "allow_dm" : 1,
+          "allow_download" : 0,
+          "allow_demand" : 0
+        },
+        "subtitle" : "已观看2360.4万次",
+        "share_copy" : "《干物妹！小埋 中配版》第5话 小埋与暑假",
+        "aid" : 631970855,
+        "from" : "bangumi",
+        "pv" : 0,
+        "status" : 13,
+        "badge_info" : {
+          "bg_color_night" : "#BB5B76",
+          "text" : "会员",
+          "bg_color" : "#FB7299"
+        },
+        "pub_time" : 1627700400,
+        "bvid" : "BV1tb4y1r7hP",
+        "duration" : 1441000,
+        "id" : 411776,
+        "cid" : 379423580,
+        "badge" : "会员",
+        "long_title" : "小埋与暑假",
+        "enable_vt" : false,
+        "is_view_hide" : false,
+        "dimension" : {
+          "height" : 1080,
+          "width" : 1920,
+          "rotate" : 0
+        }
+      },
+      {
+        "release_date" : "",
+        "skip" : {
+          "ed" : {
+            "start" : 1335,
+            "end" : 1425
+          },
+          "op" : {
+            "end" : 90,
+            "start" : 0
+          }
+        },
+        "short_link" : "https:\/\/b23.tv\/ep411777",
+        "title" : "6",
+        "link" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep411777",
+        "cover" : "http:\/\/i0.hdslb.com\/bfs\/archive\/7e4ba3822970b35582b495f376f8e01bf64dca4b.png",
+        "badge_type" : 0,
+        "share_url" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep411777",
+        "showDrmLoginDialog" : false,
+        "vid" : "",
+        "ep_id" : 411777,
+        "rights" : {
+          "allow_download" : 0,
+          "area_limit" : 0,
+          "allow_demand" : 0,
+          "allow_dm" : 1
+        },
+        "subtitle" : "已观看2360.4万次",
+        "share_copy" : "《干物妹！小埋 中配版》第6话 小埋的生日",
+        "aid" : 804487569,
+        "from" : "bangumi",
+        "pv" : 0,
+        "status" : 13,
+        "badge_info" : {
+          "bg_color_night" : "#BB5B76",
+          "text" : "会员",
+          "bg_color" : "#FB7299"
+        },
+        "pub_time" : 1627700400,
+        "bvid" : "BV1Py4y177hd",
+        "duration" : 1441000,
+        "id" : 411777,
+        "cid" : 379422877,
+        "badge" : "会员",
+        "long_title" : "小埋的生日",
+        "enable_vt" : false,
+        "is_view_hide" : false,
+        "dimension" : {
+          "height" : 1080,
+          "width" : 1920,
+          "rotate" : 0
+        }
+      },
+      {
+        "release_date" : "",
+        "skip" : {
+          "ed" : {
+            "start" : 1335,
+            "end" : 1425
+          },
+          "op" : {
+            "start" : 0,
+            "end" : 90
+          }
+        },
+        "short_link" : "https:\/\/b23.tv\/ep411778",
+        "title" : "7",
+        "link" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep411778",
+        "cover" : "http:\/\/i0.hdslb.com\/bfs\/archive\/5c0bcb51bc1d7658451fb15bcaa1a2b6315b6030.png",
+        "badge_type" : 0,
+        "share_url" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep411778",
+        "showDrmLoginDialog" : false,
+        "vid" : "",
+        "ep_id" : 411778,
+        "rights" : {
+          "area_limit" : 0,
+          "allow_dm" : 1,
+          "allow_demand" : 0,
+          "allow_download" : 0
+        },
+        "subtitle" : "已观看2360.4万次",
+        "share_copy" : "《干物妹！小埋 中配版》第7话 小埋的哥哥",
+        "aid" : 249658111,
+        "from" : "bangumi",
+        "pv" : 0,
+        "status" : 13,
+        "badge_info" : {
+          "bg_color_night" : "#BB5B76",
+          "text" : "会员",
+          "bg_color" : "#FB7299"
+        },
+        "pub_time" : 1628305200,
+        "bvid" : "BV1sv411K7zs",
+        "duration" : 1441000,
+        "id" : 411778,
+        "cid" : 407993210,
+        "badge" : "会员",
+        "long_title" : "小埋的哥哥",
+        "enable_vt" : false,
+        "is_view_hide" : false,
+        "dimension" : {
+          "height" : 1080,
+          "width" : 1920,
+          "rotate" : 0
+        }
+      },
+      {
+        "release_date" : "",
+        "skip" : {
+          "ed" : {
+            "end" : 1425,
+            "start" : 1335
+          },
+          "op" : {
+            "start" : 0,
+            "end" : 90
+          }
+        },
+        "short_link" : "https:\/\/b23.tv\/ep411779",
+        "title" : "8",
+        "link" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep411779",
+        "cover" : "http:\/\/i0.hdslb.com\/bfs\/archive\/2e19a45c65230c6999760eaf88bc01409f0beacd.png",
+        "badge_type" : 0,
+        "share_url" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep411779",
+        "showDrmLoginDialog" : false,
+        "vid" : "",
+        "ep_id" : 411779,
+        "rights" : {
+          "allow_dm" : 1,
+          "allow_demand" : 0,
+          "allow_download" : 0,
+          "area_limit" : 0
+        },
+        "subtitle" : "已观看2360.4万次",
+        "share_copy" : "《干物妹！小埋 中配版》第8话 小埋和圣诞节和正月",
+        "aid" : 334645563,
+        "from" : "bangumi",
+        "pv" : 0,
+        "status" : 13,
+        "badge_info" : {
+          "bg_color_night" : "#BB5B76",
+          "text" : "会员",
+          "bg_color" : "#FB7299"
+        },
+        "pub_time" : 1628305201,
+        "bvid" : "BV1JA411P75Z",
+        "duration" : 1441000,
+        "id" : 411779,
+        "cid" : 384604166,
+        "badge" : "会员",
+        "long_title" : "小埋和圣诞节和正月",
+        "enable_vt" : false,
+        "is_view_hide" : false,
+        "dimension" : {
+          "height" : 1080,
+          "width" : 1920,
+          "rotate" : 0
+        }
+      },
+      {
+        "release_date" : "",
+        "skip" : {
+          "ed" : {
+            "end" : 1425,
+            "start" : 1335
+          },
+          "op" : {
+            "start" : 0,
+            "end" : 90
+          }
+        },
+        "short_link" : "https:\/\/b23.tv\/ep411780",
+        "title" : "9",
+        "link" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep411780",
+        "cover" : "http:\/\/i0.hdslb.com\/bfs\/archive\/fe434f2c1486d7d446f60314efa9730535228893.png",
+        "badge_type" : 0,
+        "share_url" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep411780",
+        "showDrmLoginDialog" : false,
+        "vid" : "",
+        "ep_id" : 411780,
+        "rights" : {
+          "allow_dm" : 1,
+          "allow_demand" : 0,
+          "area_limit" : 0,
+          "allow_download" : 0
+        },
+        "subtitle" : "已观看2360.4万次",
+        "share_copy" : "《干物妹！小埋 中配版》第9话 小埋与情人节",
+        "aid" : 419787365,
+        "from" : "bangumi",
+        "pv" : 0,
+        "status" : 13,
+        "badge_info" : {
+          "bg_color_night" : "#BB5B76",
+          "text" : "会员",
+          "bg_color" : "#FB7299"
+        },
+        "pub_time" : 1628910000,
+        "bvid" : "BV1h3411z7yr",
+        "duration" : 1441000,
+        "id" : 411780,
+        "cid" : 388254306,
+        "badge" : "会员",
+        "long_title" : "小埋与情人节",
+        "enable_vt" : false,
+        "is_view_hide" : false,
+        "dimension" : {
+          "height" : 1080,
+          "width" : 1920,
+          "rotate" : 0
+        }
+      },
+      {
+        "release_date" : "",
+        "skip" : {
+          "ed" : {
+            "end" : 1425,
+            "start" : 1335
+          },
+          "op" : {
+            "end" : 90,
+            "start" : 0
+          }
+        },
+        "short_link" : "https:\/\/b23.tv\/ep411781",
+        "title" : "10",
+        "link" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep411781",
+        "cover" : "http:\/\/i0.hdslb.com\/bfs\/archive\/5d16f965b6c22a2992d2a68abee62016552b7b0b.png",
+        "badge_type" : 0,
+        "share_url" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep411781",
+        "showDrmLoginDialog" : false,
+        "vid" : "",
+        "ep_id" : 411781,
+        "rights" : {
+          "allow_demand" : 0,
+          "allow_dm" : 1,
+          "allow_download" : 0,
+          "area_limit" : 0
+        },
+        "subtitle" : "已观看2360.4万次",
+        "share_copy" : "《干物妹！小埋 中配版》第10话 小埋和现在和很久之前",
+        "aid" : 632308901,
+        "from" : "bangumi",
+        "pv" : 0,
+        "status" : 13,
+        "badge_info" : {
+          "bg_color_night" : "#BB5B76",
+          "text" : "会员",
+          "bg_color" : "#FB7299"
+        },
+        "pub_time" : 1628910000,
+        "bvid" : "BV1xb4y1U7Kz",
+        "duration" : 1441000,
+        "id" : 411781,
+        "cid" : 388255508,
+        "badge" : "会员",
+        "long_title" : "小埋和现在和很久之前",
+        "enable_vt" : false,
+        "is_view_hide" : false,
+        "dimension" : {
+          "height" : 1080,
+          "width" : 1920,
+          "rotate" : 0
+        }
+      },
+      {
+        "release_date" : "",
+        "skip" : {
+          "ed" : {
+            "end" : 1425,
+            "start" : 1335
+          },
+          "op" : {
+            "end" : 90,
+            "start" : 0
+          }
+        },
+        "short_link" : "https:\/\/b23.tv\/ep411782",
+        "title" : "11",
+        "link" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep411782",
+        "cover" : "http:\/\/i0.hdslb.com\/bfs\/archive\/d562ab6c28b2f4cad4969e4014801ab6d3322fa4.png",
+        "badge_type" : 0,
+        "share_url" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep411782",
+        "showDrmLoginDialog" : false,
+        "vid" : "",
+        "ep_id" : 411782,
+        "rights" : {
+          "area_limit" : 0,
+          "allow_demand" : 0,
+          "allow_download" : 0,
+          "allow_dm" : 1
+        },
+        "subtitle" : "已观看2360.4万次",
+        "share_copy" : "《干物妹！小埋 中配版》第11话 小埋的每一天",
+        "aid" : 889905251,
+        "from" : "bangumi",
+        "pv" : 0,
+        "status" : 13,
+        "badge_info" : {
+          "bg_color_night" : "#BB5B76",
+          "text" : "会员",
+          "bg_color" : "#FB7299"
+        },
+        "pub_time" : 1629514800,
+        "bvid" : "BV1GP4y1s7jM",
+        "duration" : 1441000,
+        "id" : 411782,
+        "cid" : 393090251,
+        "badge" : "会员",
+        "long_title" : "小埋的每一天",
+        "enable_vt" : false,
+        "is_view_hide" : false,
+        "dimension" : {
+          "height" : 1080,
+          "width" : 1920,
+          "rotate" : 0
+        }
+      },
+      {
+        "release_date" : "",
+        "skip" : {
+          "ed" : {
+            "end" : 1425,
+            "start" : 1335
+          },
+          "op" : {
+            "start" : 0,
+            "end" : 90
+          }
+        },
+        "short_link" : "https:\/\/b23.tv\/ep411783",
+        "title" : "12",
+        "link" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep411783",
+        "cover" : "http:\/\/i0.hdslb.com\/bfs\/archive\/03ce110c8c1f274cfa71a51654635cc4f3445609.png",
+        "badge_type" : 0,
+        "share_url" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep411783",
+        "showDrmLoginDialog" : false,
+        "vid" : "",
+        "ep_id" : 411783,
+        "rights" : {
+          "area_limit" : 0,
+          "allow_dm" : 1,
+          "allow_demand" : 0,
+          "allow_download" : 0
+        },
+        "subtitle" : "已观看2360.4万次",
+        "share_copy" : "《干物妹！小埋 中配版》第12话 小埋与大家",
+        "aid" : 632457145,
+        "from" : "bangumi",
+        "pv" : 0,
+        "status" : 13,
+        "badge_info" : {
+          "bg_color_night" : "#BB5B76",
+          "text" : "会员",
+          "bg_color" : "#FB7299"
+        },
+        "pub_time" : 1629514800,
+        "bvid" : "BV1nb4y1S79C",
+        "duration" : 1426000,
+        "id" : 411783,
+        "cid" : 394921900,
+        "badge" : "会员",
+        "long_title" : "小埋与大家",
+        "enable_vt" : false,
+        "is_view_hide" : false,
+        "dimension" : {
+          "height" : 1080,
+          "width" : 1920,
+          "rotate" : 0
+        }
+      }
+    ],
+    "rights" : {
+      "copyright" : "dujia",
+      "allow_bp_rank" : 0,
+      "freya_white" : 0,
+      "is_cover_show" : 0,
+      "resource" : "",
+      "allow_bp" : 0,
+      "only_vip_download" : 0,
+      "watch_platform" : 0,
+      "area_limit" : 328,
+      "allow_download" : 0,
+      "is_preview" : 0,
+      "can_watch" : 1,
+      "forbid_pre" : 0,
+      "ban_area_show" : 1,
+      "allow_review" : 1
+    },
+    "positive" : {
+      "id" : 60276,
+      "title" : "正片"
+    },
+    "rating" : {
+      "score" : 9.0999999999999996,
+      "count" : 1919
+    },
+    "stat" : {
+      "danmakus" : 87593,
+      "favorites" : 309214,
+      "reply" : 11551,
+      "favorite" : 13559,
+      "views" : 23604147,
+      "likes" : 206181,
+      "share" : 8449,
+      "vt" : 0,
+      "follow_text" : "794.6万系列追番",
+      "coins" : 31578
+    },
+    "seasons" : [
+      {
+        "badge_type" : 0,
+        "season_title" : "第一季",
+        "badge_info" : {
+          "bg_color_night" : "#BB5B76",
+          "text" : "会员专享",
+          "bg_color" : "#FB7299"
+        },
+        "horizontal_cover_169" : "",
+        "season_id" : 2580,
+        "icon_font" : {
+          "text" : "2亿",
+          "name" : "playdata-square-line@500"
+        },
+        "horizontal_cover_1610" : "",
+        "media_id" : 2580,
+        "enable_vt" : false,
+        "new_ep" : {
+          "cover" : "http:\/\/i0.hdslb.com\/bfs\/bangumi\/314261a8eab8618dbb49a4c65fe60942dac0228a.jpg",
+          "id" : 69705,
+          "index_show" : "全12话"
+        },
+        "stat" : {
+          "views" : 199161849,
+          "series_follow" : 7946247,
+          "vt" : 0,
+          "favorites" : 5234780
+        },
+        "badge" : "会员专享",
+        "season_type" : 1,
+        "cover" : "http:\/\/i0.hdslb.com\/bfs\/bangumi\/image\/e7fb0d62e99b974e00e19b68e51e8b1fcdfc02d5.png"
+      },
+      {
+        "badge_type" : 1,
+        "season_title" : "第二季",
+        "badge_info" : {
+          "bg_color_night" : "#0B91BE",
+          "text" : "出品",
+          "bg_color" : "#00C0FF"
+        },
+        "horizontal_cover_169" : "",
+        "season_id" : 6446,
+        "icon_font" : {
+          "text" : "1.6亿",
+          "name" : "playdata-square-line@500"
+        },
+        "horizontal_cover_1610" : "",
+        "media_id" : 6446,
+        "enable_vt" : false,
+        "new_ep" : {
+          "cover" : "http:\/\/i2.hdslb.com\/bfs\/archive\/f9218af7a60a68f513155c019c122b20a52f32b6.jpg",
+          "id" : 115446,
+          "index_show" : "全12话"
+        },
+        "stat" : {
+          "views" : 159162758,
+          "series_follow" : 7946247,
+          "vt" : 0,
+          "favorites" : 5021384
+        },
+        "badge" : "出品",
+        "season_type" : 1,
+        "cover" : "http:\/\/i0.hdslb.com\/bfs\/bangumi\/e4edc4b821e92840453fe6e36ade81d92e85d0bc.jpg"
+      },
+      {
+        "badge_type" : 1,
+        "season_title" : "第一季中配",
+        "badge_info" : {
+          "bg_color_night" : "#0B91BE",
+          "text" : "独家",
+          "bg_color" : "#00C0FF"
+        },
+        "horizontal_cover_169" : "http:\/\/i0.hdslb.com\/bfs\/bangumi\/image\/35046fc8f316042ed0797a0310dbb929627cb822.png",
+        "season_id" : 38876,
+        "icon_font" : {
+          "text" : "2360.4万",
+          "name" : "playdata-square-line@500"
+        },
+        "horizontal_cover_1610" : "http:\/\/i0.hdslb.com\/bfs\/bangumi\/image\/42387f8e7cf34c8bf8a5417cb70222750eb00687.png",
+        "media_id" : 28234567,
+        "enable_vt" : false,
+        "new_ep" : {
+          "cover" : "http:\/\/i0.hdslb.com\/bfs\/archive\/03ce110c8c1f274cfa71a51654635cc4f3445609.png",
+          "id" : 411783,
+          "index_show" : "全12话"
+        },
+        "stat" : {
+          "views" : 23604147,
+          "favorites" : 309214,
+          "series_follow" : 7946247,
+          "vt" : 0
+        },
+        "badge" : "独家",
+        "season_type" : 1,
+        "cover" : "http:\/\/i0.hdslb.com\/bfs\/bangumi\/image\/382b395e09fca6b382d92ba583913f240dec9666.png"
+      },
+      {
+        "badge_type" : 1,
+        "season_title" : "第二季中配",
+        "badge_info" : {
+          "bg_color_night" : "#0B91BE",
+          "text" : "独家",
+          "bg_color" : "#00C0FF"
+        },
+        "horizontal_cover_169" : "http:\/\/i0.hdslb.com\/bfs\/bangumi\/image\/ee63cc51ae2711473ecaafdccecd7bd84bf48193.png",
+        "season_id" : 38894,
+        "icon_font" : {
+          "text" : "1202.8万",
+          "name" : "playdata-square-line@500"
+        },
+        "horizontal_cover_1610" : "http:\/\/i0.hdslb.com\/bfs\/bangumi\/image\/cde0878511ae28e92a0ed65ee3e7787b1dba31dc.png",
+        "media_id" : 28234585,
+        "enable_vt" : false,
+        "new_ep" : {
+          "cover" : "http:\/\/i0.hdslb.com\/bfs\/archive\/dcb3603ff3848cf14a497c740484f4cc54cb5e82.png",
+          "id" : 411795,
+          "index_show" : "全12话"
+        },
+        "stat" : {
+          "favorites" : 133332,
+          "vt" : 0,
+          "views" : 12028216,
+          "series_follow" : 7946247
+        },
+        "badge" : "独家",
+        "season_type" : 1,
+        "cover" : "http:\/\/i0.hdslb.com\/bfs\/bangumi\/image\/a7052ae15ff4e9d9de932af3c7b89578cd99798c.png"
+      },
+      {
+        "badge_type" : 0,
+        "season_title" : "第一季粤配",
+        "badge_info" : {
+          "bg_color_night" : "#BB5B76",
+          "text" : "会员专享",
+          "bg_color" : "#FB7299"
+        },
+        "horizontal_cover_169" : "http:\/\/i0.hdslb.com\/bfs\/bangumi\/image\/b57f5988c1d2ff1ad685f344df82226f8e7a9b91.png",
+        "season_id" : 40753,
+        "icon_font" : {
+          "text" : "321.8万",
+          "name" : "playdata-square-line@500"
+        },
+        "horizontal_cover_1610" : "http:\/\/i0.hdslb.com\/bfs\/bangumi\/image\/3ad40bd4c226874054bee032cf56a52df4ef7ea1.png",
+        "media_id" : 28236459,
+        "enable_vt" : false,
+        "new_ep" : {
+          "cover" : "http:\/\/i0.hdslb.com\/bfs\/archive\/0f99c3bd2fa726224f0e3167d41dcd9cf623ac54.png",
+          "id" : 466113,
+          "index_show" : "全12话"
+        },
+        "stat" : {
+          "series_follow" : 7946247,
+          "vt" : 0,
+          "views" : 3217576,
+          "favorites" : 34359
+        },
+        "badge" : "会员专享",
+        "season_type" : 1,
+        "cover" : "http:\/\/i0.hdslb.com\/bfs\/bangumi\/image\/83bc5ff3e2d5569c4e78a99d2d867ba37c28b40f.jpg"
+      },
+      {
+        "badge_type" : 1,
+        "season_title" : "第二季粤配",
+        "badge_info" : {
+          "bg_color_night" : "#0B91BE",
+          "text" : "独家",
+          "bg_color" : "#00C0FF"
+        },
+        "horizontal_cover_169" : "http:\/\/i0.hdslb.com\/bfs\/bangumi\/image\/861901cffbf881bc985aab9ba109399f5621ecf1.png",
+        "season_id" : 40754,
+        "icon_font" : {
+          "text" : "164.1万",
+          "name" : "playdata-square-line@500"
+        },
+        "horizontal_cover_1610" : "http:\/\/i0.hdslb.com\/bfs\/bangumi\/image\/792e1925c874a72f2cb2cea440a56b251aa93441.jpg",
+        "media_id" : 28236460,
+        "enable_vt" : false,
+        "new_ep" : {
+          "cover" : "http:\/\/i0.hdslb.com\/bfs\/archive\/5aa46c1d4ee91a08a5c0316445361983cdcce6ca.png",
+          "id" : 466289,
+          "index_show" : "全12话"
+        },
+        "stat" : {
+          "views" : 1640844,
+          "vt" : 0,
+          "favorites" : 18410,
+          "series_follow" : 7946247
+        },
+        "badge" : "独家",
+        "season_type" : 1,
+        "cover" : "http:\/\/i0.hdslb.com\/bfs\/bangumi\/image\/c6c1b4679080f9a83f2e43e0163c4d5cf86b9235.jpg"
+      },
+      {
+        "badge_type" : 0,
+        "season_title" : "OVA",
+        "badge_info" : {
+          "bg_color_night" : "#BB5B76",
+          "text" : "",
+          "bg_color" : "#FB7299"
+        },
+        "horizontal_cover_169" : "",
+        "season_id" : 3421,
+        "icon_font" : {
+          "text" : "2211.1万",
+          "name" : "playdata-square-line@500"
+        },
+        "horizontal_cover_1610" : "",
+        "media_id" : 3421,
+        "enable_vt" : false,
+        "new_ep" : {
+          "cover" : "http:\/\/i2.hdslb.com\/bfs\/archive\/baf21ad7cedf355130ec797fb569f90f4353115d.jpg",
+          "id" : 104217,
+          "index_show" : "全2话"
+        },
+        "stat" : {
+          "series_follow" : 7946247,
+          "favorites" : 817437,
+          "views" : 22110831,
+          "vt" : 0
+        },
+        "badge" : "",
+        "season_type" : 1,
+        "cover" : "http:\/\/i0.hdslb.com\/bfs\/bangumi\/c80bbbb0104e7f60c1df67eebf684917880ab7b2.jpg"
+      }
+    ],
+    "user_status" : {
+      "follow_status" : 0,
+      "area_limit" : 0,
+      "follow" : 0,
+      "pay_pack_paid" : 0,
+      "pay" : 0,
+      "sponsor" : 0,
+      "login" : 0,
+      "ban_area_show" : 0
+    },
+    "activity" : {
+      "title" : "",
+      "id" : 0,
+      "head_bg_url" : ""
+    },
+    "season_title" : "干物妹！小埋 中配版",
+    "new_ep" : {
+      "title" : "12",
+      "is_new" : 0,
+      "desc" : "已完结, 全12话",
+      "id" : 411783
+    },
+    "share_sub_title" : "超级可爱的小埋！",
+    "show_season_type" : 1,
+    "share_url" : "https:\/\/www.bilibili.com\/bangumi\/play\/ss38876",
+    "jp_title" : "",
+    "series" : {
+      "display_type" : 0,
+      "series_id" : 1760,
+      "series_title" : "干物妹！小埋"
+    },
+    "hide_ep_vv_vt_dm" : 1,
+    "season_id" : 38876,
+    "icon_font" : {
+      "text" : "2360.4万",
+      "name" : "playdata-square-line@500"
+    },
+    "alias" : "",
+    "subtitle" : "已观看2360.4万次",
+    "enable_vt" : false,
+    "play_strategy" : {
+      "strategies" : [
+        "common_section-formal_first_ep",
+        "common_section-common_section",
+        "common_section-next_season",
+        "formal-finish-next_season",
+        "formal-end-other_section",
+        "formal-end-next_season",
+        "ord"
+      ]
+    },
+    "delivery_fragment_video" : false,
+    "mode" : 2,
+    "link" : "http:\/\/www.bilibili.com\/bangumi\/media\/md28234567\/",
+    "record" : "登记号：10417060168772406",
+    "section" : [
+      {
+        "episode_ids" : [
+
+        ],
+        "type2" : 0,
+        "episode_id" : 0,
+        "id" : 60309,
+        "type" : 1,
+        "attr" : 0,
+        "episodes" : [
+          {
+            "is_view_hide" : false,
+            "share_copy" : "《干物妹！小埋 中配版》正式预告片 ",
+            "duration" : 121000,
+            "badge" : "",
+            "ep_id" : 408271,
+            "enable_vt" : false,
+            "rights" : {
+              "allow_download" : 0,
+              "allow_dm" : 1,
+              "area_limit" : 0,
+              "allow_demand" : 0
+            },
+            "dimension" : {
+              "height" : 1080,
+              "width" : 1920,
+              "rotate" : 0
+            },
+            "status" : 2,
+            "aid" : 761273264,
+            "share_url" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep408271",
+            "id" : 408271,
+            "showDrmLoginDialog" : false,
+            "badge_type" : 0,
+            "bvid" : "BV1e64y1t7GT",
+            "release_date" : "",
+            "icon_font" : {
+              "text" : "100.3万",
+              "name" : "playdata-square-line@500"
+            },
+            "cid" : 358452984,
+            "short_link" : "https:\/\/b23.tv\/ep408271",
+            "from" : "bangumi",
+            "long_title" : "",
+            "stat_for_unity" : {
+              "reply" : 2156,
+              "likes" : 10327,
+              "danmaku" : {
+                "text" : "1861",
+                "value" : 1861,
+                "icon" : "danmu-square-line@500",
+                "pure_text" : ""
+              },
+              "coin" : 610,
+              "vt" : {
+                "text" : "100.3万",
+                "value" : 1003359,
+                "icon" : "playdata-square-line@500",
+                "pure_text" : "100.3万播放"
+              }
+            },
+            "title" : "正式预告片",
+            "pub_time" : 1624442400,
+            "vid" : "",
+            "subtitle" : "已观看2360.4万次",
+            "skip" : {
+              "ed" : {
+                "end" : 0,
+                "start" : 0
+              },
+              "op" : {
+                "end" : 0,
+                "start" : 0
+              }
+            },
+            "badge_info" : {
+              "bg_color_night" : "#BB5B76",
+              "text" : "",
+              "bg_color" : "#FB7299"
+            },
+            "cover" : "http:\/\/i0.hdslb.com\/bfs\/archive\/937a563d05d2760d974d4a564128ece365890868.jpg",
+            "stat" : {
+              "play" : 1003359,
+              "danmakus" : 1861,
+              "reply" : 2156,
+              "coin" : 610,
+              "likes" : 10327,
+              "vt" : 0
+            },
+            "pv" : 0,
+            "link" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep408271"
+          },
+          {
+            "is_view_hide" : false,
+            "share_copy" : "《干物妹！小埋 中配版》预热 ",
+            "duration" : 16000,
+            "badge" : "",
+            "ep_id" : 407449,
+            "enable_vt" : false,
+            "rights" : {
+              "area_limit" : 0,
+              "allow_dm" : 1,
+              "allow_demand" : 0,
+              "allow_download" : 0
+            },
+            "dimension" : {
+              "height" : 1080,
+              "width" : 1920,
+              "rotate" : 0
+            },
+            "status" : 2,
+            "aid" : 248584558,
+            "share_url" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep407449",
+            "id" : 407449,
+            "showDrmLoginDialog" : false,
+            "badge_type" : 0,
+            "bvid" : "BV1vv411p7gx",
+            "release_date" : "",
+            "icon_font" : {
+              "text" : "29.3万",
+              "name" : "playdata-square-line@500"
+            },
+            "cid" : 351385467,
+            "short_link" : "https:\/\/b23.tv\/ep407449",
+            "from" : "bangumi",
+            "long_title" : "",
+            "stat_for_unity" : {
+              "reply" : 292,
+              "coin" : 213,
+              "vt" : {
+                "icon" : "playdata-square-line@500",
+                "text" : "29.3万",
+                "value" : 292901,
+                "pure_text" : "29.3万播放"
+              },
+              "likes" : 1473,
+              "danmaku" : {
+                "icon" : "danmu-square-line@500",
+                "text" : "47",
+                "value" : 47,
+                "pure_text" : ""
+              }
+            },
+            "title" : "预热",
+            "pub_time" : 1623232800,
+            "vid" : "",
+            "subtitle" : "已观看2360.4万次",
+            "skip" : {
+              "ed" : {
+                "end" : 0,
+                "start" : 0
+              },
+              "op" : {
+                "start" : 0,
+                "end" : 0
+              }
+            },
+            "badge_info" : {
+              "bg_color_night" : "#BB5B76",
+              "text" : "",
+              "bg_color" : "#FB7299"
+            },
+            "cover" : "http:\/\/i0.hdslb.com\/bfs\/archive\/e4ec0020cf14b3ce14d52946610901a76f020ef0.jpg",
+            "stat" : {
+              "danmakus" : 47,
+              "vt" : 0,
+              "play" : 292901,
+              "likes" : 1473,
+              "reply" : 292,
+              "coin" : 213
+            },
+            "pv" : 0,
+            "link" : "https:\/\/www.bilibili.com\/bangumi\/play\/ep407449"
+          }
+        ],
+        "title" : "预告片"
+      }
+    ],
+    "staff" : "原作：サンカクヘッド\n监督：太田雅彦\n脚本：杉原研二、鸿野贵光、あおしまたかし、子安秀明\n演出：福本洁\n分镜：おざわかずひろ、太田雅彦、大隈孝晴\n系列构成：青岛崇\n角色设计：高野绫\n总作画监督：高野绫、中川洋未\n美术监督：池之上由纪\n色彩设计：真壁源太\n音响监督：虾名恭范\n音乐：三泽康广\n音乐制作：神南Studio\n编辑：小野寺绘美\n动画制作：动画工房",
+    "share_copy" : "《干物妹！小埋 中配版》超级可爱的小埋！",
+    "title" : "干物妹！小埋 中配版",
+    "areas" : [
+      {
+        "id" : 2,
+        "name" : "日本"
+      }
+    ],
+    "status" : 13,
+    "up_info" : {
+      "theme_type" : 0,
+      "pendant" : {
+        "name" : "",
+        "image" : "",
+        "pid" : 0
+      },
+      "vip_label" : {
+        "text_color" : "#FFFFFF",
+        "bg_style" : 1,
+        "text" : "十年大会员",
+        "border_color" : "",
+        "bg_color" : "#FB7299"
+      },
+      "uname" : "哔哩哔哩番剧",
+      "is_follow" : 0,
+      "verify_type" : 3,
+      "avatar_subscript_url" : "",
+      "vip_status" : 1,
+      "mid" : 928123,
+      "follower" : 6769235,
+      "vip_type" : 2,
+      "nickname_color" : "#FB7299",
+      "avatar" : "https:\/\/i1.hdslb.com\/bfs\/face\/040528a1ec634b9907ba3a9ba957819bb07def06.jpg"
+    },
+    "styles" : [
+      "漫画改",
+      "日常",
+      "搞笑",
+      "萌系"
+    ],
+    "show" : {
+      "wide_screen" : 0
+    },
+    "actors" : "土间埋：山新\n土间大平：皇贞季\n海老名菜菜：幽舞越山\n本场切绘：杨凝\n橘·希尔芬福特：姜英俊\n金刚叶：叶知秋\n本场猛：图特哈蒙\n橘·亚历克斯：李兰陵\n",
+    "bkg_cover" : "",
+    "type" : 1
+  },
+  "message" : "success",
+  "code" : 0
+}

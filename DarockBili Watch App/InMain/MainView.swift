@@ -28,6 +28,7 @@ struct MainView: View {
         if #available(watchOS 10, *) {
             MainViewMain()
                 .navigationBarTitleDisplayMode(.large)
+                .sheet(isPresented: $isSearchPresented, content: {SearchMainView()})
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Button(action: {
@@ -36,7 +37,6 @@ struct MainView: View {
                             Image(systemName: "magnifyingglass")
                                 .foregroundColor(.accentColor)
                         })
-                        .sheet(isPresented: $isSearchPresented, content: {SearchMainView()})
                         .accessibilityIdentifier("SearchButton")
                     }
                 }
