@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8C2337FA2B63DBF3009665B1 /* BPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8C2337F92B63DBF3009665B1 /* BPlayer */; };
+		8C72E32E2B6607240087486E /* DownloadObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C72E32D2B6607240087486E /* DownloadObj.swift */; };
+		8C72E3302B6621E00087486E /* Passthroughs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C72E32F2B6621E00087486E /* Passthroughs.swift */; };
 		8C81A8EA2B620D130045E986 /* BPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8C81A8E92B620D130045E986 /* BPlayer */; };
 		8C8CA05A2B6108460020DEDD /* Bangumi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8CA0592B6108460020DEDD /* Bangumi.swift */; };
 		B44689D12B4FC15A002CCEB2 /* 喵哩喵哩.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B44689D02B4FC15A002CCEB2 /* 喵哩喵哩.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -107,6 +109,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8C72E32A2B6605B80087486E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		8C72E32D2B6607240087486E /* DownloadObj.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadObj.swift; sourceTree = "<group>"; };
+		8C72E32F2B6621E00087486E /* Passthroughs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Passthroughs.swift; sourceTree = "<group>"; };
 		8C8CA0592B6108460020DEDD /* Bangumi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bangumi.swift; sourceTree = "<group>"; };
 		8CD9463A2B64CD0F005D00D0 /* Bangumi_Detail_Season.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Bangumi_Detail_Season.json; sourceTree = "<group>"; };
 		B44689CA2B4FC15A002CCEB2 /* DarockBili.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarockBili.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				8C8CA0592B6108460020DEDD /* Bangumi.swift */,
+				8C72E32D2B6607240087486E /* DownloadObj.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -213,6 +219,7 @@
 		B44689C32B4FC15A002CCEB2 = {
 			isa = PBXGroup;
 			children = (
+				8C72E32A2B6605B80087486E /* README.md */,
 				B4468A142B4FC24A002CCEB2 /* JSONReturnExamples */,
 				B44689D42B4FC15A002CCEB2 /* DarockBili Watch App */,
 				B44689CB2B4FC15A002CCEB2 /* Products */,
@@ -369,6 +376,7 @@
 			children = (
 				B4468A212B4FC24A002CCEB2 /* CCodes */,
 				B4468A1C2B4FC24A002CCEB2 /* Skins */,
+				8C72E32F2B6621E00087486E /* Passthroughs.swift */,
 				B4468A182B4FC24A002CCEB2 /* AboutView.swift */,
 				B4468A192B4FC24A002CCEB2 /* FirstUsingView.swift */,
 				B4468A1A2B4FC24A002CCEB2 /* SettingsView.swift */,
@@ -596,12 +604,14 @@
 				B4468A402B4FC24A002CCEB2 /* UIExt.swift in Sources */,
 				B4468A382B4FC24A002CCEB2 /* FeedbackEnterView.swift in Sources */,
 				B4468A312B4FC24A002CCEB2 /* NetworkFixView.swift in Sources */,
+				8C72E3302B6621E00087486E /* Passthroughs.swift in Sources */,
 				B4468A4F2B4FC24A002CCEB2 /* AudioPlayerView.swift in Sources */,
 				B4468A442B4FC24A002CCEB2 /* MainView.swift in Sources */,
 				B4468A5F2B4FC24A002CCEB2 /* PersonAccountView.swift in Sources */,
 				B4468A5E2B4FC24A002CCEB2 /* bMessageSendView.swift in Sources */,
 				B4468A422B4FC24A002CCEB2 /* DarockBiliApp.swift in Sources */,
 				B4468A572B4FC24A002CCEB2 /* SkinChooserView.swift in Sources */,
+				8C72E32E2B6607240087486E /* DownloadObj.swift in Sources */,
 				B4468A582B4FC24A002CCEB2 /* SkinExplorerView.swift in Sources */,
 				B4468A602B4FC24A002CCEB2 /* FavoriteView.swift in Sources */,
 				B4468A532B4FC24A002CCEB2 /* AboutView.swift in Sources */,
@@ -768,7 +778,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 394;
+				CURRENT_PROJECT_VERSION = 397;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -800,7 +810,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 394;
+				CURRENT_PROJECT_VERSION = 397;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -832,7 +842,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 394;
+				CURRENT_PROJECT_VERSION = 397;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				INFOPLIST_KEY_CFBundleDisplayName = DarockBili;
 				MARKETING_VERSION = 1.0.0;
@@ -848,7 +858,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 394;
+				CURRENT_PROJECT_VERSION = 397;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				INFOPLIST_KEY_CFBundleDisplayName = DarockBili;
 				MARKETING_VERSION = 1.0.0;

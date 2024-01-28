@@ -16,7 +16,10 @@
 //===----------------------------------------------------------------------===//
 
 import AVKit
+import Combine
 import SwiftUI
+import Marquee
+import Alamofire
 import AVFoundation
 import SDWebImageSwiftUI
 
@@ -27,6 +30,11 @@ struct DownloadsView: View {
     @State var vRootPath = ""
     var body: some View {
         List {
+            if #unavailable(watchOS 10) {
+                NavigationLink(destination: {DownloadingListView()}, label: {
+                    Label("下载任务列表", systemImage: "list.bullet.below.rectangle")
+                })
+            }
             if metadatas.count != 0 {
                 ForEach(0...metadatas.count - 1, id: \.self) { i in
                     if metadatas[i]["notGet"] == nil {
@@ -90,6 +98,15 @@ struct DownloadsView: View {
             }
         }
         .sheet(isPresented: $isPlayerPresented, content: {OfflineVideoPlayer()})
+        .toolbar {
+            if #available(watchOS 10, *) {
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink(destination: {DownloadingListView()}, label: {
+                        Image(systemName: "list.bullet.below.rectangle")
+                    })
+                }
+            }
+        }
         .onAppear {
             vRootPath = String(AppFileManager(path: "dlds").GetPath("").path)
             metadatas.removeAll()
@@ -117,6 +134,120 @@ struct DownloadsView: View {
     }
 }
 
+struct DownloadingListView: View {
+    @State var downloadProgresses = [Double]()
+    @State var downloadedSizes = [Int64]()
+    @State var totalSizes = [Int64]()
+    @State var videoDetails = [[String: String]]()
+    var body: some View {
+        List {
+            if downloadingProgressDatas.count != 0 && totalSizes.count != 0 {
+                ForEach(0..<downloadingProgressDatas.count, id: \.self) { i in
+                    if !failedDownloadTasks.contains(i) {
+                        if !downloadingProgressDatas[i].isFinished && downloadProgresses[i] != 1.0 {
+                            VStack {
+                                HStack {
+                                    Spacer()
+                                    Text("正在下载 #\(i + 1)")
+                                        .bold()
+                                    Spacer()
+                                }
+                                Marquee {
+                                    Text(videoDetails[i]["Title"] ?? "")
+                                }
+                                .marqueeDuration(10)
+                                .marqueeWhenNotFit(true)
+                                .marqueeIdleAlignment(.center)
+                                .frame(height: 18)
+                                ProgressView(value: downloadProgresses[i] * 100, total: 100.0)
+                                HStack {
+                                    Spacer()
+                                    Text("\(String(format: "%.2f", downloadProgresses[i] * 100) + " %")")
+                                    Spacer()
+                                }
+                                HStack {
+                                    Spacer()
+                                    Text("\(String(format: "%.2f", Double(downloadedSizes[i]) / 1024 / 1024))MB / \(String(format: "%.2f", Double(totalSizes[i]) / 1024 / 1024))MB")
+                                        .font(.system(size: 16, weight: .bold))
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.1)
+                                    Spacer()
+                                }
+                            }
+                            .onReceive(downloadingProgressDatas[i].pts) { data in
+                                downloadProgresses[i] = data.data.progress
+                                downloadedSizes[i] = data.data.currentSize
+                                totalSizes[i] = data.data.totalSize
+                                videoDetails[i] = data.videoDetails
+                            }
+                        } else {
+                            VStack {
+                                HStack {
+                                    Spacer()
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .foregroundColor(.green)
+                                    Text("下载 #\(i + 1) 已完成")
+                                    Spacer()
+                                }
+                                // TODO: VideoCard refer to DownloadsView item
+                            }
+                        }
+                    } else {
+                        Button(action: {
+                            DispatchQueue(label: "com.darock.DarockBili.VideoDownload", qos: .background).async {
+                                AF.download(resumingWith: UserDefaults.standard.data(forKey: "VideoDownloadResumeData\(i)") ?? Data())
+                                    .downloadProgress { p in
+                                        downloadingProgressDatas[i].pts.send(.init(data: .init(progress: p.fractionCompleted, currentSize: p.completedUnitCount, totalSize: p.totalUnitCount), videoDetails: downloadResumeDatas[i]!))
+                                    }
+                                    .response { r in
+                                        if r.error == nil, let filePath = r.fileURL?.path {
+                                            debugPrint(filePath)
+                                            debugPrint(downloadResumeDatas[i]!["BV"] ?? "")
+                                            var detTmp = downloadResumeDatas[i] ?? [:]
+                                            detTmp.updateValue(filePath, forKey: "Path")
+                                            detTmp.updateValue(String(Date.now.timeIntervalSince1970), forKey: "Time")
+                                            UserDefaults.standard.set(detTmp, forKey: downloadResumeDatas[i]!["BV"]!)
+                                            downloadingProgressDatas[i].isFinished = true
+                                        } else {
+                                            UserDefaults.standard.set(r.resumeData, forKey: "VideoDownloadResumeData\(i)")
+                                            failedDownloadTasks.append(i)
+                                            debugPrint(r.error as Any)
+                                        }
+                                    }
+                            }
+                        }, label: {
+                            VStack {
+                                HStack {
+                                    Spacer()
+                                    Text("任务 #\(i + 1) 中断")
+                                    Spacer()
+                                }
+                                HStack {
+                                    Spacer()
+                                    Text("轻触以尝试继续下载")
+                                        .font(.footnote)
+                                        .opacity(0.65)
+                                    Spacer()
+                                }
+                            }
+                        })
+                    }
+                }
+            } else {
+                Text("当前无下载任务")
+            }
+        }
+        .navigationTitle("下载任务列表")
+        .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            downloadProgresses = Array(repeating: 0.0, count: downloadingProgressDatas.count)
+            downloadedSizes = Array(repeating: 0, count: downloadingProgressDatas.count)
+            totalSizes = Array(repeating: 0, count: downloadingProgressDatas.count)
+            videoDetails = Array(repeating: [:], count: downloadingProgressDatas.count)
+        }
+    }
+}
+
 struct OfflineVideoPlayer: View {
     var path: String? = nil
     @State var timeUpdateTimer: Timer?
@@ -128,6 +259,7 @@ struct OfflineVideoPlayer: View {
             VideoPlayer(player: player)
                 .ignoresSafeArea()
         }
+        .navigationBarHidden(true)
         .onAppear {
             hideDigitalTime(true)
             debugPrint(DownloadsView.willPlayVideoPath)
