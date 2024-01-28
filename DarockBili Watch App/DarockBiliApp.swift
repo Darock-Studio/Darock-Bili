@@ -63,6 +63,7 @@ struct DarockBili_Watch_AppApp: App {
     @State var isShowMemoryUsage = false
     var body: some Scene {
         WindowGroup {
+            
             if UserDefaults.standard.string(forKey: "NewSignalError") ?? "" != "" {
                 SignalErrorView()
             } else {

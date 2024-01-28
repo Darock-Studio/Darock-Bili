@@ -19,8 +19,12 @@ import SwiftUI
 import DarockKit
 
 struct AboutView: View {
-     var body: some View {
-         NavigationStack {
+    @Environment(\.dismiss) var dismiss
+    @State var isEasterEgg1Presented = false
+    @State var isGenshin = false
+    @State var genshinOverlayTextOpacity: CGFloat = 0.0
+    var body: some View {
+        NavigationStack {
             List {
                 Section {
                     Text("喵哩喵哩 v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)")
@@ -38,7 +42,12 @@ struct AboutView: View {
                     }
                     Text("Lightning-Lion")
                     Text("Linecom")
+                    Text("令枫")
                     Text("-- And You --")
+                        .sheet(isPresented: $isEasterEgg1Presented, content: {EasterEgg1View(isGenshin: $isGenshin)})
+                        .onTapGesture(count: 10) {
+                            isEasterEgg1Presented = true
+                        }
                 }
                 Section {
                     NavigationLink(destination: {OpenSource()}, label: {
@@ -48,7 +57,27 @@ struct AboutView: View {
             }
             .bold()
         }
-        
+        .navigationBarHidden(isGenshin)
+        .overlay {
+            if isGenshin {
+                ZStack(alignment: .center) {
+                    Color.white
+                    Text("原神")
+                        .font(.system(size: 30, weight: .heavy))
+                        .foregroundColor(.black)
+                        .opacity(genshinOverlayTextOpacity)
+                }
+                .ignoresSafeArea()
+                .animation(.smooth(duration: 2.0), value: genshinOverlayTextOpacity)
+                .onAppear {
+                    genshinOverlayTextOpacity = 1.0
+                    Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
+                        isGenshin = false
+                        dismiss()
+                    }
+                }
+            }
+        }
     }
     struct OpenSource: View {
         var body: some View {
@@ -102,6 +131,28 @@ struct AboutView: View {
                 Licensed under MIT license
                 ------------------
                 """)
+            }
+        }
+    }
+    
+    // MARK: Easter Eggs
+    struct EasterEgg1View: View {
+        @Binding var isGenshin: Bool
+        @Environment(\.dismiss) var dismiss
+        @State var codeInput = ""
+        var body: some View {
+            VStack {
+                TextField("神秘代码", text: $codeInput)
+                Button(action: {
+                    if codeInput == "Genshin" {
+                        isGenshin = true
+                        dismiss()
+                    } else {
+                        codeInput = "输入错误"
+                    }
+                }, label: {
+                    Text("确认")
+                })
             }
         }
     }
