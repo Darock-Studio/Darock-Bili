@@ -25,7 +25,7 @@ struct HistoryView: View {
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
     @AppStorage("bili_jct") var biliJct = ""
-    @State var histories = [[String: String]]()
+    @State var histories = [Any]()
     @State var isLoaded = false
     @State var nowPage = 1
     @State var totalPage = 1
@@ -33,33 +33,11 @@ struct HistoryView: View {
         List {
             if histories.count != 0 {
                 ForEach(0...histories.count - 1, id: \.self) { i in
-                    VideoCard(histories[i])
-//                    HStack {
-//                        switch Int(histories[i]["Device"]!)! {
-//                        case 1, 3, 5, 7:
-//                            Image(systemName: "iphone")
-//                                .resizable()
-//                                .frame(width: 10, height: 16)
-//                        case 2:
-//                            Image(systemName: "desktopcomputer")
-//                                .resizable()
-//                                .frame(width: 16, height: 10)
-//                        case 4, 6:
-//                            Image(systemName: "ipad.landscape")
-//                                .resizable()
-//                                .frame(width: 16, height: 10)
-//                        case 33:
-//                            Image(systemName: "tv")
-//                                .resizable()
-//                                .frame(width: 16, height: 10)
-//                        default:
-//                            Image(systemName: "iphone")
-//                                .resizable()
-//                                .frame(width: 10, height: 16)
-//                        }
-//                        Spacer()
-//                    }
-//                    .foregroundColor(.gray)
+                    if (histories[i] as! [String: Any])["Type"]! as! String == "archive" {
+                        VideoCard(histories[i] as! [String: String])
+                    } else if (histories[i] as! [String: Any])["Type"]! as! String == "pgc" {
+                        BangumiCard((histories[i] as! [String: Any])["Data"] as! BangumiData)
+                    }
                 }
             } else {
                 ProgressView()
@@ -77,7 +55,12 @@ struct HistoryView: View {
                         if !CheckBApiError(from: respJson) { return }
                         let datas = respJson["data"]
                         for data in datas {
-                            histories.append(["Type": data.1["business"].string!, "Pic": data.1["pic"].string!, "Title": data.1["title"].string!, "UP": data.1["owner"]["name"].string!, "Device": String(data.1["device"].int!), "BV": data.1["bvid"].string!, "View": String(data.1["stat"]["view"].int!), "Danmaku": String(data.1["stat"]["danmaku"].int!)])
+                            let type = data.1["business"].string ?? "archive"
+                            if type == "archive" {
+                                histories.append(["Type": type, "Pic": data.1["pic"].string!, "Title": data.1["title"].string!, "UP": data.1["owner"]["name"].string!, "Device": String(data.1["device"].int!), "BV": data.1["bvid"].string!, "View": String(data.1["stat"]["view"].int!), "Danmaku": String(data.1["stat"]["danmaku"].int!)])
+                            } else if type == "pgc" {
+                                histories.append(["Type": type, "Data": BangumiData(mediaId: data.1["bangumi"]["ep_id"].int64 ?? 0, seasonId: data.1["bangumi"]["season"]["season_id"].int64 ?? 0, title: data.1["bangumi"]["long_title"].string ?? "[加载失败]", originalTitle: data.1["bangumi"]["season"]["title"].string ?? "[加载失败]", cover: data.1["bangumi"]["cover"].string ?? "E")])
+                            }
                         }
                         isLoaded = true
                     }

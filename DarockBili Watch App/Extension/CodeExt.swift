@@ -653,42 +653,24 @@ extension Int {
     }
 }
 
-extension Collection {
-    /**
-     如果元素在边界内，则返回指定索引处的元素，否则为nil。
-     ```
-     let 集合 = [1,2]
-     let 结果 = 集合.at(2)
-     print(结果)
-     */
-    public func safeSubscript(_ index: Index) -> Iterator.Element? {
-        return indices.contains(index) ? self[index] : nil
+extension Bool {
+    init(_ input: Int) {
+        if input == 0 {
+            self = false
+        } else {
+            self = true
+        }
     }
 }
 
-class CancellableTask {
-    private var workItem: DispatchWorkItem?
-    
-    func performDelayedOperation(after: TimeInterval, handler: @escaping () -> Void) {
-        // 取消之前的 workItem，如果有的话
-        workItem?.cancel()
-        
-        // 创建一个新的 DispatchWorkItem
-        let new = DispatchWorkItem {
-            handler()
-        }
-        self.workItem = new
-        
-        // 使用异步延迟将 workItem 添加到队列
-        DispatchQueue.main.asyncAfter(deadline: .now() + after, execute: new)
+infix operator ~
+extension Float {
+    static func ~ (lhs: Float, rhs: Int) -> String {
+        return String(format: "%.\(rhs)f", lhs)
     }
-    
-    func cancel() {
-        if let workItem {
-            workItem.cancel()
-            self.workItem = nil
-        } else {
-            print("Cancelling a not existent task")
-        }
+}
+extension Double {
+    static func ~ (lhs: Double, rhs: Int) -> String {
+        return String(format: "%.\(rhs)f", lhs)
     }
 }
