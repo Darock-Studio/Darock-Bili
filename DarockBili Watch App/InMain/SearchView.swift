@@ -24,7 +24,7 @@ import SDWebImageSwiftUI
 import AuthenticationServices
 
 struct SearchMainView: View {
-    @State var searchText = "小埋"
+    @State var searchText = ""
     @State var isSearchPresented = false
     @State var searchHistory = [String]()
     var body: some View {
