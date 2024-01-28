@@ -60,6 +60,7 @@ struct VideoDetailView: View {
     @State var isNowPlayingPresented = false
     @State var backgroundPicOpacity = 0.0
     @State var mainVerticalTabViewSelection = 1
+    @State var videoPartShouldShowDownloadTip = false
     var body: some View {
         TabView {
             if #available(watchOS 10, *) {
@@ -82,11 +83,16 @@ struct VideoDetailView: View {
                                             .sheet(isPresented: $isMoreMenuPresented, content: {
                                                 List {
                                                     Button(action: {
-                                                        isDownloadPresented = true
+                                                        if videoPages.count <= 1 {
+                                                            isDownloadPresented = true
+                                                        } else {
+                                                            videoPartShouldShowDownloadTip = true
+                                                            mainVerticalTabViewSelection = 3
+                                                            isMoreMenuPresented = false
+                                                        }
                                                     }, label: {
                                                         Label("下载视频", systemImage: "arrow.down.doc")
                                                     })
-                                                    .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
                                                     Button(action: {
                                                         let headers: HTTPHeaders = [
                                                             "cookie": "SESSDATA=\(sessdata)",
@@ -148,7 +154,7 @@ struct VideoDetailView: View {
                                             }, label: {
                                                 Image(systemName: "waveform")
                                             })
-                                            if videoPages.count == 1 {
+                                            if videoPages.count <= 1 {
                                                 Button(action: {
                                                     isLoading = true
                                                     debugPrint(videoDetails["BV"]!)
@@ -196,8 +202,8 @@ struct VideoDetailView: View {
                             }
                             DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, honors: $honors, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount, publishTime: $publishTime)
                                 .tag(2)
-                            if videoPages.count != 1 {
-                                DetailViewVideoPartPageBase(videoDetails: $videoDetails, videoPages: $videoPages, isLoading: $isLoading)
+                            if videoPages.count > 1 {
+                                DetailViewVideoPartPageBase(videoDetails: $videoDetails, videoPages: $videoPages, isLoading: $isLoading, videoPartShouldShowDownloadTip: $videoPartShouldShowDownloadTip)
                                     .tag(3)
                             }
                         }
@@ -210,6 +216,7 @@ struct VideoDetailView: View {
                             .bold()
                     }
                 }
+                .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
                 .sheet(isPresented: $isVideoPlayerPresented, content: {
                     VideoPlayerView()
                         .navigationBarHidden(true)
@@ -905,12 +912,16 @@ struct VideoDetailView: View {
         @Binding var videoDetails: [String: String]
         @Binding var videoPages: [[String: String]]
         @Binding var isLoading: Bool
+        @Binding var videoPartShouldShowDownloadTip: Bool
         @AppStorage("DedeUserID") var dedeUserID = ""
         @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
         @AppStorage("SESSDATA") var sessdata = ""
         @AppStorage("bili_jct") var biliJct = ""
         @AppStorage("VideoGetterSource") var videoGetterSource = "official"
         @State var isVideoPlayerPresented = false
+        @State var downloadTipOffset: CGFloat = 0.0
+        @State var downloadTipOpacity: CGFloat = 1.0
+        @State var isDownloadPresented = false
         var body: some View {
             List {
                 if videoPages.count != 0 {
@@ -926,11 +937,13 @@ struct VideoDetailView: View {
                                 let cid = videoPages[i]["CID"]!
                                 VideoDetailView.willPlayVideoCID = Int64(cid)!
                                 DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers) { respJson, isSuccess in
-                                    if !CheckBApiError(from: respJson) { return }
-                                    VideoDetailView.willPlayVideoLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
-                                    VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                                    isVideoPlayerPresented = true
-                                    isLoading = false
+                                    if isSuccess {
+                                        if !CheckBApiError(from: respJson) { return }
+                                        VideoDetailView.willPlayVideoLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
+                                        VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                                        isVideoPlayerPresented = true
+                                        isLoading = false
+                                    }
                                 }
                             } else if videoGetterSource == "injahow" {
                                 DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=\(i + 1)&type=video&q=32&format=mp4&otype=url") { respStr, isSuccess in
@@ -943,14 +956,66 @@ struct VideoDetailView: View {
                                 }
                             }
                         }, label: {
-                            HStack {
-                                Text(String(i + 1))
-                                Text(videoPages[i]["Title"]!)
+                            ZStack {
+                                HStack {
+                                    Text(String(i + 1))
+                                    Text(videoPages[i]["Title"]!)
+                                    Spacer()
+                                }
+                                if videoPartShouldShowDownloadTip && i == 0 {
+                                    HStack {
+                                        Spacer()
+                                        Image(systemName: "hand.point.up.left")
+                                            .font(.system(size: 30))
+                                            .offset(x: downloadTipOffset, y: 10)
+                                            .opacity(downloadTipOpacity)
+                                            .animation(.easeOut(duration: 2.0), value: downloadTipOffset)
+                                            .animation(.easeIn(duration: 1.0), value: downloadTipOpacity)
+                                            .onAppear {
+                                                DispatchQueue(label: "com.darock.DarockBili.PartVideoDownloadTip", qos: .userInteractive).async {
+                                                    downloadTipOffset = -40
+                                                    sleep(3)
+                                                    downloadTipOpacity = 0
+                                                    sleep(1)
+                                                    videoPartShouldShowDownloadTip = false
+                                                }
+                                            }
+                                    }
+                                }
                             }
                         })
+                        .swipeActions {
+                            Button(action: {
+                                if videoGetterSource == "official" {
+                                    let headers: HTTPHeaders = [
+                                        "cookie": "SESSDATA=\(sessdata)",
+                                        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                    ]
+                                    let cid = videoPages[i]["CID"]!
+                                    VideoDetailView.willPlayVideoCID = Int64(cid)!
+                                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers) { respJson, isSuccess in
+                                        if isSuccess {
+                                            if !CheckBApiError(from: respJson) { return }
+                                            VideoDownloadView.downloadLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
+                                            isDownloadPresented = true
+                                        }
+                                    }
+                                } else if videoGetterSource == "injahow" {
+                                    DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=\(i + 1)&type=video&q=32&format=mp4&otype=url") { respStr, isSuccess in
+                                        if isSuccess {
+                                            VideoDownloadView.downloadLink = respStr
+                                            isDownloadPresented = true
+                                        }
+                                    }
+                                }
+                            }, label: {
+                                Image(systemName: "arrow.down.doc")
+                            })
+                        }
                     }
                 }
             }
+            .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
             .sheet(isPresented: $isVideoPlayerPresented, content: {
                 VideoPlayerView()
                     .navigationBarHidden(true)
