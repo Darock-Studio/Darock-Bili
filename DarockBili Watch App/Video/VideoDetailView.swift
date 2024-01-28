@@ -266,7 +266,7 @@ struct VideoDetailView: View {
                 .tag(1)
             }
             if #available(watchOS 10, *) {
-                VideoCommentsView(oid: String(videoDetails["BV"]!.dropFirst().dropFirst()))
+                CommentsView(oid: String(videoDetails["BV"]!.dropFirst().dropFirst()))
                     .containerBackground(for: .navigation) {
                         ZStack {
                             CachedAsyncImage(url: URL(string: videoDetails["Pic"]!))
@@ -277,7 +277,7 @@ struct VideoDetailView: View {
                     }
                     .tag(2)
             } else {
-                VideoCommentsView(oid: String(videoDetails["BV"]!.dropFirst().dropFirst()))
+                CommentsView(oid: String(videoDetails["BV"]!.dropFirst().dropFirst()))
             }
             if goodVideos.count != 0 {
                 List {
