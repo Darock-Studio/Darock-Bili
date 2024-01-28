@@ -16,7 +16,7 @@
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/Darock-Studio/Darock-Bili/ios.yml)
 
 <p align="center">
-    <img src="./Artwork/eg-vd.png" width="480" height="760">
+    <img src="./Artwork/eg-vd.png" width="240" height="380">
 </p>
 
 ## ✨功能
