@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="./Artwork/rm-ico.png" width="200" height="200" style="border-radius:1000px;box-shadow:0 0 1000px">
+    <img src="./Artwork/rm-ico.png" width="200" height="200">
 </p>
 
 # 喵哩喵哩 - Apple Watch 上的B站客户端
@@ -14,6 +14,10 @@
 ![GitHub Release Date](https://img.shields.io/github/release-date-pre/Darock-Studio/Darock-Bili?label=Latest%20Release%20Date)&nbsp;
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/Darock-Studio/Darock-Bili/main?label=Main%20Branch%20Last%20Commit)&nbsp;
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/Darock-Studio/Darock-Bili/ios.yml)
+
+<p align="center">
+    <img src="./Artwork/eg-vd.png" width="480" height="760">
+</p>
 
 ## ✨功能
 - 个性化推荐
