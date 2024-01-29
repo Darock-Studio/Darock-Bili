@@ -29,10 +29,10 @@ struct ContentView: View {
             TabView {
                 MainView()
                     .tag(1)
-                PersonAccountView()
-                    .tag(2)
+//                PersonAccountView()
+//                    .tag(2)
                 UserDynamicMainView()
-                    .tag(3)
+                    .tag(2)
             }
             .accessibility(identifier: "MainTabView")
             .sheet(isPresented: $isTermsPresented, onDismiss: {

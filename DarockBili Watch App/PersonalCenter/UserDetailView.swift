@@ -114,6 +114,8 @@ struct UserDetailView: View {
                             .sheet(isPresented: $isInfoSheetPresented, content: {SecondPageBase(officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign, userLevel: $userLevel, vipLabel: $vipLabel)})
                     }
                     ScrollView {
+                        Spacer()
+                            .frame(height: 50)
                         VideosListBase(uid: uid, username: $username, videos: $videos, articles: $articles, viewSelector: $viewSelector, videoCount: $videoCount, articalCount: $articalCount)
                             .tag(2)
                             .navigationTitle(viewSelector == .video ? "Account.videos.\(videoCount)" : "Account.articals.\(articalCount)")
@@ -219,6 +221,7 @@ struct UserDetailView: View {
                     Spacer()
                 }
                 HStack {
+                    Spacer()
                     VStack {
                         if followCount != -1 {
                             Text(String(followCount))
@@ -231,6 +234,7 @@ struct UserDetailView: View {
                         Text("Account.subscribed")
                             .font(.system(size: 12))
                             .opacity(0.6)
+                            .lineLimit(1)
                     }
                     Spacer()
                     VStack {
@@ -242,12 +246,14 @@ struct UserDetailView: View {
                                 .font(.system(size: 14))
                                 .redacted(reason: .placeholder)
                         }
-                        Text("Accounts.followers")
+                        Text("Account.followers")
                             .font(.system(size: 12))
                             .opacity(0.6)
+                            .lineLimit(1)
                     }
+                    Spacer()
                 }
-                .padding(.horizontal, 40)
+//                .padding(.horizontal, 40)
                 if #unavailable(watchOS 10) {
                     if dedeUserID == uid {
                         HStack {

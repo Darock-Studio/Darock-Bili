@@ -160,7 +160,7 @@ struct DarockBili_Watch_AppApp: App {
                             VStack {
                                 HStack {
                                     Spacer()
-                                    Text("Memory.indicator.\(Int(String(format: "%.2f", memoryUsage)) ?? -1)")
+                                    Text("Memory.indicator.\(String(format: "%.2f", memoryUsage))")
                                         .font(.system(size: 10, weight: .medium))
                                         .offset(y: 26)
                                 }

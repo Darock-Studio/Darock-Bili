@@ -413,6 +413,22 @@
         }
       }
     },
+    "Account.followers" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FOLLOWERS"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "粉丝"
+          }
+        }
+      }
+    },
     "Account.info" : {
       "localizations" : {
         "en" : {
@@ -546,7 +562,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "subscribes"
+            "value" : "SUBSCRIBES"
           }
         },
         "zh-Hans" : {
@@ -629,22 +645,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld视频"
-          }
-        }
-      }
-    },
-    "Accounts.followers" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "followers"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "粉丝"
           }
         }
       }
@@ -2053,18 +2053,18 @@
         }
       }
     },
-    "Memory.indicator.%lld" : {
+    "Memory.indicator.%@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Memory %lldMB/300MB"
+            "value" : "Memory %@MB/300MB"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "内存 %lldMB/300MB"
+            "value" : "内存 %@MB/300MB"
           }
         }
       }
