@@ -31,70 +31,70 @@ struct ErrorGetView: View {
     var body: some View {
         ScrollView {
             Group {
-                Text("出现问题！")
+                Text("Error.ran-into-a-problem")
                     .font(.system(size: 22, weight: .bold))
                 Spacer()
                     .frame(height: 15)
-                Text("非常抱歉，喵哩喵哩在 \(error.when) 时出现了问题。\(error.ignoreable ? "" : "应用程序无法正常运行")")
+                Text(String(localized: "Error.sorry.\(error.when)") + "\(error.ignoreable ? "" : String(localized: "Error.fatal"))")
                 if error.area == "网络请求" {
                     Spacer()
                         .frame(height: 15)
                     Button(action: {
                         isNetworkFixPresented = true
                     }, label: {
-                        Text("错误与网络有关，您应当先点此尝试 网络疑难解答")
+                        Text("Error.network-troubleshoot")
                     })
                     .sheet(isPresented: $isNetworkFixPresented, content: {NetworkFixView()})
                 }
                 Spacer()
                     .frame(height: 10)
-                Text("以下为错误详情：")
-                Text("范围：\(error.area)")
-                Text("位置：\(error.inAppArea)")
-                Text("详细信息：\(error.errDetail)")
+                Text("Error.information")
+                Text("Error.area.\(error.area)")
+                Text("Error.place.\(error.inAppArea)")
+                Text("Error.details.\(error.errDetail)")
                 Spacer()
                     .frame(height: 15)
             }
             Group {
                 if error.sendable {
-                    Text("您可以将此信息发送至 Darock 以帮助我们改进喵哩喵哩")
+                    Text("Error.send-to-Darock-advice")
                     Spacer()
                         .frame(height: 10)
-                    Text("发送的信息中不含任何您的个人信息")
-                    TextField("发生问题前...(选填)", text: $doing)
+                    Text("Error")
+                    TextField("Error.before-ranning-into-problem", text: $doing)
                     Spacer()
                         .frame(height: 15)
                     Button(action: {
                         isSendPresented = true
                     }, label: {
-                        Text("发送")
+                        Text("Error.send")
                             .bold()
                     })
                     .sheet(isPresented: $isSendPresented, content: {
                         VStack {
                             if !isSent {
                                 ProgressView()
-                                Text("正在发送...")
+                                Text("Error.sending")
                                     .bold()
-                                Text("感谢您的支持！")
+                                Text("Error.appriciate")
                                     .bold()
                             } else {
-                                Text("已发送")
+                                Text("Error.sent")
                                     .bold()
-                                Text("案例编号为 \(Text(sentCode).font(.system(size: 18, design: .monospaced))) 后续可通过此编号跟进状态")
+                                Text("Error.number.\(Text(sentCode))")
                                     .font(.system(size: 18, weight: .bold))
                                 if error.ignoreable {
                                     Button(action: {
                                         dismiss()
                                     }, label: {
-                                        Text("返回")
+                                        Text("Error.leave")
                                             .bold()
                                     })
                                 } else {
                                     Button(action: {
                                         exit(114514)
                                     }, label: {
-                                        Text("退出程序")
+                                        Text("Error.exit")
                                             .bold()
                                     })
                                 }
@@ -116,10 +116,10 @@ struct ErrorGetView: View {
                             isClosePresented = true
                         }
                     }, label: {
-                        Text("不发送")
+                        Text("Error.do-not-send")
                     })
                     .sheet(isPresented: $isClosePresented, content: {
-                        Text("即将退出...")
+                        Text("Error.exiting")
                             .onAppear {
                                 Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { timer in
                                     timer.invalidate()
@@ -128,7 +128,7 @@ struct ErrorGetView: View {
                             }
                     })
                 } else {
-                    Text("此错误无需或无法发送至 Darock")
+                    Text("Error.no-need-to-send")
                 }
             }
         }

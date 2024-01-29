@@ -58,11 +58,11 @@ struct LoginView: View {
                                 .resizable()
                                 .frame(width: 140, height: 140)
                                 .blur(radius: isScanned ? 8 : 0)
-                            Text("扫码登录")
+                            Text("Login.scan")
                                 .bold()
                         }
                         if isScanned {
-                            Text("已扫描")
+                            Text("Login.scanned")
                                 .font(.title2)
                                 //.foregroundColor(.white)
                         }

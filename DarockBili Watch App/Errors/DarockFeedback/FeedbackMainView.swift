@@ -25,7 +25,7 @@ struct FeedbackMainView: View {
                     ProgressView()
                 }
             } else {
-                Text("无反馈")
+                Text("Feedback.nothing")
             }
         }
 //        .toolbar {
