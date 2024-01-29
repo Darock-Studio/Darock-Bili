@@ -162,3 +162,19 @@ extension Indicator where T == ProgressView<EmptyView, EmptyView> {
         }
     }
 }
+
+struct UIImageTransfer: Transferable {
+  let image: UIImage
+  enum TransferError: Error {
+    case importFailed
+  }
+  
+  static var transferRepresentation: some TransferRepresentation {
+    DataRepresentation(importedContentType: .image) { data in
+        guard let uiImage = UIImage(data: data) else {
+          throw TransferError.importFailed
+        }
+        return UIImageTransfer(image: uiImage)
+    }
+  }
+}
