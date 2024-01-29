@@ -60,12 +60,12 @@ struct BangumiDetailView: View {
                                         })
                                         .sheet(isPresented: $isMoreMenuPresented, content: {
                                             List {
-                                                //                                            Button(action: {
-                                                //                                                isDownloadPresented = true
-                                                //                                            }, label: {
-                                                //                                                Label("下载视频", systemImage: "arrow.down.doc")
-                                                //                                            })
-                                                //                                            .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
+                                                /* Button(action: {
+                                                    isDownloadPresented = true
+                                                }, label: {
+                                                    Label("下载视频", systemImage: "arrow.down.doc")
+                                                })
+                                                .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)}) */
                                             }
                                         })
                                     }
@@ -121,7 +121,7 @@ struct BangumiDetailView: View {
                 }
                 .blur(radius: isLoading ? 14 : 0)
                 if isLoading {
-                    Text("正在解析...")
+                    Text("Video.analyzing")
                         .font(.title2)
                         .bold()
                 }
@@ -131,7 +131,7 @@ struct BangumiDetailView: View {
             Group {
                 if #available(watchOS 10, *) {
                     NavigationSplitView {
-                        Text("选择要查看评论的单集")
+                        Text("Bangumi.comments.select")
                         List(epDatas, selection: $navigationSelectedEpdata) { data in
                             Text(data.longTitle).tag(data)
                         }
@@ -139,7 +139,7 @@ struct BangumiDetailView: View {
                         if let data = navigationSelectedEpdata, let aid = data.aid {
                             VideoCommentsView(oid: av2bv(avid: UInt64(aid)))
                         } else {
-                            Text("选择一项")
+                            Text("Bangumi.comments.select")
                         }
                     }
                     .navigationBarHidden(true)
@@ -172,7 +172,7 @@ struct BangumiDetailView: View {
                 } else {
                     if epDatas.count != 0 {
                         List {
-                            Text("选择要查看评论的单集")
+                            Text("Bangumi.comments.select")
                                 .listRowBackground(Color.clear)
                             ForEach(0..<epDatas.count, id: \.self) { i in
                                 if let aid = epDatas[i].aid {
@@ -186,7 +186,7 @@ struct BangumiDetailView: View {
                 }
             }
             .tag(2)
-            .navigationTitle("评论")
+            .navigationTitle("Bangumi.commnets")
         }
         .onAppear {
             let headers: HTTPHeaders = [
@@ -284,7 +284,7 @@ struct BangumiDetailView: View {
                             Spacer()
                         }
                         HStack {
-                            Text("\(score.userCount) 人参与了评分")
+                            Text("Bangumi.score.joined-people.\(Int(score.userCount) ?? 0)")
                                 .font(.footnote)
                                 .opacity(0.65)
                             Spacer()

@@ -22,21 +22,20 @@ struct MemoryWarningView: View {
     var body: some View {
         ScrollView {
             VStack {
-                Text("注意！")
+                Text("Memory.caution")
                     .font(.system(size: 18, weight: .bold))
-                Text("当前占用内存过高")
-                Text("喵哩喵哩可能会被系统终止")
-                Text("当前内存占用大于 240 MB\n内存占用超过 300 MB 后会被系统终止")
+                Text("Memory.too-much-occupied")
+                Text("Memory.limit")
                 Button(action: {
                     dismiss()
                 }, label: {
-                    Text("了解！")
+                    Text("Memory.understand")
                 })
                 Button(action: {
                     isShowMemoryInScreen = true
                     dismiss()
                 }, label: {
-                    Text("在右上角显示占用（仅本次启动）")
+                    Text("Memory.display-usage")
                 })
             }
             .multilineTextAlignment(.center)

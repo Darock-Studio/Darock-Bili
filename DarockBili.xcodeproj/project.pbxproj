@@ -43,7 +43,6 @@
 		B4468A4F2B4FC24A002CCEB2 /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4468A112B4FC24A002CCEB2 /* AudioPlayerView.swift */; };
 		B4468A502B4FC24A002CCEB2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4468A132B4FC24A002CCEB2 /* Preview Assets.xcassets */; };
 		B4468A532B4FC24A002CCEB2 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4468A182B4FC24A002CCEB2 /* AboutView.swift */; };
-		B4468A542B4FC24A002CCEB2 /* FirstUsingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4468A192B4FC24A002CCEB2 /* FirstUsingView.swift */; };
 		B4468A552B4FC24A002CCEB2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4468A1A2B4FC24A002CCEB2 /* SettingsView.swift */; };
 		B4468A562B4FC24A002CCEB2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4468A1B2B4FC24A002CCEB2 /* LoginView.swift */; };
 		B4468A572B4FC24A002CCEB2 /* SkinChooserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4468A1D2B4FC24A002CCEB2 /* SkinChooserView.swift */; };
@@ -82,6 +81,7 @@
 		E2565AF52B52C017000E01ED /* BangumiDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2565AF42B52C017000E01ED /* BangumiDownloadView.swift */; };
 		E2565AF92B52C076000E01ED /* BangumiPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2565AF82B52C076000E01ED /* BangumiPlayerView.swift */; };
 		E2565AFB2B52C114000E01ED /* LiveDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2565AFA2B52C114000E01ED /* LiveDetailView.swift */; };
+		E2B720942B67858E00ABB0A6 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E2B720932B67858E00ABB0A6 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,7 +150,6 @@
 		B4468A152B4FC24A002CCEB2 /* Dynamic_Feed_All.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Dynamic_Feed_All.json; sourceTree = "<group>"; };
 		B4468A162B4FC24A002CCEB2 /* Search_With_UP_V2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Search_With_UP_V2.json; sourceTree = "<group>"; };
 		B4468A182B4FC24A002CCEB2 /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
-		B4468A192B4FC24A002CCEB2 /* FirstUsingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstUsingView.swift; sourceTree = "<group>"; };
 		B4468A1A2B4FC24A002CCEB2 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B4468A1B2B4FC24A002CCEB2 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		B4468A1D2B4FC24A002CCEB2 /* SkinChooserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkinChooserView.swift; sourceTree = "<group>"; };
@@ -176,6 +175,7 @@
 		E2565AF42B52C017000E01ED /* BangumiDownloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BangumiDownloadView.swift; sourceTree = "<group>"; };
 		E2565AF82B52C076000E01ED /* BangumiPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BangumiPlayerView.swift; sourceTree = "<group>"; };
 		E2565AFA2B52C114000E01ED /* LiveDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDetailView.swift; sourceTree = "<group>"; };
+		E2B720932B67858E00ABB0A6 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +219,7 @@
 		B44689C32B4FC15A002CCEB2 = {
 			isa = PBXGroup;
 			children = (
+				E2B720932B67858E00ABB0A6 /* Localizable.xcstrings */,
 				8C72E32A2B6605B80087486E /* README.md */,
 				B4468A142B4FC24A002CCEB2 /* JSONReturnExamples */,
 				B44689D42B4FC15A002CCEB2 /* DarockBili Watch App */,
@@ -378,7 +379,6 @@
 				B4468A1C2B4FC24A002CCEB2 /* Skins */,
 				8C72E32F2B6621E00087486E /* Passthroughs.swift */,
 				B4468A182B4FC24A002CCEB2 /* AboutView.swift */,
-				B4468A192B4FC24A002CCEB2 /* FirstUsingView.swift */,
 				B4468A1A2B4FC24A002CCEB2 /* SettingsView.swift */,
 				B4468A1B2B4FC24A002CCEB2 /* LoginView.swift */,
 				B4468A202B4FC24A002CCEB2 /* NoticeView.swift */,
@@ -530,6 +530,7 @@
 			knownRegions = (
 				Base,
 				"zh-Hans",
+				en,
 			);
 			mainGroup = B44689C32B4FC15A002CCEB2;
 			packageReferences = (
@@ -573,6 +574,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4468A502B4FC24A002CCEB2 /* Preview Assets.xcassets in Resources */,
+				E2B720942B67858E00ABB0A6 /* Localizable.xcstrings in Resources */,
 				B4468A672B4FC286002CCEB2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -599,7 +601,6 @@
 				B4468A472B4FC24A002CCEB2 /* UserDynamicMainView.swift in Sources */,
 				B4468A5A2B4FC24A002CCEB2 /* NoticeView.swift in Sources */,
 				B4468A612B4FC24A002CCEB2 /* FollowListView.swift in Sources */,
-				B4468A542B4FC24A002CCEB2 /* FirstUsingView.swift in Sources */,
 				B4468A4C2B4FC24A002CCEB2 /* VideoDownloadView.swift in Sources */,
 				B4468A402B4FC24A002CCEB2 /* UIExt.swift in Sources */,
 				B4468A382B4FC24A002CCEB2 /* FeedbackEnterView.swift in Sources */,

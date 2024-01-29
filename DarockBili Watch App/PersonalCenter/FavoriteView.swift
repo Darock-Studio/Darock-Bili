@@ -84,7 +84,7 @@ struct FavoriteDetailView: View {
                             nowPage -= 1
                             RefreshDetailData()
                         }, label: {
-                            Text("上一页")
+                            Text("Account.list.last-page")
                                 .bold()
                         })
                     }
@@ -95,7 +95,7 @@ struct FavoriteDetailView: View {
                             nowPage += 1
                             RefreshDetailData()
                         }, label: {
-                            Text("下一页")
+                            Text("Account.list.next-page")
                                 .bold()
                         })
                     }

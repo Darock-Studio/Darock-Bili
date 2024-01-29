@@ -117,7 +117,7 @@ struct VideoPlayerView: View {
                 Button(action: {
                     player?.pause()
                 }, label: {
-                    Text("Pause")
+                    Text("Player.pause")
                 })
             }
         }

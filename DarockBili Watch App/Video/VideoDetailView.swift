@@ -91,7 +91,7 @@ struct VideoDetailView: View {
                                                             isMoreMenuPresented = false
                                                         }
                                                     }, label: {
-                                                        Label("下载视频", systemImage: "arrow.down.doc")
+                                                        Label("Video.download", systemImage: "arrow.down.doc")
                                                     })
                                                     Button(action: {
                                                         let headers: HTTPHeaders = [
@@ -103,19 +103,19 @@ struct VideoDetailView: View {
                                                                 let json = try JSON(data: response.data ?? Data())
                                                                 if let code = json["code"].int {
                                                                     if code == 0 {
-                                                                        tipWithText("添加成功", symbol: SFSymbol.Checkmark.circleFill.rawValue)
+                                                                        tipWithText(String(localized: "Video.added"), symbol: SFSymbol.Checkmark.circleFill.rawValue)
                                                                     } else {
-                                                                        tipWithText(json["message"].string ?? "未知错误", symbol: SFSymbol.Xmark.circleFill.rawValue)
+                                                                        tipWithText(json["message"].string ?? String(localized: "Video.unkonwn-error"), symbol: SFSymbol.Xmark.circleFill.rawValue)
                                                                     }
                                                                 } else {
-                                                                    tipWithText("未知错误", symbol: SFSymbol.Xmark.circleFill.rawValue)
+                                                                    tipWithText(String(localized: "Video.unkonwn-error"), symbol: SFSymbol.Xmark.circleFill.rawValue)
                                                                 }
                                                             } catch {
-                                                                tipWithText("未知错误", symbol: SFSymbol.Xmark.circleFill.rawValue)
+                                                                tipWithText(String(localized: "Video.unkonwn-error"), symbol: SFSymbol.Xmark.circleFill.rawValue)
                                                             }
                                                         }
                                                     }, label: {
-                                                        Label("添加到稍后再看", systemImage: "memories.badge.plus")
+                                                        Label("Video.watch-later", systemImage: "memories.badge.plus")
                                                     })
                                                 }
                                             })
@@ -211,7 +211,7 @@ struct VideoDetailView: View {
                     }
                     .blur(radius: isLoading ? 14 : 0)
                     if isLoading {
-                        Text("正在解析...")
+                        Text("Video.analyzing")
                             .font(.title2)
                             .bold()
                     }
@@ -258,7 +258,7 @@ struct VideoDetailView: View {
                     }
                     .blur(radius: isLoading ? 14 : 0)
                     if isLoading {
-                        Text("正在解析...")
+                        Text("Video.analyzing")
                             .font(.title2)
                             .bold()
                     }
@@ -451,7 +451,7 @@ struct VideoDetailView: View {
                         if honors[3] != "" {
                             HStack {
                                 Image(systemName: SFSymbol.Flame.fill.rawValue)
-                                Text("热门")
+                                Text("Video.trending")
                             }
                             .font(.system(size: 11))
                             .foregroundColor(.red)
@@ -516,7 +516,7 @@ struct VideoDetailView: View {
                             }
                         }
                     }, label: {
-                        Label("播放", systemImage: "play.fill")
+                        Label("Video.play", systemImage: "play.fill")
                     })
                     .sheet(isPresented: $isVideoPlayerPresented, content: {
                         VideoPlayerView()
@@ -553,19 +553,19 @@ struct VideoDetailView: View {
                             }
                         }
                     }, label: {
-                        Label("以音频播放", systemImage: "waveform")
+                        Label("Video.play-in-audio", systemImage: "waveform")
                     })
                     Button(action: {
                         isMoreMenuPresented = true
                     }, label: {
-                        Label("更多", systemImage: "ellipsis")
+                        Label("Video.more", systemImage: "ellipsis")
                     })
                     .sheet(isPresented: $isMoreMenuPresented, content: {
                         List {
                             Button(action: {
                                 isDownloadPresented = true
                             }, label: {
-                                Label("下载视频", image: "arrow.down.doc")
+                                Label("Video.download", image: "arrow.down.doc")
                             })
                             .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
                             Button(action: {
@@ -578,19 +578,19 @@ struct VideoDetailView: View {
                                         let json = try JSON(data: response.data ?? Data())
                                         if let code = json["code"].int {
                                             if code == 0 {
-                                                tipWithText("添加成功", symbol: SFSymbol.Checkmark.circleFill.rawValue)
+                                                tipWithText(String(localized: "Video.added"), symbol: SFSymbol.Checkmark.circleFill.rawValue)
                                             } else {
-                                                tipWithText(json["message"].string ?? "未知错误", symbol: SFSymbol.Xmark.circleFill.rawValue)
+                                                tipWithText(json["message"].string ?? String(localized: "Video.unkonwn-error"), symbol: SFSymbol.Xmark.circleFill.rawValue)
                                             }
                                         } else {
-                                            tipWithText("未知错误", symbol: SFSymbol.Xmark.circleFill.rawValue)
+                                            tipWithText(String(localized: "Video.unkonwn-error"), symbol: SFSymbol.Xmark.circleFill.rawValue)
                                         }
                                     } catch {
-                                        tipWithText("未知错误", symbol: SFSymbol.Xmark.circleFill.rawValue)
+                                        tipWithText(String(localized: "Video.unkonwn-error"), symbol: SFSymbol.Xmark.circleFill.rawValue)
                                     }
                                 }
                             }, label: {
-                                Label("添加到稍后再看", systemImage: "memories.badge.plus")
+                                Label("Video.watch-later", systemImage: "memories.badge.plus")
                             })
                         }
                     })
@@ -627,6 +627,7 @@ struct VideoDetailView: View {
         @State var descOffset: CGFloat = 20
         @State var tagOffset: CGFloat = 20
         @State var isFavoriteChoosePresented = false
+        @State var tagDisplayedNum = 0
         var body: some View {
             ScrollView {
                 VStack {
@@ -645,7 +646,7 @@ struct VideoDetailView: View {
                                         Spacer()
                                     }
                                     HStack {
-                                        Text(String(ownerFansCount).shorter() + " 粉丝")
+                                        Text("Video.fans.\(Int(String(ownerFansCount).shorter()) ?? 0)")
                                             .font(.system(size: 11))
                                             .lineLimit(1)
                                             .opacity(0.6)
@@ -672,7 +673,7 @@ struct VideoDetailView: View {
                                 ]
                                 AF.request("https://api.bilibili.com/x/web-interface/archive/like", method: .post, parameters: ["bvid": videoDetails["BV"]!, "like": isLiked ? 2 : 1, "eab_x": 2, "ramval": 0, "source": "web_normal", "ga": 1, "csrf": biliJct], headers: headers).response { response in
                                     debugPrint(response)
-                                    isLiked ? tipWithText("取消成功", symbol: "checkmark.circle.fill") : tipWithText("点赞成功", symbol: "checkmark.circle.fill")
+                                    isLiked ? tipWithText(String(localized: "Video.action.canceled"), symbol: "checkmark.circle.fill") : tipWithText(String(localized: "Video.action.liked"), symbol: "checkmark.circle.fill")
                                     isLiked.toggle()
                                 }
                             }, label: {
@@ -734,7 +735,7 @@ struct VideoDetailView: View {
                         VStack {
                             HStack {
                                 Image(systemName: "text.word.spacing")
-                                Text(videoDetails["Danmaku"]!.shorter() + " 弹幕")
+                                Text("Video.details.danmaku.\(Int(videoDetails["Danmaku"]!.shorter()) ?? 0)")
                                 Spacer()
                             }
                             .offset(y: danmakuCountOffset)
@@ -744,7 +745,7 @@ struct VideoDetailView: View {
                             }
                             HStack {
                                 Image(systemName: "person.2")
-                                Text("\(nowPlayingCount) 人在看")
+                                Text("Video.details.watching-people.\(Int(nowPlayingCount) ?? 0)")
                                     .offset(x: -1)
                                 Spacer()
                             }
@@ -755,7 +756,7 @@ struct VideoDetailView: View {
                             }
                             HStack {
                                 Image(systemName: "play.circle")
-                                Text(videoDetails["View"]!.shorter() + " 播放")
+                                Text("Video.details.watches.\(Int(videoDetails["View"]!.shorter()) ?? 0)")
                                     .offset(x: 1)
                                 Spacer()
                             }
@@ -766,7 +767,7 @@ struct VideoDetailView: View {
                             }
                             HStack {
                                 Image(systemName: "clock")
-                                Text(publishTime)
+                                Text("Video.details.publish-time.\(publishTime)")
                                 Spacer()
                             }
                             .offset(y: publishTimeTextOffset)
@@ -780,7 +781,7 @@ struct VideoDetailView: View {
                                 Spacer()
                             }
                             .offset(x: -1, y: bvidTextOffset)
-                            .animation(.easeOut(duration: 0.95), value: bvidTextOffset)
+                            .animation(.easeOut(duration: 0.85), value: bvidTextOffset)
                             .onAppear {
                                 bvidTextOffset = 0
                             }
@@ -789,8 +790,24 @@ struct VideoDetailView: View {
                         .opacity(0.6)
                         .padding(.horizontal, 10)
                         Spacer()
-                            .frame(height: 10)
-                        Text(videoDesc)
+                            .frame(height: 5)
+                        HStack {
+                            VStack {
+                                Image(systemName: "info.circle")
+                                Spacer()
+                            }
+                            Text(videoDesc)
+                            Spacer()
+                        }
+                        .font(.system(size: 12))
+                        .opacity(0.65)
+                        .padding(.horizontal, 8)
+                        .offset(y: descOffset)
+                        .animation(.easeOut(duration: 0.4), value: descOffset)
+                        .onAppear {
+                            descOffset = 0
+                        }
+                        /* Text(videoDesc)
                             .font(.system(size: 12))
                             .opacity(0.65)
                             .padding(.horizontal, 8)
@@ -798,22 +815,33 @@ struct VideoDetailView: View {
                             .animation(.easeOut(duration: 0.4), value: descOffset)
                             .onAppear {
                                 descOffset = 0
+                            } */
+                        HStack {
+                            VStack {
+                                Image(systemName: "tag")
+                                Spacer()
                             }
-                        Spacer()
-                            .frame(height: 15)
-                        Text(tagText)
-                            .font(.system(size: 13))
-                            .padding(.horizontal, 8)
-                            .opacity(0.6)
-                            .offset(y: tagOffset)
-                            .animation(.easeOut(duration: 0.3), value: tagOffset)
-                            .onAppear {
-                                tagOffset = 0
-                                tagText = ""
-                                for text in tags {
-                                    tagText += text + "  "
+                            Text(tagText)
+                            Spacer()
+                        }
+                        .font(.system(size: 12))
+                        .opacity(0.65)
+                        .padding(.horizontal, 8)
+                        .offset(y: descOffset)
+                        .animation(.easeOut(duration: 0.4), value: descOffset)
+                        .onAppear {
+                            tagDisplayedNum = 0
+                            tagOffset = 0
+                            tagText = ""
+                            for text in tags {
+                                tagDisplayedNum += 1
+                                if tagDisplayedNum == tags.count {
+                                    tagText += text
+                                } else {
+                                    tagText += text + " / "
                                 }
                             }
+                        }
                     }
                 }
             }
@@ -885,7 +913,7 @@ struct VideoDetailView: View {
                             }
                         }
                     }
-                    .navigationTitle("添加到收藏夹")
+                    .navigationTitle(String(localized: "Video.add-to-favorites"))
                     .navigationBarTitleDisplayMode(.inline)
                 }
                 .onAppear {
@@ -1034,7 +1062,14 @@ struct VideoThrowCoinView: View {
     @State var choseCoin = 2
     var body: some View {
         VStack {
-            HStack {
+            Picker("Video.coin.throw", selection: $choseCoin) {
+                Label("Video.coin.throw.1", systemImage: "circlebadge")
+                    .tag(1)
+                Label("Video.coin.throw.2", systemImage: "circlebadge.2")
+                    .tag(2)
+            }
+            .pickerStyle(.wheel)
+            /* HStack {
                 Button(action: {
                     choseCoin = 1
                 }, label: {
@@ -1053,7 +1088,7 @@ struct VideoThrowCoinView: View {
                 .frame(width: 86, height: 126.5)
                 .buttonBorderShape(.roundedRectangle(radius: 8))
                 .border(choseCoin == 2 ? .blue : .black, width: 5)
-            }
+            } */
             Button(action: {
                 let headers: HTTPHeaders = [
                     "cookie": "SESSDATA=\(sessdata)",
@@ -1064,7 +1099,7 @@ struct VideoThrowCoinView: View {
                     dismiss()
                 }
             }, label: {
-                Text("投币")
+                Text("Video.coin.throw")
             })
         }
     }

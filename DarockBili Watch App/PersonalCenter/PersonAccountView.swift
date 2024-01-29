@@ -26,6 +26,7 @@ import CachedAsyncImage
 import SDWebImageSwiftUI
 
 struct PersonAccountView: View {
+    var isSettingsButtonTrailing = false
     @AppStorage("UsingSkin") var usingSkin = ""
     @AppStorage("IsSkinNoBlur") var isSkinNoBlur = false
     var body: some View {
@@ -33,12 +34,22 @@ struct PersonAccountView: View {
             if #available(watchOS 10, *) {
                 MainView()
                     .toolbar {
-                        ToolbarItem(placement: .topBarLeading) {
-                            NavigationLink(destination: {SettingsView()}, label: {
-                                Image(systemName: "gear")
-                                    .foregroundColor(.accentColor)
-                            })
-                            .accessibility(identifier: "AppSettingsButton")
+                        if isSettingsButtonTrailing {
+                            ToolbarItem(placement: .topBarTrailing) {
+                                NavigationLink(destination: {SettingsView()}, label: {
+                                    Image(systemName: "gear")
+                                        .foregroundColor(.accentColor)
+                                })
+                                .accessibility(identifier: "AppSettingsButton")
+                            }
+                        } else {
+                            ToolbarItem(placement: .topBarLeading) {
+                                NavigationLink(destination: {SettingsView()}, label: {
+                                    Image(systemName: "gear")
+                                        .foregroundColor(.accentColor)
+                                })
+                                .accessibility(identifier: "AppSettingsButton")
+                            }
                         }
 //                        ToolbarItem(placement: .topBarTrailing) {
 //                            NavigationLink(destination: {SkinExplorerView()}, label: {
@@ -87,6 +98,7 @@ struct PersonAccountView: View {
     
     struct MainView: View {
         var isShowSettingsButton: Bool = false
+        @Namespace public var imageAnimation
         @AppStorage("DedeUserID") var dedeUserID = ""
         @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
         @AppStorage("SESSDATA") var sessdata = ""
@@ -106,7 +118,7 @@ struct PersonAccountView: View {
                         Button(action: {
                             isLoginPresented = true
                         }, label: {
-                            Text("点击登录")
+                            Text("User.tap-to-login")
                         })
                         .sheet(isPresented: $isLoginPresented, content: {LoginView()})
                     } else {
@@ -116,8 +128,9 @@ struct PersonAccountView: View {
                             HStack {
                                 if userFaceUrl != "" {
                                     CachedAsyncImage(url: URL(string: userFaceUrl + "@30w"))
-                                        .frame(width: 28, height: 28)
+                                        .frame(width: 30)
                                         .clipShape(Circle())
+                                        .matchedGeometryEffect(id: "image", in: imageAnimation)
                                 } else {
                                     Image("Placeholder")
                                         .resizable()
@@ -130,7 +143,7 @@ struct PersonAccountView: View {
                                         Text(username)
                                             .font(.system(size: 15))
                                     } else {
-                                        Text("Jst Placeholder")
+                                        Text("")
                                             .font(.system(size: 15))
                                             .redacted(reason: .placeholder)
                                     }
@@ -148,7 +161,7 @@ struct PersonAccountView: View {
                                                 Image(systemName: "person.2.fill")
                                                     .foregroundColor(.accentColor)
                                                     .offset(x: -3)
-                                                Text("我的好友")
+                                                Text("User.subcribed-accounts")
                                                     .offset(x: -6)
                                             }
                                             .font(.system(size: 16))
@@ -161,7 +174,7 @@ struct PersonAccountView: View {
                                             HStack {
                                                 Image(systemName: "square.and.arrow.down.fill")
                                                     .foregroundColor(.accentColor)
-                                                Text("离线缓存")
+                                                Text("User.offline-cache")
                                             }
                                             .font(.system(size: 16))
                                             Spacer()
@@ -173,7 +186,7 @@ struct PersonAccountView: View {
                                             HStack {
                                                 Image(systemName: "star.fill")
                                                     .foregroundColor(.accentColor)
-                                                Text("我的收藏")
+                                                Text("User.favorites")
                                             }
                                             .font(.system(size: 16))
                                             Spacer()
@@ -185,7 +198,7 @@ struct PersonAccountView: View {
                                             HStack {
                                                 Image(systemName: "clock.arrow.circlepath")
                                                     .foregroundColor(.accentColor)
-                                                Text("历史记录")
+                                                Text("User.histories")
                                             }
                                             .font(.system(size: 16))
                                             Spacer()
@@ -197,7 +210,7 @@ struct PersonAccountView: View {
                                             HStack {
                                                 Image(systemName: "memories")
                                                     .foregroundColor(.accentColor)
-                                                Text("稍后再看")
+                                                Text("User.watch-later")
                                             }
                                             .font(.system(size: 16))
                                             Spacer()
@@ -212,7 +225,7 @@ struct PersonAccountView: View {
                                                 HStack {
                                                     Image(systemName: "gear")
                                                         .foregroundColor(.accentColor)
-                                                    Text("设置")
+                                                    Text("Settings")
                                                 }
                                                 .font(.system(size: 16))
                                                 Spacer()
@@ -221,7 +234,7 @@ struct PersonAccountView: View {
                                     }
                                 }
                             }
-                            .navigationTitle("我的")
+                            .navigationTitle("About-me")
                             .navigationBarTitleDisplayMode(.large)
                         .onAppear {
                             if username == "" {
