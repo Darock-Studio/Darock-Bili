@@ -29,10 +29,12 @@ struct ContentView: View {
             TabView {
                 MainView()
                     .tag(1)
-//                PersonAccountView()
-//                    .tag(2)
+                if #unavailable(watchOS 10) {
+                    PersonAccountView()
+                        .tag(2)
+                }
                 UserDynamicMainView()
-                    .tag(2)
+                    .tag(3)
             }
             .accessibility(identifier: "MainTabView")
             .sheet(isPresented: $isTermsPresented, onDismiss: {
