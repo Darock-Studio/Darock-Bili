@@ -58,9 +58,9 @@ struct UserDynamicMainView: View {
                                                 case .majorTypeDraw:
                                                     return ""
                                                 case .majorTypeArchive:
-                                                    return " · 投稿了视频"
+                                                    return String(localized: "Moments.upload-video")
                                                 case .majorTypeLiveRcmd:
-                                                    return "直播了"
+                                                    return String(localized: "Moments.live")
                                                 }
                                             }())
                                             .font(.system(size: 10))
@@ -140,7 +140,7 @@ struct UserDynamicMainView: View {
                             ContinueLoadDynamic()
                         }, label: {
                             if !isLoadingNew {
-                                Text("继续加载")
+                                Text("Home.more")
                                     .font(.system(size: 18, weight: .bold))
                             } else {
                                 ProgressView()
@@ -151,7 +151,7 @@ struct UserDynamicMainView: View {
                     }
                 }
             }
-            .navigationTitle("动态")
+            .navigationTitle("Moments")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 if #available(watchOS 10, *) {
@@ -174,8 +174,8 @@ struct UserDynamicMainView: View {
                 }
             }
         } else {
-            Text("需要登录")
-                .navigationTitle("动态")
+            Text("Moments.requires-login")
+                .navigationTitle("Moments")
         }
     }
     

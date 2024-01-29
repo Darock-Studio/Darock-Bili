@@ -35,19 +35,19 @@ struct VideoDownloadView: View {
     var body: some View {
         List {
             if isLoading {
-                Text("正在预加载...")
+                Text("Download.preloading...")
                     .bold()
             } else {
                 VStack {
                     HStack {
                         Spacer()
-                        Label("已创建下载任务!", systemImage: "checkmark.circle.fill")
+                        Label("Download.task-created", systemImage: "checkmark.circle.fill")
                             .bold()
                         Spacer()
                     }
                     HStack {
                         Spacer()
-                        Text("将在3秒后关闭本页")
+                        Text("Download.closing-in-3sec")
                             .font(.footnote)
                             .opacity(0.65)
                             .onAppear {

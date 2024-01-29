@@ -86,7 +86,7 @@ struct BangumiPlayerView: View {
                 Button(action: {
                     player?.pause()
                 }, label: {
-                    Text("Pause")
+                    Text("Player.pause")
                 })
             }
         }

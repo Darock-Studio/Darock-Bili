@@ -83,7 +83,7 @@ struct TermsListView: View {
                     isReadTerms = true
                     dismiss()
                 }, label: {
-                    Text("我已了解")
+                    Text("Home.understand")
                 })
                 .buttonStyle(.borderedProminent)
             }

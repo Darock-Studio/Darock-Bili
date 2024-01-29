@@ -39,6 +39,7 @@ import SDWebImageSwiftUI
                 Text(videoDetails["Title"]!)
                     .font(.system(size: 14, weight: .bold))
                     .lineLimit(2)
+                    .multilineTextAlignment(.leading)
                 Spacer()
             }
             HStack {
@@ -81,7 +82,7 @@ import SDWebImageSwiftUI
             HStack {
                 if let score = bangumiData.score {
                     Image(systemName: "star.fill")
-                    Text("\(score.score ~ 1)分")
+                    Text(score.score ~ 1)
                         .offset(x: -3)
                 }
                 if let style = bangumiData.style {
