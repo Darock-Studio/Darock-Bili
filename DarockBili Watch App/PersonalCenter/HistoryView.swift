@@ -35,8 +35,34 @@ struct HistoryView: View {
                 ForEach(0...histories.count - 1, id: \.self) { i in
                     if (histories[i] as! [String: Any])["Type"]! as! String == "archive" {
                         VideoCard(histories[i] as! [String: String])
+                            .swipeActions {
+                                Button(role: .destructive, action: {
+                                    let headers: HTTPHeaders = [
+                                        "cookie": "SESSDATA=\(sessdata);",
+                                        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                    ]
+                                    AF.request("https://api.bilibili.com/x/v2/history/delete?kid=archive_\(bv2av(bvid: (histories[i] as! [String: String])["BV"]!))&csrf=\(biliJct)", method: .post, headers: headers).response { response in
+                                        debugPrint(response)
+                                    }
+                                }, label: {
+                                    Image(systemName: "xmark.bin.fill")
+                                })
+                            }
                     } else if (histories[i] as! [String: Any])["Type"]! as! String == "pgc" {
                         BangumiCard((histories[i] as! [String: Any])["Data"] as! BangumiData)
+                            .swipeActions {
+                                Button(role: .destructive, action: {
+                                    let headers: HTTPHeaders = [
+                                        "cookie": "SESSDATA=\(sessdata);",
+                                        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                    ]
+                                    AF.request("https://api.bilibili.com/x/v2/history/delete?kid=pgc_\(((histories[i] as! [String: Any])["Data"] as! BangumiData).seasonId)&csrf=\(biliJct)", method: .post, headers: headers).response { response in
+                                        debugPrint(response)
+                                    }
+                                }, label: {
+                                    Image(systemName: "xmark.bin.fill")
+                                })
+                            }
                     }
                 }
             } else {
