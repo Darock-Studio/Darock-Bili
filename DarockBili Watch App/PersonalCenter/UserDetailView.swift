@@ -332,8 +332,8 @@ struct UserDetailView: View {
                 }
                 if !vipLabel.isEmpty {
                     HStack {
-                        Image(systemName: "dollarsign.circle")
-                            .foregroundColor(Color(red: 236/255, green: 98/255, blue: 139/255))
+                        WebImage(url: URL(string: "https://s1.hdslb.com/bfs/seed/jinkela/short/user-avatar/big-vip.svg"))
+                            .resizable()
                             .frame(width: 20, height: 20)
                         Text(vipLabel)
                             .font(.system(size: 15))
