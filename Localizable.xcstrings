@@ -1129,6 +1129,7 @@
       }
     },
     "Download.closing-in-3sec" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4219,6 +4220,9 @@
 
     },
     "确认" : {
+
+    },
+    "视频下载列表" : {
 
     },
     "神秘代码" : {

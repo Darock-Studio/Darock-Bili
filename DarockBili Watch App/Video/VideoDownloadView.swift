@@ -33,29 +33,29 @@ struct VideoDownloadView: View {
     @AppStorage("bili_jct") var biliJct = ""
     @State var isLoading = true
     var body: some View {
-        List {
-            if isLoading {
-                Text("Download.preloading...")
-                    .bold()
-            } else {
-                VStack {
-                    HStack {
-                        Spacer()
-                        Label("Download.task-created", systemImage: "checkmark.circle.fill")
-                            .bold()
-                        Spacer()
+        NavigationStack {
+            List {
+                if isLoading {
+                    Text("Download.preloading...")
+                        .bold()
+                } else {
+                    Section {
+                        HStack {
+                            Spacer()
+                            Label("Download.task-created", systemImage: "checkmark.circle.fill")
+                                .bold()
+                            Spacer()
+                        }
                     }
-                    HStack {
-                        Spacer()
-                        Text("Download.closing-in-3sec")
-                            .font(.footnote)
-                            .opacity(0.65)
-                            .onAppear {
-                                Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
-                                    dismiss()
-                                }
+                    Section {
+                        NavigationLink(destination: {DownloadingListView()}, label: {
+                            HStack {
+                                Text("视频下载列表")
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .opacity(0.65)
                             }
-                        Spacer()
+                        })
                     }
                 }
             }
