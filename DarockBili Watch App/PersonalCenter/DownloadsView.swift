@@ -174,6 +174,13 @@ struct DownloadingListView: View {
                                     Spacer()
                                 }
                             }
+                            .swipeActions {
+                                Button(role: .destructive, action: {
+                                    videoDownloadRequests[i].cancel()
+                                }, label: {
+                                    Image(systemName: "xmark.circle.fill")
+                                })
+                            }
                             .onReceive(downloadingProgressDatas[i].pts) { data in
                                 downloadProgresses[i] = data.data.progress
                                 downloadedSizes[i] = data.data.currentSize
