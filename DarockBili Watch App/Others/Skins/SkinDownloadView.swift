@@ -17,7 +17,7 @@ struct SkinDownloadView: View {
     @State var isUnzipping = false
     var body: some View {
         VStack {
-            Text(isUnzipping ? "正在解压..." : "正在下载...")
+            Text(isUnzipping ? "Skin.unzipping" : "Skin.downloading")
                 .font(.system(size: 18, weight: .bold))
             ProgressView(value: downloadProgress, total: 1.0)
         }

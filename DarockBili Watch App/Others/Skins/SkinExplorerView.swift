@@ -32,7 +32,7 @@ struct SkinExplorerView: View {
                     NavigationLink(destination: {SkinChooserView()}, label: {
                         HStack {
                             Image(systemName: "plus")
-                            Text("添加装扮")
+                            Text("Skin.add")
                         }
                         .font(.system(size: 16, weight: .bold))
                     })
@@ -42,7 +42,7 @@ struct SkinExplorerView: View {
                         Button(action: {
                             usingSkin = ""
                         }, label: {
-                            Label("不使用装扮", systemImage: usingSkin == "" ? "checkmark" : "")
+                            Label("Skin.none", systemImage: usingSkin == "" ? "checkmark" : "")
                         })
                     }
                     Section {
@@ -55,10 +55,10 @@ struct SkinExplorerView: View {
                         }
                     }
                 } else {
-                    Text("还没有装扮呢，去添加一个吧！")
+                    Text("Skin.nothing")
                 }
             }
-            .navigationTitle("个性装扮")
+            .navigationTitle("Skin")
             .onAppear {
                 skinNames.removeAll()
                 let files = AppFileManager(path: "skin").GetRoot() ?? [[:]]
