@@ -10,7 +10,6 @@
 		8C2337FA2B63DBF3009665B1 /* BPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8C2337F92B63DBF3009665B1 /* BPlayer */; };
 		8C72E32E2B6607240087486E /* DownloadObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C72E32D2B6607240087486E /* DownloadObj.swift */; };
 		8C72E3302B6621E00087486E /* Passthroughs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C72E32F2B6621E00087486E /* Passthroughs.swift */; };
-		8C72E3322B666C310087486E /* HYWenHei-85W.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8C72E3312B666C310087486E /* HYWenHei-85W.ttf */; };
 		8C81A8EA2B620D130045E986 /* BPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8C81A8E92B620D130045E986 /* BPlayer */; };
 		8C8CA05A2B6108460020DEDD /* Bangumi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8CA0592B6108460020DEDD /* Bangumi.swift */; };
 		B44689D12B4FC15A002CCEB2 /* 喵哩喵哩.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B44689D02B4FC15A002CCEB2 /* 喵哩喵哩.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -113,7 +112,6 @@
 		8C72E32A2B6605B80087486E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8C72E32D2B6607240087486E /* DownloadObj.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadObj.swift; sourceTree = "<group>"; };
 		8C72E32F2B6621E00087486E /* Passthroughs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Passthroughs.swift; sourceTree = "<group>"; };
-		8C72E3312B666C310087486E /* HYWenHei-85W.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HYWenHei-85W.ttf"; sourceTree = "<group>"; };
 		8C8CA0592B6108460020DEDD /* Bangumi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bangumi.swift; sourceTree = "<group>"; };
 		8CD9463A2B64CD0F005D00D0 /* Bangumi_Detail_Season.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Bangumi_Detail_Season.json; sourceTree = "<group>"; };
 		B44689CA2B4FC15A002CCEB2 /* DarockBili.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarockBili.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -241,7 +239,6 @@
 		B44689D42B4FC15A002CCEB2 /* DarockBili Watch App */ = {
 			isa = PBXGroup;
 			children = (
-				8C72E3312B666C310087486E /* HYWenHei-85W.ttf */,
 				B4C5E9562B4FD60600E2605B /* DarockBili-Watch-App-Info.plist */,
 				B4468A042B4FC249002CCEB2 /* DarockBili-Bridging-Header.h */,
 				B44689FF2B4FC249002CCEB2 /* DarockBiliApp.swift */,
@@ -575,7 +572,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C72E3322B666C310087486E /* HYWenHei-85W.ttf in Resources */,
 				B4468A502B4FC24A002CCEB2 /* Preview Assets.xcassets in Resources */,
 				B4468A672B4FC286002CCEB2 /* Assets.xcassets in Resources */,
 			);
