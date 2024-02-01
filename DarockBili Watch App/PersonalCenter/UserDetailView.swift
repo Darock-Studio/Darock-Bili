@@ -50,72 +50,74 @@ struct UserDetailView: View {
     @State var isSendbMessagePresented = false
     @State var isInfoSheetPresented = false
     var body: some View {
-        TabView {
+        Group {
             if #available(watchOS 10, *) {
                 TabView {
                     VStack {
                         NavigationLink("", isActive: $isSendbMessagePresented, destination: {bMessageSendView(uid: Int64(uid)!, username: username)})
                             .frame(width: 0, height: 0)
                         FirstPageBase(uid: uid, userFaceUrl: $userFaceUrl, username: $username, followCount: $followCount, fansCount: $fansCount, coinCount: $coinCount, isFollowed: $isFollowed, isSendbMessagePresented: $isSendbMessagePresented)
-                            .toolbar {
-                                ToolbarItemGroup(placement: .bottomBar) {
-                                    Button(action: {
-                                        let headers: HTTPHeaders = [
-                                            "cookie": "SESSDATA=\(sessdata);"
-                                        ]
-                                        AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
-                                            debugPrint(response)
-                                            let json = try! JSON(data: response.data!)
-                                            let code = json["code"].int!
-                                            if code == 0 {
-                                                tipWithText(isFollowed ? String(localized: "Account.tips.unfollowed") : String(localized: "Account.tips.followed"), symbol: "checkmark.circle.fill")
-                                                isFollowed.toggle()
-                                            } else {
-                                                tipWithText(json["message"].string!, symbol: "xmark.circle.fill")
-                                            }
-                                        }
-                                    }, label: {
-                                        Image(systemName: isFollowed ? "person.badge.minus" : "person.badge.plus")
-                                    })
-                                    VStack {
-                                        if dedeUserID == uid {
-                                            HStack {
-                                                Image(systemName: "b.circle")
-                                                    .font(.system(size: 12))
-                                                    .opacity(0.55)
-                                                    .offset(y: 1)
-                                                if coinCount != -1 {
-                                                    Text(String(coinCount))
-                                                        .font(.system(size: 14))
-                                                } else {
-                                                    Text("114")
-                                                        .font(.system(size: 14))
-                                                        .redacted(reason: .placeholder)
-                                                }
-                                            }
-                                        }
-                                        Button(action: {
-                                            isInfoSheetPresented = true
-                                        }, label: {
-                                            Text(officialType == -1 ? "Account.info" : "Account.certification")
-                                        })
-                                        .buttonStyle(.borderless)
-                                        .font(.caption)
-                                    }
-                                    Button(action: {
-                                        isSendbMessagePresented = true
-                                    }, label: {
-                                        Image(systemName: "ellipsis.bubble")
-                                    })
-                                }
-                            }
-                            .offset(y: 10)
-                            .navigationTitle(username)
-                            .sheet(isPresented: $isInfoSheetPresented, content: {SecondPageBase(officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign, userLevel: $userLevel, vipLabel: $vipLabel)})
-                    }
-                    ScrollView {
                         Spacer()
-                            .frame(height: 50)
+                    }
+                    .toolbar {
+                        ToolbarItemGroup(placement: .bottomBar) {
+                            Button(action: {
+                                let headers: HTTPHeaders = [
+                                    "cookie": "SESSDATA=\(sessdata);"
+                                ]
+                                AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
+                                    debugPrint(response)
+                                    let json = try! JSON(data: response.data!)
+                                    let code = json["code"].int!
+                                    if code == 0 {
+                                        tipWithText(isFollowed ? String(localized: "Account.tips.unfollowed") : String(localized: "Account.tips.followed"), symbol: "checkmark.circle.fill")
+                                        isFollowed.toggle()
+                                    } else {
+                                        tipWithText(json["message"].string!, symbol: "xmark.circle.fill")
+                                    }
+                                }
+                            }, label: {
+                                Image(systemName: isFollowed ? "person.badge.minus" : "person.badge.plus")
+                            })
+                            VStack {
+                                if dedeUserID == uid {
+                                    HStack {
+                                        Image(systemName: "b.circle")
+                                            .font(.system(size: 12))
+                                            .opacity(0.55)
+                                            .offset(y: 1)
+                                        if coinCount != -1 {
+                                            Text(String(coinCount))
+                                                .font(.system(size: 14))
+                                        } else {
+                                            Text("114")
+                                                .font(.system(size: 14))
+                                                .redacted(reason: .placeholder)
+                                        }
+                                    }
+                                }
+                                Button(action: {
+                                    isInfoSheetPresented = true
+                                }, label: {
+                                    Text(officialType == -1 ? "Account.info" : "Account.certification")
+                                })
+                                .buttonStyle(.borderless)
+                                .font(.caption)
+                            }
+                            Button(action: {
+                                isSendbMessagePresented = true
+                            }, label: {
+                                Image(systemName: "ellipsis.bubble")
+                            })
+                        }
+                    }
+                    .navigationTitle(username)
+                    .sheet(isPresented: $isInfoSheetPresented, content: {
+                        ScrollView {
+                            SecondPageBase(officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign, userLevel: $userLevel, vipLabel: $vipLabel)
+                        }
+                    })
+                    ScrollView {
                         VideosListBase(uid: uid, username: $username, videos: $videos, articles: $articles, viewSelector: $viewSelector, videoCount: $videoCount, articalCount: $articalCount)
                             .tag(2)
                             .navigationTitle(viewSelector == .video ? "Account.videos.\(videoCount)" : "Account.articals.\(articalCount)")
@@ -137,13 +139,15 @@ struct UserDetailView: View {
                 .tabViewStyle(.verticalPage)
                 .containerBackground(Color.accentColor.gradient, for: .navigation)
             } else {
-                ScrollView {
-                    FirstPageBase(uid: uid, userFaceUrl: $userFaceUrl, username: $username, followCount: $followCount, fansCount: $fansCount, coinCount: $coinCount, isFollowed: $isFollowed, isSendbMessagePresented: $isSendbMessagePresented)
-                        .offset(y: -10)
-                        .navigationTitle(username)
-                        .tag(1)
-                    SecondPageBase(officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign, userLevel: $userLevel, vipLabel: $vipLabel)
-                        .tag(2)
+                TabView {
+                    ScrollView {
+                        FirstPageBase(uid: uid, userFaceUrl: $userFaceUrl, username: $username, followCount: $followCount, fansCount: $fansCount, coinCount: $coinCount, isFollowed: $isFollowed, isSendbMessagePresented: $isSendbMessagePresented)
+                            .offset(y: -10)
+                            .navigationTitle(username)
+                            .tag(1)
+                        SecondPageBase(officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign, userLevel: $userLevel, vipLabel: $vipLabel)
+                            .tag(2)
+                    }
                     VideosListBase(uid: uid, username: $username, videos: $videos, articles: $articles, viewSelector: $viewSelector, videoCount: $videoCount, articalCount: $articalCount)
                         .tag(3)
                         .navigationTitle(viewSelector == .video ? "Account.videos.\(videoCount)" : "Account.articals.\(articalCount)")
@@ -315,54 +319,52 @@ struct UserDetailView: View {
                            Color(red: 222/255, green: 111/255, blue: 60/255), //5
                            Color(red: 234/255, green: 51/255, blue: 35/255)]  //6
         var body: some View {
-            ScrollView {
-                VStack {
-                    if officialType != -1 {
-                        HStack {
-                            Image(systemName: "bolt.circle")
-                                .foregroundColor(officialType == 0 ? Color(hex: 0xFDD663) : Color(hex: 0xA0C0F4))
-                                .frame(width: 20, height: 20)
-                            Text("\(Text(String(localized: "Account.certification")).bold())\n\(officialTitle)")
-                                .font(.system(size: 15))
-                            Spacer()
-                        }
-                    }
-                    if !vipLabel.isEmpty {
-                        HStack {
-                            Image(systemName: "dollarsign.circle")
-                                .foregroundColor(Color(red: 236/255, green: 98/255, blue: 139/255))
-                                .frame(width: 20, height: 20)
-                            Text(vipLabel)
-                                .font(.system(size: 15))
-                                .bold()
-                            Spacer()
-                        }
-                    }
+            VStack {
+                if officialType != -1 {
                     HStack {
-                        Image(systemName: "graduationcap.circle")
-                            .foregroundColor(levelColors[userLevel])
+                        Image(systemName: "bolt.circle")
+                            .foregroundColor(officialType == 0 ? Color(hex: 0xFDD663) : Color(hex: 0xA0C0F4))
                             .frame(width: 20, height: 20)
-                        Text("Lv\(userLevel)")
+                        Text("\(Text(String(localized: "Account.certification")).bold())\n\(officialTitle)")
+                            .font(.system(size: 15))
+                        Spacer()
+                    }
+                }
+                if !vipLabel.isEmpty {
+                    HStack {
+                        Image(systemName: "dollarsign.circle")
+                            .foregroundColor(Color(red: 236/255, green: 98/255, blue: 139/255))
+                            .frame(width: 20, height: 20)
+                        Text(vipLabel)
                             .font(.system(size: 15))
                             .bold()
                         Spacer()
                     }
-                    HStack {
-                        VStack {
-                            Image(systemName: "info.circle")
-                                .foregroundColor(.secondary)
-                                .frame(width: 20, height: 20)
-                            Spacer()
-                        }
-                        Text(userSign)
-                            .font(.system(size: 14))
+                }
+                HStack {
+                    Image(systemName: "graduationcap.circle")
+                        .foregroundColor(levelColors[userLevel])
+                        .frame(width: 20, height: 20)
+                    Text("Lv\(userLevel)")
+                        .font(.system(size: 15))
+                        .bold()
+                    Spacer()
+                }
+                HStack {
+                    VStack {
+                        Image(systemName: "info.circle")
                             .foregroundColor(.secondary)
-//                            .opacity(0.6)
+                            .frame(width: 20, height: 20)
                         Spacer()
                     }
+                    Text(userSign)
+                        .font(.system(size: 14))
+                        .foregroundColor(.secondary)
+//                            .opacity(0.6)
+                    Spacer()
                 }
-                .padding()
             }
+            .padding()
         }
     }
     struct VideosListBase: View {
