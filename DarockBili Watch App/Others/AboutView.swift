@@ -80,6 +80,10 @@ struct AboutApp: View {
 }
 
 struct AboutCredits: View {
+    @Environment(\.dismiss) var dismiss
+    @State var isEasterEgg1Presented = false
+    @State var isGenshin = false
+    @State var genshinOverlayTextOpacity: CGFloat = 0.0
     var body: some View {
         NavigationStack {
             List {
@@ -87,8 +91,13 @@ struct AboutCredits: View {
                     Text("WindowsMEMZ")
                     Text("Lightning-Lion")
                     Text("Linecom")
+                    Text("令枫")
                     Text("ThreeManager785")
                     Text("-- And You --")
+                        .sheet(isPresented: $isEasterEgg1Presented, content: {EasterEgg1View(isGenshin: $isGenshin)})
+                        .onTapGesture(count: 10) {
+                            isEasterEgg1Presented = true
+                        }
                 }
                 Section {
                     NavigationLink(destination: {
@@ -98,6 +107,49 @@ struct AboutCredits: View {
                         Text("About.open-source")
                     })
                 }
+            }
+        }
+        .navigationBarHidden(isGenshin)
+        .overlay {
+            if isGenshin {
+                ZStack(alignment: .center) {
+                    Color.white
+                    Text("原神")
+                        .font(.system(size: 30, weight: .heavy))
+                        .foregroundColor(.black)
+                        .opacity(genshinOverlayTextOpacity)
+                }
+                .ignoresSafeArea()
+                .animation(.smooth(duration: 2.0), value: genshinOverlayTextOpacity)
+                .onAppear {
+                    genshinOverlayTextOpacity = 1.0
+                    Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
+                        isGenshin = false
+                        dismiss()
+                    }
+                }
+            }
+        }
+    }
+    
+    // MARK: Easter Eggs
+    struct EasterEgg1View: View {
+        @Binding var isGenshin: Bool
+        @Environment(\.dismiss) var dismiss
+        @State var codeInput = ""
+        var body: some View {
+            VStack {
+                TextField("神秘代码", text: $codeInput)
+                Button(action: {
+                    if codeInput == "Genshin" {
+                        isGenshin = true
+                        dismiss()
+                    } else {
+                        codeInput = "输入错误"
+                    }
+                }, label: {
+                    Text("确认")
+                })
             }
         }
     }
