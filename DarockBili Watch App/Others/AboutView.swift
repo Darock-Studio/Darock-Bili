@@ -131,6 +131,28 @@ struct AboutCredits: View {
             }
         }
     }
+    
+    // MARK: Easter Eggs
+    struct EasterEgg1View: View {
+        @Binding var isGenshin: Bool
+        @Environment(\.dismiss) var dismiss
+        @State var codeInput = ""
+        var body: some View {
+            VStack {
+                TextField("神秘代码", text: $codeInput)
+                Button(action: {
+                    if codeInput == "Genshin" {
+                        isGenshin = true
+                        dismiss()
+                    } else {
+                        codeInput = "输入错误"
+                    }
+                }, label: {
+                    Text("确认")
+                })
+            }
+        }
+    }
 }
 
 
@@ -187,28 +209,6 @@ struct OpenSourceView: View {
     var body: some View {
         ScrollView {
             Text(openSourceTexts)
-        }
-    }
-    
-    // MARK: Easter Eggs
-    struct EasterEgg1View: View {
-        @Binding var isGenshin: Bool
-        @Environment(\.dismiss) var dismiss
-        @State var codeInput = ""
-        var body: some View {
-            VStack {
-                TextField("神秘代码", text: $codeInput)
-                Button(action: {
-                    if codeInput == "Genshin" {
-                        isGenshin = true
-                        dismiss()
-                    } else {
-                        codeInput = "输入错误"
-                    }
-                }, label: {
-                    Text("确认")
-                })
-            }
         }
     }
 }
