@@ -49,6 +49,7 @@ struct DarockBili_Watch_AppApp: App {
     @WKApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @Environment(\.scenePhase) var scenePhase
     // Screen Time
+    @AppStorage("IsScreenTimeEnabled") var isScreenTimeEnabled = true
     @State var screenTimeCaculateTimer: Timer? = nil
     @State var isMemoryWarningPresented = false
     @State var showTipText = ""
@@ -63,7 +64,6 @@ struct DarockBili_Watch_AppApp: App {
     @State var isShowMemoryUsage = false
     var body: some Scene {
         WindowGroup {
-            
             if UserDefaults.standard.string(forKey: "NewSignalError") ?? "" != "" {
                 SignalErrorView()
             } else {
@@ -215,7 +215,6 @@ struct DarockBili_Watch_AppApp: App {
         .onChange(of: scenePhase) { value in
             switch value {
             case .background:
-                //screenTimeCaculateTimer?.invalidate()
                 break
             case .inactive:
                 break
@@ -223,16 +222,17 @@ struct DarockBili_Watch_AppApp: App {
                 updateBuvid()
                 
                 WKInterfaceDevice.current().isBatteryMonitoringEnabled = true
-                if screenTimeCaculateTimer == nil {
-                    Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-                        screenTimeCaculateTimer = timer
-                        let df = DateFormatter()
-                        df.dateFormat = "yyyy-MM-dd"
-                        let dateStr = df.string(from: Date.now)
-                        UserDefaults.standard.set(UserDefaults.standard.integer(forKey: "ScreenTime\(dateStr)") + 1, forKey: "ScreenTime\(dateStr)")
+                
+                if isScreenTimeEnabled {
+                    if screenTimeCaculateTimer == nil {
+                        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+                            screenTimeCaculateTimer = timer
+                            let df = DateFormatter()
+                            df.dateFormat = "yyyy-MM-dd"
+                            let dateStr = df.string(from: Date.now)
+                            UserDefaults.standard.set(UserDefaults.standard.integer(forKey: "ScreenTime\(dateStr)") + 1, forKey: "ScreenTime\(dateStr)")
+                        }
                     }
-                } else {
-                    //screenTimeCaculateTimer!.fire()
                 }
             @unknown default:
                 break
