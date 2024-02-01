@@ -16,7 +16,7 @@
       "location" : "https://github.com/WindowsMEMZ/bplayer",
       "state" : {
         "branch" : "main",
-        "revision" : "0cf4298b592ceed811b7df04a79019c315481376"
+        "revision" : "8da48b0e7004f99adb43ddbb9ae650ae85551f8c"
       }
     },
     {
@@ -114,8 +114,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImageWebPCoder",
       "state" : {
-        "revision" : "db4603921b31a6ce0f8c26d36d6a3fffc2dba481",
-        "version" : "0.14.2"
+        "revision" : "acfb824ca5cd9dbde2c43dc6b5a008c6757dee85",
+        "version" : "0.14.3"
       }
     },
     {
