@@ -327,39 +327,61 @@ struct NetworkSettingsView: View {
 }
 
 struct ScreenTimeSettingsView: View {
+    @AppStorage("IsScreenTimeEnabled") var isScreenTimeEnabled = true
     @State var screenTimes = [Int]()
     @State var mainBarData = [SingleTimeBarMarkData]()
     @State var dayAverageTime = 0 // Minutes
     var body: some View {
         List {
-            Section {
-                VStack {
-                    HStack {
-                        Text("Screen-time.daily-average")
-                            .font(.system(size: 14))
-                            .foregroundColor(.gray)
-                        Spacer()
-                    }
-                    HStack {
-                        Text("Screen-time.minutes.\(dayAverageTime)")
-                            .font(.system(size: 20))
-                        Spacer()
-                    }
-                    Chart(mainBarData) {
-                        BarMark(
-                            x: .value("name", $0.name),
-                            y: .value("time", $0.time)
-                        )
-//                                RuleMark(
-//                                    y: .value("Highlight", dayAverageTime)
-//                                )
-//                                .foregroundStyle(.green)
-                    }
-                    .chartYAxis {
-                        AxisMarks(preset: .aligned, position: .trailing) { value in
-                            AxisValueLabel("Screen-time.minutes.\(value.index)")
+            if isScreenTimeEnabled {
+                Section {
+                    VStack {
+                        HStack {
+                            Text("Screen-time.daily-average")
+                                .font(.system(size: 14))
+                                .foregroundColor(.gray)
+                            Spacer()
+                        }
+                        HStack {
+                            Text("Screen-time.minutes.\(dayAverageTime)")
+                                .font(.system(size: 20))
+                            Spacer()
+                        }
+                        Chart(mainBarData) {
+                            BarMark(
+                                x: .value("name", $0.name),
+                                y: .value("time", $0.time)
+                            )
+                            //                                RuleMark(
+                            //                                    y: .value("Highlight", dayAverageTime)
+                            //                                )
+                            //                                .foregroundStyle(.green)
+                        }
+                        .chartYAxis {
+                            AxisMarks(preset: .aligned, position: .trailing) { value in
+                                AxisValueLabel("Screen-time.minutes.\(value.index)")
+                            }
                         }
                     }
+                }
+                Section {
+                    Button(role: .destructive, action: {
+                        isScreenTimeEnabled = false
+                    }, label: {
+                        Text("关闭“屏幕使用时间”")
+                    })
+                } footer: {
+                    Text("将不再记录您的屏幕使用时间, 已记录的数据不会被删除")
+                }
+            } else {
+                Section {
+                    Button(action: {
+                        isScreenTimeEnabled = true
+                    }, label: {
+                        Text("开启屏幕使用时间")
+                    })
+                } footer: {
+                    Text("“屏幕使用时间”会记录您每天使用喵哩喵哩的时间并作出统计")
                 }
             }
         }
