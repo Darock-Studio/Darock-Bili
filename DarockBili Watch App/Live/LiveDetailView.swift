@@ -49,6 +49,7 @@ struct LiveDetailView: View {
                     TabView {
                         FirstPageBase(liveDetails: liveDetails, streamerName: $streamerName, isLoading: $isLoading, isLivePlayerPresented: $isLivePlayerPresented)
                             .tag(1)
+                            .offset(y: 16)
                             .toolbar {
                                 ToolbarItemGroup(placement: .bottomBar) {
                                     Spacer()
@@ -112,6 +113,8 @@ struct LiveDetailView: View {
                     .bold()
             }
         }
+        .navigationTitle("直播")
+        .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $isLivePlayerPresented, content: {LivePlayerView()})
         .onAppear {
             let headers: HTTPHeaders = [
@@ -280,7 +283,7 @@ struct LiveDetailView: View {
                             }
                             HStack {
                                 Image(systemName: "clock")
-                                Text("Video.details.publish-time.\(startTime)")
+                                Text("于 \(startTime) 开始")
                                 Spacer()
                             }
                             .offset(y: publishTimeTextOffset)

@@ -188,6 +188,8 @@ struct BangumiDetailView: View {
             .tag(2)
             .navigationTitle("Bangumi.commnets")
         }
+        .navigationTitle("番剧")
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             let headers: HTTPHeaders = [
                 "cookie": "SESSDATA=\(sessdata)",
