@@ -103,8 +103,7 @@ struct SearchView: View {
                     Text("Search.type.user").tag(SearchType.user)
                     Text("Search.type.article").tag(SearchType.article)
                     Text("Search.type.bangumi").tag(SearchType.bangumi)
-                    // TODO: Enable it after prepared
-                    //Text("Search.type.live").tag(SearchType.liveRoom)
+                    Text("Search.type.live").tag(SearchType.liveRoom)
                 }
                 .pickerStyle(.navigationLink)
                 .buttonBorderShape(.roundedRectangle(radius: 16))
@@ -213,8 +212,16 @@ struct SearchView: View {
                     } else if isNoResult {
                         Text("Search.no-result")
                     }
+                } else if searchType == .liveRoom {
+                    if liverooms.count != 0 {
+                        ForEach(0..<liverooms.count, id: \.self) { i in
+                            LiveCard(liverooms[i])
+                        }
+                    } else if isNoResult {
+                        Text("Search.no-result")
+                    }
                 }
-                if videos.isEmpty && users.isEmpty && articles.isEmpty && bangumis.isEmpty && liverooms.isEmpty {
+                if videos.isEmpty && users.isEmpty && articles.isEmpty && bangumis.isEmpty && liverooms.isEmpty && !isNoResult {
                     ProgressView()
                 }
             }
@@ -302,7 +309,9 @@ struct SearchView: View {
                                     }
                                 }
                             case .liveRoom:
-                                break
+                                for liveRoom in result {
+                                    liverooms.append(["Cover": "https:" + (liveRoom.1["user_cover"].string ?? "E"), "Title": (liveRoom.1["title"].string ?? "[加载失败]").replacingOccurrences(of: "<em class=\"keyword\">", with: "").replacingOccurrences(of: "</em>", with: ""), "ID": String(liveRoom.1["roomid"].int ?? 0), "Type": (liveRoom.1["cate_name"].string ?? "[加载失败]").replacingOccurrences(of: "<em class=\"keyword\">", with: "").replacingOccurrences(of: "</em>", with: "")])
+                                }
                             }
                         }
                     }

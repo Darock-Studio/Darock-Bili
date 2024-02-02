@@ -23,6 +23,7 @@ import DarockKit
 import Alamofire
 import SwiftyJSON
 import Foundation
+import Starscream
 import AVFoundation
 import CommonCrypto
 
@@ -621,6 +622,40 @@ public func getBuvid(url: String, callback: @escaping (String, String, String, S
             }
         }
     } 
+}
+
+class LiveWebSocketManager: WebSocketDelegate {
+    var socket: WebSocket!
+    var onConnected: () -> Void
+    
+    init(serverUrl: String, onConnected: @escaping () -> Void) {
+        self.onConnected = onConnected
+        
+        // 创建 WebSocket 连接
+        if let url = URL(string: serverUrl) {
+            var request = URLRequest(url: URL(string: "\(url):443")!)
+            request.timeoutInterval = 5
+            socket = WebSocket(request: request)
+            socket.delegate = self
+            socket.connect()
+        }
+    }
+    
+    // 连接成功
+    func didReceive(event: Starscream.WebSocketEvent, client: Starscream.WebSocketClient) {
+        switch event {
+        case .connected(_):
+            print("WebSocket is connected.")
+            
+        default:
+            break
+        }
+    }
+    
+    // 发送 WebSocket 消息
+    func sendWebSocketMessage(data: Data) {
+        socket.write(data: data)
+    }
 }
 
 postfix operator ++
