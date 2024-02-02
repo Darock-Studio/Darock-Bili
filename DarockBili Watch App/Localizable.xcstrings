@@ -91,6 +91,14 @@
       }
     },
     "%@ 人在看" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ is watching"
+          }
+        }
+      }
 
     },
     "%@ 搜索..." : {
@@ -426,7 +434,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Previous Page"
+            "value" : "Previous"
           }
         }
       }
@@ -436,15 +444,31 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Next Page"
+            "value" : "Next"
           }
         }
       }
     },
     "下载并安装" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Downlaod & Install"
+          }
+        }
+      }
 
     },
     "下载视频" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download Video"
+          }
+        }
+      }
 
     },
     "下面是错误详情：" : {
@@ -515,6 +539,14 @@
 
     },
     "以下为错误详情：" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Following is error detail:"
+          }
+        }
+      }
 
     },
     "网络连接" : {
@@ -573,6 +605,14 @@
 
     },
     "位置：%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location: %@"
+          }
+        }
+      }
 
     },
     "低电量模式" : {
@@ -618,6 +658,14 @@
       }
     },
     "关闭" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close"
+          }
+        }
+      }
 
     },
     "关闭 iPhone 的 Wi-Fi 以及蓝牙" : {
@@ -632,6 +680,14 @@
       }
     },
     "内存占用: %@ MB / 300 MB" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menory Usage: %@ MB / 300 MB"
+          }
+        }
+      }
 
     },
     "再次轻触以在下次更新前禁用此提示" : {
@@ -771,9 +827,25 @@
       }
     },
     "发送评论" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send Commit"
+          }
+        }
+      }
 
     },
     "发送评论..." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send Commit..."
+          }
+        }
+      }
 
     },
     "发送验证码" : {
@@ -797,6 +869,14 @@
       }
     },
     "取消关注" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unfollow"
+          }
+        }
+      }
 
     },
     "可在 TestFlight 中反馈，感谢您的支持！" : {
@@ -830,12 +910,36 @@
       }
     },
     "喵哩喵哩可能会被系统终止" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meowbili may be killed by system"
+          }
+        }
+      }
 
     },
     "喵哩喵哩在上次运行时出现了一些问题" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meowbili had pronlem during last run"
+          }
+        }
+      }
 
     },
     "喵哩喵哩已是最新版本" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meowbili is already the latest version."
+          }
+        }
+      }
 
     },
     "喵哩喵哩新版本(v%@ Build %@)已发布！现可更新" : {
@@ -844,6 +948,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "喵哩喵哩新版本(v%1$@ Build %2$@)已发布！现可更新"
+          }
+          "en": {
+            "stringUnit": {
+              "state": "translated",
+              "value": "Meowbili new version (v%1$@ Build %2$@) released! You can update now."
+            }
           }
         }
       }
@@ -855,6 +965,14 @@
 
     },
     "在手机上继续" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue on iPhone"
+          }
+        }
+      }
 
     },
     "在视频播放器使用互点两下手势(Apple Watch Series 9 及以上)或快速操作(其他机型)暂停或播放视频" : {
@@ -874,6 +992,14 @@
 
     },
     "官方" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Official"
+          }
+        }
+      }
 
     },
     "密码" : {
@@ -908,9 +1034,25 @@
       }
     },
     "屏幕使用时间" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Screen Time"
+          }
+        }
+      }
 
     },
     "已发送" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sent"
+          }
+        }
+      }
 
     },
     "已扫描" : {
@@ -935,9 +1077,25 @@
       }
     },
     "开发者" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Developers"
+          }
+        }
+      }
 
     },
     "开始播放时" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start Playing"
+          }
+        }
+      }
 
     },
     "开源组件许可" : {
@@ -951,9 +1109,25 @@
       }
     },
     "当前内存占用大于 240 MB\n内存占用超过 300 MB 后会被系统终止" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menory usage above than 240MB\nIf menory usage above than 300MB, the App will be killed by system."
+          }
+        }
+      }
 
     },
     "当前占用内存过高" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "High menory usage"
+          }
+        }
+      }
 
     },
     "很快到来" : {
@@ -968,9 +1142,25 @@
       }
     },
     "您似乎未连接到网络。如果您的iPhone在附近，请在iPhone的%@中关闭WiFi和蓝牙。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It seems you're not connected to the Internet. If your iPhone is around here, please turn off WiFi and Bluetooth on iPhone's %@"
+          }
+        }
+      }
 
     },
     "您可于 iPhone 上的 TestFlight 更新 App" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " You can update this App through TestFlight on iPhone"
+          }
+        }
+      }
 
     },
     "您可以将此信息发送至 Darock 以帮助我们改进喵哩喵哩" : {
@@ -993,9 +1183,25 @@
 
     },
     "我的" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My"
+          }
+        }
+      }
 
     },
     "我的好友" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My Friends"
+          }
+        }
+      }
 
     },
     "我的收藏" : {
@@ -1053,6 +1259,14 @@
       }
     },
     "推荐" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suggest"
+          }
+        }
+      }
 
     },
     "提交反馈" : {
@@ -1082,13 +1296,21 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Search"
+            "value" : "Search..."
           }
         }
       }
 
     },
     "搜索类型" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search Type"
+          }
+        }
+      }
 
     },
     "播放" : {
@@ -1102,6 +1324,14 @@
       }
     },
     "播放设置" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Play Settings"
+          }
+        }
+      }
 
     },
     "无反馈" : {
@@ -1130,9 +1360,25 @@
 
     },
     "日均" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daily Average"
+          }
+        }
+      }
 
     },
     "时间：%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time: %@"
+          }
+        }
+      }
 
     },
     "暗礁反馈" : {
@@ -1147,6 +1393,14 @@
       }
     },
     "更多" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "More"
+          }
+        }
+      }
 
     },
     "来自 %@ 的消息：欢迎加群 248036605 获取最新消息谢谢喵！" : {
@@ -1171,9 +1425,25 @@
       }
     },
     "查看专栏" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View Article"
+          }
+        }
+      }
 
     },
     "查看视频" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View Video"
+          }
+        }
+      }
 
     },
     "标题" : {
@@ -1198,6 +1468,14 @@
       }
     },
     "检查更新时出错" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error when checking for update"
+          }
+        }
+      }
 
     },
     "检查网络或稍后重试" : {
@@ -1218,21 +1496,53 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Downloading…"
+            "value" : "Downloading..."
           }
         }
       }
     },
     "正在发送..." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sending..."
+          }
+        }
+      }
 
     },
     "正在检查..." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Checking..."
+          }
+        }
+      }
 
     },
     "正在检查更新..." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Checking for update..."
+          }
+        }
+      }
 
     },
     "正在解压..." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Decompressing..."
+          }
+        }
+      }
 
     },
     "正在解析..." : {
@@ -1256,18 +1566,50 @@
       }
     },
     "此错误无需或无法发送至 Darock" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This error cannot send to Darock"
+          }
+        }
+      }
 
     },
     "注册" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Register"
+          }
+        }
+      }
 
     },
     "注册 Darock 通行证" : {
 
     },
     "注意！" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attention!"
+          }
+        }
+      }
 
     },
     "添加到收藏夹" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add to favourite"
+          }
+        }
+      }
 
     },
     "添加到稍后再看" : {
@@ -1287,6 +1629,14 @@
       }
     },
     "热门" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Popular"
+          }
+        }
+      }
 
     },
     "用户" : {
@@ -1301,6 +1651,14 @@
 
     },
     "电池" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery"
+          }
+        }
+      }
 
     },
     "番剧" : {
@@ -1479,9 +1837,25 @@
       }
     },
     "编译时间: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compile time: %@"
+          }
+        }
+      }
 
     },
     "网络检查" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Network Check"
+          }
+        }
+      }
 
     },
     "网络环境：" : {
@@ -1541,6 +1915,14 @@
 
     },
     "自动显示网络检查" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto display network check"
+          }
+        }
+      }
 
     },
     "范围：%@" : {
@@ -1554,15 +1936,47 @@
       }
     },
     "解析失败或无法播放视频时可尝试更换" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change it when decode failed or cannot play video"
+          }
+        }
+      }
 
     },
     "解析源" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Decode Source"
+          }
+        }
+      }
 
     },
     "记录历史记录" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Record History"
+          }
+        }
+      }
 
     },
     "设置" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        }
+      }
 
     },
     "该用户无专栏" : {
@@ -1586,6 +2000,14 @@
       }
     },
     "详细信息：%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Details: %@"
+          }
+        }
+      }
 
     },
     "请确定 Watch 的状态栏（控制中心上方）显示为%@而不是%@" : {
@@ -1661,6 +2083,14 @@
       }
     },
     "进入详情页时" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entering Detail Page"
+          }
+        }
+      }
 
     },
     "进行人机验证" : {
@@ -1675,6 +2105,14 @@
       }
     },
     "连接状态" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connection Status"
+          }
+        }
+      }
 
     },
     "退出登录" : {
@@ -1716,6 +2154,14 @@
 
     },
     "邮箱" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email"
+          }
+        }
+      }
 
     },
     "重新检查" : {
