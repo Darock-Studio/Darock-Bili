@@ -290,6 +290,8 @@ struct VideoDetailView: View {
         }
         .accentColor(.white)
         .animation(.smooth, value: isLoading)
+        .navigationTitle("视频")
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             let headers: HTTPHeaders = [
                 "cookie": "SESSDATA=\(sessdata)",
