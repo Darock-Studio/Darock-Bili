@@ -103,7 +103,10 @@ struct LiveDetailView: View {
                         }
                     }
                 } else {
-                    
+                    ScrollView {
+                        FirstPageBase(liveDetails: liveDetails, streamerName: $streamerName, isLoading: $isLoading, isLivePlayerPresented: $isLivePlayerPresented)
+                        SecondPageBase(liveDetails: liveDetails, watchingCount: $watchingCount, description: $description, liveStatus: $liveStatus, startTime: $startTime, streamerId: $streamerId, streamerName: $streamerName, streamerFaceUrl: $streamerFaceUrl, streamerFansCount: $streamerFansCount, tagName: $tagName)
+                    }
                 }
             }
             .blur(radius: isLoading ? 14 : 0)
@@ -206,7 +209,15 @@ struct LiveDetailView: View {
                     Button(action: {
                         isLoading = true
                         
-                        
+                        DarockKit.Network.shared.requestJSON("https://api.live.bilibili.com/room/v1/Room/playUrl?cid=\(liveDetails["ID"]!)&qn=150&platform=h5") { respJson, isSuccess in
+                            if isSuccess {
+                                debugPrint(respJson)
+                                LiveDetailView.willPlayStreamUrl = respJson["data"]["durl"][0]["url"].string ?? ""
+                                debugPrint(LiveDetailView.willPlayStreamUrl)
+                                isLivePlayerPresented = true
+                                isLoading = false
+                            }
+                        }
                     }, label: {
                         Label("Video.play", systemImage: "play.fill")
                     })
