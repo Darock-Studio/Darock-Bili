@@ -260,12 +260,36 @@
 
     },
     "Darock API 响应无效" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Darock API Response Invalid"
+          }
+        }
+      }
 
     },
     "Darock API 无法访问" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Darock API Cannot Access"
+          }
+        }
+      }
 
     },
     "Darock API 服务器目前出现了问题" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Darock API Server is Down"
+          }
+        }
+      }
 
     },
     "Darock API 问题" : {
@@ -480,30 +504,86 @@
       }
     },
     "仍有问题？" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Still have problem?"
+          }
+        }
+      }
 
     },
     "以下为错误详情：" : {
 
     },
-    "以太网" : {
+    "网络连接" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Network Connection"
+          }
+        }
+      }
 
     },
-    "以太网：在线" : {
+    "网络连接：在线" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Network Connection: Online"
+          }
+        }
+      }
 
     },
-    "以太网：正在检查" : {
+    "网络连接：正在检查" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Network Connection: Checking"
+          }
+        }
+      }
 
     },
-    "以太网：离线" : {
+    "网络连接：离线" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Network Connection: Offline"
+          }
+        }
+      }
 
     },
     "以音频播放" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Play as Audio"
+          }
+        }
+      }
 
     },
     "位置：%@" : {
 
     },
     "低电量模式" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Low Power Mode"
+          }
+        }
+      }
 
     },
     "关于" : {
@@ -592,7 +672,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Will exit..."
+            "value" : "Exiting..."
           }
         }
       }
@@ -923,7 +1003,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "My favorites:"
+            "value" : "My favorites"
           }
         }
       }
@@ -952,6 +1032,14 @@
       }
     },
     "找到了以下问题：" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Problem(s) Found: "
+          }
+        }
+      }
 
     },
     "投币" : {
@@ -968,6 +1056,14 @@
 
     },
     "提交反馈" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feedback"
+          }
+        }
+      }
 
     },
     "搜索" : {
@@ -982,6 +1078,14 @@
       }
     },
     "搜索..." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search"
+          }
+        }
+      }
 
     },
     "搜索类型" : {
@@ -1004,9 +1108,25 @@
 
     },
     "无搜索结果" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No result found"
+          }
+        }
+      }
 
     },
     "无法连接到网络" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cannot connect to Internet"
+          }
+        }
+      }
 
     },
     "日均" : {
@@ -1161,7 +1281,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tap to Login"
+            "value" : "Click to Login"
           }
         }
       }
@@ -1170,12 +1290,28 @@
 
     },
     "用户" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "User"
+          }
+        }
+      }
 
     },
     "电池" : {
 
     },
     "番剧" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bangumi"
+          }
+        }
+      }
 
     },
     "登录" : {
@@ -1192,6 +1328,14 @@
 
     },
     "目前无法连接到 Bilibili 服务器，可能是您的网络出现问题。在少部分情况下，Bilibili 服务器可能已宕机" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cannot connect to Bilibili. Maybe your Internet connection have problem. Hardly, the Bilibili's server were down."
+          }
+        }
+      }
 
     },
     "目标页" : {
@@ -1218,12 +1362,36 @@
       }
     },
     "确认 Apple Watch 已连接到互联网" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ensure the Apple Watch is connected to the Internet."
+          }
+        }
+      }
 
     },
     "确认密码" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm Password"
+          }
+        }
+      }
 
     },
     "确认已在手机端同意网络权限" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ensure that you're agreed network permission on iPhone."
+          }
+        }
+      }
 
     },
     "视频" : {
@@ -1247,12 +1415,36 @@
       }
     },
     "私信" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Private Message"
+          }
+        }
+      }
 
     },
     "稍后再看" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Watch Later"
+          }
+        }
+      }
 
     },
     "第三方" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Third Party"
+          }
+        }
+      }
 
     },
     "简单地描述问题" : {
@@ -1429,6 +1621,14 @@
 
     },
     "软件更新" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Software Update"
+          }
+        }
+      }
 
     },
     "轻点问题以查看详细信息" : {
@@ -1491,6 +1691,14 @@
 
     },
     "通用" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "General"
+          }
+        }
+      }
 
     },
     "遇到问题？下载%@（暂未上线），附带上方文本进行反馈" : {
@@ -1545,6 +1753,14 @@
       }
     },
     "需要登录" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login Required"
+          }
+        }
+      }
 
     },
     "非常抱歉，喵哩喵哩在 %@ 时出现了问题。%@" : {
