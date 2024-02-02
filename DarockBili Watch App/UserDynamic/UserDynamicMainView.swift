@@ -105,7 +105,7 @@ struct UserDynamicMainView: View {
                                     }
                                 } else if dynamics[i]["MajorType"]! as! BiliDynamicMajorType == .majorTypeLiveRcmd {
                                     if let liveInfo = dynamics[i]["Live"] as? [String: String] {
-                                        NavigationLink(destination: {LivePlayerView(id: liveInfo["ID"]!)}, label: {
+                                        NavigationLink(destination: {LiveDetailView(liveDetails: liveInfo)}, label: {
                                             VStack {
                                                 HStack {
                                                     WebImage(url: URL(string: liveInfo["Cover"]! + "@50w")!, options: [.progressiveLoad, .scaleDownLargeImages])

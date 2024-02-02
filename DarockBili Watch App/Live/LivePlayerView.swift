@@ -23,30 +23,18 @@ import SwiftyJSON
 import AVFoundation
 
 struct LivePlayerView: View {
-    var id: String
-    @State var playUrl = ""
     @State var livePlayer: AVPlayer? = nil
+    @State var tabviewChoseTab = 2
     var body: some View {
-        TabView {
-//            VideoPlayer(player: livePlayer)
-//                .ignoresSafeArea()
+        TabView(selection: $tabviewChoseTab) {
+            VideoPlayer(player: livePlayer)
+                .ignoresSafeArea()
+                .tag(2)
         }
-        //.navigationBarBackButtonHidden()
         .onAppear {
-            DarockKit.Network.shared.requestJSON("https://api.live.bilibili.com/room/v1/Room/playUrl?cid=\(id)&qn=150") { respJson, isSuccess in
-                if isSuccess {
-                    debugPrint(respJson)
-                    playUrl = respJson["data"]["durl"][0]["url"].string ?? ""
-                    debugPrint(playUrl)
-                    livePlayer = AVPlayer(url: URL(string: playUrl)!)
-                }
-            }
+            let asset = AVURLAsset(url: URL(string: LiveDetailView.willPlayStreamUrl)!, options: ["AVURLAssetHTTPHeaderFieldsKey": ["User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15", "Referer": "https://www.bilibili.com"]])
+            let item = AVPlayerItem(asset: asset)
+            livePlayer = AVPlayer(playerItem: item)
         }
-    }
-}
-
-struct LivePlayerView_Previews: PreviewProvider {
-    static var previews: some View {
-        LivePlayerView(id: "114514")
     }
 }
