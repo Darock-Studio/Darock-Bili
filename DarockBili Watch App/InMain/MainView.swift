@@ -54,10 +54,24 @@ struct MainView: View {
                     ToolbarItem(placement: .topBarTrailing) {
                         if dedeUserID != "" {
                             NavigationLink(destination: {PersonAccountView(isSettingsButtonTrailing: true)}, label: {
-                                CachedAsyncImage(url: URL(string: userFaceUrl + "@30w"))
-                                    .frame(width: 30)
-                                    .clipShape(Circle())
-                                    .matchedGeometryEffect(id: "image", in: imageAnimation)
+                                CachedAsyncImage(url: URL(string: userFaceUrl + "@30w")) { phase in
+                                    switch phase {
+                                      case .empty:
+                                          Image(systemName: "person")
+                                              .foregroundColor(.accentColor)
+                                      case .success(let image):
+                                          image
+                                      case .failure:
+                                          Image(systemName: "person")
+                                              .foregroundColor(.accentColor)
+                                      @unknown default:
+                                          Image(systemName: "person")
+                                              .foregroundColor(.accentColor)
+                                    }
+                                }
+                                .frame(width: 30)
+                                .clipShape(Circle())
+                                .matchedGeometryEffect(id: "image", in: imageAnimation)
                             })
                             .buttonStyle(.borderless)
                         } else {
