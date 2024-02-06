@@ -79,6 +79,10 @@ struct HistoryView: View {
                     if isSuccess {
                         debugPrint(respJson)
                         if !CheckBApiError(from: respJson) { return }
+                        guard let responseData = respJson["data"].dictionary else {
+                            tipWithText("暂无历史记录", symbol: "xmark.circle.fill")
+                            return
+                        }
                         let datas = respJson["data"]
                         for data in datas {
                             let type = data.1["business"].string ?? "archive"
