@@ -27,6 +27,7 @@ struct HistoryView: View {
     @AppStorage("bili_jct") var biliJct = ""
     @State var histories = [Any]()
     @State var isLoaded = false
+    @State var hasData = true
     @State var nowPage = 1
     @State var totalPage = 1
     var body: some View {
@@ -66,7 +67,17 @@ struct HistoryView: View {
                     }
                 }
             } else {
-                ProgressView()
+                if hasData {
+                    ProgressView()
+                } else {
+                    HStack {
+                        Spacer(minLength: 0)
+                        Image(systemName: "xmark.bin.fill")
+                        Text("这里空空如也")
+                        Spacer(minLength: 0)
+                    }
+                    .padding()
+                }
             }
         }
         .onAppear {
@@ -79,6 +90,11 @@ struct HistoryView: View {
                     if isSuccess {
                         debugPrint(respJson)
                         if !CheckBApiError(from: respJson) { return }
+                        guard respJson["data"].dictionary != nil else {
+                            hasData = false
+                            isLoaded = true
+                            return
+                        }
                         let datas = respJson["data"]
                         for data in datas {
                             let type = data.1["business"].string ?? "archive"
@@ -88,6 +104,7 @@ struct HistoryView: View {
                                 histories.append(["Type": type, "Data": BangumiData(mediaId: data.1["bangumi"]["ep_id"].int64 ?? 0, seasonId: data.1["bangumi"]["season"]["season_id"].int64 ?? 0, title: data.1["bangumi"]["long_title"].string ?? "[加载失败]", originalTitle: data.1["bangumi"]["season"]["title"].string ?? "[加载失败]", cover: data.1["bangumi"]["cover"].string ?? "E")])
                             }
                         }
+                        hasData = true
                         isLoaded = true
                     }
                 }
