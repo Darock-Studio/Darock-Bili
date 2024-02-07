@@ -1112,6 +1112,9 @@
         }
       }
     },
+    "Dignite" : {
+
+    },
     "Direct-message.failed" : {
       "localizations" : {
         "en" : {
@@ -4197,22 +4200,15 @@
     "令枫" : {
 
     },
-    "原神" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GENSHIN"
-          }
-        }
-      }
+    "关闭“屏幕使用时间”" : {
+
     },
     "原神" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ""
+            "value" : "GENSHIN"
           }
         }
       }
@@ -4255,6 +4251,9 @@
 
     },
     "神秘代码" : {
+
+    },
+    "这里空空如也" : {
 
     }
   },
