@@ -4197,8 +4197,15 @@
     "令枫" : {
 
     },
-    "关闭“屏幕使用时间”" : {
-
+    "原神" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GENSHIN"
+          }
+        }
+      }
     },
     "原神" : {
       "localizations" : {
