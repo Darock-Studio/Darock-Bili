@@ -25,8 +25,11 @@ import CachedAsyncImage
 
 struct MainView: View {
     @Namespace public var imageAnimation
-    @AppStorage("SESSDATA") var sessdata = ""
+    
     @AppStorage("DedeUserID") var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") var sessdata = ""
+    @AppStorage("bili_jct") var biliJct = ""
     @AppStorage("IsShowNetworkFixing") var isShowNetworkFixing = true
     @State var userFaceUrl = ""
     @State var username = ""
@@ -34,6 +37,11 @@ struct MainView: View {
     @State var isSearchPresented = false
     @State var isNetworkFixPresented = false
     @State var isLoginPresented = false
+    @State var userList1: [Any] = []
+    @State var userList2: [Any] = []
+    @State var userList3: [Any] = []
+    @State var userList4: [Any] = []
+    @State var isNewUserPresenting = false
     var body: some View {
         if #available(watchOS 10, *) {
             MainViewMain()
@@ -54,36 +62,94 @@ struct MainView: View {
                     ToolbarItem(placement: .topBarTrailing) {
                         if dedeUserID != "" {
                             NavigationLink(destination: {PersonAccountView(isSettingsButtonTrailing: true)}, label: {
-                                CachedAsyncImage(url: URL(string: userFaceUrl + "@30w")) { phase in
-                                    switch phase {
-                                      case .empty:
-                                          Image(systemName: "person")
-                                              .foregroundColor(.accentColor)
-                                      case .success(let image):
-                                          image
-                                      case .failure:
-                                          Image(systemName: "person")
-                                              .foregroundColor(.accentColor)
-                                      @unknown default:
-                                          Image(systemName: "person")
-                                              .foregroundColor(.accentColor)
-                                    }
-                                }
-                                .frame(width: 30)
-                                .clipShape(Circle())
-                                .matchedGeometryEffect(id: "image", in: imageAnimation)
+                                CachedAsyncImage(url: URL(string: userFaceUrl + "@30w"))
+                                    .frame(width: 30)
+                                    .clipShape(Circle())
+                                    .matchedGeometryEffect(id: "image", in: imageAnimation)
                             })
                             .buttonStyle(.borderless)
                         } else {
-                            Button(action: {
-                                isLoginPresented = true
+                            NavigationLink(destination: {
+                                List {
+                                    if #available(watchOS 10.0, *) {} else {
+                                        Button(action: {
+                                            isNewUserPresenting = true
+                                        }, label: {
+                                            Label("User.switch.add", systemImage: "plus")
+                                        })
+                                    }
+                                    
+                                    if userList1.isEmpty {
+                                        Text("User.switch.none")
+                                            .bold()
+                                            .foregroundStyle(.secondary)
+                                    } else {
+                                        Section(content: {
+                                            ForEach(0..<userList1.count, id: \.self) { user in
+                                                Button(action: {
+                                                    dedeUserID = userList1[user] as! String
+                                                    dedeUserID__ckMd5 = userList2[user] as! String
+                                                    sessdata = userList3[user] as! String
+                                                    biliJct = userList4[user] as! String
+                                                }, label: {
+                                                    Text(userList1[user] as! String)
+                                                })
+                                            }
+                                            .onDelete(perform: { user in
+                                                userList1.remove(atOffsets: user)
+                                                userList2.remove(atOffsets: user)
+                                                userList3.remove(atOffsets: user)
+                                                userList4.remove(atOffsets: user)
+                                                UserDefaults.standard.set(userList1, forKey: "userList1")
+                                                UserDefaults.standard.set(userList2, forKey: "userList2")
+                                                UserDefaults.standard.set(userList3, forKey: "userList3")
+                                                UserDefaults.standard.set(userList4, forKey: "userList4")
+                                            })
+                                            .onMove(perform: { users, user  in
+                                                userList1.move(fromOffsets: users, toOffset: user)
+                                                userList2.move(fromOffsets: users, toOffset: user)
+                                                userList3.move(fromOffsets: users, toOffset: user)
+                                                userList4.move(fromOffsets: users, toOffset: user)
+                                                UserDefaults.standard.set(userList1, forKey: "userList1")
+                                                UserDefaults.standard.set(userList2, forKey: "userList2")
+                                                UserDefaults.standard.set(userList3, forKey: "userList3")
+                                                UserDefaults.standard.set(userList4, forKey: "userList4")
+                                            })
+                                        }, footer: {
+                                            Text("User.switch.description")
+                                            Text("User.switch.description.1")
+                                        })
+                                    }
+                                }
+                                .toolbar {
+                                    if #available(watchOS 10.0, *) {
+                                        ToolbarItem(placement: .bottomBar) {
+                                            HStack {
+                                                Spacer()
+                                                Button(action: {
+                                                    isNewUserPresenting = true
+                                                }, label: {
+                                                    Image(systemName: "plus")
+                                                })
+                                            }
+                                        }
+                                    }
+                                }
+                                .onAppear {
+                                    userList1 = UserDefaults.standard.array(forKey: "userList1") ?? []
+                                    userList2 = UserDefaults.standard.array(forKey: "userList2") ?? []
+                                    userList3 = UserDefaults.standard.array(forKey: "userList3") ?? []
+                                    userList4 = UserDefaults.standard.array(forKey: "userList4") ?? []
+                                }
                             }, label: {
                                 Image(systemName: "person")
                                     .foregroundColor(.accentColor)
+                                    .matchedGeometryEffect(id: "image", in: imageAnimation)
                             })
                         }
                     }
                 }
+                .sheet(isPresented: $isNewUserPresenting, content: {LoginView()})
                 .onAppear {
                     if username == "" {
                         getBuvid(url: "https://api.bilibili.com/x/space/wbi/acc/info".urlEncoded()) { buvid3, buvid4, _uuid, resp in
