@@ -153,6 +153,11 @@
 
 </details>
 
+### 贡献流程
+开启Pull Request->等待审查->修复问题（如果有）->等待CI完成编译性检查->合并到main（或Close Pull Request）
+
+任何人（包括管理员）不可跳过上述步骤的任一部分。
+
 ## 📝版本号
 喵哩喵哩在GitHub和TestFlight(与关于页上相同)上的版本号**不同**，因为如果在TestFlight上递增版本号，App 需要重新接受审核，而递增 Build 版本则不用。
 
