@@ -1,5 +1,5 @@
 //
-//  VideoCommentsView.swift
+//  CommentsView.swift
 //  DarockBili Watch App
 //
 //  Created by WindowsMEMZ on 2023/7/2.
@@ -22,8 +22,9 @@ import Alamofire
 import SwiftyJSON
 import SDWebImageSwiftUI
 
-struct VideoCommentsView: View {
+struct CommentsView: View {
     var oid: String
+    var type: Int = 1
     @AppStorage("DedeUserID") var dedeUserID = ""
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
@@ -32,7 +33,7 @@ struct VideoCommentsView: View {
     var body: some View {
         VStack {
             if #available(watchOS 10, *) {
-                CommentMainView(oid: oid)
+                CommentMainView(oid: oid, type: type)
                     .toolbar {
                         ToolbarItem(placement: .topBarTrailing) {
                             Button(action: {
@@ -40,23 +41,23 @@ struct VideoCommentsView: View {
                             }, label: {
                                 Image(systemName: "square.and.pencil")
                             })
-                            .sheet(isPresented: $isSendCommentPresented, content: {CommentSendView(oid: oid)})
+                            .sheet(isPresented: $isSendCommentPresented, content: {CommentSendView(oid: oid, type: type)})
                         }
                     }
             } else {
-                CommentMainView(oid: oid)
+                CommentMainView(oid: oid, type: type)
             }
         }
-        
     }
     
     struct CommentMainView: View {
         var oid: String
+        var type: Int
         @AppStorage("DedeUserID") var dedeUserID = ""
         @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
         @AppStorage("SESSDATA") var sessdata = ""
         @AppStorage("bili_jct") var biliJct = ""
-        @State var avid: UInt64 = 0
+        @State var id = ""
         @State var comments = [[String: String]]()
         @State var sepTexts = [[String]]()
         @State var emojiUrls = [[String]]()
@@ -79,7 +80,7 @@ struct VideoCommentsView: View {
                                 Text("Comment.send")
                             }
                         })
-                        .sheet(isPresented: $isSendCommentPresented, content: {CommentSendView(oid: oid)})
+                        .sheet(isPresented: $isSendCommentPresented, content: {CommentSendView(oid: oid, type: type)})
                     }
                     if comments.count != 0 {
                         ForEach(0...comments.count - 1, id: \.self) { i in
@@ -133,7 +134,7 @@ struct VideoCommentsView: View {
                                 if commentReplies[i].count != 0 {
                                     VStack {
                                         ForEach(0...commentReplies[i].count - 1, id: \.self) { j in
-                                            NavigationLink(destination: {CommentRepliesView(avid: avid, replies: commentReplies[i], goto: commentReplies[i][j]["Rpid"]!)}, label: {
+                                            NavigationLink(destination: {CommentRepliesView(avid: id, type: type, replies: commentReplies[i], goto: commentReplies[i][j]["Rpid"]!)}, label: {
                                                 HStack {
                                                     Text("\(Text(commentReplies[i][j]["Sender"]! + ":").foregroundColor(.blue)) \(commentReplies[i][j]["Text"]!)")
                                                         .font(.system(size: 12))
@@ -162,7 +163,7 @@ struct VideoCommentsView: View {
                                                 "cookie": "SESSDATA=\(sessdata)",
                                                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                             ]
-                                            AF.request("https://api.bilibili.com/x/v2/reply/action", method: .post, parameters: BiliCommentLike(oid: avid, rpid: Int(comments[i]["Rpid"]!)!, action: comments[i]["UserAction"]! == "1" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
+                                            AF.request("https://api.bilibili.com/x/v2/reply/action", method: .post, parameters: BiliCommentLike(type: type, oid: id, rpid: Int(comments[i]["Rpid"]!)!, action: comments[i]["UserAction"]! == "1" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
                                                 debugPrint(response)
                                                 comments[i]["UserAction"]! = comments[i]["UserAction"]! == "1" ? "0" : "1"
                                             }
@@ -177,7 +178,7 @@ struct VideoCommentsView: View {
                                                 "cookie": "SESSDATA=\(sessdata)",
                                                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                             ]
-                                            AF.request("https://api.bilibili.com/x/v2/reply/hate", method: .post, parameters: BiliCommentLike(oid: avid, rpid: Int(comments[i]["Rpid"]!)!, action: comments[i]["UserAction"]! == "2" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
+                                            AF.request("https://api.bilibili.com/x/v2/reply/hate", method: .post, parameters: BiliCommentLike(type: type, oid: id, rpid: Int(comments[i]["Rpid"]!)!, action: comments[i]["UserAction"]! == "2" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
                                                 debugPrint(response)
                                                 comments[i]["UserAction"]! = comments[i]["UserAction"]! == "2" ? "0" : "2"
                                             }
@@ -219,13 +220,17 @@ struct VideoCommentsView: View {
         }
         
         func ContinueLoadComment() {
-            avid = bv2av(bvid: oid)
-            debugPrint(avid)
+            if Int(oid) == nil, type == 1 {
+                id = String(bv2av(bvid: oid))
+            } else {
+                id = oid
+            }
+            debugPrint(id)
             let headers: HTTPHeaders = [
                 "cookie": "SESSDATA=\(sessdata);",
                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             ]
-            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v2/reply?type=1&oid=\(avid)&sort=1&ps=20&pn=\(nowPage)", headers: headers) { respJson, isSuccess in
+            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v2/reply?type=\(type)&oid=\(id)&sort=1&ps=20&pn=\(nowPage)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
                     debugPrint(respJson)
                     if !CheckBApiError(from: respJson) { return }
@@ -282,7 +287,8 @@ struct VideoCommentsView: View {
         }
         
         struct CommentRepliesView: View {
-            var avid: UInt64
+            var avid: String
+            var type: Int
             @State var replies: [[String: String]]
             var goto: String? = nil
             @AppStorage("DedeUserID") var dedeUserID = ""
@@ -357,7 +363,7 @@ struct VideoCommentsView: View {
                                                         "cookie": "SESSDATA=\(sessdata)",
                                                         "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                                     ]
-                                                    AF.request("https://api.bilibili.com/x/v2/reply/action", method: .post, parameters: BiliCommentLike(oid: avid, rpid: Int(replies[i]["Rpid"]!)!, action: replies[i]["UserAction"]! == "1" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
+                                                    AF.request("https://api.bilibili.com/x/v2/reply/action", method: .post, parameters: BiliCommentLike(type: type, oid: avid, rpid: Int(replies[i]["Rpid"]!)!, action: replies[i]["UserAction"]! == "1" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
                                                         debugPrint(response)
                                                         replies[i]["UserAction"]! = replies[i]["UserAction"]! == "1" ? "0" : "1"
                                                     }
@@ -372,7 +378,7 @@ struct VideoCommentsView: View {
                                                         "cookie": "SESSDATA=\(sessdata)",
                                                         "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                                     ]
-                                                    AF.request("https://api.bilibili.com/x/v2/reply/hate", method: .post, parameters: BiliCommentLike(oid: avid, rpid: Int(replies[i]["Rpid"]!)!, action: replies[i]["UserAction"]! == "2" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
+                                                    AF.request("https://api.bilibili.com/x/v2/reply/hate", method: .post, parameters: BiliCommentLike(type: type, oid: avid, rpid: Int(replies[i]["Rpid"]!)!, action: replies[i]["UserAction"]! == "2" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
                                                         debugPrint(response)
                                                         replies[i]["UserAction"]! = replies[i]["UserAction"]! == "2" ? "0" : "2"
                                                     }
@@ -407,6 +413,7 @@ struct VideoCommentsView: View {
     }
     struct CommentSendView: View {
         var oid: String
+        var type: Int
         @Environment(\.dismiss) var dismiss
         @AppStorage("DedeUserID") var dedeUserID = ""
         @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
@@ -414,7 +421,7 @@ struct VideoCommentsView: View {
         @AppStorage("bili_jct") var biliJct = ""
         @State var sendCommentCache = ""
         @State var isSendingComment = false
-        @State var avid: UInt64 = 0
+        @State var id = ""
         var body: some View {
             VStack {
                 if !isSendingComment {
@@ -425,7 +432,7 @@ struct VideoCommentsView: View {
                                     "cookie": "SESSDATA=\(sessdata)",
                                     "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                 ]
-                                AF.request("https://api.bilibili.com/x/v2/reply/add", method: .post, parameters: BiliSubmitComment(oid: avid, message: sendCommentCache, csrf: biliJct), headers: headers).response { response in
+                                AF.request("https://api.bilibili.com/x/v2/reply/add", method: .post, parameters: BiliSubmitComment(type: type, oid: id, message: sendCommentCache, csrf: biliJct), headers: headers).response { response in
                                     sendCommentCache = ""
                                     debugPrint(response)
                                     isSendingComment = false
@@ -439,32 +446,36 @@ struct VideoCommentsView: View {
                 }
             }
             .onAppear {
-                avid = bv2av(bvid: oid)
-                debugPrint(avid)
+                if Int(oid) == nil, type == 1 {
+                    id = String(bv2av(bvid: oid))
+                } else {
+                    id = oid
+                }
+                debugPrint(id)
             }
         }
     }
 }
 
 struct BiliCommentLike: Codable {
-    var type: Int = 1
-    let oid: UInt64
+    var type: Int
+    let oid: String
     let rpid: Int
     let action: Int
     let csrf: String
 }
 
 struct BiliSubmitComment: Codable {
-    var type: Int = 1
-    let oid: UInt64
+    var type: Int
+    let oid: String
     var root: Int? = nil
     var parent: Int? = nil
     let message: String
     let csrf: String
 }
 
-struct VideoCommentsView_Previews: PreviewProvider {
+struct CommentsView_Previews: PreviewProvider {
     static var previews: some View {
-        VideoCommentsView(oid: "1tV4y1379v")
+        CommentsView(oid: "1tV4y1379v")
     }
 }
