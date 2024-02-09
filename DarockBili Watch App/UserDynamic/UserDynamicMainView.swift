@@ -126,7 +126,7 @@ struct UserDynamicMainView: View {
                                     }
                                 } else if dynamics[i]["Type"]! as! BiliDynamicType == .live {
                                     if let liveInfo = dynamics[i]["Live"] as? [String: String] {
-                                        NavigationLink(destination: {LivePlayerView(id: liveInfo["ID"]!)}, label: {
+                                        NavigationLink(destination: {LiveDetailView(liveDetails: liveInfo)}, label: {
                                             VStack {
                                                 HStack {
                                                     WebImage(url: URL(string: liveInfo["Cover"]! + "@50w")!, options: [.progressiveLoad, .scaleDownLargeImages])
@@ -219,7 +219,7 @@ struct UserDynamicMainView: View {
                                                         }
                                                     } else if orig["Type"]! as! BiliDynamicType == .live {
                                                         if let liveInfo = orig["Live"] as? [String: String] {
-                                                            NavigationLink(destination: {LivePlayerView(id: liveInfo["ID"]!)}, label: {
+                                                            NavigationLink(destination: {LiveDetailView(liveDetails: liveInfo)}, label: {
                                                                 VStack {
                                                                     HStack {
                                                                         WebImage(url: URL(string: liveInfo["Cover"]! + "@50w")!, options: [.progressiveLoad, .scaleDownLargeImages])
@@ -261,7 +261,7 @@ struct UserDynamicMainView: View {
                             ContinueLoadDynamic()
                         }, label: {
                             if !isLoadingNew {
-                                Text("继续加载")
+                                Text("Home.more")
                                     .font(.system(size: 18, weight: .bold))
                             } else {
                                 ProgressView()
@@ -272,7 +272,7 @@ struct UserDynamicMainView: View {
                     }
                 }
             }
-            .navigationTitle("动态")
+            .navigationTitle("Moments")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 if #available(watchOS 10, *) {
@@ -300,8 +300,8 @@ struct UserDynamicMainView: View {
                 }
             }
         } else {
-            Text("需要登录")
-                .navigationTitle("动态")
+            Text("Moments.requires-login")
+                .navigationTitle("Moments")
         }
     }
     

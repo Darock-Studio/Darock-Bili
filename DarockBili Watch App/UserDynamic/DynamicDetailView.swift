@@ -93,7 +93,7 @@ struct DynamicDetailView: View {
                         }
                     } else if dynamicDetails["Type"]! as! BiliDynamicType == .live {
                         if let liveInfo = dynamicDetails["Live"] as? [String: String] {
-                            NavigationLink(destination: {LivePlayerView(id: liveInfo["ID"]!)}, label: {
+                            NavigationLink(destination: {LiveDetailView(liveDetails: liveInfo)}, label: {
                                 VStack {
                                     HStack {
                                         WebImage(url: URL(string: liveInfo["Cover"]! + "@50w")!, options: [.progressiveLoad, .scaleDownLargeImages])
@@ -184,7 +184,7 @@ struct DynamicDetailView: View {
                                             }
                                         } else if orig["Type"]! as! BiliDynamicType == .live {
                                             if let liveInfo = orig["Live"] as? [String: String] {
-                                                NavigationLink(destination: {LivePlayerView(id: liveInfo["ID"]!)}, label: {
+                                                NavigationLink(destination: {LiveDetailView(liveDetails: liveInfo)}, label: {
                                                     VStack {
                                                         HStack {
                                                             WebImage(url: URL(string: liveInfo["Cover"]! + "@50w")!, options: [.progressiveLoad, .scaleDownLargeImages])

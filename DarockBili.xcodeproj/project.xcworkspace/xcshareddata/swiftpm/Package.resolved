@@ -15,7 +15,7 @@
       "location" : "https://github.com/WindowsMEMZ/bplayer",
       "state" : {
         "branch" : "main",
-        "revision" : "0cf4298b592ceed811b7df04a79019c315481376"
+        "revision" : "8da48b0e7004f99adb43ddbb9ae650ae85551f8c"
       }
     },
     {
@@ -124,6 +124,15 @@
       "state" : {
         "revision" : "1b127194b976a58ea460a2cbe10f00fa994b1ece",
         "version" : "2.3.0"
+      }
+    },
+    {
+      "identity" : "starscream",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/daltoniam/Starscream",
+      "state" : {
+        "revision" : "ac6c0fc9da221873e01bd1a0d4818498a71eef33",
+        "version" : "4.0.6"
       }
     },
     {

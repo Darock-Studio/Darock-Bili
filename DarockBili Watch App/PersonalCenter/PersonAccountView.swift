@@ -26,6 +26,7 @@ import CachedAsyncImage
 import SDWebImageSwiftUI
 
 struct PersonAccountView: View {
+    var isSettingsButtonTrailing = false
     @AppStorage("UsingSkin") var usingSkin = ""
     @AppStorage("IsSkinNoBlur") var isSkinNoBlur = false
     var body: some View {
@@ -33,12 +34,22 @@ struct PersonAccountView: View {
             if #available(watchOS 10, *) {
                 MainView()
                     .toolbar {
-                        ToolbarItem(placement: .topBarLeading) {
-                            NavigationLink(destination: {SettingsView()}, label: {
-                                Image(systemName: "gear")
-                                    .foregroundColor(.accentColor)
-                            })
-                            .accessibility(identifier: "AppSettingsButton")
+                        if isSettingsButtonTrailing {
+                            ToolbarItem(placement: .topBarTrailing) {
+                                NavigationLink(destination: {SettingsView()}, label: {
+                                    Image(systemName: "gear")
+                                        .foregroundColor(.accentColor)
+                                })
+                                .accessibility(identifier: "AppSettingsButton")
+                            }
+                        } else {
+                            ToolbarItem(placement: .topBarLeading) {
+                                NavigationLink(destination: {SettingsView()}, label: {
+                                    Image(systemName: "gear")
+                                        .foregroundColor(.accentColor)
+                                })
+                                .accessibility(identifier: "AppSettingsButton")
+                            }
                         }
 //                        ToolbarItem(placement: .topBarTrailing) {
 //                            NavigationLink(destination: {SkinExplorerView()}, label: {
@@ -87,11 +98,16 @@ struct PersonAccountView: View {
     
     struct MainView: View {
         var isShowSettingsButton: Bool = false
+        @Namespace public var imageAnimation
         @AppStorage("DedeUserID") var dedeUserID = ""
         @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
         @AppStorage("SESSDATA") var sessdata = ""
         @AppStorage("bili_jct") var biliJct = ""
         @AppStorage("IsShowNetworkFixing") var isShowNetworkFixing = true
+        @State var userList1: [Any] = []
+        @State var userList2: [Any] = []
+        @State var userList3: [Any] = []
+        @State var userList4: [Any] = []
         @State var isLoginPresented = false
         @State var username = ""
         @State var userSign = ""
@@ -99,6 +115,8 @@ struct PersonAccountView: View {
         @State var isLogoutAlertPresented = false
         @State var isUserDetailSelfPresented = false
         @State var isNetworkFixPresented = false
+        @State var isUserSwitchPresented = false
+        @State var isNewUserPresenting = false
         var body: some View {
             List {
                 //VStack {
@@ -106,9 +124,94 @@ struct PersonAccountView: View {
                         Button(action: {
                             isLoginPresented = true
                         }, label: {
-                            Text("点击登录")
+                            Label("User.tap-to-login", systemImage: "qrcode.viewfinder")
                         })
                         .sheet(isPresented: $isLoginPresented, content: {LoginView()})
+                        Button(action: {isUserSwitchPresented = true}, label: {
+                            HStack {
+                                HStack {
+                                    Image(systemName: "person.2.badge.key.fill")
+                                        .foregroundColor(.accentColor)
+                                    Text("User.switch")
+                                }
+                                .font(.system(size: 16))
+                                Spacer()
+                            }
+                        })
+                        .sheet(isPresented: $isUserSwitchPresented, content: {
+                            List {
+                                if #available(watchOS 10.0, *) {} else {
+                                    Button(action: {
+                                        isNewUserPresenting = true
+                                    }, label: {
+                                        Label("User.switch.add", systemImage: "plus")
+                                    })
+                                }
+                                
+                                if userList1.isEmpty {
+                                    Text("User.switch.none")
+                                        .bold()
+                                        .foregroundStyle(.secondary)
+                                } else {
+                                    Section(content: {
+                                        ForEach(0..<userList1.count, id: \.self) { user in
+                                            Button(action: {
+                                                dedeUserID = userList1[user] as! String
+                                                dedeUserID__ckMd5 = userList2[user] as! String
+                                                sessdata = userList3[user] as! String
+                                                biliJct = userList4[user] as! String
+                                            }, label: {
+                                                Text(userList1[user] as! String)
+                                            })
+                                        }
+                                        .onDelete(perform: { user in
+                                            userList1.remove(atOffsets: user)
+                                            userList2.remove(atOffsets: user)
+                                            userList3.remove(atOffsets: user)
+                                            userList4.remove(atOffsets: user)
+                                            UserDefaults.standard.set(userList1, forKey: "userList1")
+                                            UserDefaults.standard.set(userList2, forKey: "userList2")
+                                            UserDefaults.standard.set(userList3, forKey: "userList3")
+                                            UserDefaults.standard.set(userList4, forKey: "userList4")
+                                        })
+                                        .onMove(perform: { users, user  in
+                                            userList1.move(fromOffsets: users, toOffset: user)
+                                            userList2.move(fromOffsets: users, toOffset: user)
+                                            userList3.move(fromOffsets: users, toOffset: user)
+                                            userList4.move(fromOffsets: users, toOffset: user)
+                                            UserDefaults.standard.set(userList1, forKey: "userList1")
+                                            UserDefaults.standard.set(userList2, forKey: "userList2")
+                                            UserDefaults.standard.set(userList3, forKey: "userList3")
+                                            UserDefaults.standard.set(userList4, forKey: "userList4")
+                                        })
+                                    }, footer: {
+                                        Text("User.switch.description")
+                                        Text("User.switch.description.1")
+                                    })
+                                }
+                            }
+                            .toolbar {
+                                if #available(watchOS 10.0, *) {
+                                    ToolbarItem(placement: .bottomBar) {
+                                        HStack {
+                                            Spacer()
+                                            Button(action: {
+                                                isNewUserPresenting = true
+                                            }, label: {
+                                                Image(systemName: "plus")
+                                            })
+                                        }
+                                    }
+                                }
+                            }
+                        })
+                        .onAppear {
+                            userList1 = UserDefaults.standard.array(forKey: "userList1") ?? []
+                            userList2 = UserDefaults.standard.array(forKey: "userList2") ?? []
+                            userList3 = UserDefaults.standard.array(forKey: "userList3") ?? []
+                            userList4 = UserDefaults.standard.array(forKey: "userList4") ?? []
+                        }
+                        .sheet(isPresented: $isNewUserPresenting, content: {LoginView()})
                     } else {
                         VStack {
                             NavigationLink("", isActive: $isUserDetailSelfPresented, destination: {UserDetailView(uid: dedeUserID)})
@@ -116,8 +219,9 @@ struct PersonAccountView: View {
                             HStack {
                                 if userFaceUrl != "" {
                                     CachedAsyncImage(url: URL(string: userFaceUrl + "@30w"))
-                                        .frame(width: 28, height: 28)
+                                        .frame(width: 30)
                                         .clipShape(Circle())
+                                        .matchedGeometryEffect(id: "image", in: imageAnimation)
                                 } else {
                                     Image("Placeholder")
                                         .resizable()
@@ -130,7 +234,7 @@ struct PersonAccountView: View {
                                         Text(username)
                                             .font(.system(size: 15))
                                     } else {
-                                        Text("Jst Placeholder")
+                                        Text("")
                                             .font(.system(size: 15))
                                             .redacted(reason: .placeholder)
                                     }
@@ -140,6 +244,85 @@ struct PersonAccountView: View {
                                 isUserDetailSelfPresented = true
                             }
                         }
+                        Button(action: {isUserSwitchPresented = true}, label: {
+                            HStack {
+                                HStack {
+                                    Image(systemName: "person.2.badge.key.fill")
+                                        .foregroundColor(.accentColor)
+                                    Text("User.switch")
+                                }
+                                .font(.system(size: 16))
+                                Spacer()
+                            }
+                        })
+                        .sheet(isPresented: $isNewUserPresenting, content: {LoginView()})
+                        .sheet(isPresented: $isUserSwitchPresented, content: {
+                            List {
+                                if #available(watchOS 10.0, *) {} else {
+                                    Button(action: {
+                                        isNewUserPresenting = true
+                                    }, label: {
+                                        Label("User.switch.add", systemImage: "plus")
+                                    })
+                                }
+                                
+                                Section(content: {
+                                    ForEach(0..<userList1.count, id: \.self) {user in
+                                        Button(action: {
+                                            dedeUserID = userList1[user] as! String
+                                            dedeUserID__ckMd5 = userList2[user] as! String
+                                            sessdata = userList3[user] as! String
+                                            biliJct = userList4[user] as! String
+                                        }, label: {
+                                            Text(userList1[user] as! String)
+                                        })
+                                    }
+                                    .onDelete(perform: { user in
+                                        userList1.remove(atOffsets: user)
+                                        userList2.remove(atOffsets: user)
+                                        userList3.remove(atOffsets: user)
+                                        userList4.remove(atOffsets: user)
+                                        UserDefaults.standard.set(userList1, forKey: "userList1")
+                                        UserDefaults.standard.set(userList2, forKey: "userList2")
+                                        UserDefaults.standard.set(userList3, forKey: "userList3")
+                                        UserDefaults.standard.set(userList4, forKey: "userList4")
+                                    })
+                                    .onMove(perform: { users, user  in
+                                        userList1.move(fromOffsets: users, toOffset: user)
+                                        userList2.move(fromOffsets: users, toOffset: user)
+                                        userList3.move(fromOffsets: users, toOffset: user)
+                                        userList4.move(fromOffsets: users, toOffset: user)
+                                        UserDefaults.standard.set(userList1, forKey: "userList1")
+                                        UserDefaults.standard.set(userList2, forKey: "userList2")
+                                        UserDefaults.standard.set(userList3, forKey: "userList3")
+                                        UserDefaults.standard.set(userList4, forKey: "userList4")
+                                    })
+                                }, footer: {
+                                    Text("User.switch.description")
+                                    Text("User.switch.description.1")
+                                })
+                            }
+                            .toolbar {
+                                if #available(watchOS 10.0, *) {
+                                    ToolbarItem(placement: .bottomBar) {
+                                        HStack {
+                                            Spacer()
+                                            Button(action: {
+                                                isNewUserPresenting = true
+                                            }, label: {
+                                                Image(systemName: "plus")
+                                            })
+                                        }
+                                    }
+                                }
+                            }
+                        })
+                        .onAppear {
+                            userList1 = UserDefaults.standard.array(forKey: "userList1") ?? []
+                            userList2 = UserDefaults.standard.array(forKey: "userList2") ?? []
+                            userList3 = UserDefaults.standard.array(forKey: "userList3") ?? []
+                            userList4 = UserDefaults.standard.array(forKey: "userList4") ?? []
+                        }
                             Group {
                                 Section {
                                     NavigationLink(destination: {FollowListView(viewUserId: dedeUserID)}, label: {
@@ -148,7 +331,7 @@ struct PersonAccountView: View {
                                                 Image(systemName: "person.2.fill")
                                                     .foregroundColor(.accentColor)
                                                     .offset(x: -3)
-                                                Text("我的好友")
+                                                Text("User.subcribed-accounts")
                                                     .offset(x: -6)
                                             }
                                             .font(.system(size: 16))
@@ -161,7 +344,7 @@ struct PersonAccountView: View {
                                             HStack {
                                                 Image(systemName: "square.and.arrow.down.fill")
                                                     .foregroundColor(.accentColor)
-                                                Text("离线缓存")
+                                                Text("User.offline-cache")
                                             }
                                             .font(.system(size: 16))
                                             Spacer()
@@ -173,7 +356,7 @@ struct PersonAccountView: View {
                                             HStack {
                                                 Image(systemName: "star.fill")
                                                     .foregroundColor(.accentColor)
-                                                Text("我的收藏")
+                                                Text("User.favorites")
                                             }
                                             .font(.system(size: 16))
                                             Spacer()
@@ -185,7 +368,7 @@ struct PersonAccountView: View {
                                             HStack {
                                                 Image(systemName: "clock.arrow.circlepath")
                                                     .foregroundColor(.accentColor)
-                                                Text("历史记录")
+                                                Text("User.histories")
                                             }
                                             .font(.system(size: 16))
                                             Spacer()
@@ -197,7 +380,7 @@ struct PersonAccountView: View {
                                             HStack {
                                                 Image(systemName: "memories")
                                                     .foregroundColor(.accentColor)
-                                                Text("稍后再看")
+                                                Text("User.watch-later")
                                             }
                                             .font(.system(size: 16))
                                             Spacer()
@@ -212,7 +395,7 @@ struct PersonAccountView: View {
                                                 HStack {
                                                     Image(systemName: "gear")
                                                         .foregroundColor(.accentColor)
-                                                    Text("设置")
+                                                    Text("Settings")
                                                 }
                                                 .font(.system(size: 16))
                                                 Spacer()
@@ -221,37 +404,40 @@ struct PersonAccountView: View {
                                     }
                                 }
                             }
-                            .navigationTitle("我的")
+                            .navigationTitle("About-me")
                             .navigationBarTitleDisplayMode(.large)
                         .onAppear {
-                            if username == "" {
-                                getBuvid(url: "https://api.bilibili.com/x/space/wbi/acc/info".urlEncoded()) { buvid3, buvid4, _uuid, resp in
-                                let headers: HTTPHeaders = [
-                                    "cookie": "SESSDATA=\(sessdata); innersign=0; buvid3=\(buvid3); b_nut=1704873471; i-wanna-go-back=-1; b_ut=7; b_lsid=9910433CB_18CF260AB89; _uuid=\(_uuid); enable_web_push=DISABLE; header_theme_version=undefined; home_feed_column=4; browser_resolution=3440-1440; buvid4=\(buvid4);",
-                                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                                ]
-                                    biliWbiSign(paramEncoded: "mid=\(dedeUserID)".base64Encoded()) { signed in
-                                        if let signed {
-                                            debugPrint(signed)
-                                            autoRetryRequestApi("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
-                                                if isSuccess {
-                                                    debugPrint(respJson)
-                                                    if !CheckBApiError(from: respJson) { return }
-                                                    username = respJson["data"]["name"].string ?? ""
-                                                    userSign = respJson["data"]["sign"].string ?? ""
-                                                    userFaceUrl = respJson["data"]["face"].string ?? "E"
-                                                } else if isShowNetworkFixing {
-                                                    isNetworkFixPresented = true
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                            getAccountInfos()
                         }
                         .sheet(isPresented: $isNetworkFixPresented, content: {NetworkFixView()})
                     }
                 //}
+            }
+        }
+        func getAccountInfos() {
+            if username == "" {
+                getBuvid(url: "https://api.bilibili.com/x/space/wbi/acc/info".urlEncoded()) { buvid3, buvid4, _uuid, resp in
+                let headers: HTTPHeaders = [
+                    "cookie": "SESSDATA=\(sessdata); innersign=0; buvid3=\(buvid3); b_nut=1704873471; i-wanna-go-back=-1; b_ut=7; b_lsid=9910433CB_18CF260AB89; _uuid=\(_uuid); enable_web_push=DISABLE; header_theme_version=undefined; home_feed_column=4; browser_resolution=3440-1440; buvid4=\(buvid4);",
+                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                ]
+                    biliWbiSign(paramEncoded: "mid=\(dedeUserID)".base64Encoded()) { signed in
+                        if let signed {
+                            debugPrint(signed)
+                            autoRetryRequestApi("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
+                                if isSuccess {
+                                    debugPrint(respJson)
+                                    if !CheckBApiError(from: respJson) { return }
+                                    username = respJson["data"]["name"].string ?? ""
+                                    userSign = respJson["data"]["sign"].string ?? ""
+                                    userFaceUrl = respJson["data"]["face"].string ?? "E"
+                                } else if isShowNetworkFixing {
+                                    isNetworkFixPresented = true
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

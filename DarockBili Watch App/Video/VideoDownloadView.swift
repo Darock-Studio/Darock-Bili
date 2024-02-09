@@ -21,6 +21,7 @@ import Alamofire
 
 var failedDownloadTasks = [Int]()
 var downloadResumeDatas = [Int: [String: String]]()
+var videoDownloadRequests = [DownloadRequest]()
 
 struct VideoDownloadView: View {
     var bvid: String
@@ -33,29 +34,29 @@ struct VideoDownloadView: View {
     @AppStorage("bili_jct") var biliJct = ""
     @State var isLoading = true
     var body: some View {
-        List {
-            if isLoading {
-                Text("正在预加载...")
-                    .bold()
-            } else {
-                VStack {
-                    HStack {
-                        Spacer()
-                        Label("已创建下载任务!", systemImage: "checkmark.circle.fill")
-                            .bold()
-                        Spacer()
+        NavigationStack {
+            List {
+                if isLoading {
+                    Text("Download.preloading...")
+                        .bold()
+                } else {
+                    Section {
+                        HStack {
+                            Spacer()
+                            Label("Download.task-created", systemImage: "checkmark.circle.fill")
+                                .bold()
+                            Spacer()
+                        }
                     }
-                    HStack {
-                        Spacer()
-                        Text("将在3秒后关闭本页")
-                            .font(.footnote)
-                            .opacity(0.65)
-                            .onAppear {
-                                Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
-                                    dismiss()
-                                }
+                    Section {
+                        NavigationLink(destination: {DownloadingListView()}, label: {
+                            HStack {
+                                Text("视频下载列表")
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .opacity(0.65)
                             }
-                        Spacer()
+                        })
                     }
                 }
             }
@@ -92,26 +93,28 @@ struct VideoDownloadView: View {
                         isLoading = false
                         downloadingProgressDatas.append((.init(), false))
                         let currentDownloadingIndex = downloadingProgressDatas.count - 1
-                        AF.download((VideoDownloadView.downloadLink ?? (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")), headers: headers, to: destination)
-                            .downloadProgress { p in
-                                downloadingProgressDatas[currentDownloadingIndex].pts.send(.init(data: .init(progress: p.fractionCompleted, currentSize: p.completedUnitCount, totalSize: p.totalUnitCount), videoDetails: videoDetails))
-                            }
-                            .response { r in
-                                if r.error == nil, let filePath = r.fileURL?.path {
-                                    debugPrint(filePath)
-                                    debugPrint(bvid)
-                                    var detTmp = videoDetails
-                                    detTmp.updateValue(filePath, forKey: "Path")
-                                    detTmp.updateValue(String(Date.now.timeIntervalSince1970), forKey: "Time")
-                                    UserDefaults.standard.set(detTmp, forKey: bvid)
-                                    downloadingProgressDatas[currentDownloadingIndex].isFinished = true
-                                } else {
-                                    UserDefaults.standard.set(r.resumeData, forKey: "VideoDownloadResumeData\(currentDownloadingIndex)")
-                                    downloadResumeDatas.updateValue(videoDetails, forKey: currentDownloadingIndex)
-                                    failedDownloadTasks.append(currentDownloadingIndex)
-                                    debugPrint(r.error as Any)
+                        videoDownloadRequests.append(
+                            AF.download((VideoDownloadView.downloadLink ?? (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")), headers: headers, to: destination)
+                                .downloadProgress { p in
+                                    downloadingProgressDatas[currentDownloadingIndex].pts.send(.init(data: .init(progress: p.fractionCompleted, currentSize: p.completedUnitCount, totalSize: p.totalUnitCount), videoDetails: videoDetails))
                                 }
-                            }
+                                .response { r in
+                                    if r.error == nil, let filePath = r.fileURL?.path {
+                                        debugPrint(filePath)
+                                        debugPrint(bvid)
+                                        var detTmp = videoDetails
+                                        detTmp.updateValue(filePath, forKey: "Path")
+                                        detTmp.updateValue(String(Date.now.timeIntervalSince1970), forKey: "Time")
+                                        UserDefaults.standard.set(detTmp, forKey: bvid)
+                                        downloadingProgressDatas[currentDownloadingIndex].isFinished = true
+                                    } else {
+                                        UserDefaults.standard.set(r.resumeData, forKey: "VideoDownloadResumeData\(currentDownloadingIndex)")
+                                        downloadResumeDatas.updateValue(videoDetails, forKey: currentDownloadingIndex)
+                                        failedDownloadTasks.append(currentDownloadingIndex)
+                                        debugPrint(r.error as Any)
+                                    }
+                                }
+                        )
                         VideoDownloadView.downloadLink = nil
                     }
                 }

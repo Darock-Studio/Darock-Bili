@@ -86,7 +86,7 @@ struct FeedbackView: View {
                 Image(uiImage: UIImage(cgImage: qrImage!))
                     .resizable()
                     .frame(width: 140, height: 140)
-                Text("在手机上继续")
+                Text("Feedback.continue-on-other-device")
                     .bold()
             }
         }

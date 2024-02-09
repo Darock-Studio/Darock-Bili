@@ -27,17 +27,17 @@ struct SignalErrorView: View {
         ScrollView {
             VStack {
                 HStack {
-                    Text("呜啊！")
+                    Text("Error.oops")
                         .font(.system(size: 22, weight: .bold))
                     Spacer()
                 }
                 HStack {
-                    Text("喵哩喵哩在上次运行时出现了一些问题")
+                    Text("Error.ran-into-a-problem")
                         .font(.system(size: 17))
                     Spacer()
                 }
                 HStack {
-                    Text("下面是错误详情：")
+                    Text("Error.details")
                         .font(.system(size: 15))
                     Spacer()
                 }
@@ -53,10 +53,10 @@ struct SignalErrorView: View {
                 .frame(maxHeight: 100)
                 .border(Color.accentColor, width: 2)
                 .cornerRadius(5)
-                Text("将上方信息发送到 Darock 可以帮助我们改进喵哩喵哩")
+                Text("Error.send-to-Darock-advice")
                     .bold()
                     .multilineTextAlignment(.leading)
-                TextField("发生错误前...", text: $userDesc)
+                TextField("Error.before-ranning-into-problem", text: $userDesc)
                 Button(action: {
                     isSending = true
                     let headers: HTTPHeaders = [
@@ -73,7 +73,7 @@ struct SignalErrorView: View {
                     }
                 }, label: {
                     if !isSending {
-                        Text("发送")
+                        Text("Error.send")
                             .bold()
                     } else {
                         ProgressView()
@@ -83,7 +83,7 @@ struct SignalErrorView: View {
                 Button(action: {
                     UserDefaults.standard.set("", forKey: "NewSignalError")
                 }, label: {
-                    Text("不发送")
+                    Text("Error.do-not-send")
                 })
             }
         }

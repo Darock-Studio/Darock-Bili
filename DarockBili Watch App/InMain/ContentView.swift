@@ -29,8 +29,10 @@ struct ContentView: View {
             TabView {
                 MainView()
                     .tag(1)
-                PersonAccountView()
-                    .tag(2)
+                if #unavailable(watchOS 10) {
+                    PersonAccountView()
+                        .tag(2)
+                }
                 UserDynamicMainView()
                     .tag(3)
             }
@@ -83,7 +85,7 @@ struct TermsListView: View {
                     isReadTerms = true
                     dismiss()
                 }, label: {
-                    Text("我已了解")
+                    Text("Home.understand")
                 })
                 .buttonStyle(.borderedProminent)
             }

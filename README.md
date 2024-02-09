@@ -49,64 +49,121 @@
 <details><summary>项目中的逆天代码片段</summary>
 
 ```swift
-// UserDynamic/UserDynamicMainView.swift :196
-
-dynamics.append([
-    "WithText": item.1["modules"]["module_dynamic"]["desc"]["text"].string ?? "",
-    "MajorType": BiliDynamicMajorType(rawValue: item.1["modules"]["module_dynamic"]["major"]["type"].string ?? "MAJOR_TYPE_DRAW") ?? .majorTypeDraw,
-    "Draws": { () -> [[String: String]]? in
-        if BiliDynamicMajorType(rawValue: item.1["modules"]["module_dynamic"]["major"]["type"].string ?? "MAJOR_TYPE_DRAW") == .majorTypeDraw {
-            var dTmp = [[String: String]]()
-            for draw in item.1["modules"]["module_dynamic"]["major"]["draw"]["items"] {
-                isDynamicImagePresented[itemForCount].append(false)
-                dTmp.append(["Src": draw.1["src"].string ?? ""])
-            }
-            return dTmp
-        } else {
-            return nil
-        }
-    }(),
-    "Archive": { () -> [String: String]? in
-        if BiliDynamicMajorType(rawValue: item.1["modules"]["module_dynamic"]["major"]["type"].string ?? "MAJOR_TYPE_DRAW") == .majorTypeArchive {
-            let archive = item.1["modules"]["module_dynamic"]["major"]["archive"]
-            return ["Pic": archive["cover"].string ?? "", "Title": archive["title"].string ?? "", "BV": archive["bvid"].string ?? "", "UP": item.1["modules"]["module_author"]["name"].string ?? "", "View": archive["stat"]["play"].string ?? "-1", "Danmaku": archive["stat"]["danmaku"].string ?? "-1"]
-        } else {
-            return nil
-        }
-    }(),
-    "Live": { () -> [String: String]? in
-        if BiliDynamicMajorType(rawValue: item.1["modules"]["module_dynamic"]["major"]["type"].string ?? "MAJOR_TYPE_DRAW") == .majorTypeLiveRcmd {
-            do {
-                let liveContentJson = try JSON(data: (item.1["modules"]["module_dynamic"]["major"]["live_rcmd"]["content"].string ?? "").data(using: .utf8) ?? Data())
-                debugPrint(liveContentJson)
-                return ["Cover": liveContentJson["live_play_info"]["cover"].string ?? "", "Title": liveContentJson["live_play_info"]["title"].string ?? "", "ID": String(liveContentJson["live_play_info"]["room_id"].int ?? 0), "Type": liveContentJson["live_play_info"]["area_name"].string ?? "", "ViewStr": liveContentJson["live_play_info"]["watched_show"]["text_large"].string ?? "-1"]
-            } catch {
-                return nil
-            }
-        } else {
-            return nil
-        }
-    }(),
-    "SenderPic": item.1["modules"]["module_author"]["face"].string ?? "",
-    "SenderName": item.1["modules"]["module_author"]["name"].string ?? "",
-    "SenderID": String(item.1["modules"]["module_author"]["mid"].int ?? 0),
-    "SendTimeStr": item.1["modules"]["module_author"]["pub_time"].string ?? "0000/00/00",
-    "SharedCount": String(item.1["modules"]["module_stat"]["forward"]["count"].int ?? -1),
-    "LikedCount": String(item.1["modules"]["module_stat"]["like"]["count"].int ?? -1),
-    "IsLiked": item.1["modules"]["module_stat"]["like"]["status"].bool ?? false,
-    "CommentCount": String(item.1["modules"]["module_stat"]["comment"]["count"].int ?? -1),
-    "DynamicID": item.1["id_str"].string ?? ""
-])
+// UserDynamic/UserDynamicMainView.swift :322
+                    dynamics.append([
+                        "WithText": item.1["modules"]["module_dynamic"]["desc"]["text"].string ?? "",
+                        "Type": BiliDynamicType(rawValue: item.1["type"].string ?? "DYNAMIC_TYPE_WORD") ?? .text,
+                        "Draws": { () -> [[String: String]]? in
+                            if BiliDynamicType(rawValue: item.1["type"].string ?? "DYNAMIC_TYPE_WORD") == .draw {
+                                var dTmp = [[String: String]]()
+                                for draw in item.1["modules"]["module_dynamic"]["major"]["draw"]["items"] {
+                                    isDynamicImagePresented[itemForCount].append(false)
+                                    dTmp.append(["Src": draw.1["src"].string ?? ""])
+                                }
+                                return dTmp
+                            } else {
+                                return nil
+                            }
+                        }(),
+                        "Archive": { () -> [String: String]? in
+                            if BiliDynamicType(rawValue: item.1["type"].string ?? "DYNAMIC_TYPE_WORD") == .video {
+                                let archive = item.1["modules"]["module_dynamic"]["major"]["archive"]
+                                return ["Pic": archive["cover"].string ?? "", "Title": archive["title"].string ?? "", "BV": archive["bvid"].string ?? "", "UP": item.1["modules"]["module_author"]["name"].string ?? "", "View": archive["stat"]["play"].string ?? "-1", "Danmaku": archive["stat"]["danmaku"].string ?? "-1"]
+                            } else {
+                                return nil
+                            }
+                        }(),
+                        "Live": { () -> [String: String]? in
+                            if BiliDynamicType(rawValue: item.1["type"].string ?? "DYNAMIC_TYPE_WORD") == .live {
+                                do {
+                                    let liveContentJson = try JSON(data: (item.1["modules"]["module_dynamic"]["major"]["live_rcmd"]["content"].string ?? "").data(using: .utf8) ?? Data())
+                                    debugPrint(liveContentJson)
+                                    return ["Cover": liveContentJson["live_play_info"]["cover"].string ?? "", "Title": liveContentJson["live_play_info"]["title"].string ?? "", "ID": String(liveContentJson["live_play_info"]["room_id"].int ?? 0), "Type": liveContentJson["live_play_info"]["area_name"].string ?? "", "ViewStr": liveContentJson["live_play_info"]["watched_show"]["text_large"].string ?? "-1"]
+                                } catch {
+                                    return nil
+                                }
+                            } else {
+                                return nil
+                            }
+                        }(),
+                        "Forward": { () -> [String: Any?]? in
+                            if BiliDynamicType(rawValue: item.1["type"].string ?? "DYNAMIC_TYPE_WORD") == .forward {
+                                let origData = item.1["orig"]
+                                return [
+                                    "WithText": origData["modules"]["module_dynamic"]["desc"]["text"].string ?? "",
+                                    "Type": BiliDynamicType(rawValue: origData["type"].string ?? "DYNAMIC_TYPE_WORD") ?? .text,
+                                    "Draws": { () -> [[String: String]]? in
+                                        if BiliDynamicType(rawValue: origData["type"].string ?? "DYNAMIC_TYPE_WORD") == .draw {
+                                            var dTmp = [[String: String]]()
+                                            for draw in origData["modules"]["module_dynamic"]["major"]["draw"]["items"] {
+                                                isDynamicImagePresented[itemForCount].append(false)
+                                                dTmp.append(["Src": draw.1["src"].string ?? ""])
+                                            }
+                                            return dTmp
+                                        } else {
+                                            return nil
+                                        }
+                                    }(),
+                                    "Archive": { () -> [String: String]? in
+                                        if BiliDynamicType(rawValue: origData["type"].string ?? "DYNAMIC_TYPE_WORD") == .video {
+                                            let archive = origData["modules"]["module_dynamic"]["major"]["archive"]
+                                            return ["Pic": archive["cover"].string ?? "", "Title": archive["title"].string ?? "", "BV": archive["bvid"].string ?? "", "UP": origData["modules"]["module_author"]["name"].string ?? "", "View": archive["stat"]["play"].string ?? "-1", "Danmaku": archive["stat"]["danmaku"].string ?? "-1"]
+                                        } else {
+                                            return nil
+                                        }
+                                    }(),
+                                    "Live": { () -> [String: String]? in
+                                        if BiliDynamicType(rawValue: origData["type"].string ?? "DYNAMIC_TYPE_WORD") == .live {
+                                            do {
+                                                let liveContentJson = try JSON(data: (origData["modules"]["module_dynamic"]["major"]["live_rcmd"]["content"].string ?? "").data(using: .utf8) ?? Data())
+                                                debugPrint(liveContentJson)
+                                                return ["Cover": liveContentJson["live_play_info"]["cover"].string ?? "", "Title": liveContentJson["live_play_info"]["title"].string ?? "", "ID": String(liveContentJson["live_play_info"]["room_id"].int ?? 0), "Type": liveContentJson["live_play_info"]["area_name"].string ?? "", "ViewStr": liveContentJson["live_play_info"]["watched_show"]["text_large"].string ?? "-1"]
+                                            } catch {
+                                                return nil
+                                            }
+                                        } else {
+                                            return nil
+                                        }
+                                    }(),
+                                    "SenderPic": origData["modules"]["module_author"]["face"].string ?? "",
+                                    "SenderName": origData["modules"]["module_author"]["name"].string ?? "",
+                                    "SenderID": String(origData["modules"]["module_author"]["mid"].int ?? 0),
+                                    "SendTimeStr": origData["modules"]["module_author"]["pub_time"].string ?? "0000/00/00",
+                                    "SharedCount": String(origData["modules"]["module_stat"]["forward"]["count"].int ?? -1),
+                                    "LikedCount": String(origData["modules"]["module_stat"]["like"]["count"].int ?? -1),
+                                    "IsLiked": origData["modules"]["module_stat"]["like"]["status"].bool ?? false,
+                                    "CommentCount": String(origData["modules"]["module_stat"]["comment"]["count"].int ?? -1),
+                                    "DynamicID": origData["id_str"].string ?? ""
+                                ]
+                            } else {
+                                return nil
+                            }
+                        }(),
+                        "SenderPic": item.1["modules"]["module_author"]["face"].string ?? "",
+                        "SenderName": item.1["modules"]["module_author"]["name"].string ?? "",
+                        "SenderID": String(item.1["modules"]["module_author"]["mid"].int ?? 0),
+                        "SendTimeStr": item.1["modules"]["module_author"]["pub_time"].string ?? "0000/00/00",
+                        "SharedCount": String(item.1["modules"]["module_stat"]["forward"]["count"].int ?? -1),
+                        "LikedCount": String(item.1["modules"]["module_stat"]["like"]["count"].int ?? -1),
+                        "IsLiked": item.1["modules"]["module_stat"]["like"]["status"].bool ?? false,
+                        "CommentCount": String(item.1["modules"]["module_stat"]["comment"]["count"].int ?? -1),
+                        "DynamicID": item.1["id_str"].string ?? ""
+                    ])
 ```
 
 </details>
+
+### 贡献流程
+开启Pull Request->等待审查->修复问题（如果有）->等待CI完成编译性检查->合并到main（或Close Pull Request）
+
+任何人（包括管理员）不可跳过上述步骤的任一部分。
 
 ## 📝版本号
 喵哩喵哩在GitHub和TestFlight(与关于页上相同)上的版本号**不同**，因为如果在TestFlight上递增版本号，App 需要重新接受审核，而递增 Build 版本则不用。
 
 因此，我们在TestFlight上仅仅递增 Build 号，而GitHub上尽可能使用语义化版本，我们更推荐使用GitHub上的版本号来引用喵哩喵哩程序。
 
-## 用户评价
+## 💬用户评价
 ~~用过的都说好~~
 
 > [!TIP]
@@ -136,3 +193,20 @@ dynamics.append([
 > 可惜我现在幼儿园，我只会说，喵哩喵哩我好喜欢你，喵哩喵哩😭😭你带我走吧🚗……喵哩喵哩🏃…喵哩喵哩🏃…喵哩喵哩🧎没有你我怎么活啊😭
 > 
 > ————Miku
+
+> [!TIP]
+> 🐱🍐🐱🍐👍，🈶✨🧑‍🎨、❤️🌐，➕⏰🔄。🧑‍💻🤝👂👥🗣️，🙅⛓️‍💥✍️⏩。
+> 
+> 🐱🍐🐱🍐🤝🙋👋🐟，🙋💗 🐱🍐🐱🍐
+>
+> ————ThreeManager785
+
+> [!TIP]
+> 你说的对，但是喵哩喵哩是由 Darock 研发的一款开源世界B站第三方 Apple Watch 客户端。游戏发生在一个名为“学校”的真实世界，在这里，被老师选中的人会被没收手机，引导 Apple Watch 之力。你将扮演一位名为“学生”的神秘角色，在教室中浏览性格各异能力独特的视频们，和他们一起击败强敌，找回失散的MEMZ。
+
+> [!TIP]
+> 巴山楚水凄凉地，平面直角坐标系
+> 
+> responsibility，aw也能看视频
+> 
+> 高猛酸钾制氧气，喵哩喵哩真nb

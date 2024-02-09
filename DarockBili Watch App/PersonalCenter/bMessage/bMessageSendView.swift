@@ -116,14 +116,14 @@ struct bMessageSendView: View {
 //                        }
 //                    })
 //                    .frame(width: 50, height: 30)
-                    TextField("私信", text: $sendTextCache)
+                    TextField("Account.direct-message", text: $sendTextCache)
                         .opacity(0.0100000002421438702673861521) // MARK: You can find the limit here. If opacity lower than this value, this control won't be loaded.
                         .background {
                             ZStack {
                                 Capsule()
                                     .stroke(Color(red: 31/255, green: 31/255, blue: 31/255), lineWidth: 2)
                                 HStack {
-                                    Text("私信")
+                                    Text("Account.direct-message")
                                         .foregroundStyle(.secondary)
                                         .lineLimit(1)
                                     Spacer()
@@ -145,7 +145,7 @@ struct bMessageSendView: View {
                                 if json["code"].int! == 0 {
                                     //tipWithText("发送成功", symbol: "checkmark.circle.fill")
                                 } else {
-                                    tipWithText("发送失败", symbol: "xmark.circle.fill")
+                                    tipWithText(String(localized: "Direct-message.failed"), symbol: "xmark.circle.fill")
                                 }
                             }
                         }

@@ -77,7 +77,7 @@ struct CommentsView: View {
                         }, label: {
                             HStack {
                                 Image(systemName: "square.and.pencil")
-                                Text("发送评论")
+                                Text("Comment.send")
                             }
                         })
                         .sheet(isPresented: $isSendCommentPresented, content: {CommentSendView(oid: oid, type: type)})
@@ -198,7 +198,7 @@ struct CommentsView: View {
                             nowPage += 1
                             ContinueLoadComment()
                         }, label: {
-                            Text("继续加载")
+                            Text("Home.more")
                                 .bold()
                         })
                     } else {
@@ -425,7 +425,7 @@ struct CommentsView: View {
         var body: some View {
             VStack {
                 if !isSendingComment {
-                    TextField("发送评论...", text: $sendCommentCache)
+                    TextField("Comment.send", text: $sendCommentCache)
                         .onSubmit {
                             if sendCommentCache != "" {
                                 let headers: HTTPHeaders = [

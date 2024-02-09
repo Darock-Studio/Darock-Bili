@@ -39,6 +39,7 @@ import SDWebImageSwiftUI
                 Text(videoDetails["Title"]!)
                     .font(.system(size: 14, weight: .bold))
                     .lineLimit(2)
+                    .multilineTextAlignment(.leading)
                 Spacer()
             }
             HStack {
@@ -81,7 +82,7 @@ import SDWebImageSwiftUI
             HStack {
                 if let score = bangumiData.score {
                     Image(systemName: "star.fill")
-                    Text("\(score.score ~ 1)分")
+                    Text(score.score ~ 1)
                         .offset(x: -3)
                 }
                 if let style = bangumiData.style {
@@ -90,6 +91,41 @@ import SDWebImageSwiftUI
                         .lineLimit(1)
                         .offset(x: -3)
                 }
+                Spacer()
+            }
+            .lineLimit(1)
+            .font(.system(size: 11))
+            .foregroundColor(.gray)
+        }
+    })
+    .buttonBorderShape(.roundedRectangle(radius: 14))
+}
+
+@ViewBuilder func LiveCard(_ liveDetails: [String: String]) -> some View {
+    NavigationLink(destination: {LiveDetailView(liveDetails: liveDetails)}, label: {
+        VStack {
+            HStack {
+                WebImage(url: URL(string: liveDetails["Cover"]! + "@100w")!, options: [.progressiveLoad, .scaleDownLargeImages])
+                    .placeholder {
+                        RoundedRectangle(cornerRadius: 7)
+                            .frame(width: 50, height: 30)
+                            .foregroundColor(Color(hex: 0x3D3D3D))
+                            .redacted(reason: .placeholder)
+                    }
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 50)
+                    .cornerRadius(7)
+                Text(liveDetails["Title"]!)
+                    .font(.system(size: 14, weight: .bold))
+                    .lineLimit(2)
+                    .multilineTextAlignment(.leading)
+                Spacer()
+            }
+            HStack {
+                Image(systemName: "tag")
+                Text(liveDetails["Type"]!)
+                    .offset(x: -3)
                 Spacer()
             }
             .lineLimit(1)

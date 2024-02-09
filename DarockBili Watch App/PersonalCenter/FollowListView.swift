@@ -94,7 +94,7 @@ struct FollowListView: View {
                         }, label: {
                             HStack {
                                 Spacer()
-                                Text("继续加载")
+                                Text("Home.more")
                                 Spacer()
                             }
                         })
@@ -104,7 +104,7 @@ struct FollowListView: View {
                 }
             }
         }
-        .navigationTitle("关注")
+        .navigationTitle("User.subcribed-accounts")
         .navigationBarTitleDisplayMode(.large)
         .onAppear {
             pinnedUsers = UserDefaults.standard.stringArray(forKey: "PinnedFollows") ?? [String]()

@@ -390,8 +390,8 @@ struct SkinChooserView: View {
                 }
             }
         }
-        .searchable(text: $listSearchCache, placement: .automatic, prompt: "搜索...")
-        .navigationTitle("添加装扮")
+        .searchable(text: $listSearchCache, placement: .automatic, prompt: "Home.search")
+        .navigationTitle("Skin.add")
     }
 }
 

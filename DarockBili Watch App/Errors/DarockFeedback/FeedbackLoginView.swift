@@ -19,12 +19,12 @@ struct FeedbackLoginView: View {
         ScrollView {
             VStack {
                 Group {
-                    Text("登录 Darock 通行证")
+                    Text("DarockID.login.title")
                         .font(.system(size: 18, weight: .bold))
-                    TextField("账号", text: $accountCache)
+                    TextField("DarockID.account", text: $accountCache)
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
-                    SecureField("密码", text: $passwdCache)
+                    SecureField("DarockID.password", text: $passwdCache)
                     Button(action: {
                         isLoading = true
                         DarockKit.Network.shared.requestString("https://api.darock.top/user/login/\(accountCache)/\(passwdCache)") { respStr, isSuccess in
@@ -33,16 +33,16 @@ struct FeedbackLoginView: View {
                                 if respStr.apiFixed() == "Success" {
                                     darockIdAccount = accountCache
                                 } else {
-                                    tipText = "账号或密码错误"
+                                    tipText = String(localized: "DarockID.incorrect")
                                 }
                             } else {
-                                tipText = "错误：无法连接到 Darock"
+                                tipText = String(localized: "DarockID.unable-to-connect")
                             }
                             isLoading = false
                         }
                     }, label: {
                         if !isLoading {
-                            Text("登录")
+                            Text("DarockID.login")
                         } else {
                             ProgressView()
                         }
@@ -51,7 +51,7 @@ struct FeedbackLoginView: View {
                     Button(action: {
                         isRegisterPresented = true
                     }, label: {
-                        Text("注册")
+                        Text("DarockID.register")
                     })
                     .sheet(isPresented: $isRegisterPresented, content: {RegisterView()})
                     Text(tipText)
@@ -60,7 +60,7 @@ struct FeedbackLoginView: View {
                     Spacer()
                         .frame(height: 20)
                     NavigationLink(destination: {FeedbackView()}, label: {
-                        Text("不想登录？直接反馈 ->")
+                        Text("DarockID.feedback-without-logging-in")
                     })
                 }
             }
@@ -77,9 +77,9 @@ struct FeedbackLoginView: View {
         var body: some View {
             ScrollView {
                 VStack {
-                    Text("注册 Darock 通行证")
+                    Text("DarockID.register.title")
                         .font(.system(size: 18, weight: .bold))
-                    TextField("邮箱", text: $mailCache)
+                    TextField("DarockID.email", text: $mailCache)
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
                         .onSubmit {
@@ -92,32 +92,32 @@ struct FeedbackLoginView: View {
                             }
                         }
                     }, label: {
-                        Text("发送验证码")
+                        Text("DarockID.verification-code.send")
                     })
-                    .disabled(mailCache == "")
-                    TextField("验证码", text: $mailCodeCache)
+                    .disabled(mailCache.isEmpty)
+                    TextField("DarockID.verification-code", text: $mailCodeCache)
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
-                    SecureField("密码", text: $passwdCache)
-                    SecureField("确认密码", text: $passwdCache)
+                    SecureField("DarockID.password", text: $passwdCache)
+                    SecureField("DarockID.password.confirm", text: $passwdCache)
                     Button(action: {
                         if mailCodeCache == serverMailCode {
                             if passwdCache == passwd2Cache {
                                 DarockKit.Network.shared.requestString("https://api.darock.top/user/reg/\(mailCache)/\(passwdCache)") { respStr, isSuccess in
                                     if isSuccess {
                                         if respStr.apiFixed() == "Success" {
-                                            tipText = "注册成功！"
+                                            tipText = String(localized: "DarockID.register.success")
                                         }
                                     }
                                 }
                             } else {
-                                tipText = "两次密码不匹配"
+                                tipText = String(localized: "DarockID.password.unmatch")
                             }
                         } else {
-                            tipText = "验证码错误"
+                            tipText = String(localized: "DarockID.code.unmatch")
                         }
                     }, label: {
-                        Text("注册")
+                        Text("DarockID.register")
                     })
                     Text(tipText)
                 }

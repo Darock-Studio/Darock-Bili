@@ -32,7 +32,7 @@ struct DownloadsView: View {
         List {
             if #unavailable(watchOS 10) {
                 NavigationLink(destination: {DownloadingListView()}, label: {
-                    Label("下载任务列表", systemImage: "list.bullet.below.rectangle")
+                    Label("Download.list", systemImage: "list.bullet.below.rectangle")
                 })
             }
             if metadatas.count != 0 {
@@ -148,7 +148,7 @@ struct DownloadingListView: View {
                             VStack {
                                 HStack {
                                     Spacer()
-                                    Text("正在下载 #\(i + 1)")
+                                    Text("Download.num.\(i + 1)")
                                         .bold()
                                     Spacer()
                                 }
@@ -174,6 +174,13 @@ struct DownloadingListView: View {
                                     Spacer()
                                 }
                             }
+                            .swipeActions {
+                                Button(role: .destructive, action: {
+                                    videoDownloadRequests[i].cancel()
+                                }, label: {
+                                    Image(systemName: "xmark.circle.fill")
+                                })
+                            }
                             .onReceive(downloadingProgressDatas[i].pts) { data in
                                 downloadProgresses[i] = data.data.progress
                                 downloadedSizes[i] = data.data.currentSize
@@ -186,7 +193,7 @@ struct DownloadingListView: View {
                                     Spacer()
                                     Image(systemName: "checkmark.circle.fill")
                                         .foregroundColor(.green)
-                                    Text("下载 #\(i + 1) 已完成")
+                                    Text("Download.finished.\(i + 1)")
                                     Spacer()
                                 }
                                 // TODO: VideoCard refer to DownloadsView item
@@ -219,12 +226,12 @@ struct DownloadingListView: View {
                             VStack {
                                 HStack {
                                     Spacer()
-                                    Text("任务 #\(i + 1) 中断")
+                                    Text("Download.paused.\(i + 1)")
                                     Spacer()
                                 }
                                 HStack {
                                     Spacer()
-                                    Text("轻触以尝试继续下载")
+                                    Text("Download.tap-2-retry")
                                         .font(.footnote)
                                         .opacity(0.65)
                                     Spacer()
@@ -234,10 +241,10 @@ struct DownloadingListView: View {
                     }
                 }
             } else {
-                Text("当前无下载任务")
+                Text("Download.nothing")
             }
         }
-        .navigationTitle("下载任务列表")
+        .navigationTitle("Download.list")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             downloadProgresses = Array(repeating: 0.0, count: downloadingProgressDatas.count)

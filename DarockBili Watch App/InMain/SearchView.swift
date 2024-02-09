@@ -31,7 +31,7 @@ struct SearchMainView: View {
         NavigationStack {
             List {
                 Section {
-                    TextField("\(Image(systemName: "magnifyingglass")) 搜索...", text: $searchText)
+                    TextField("Search.\(Image(systemName: "magnifyingglass"))", text: $searchText)
                         .onSubmit {
                             isSearchPresented = true
                             if searchText != (searchHistory.first ?? "") {
@@ -48,13 +48,13 @@ struct SearchMainView: View {
                             searchText = "Darock"
                             isSearchPresented = true
                         }, label: {
-                            Text("Debug Search")
+                            Text("Search.debug")
                         })
                         .accessibilityIdentifier("SearchDebugButton")
                     }
                 }
                 if searchHistory.count != 0 {
-                    Section(header: Text("历史记录")) {
+                    Section(header: Text("Search.history")) {
                         ForEach(0...searchHistory.count - 1, id: \.self) { i in
                             NavigationLink(destination: {SearchView(keyword: searchHistory[i])}, label: {
                                 Text(searchHistory[i])
@@ -97,14 +97,13 @@ struct SearchView: View {
     var body: some View {
         ScrollView {
             VStack {
-                // FIXME: Wtf Apple doing? It shows a really fking bad view when the selecter presents.
-                Picker("搜索类型", selection: $searchType) {
-                    Text("视频").tag(SearchType.video)
-                    Text("用户").tag(SearchType.user)
-                    Text("专栏").tag(SearchType.article)
-                    Text("番剧").tag(SearchType.bangumi)
-                    // TODO: Enable it after prepared
-                    //Text("直播").tag(SearchType.liveRoom)
+                // FIXME: Wtf is Apple doing? It shows a really fking bad view when the selecter presents.
+                Picker("Search.type", selection: $searchType) {
+                    Text("Search.type.video").tag(SearchType.video)
+                    Text("Search.type.user").tag(SearchType.user)
+                    Text("Search.type.article").tag(SearchType.article)
+                    Text("Search.type.bangumi").tag(SearchType.bangumi)
+                    Text("Search.type.live").tag(SearchType.liveRoom)
                 }
                 .pickerStyle(.navigationLink)
                 .buttonBorderShape(.roundedRectangle(radius: 16))
@@ -118,7 +117,7 @@ struct SearchView: View {
                             VideoCard(videos[i])
                         }
                     } else if isNoResult {
-                        Text("无搜索结果")
+                        Text("Search.no-result")
                     }
                 } else if searchType == .user {
                     if users.count != 0 {
@@ -135,7 +134,7 @@ struct SearchView: View {
                                                 .font(.system(size: 14, weight: .bold))
                                                 .lineLimit(1)
                                         }
-                                        Text("\(users[i]["VideoCount"]! as! String) 视频")
+                                        Text("Account.videos.\(Int(users[i]["VideoCount"]! as! String) ?? 0)")
                                             .font(.system(size: 12))
                                             .foregroundColor(.gray)
                                             .lineLimit(1)
@@ -158,7 +157,7 @@ struct SearchView: View {
                             }
                         }
                     } else if isNoResult {
-                        Text("无搜索结果")
+                        Text("Search.no-result")
                     }
                 } else if searchType == .article {
                     if articles.count != 0 {
@@ -203,7 +202,7 @@ struct SearchView: View {
                             .buttonBorderShape(.roundedRectangle(radius: 14))
                         }
                     } else if isNoResult {
-                        Text("无搜索结果")
+                        Text("Search.no-result")
                     }
                 } else if searchType == .bangumi {
                     if bangumis.count != 0 {
@@ -211,10 +210,18 @@ struct SearchView: View {
                             BangumiCard(bangumis[i])
                         }
                     } else if isNoResult {
-                        Text("无搜索结果")
+                        Text("Search.no-result")
+                    }
+                } else if searchType == .liveRoom {
+                    if liverooms.count != 0 {
+                        ForEach(0..<liverooms.count, id: \.self) { i in
+                            LiveCard(liverooms[i])
+                        }
+                    } else if isNoResult {
+                        Text("Search.no-result")
                     }
                 }
-                if videos.isEmpty && users.isEmpty && articles.isEmpty && bangumis.isEmpty && liverooms.isEmpty {
+                if videos.isEmpty && users.isEmpty && articles.isEmpty && bangumis.isEmpty && liverooms.isEmpty && !isNoResult {
                     ProgressView()
                 }
             }
@@ -302,7 +309,9 @@ struct SearchView: View {
                                     }
                                 }
                             case .liveRoom:
-                                break
+                                for liveRoom in result {
+                                    liverooms.append(["Cover": "https:" + (liveRoom.1["user_cover"].string ?? "E"), "Title": (liveRoom.1["title"].string ?? "[加载失败]").replacingOccurrences(of: "<em class=\"keyword\">", with: "").replacingOccurrences(of: "</em>", with: ""), "ID": String(liveRoom.1["roomid"].int ?? 0), "Type": (liveRoom.1["cate_name"].string ?? "[加载失败]").replacingOccurrences(of: "<em class=\"keyword\">", with: "").replacingOccurrences(of: "</em>", with: "")])
+                                }
                             }
                         }
                     }
