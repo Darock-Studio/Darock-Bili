@@ -106,6 +106,9 @@ struct DarockBili_Watch_AppApp: App {
     @WKApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @Environment(\.scenePhase) var scenePhase
     // Screen Time
+    @AppStorage("isSleepNotificationOn") var isSleepNotificationOn = false
+    @AppStorage("notifyHour") var notifyHour = 0
+    @AppStorage("notifyMinute") var notifyMinute = 0
     @AppStorage("IsScreenTimeEnabled") var isScreenTimeEnabled = true
     @State var screenTimeCaculateTimer: Timer? = nil
     @State var isMemoryWarningPresented = false
@@ -119,6 +122,8 @@ struct DarockBili_Watch_AppApp: App {
     @State var systemResourceRefreshTimer: Timer?
     @State var memoryUsage: Float = 0.0
     @State var isShowMemoryUsage = false
+    @State var currentHour = 0
+    @State var currentMinute = 0
     var body: some Scene {
         WindowGroup {
             if UserDefaults.standard.string(forKey: "NewSignalError") ?? "" != "" {
@@ -199,6 +204,21 @@ struct DarockBili_Watch_AppApp: App {
                                 }
                                 timer.invalidate()
                             }
+                        }
+                        let timer = Timer(timeInterval: 1, repeats: true) { timer in
+                            currentHour = getCurrentTime().hour
+                            currentMinute = getCurrentTime().minute
+                        }
+                        let sleepTimeCheck = Timer(timeInterval: 60, repeats: true) { timer in
+                            if currentHour == notifyHour && currentMinute == notifyMinute {
+                                tipWithText(String(localized: "Sleep.notification"), symbol: "bed.double.fill")
+                            }
+                        }
+                        RunLoop.current.add(timer, forMode: .default)
+                        timer.fire()
+                        if isSleepNotificationOn {
+                            RunLoop.current.add(sleepTimeCheck, forMode: .default)
+                            sleepTimeCheck.fire()
                         }
                     }
                     .overlay {

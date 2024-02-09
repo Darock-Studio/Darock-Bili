@@ -51,7 +51,7 @@ struct VideoDownloadView: View {
                     Section {
                         NavigationLink(destination: {DownloadingListView()}, label: {
                             HStack {
-                                Text("视频下载列表")
+                                Text("Download.title")
                                 Spacer()
                                 Image(systemName: "chevron.right")
                                     .opacity(0.65)

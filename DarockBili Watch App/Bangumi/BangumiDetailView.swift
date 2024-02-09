@@ -188,7 +188,7 @@ struct BangumiDetailView: View {
             .tag(2)
             .navigationTitle("Bangumi.commnets")
         }
-        .navigationTitle("番剧")
+        .navigationTitle("Bangumi")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             let headers: HTTPHeaders = [
