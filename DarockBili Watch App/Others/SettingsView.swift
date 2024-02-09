@@ -378,7 +378,7 @@ struct ScreenTimeSettingsView: View {
                     Button(action: {
                         isScreenTimeEnabled = true
                     }, label: {
-                        Text("开启屏幕使用时间")
+                        Text("开启“屏幕使用时间”")
                     })
                 } footer: {
                     Text("“屏幕使用时间”会记录您每天使用喵哩喵哩的时间并作出统计")
