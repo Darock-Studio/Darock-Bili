@@ -210,16 +210,14 @@ struct DarockBili_Watch_AppApp: App {
                             currentMinute = getCurrentTime().minute
                         }
                         let sleepTimeCheck = Timer(timeInterval: 60, repeats: true) { timer in
-                            if currentHour == notifyHour && currentMinute == notifyMinute {
+                            if currentHour == notifyHour && currentMinute == notifyMinute && isSleepNotificationOn {
                                 tipWithText(String(localized: "Sleep.notification"), symbol: "bed.double.fill")
                             }
                         }
                         RunLoop.current.add(timer, forMode: .default)
                         timer.fire()
-                        if isSleepNotificationOn {
                             RunLoop.current.add(sleepTimeCheck, forMode: .default)
                             sleepTimeCheck.fire()
-                        }
                     }
                     .overlay {
                         VStack {
