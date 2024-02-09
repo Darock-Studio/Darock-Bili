@@ -116,7 +116,7 @@ struct LiveDetailView: View {
                     .bold()
             }
         }
-        .navigationTitle("直播")
+        .navigationTitle("Live")
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $isLivePlayerPresented, content: {LivePlayerView()})
         .onAppear {
@@ -294,7 +294,7 @@ struct LiveDetailView: View {
                             }
                             HStack {
                                 Image(systemName: "clock")
-                                Text("于 \(startTime) 开始")
+                                Text("Live.starting.\(startTime)")
                                 Spacer()
                             }
                             .offset(y: publishTimeTextOffset)

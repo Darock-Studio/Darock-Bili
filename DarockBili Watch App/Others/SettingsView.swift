@@ -91,6 +91,18 @@ struct SettingsView: View {
                         Text("Settings.battery")
                     }
                 })
+                NavigationLink(destination: {SleepTimeView().navigationTitle("Settings.sleep")}, label: {
+                    HStack {
+                        ZStack {
+                            Color.cyan
+                                .frame(width: 20, height: 20)
+                                .clipShape(Circle())
+                            Image(systemName: "bed.double.fill")
+                                .font(.system(size: 12))
+                        }
+                        Text("Settings.sleep")
+                    }
+                })
                 NavigationLink(destination: {FeedbackView().navigationTitle("Settings.feedback")}, label: {
                     HStack {
                         ZStack {
@@ -368,20 +380,20 @@ struct ScreenTimeSettingsView: View {
                     Button(role: .destructive, action: {
                         isScreenTimeEnabled = false
                     }, label: {
-                        Text("关闭“屏幕使用时间”")
+                        Text("Screen-time.off")
                     })
                 } footer: {
-                    Text("将不再记录您的屏幕使用时间, 已记录的数据不会被删除")
+                    Text("Screen-time.description")
                 }
             } else {
                 Section {
                     Button(action: {
                         isScreenTimeEnabled = true
                     }, label: {
-                        Text("开启屏幕使用时间")
+                        Text("Screen-time.on")
                     })
                 } footer: {
-                    Text("“屏幕使用时间”会记录您每天使用喵哩喵哩的时间并作出统计")
+                    Text("Screen-time.usage")
                 }
             }
         }
@@ -453,6 +465,81 @@ struct BatterySettingsView: View {
         }
     }
 }
+
+struct SleepTimeView: View {
+    @AppStorage("isSleepNotificationOn") var isSleepNotificationOn = false
+    @AppStorage("notifyHour") var notifyHour = 0
+    @AppStorage("notifyMinute") var notifyMinute = 0
+    @State var currentHour = 0
+    @State var currentMinute = 0
+    @State var currentSecond = 0
+    @State var isEditingTime = false
+    var body: some View {
+        List {
+            Section(content: {
+                Toggle(isOn: $isSleepNotificationOn, label: {
+                    Text("Sleep")
+                })
+                if isSleepNotificationOn {
+                    Button(action: {
+                        isEditingTime = true
+                    }, label: {
+                        Text("Sleep.edit.\(notifyHour<10 ? "0\(notifyHour)" : "\(notifyHour)").\(notifyMinute<10 ? "0\(notifyMinute)" : "\(notifyMinute)")")
+                    })
+                }
+            }, footer: {
+                Text("Sleep.discription")
+            })
+            Section {
+                Text("Sleep.current.\(currentHour<10 ? "0\(currentHour)" : "\(currentHour)").\(currentMinute<10 ? "0\(currentMinute)" : "\(currentMinute)").\(currentSecond<10 ? "0\(currentSecond)" : "\(currentSecond)")")
+            }
+        }
+        .navigationTitle("Sleep")
+        .onAppear {
+            let timer = Timer(timeInterval: 0.5, repeats: true) { timer in
+                currentHour = getCurrentTime().hour
+                currentMinute = getCurrentTime().minute
+                currentSecond = getCurrentTime().second
+            }
+            RunLoop.current.add(timer, forMode: .default)
+            timer.fire()
+        }
+        .sheet(isPresented: $isEditingTime, content: {
+            VStack {
+                Text("Sleep.edit.title")
+                    .bold()
+                HStack {
+                    Picker("Sleep.edit.hour", selection: $notifyHour) {
+                        ForEach(0..<24) { index in
+                            Text("\(index<10 ? "0\(index)" : "\(index)")").tag(index)
+                        }
+                    }
+                    Text(":")
+                    Picker("Sleep.edit.minute", selection: $notifyMinute) {
+                        ForEach(0..<60) { index in
+                            Text("\(index<10 ? "0\(index)" : "\(index)")").tag(index)
+                        }
+                    }
+                }
+            }
+        })
+    }
+}
+
+struct Time {
+    var hour: Int
+    var minute: Int
+    var second: Int
+}
+
+func getCurrentTime() -> Time {
+    let calendar = Calendar.current
+    let components = calendar.dateComponents([.hour, .minute, .second], from: Date())
+    let currentTime = Time(hour: components.hour ?? 0, minute: components.minute ?? 0, second: components.second ?? 0)
+    return currentTime
+}
+
+
 
 struct DebugMenuView: View {
     var body: some View {
