@@ -164,34 +164,34 @@ Meowbili's Version number is **different** on GitHub and TestFlight(Same on abou
 
 So, we only add build number on Testflight. However, on Github we use easy to understand version number. We recommanded to use version number on Github to identity Meowbili.
 
-## 💬User Comments (in Chinese)
+## 💬User Comments
 ~~When people used this, they all say good~~
 
 > [!TIP]
-> 当我发现我可以在Apple Watch上直接浏览哔哩哔哩的内容时，我的兴奋可想而知。这要归功于“喵哩喵哩”这款小巧而强大的应用。作为一个整日不离手的智能手表，Apple Watch对于我来说早已不止是时间显示和运动追踪，它逐渐演变成了我的日常生活中的小秘书。但现在，随着“喵哩喵哩”的出现，它的功能越发丰富，我的娱乐生活也因此而提升。
+> When I found that I could browse Bilibili directly on Apple Watch, my excitement was imaginable. This is thanks to the small and powerful application of Meowbili.As a smart watch that never leaves my hands all day long, Apple Watch is not only a time display and motion tracking for me, but also has gradually evolved into a little secretary in my daily life. But now, with the emergence of Meowbili, its functions have become richer and richer, and my entertainment life has also improved.
 > 
-> 首先要赞赏的是“喵哩喵哩”的设计。这款应用针对Apple Watch的小屏幕做了极佳的优化。它的界面干净且直观，方便用户在屏幕尺寸有限的情况下，快速地浏览和搜索内容。字体大小和按钮布局考虑到了触控的便利性，不会让人觉得拥挤或难以操作。
+> The first thing to appreciate is the design of Meowbili. This app is excellently optimized for the small screen of Apple Watch. Its interface is clean and intuitive, which is convenient for users to quickly browse and search for content with limited screen size. The font size and button layout take into account the convenience of touch and will not make people feel crowded or difficult to operate.
 > 
-> 其次，功能上的实用性也是我极大的喜爱之处。虽然Apple Watch的屏幕并不适合长时间观看视频，但“喵哩喵哩”让我能在空闲之余迅速地查看更新，了解最新动态，甚至在不便拿出手机的情况下观看一些短视频或者收听up主的声音。这样的体验让我感到十分便捷。
+> Secondly, the practicality of functions is also my favorite. Although the screen of Apple Watch is not suitable for watching videos for a long time, Meowbili allows me to quickly check the updates in my spare time, keep abreast of the latest developments, and even watch some short videos or listen to the voice of the uploader when it is inconvenient to take out the mobile phone. This kind of experience makes me feel very convenient.
 > 
-> 总的来说，“喵哩喵哩”不仅为我日常的Apple Watch使用增添了乐趣，同时也满足了我作为一个视频内容爱好者的需求。它是那些喜欢在任何时间地点都保持在线的用户的必备应用。
+> Generally speaking, Meowbili not only adds fun to my daily use of Apple Watch, but also meets my needs as a video content enthusiast. It is a must-have application for users who like to stay online at any time and anywhere.
 > 
-> ————陵长镜
+> ————Ling Changjing
 
 > [!TIP]
-> 如果我高一，
+> If I am first year in high school,
 > 
-> 我会写七言情诗，引经据典行行不提喜欢；
+> I will write seven romance poems, citing the scriptures and not mentioning what I like;
 > 
-> 如果我高二,
+> If I am second year in high school,
 > 
-> 我会写千字散文，辞藻华丽句句点名爱意；
+> I can write thousands of words of prose, and the words are gorgeous and full of love;
 > 
-> 如果我高三，
+> If I am second year in high school,
 > 
-> 我会写一纸情书，哲思神秘再融进荣格和弗洛伊;
+> I will write a love letter, and the mystery of philosophy will be integrated into Jung and Freud;
 > 
-> 可惜我现在幼儿园，我只会说，喵哩喵哩我好喜欢你，喵哩喵哩😭😭你带我走吧🚗……喵哩喵哩🏃…喵哩喵哩🏃…喵哩喵哩🧎没有你我怎么活啊😭
+> It's a pity that I'm in kindergarten now, and I can only say, Meowbili 😭😭 take me away 🚗... Meowbili 🏃... Meowbili 🧎 how can I live without you 😭
 > 
 > ————Miku
 
@@ -203,11 +203,11 @@ So, we only add build number on Testflight. However, on Github we use easy to un
 > ————ThreeManager785
 
 > [!TIP]
-> 你说的对，但是喵哩喵哩是由 Darock 研发的一款开源世界B站第三方 Apple Watch 客户端。游戏发生在一个名为“学校”的真实世界，在这里，被老师选中的人会被没收手机，引导 Apple Watch 之力。你将扮演一位名为“学生”的神秘角色，在教室中浏览性格各异能力独特的视频们，和他们一起击败强敌，找回失散的MEMZ。
+> You're right, but Meowbili is an open source world Bilivili third-party Apple Watch client developed by Darock. The game takes place in a real world called "School", where the person selected by the teacher will confiscate the mobile phone and guide the power of Apple Watch. You will play a mysterious role named "student", browse videos with different personalities and abilities in the classroom, defeat the strong enemy with them, and find the lost MEMZ.
 
 > [!TIP]
-> 巴山楚水凄凉地，平面直角坐标系
+> Bashan Chushui is desolate, and the plane is rectangular coordinate system.
 > 
-> responsibility，aw也能看视频
+> responsibility,aw can also watch videos
 > 
-> 高猛酸钾制氧气，喵哩喵哩真nb
+> High potassium fermentic acid to produce oxygen, Meowbili is so NB
