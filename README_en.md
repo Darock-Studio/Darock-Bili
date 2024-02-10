@@ -169,7 +169,7 @@ Translated by ThreeManager785
 ~~Everyone says good when they use~~
 
 > [!TIP]
-> It's obvious how excited I am when I realized that I can browse Bilibili contents directly on Apple Watch. This is all attributed to a small but powerful App ———— MeowBili. For a smart watch that wears all day, Apple Watch is more than displaying time and tracking workouts, it had turned into a little secretary in my daily lifve. But now, as MeowBili appears, it's features has gone more and more, and my entertainment life had improved.
+> It's obvious how excited I am when I realized that I can browse Bilibili contents directly on Apple Watch. This is all attributed to a small but powerful App ——— MeowBili. For a smart watch that wears all day, Apple Watch is more than displaying time and tracking workouts, it had turned into a little secretary in my daily lifve. But now, as MeowBili appears, it's features has gone more and more, and my entertainment life had improved.
 > 
 > To appreciate first is MeowBili's design. This App optimizes excellently for Apple Watch's small screen. It's interface is clear and audio-visual, help user to browse and search content's in a limited screen size. Font size and button typesets all thought about the convienence if touching, which won't make people fill crowded or unpleasant.
 > 
@@ -209,6 +209,7 @@ Translated by ThreeManager785
 
 > [!TIP]
 > [Homophonic Meme is Hard to Translate]
+> 
 > 巴山楚水凄凉地，平面直角坐标系
 > 
 > responsibility，aw也能看视频
