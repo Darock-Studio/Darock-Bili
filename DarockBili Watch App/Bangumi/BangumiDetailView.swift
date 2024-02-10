@@ -137,7 +137,7 @@ struct BangumiDetailView: View {
                         }
                     } detail: {
                         if let data = navigationSelectedEpdata, let aid = data.aid {
-                            VideoCommentsView(oid: av2bv(avid: UInt64(aid)))
+                            CommentsView(oid: av2bv(avid: UInt64(aid)))
                         } else {
                             Text("Bangumi.comments.select")
                         }
@@ -176,7 +176,7 @@ struct BangumiDetailView: View {
                                 .listRowBackground(Color.clear)
                             ForEach(0..<epDatas.count, id: \.self) { i in
                                 if let aid = epDatas[i].aid {
-                                    NavigationLink(destination: {VideoCommentsView(oid: av2bv(avid: UInt64(aid)))}, label: {
+                                    NavigationLink(destination: {CommentsView(oid: av2bv(avid: UInt64(aid)))}, label: {
                                         Text(epDatas[i].longTitle)
                                     })
                                 }
