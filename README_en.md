@@ -155,7 +155,7 @@ View contribute/develop document at [/doc/dev](/doc/dev)
 </details>
 
 ### Contribute Steps
-Open an Pull Request->Wait for review->Repair problem (if have)->Wait for compile check->merge to main（or Close Pull Request）
+Open an Pull Request -> Wait for review -> Repair problem (if have) -> Wait for compile check -> merge to main（or Close Pull Request）
 
 Everyone（including administrators）cannot skip any steps.
 
@@ -164,34 +164,36 @@ Meowbili's Version number is **different** on GitHub and TestFlight(Same on abou
 
 So, we only add build number on Testflight. However, on Github we use easy to understand version number. We recommanded to use version number on Github to identity Meowbili.
 
-## 💬User Comments (in Chinese)
-~~When people used this, they all say good~~
+## 💬User Comments
+Translated by ThreeManager785
+~~Everyone says good when they use~~
 
 > [!TIP]
-> 当我发现我可以在Apple Watch上直接浏览哔哩哔哩的内容时，我的兴奋可想而知。这要归功于“喵哩喵哩”这款小巧而强大的应用。作为一个整日不离手的智能手表，Apple Watch对于我来说早已不止是时间显示和运动追踪，它逐渐演变成了我的日常生活中的小秘书。但现在，随着“喵哩喵哩”的出现，它的功能越发丰富，我的娱乐生活也因此而提升。
+> It's obvious how excited I am when I realized that I can browse Bilibili contents directly on Apple Watch. This is all attributed to a small but powerful App ———— MeowBili. For a smart watch that wears all day, Apple Watch is more than displaying time and tracking workouts, it had turned into a little secretary in my daily lifve. But now, as MeowBili appears, it's features has gone more and more, and my entertainment life had improved.
 > 
-> 首先要赞赏的是“喵哩喵哩”的设计。这款应用针对Apple Watch的小屏幕做了极佳的优化。它的界面干净且直观，方便用户在屏幕尺寸有限的情况下，快速地浏览和搜索内容。字体大小和按钮布局考虑到了触控的便利性，不会让人觉得拥挤或难以操作。
+> To appreciate first is MeowBili's design. This App optimizes excellently for Apple Watch's small screen. It's interface is clear and audio-visual, help user to browse and search content's in a limited screen size. Font size and button typesets all thought about the convienence if touching, which won't make people fill crowded or unpleasant.
 > 
-> 其次，功能上的实用性也是我极大的喜爱之处。虽然Apple Watch的屏幕并不适合长时间观看视频，但“喵哩喵哩”让我能在空闲之余迅速地查看更新，了解最新动态，甚至在不便拿出手机的情况下观看一些短视频或者收听up主的声音。这样的体验让我感到十分便捷。
+> Further more, it's useful features is also why I like it. Although Apple Watch's screen isn't suitable for long-time watching, but MeowBili allows me to check update in free time quickly, get to know about the latest news, even watch short videos or listen to uploader's voice in where it's inconvenient to take the phone out. The experience make me feel very instant.
 > 
-> 总的来说，“喵哩喵哩”不仅为我日常的Apple Watch使用增添了乐趣，同时也满足了我作为一个视频内容爱好者的需求。它是那些喜欢在任何时间地点都保持在线的用户的必备应用。
+> To conclude, MeowBili make my daily Apple Watch experience more interesting, meanwhile satisfied my need as a video enthusiasts. It's a must-have app for users who like to keep online anywhere anytime.
 > 
 > ————陵长镜
 
 > [!TIP]
-> 如果我高一，
+> If I'm in first year of high school,
 > 
-> 我会写七言情诗，引经据典行行不提喜欢；
+> I would write elegant poems, quote classics and enjoy in it;
 > 
-> 如果我高二,
+> If I'm in second year of high school,
 > 
-> 我会写千字散文，辞藻华丽句句点名爱意；
+> I would write long-term essays, type in literary sentences and express my love;
 > 
-> 如果我高三，
+> If I;m in third year of high school,
 > 
-> 我会写一纸情书，哲思神秘再融进荣格和弗洛伊;
-> 
-> 可惜我现在幼儿园，我只会说，喵哩喵哩我好喜欢你，喵哩喵哩😭😭你带我走吧🚗……喵哩喵哩🏃…喵哩喵哩🏃…喵哩喵哩🧎没有你我怎么活啊😭
+> I wolrd write a love letter, tells philosophical words and adds in Floy;
+>
+> But unfortunately I'm currently in kindergarden,
+> I can only say, I like u so much MeowBili, MeowBili 😭😭 carry me on 🚗 ... MeobwBili🏃... MeobwBili🏃... MeobwBili🧎How could i live without u 😭
 > 
 > ————Miku
 
@@ -203,9 +205,10 @@ So, we only add build number on Testflight. However, on Github we use easy to un
 > ————ThreeManager785
 
 > [!TIP]
-> 你说的对，但是喵哩喵哩是由 Darock 研发的一款开源世界B站第三方 Apple Watch 客户端。游戏发生在一个名为“学校”的真实世界，在这里，被老师选中的人会被没收手机，引导 Apple Watch 之力。你将扮演一位名为“学生”的神秘角色，在教室中浏览性格各异能力独特的视频们，和他们一起击败强敌，找回失散的MEMZ。
+> Ur right, but MeowBili is a third-party Apple Watch Bilibili client made by Daorck. the game starts in a real world called "school", in here, people who are chosen by teacher will confiscate their phone, leads the power of Apple Watch. You're acting as a mystery character called "student", browse videos with different personalities and unique abilities in the clasroom, beat the enemies with them, find the lost MEMZ, and resolve the mystery of MeowBili.
 
 > [!TIP]
+> [Homophonic Meme is Hard to Translate]
 > 巴山楚水凄凉地，平面直角坐标系
 > 
 > responsibility，aw也能看视频
