@@ -1,3 +1,4 @@
+语言：简体中文｜<a href="./README_en.md">English</a>
 <p align="center">
     <img src="./Artwork/rm-ico.png" width="200" height="200">
 </p>
