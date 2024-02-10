@@ -31,7 +31,7 @@ Language: <a href="./README.md">简体中文</a>｜English
 - Video Actions（Like、Throw Coins、Add to favorites...）
 - User Detail Page（Fans、Follows count，User bio...）
 - User Videos and Articles
-- User Actions（Follow、D.M.）
+- User Actions（Follow、Direct Message）
 - Search（Videos、Users）
 - Follow List
 - Favorites（Folder）
@@ -203,11 +203,5 @@ So, we only add build number on Testflight. However, on Github we use easy to un
 > ————ThreeManager785
 
 > [!TIP]
-> You're right, but Meowbili is an open source world Bilivili third-party Apple Watch client developed by Darock. The game takes place in a real world called "School", where the person selected by the teacher will confiscate the mobile phone and guide the power of Apple Watch. You will play a mysterious role named "student", browse videos with different personalities and abilities in the classroom, defeat the strong enemy with them, and find the lost MEMZ.
+> You're right, but Meowbili is an open source world Bilibili third-party Apple Watch client developed by Darock. The game takes place in a real world called "School", where the person selected by the teacher will confiscate the mobile phone and guide the power of Apple Watch. You will play a mysterious role named "student", browse videos with different personalities and abilities in the classroom, defeat the strong enemy with them, and find the lost MEMZ.
 
-> [!TIP]
-> Bashan Chushui is desolate, and the plane is rectangular coordinate system.
-> 
-> responsibility,aw can also watch videos
-> 
-> High potassium fermentic acid to produce oxygen, Meowbili is so NB
