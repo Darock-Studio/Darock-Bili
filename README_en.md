@@ -187,7 +187,7 @@ So, we only add build number on Testflight. However, on Github we use easy to un
 > 
 > I can write thousands of words of prose, and the words are gorgeous and full of love;
 > 
-> If I am second year in high school,
+> If I am third year in high school,
 > 
 > I will write a love letter, and the mystery of philosophy will be integrated into Jung and Freud;
 > 
