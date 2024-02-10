@@ -115,7 +115,7 @@ struct AboutCredits: View {
             if isGenshin {
                 ZStack(alignment: .center) {
                     Color.white
-                    Text("原神")
+                    Text("About.genshin")
                         .font(.system(size: 30, weight: .heavy))
                         .foregroundColor(.black)
                         .opacity(genshinOverlayTextOpacity)
@@ -140,16 +140,16 @@ struct AboutCredits: View {
         @State var codeInput = ""
         var body: some View {
             VStack {
-                TextField("神秘代码", text: $codeInput)
+                TextField("About.mystery-code", text: $codeInput)
                 Button(action: {
                     if codeInput == "Genshin" {
                         isGenshin = true
                         dismiss()
                     } else {
-                        codeInput = "输入错误"
+                        codeInput = String(localized: "About.mystery-code.error")
                     }
                 }, label: {
-                    Text("确认")
+                    Text("About.confirm")
                 })
             }
         }
