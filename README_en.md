@@ -155,7 +155,7 @@ View contribute/develop document at [/doc/dev](/doc/dev)
 </details>
 
 ### Contribute Steps
-Open an Pull Request->Wait for review->Repair problem (if have)->Wait for compile ckeck->merge to main（or Close Pull Request）
+Open an Pull Request->Wait for review->Repair problem (if have)->Wait for compile check->merge to main（or Close Pull Request）
 
 Everyone（including administrators）cannot skip any steps.
 
