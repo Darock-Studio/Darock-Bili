@@ -88,7 +88,6 @@ struct PersonAccountView: View {
         @State var userList2: [Any] = []
         @State var userList3: [Any] = []
         @State var userList4: [Any] = []
-        @State var isLoginPresented = false
         @State var username = ""
         @State var userSign = ""
         @State var userFaceUrl = ""
@@ -101,12 +100,9 @@ struct PersonAccountView: View {
             List {
                 //VStack {
                     if sessdata == "" {
-                        Button(action: {
-                            isLoginPresented = true
-                        }, label: {
-                            Label("User.tap-to-login", systemImage: "qrcode.viewfinder")
+                        NavigationLink(destination: {LoginView()}, label: {
+                            Label("User.tap-to-login", systemImage: "rectangle.and.pencil.and.ellipsis")
                         })
-                        .sheet(isPresented: $isLoginPresented, content: {LoginView()})
                         Button(action: {isUserSwitchPresented = true}, label: {
                             HStack {
                                 HStack {

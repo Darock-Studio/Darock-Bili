@@ -226,51 +226,62 @@ struct VideoDetailView: View {
                                         isLiked.toggle()
                                     }
                                 }, label: {
-                                    VStack {
-                                        Image(systemName: isLiked ? "hand.thumbsup.fill" : "hand.thumbsup")
-                                            .foregroundColor(isLiked ? .white  : .black)
-                                        Text(stat["Like"]?.shorter() ?? "")
-                                            .font(.system(size: 11))
-                                            .foregroundColor(isLiked ? .white  : .black)
-                                            .opacity(isLiked ? 1 : 0.6)
-                                            .minimumScaleFactor(0.1)
-                                            .scaledToFit()
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .foregroundStyle(isLiked ? Color(hex: 0xfa678e) : Color.gray.opacity(0.35))
+                                        VStack {
+                                            Image(systemName: isLiked ? "hand.thumbsup.fill" : "hand.thumbsup")
+                                                .foregroundColor(isLiked ? .white : .black)
+                                            Text(stat["Like"]?.shorter() ?? "")
+                                                .font(.system(size: 11))
+                                                .foregroundColor(isLiked ? .white : .black)
+                                                .opacity(isLiked ? 1 : 0.6)
+                                                .minimumScaleFactor(0.1)
+                                                .scaledToFit()
+                                        }
+                                        .padding(.vertical, 5)
                                     }
                                 })
-                                .buttonStyle(.bordered)
-                                .buttonBorderShape(.roundedRectangle(radius: 12))
                                 Button(action: {
                                     if !isCoined {
                                         isCoinViewPresented = true
                                     }
                                 }, label: {
-                                    VStack {
-                                        Image(systemName: isCoined ? "b.circle.fill" : "b.circle")
-                                            .foregroundColor(isCoined ? Color(hex: 0xfa678e)  : .white)
-                                            .bold()
-                                        Text(stat["Coin"]?.shorter() ?? "")
-                                            .font(.system(size: 11))
-                                            .foregroundColor(isCoined ? Color(hex: 0xfa678e)  : .white)
-                                            .opacity(isCoined ? 1 : 0.6)
-                                            .minimumScaleFactor(0.1)
-                                            .scaledToFit()
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .foregroundStyle(isCoined ? Color(hex: 0xfa678e) : Color.gray.opacity(0.35))
+                                        VStack {
+                                            Image(systemName: isCoined ? "b.circle.fill" : "b.circle")
+                                                .foregroundColor(isCoined ? .white : .black)
+                                                .bold()
+                                            Text(stat["Coin"]?.shorter() ?? "")
+                                                .font(.system(size: 11))
+                                                .foregroundColor(isCoined ? .white : .black)
+                                                .opacity(isCoined ? 1 : 0.6)
+                                                .minimumScaleFactor(0.1)
+                                                .scaledToFit()
+                                        }
+                                        .padding(.vertical, 5)
                                     }
                                 })
-                                .buttonStyle(.borderedProminent)
-                                .buttonBorderShape(.roundedRectangle(radius: 12))
                                 .sheet(isPresented: $isCoinViewPresented, content: {VideoThrowCoinView(bvid: videoDetails["BV"]!)})
                                 Button(action: {
                                     isFavoriteChoosePresented = true
                                 }, label: {
-                                    VStack {
-                                        Image(systemName: isFavoured ? "star.fill" : "star")
-                                            .foregroundColor(isFavoured ? Color(hex: 0xf9678f) : .white)
-                                        Text(stat["Favorite"]?.shorter() ?? "")
-                                            .font(.system(size: 11))
-                                            .foregroundColor(isFavoured ? Color(hex: 0xfa678e)  : .white)
-                                            .opacity(isFavoured ? 1 : 0.6)
-                                            .minimumScaleFactor(0.1)
-                                            .scaledToFit()
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .foregroundStyle(isFavoured ? Color(hex: 0xfa678e) : Color.gray.opacity(0.35))
+                                        VStack {
+                                            Image(systemName: isFavoured ? "star.fill" : "star")
+                                                .foregroundColor(isFavoured ? .white : .black)
+                                            Text(stat["Favorite"]?.shorter() ?? "")
+                                                .font(.system(size: 11))
+                                                .foregroundColor(isFavoured ? .white  : .black)
+                                                .opacity(isFavoured ? 1 : 0.6)
+                                                .minimumScaleFactor(0.1)
+                                                .scaledToFit()
+                                        }
+                                        .padding(.vertical, 5)
                                     }
                                 })
                             }

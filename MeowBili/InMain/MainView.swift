@@ -201,6 +201,7 @@ struct MainView: View {
             }
             .navigationTitle("Home")
             .refreshable {
+                videos.removeAll()
                 LoadNewVideos(clearWhenFinish: true)
             }
             .onAppear {

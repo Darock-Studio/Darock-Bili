@@ -20,6 +20,7 @@ import UIKit
 import SwiftUI
 import Foundation
 import SDWebImageSwiftUI
+import AuthenticationServices
 
 @ViewBuilder func VideoCard(_ videoDetails: [String: String]) -> some View {
     NavigationLink(destination: {VideoDetailView(videoDetails: videoDetails)}, label: {
@@ -200,3 +201,4 @@ struct UIImageTransfer: Transferable {
     }
   }
 }
+
