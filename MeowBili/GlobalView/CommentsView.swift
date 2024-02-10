@@ -213,11 +213,6 @@ struct CommentsView: View {
                     isLoaded = true
                 }
             }
-//            .onDisappear {
-//                nowPage = 1
-//                comments = [[String: String]]()
-//                SDImageCache.shared.clearMemory()
-//            }
         }
         
         func ContinueLoadComment() {

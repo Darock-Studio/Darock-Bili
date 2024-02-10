@@ -252,6 +252,14 @@ struct DarockBili_Watch_AppApp: App {
             case .inactive:
                 break
             case .active:
+                SDImageCodersManager.shared.addCoder(SDImageWebPCoder.shared)
+                SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)
+                SDImageCodersManager.shared.addCoder(SDImagePDFCoder.shared)
+                SDImageCache.shared.config.maxMemoryCost = 1024 * 1024 * 10
+                SDImageCache.shared.config.shouldCacheImagesInMemory = false
+                SDImageCache.shared.config.shouldUseWeakMemoryCache = true
+                SDImageCache.shared.clearMemory()
+                
                 updateBuvid()
                 
                 if isScreenTimeEnabled {
@@ -273,28 +281,7 @@ struct DarockBili_Watch_AppApp: App {
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-    func applicationDidFinishLaunching() {
-//        signal(SIGABRT, {error in
-//            signalErrorRecord(error, "SIGABRT")
-//        })
-//        signal(SIGTRAP, {error in
-//            signalErrorRecord(error, "SIGTRAP")
-//        })
-//        signal(SIGILL, {error in
-//            signalErrorRecord(error, "SIGILL")
-//        })
-//        signal(SIGKILL, {error in
-//            signalErrorRecord(error, "SIGKILL")
-//        })
-        
-        SDImageCodersManager.shared.addCoder(SDImageWebPCoder.shared)
-        SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)
-        SDImageCodersManager.shared.addCoder(SDImagePDFCoder.shared)
-        SDImageCache.shared.config.maxMemoryCost = 1024 * 1024 * 10
-        SDImageCache.shared.config.shouldCacheImagesInMemory = false
-        SDImageCache.shared.config.shouldUseWeakMemoryCache = true
-        SDImageCache.shared.clearMemory()
-    }
+    
 }
 
 func signalErrorRecord(_ errorNum: Int32, _ errorSignal: String) {

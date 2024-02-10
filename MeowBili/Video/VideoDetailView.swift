@@ -33,6 +33,7 @@ struct VideoDetailView: View {
     public static var willPlayVideoBV = ""
     public static var willPlayVideoCID: Int64 = 0
     @State var videoDetails: [String: String]
+    @Environment(\.colorScheme) var colorScheme
     @AppStorage("DedeUserID") var dedeUserID = ""
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
@@ -66,6 +67,7 @@ struct VideoDetailView: View {
     @State var tagText = ""
     @State var isFavoriteChoosePresented = false
     @State var tagDisplayedNum = 0
+    @State var currentDetailSelection = 1
     var body: some View {
         VStack {
             if isDecoded {
@@ -76,300 +78,313 @@ struct VideoDetailView: View {
                     .frame(height: 240)
                     .redacted(reason: .placeholder)
             }
-            TabView {
-                ScrollView {
-                    VStack {
-                        HStack {
-                            if honors.count >= 4 {
-                                if honors[3] != "" {
+            VStack {
+                Picker("", selection: $currentDetailSelection) {
+                    Text("详情").tag(1)
+                    Text("评论").tag(2)
+                    if goodVideos.count != 0 {
+                        Text("推荐").tag(3)
+                    }
+                }
+                .pickerStyle(.segmented)
+                
+                if currentDetailSelection == 1 {
+                    ScrollView {
+                        VStack {
+                            HStack {
+                                if honors.count >= 4 {
+                                    if honors[3] != "" {
+                                        HStack {
+                                            Image(systemName: SFSymbol.Flame.fill.rawValue)
+                                            Text("Video.trending")
+                                        }
+                                        .font(.system(size: 11))
+                                        .foregroundColor(.red)
+                                        .padding(5)
+                                        .background {
+                                            Capsule()
+                                                .fill(.white)
+                                                .opacity(0.3)
+                                        }
+                                    }
+                                }
+                                Marquee {
                                     HStack {
-                                        Image(systemName: SFSymbol.Flame.fill.rawValue)
-                                        Text("Video.trending")
-                                    }
-                                    .font(.system(size: 11))
-                                    .foregroundColor(.red)
-                                    .padding(5)
-                                    .background {
-                                        Capsule()
-                                            .fill(.white)
-                                            .opacity(0.3)
+                                        Text(videoDetails["Title"]!)
+                                            .lineLimit(1)
+                                            .font(.system(size: 18, weight: .bold))
+                                            .multilineTextAlignment(.center)
                                     }
                                 }
+                                .marqueeWhenNotFit(true)
+                                .marqueeDuration(10)
+                                .frame(height: 20)
+                                .padding(.horizontal, 10)
                             }
-                            Marquee {
-                                HStack {
-                                    Text(videoDetails["Title"]!)
-                                        .lineLimit(1)
-                                        .font(.system(size: 18, weight: .bold))
-                                        .multilineTextAlignment(.center)
-                                }
-                            }
-                            .marqueeWhenNotFit(true)
-                            .marqueeDuration(10)
-                            .frame(height: 20)
-                            .padding(.horizontal, 10)
-                        }
-                        Spacer()
-                            .frame(height: 20)
-                        if #unavailable(watchOS 10) {
-                            NavigationLink("", isActive: $isNowPlayingPresented, destination: {AudioPlayerView(videoDetails: videoDetails, subTitles: subTitles)})
-                                .frame(width: 0, height: 0)
-                            Button(action: {
-                                if videoGetterSource == "official" {
-                                    let headers: HTTPHeaders = [
-                                        "cookie": "SESSDATA=\(sessdata)",
-                                        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                                    ]
-                                    AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers).response { response in
-                                        let cid = Int64((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
-                                        VideoDetailView.willPlayVideoCID = cid
-                                        AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
-                                            VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
-                                            VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                                            isNowPlayingPresented = true
-                                            
-                                        }
-                                    }
-                                } else if videoGetterSource == "injahow" {
-                                    DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=1&type=video&q=32&format=mp4&otype=url") { respStr, isSuccess in
-                                        if isSuccess {
-                                            VideoDetailView.willPlayVideoLink = respStr
-                                            VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                                            isNowPlayingPresented = true
-                                            
-                                        }
-                                    }
-                                }
-                            }, label: {
-                                Label("Video.play-in-audio", systemImage: "waveform")
-                            })
-                            Button(action: {
-                                isMoreMenuPresented = true
-                            }, label: {
-                                Label("Video.more", systemImage: "ellipsis")
-                            })
-                            .sheet(isPresented: $isMoreMenuPresented, content: {
-                                List {
-                                    Button(action: {
-                                        isDownloadPresented = true
-                                    }, label: {
-                                        Label("Video.download", image: "arrow.down.doc")
-                                    })
-                                    .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
-                                    Button(action: {
+                            Spacer()
+                                .frame(height: 20)
+                            if #unavailable(watchOS 10) {
+                                NavigationLink("", isActive: $isNowPlayingPresented, destination: {AudioPlayerView(videoDetails: videoDetails, subTitles: subTitles)})
+                                    .frame(width: 0, height: 0)
+                                Button(action: {
+                                    if videoGetterSource == "official" {
                                         let headers: HTTPHeaders = [
                                             "cookie": "SESSDATA=\(sessdata)",
                                             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                         ]
-                                        AF.request("https://api.bilibili.com/x/v2/history/toview/add", method: .post, parameters: ["bvid": videoDetails["BV"]!, "csrf": biliJct], headers: headers).response { response in
-                                            do {
-                                                let json = try JSON(data: response.data ?? Data())
-                                                if let code = json["code"].int {
-                                                    if code == 0 {
-                                                        AlertKitAPI.present(title: String(localized: "Video.added"), icon: .done, style: .iOS17AppleMusic, haptic: .success)
-                                                    } else {
-                                                        AlertKitAPI.present(title: json["message"].string ?? String(localized: "Video.unkonwn-error"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
-                                                    }
-                                                } else {
-                                                    AlertKitAPI.present(title: String(localized: "Video.unkonwn-error"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
-                                                }
-                                            } catch {
-                                                AlertKitAPI.present(title: String(localized: "Video.unkonwn-error"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                                        AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers).response { response in
+                                            let cid = Int64((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
+                                            VideoDetailView.willPlayVideoCID = cid
+                                            AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
+                                                VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
+                                                VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                                                isNowPlayingPresented = true
+                                                
                                             }
                                         }
+                                    } else if videoGetterSource == "injahow" {
+                                        DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=1&type=video&q=32&format=mp4&otype=url") { respStr, isSuccess in
+                                            if isSuccess {
+                                                VideoDetailView.willPlayVideoLink = respStr
+                                                VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
+                                                isNowPlayingPresented = true
+                                                
+                                            }
+                                        }
+                                    }
+                                }, label: {
+                                    Label("Video.play-in-audio", systemImage: "waveform")
+                                })
+                                Button(action: {
+                                    isMoreMenuPresented = true
+                                }, label: {
+                                    Label("Video.more", systemImage: "ellipsis")
+                                })
+                                .sheet(isPresented: $isMoreMenuPresented, content: {
+                                    List {
+                                        Button(action: {
+                                            isDownloadPresented = true
+                                        }, label: {
+                                            Label("Video.download", image: "arrow.down.doc")
+                                        })
+                                        .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
+                                        Button(action: {
+                                            let headers: HTTPHeaders = [
+                                                "cookie": "SESSDATA=\(sessdata)",
+                                                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                            ]
+                                            AF.request("https://api.bilibili.com/x/v2/history/toview/add", method: .post, parameters: ["bvid": videoDetails["BV"]!, "csrf": biliJct], headers: headers).response { response in
+                                                do {
+                                                    let json = try JSON(data: response.data ?? Data())
+                                                    if let code = json["code"].int {
+                                                        if code == 0 {
+                                                            AlertKitAPI.present(title: String(localized: "Video.added"), icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                                        } else {
+                                                            AlertKitAPI.present(title: json["message"].string ?? String(localized: "Video.unkonwn-error"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                                                        }
+                                                    } else {
+                                                        AlertKitAPI.present(title: String(localized: "Video.unkonwn-error"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                                                    }
+                                                } catch {
+                                                    AlertKitAPI.present(title: String(localized: "Video.unkonwn-error"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                                                }
+                                            }
+                                        }, label: {
+                                            Label("Video.watch-later", systemImage: "memories.badge.plus")
+                                        })
+                                    }
+                                })
+                            }
+                            if owner["ID"] != nil {
+                                NavigationLink(destination: {UserDetailView(uid: owner["ID"]!)}, label: {
+                                    HStack {
+                                        AsyncImage(url: URL(string: owner["Face"]! + "@40w"))
+                                            .cornerRadius(100)
+                                            .frame(width: 40, height: 40)
+                                        VStack {
+                                            HStack {
+                                                Text(owner["Name"]!)
+                                                    .font(.system(size: 16, weight: .bold))
+                                                    .lineLimit(1)
+                                                    .minimumScaleFactor(0.1)
+                                                    .foregroundColor(colorScheme == .dark ? .white : .black)
+                                                Spacer()
+                                            }
+                                            HStack {
+                                                Text("Video.fans.\(Int(String(ownerFansCount).shorter()) ?? 0)")
+                                                    .font(.system(size: 11))
+                                                    .lineLimit(1)
+                                                    .foregroundColor(.gray)
+                                                Spacer()
+                                            }
+                                        }
+                                        Spacer()
+                                    }
+                                    .padding(5)
+                                    .background(Color.gray.opacity(0.35))
+                                    .cornerRadius(12)
+                                })
+                            }
+                            LazyVStack {
+                                HStack {
+                                    Button(action: {
+                                        let headers: HTTPHeaders = [
+                                            "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3)",
+                                            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                        ]
+                                        AF.request("https://api.bilibili.com/x/web-interface/archive/like", method: .post, parameters: ["bvid": videoDetails["BV"]!, "like": isLiked ? 2 : 1, "eab_x": 2, "ramval": 0, "source": "web_normal", "ga": 1, "csrf": biliJct], headers: headers).response { response in
+                                            debugPrint(response)
+                                            isLiked ? AlertKitAPI.present(title: String(localized: "Video.action.canceled"), icon: .done, style: .iOS17AppleMusic, haptic: .success) : AlertKitAPI.present(title: String(localized: "Video.action.liked"), icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                            isLiked.toggle()
+                                        }
                                     }, label: {
-                                        Label("Video.watch-later", systemImage: "memories.badge.plus")
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 12)
+                                                .foregroundStyle(isLiked ? Color(hex: 0xfa678e) : Color.gray.opacity(0.35))
+                                            VStack {
+                                                Image(systemName: isLiked ? "hand.thumbsup.fill" : "hand.thumbsup")
+                                                    .foregroundColor(isLiked ? .white : (colorScheme == .dark ? .white : .black))
+                                                Text(stat["Like"]?.shorter() ?? "")
+                                                    .font(.system(size: 11))
+                                                    .foregroundColor(isLiked ? .white : (colorScheme == .dark ? .white : .black))
+                                                    .opacity(isLiked ? 1 : 0.6)
+                                                    .minimumScaleFactor(0.1)
+                                                    .scaledToFit()
+                                            }
+                                            .padding(.vertical, 5)
+                                        }
+                                    })
+                                    Button(action: {
+                                        if !isCoined {
+                                            isCoinViewPresented = true
+                                        }
+                                    }, label: {
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 12)
+                                                .foregroundStyle(isCoined ? Color(hex: 0xfa678e) : Color.gray.opacity(0.35))
+                                            VStack {
+                                                Image(systemName: isCoined ? "b.circle.fill" : "b.circle")
+                                                    .foregroundColor(isCoined ? .white : (colorScheme == .dark ? .white : .black))
+                                                    .bold()
+                                                Text(stat["Coin"]?.shorter() ?? "")
+                                                    .font(.system(size: 11))
+                                                    .foregroundColor(isCoined ? .white : (colorScheme == .dark ? .white : .black))
+                                                    .opacity(isCoined ? 1 : 0.6)
+                                                    .minimumScaleFactor(0.1)
+                                                    .scaledToFit()
+                                            }
+                                            .padding(.vertical, 5)
+                                        }
+                                    })
+                                    .sheet(isPresented: $isCoinViewPresented, content: {VideoThrowCoinView(bvid: videoDetails["BV"]!)})
+                                    Button(action: {
+                                        isFavoriteChoosePresented = true
+                                    }, label: {
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 12)
+                                                .foregroundStyle(isFavoured ? Color(hex: 0xfa678e) : Color.gray.opacity(0.35))
+                                            VStack {
+                                                Image(systemName: isFavoured ? "star.fill" : "star")
+                                                    .foregroundColor(isFavoured ? .white : (colorScheme == .dark ? .white : .black))
+                                                Text(stat["Favorite"]?.shorter() ?? "")
+                                                    .font(.system(size: 11))
+                                                    .foregroundColor(isFavoured ? .white : (colorScheme == .dark ? .white : .black))
+                                                    .opacity(isFavoured ? 1 : 0.6)
+                                                    .minimumScaleFactor(0.1)
+                                                    .scaledToFit()
+                                            }
+                                            .padding(.vertical, 5)
+                                        }
                                     })
                                 }
-                            })
-                        }
-                        if owner["ID"] != nil {
-                            NavigationLink(destination: {UserDetailView(uid: owner["ID"]!)}, label: {
+                                .buttonBorderShape(.roundedRectangle(radius: 18))
+                                .sheet(isPresented: $isFavoriteChoosePresented, content: {VideoFavoriteAddView(videoDetails: $videoDetails, isFavoured: $isFavoured)})
+                                Spacer()
+                                    .frame(height: 10)
+                                VStack {
+                                    HStack {
+                                        Image(systemName: "text.word.spacing")
+                                        Text("Video.details.danmaku.\(Int(videoDetails["Danmaku"]!.shorter()) ?? 0)")
+                                        Spacer()
+                                    }
+                                    HStack {
+                                        Image(systemName: "person.2")
+                                        Text("Video.details.watching-people.\(Int(nowPlayingCount) ?? 0)")
+                                            .offset(x: -1)
+                                        Spacer()
+                                    }
+                                    HStack {
+                                        Image(systemName: "play.circle")
+                                        Text("Video.details.watches.\(Int(videoDetails["View"]!.shorter()) ?? 0)")
+                                            .offset(x: 1)
+                                        Spacer()
+                                    }
+                                    HStack {
+                                        Image(systemName: "clock")
+                                        Text("Video.details.publish-time.\(publishTime)")
+                                        Spacer()
+                                    }
+                                    HStack {
+                                        Image(systemName: "movieclapper")
+                                        Text(videoDetails["BV"]!)
+                                        Spacer()
+                                    }
+                                }
+                                .font(.system(size: 11))
+                                .opacity(0.6)
+                                .padding(.horizontal, 10)
+                                Spacer()
+                                    .frame(height: 5)
                                 HStack {
-                                    AsyncImage(url: URL(string: owner["Face"]! + "@40w"))
-                                        .cornerRadius(100)
-                                        .frame(width: 40, height: 40)
                                     VStack {
-                                        HStack {
-                                            Text(owner["Name"]!)
-                                                .font(.system(size: 16, weight: .bold))
-                                                .lineLimit(1)
-                                                .minimumScaleFactor(0.1)
-                                                .foregroundColor(.black)
-                                            Spacer()
-                                        }
-                                        HStack {
-                                            Text("Video.fans.\(Int(String(ownerFansCount).shorter()) ?? 0)")
-                                                .font(.system(size: 11))
-                                                .lineLimit(1)
-                                                .foregroundColor(.gray)
-                                            Spacer()
-                                        }
+                                        Image(systemName: "info.circle")
+                                        Spacer()
                                     }
+                                    Text(videoDesc)
                                     Spacer()
                                 }
-                                .padding(5)
-                                .background(Color.gray.opacity(0.35))
-                                .cornerRadius(12)
-                            })
-                        }
-                        LazyVStack {
-                            HStack {
-                                Button(action: {
-                                    let headers: HTTPHeaders = [
-                                        "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3)",
-                                        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                                    ]
-                                    AF.request("https://api.bilibili.com/x/web-interface/archive/like", method: .post, parameters: ["bvid": videoDetails["BV"]!, "like": isLiked ? 2 : 1, "eab_x": 2, "ramval": 0, "source": "web_normal", "ga": 1, "csrf": biliJct], headers: headers).response { response in
-                                        debugPrint(response)
-                                        isLiked ? AlertKitAPI.present(title: String(localized: "Video.action.canceled"), icon: .done, style: .iOS17AppleMusic, haptic: .success) : AlertKitAPI.present(title: String(localized: "Video.action.liked"), icon: .done, style: .iOS17AppleMusic, haptic: .success)
-                                        isLiked.toggle()
-                                    }
-                                }, label: {
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .foregroundStyle(isLiked ? Color(hex: 0xfa678e) : Color.gray.opacity(0.35))
-                                        VStack {
-                                            Image(systemName: isLiked ? "hand.thumbsup.fill" : "hand.thumbsup")
-                                                .foregroundColor(isLiked ? .white : .black)
-                                            Text(stat["Like"]?.shorter() ?? "")
-                                                .font(.system(size: 11))
-                                                .foregroundColor(isLiked ? .white : .black)
-                                                .opacity(isLiked ? 1 : 0.6)
-                                                .minimumScaleFactor(0.1)
-                                                .scaledToFit()
-                                        }
-                                        .padding(.vertical, 5)
-                                    }
-                                })
-                                Button(action: {
-                                    if !isCoined {
-                                        isCoinViewPresented = true
-                                    }
-                                }, label: {
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .foregroundStyle(isCoined ? Color(hex: 0xfa678e) : Color.gray.opacity(0.35))
-                                        VStack {
-                                            Image(systemName: isCoined ? "b.circle.fill" : "b.circle")
-                                                .foregroundColor(isCoined ? .white : .black)
-                                                .bold()
-                                            Text(stat["Coin"]?.shorter() ?? "")
-                                                .font(.system(size: 11))
-                                                .foregroundColor(isCoined ? .white : .black)
-                                                .opacity(isCoined ? 1 : 0.6)
-                                                .minimumScaleFactor(0.1)
-                                                .scaledToFit()
-                                        }
-                                        .padding(.vertical, 5)
-                                    }
-                                })
-                                .sheet(isPresented: $isCoinViewPresented, content: {VideoThrowCoinView(bvid: videoDetails["BV"]!)})
-                                Button(action: {
-                                    isFavoriteChoosePresented = true
-                                }, label: {
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .foregroundStyle(isFavoured ? Color(hex: 0xfa678e) : Color.gray.opacity(0.35))
-                                        VStack {
-                                            Image(systemName: isFavoured ? "star.fill" : "star")
-                                                .foregroundColor(isFavoured ? .white : .black)
-                                            Text(stat["Favorite"]?.shorter() ?? "")
-                                                .font(.system(size: 11))
-                                                .foregroundColor(isFavoured ? .white  : .black)
-                                                .opacity(isFavoured ? 1 : 0.6)
-                                                .minimumScaleFactor(0.1)
-                                                .scaledToFit()
-                                        }
-                                        .padding(.vertical, 5)
-                                    }
-                                })
-                            }
-                            .buttonBorderShape(.roundedRectangle(radius: 18))
-                            .sheet(isPresented: $isFavoriteChoosePresented, content: {VideoFavoriteAddView(videoDetails: $videoDetails, isFavoured: $isFavoured)})
-                            Spacer()
-                                .frame(height: 10)
-                            VStack {
+                                .font(.system(size: 12))
+                                .opacity(0.65)
+                                .padding(.horizontal, 8)
                                 HStack {
-                                    Image(systemName: "text.word.spacing")
-                                    Text("Video.details.danmaku.\(Int(videoDetails["Danmaku"]!.shorter()) ?? 0)")
+                                    VStack {
+                                        Image(systemName: "tag")
+                                        Spacer()
+                                    }
+                                    Text(tagText)
                                     Spacer()
                                 }
-                                HStack {
-                                    Image(systemName: "person.2")
-                                    Text("Video.details.watching-people.\(Int(nowPlayingCount) ?? 0)")
-                                        .offset(x: -1)
-                                    Spacer()
-                                }
-                                HStack {
-                                    Image(systemName: "play.circle")
-                                    Text("Video.details.watches.\(Int(videoDetails["View"]!.shorter()) ?? 0)")
-                                        .offset(x: 1)
-                                    Spacer()
-                                }
-                                HStack {
-                                    Image(systemName: "clock")
-                                    Text("Video.details.publish-time.\(publishTime)")
-                                    Spacer()
-                                }
-                                HStack {
-                                    Image(systemName: "movieclapper")
-                                    Text(videoDetails["BV"]!)
-                                    Spacer()
-                                }
-                            }
-                            .font(.system(size: 11))
-                            .opacity(0.6)
-                            .padding(.horizontal, 10)
-                            Spacer()
-                                .frame(height: 5)
-                            HStack {
-                                VStack {
-                                    Image(systemName: "info.circle")
-                                    Spacer()
-                                }
-                                Text(videoDesc)
-                                Spacer()
-                            }
-                            .font(.system(size: 12))
-                            .opacity(0.65)
-                            .padding(.horizontal, 8)
-                            HStack {
-                                VStack {
-                                    Image(systemName: "tag")
-                                    Spacer()
-                                }
-                                Text(tagText)
-                                Spacer()
-                            }
-                            .font(.system(size: 12))
-                            .opacity(0.65)
-                            .padding(.horizontal, 8)
-                            .onAppear {
-                                tagDisplayedNum = 0
-                                tagText = ""
-                                for text in tags {
-                                    tagDisplayedNum += 1
-                                    if tagDisplayedNum == tags.count {
-                                        tagText += text
-                                    } else {
-                                        tagText += text + " / "
+                                .font(.system(size: 12))
+                                .opacity(0.65)
+                                .padding(.horizontal, 8)
+                                .onAppear {
+                                    tagDisplayedNum = 0
+                                    tagText = ""
+                                    for text in tags {
+                                        tagDisplayedNum += 1
+                                        if tagDisplayedNum == tags.count {
+                                            tagText += text
+                                        } else {
+                                            tagText += text + " / "
+                                        }
                                     }
                                 }
                             }
                         }
+                        .padding()
                     }
-                    .padding()
-                }
-                .tag(1)
-                CommentsView(oid: String(videoDetails["BV"]!.dropFirst().dropFirst()))
-                if goodVideos.count != 0 {
-                    List {
-                        ForEach(0...goodVideos.count - 1, id: \.self) { i in
-                            VideoCard(goodVideos[i])
+                } else if currentDetailSelection == 2 {
+                    CommentsView(oid: String(videoDetails["BV"]!.dropFirst().dropFirst()))
+                } else if currentDetailSelection == 3 {
+                    if goodVideos.count != 0 {
+                        List {
+                            ForEach(0...goodVideos.count - 1, id: \.self) { i in
+                                VideoCard(goodVideos[i])
+                            }
                         }
+                    } else {
+                        
                     }
-                    .tag(3)
                 }
             }
         }
@@ -511,13 +526,6 @@ struct VideoDetailView: View {
                     }
                 }
             }
-        }
-        .onDisappear {
-            goodVideos = [[String: String]]()
-            owner = [String: String]()
-            stat = [String: String]()
-            videoDesc = ""
-            SDImageCache.shared.clearMemory()
         }
     }
     
