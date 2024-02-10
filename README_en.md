@@ -1,4 +1,3 @@
-Language: English|<a href="./README.md">Simplified Chinese</a>
 <p align="center">
     <img src="./Artwork/rm-ico.png" width="200" height="200">
 </p>
