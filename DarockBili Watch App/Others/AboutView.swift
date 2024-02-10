@@ -142,7 +142,7 @@ struct AboutCredits: View {
             VStack {
                 TextField("About.mystery-code", text: $codeInput)
                 Button(action: {
-                    if codeInput == "Genshin" {
+                    if codeInput.lowercased().contains("genshin") {
                         isGenshin = true
                         dismiss()
                     } else {

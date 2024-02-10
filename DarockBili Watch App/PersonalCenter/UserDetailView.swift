@@ -332,9 +332,15 @@ struct UserDetailView: View {
                 }
                 if !vipLabel.isEmpty {
                     HStack {
-                        WebImage(url: URL(string: "https://s1.hdslb.com/bfs/seed/jinkela/short/user-avatar/big-vip.svg"))
-                            .resizable()
-                            .frame(width: 20, height: 20)
+                        if true {
+                            WebImage(url: URL(string: "https://s1.hdslb.com/bfs/seed/jinkela/short/user-avatar/big-vip.svg"))
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                        } else {
+                            Image(systemName: "dollarsign.circle")
+                                .foregroundColor(Color(red: 236/255, green: 99/255, blue: 141/255))
+                                .frame(width: 20, height: 20)
+                        }
                         Text(vipLabel)
                             .font(.system(size: 15))
                             .bold()

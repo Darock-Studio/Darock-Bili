@@ -177,9 +177,6 @@
         }
       }
     },
-    "%lld" : {
-      "extractionState" : "stale"
-    },
     "%lld / %lld" : {
       "localizations" : {
         "en" : {
@@ -2681,7 +2678,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Histories"
+            "value" : "History"
           }
         },
         "zh-Hans" : {
@@ -3192,7 +3189,7 @@
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "It's %1$@:%2$@:%3$@ now"
           }
         },
@@ -4089,7 +4086,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Histories"
+            "value" : "History"
           }
         },
         "zh-Hans" : {
