@@ -178,21 +178,7 @@
       }
     },
     "%lld" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld"
-          }
-        }
-      }
+      "extractionState" : "stale"
     },
     "%lld / %lld" : {
       "localizations" : {
@@ -2123,7 +2109,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scan to continue"
+            "value" : "Scan to Continue"
           }
         },
         "zh-Hans" : {
