@@ -65,6 +65,22 @@
         }
       }
     },
+    ":" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ":"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ":"
+          }
+        }
+      }
+    },
     ".%lld" : {
       "localizations" : {
         "en" : {
@@ -160,6 +176,23 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@MB / %2$@MB"
+          }
+        }
+      }
+    },
+    "%lld" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
           }
         }
       }
@@ -260,6 +293,22 @@
         }
       }
     },
+    "About.confirm" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "确认"
+          }
+        }
+      }
+    },
     "About.credits" : {
       "localizations" : {
         "en" : {
@@ -276,6 +325,22 @@
         }
       }
     },
+    "About.genshin" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Genshin"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "原神"
+          }
+        }
+      }
+    },
     "About.meowbili" : {
       "localizations" : {
         "en" : {
@@ -288,6 +353,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "喵哩喵哩"
+          }
+        }
+      }
+    },
+    "About.mystery-code" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mystery Code"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "神秘代码"
+          }
+        }
+      }
+    },
+    "About.mystery-code.error" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Input Error"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "输入错误"
           }
         }
       }
@@ -664,6 +761,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "activeBdUrl"
+          }
+        }
+      }
+    },
+    "Bangumi" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bangumi"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "番剧"
           }
         }
       }
@@ -1113,7 +1226,20 @@
       }
     },
     "Dignite" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dignite"
+          }
+        }
+      }
     },
     "Direct-message.failed" : {
       "localizations" : {
@@ -1272,6 +1398,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "下载任务已创建"
+          }
+        }
+      }
+    },
+    "Download.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "视频下载列表"
           }
         }
       }
@@ -1772,6 +1914,22 @@
         }
       }
     },
+    "History.none" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing Here"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "这里空空如也"
+          }
+        }
+      }
+    },
     "Home" : {
       "localizations" : {
         "en" : {
@@ -1944,6 +2102,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Linecom"
+          }
+        }
+      }
+    },
+    "Live" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "直播"
+          }
+        }
+      }
+    },
+    "Live.starting.%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Started at %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "于 %@ 开始"
           }
         }
       }
@@ -2398,6 +2588,22 @@
         }
       }
     },
+    "Screen-time.description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Screen Time will not be recorded any more and recorded datas will be cleared"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "将不再记录您的屏幕使用时间, 已记录的数据不会被删除"
+          }
+        }
+      }
+    },
     "Screen-time.minutes.%lld" : {
       "localizations" : {
         "en" : {
@@ -2422,6 +2628,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld分钟"
+          }
+        }
+      }
+    },
+    "Screen-time.off" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn Off Screen Time"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "关闭“屏幕使用时间”"
+          }
+        }
+      }
+    },
+    "Screen-time.on" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn One Screen Time"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "开启“屏幕使用时间”"
+          }
+        }
+      }
+    },
+    "Screen-time.usage" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Screen Time will record and count the time you use MeowBili"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“屏幕使用时间”会记录并统计您每天使用喵哩喵哩的时间"
           }
         }
       }
@@ -2539,7 +2793,20 @@
       }
     },
     "Search.type.live" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lives"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "直播"
+          }
+        }
+      }
     },
     "Search.type.user" : {
       "localizations" : {
@@ -2797,6 +3064,22 @@
         }
       }
     },
+    "Settings.sleep" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sleep"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "睡眠"
+          }
+        }
+      }
+    },
     "Settings.update" : {
       "localizations" : {
         "en" : {
@@ -2921,6 +3204,134 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "解压中…"
+          }
+        }
+      }
+    },
+    "Sleep" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sleep Time"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "睡眠时间"
+          }
+        }
+      }
+    },
+    "Sleep.current.%@.%@.%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "It's %1$@:%2$@:%3$@ now"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "现在是%1$@:%2$@:%3$@"
+          }
+        }
+      }
+    },
+    "Sleep.discription" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sleep Time will notify you too sleep at a specific time"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“睡眠时间”可以在特定时间内提醒您睡觉"
+          }
+        }
+      }
+    },
+    "Sleep.edit.%@.%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Sleep Time %1$@:%2$@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑睡眠时间 %1$@:%2$@"
+          }
+        }
+      }
+    },
+    "Sleep.edit.hour" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HOUR"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "小时"
+          }
+        }
+      }
+    },
+    "Sleep.edit.minute" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MINUTE"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "分钟"
+          }
+        }
+      }
+    },
+    "Sleep.edit.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Sleep Time"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑睡眠时间"
+          }
+        }
+      }
+    },
+    "Sleep.notification" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time to Sleep!"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "该睡觉啦！"
           }
         }
       }
@@ -3879,8 +4290,24 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "v%1$@ Build %2$@"
+          }
+        }
+      }
+    },
+    "Video" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "视频"
           }
         }
       }
@@ -4273,22 +4700,20 @@
 
     },
     "令枫" : {
-
-    },
-    "关闭“屏幕使用时间”" : {
-
-    },
-    "动态内容" : {
-
-    },
-    "动态评论" : {
-
-    },
-    "动态详情" : {
-
-    },
-    "原神" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "令枫"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "令枫"
+          }
+        }
+      }
     },
     "发送动态" : {
 
@@ -4311,57 +4736,6 @@
           }
         }
       }
-    },
-    "将不再记录您的屏幕使用时间, 已记录的数据不会被删除" : {
-
-    },
-    "将作为动态主体" : {
-
-    },
-    "小尾巴内容" : {
-
-    },
-    "已选择的图片" : {
-
-    },
-    "应用" : {
-
-    },
-    "开启屏幕使用时间" : {
-
-    },
-    "您可以更改默认的小尾巴内容, 如果不想添加小尾巴, 请清空上方文本框内容. 您可以随时在设置中更改此内容" : {
-
-    },
-    "番剧" : {
-
-    },
-    "直播" : {
-
-    },
-    "确认" : {
-
-    },
-    "视频" : {
-
-    },
-    "视频下载列表" : {
-
-    },
-    "神秘代码" : {
-
-    },
-    "要使用动态小尾巴吗?" : {
-
-    },
-    "这里空空如也" : {
-
-    },
-    "选择图片" : {
-
-    },
-    "重新载入" : {
-
     }
   },
   "version" : "1.0"
