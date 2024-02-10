@@ -159,7 +159,7 @@ Open an Pull Request->Wait for review->Repair problem (if have)->Wait for compil
 
 Everyone（including administrators）cannot skip any steps.
 
-## 📝版本号
+## 📝Version Number
 Meowbili's Version number is **different** on GitHub and TestFlight(Same on about page). Because if add Version number on Testflight, app need to review by Apple. But if only add build number can prevent this.
 
 So, we only add build number on Testflight. However, on Github we use easy to understand version number. We recommanded to use version number on Github to identity Meowbili.
