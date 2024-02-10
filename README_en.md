@@ -164,7 +164,7 @@ Meowbili's Version number is **different** on GitHub and TestFlight(Same on abou
 
 So, we only add build number on Testflight. However, on Github we use easy to understand version number. We recommanded to use version number on Github to identity Meowbili.
 
-## 💬User Commits (in Chinese)
+## 💬User Comments (in Chinese)
 ~~When people used this, they all say good~~
 
 > [!TIP]
