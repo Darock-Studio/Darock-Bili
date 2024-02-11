@@ -1,2 +1,2 @@
-# 开发文档
-此处为喵哩喵哩开发文档，与代码、开发相关的说明和文档将在此处。
+# 请选择一种语言以查看开发文档
+## Please select a language to view develop docs
