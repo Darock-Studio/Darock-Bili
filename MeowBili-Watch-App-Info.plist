@@ -3,10 +3,13 @@
 <plist version="1.0">
 <dict>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 =======
 >>>>>>> b96d684a2059a15f40b809539d3177836a287d2e
+=======
+>>>>>>> fix/history
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

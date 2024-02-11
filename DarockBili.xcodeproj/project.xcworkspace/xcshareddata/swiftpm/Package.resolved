@@ -122,8 +122,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImageWebPCoder",
       "state" : {
-        "revision" : "acfb824ca5cd9dbde2c43dc6b5a008c6757dee85",
-        "version" : "0.14.3"
+        "revision" : "db4603921b31a6ce0f8c26d36d6a3fffc2dba481",
+        "version" : "0.14.2"
       }
     },
     {
