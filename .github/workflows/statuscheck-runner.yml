@@ -69,8 +69,6 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1.2.2
         with:
           workflow: status-check.yml
-          ref: ${{ needs.get-head-sha.outputs.psha }}
-          repo: ${{ needs.get-head-sha.outputs.repository }}
           inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}", "repository": "${{ needs.get-head-sha.outputs.repository }}", "lsha": "${{ needs.get-head-sha.outputs.lsha }}" }'
   call-company-export-workflow:
     name: Call Company Export Overflow
@@ -86,8 +84,6 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1.2.2
         with:
           workflow: company-export.yml
-          ref: ${{ needs.get-head-sha.outputs.psha }}
-          repo: ${{ needs.get-head-sha.outputs.repository }}
           inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}", "repository": "${{ needs.get-head-sha.outputs.repository }}", "lsha": "${{ needs.get-head-sha.outputs.lsha }}" }'
   call-tf-deploy-workflow:
     name: Call TestFlight Internal Deploy Overflow
@@ -103,6 +99,4 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1.2.2
         with:
           workflow: tf.yml
-          ref: ${{ needs.get-head-sha.outputs.psha }}
-          repo: ${{ needs.get-head-sha.outputs.repository }}
           inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}", "repository": "${{ needs.get-head-sha.outputs.repository }}", "lsha": "${{ needs.get-head-sha.outputs.lsha }}" }'
