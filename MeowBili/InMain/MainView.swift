@@ -35,7 +35,6 @@ struct MainView: View {
     @State var userFaceUrl = ""
     @State var username = ""
     @State var userSign = ""
-    @State var isSearchPresented = false
     @State var isNetworkFixPresented = false
     @State var isLoginPresented = false
     @State var userList1: [Any] = []
@@ -46,7 +45,6 @@ struct MainView: View {
     var body: some View {
         MainViewMain()
             .navigationBarTitleDisplayMode(.large)
-            .sheet(isPresented: $isSearchPresented, content: {SearchMainView()})
             .sheet(isPresented: $isNetworkFixPresented, content: {NetworkFixView()})
             .sheet(isPresented: $isLoginPresented, content: {LoginView()})
             .toolbar {
@@ -100,7 +98,6 @@ struct MainView: View {
         @AppStorage("UpdateTipIgnoreVersion") var updateTipIgnoreVersion = ""
         @AppStorage("IsShowNetworkFixing") var isShowNetworkFixing = true
         @State var videos = [[String: String]]()
-        @State var isSearchPresented = false
         @State var notice = ""
         @State var isNetworkFixPresented = false
         @State var isFirstLoaded = false
@@ -151,41 +148,29 @@ struct MainView: View {
                         }
                     }
                     Section {
-                        Button(action: {
-                            isSearchPresented = true
-                        }, label: {
+                        NavigationLink(destination: {SearchMainView()}, label: {
                             HStack {
                                 Image(systemName: "magnifyingglass")
                                 Text("Home.search")
                             }
                             .foregroundColor(.gray)
                         })
-                        .sheet(isPresented: $isSearchPresented, content: {SearchMainView()})
                     }
                     if videos.count != 0 {
                         Section {
-                            autoreleasepool {
-                                ForEach(0...videos.count - 1, id: \.self) { i in
-                                    VideoCard(videos[i])
-                                        .accessibility(identifier: "SuggestVideo")
-                                }
+                            ForEach(0...videos.count - 1, id: \.self) { i in
+                                VideoCard(videos[i])
+                                    .onAppear {
+                                        if i == videos.count - 1 {
+                                            LoadNewVideos()
+                                        }
+                                    }
                             }
                         }
                         Section {
-                            Button(action: {
-                                LoadNewVideos()
-                            }, label: {
-                                if !isFailedToLoad {
-                                    if !isLoadingNew {
-                                        Text("Home.more")
-                                            .bold()
-                                    } else {
-                                        ProgressView()
-                                    }
-                                } else {
-                                    Label("Home.more.error", systemImage: "arrow.clockwise")
-                                }
-                            })
+                            if isLoadingNew {
+                                ProgressView()
+                            }
                         }
                     } else if isFailedToLoad {
                         Button {
@@ -231,7 +216,7 @@ struct MainView: View {
                 "cookie": "SESSDATA=\(sessdata)",
                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             ]
-            biliWbiSign(paramEncoded: "ps=\(isInLowBatteryMode ? 10 :  30)".base64Encoded()) { signed in
+            biliWbiSign(paramEncoded: "ps=30".base64Encoded()) { signed in
                 if let signed {
                     debugPrint(signed)
                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/wbi/index/top/feed/rcmd?\(signed)", headers: headers) { respJson, isSuccess in

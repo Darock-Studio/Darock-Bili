@@ -91,12 +91,12 @@ struct HistoryView: View {
                     if isSuccess {
                         debugPrint(respJson)
                         if !CheckBApiError(from: respJson) { return }
-                        guard respJson["data"].dictionary != nil else {
+                        let datas = respJson["data"]
+                        if datas[0]["business"].string == nil {
                             hasData = false
                             isLoaded = true
                             return
                         }
-                        let datas = respJson["data"]
                         for data in datas {
                             let type = data.1["business"].string ?? "archive"
                             if type == "archive" {

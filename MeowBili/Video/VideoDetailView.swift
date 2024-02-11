@@ -39,6 +39,7 @@ struct VideoDetailView: View {
     @AppStorage("bili_jct") var biliJct = ""
     @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
     @AppStorage("VideoGetterSource") var videoGetterSource = "official"
+    @AppStorage("IsDanmakuEnabled") var isDanmakuEnabled = true
     @State var isDecoded = false
     @State var isLiked = false
     @State var isCoined = false
@@ -70,13 +71,24 @@ struct VideoDetailView: View {
     var body: some View {
         VStack {
             if isDecoded {
-                VideoPlayerView()
+                VideoPlayerView(isDanmakuEnabled: $isDanmakuEnabled)
                     .frame(height: 240)
             } else {
                 Rectangle()
                     .frame(height: 240)
                     .redacted(reason: .placeholder)
             }
+            HStack {
+                Spacer()
+                Button(action: {
+                    isDanmakuEnabled.toggle()
+                }, label: {
+                    Text(isDanmakuEnabled ? "" : "")
+                        .font(.custom("bilibili", size: 28))
+                        .foregroundColor(isDanmakuEnabled ? .accentColor : .gray)
+                })
+            }
+            .padding(.horizontal)
             VStack {
                 Picker("", selection: $currentDetailSelection) {
                     Text("详情").tag(1)
@@ -86,7 +98,7 @@ struct VideoDetailView: View {
                     }
                 }
                 .pickerStyle(.segmented)
-                
+                .padding(.horizontal)
                 if currentDetailSelection == 1 {
                     ScrollView {
                         VStack {
@@ -241,7 +253,8 @@ struct VideoDetailView: View {
                                             RoundedRectangle(cornerRadius: 12)
                                                 .foregroundStyle(isLiked ? Color(hex: 0xfa678e) : Color.gray.opacity(0.35))
                                             VStack {
-                                                Image(systemName: isLiked ? "hand.thumbsup.fill" : "hand.thumbsup")
+                                                Text(isLiked ? "" : "")
+                                                    .font(.custom("bilibili", size: 20))
                                                     .foregroundColor(isLiked ? .white : (colorScheme == .dark ? .white : .black))
                                                 Text(stat["Like"]?.shorter() ?? "")
                                                     .font(.system(size: 11))
@@ -262,9 +275,9 @@ struct VideoDetailView: View {
                                             RoundedRectangle(cornerRadius: 12)
                                                 .foregroundStyle(isCoined ? Color(hex: 0xfa678e) : Color.gray.opacity(0.35))
                                             VStack {
-                                                Image(systemName: isCoined ? "b.circle.fill" : "b.circle")
+                                                Text(isCoined ? "" : "")
+                                                    .font(.custom("bilibili", size: 20))
                                                     .foregroundColor(isCoined ? .white : (colorScheme == .dark ? .white : .black))
-                                                    .bold()
                                                 Text(stat["Coin"]?.shorter() ?? "")
                                                     .font(.system(size: 11))
                                                     .foregroundColor(isCoined ? .white : (colorScheme == .dark ? .white : .black))
@@ -275,7 +288,10 @@ struct VideoDetailView: View {
                                             .padding(.vertical, 5)
                                         }
                                     })
-                                    .sheet(isPresented: $isCoinViewPresented, content: {VideoThrowCoinView(bvid: videoDetails["BV"]!)})
+                                    .sheet(isPresented: $isCoinViewPresented, content: {
+                                        VideoThrowCoinView(bvid: videoDetails["BV"]!)
+                                            .presentationDetents([.medium])
+                                    })
                                     Button(action: {
                                         isFavoriteChoosePresented = true
                                     }, label: {
@@ -283,7 +299,8 @@ struct VideoDetailView: View {
                                             RoundedRectangle(cornerRadius: 12)
                                                 .foregroundStyle(isFavoured ? Color(hex: 0xfa678e) : Color.gray.opacity(0.35))
                                             VStack {
-                                                Image(systemName: isFavoured ? "star.fill" : "star")
+                                                Text(isFavoured ? "" : "")
+                                                    .font(.custom("bilibili", size: 20))
                                                     .foregroundColor(isFavoured ? .white : (colorScheme == .dark ? .white : .black))
                                                 Text(stat["Favorite"]?.shorter() ?? "")
                                                     .font(.system(size: 11))
@@ -506,7 +523,7 @@ struct VideoDetailView: View {
                 DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
                     if !CheckBApiError(from: respJson) { return }
                     let cid = respJson["data"]["pages"][0]["cid"].int64!
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers) { respJson, isSuccess in
+                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?bvid=\(videoDetails["BV"]!)&cid=\(cid)&qn=\(sessdata == "" ? 64 : 80)", headers: headers) { respJson, isSuccess in
                         if !CheckBApiError(from: respJson) { return }
                         VideoDetailView.willPlayVideoLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
                         VideoDetailView.willPlayVideoCID = cid
@@ -516,7 +533,7 @@ struct VideoDetailView: View {
                     }
                 }
             } else if videoGetterSource == "injahow" {
-                DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=1&type=video&q=32&format=mp4&otype=url") { respStr, isSuccess in
+                DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=1&type=video&q=80&format=mp4&otype=url") { respStr, isSuccess in
                     if isSuccess {
                         VideoDetailView.willPlayVideoLink = respStr
                         VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
@@ -724,10 +741,6 @@ struct VideoDetailView: View {
                 }
             }
             .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
-            .sheet(isPresented: $isVideoPlayerPresented, content: {
-                VideoPlayerView()
-                    .navigationBarHidden(true)
-            })
         }
     }
 }

@@ -25,17 +25,21 @@ struct AboutView: View {
             TabView {
                 AboutApp()
                     .navigationTitle("About")
+                    .tabItem {
+                        Label("About", systemImage: "info.circle.fill")
+                    }
                 AboutCredits()
                     .navigationTitle("About.credits")
-//                    OpenSourceView()
-//                        .navigationTitle("开源组件许可")
+                    .tabItem {
+                        Label("About.credits", systemImage: "person.3.sequence.fill")
+                    }
             }
         }
     }
 }
 
 struct AboutApp: View {
-    let AppIconLength: CGFloat = 70
+    let AppIconLength: CGFloat = 140
     var body: some View {
         VStack(alignment: .center) {
             Image("AppIconImage")
@@ -44,14 +48,18 @@ struct AboutApp: View {
                 .mask(Circle())
             Text("About.meowbili")
                 .bold()
-                .font(.title3)
+                .font(.title2)
             Group {
                 Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)")
-                if debug {
-                    Text(CodingTime.getCodingTime())
-                } else {
-                    Text("\(CodingTime.getCodingTime().components(separatedBy: " ")[0] + " " + CodingTime.getCodingTime().components(separatedBy: " ")[1] + " " +  CodingTime.getCodingTime().components(separatedBy: " ")[2])")
+                    .font(.system(size: 18))
+                Group {
+                    if debug {
+                        Text(CodingTime.getCodingTime())
+                    } else {
+                        Text("\(CodingTime.getCodingTime().components(separatedBy: " ")[0] + " " + CodingTime.getCodingTime().components(separatedBy: " ")[1] + " " +  CodingTime.getCodingTime().components(separatedBy: " ")[2])")
+                    }
                 }
+                .font(.system(size: 18))
             }
             .font(.caption)
             .monospaced()
@@ -74,31 +82,30 @@ struct AboutCredits: View {
     @State var isGenshin = false
     @State var genshinOverlayTextOpacity: CGFloat = 0.0
     var body: some View {
-        NavigationStack {
-            List {
-                Section {
-                    Text("WindowsMEMZ")
-                    Text("Lightning-Lion")
-                    Text("Linecom")
-                    Text("令枫")
-                    Text("ThreeManager785")
-                    Text("Dignite")
-                    Text("-- And You --")
-                        .sheet(isPresented: $isEasterEgg1Presented, content: {EasterEgg1View(isGenshin: $isGenshin)})
-                        .onTapGesture(count: 10) {
-                            isEasterEgg1Presented = true
-                        }
-                }
-                Section {
-                    NavigationLink(destination: {
-                        OpenSourceView()
-                            .navigationTitle("About.open-source")
-                    }, label: {
-                        Text("About.open-source")
-                    })
-                }
+        List {
+            Section {
+                Text("WindowsMEMZ")
+                Text("Lightning-Lion")
+                Text("Linecom")
+                Text("令枫")
+                Text("ThreeManager785")
+                Text("Dignite")
+                Text("-- And You --")
+                    .sheet(isPresented: $isEasterEgg1Presented, content: {EasterEgg1View(isGenshin: $isGenshin)})
+                    .onTapGesture(count: 10) {
+                        isEasterEgg1Presented = true
+                    }
+            }
+            Section {
+                NavigationLink(destination: {
+                    OpenSourceView()
+                        .navigationTitle("About.open-source")
+                }, label: {
+                    Text("About.open-source")
+                })
             }
         }
+        .navigationTitle("About.credits")
         .navigationBarHidden(isGenshin)
         .overlay {
             if isGenshin {
@@ -141,6 +148,7 @@ struct AboutCredits: View {
                     Text("About.confirm")
                 })
             }
+            .presentationDetents([.medium])
         }
     }
 }
@@ -198,7 +206,11 @@ struct OpenSourceView: View {
             """
     var body: some View {
         ScrollView {
-            Text(openSourceTexts)
+            HStack {
+                Spacer()
+                Text(openSourceTexts)
+                Spacer()
+            }
         }
     }
 }

@@ -31,18 +31,21 @@ struct SearchMainView: View {
         NavigationStack {
             List {
                 Section {
-                    TextField("Search.\(Image(systemName: "magnifyingglass"))", text: $searchText)
-                        .onSubmit {
-                            isSearchPresented = true
-                            if searchText != (searchHistory.first ?? "") {
-                                UserDefaults.standard.set([searchText] + searchHistory, forKey: "SearchHistory")
+                    VStack {
+                        NavigationLink("", destination: SearchView(keyword: searchText), isActive: $isSearchPresented)
+                            .frame(width: 0, height: 0)
+                            .hidden()
+                        TextField("Search.\(Image(systemName: "magnifyingglass"))", text: $searchText)
+                            .onSubmit {
+                                isSearchPresented = true
+                                if searchText != (searchHistory.first ?? "") {
+                                    UserDefaults.standard.set([searchText] + searchHistory, forKey: "SearchHistory")
+                                }
                             }
-                        }
-                        .sheet(isPresented: $isSearchPresented, content: {NavigationStack { SearchView(keyword: searchText) }})
-                        .onDisappear {
-                            searchText = ""
-                        }
-                        .accessibilityIdentifier("SearchInput")
+                            .onDisappear {
+                                searchText = ""
+                            }
+                    }
                     if debug {
                         Button(action: {
                             searchText = "Darock"
@@ -105,122 +108,123 @@ struct SearchView: View {
                     Text("Search.type.bangumi").tag(SearchType.bangumi)
                     Text("Search.type.live").tag(SearchType.liveRoom)
                 }
-                .pickerStyle(.navigationLink)
-                .buttonBorderShape(.roundedRectangle(radius: 16))
                 .onChange(of: searchType) { value in
                     NewSearch(keyword: keyword, type: value, clear: true)
                 }
                 Divider()
-                if searchType == .video {
-                    if videos.count != 0 {
-                        ForEach(0...videos.count - 1, id: \.self) { i in
-                            VideoCard(videos[i])
+                Group {
+                    if searchType == .video {
+                        if videos.count != 0 {
+                            ForEach(0...videos.count - 1, id: \.self) { i in
+                                VideoCard(videos[i])
+                            }
+                        } else if isNoResult {
+                            Text("Search.no-result")
                         }
-                    } else if isNoResult {
-                        Text("Search.no-result")
-                    }
-                } else if searchType == .user {
-                    if users.count != 0 {
-                        ForEach(0..<users.count, id: \.self) { i in
-                            VStack {
-                                HStack {
-                                    WebImage(url: URL(string: users[i]["Pic"]! as! String + "@30w"), options: [.progressiveLoad])
-                                        .cornerRadius(100)
-                                    VStack {
-                                        NavigationLink("", isActive: $isUserDetailPresented[i], destination: {UserDetailView(uid: users[i]["ID"]! as! String)})
-                                            .frame(width: 0, height: 0)
-                                        HStack {
-                                            Text(users[i]["Name"]! as! String)
-                                                .font(.system(size: 14, weight: .bold))
+                    } else if searchType == .user {
+                        if users.count != 0 {
+                            ForEach(0..<users.count, id: \.self) { i in
+                                VStack {
+                                    HStack {
+                                        WebImage(url: URL(string: users[i]["Pic"]! as! String + "@30w"), options: [.progressiveLoad])
+                                            .cornerRadius(100)
+                                        VStack {
+                                            NavigationLink("", isActive: $isUserDetailPresented[i], destination: {UserDetailView(uid: users[i]["ID"]! as! String)})
+                                                .frame(width: 0, height: 0)
+                                            HStack {
+                                                Text(users[i]["Name"]! as! String)
+                                                    .font(.system(size: 14, weight: .bold))
+                                                    .lineLimit(1)
+                                            }
+                                            Text("Account.videos.\(Int(users[i]["VideoCount"]! as! String) ?? 0)")
+                                                .font(.system(size: 12))
+                                                .foregroundColor(.gray)
                                                 .lineLimit(1)
                                         }
-                                        Text("Account.videos.\(Int(users[i]["VideoCount"]! as! String) ?? 0)")
-                                            .font(.system(size: 12))
-                                            .foregroundColor(.gray)
-                                            .lineLimit(1)
+                                        Spacer()
                                     }
-                                    Spacer()
-                                }
-                                .padding(.horizontal, 5)
-                                .onTapGesture {
-                                    isUserDetailPresented[i] = true
-                                }
-                                if (users[i]["Videos"]! as! Array<Dictionary<String, String>>).count != 0 {
-                                    ForEach(0..<(users[i]["Videos"]! as! Array<Dictionary<String, String>>).count, id: \.self) { j in
-                                        VideoCard((users[i]["Videos"]! as! Array<Dictionary<String, String>>)[j])
-                                            .padding(.horizontal, 5)
+                                    .padding(.horizontal, 5)
+                                    .onTapGesture {
+                                        isUserDetailPresented[i] = true
                                     }
-                                    Divider()
-                                    Spacer()
-                                        .frame(height: 20)
+                                    if (users[i]["Videos"]! as! Array<Dictionary<String, String>>).count != 0 {
+                                        ForEach(0..<(users[i]["Videos"]! as! Array<Dictionary<String, String>>).count, id: \.self) { j in
+                                            VideoCard((users[i]["Videos"]! as! Array<Dictionary<String, String>>)[j])
+                                                .padding(.horizontal, 5)
+                                        }
+                                        Divider()
+                                        Spacer()
+                                            .frame(height: 20)
+                                    }
                                 }
                             }
+                        } else if isNoResult {
+                            Text("Search.no-result")
                         }
-                    } else if isNoResult {
-                        Text("Search.no-result")
-                    }
-                } else if searchType == .article {
-                    if articles.count != 0 {
-                        ForEach(0..<articles.count, id: \.self) { i in
-                            Button(action: {
-                                let session = ASWebAuthenticationSession(url: URL(string: "https://www.bilibili.com/read/cv\(articles[i]["CV"]!)")!, callbackURLScheme: nil) { _, _ in
-                                    return
-                                }
-                                session.prefersEphemeralWebBrowserSession = true
-                                session.start()
-                            }, label: {
-                                VStack {
-                                    Text(articles[i]["Title"]!)
-                                        .font(.system(size: 16, weight: .bold))
-                                        .lineLimit(3)
-                                    HStack {
-                                        VStack {
-                                            Text(articles[i]["Summary"]!)
-                                                .font(.system(size: 10, weight: .bold))
-                                                .lineLimit(3)
-                                                .foregroundColor(.gray)
-                                            HStack {
-                                                Text(articles[i]["Type"]!)
-                                                    .font(.system(size: 10))
-                                                    .lineLimit(1)
-                                                    .foregroundColor(.gray)
-                                                Label(articles[i]["View"]!, systemImage: "eye.fill")
-                                                    .font(.system(size: 10))
-                                                    .lineLimit(1)
-                                                    .foregroundColor(.gray)
-                                                Label(articles[i]["Like"]!, systemImage: "hand.thumbsup.fill")
-                                                    .font(.system(size: 10))
-                                                    .lineLimit(1)
-                                                    .foregroundColor(.gray)
-                                            }
-                                        }
-                                        WebImage(url: URL(string: articles[i]["Pic"]! + "@60w"), options: [.progressiveLoad])
-                                            .cornerRadius(5)
+                    } else if searchType == .article {
+                        if articles.count != 0 {
+                            ForEach(0..<articles.count, id: \.self) { i in
+                                Button(action: {
+                                    let session = ASWebAuthenticationSession(url: URL(string: "https://www.bilibili.com/read/cv\(articles[i]["CV"]!)")!, callbackURLScheme: nil) { _, _ in
+                                        return
                                     }
-                                }
-                            })
-                            .buttonBorderShape(.roundedRectangle(radius: 14))
+                                    session.prefersEphemeralWebBrowserSession = true
+                                    session.start()
+                                }, label: {
+                                    VStack {
+                                        Text(articles[i]["Title"]!)
+                                            .font(.system(size: 16, weight: .bold))
+                                            .lineLimit(3)
+                                        HStack {
+                                            VStack {
+                                                Text(articles[i]["Summary"]!)
+                                                    .font(.system(size: 10, weight: .bold))
+                                                    .lineLimit(3)
+                                                    .foregroundColor(.gray)
+                                                HStack {
+                                                    Text(articles[i]["Type"]!)
+                                                        .font(.system(size: 10))
+                                                        .lineLimit(1)
+                                                        .foregroundColor(.gray)
+                                                    Label(articles[i]["View"]!, systemImage: "eye.fill")
+                                                        .font(.system(size: 10))
+                                                        .lineLimit(1)
+                                                        .foregroundColor(.gray)
+                                                    Label(articles[i]["Like"]!, systemImage: "hand.thumbsup.fill")
+                                                        .font(.system(size: 10))
+                                                        .lineLimit(1)
+                                                        .foregroundColor(.gray)
+                                                }
+                                            }
+                                            WebImage(url: URL(string: articles[i]["Pic"]! + "@60w"), options: [.progressiveLoad])
+                                                .cornerRadius(5)
+                                        }
+                                    }
+                                })
+                                .buttonBorderShape(.roundedRectangle(radius: 14))
+                            }
+                        } else if isNoResult {
+                            Text("Search.no-result")
                         }
-                    } else if isNoResult {
-                        Text("Search.no-result")
-                    }
-                } else if searchType == .bangumi {
-                    if bangumis.count != 0 {
-                        ForEach(0..<bangumis.count, id: \.self) { i in
-                            BangumiCard(bangumis[i])
+                    } else if searchType == .bangumi {
+                        if bangumis.count != 0 {
+                            ForEach(0..<bangumis.count, id: \.self) { i in
+                                BangumiCard(bangumis[i])
+                            }
+                        } else if isNoResult {
+                            Text("Search.no-result")
                         }
-                    } else if isNoResult {
-                        Text("Search.no-result")
-                    }
-                } else if searchType == .liveRoom {
-                    if liverooms.count != 0 {
-                        ForEach(0..<liverooms.count, id: \.self) { i in
-                            LiveCard(liverooms[i])
+                    } else if searchType == .liveRoom {
+                        if liverooms.count != 0 {
+                            ForEach(0..<liverooms.count, id: \.self) { i in
+                                LiveCard(liverooms[i])
+                            }
+                        } else if isNoResult {
+                            Text("Search.no-result")
                         }
-                    } else if isNoResult {
-                        Text("Search.no-result")
                     }
                 }
+                .padding(.horizontal)
                 if videos.isEmpty && users.isEmpty && articles.isEmpty && bangumis.isEmpty && liverooms.isEmpty && !isNoResult {
                     ProgressView()
                 }

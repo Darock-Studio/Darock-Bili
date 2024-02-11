@@ -46,13 +46,12 @@ struct UserDetailView: View {
     @State var articalCount = 0
     @State var coinCount = -1
     @State var isFollowed = false
-    @State var isSendbMessagePresented = false
     @State var isInfoSheetPresented = false
     var body: some View {
         Group {
             TabView {
                 ScrollView {
-                    FirstPageBase(uid: uid, userFaceUrl: $userFaceUrl, username: $username, followCount: $followCount, fansCount: $fansCount, coinCount: $coinCount, isFollowed: $isFollowed, isSendbMessagePresented: $isSendbMessagePresented)
+                    FirstPageBase(uid: uid, userFaceUrl: $userFaceUrl, username: $username, followCount: $followCount, fansCount: $fansCount, coinCount: $coinCount, isFollowed: $isFollowed)
                         .offset(y: -10)
                         .navigationTitle(username)
                     SecondPageBase(officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign, userLevel: $userLevel, vipLabel: $vipLabel)
@@ -123,7 +122,6 @@ struct UserDetailView: View {
         @Binding var fansCount: Int
         @Binding var coinCount: Int
         @Binding var isFollowed: Bool
-        @Binding var isSendbMessagePresented: Bool
         @AppStorage("DedeUserID") var dedeUserID = ""
         @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
         @AppStorage("SESSDATA") var sessdata = ""
@@ -134,9 +132,17 @@ struct UserDetailView: View {
                     .frame(height: 20)
                 HStack {
                     Spacer()
-                    CachedAsyncImage(url: URL(string: userFaceUrl + "@50w_50h"))
-                        .cornerRadius(100)
-                        .frame(width: 50, height: 50)
+                    CachedAsyncImage(url: URL(string: userFaceUrl)) { phase in
+                        if let image = phase.image {
+                            image
+                                .resizable()
+                        } else {
+                            Circle()
+                                .redacted(reason: .placeholder)
+                        }
+                    }
+                    .clipShape(Circle())
+                    .frame(width: 150, height: 150)
                     Spacer()
                 }
                 HStack {
@@ -144,14 +150,14 @@ struct UserDetailView: View {
                     VStack {
                         if followCount != -1 {
                             Text(String(followCount))
-                                .font(.system(size: 14))
+                                .font(.system(size: 18))
                         } else {
                             Text("114")
-                                .font(.system(size: 14))
+                                .font(.system(size: 18))
                                 .redacted(reason: .placeholder)
                         }
                         Text("Account.subscribed")
-                            .font(.system(size: 12))
+                            .font(.system(size: 16))
                             .opacity(0.6)
                             .lineLimit(1)
                     }
@@ -159,64 +165,64 @@ struct UserDetailView: View {
                     VStack {
                         if fansCount != -1 {
                             Text(String(fansCount).shorter())
-                                .font(.system(size: 14))
+                                .font(.system(size: 18))
                         } else {
                             Text("114")
-                                .font(.system(size: 14))
+                                .font(.system(size: 18))
                                 .redacted(reason: .placeholder)
                         }
                         Text("Account.followers")
-                            .font(.system(size: 12))
+                            .font(.system(size: 16))
                             .opacity(0.6)
                             .lineLimit(1)
                     }
                     Spacer()
                 }
-//                .padding(.horizontal, 40)
-                if #unavailable(watchOS 10) {
-                    if dedeUserID == uid {
-                        HStack {
-                            Image(systemName: "b.circle")
-                                .font(.system(size: 12))
-                                .opacity(0.55)
-                                .offset(y: 1)
-                            Text(String(coinCount))
-                                .font(.system(size: 14))
-                        }
+                if dedeUserID == uid {
+                    HStack {
+                        Text("")
+                            .font(.custom("bilibili", size: 20))
+                            .opacity(0.55)
+                            .offset(y: 1)
+                        Text(String(coinCount))
+                            .font(.system(size: 20))
                     }
-                    Button(action: {
-                        let headers: HTTPHeaders = [
-                            "cookie": "SESSDATA=\(sessdata);",
-                            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                        ]
-                        AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
-                            debugPrint(response)
-                            let json = try! JSON(data: response.data!)
-                            let code = json["code"].int!
-                            if code == 0 {
-                                AlertKitAPI.present(title: isFollowed ? String(localized: "Account.tips.unfollowed") : String(localized: "Account.tips.followed"), icon: .done, style: .iOS17AppleMusic, haptic: .success)
-                                isFollowed.toggle()
-                            } else {
-                                AlertKitAPI.present(title: json["message"].string!, icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                }
+                HStack {
+                    if dedeUserID != uid {
+                        Button(action: {
+                            let headers: HTTPHeaders = [
+                                "cookie": "SESSDATA=\(sessdata);",
+                                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                            ]
+                            AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
+                                debugPrint(response)
+                                let json = try! JSON(data: response.data!)
+                                let code = json["code"].int!
+                                if code == 0 {
+                                    AlertKitAPI.present(title: isFollowed ? String(localized: "Account.tips.unfollowed") : String(localized: "Account.tips.followed"), icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                    isFollowed.toggle()
+                                } else {
+                                    AlertKitAPI.present(title: json["message"].string!, icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                                }
                             }
-                        }
-                    }, label: {
-                        HStack {
-                            Image(systemName: isFollowed ? "person.badge.minus" : "person.badge.plus")
-                            Text(isFollowed ? String(localized: "Account.unfollow") : String(localized: "Account.follow"))
-                        }
-                    })
-                    NavigationLink("", isActive: $isSendbMessagePresented, destination: {bMessageSendView(uid: Int64(uid)!, username: username)})
-                        .frame(width: 0, height: 0)
-                    Button(action: {
-                        isSendbMessagePresented = true
-                    }, label: {
+                        }, label: {
+                            HStack {
+                                Image(systemName: isFollowed ? "person.badge.minus" : "person.badge.plus")
+                                Text(isFollowed ? String(localized: "Account.unfollow") : String(localized: "Account.follow"))
+                            }
+                        })
+                        .buttonStyle(.borderedProminent)
+                    }
+                    NavigationLink(destination: {bMessageSendView(uid: Int64(uid)!, username: username)}, label: {
                         HStack {
                             Image(systemName: "ellipsis.bubble")
                             Text("Account.direct-message")
                         }
                     })
+                    .buttonStyle(.borderedProminent)
                 }
+                .padding()
             }
         }
     }

@@ -38,8 +38,6 @@ var isShowMemoryInScreen = false
 
 var isInOfflineMode = false
 
-var isInLowBatteryMode = false
-
 // BUVID
 var globalBuvid3 = ""
 var globalBuvid4 = ""
@@ -111,7 +109,6 @@ struct DarockBili_Watch_AppApp: App {
     @AppStorage("notifyMinute") var notifyMinute = 0
     @AppStorage("IsScreenTimeEnabled") var isScreenTimeEnabled = true
     @State var screenTimeCaculateTimer: Timer? = nil
-    @State var isMemoryWarningPresented = false
     @State var showTipText = ""
     @State var showTipSymbol = ""
     @State var tipBoxOffset: CGFloat = 80
@@ -130,26 +127,13 @@ struct DarockBili_Watch_AppApp: App {
                 SignalErrorView()
             } else {
                 ContentView()
-                    .sheet(isPresented: $isMemoryWarningPresented, content: {MemoryWarningView()})
                     .onAppear {
-                        isInLowBatteryMode = UserDefaults.standard.bool(forKey: "IsInLowBatteryMode")
-                        
                         Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
                             showTipText = pShowTipText
                             showTipSymbol = pShowTipSymbol
-                            isLowBatteryMode = isInLowBatteryMode
                             UserDefaults.standard.set(isLowBatteryMode, forKey: "IsInLowBatteryMode")
                             Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { timer in
                                 tipBoxOffset = pTipBoxOffset
-                                timer.invalidate()
-                            }
-                            
-                            isOfflineMode = isInOfflineMode
-                        }
-                        
-                        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { timer in
-                            if getMemory() > 240.0 {
-                                isMemoryWarningPresented = true
                                 timer.invalidate()
                             }
                         }
@@ -281,7 +265,21 @@ struct DarockBili_Watch_AppApp: App {
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.playback)
+            try audioSession.setActive(true, options: [])
+        } catch {
+            print("Setting category to AVAudioSessionCategoryPlayback failed.")
+        }
+        
+        return true
+    }
     
+    func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
+        AlertKitAPI.present(title: "低内存警告", subtitle: "喵哩喵哩收到了低内存警告", icon: .error, style: .iOS17AppleMusic, haptic: .warning)
+    }
 }
 
 func signalErrorRecord(_ errorNum: Int32, _ errorSignal: String) {
