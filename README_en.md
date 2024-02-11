@@ -1,4 +1,4 @@
-Language: <a href="./README.md">简体中文</a>｜English
+Language: <a href="./README.md">简体中文</a>｜English｜<a href="./README_ja.md">日本語</a>
 <p align="center">
     <img src="./Artwork/rm-ico.png" width="200" height="200">
 </p>
