@@ -1,7 +1,7 @@
 # CI Docs
 What is CI? It means *Continuous integration*. Speak in easily, this is a machine that can compiling and more.
 
-CI Darock using is from Github Actions and XCode Cloud. Xcode Cloud's call is automatic, and you cannot call it manually. So this docs is mainly introduce Github Actions.
+CI Darock using is from Github Actions and Xcode Cloud. Xcode Cloud's call is automatic, and you cannot call it manually. So this docs is mainly introduce Github Actions.
 ## Call
 You can commit under Pull Request to call CI.
 ### compileable Check
