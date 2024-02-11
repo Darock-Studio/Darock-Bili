@@ -20,7 +20,6 @@ import UIKit
 import AVKit
 import SwiftUI
 import Marquee
-import SFSymbol
 import DarockKit
 import Alamofire
 import SwiftyJSON
@@ -95,7 +94,7 @@ struct VideoDetailView: View {
                                 if honors.count >= 4 {
                                     if honors[3] != "" {
                                         HStack {
-                                            Image(systemName: SFSymbol.Flame.fill.rawValue)
+                                            Image(systemName: "flame.fill")
                                             Text("Video.trending")
                                         }
                                         .font(.system(size: 11))

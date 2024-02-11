@@ -33,8 +33,9 @@ struct VideoPlayerView: View {
     @State var playerTimer: Timer?
     @State var player: AVPlayer!
     @State var isFinishedInit = false
+    @State var willBeginFullScreenPresentation = false
     var body: some View {
-        AZVideoPlayer(player: player)
+        AZVideoPlayer(player: player, willBeginFullScreenPresentationWithAnimationCoordinator: willBeginFullScreen, willEndFullScreenPresentationWithAnimationCoordinator: willEndFullScreen)
             .onAppear {
                 if !isFinishedInit {
                     isFinishedInit = true
@@ -65,8 +66,23 @@ struct VideoPlayerView: View {
                 }
             }
             .onDisappear {
+                guard !willBeginFullScreenPresentation else {
+                    willBeginFullScreenPresentation = false
+                    return
+                }
                 playerTimer?.invalidate()
+                player?.pause()
+                player?.seek(to: .zero)
             }
+    }
+    
+    func willBeginFullScreen(_ playerViewController: AVPlayerViewController, _ coordinator: UIViewControllerTransitionCoordinator) {
+        willBeginFullScreenPresentation = true
+    }
+    func willEndFullScreen(_ playerViewController: AVPlayerViewController,_ coordinator: UIViewControllerTransitionCoordinator) {
+        // This is a static helper method provided by AZVideoPlayer to keep
+        // the video playing if it was playing when full screen presentation ended
+        AZVideoPlayer.continuePlayingIfPlaying(player, coordinator)
     }
 }
 

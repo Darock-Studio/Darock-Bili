@@ -18,7 +18,6 @@
 
 import SwiftUI
 import Marquee
-import SFSymbol
 import DarockKit
 import Alamofire
 import SwiftyJSON

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,7 +16,7 @@
 		8C72E3392B66A76A0087486E /* DynamicSendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C72E3382B66A76A0087486E /* DynamicSendView.swift */; };
 		8C81A8EA2B620D130045E986 /* BPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8C81A8E92B620D130045E986 /* BPlayer */; };
 		8C8CA05A2B6108460020DEDD /* Bangumi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8CA0592B6108460020DEDD /* Bangumi.swift */; };
-		8CA388842B77EF7F00F5F91F /* AZVideoPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA388832B77EF7F00F5F91F /* AZVideoPlayer */; };
+		8CA388992B789A0300F5F91F /* AZVideoPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA388982B789A0300F5F91F /* AZVideoPlayer */; };
 		8CA7CBC32B77AC4A008E587F /* MeowBiliApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC22B77AC4A008E587F /* MeowBiliApp.swift */; };
 		8CA7CBC52B77AC4A008E587F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC42B77AC4A008E587F /* ContentView.swift */; };
 		8CA7CBC72B77AC4C008E587F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC62B77AC4C008E587F /* Assets.xcassets */; };
@@ -42,7 +42,6 @@
 		8CA7CC072B77AC93008E587F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC062B77AC93008E587F /* Alamofire */; };
 		8CA7CC092B77AC93008E587F /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC082B77AC93008E587F /* Marquee */; };
 		8CA7CC0B2B77AC93008E587F /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC0A2B77AC93008E587F /* SwiftDate */; };
-		8CA7CC0D2B77AC93008E587F /* SFSymbol in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC0C2B77AC93008E587F /* SFSymbol */; };
 		8CA7CC0F2B77AC93008E587F /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC0E2B77AC93008E587F /* ZipArchive */; };
 		8CA7CC112B77AC93008E587F /* EFQRCode in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC102B77AC93008E587F /* EFQRCode */; };
 		8CA7CC132B77AC93008E587F /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC122B77AC93008E587F /* SDWebImageSwiftUI */; };
@@ -54,7 +53,6 @@
 		8CA7CC1F2B77AC93008E587F /* Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC1E2B77AC93008E587F /* Dynamic */; };
 		8CA7CC212B77AC93008E587F /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC202B77AC93008E587F /* SwiftyJSON */; };
 		8CA7CC232B77AC93008E587F /* DarockKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC222B77AC93008E587F /* DarockKit */; };
-		8CA7CC272B77AC93008E587F /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC262B77AC93008E587F /* Starscream */; };
 		8CA7CC292B77ACE8008E587F /* SkinDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4468A1F2B4FC24A002CCEB2 /* SkinDownloadView.swift */; };
 		8CA7CC2A2B77ACE8008E587F /* WatchLaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4468A302B4FC24A002CCEB2 /* WatchLaterView.swift */; };
 		8CA7CC2B2B77ACE8008E587F /* UIExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44689FC2B4FC249002CCEB2 /* UIExt.swift */; };
@@ -414,16 +412,14 @@
 				8CA7CC172B77AC93008E587F /* SDWebImageSVGCoder in Frameworks */,
 				8CA7CC232B77AC93008E587F /* DarockKit in Frameworks */,
 				8CA7CC092B77AC93008E587F /* Marquee in Frameworks */,
-				8CA388842B77EF7F00F5F91F /* AZVideoPlayer in Frameworks */,
 				8CA7CC0B2B77AC93008E587F /* SwiftDate in Frameworks */,
 				8CA7CC1F2B77AC93008E587F /* Dynamic in Frameworks */,
 				8CA7CC212B77AC93008E587F /* SwiftyJSON in Frameworks */,
 				8CA7CC1B2B77AC93008E587F /* SwiftSoup in Frameworks */,
-				8CA7CC0D2B77AC93008E587F /* SFSymbol in Frameworks */,
+				8CA388992B789A0300F5F91F /* AZVideoPlayer in Frameworks */,
 				8CA7CC1D2B77AC93008E587F /* CachedAsyncImage in Frameworks */,
 				8CA7CC152B77AC93008E587F /* SDWebImageWebPCoder in Frameworks */,
 				8CA7CC112B77AC93008E587F /* EFQRCode in Frameworks */,
-				8CA7CC272B77AC93008E587F /* Starscream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -939,7 +935,6 @@
 				8CA7CC062B77AC93008E587F /* Alamofire */,
 				8CA7CC082B77AC93008E587F /* Marquee */,
 				8CA7CC0A2B77AC93008E587F /* SwiftDate */,
-				8CA7CC0C2B77AC93008E587F /* SFSymbol */,
 				8CA7CC0E2B77AC93008E587F /* ZipArchive */,
 				8CA7CC102B77AC93008E587F /* EFQRCode */,
 				8CA7CC122B77AC93008E587F /* SDWebImageSwiftUI */,
@@ -951,9 +946,8 @@
 				8CA7CC1E2B77AC93008E587F /* Dynamic */,
 				8CA7CC202B77AC93008E587F /* SwiftyJSON */,
 				8CA7CC222B77AC93008E587F /* DarockKit */,
-				8CA7CC262B77AC93008E587F /* Starscream */,
 				8CA7CCDE2B77BB5A008E587F /* AlertKit */,
-				8CA388832B77EF7F00F5F91F /* AZVideoPlayer */,
+				8CA388982B789A0300F5F91F /* AZVideoPlayer */,
 			);
 			productName = MeowBili;
 			productReference = 8CA7CBC02B77AC4A008E587F /* MeowBili.app */;
@@ -1104,7 +1098,7 @@
 				8C2337F82B63DBF3009665B1 /* XCRemoteSwiftPackageReference "bplayer" */,
 				8C372ED32B6CF079002033A1 /* XCRemoteSwiftPackageReference "Starscream" */,
 				8CA7CCDD2B77BB5A008E587F /* XCRemoteSwiftPackageReference "AlertKit" */,
-				8CA388822B77EF7F00F5F91F /* XCRemoteSwiftPackageReference "AZVideoPlayer" */,
+				8CA388972B789A0300F5F91F /* XCLocalSwiftPackageReference "../AZVideoPlayer" */,
 			);
 			productRefGroup = B44689CB2B4FC15A002CCEB2 /* Products */;
 			projectDirPath = "";
@@ -1359,7 +1353,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 405;
+				CURRENT_PROJECT_VERSION = 406;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1398,7 +1392,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 405;
+				CURRENT_PROJECT_VERSION = 406;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1435,7 +1429,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 405;
+				CURRENT_PROJECT_VERSION = 406;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1467,7 +1461,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 405;
+				CURRENT_PROJECT_VERSION = 406;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1620,7 +1614,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 405;
+				CURRENT_PROJECT_VERSION = 406;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1652,7 +1646,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 405;
+				CURRENT_PROJECT_VERSION = 406;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1684,7 +1678,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 405;
+				CURRENT_PROJECT_VERSION = 406;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				INFOPLIST_KEY_CFBundleDisplayName = DarockBili;
 				MARKETING_VERSION = 1.0.0;
@@ -1700,7 +1694,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 405;
+				CURRENT_PROJECT_VERSION = 406;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				INFOPLIST_KEY_CFBundleDisplayName = DarockBili;
 				MARKETING_VERSION = 1.0.0;
@@ -1762,6 +1756,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		8CA388972B789A0300F5F91F /* XCLocalSwiftPackageReference "../AZVideoPlayer" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../AZVideoPlayer;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		8C2337F82B63DBF3009665B1 /* XCRemoteSwiftPackageReference "bplayer" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -1777,14 +1778,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.0.6;
-			};
-		};
-		8CA388822B77EF7F00F5F91F /* XCRemoteSwiftPackageReference "AZVideoPlayer" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/adamzarn/AZVideoPlayer";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
 			};
 		};
 		8CA7CCDD2B77BB5A008E587F /* XCRemoteSwiftPackageReference "AlertKit" */ = {
@@ -1932,9 +1925,8 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = BPlayer;
 		};
-		8CA388832B77EF7F00F5F91F /* AZVideoPlayer */ = {
+		8CA388982B789A0300F5F91F /* AZVideoPlayer */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8CA388822B77EF7F00F5F91F /* XCRemoteSwiftPackageReference "AZVideoPlayer" */;
 			productName = AZVideoPlayer;
 		};
 		8CA7CBE42B77AC8A008E587F /* Alamofire */ = {
@@ -2037,11 +2029,6 @@
 			package = B4468A712B4FC5F1002CCEB2 /* XCRemoteSwiftPackageReference "SwiftDate" */;
 			productName = SwiftDate;
 		};
-		8CA7CC0C2B77AC93008E587F /* SFSymbol */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A742B4FC602002CCEB2 /* XCRemoteSwiftPackageReference "SFSymbol" */;
-			productName = SFSymbol;
-		};
 		8CA7CC0E2B77AC93008E587F /* ZipArchive */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B4468A792B4FC618002CCEB2 /* XCRemoteSwiftPackageReference "ZipArchive" */;
@@ -2096,11 +2083,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B4468A8D2B4FC8AC002CCEB2 /* XCRemoteSwiftPackageReference "DarockKit" */;
 			productName = DarockKit;
-		};
-		8CA7CC262B77AC93008E587F /* Starscream */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8C372ED32B6CF079002033A1 /* XCRemoteSwiftPackageReference "Starscream" */;
-			productName = Starscream;
 		};
 		8CA7CCDE2B77BB5A008E587F /* AlertKit */ = {
 			isa = XCSwiftPackageProductDependency;
