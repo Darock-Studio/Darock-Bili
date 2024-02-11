@@ -6,18 +6,18 @@ This docs can provide help on contribute
 If you don't know what can you help, you can start from checking issues. Resolve pronlems mentioned in issue, and：
 - Check commits under issue and Pull Request list. Ensure none is resolving this issue.
   
-  如果您看到一个 Pull Request 很久没有更新活动，您也可以开始尝试为此工作。
+  If you see a Pull Request with no activities for a long time, you also can try to working on this.
 - Commits under issue to explain you're working on this issue.
 ## Get Help
-处理问题时，您将可能遇到很多问题，例如，您可能会有这些问题：
-- 有关于 X 的文档吗？
-- 我在尝试 Build 时遇到了 X 错误，如何解决它？
-- 我不确定如何实现 X ，有什么建议以便我走出第一步吗？
-- 我应该为新的 X 创建一个单独的文件吗？
-- 我如何测试是否真的修复了此错误？
-- 如何使用 git 做 X ？
-其中的一些问题可以在我们的文档中找到答案，也许您有在文档中找不到的问题，没关系，还有一些方法可以取得帮助：
-- 开启一个 Issue 或在您工作的 Pull Request 下提问。
+When working on issues, you may get into troubles. For example, you may ran into following troubles：
+- Have documents for it?
+- An error occurred while building. How to reslove it?
+- I'm not sure about how to implement it. Have it something suggestions to make my first step?
+- Should I create a standalone file for it?
+- How to verify I really fixed this issue?
+- How to do it with Git?
+  Some questions can found the solution in our documents. Maybe you have some problems that cannot be found in our documents. It doesn't matter! There are some other ways to get help on questions:
+- Open an Issue or ask on your Pull Request.
 ## Open Pull Request
 Done all works? You can open a Pull Request now.
 ### Create Pull Request
@@ -30,16 +30,16 @@ If you not done yet，you can open a Draft Pull Request.
 We require completing all check list before merging. User with access can run check. Details at [CI Docs](/doc/dev/en-us/ci.md)
 
 ### Request Review
-在您准备好接受审查后，您可以在GitHub右侧要求 @WindowsMEMZ 审查您的代码
+After you ready for review, you can request @WindowsMEMZ for review on the right side of Github.
 
 ### Merging
-您可以要求拥有权限的用户进行合并。在完成更改后，请@一位拥有权限的用户并请求合并，他们将审核您的提交并进行合并。
+You can request everyone who have write access to merge. After completing changes, please @ a user who have access to request merge. They'll review your commit and merge.
 
 ## I Cannot Complete My Contribute!
-No problem! 这并不是件丢人的事。您只有有限的时间来为项目做贡献。如果可以，请在 Issue 或 Pull Request 下回复您将无法继续完成贡献。无需解释您为什么这样做，我们理解并尊重您，您应当为自己花更多时间。
+No problem! This is not a shame! You only have limited time to contribute. If you can, please commit to Issue or Pull Request to explain you cannot continue contributing. No reason required. We understand and respect you. You should spend more time on yourselves.
 
 ## My Pull Request was merged!
 
-Thanks for your contribute to Meowbili project.欢迎您继续多多帮助喵哩喵哩项目，无论是回答问题还是提交 Pull Request。
+Thanks for your contribute to Meowbili project. Welcome to contribute more to Meowbili. Whatever answering questions or opening Pull Request.
 
-在您做出了多个实质性的贡献后，您可以申请提交权限，这将使您能够更方便地贡献喵哩喵哩项目。
+After you contribute more time, you can request for a write access. This helps you easier to contribute to Meowbili.
