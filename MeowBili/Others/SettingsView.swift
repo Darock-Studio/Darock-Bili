@@ -1,8 +1,9 @@
 //
-//  SettingsView.swift
-//  DarockBili Watch App
 //
-//  Created by WindowsMEMZ on 2023/7/5.
+//  SettingsView.swift
+//  MeowBili
+//
+//  Created by memz233 on 2024/2/10.
 //
 //===----------------------------------------------------------------------===//
 //
@@ -17,7 +18,6 @@
 
 import Charts
 import SwiftUI
-import WatchKit
 import SwiftDate
 import DarockKit
 import AuthenticationServices
@@ -35,10 +35,11 @@ struct SettingsView: View {
                     HStack {
                         ZStack {
                             Color.gray
-                                .frame(width: 20, height: 20)
-                                .clipShape(Circle())
-                            Image(systemName: "play.circle")
-                                .font(.system(size: 12))
+                                .frame(width: 26, height: 26)
+                                .clipShape(RoundedRectangle(cornerRadius: 5))
+                            Image(systemName: "play.square")
+                                .font(.system(size: 16))
+                                .foregroundColor(.white)
                         }
                         Text("Settings.player")
                     }
@@ -47,58 +48,34 @@ struct SettingsView: View {
                     HStack {
                         ZStack {
                             Color.blue
-                                .frame(width: 20, height: 20)
-                                .clipShape(Circle())
+                                .frame(width: 26, height: 26)
+                                .clipShape(RoundedRectangle(cornerRadius: 5))
                             Image(systemName: "network")
-                                .font(.system(size: 12))
+                                .font(.system(size: 16))
                         }
                         Text("Settings.internet")
-                    }
-                })
-                NavigationLink(destination: {GestureSettingsView().navigationTitle("Settings.gesture")}, label: {
-                    HStack {
-                        ZStack {
-                            Color.blue
-                                .frame(width: 20, height: 20)
-                                .clipShape(Circle())
-                            Image(systemName: "hand.wave.fill")
-                                .font(.system(size: 12))
-                        }
-                        Text("Settings.gesture")
                     }
                 })
                 NavigationLink(destination: {ScreenTimeSettingsView().navigationTitle("Settings.screen-time")}, label: {
                     HStack {
                         ZStack {
                             Color.blue
-                                .frame(width: 20, height: 20)
-                                .clipShape(Circle())
+                                .frame(width: 26, height: 26)
+                                .clipShape(RoundedRectangle(cornerRadius: 5))
                             Image(systemName: "hourglass")
-                                .font(.system(size: 12))
+                                .font(.system(size: 16))
                         }
                         Text("Settings.screen-time")
-                    }
-                })
-                NavigationLink(destination: {BatterySettingsView().navigationTitle("Settings.battery")}, label: {
-                    HStack {
-                        ZStack {
-                            Color.green
-                                .frame(width: 20, height: 20)
-                                .clipShape(Circle())
-                            Image(systemName: "bolt.fill")
-                                .font(.system(size: 12))
-                        }
-                        Text("Settings.battery")
                     }
                 })
                 NavigationLink(destination: {SleepTimeView().navigationTitle("Settings.sleep")}, label: {
                     HStack {
                         ZStack {
                             Color.cyan
-                                .frame(width: 20, height: 20)
-                                .clipShape(Circle())
+                                .frame(width: 26, height: 26)
+                                .clipShape(RoundedRectangle(cornerRadius: 5))
                             Image(systemName: "bed.double.fill")
-                                .font(.system(size: 12))
+                                .font(.system(size: 14))
                         }
                         Text("Settings.sleep")
                     }
@@ -107,10 +84,10 @@ struct SettingsView: View {
                     HStack {
                         ZStack {
                             Color.purple
-                                .frame(width: 20, height: 20)
-                                .clipShape(Circle())
+                                .frame(width: 26, height: 26)
+                                .clipShape(RoundedRectangle(cornerRadius: 5))
                             Image(systemName: "exclamationmark")
-                                .font(.system(size: 12))
+                                .font(.system(size: 16))
                         }
                         Text("Settings.feedback")
                     }
@@ -121,24 +98,12 @@ struct SettingsView: View {
                     HStack {
                         ZStack {
                             Color.gray
-                                .frame(width: 20, height: 20)
-                                .clipShape(Circle())
+                                .frame(width: 26, height: 26)
+                                .clipShape(RoundedRectangle(cornerRadius: 5))
                             Image(systemName: "info")
-                                .font(.system(size: 12))
+                                .font(.system(size: 16))
                         }
                         Text("Settings.about")
-                    }
-                })
-                NavigationLink(destination: {SoftwareUpdateView().navigationTitle("Settings.update")}, label: {
-                    HStack {
-                        ZStack {
-                            Color.gray
-                                .frame(width: 20, height: 20)
-                                .clipShape(Circle())
-                            Image(systemName: "arrow.clockwise")
-                                .font(.system(size: 12))
-                        }
-                        Text("Settings.update")
                     }
                 })
                 if debug {
@@ -147,10 +112,10 @@ struct SettingsView: View {
                             HStack {
                                 ZStack {
                                     Color.blue
-                                        .frame(width: 20, height: 20)
-                                        .clipShape(Circle())
+                                        .frame(width: 26, height: 26)
+                                        .clipShape(RoundedRectangle(cornerRadius: 5))
                                     Image(systemName: "hammer.fill")
-                                        .font(.system(size: 12))
+                                        .font(.system(size: 16))
                                 }
                                 Text("Settings.developer")
                             }
@@ -185,11 +150,6 @@ struct SettingsView: View {
                                 Spacer()
                             }
                         })
-                        Button(action: {
-                            
-                        }, label: {
-                            Text("Settings.log-out.cancel")
-                        })
                     }, message: {
                         Text("Settings.log-out.message")
                     })
@@ -201,112 +161,11 @@ struct SettingsView: View {
     }
 }
 
-
-struct SoftwareUpdateView: View {
-    @State var shouldUpdate = false
-    @State var isLoading = true
-    @State var isFailed = false
-    @State var latestVer = ""
-    @State var latestBuild = ""
-    @State var releaseNote = ""
-    var body: some View {
-        ScrollView {
-            VStack {
-                if !isLoading {
-                    if shouldUpdate {
-                        HStack {
-                            Spacer()
-                                .frame(width: 10)
-                            Image("AppIconImage")
-                                .resizable()
-                                .frame(width: 40, height: 40)
-                                .cornerRadius(8)
-                            Spacer()
-                                .frame(width: 10)
-                            VStack {
-                                Text("v\(latestVer) Build \(latestBuild)")
-                                    .font(.system(size: 14, weight: .medium))
-                                HStack {
-                                    Text("Darock-studio")
-                                        .font(.system(size: 13))
-                                        .foregroundColor(.gray)
-                                    Spacer()
-                                }
-                            }
-                        }
-                        Divider()
-                        Text(releaseNote)
-                        if (Bundle.main.infoDictionary?["CFBundleIdentifier"] as! String) != "com.darock.DarockBili.watchkitapp" {
-                            Button(action: {
-                                let session = ASWebAuthenticationSession(url: URL(string: "https://cd.darock.top:32767/meowbili/install.html")!, callbackURLScheme: "mlhd") { _, _ in
-                                    return
-                                }
-                                session.prefersEphemeralWebBrowserSession = true
-                                session.start()
-                            }, label: {
-                                Text("Update.download-and-install")
-                            })
-                        } else {
-                            Spacer()
-                                .frame(height: 10)
-                            Text("Update.install-by-testflight")
-                                .bold()
-                        }
-                    } else if isFailed {
-                        Text("Update.error")
-                    } else {
-                        Text("Update.latest")
-                    }
-                } else {
-                    HStack {
-                        Text("Update.checking")
-                            .lineLimit(1)
-                            .multilineTextAlignment(.leading)
-                            .frame(width: 130)
-                        Spacer()
-                            .frame(maxWidth: .infinity)
-                        ProgressView()
-                    }
-                }
-            }
-        }
-        .onAppear {
-            DarockKit.Network.shared.requestString("https://api.darock.top/bili/newver") { respStr, isSuccess in
-                if isSuccess && respStr.apiFixed().contains("|") {
-                    latestVer = String(respStr.apiFixed().split(separator: "|")[0])
-                    latestBuild = String(respStr.apiFixed().split(separator: "|")[1])
-                    let nowMajorVer = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
-                    let nowBuildVer = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
-                    if nowMajorVer != latestVer || Int(nowBuildVer)! < Int(latestBuild)! {
-                        shouldUpdate = true
-                    }
-                    DarockKit.Network.shared.requestString("https://api.darock.top/bili/newver/note") { respStr, isSuccess in
-                        if isSuccess {
-                            releaseNote = respStr.apiFixed()
-                            isLoading = false
-                        } else {
-                            isFailed = true
-                        }
-                    }
-                } else {
-                    isFailed = true
-                }
-            }
-        }
-    }
-}
-
 struct PlayerSettingsView: View {
-    @AppStorage("IsUseModifiedPlayer") var isUseModifiedPlayer = true
     @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
     @AppStorage("VideoGetterSource") var videoGetterSource = "official"
     var body: some View {
         List {
-            Section {
-                Toggle("Player.third-party", isOn: $isUseModifiedPlayer)
-            } footer: {
-                Text("Player.third-party.description")
-            }
             Section {
                 Picker("Player.record-history", selection: $recordHistoryTime) {
                     Text("Player.record-history.when-entering-page").tag("into")
@@ -390,7 +249,7 @@ struct ScreenTimeSettingsView: View {
                     Button(action: {
                         isScreenTimeEnabled = true
                     }, label: {
-                        Text("开启“屏幕使用时间”")
+                        Text("Screen-time.on")
                     })
                 } footer: {
                     Text("Screen-time.usage")
@@ -421,48 +280,6 @@ struct ScreenTimeSettingsView: View {
         let name: String
         let time: Int
         var id: String{ name }
-    }
-}
-
-struct GestureSettingsView: View {
-    @AppStorage("IsVideoPlayerGestureEnabled") var isVideoPlayerGestureEnabled = true
-    var body: some View {
-        List {
-            Section {
-                Toggle("Gesture.double-tap", isOn: $isVideoPlayerGestureEnabled)
-            } footer: {
-                Text("Gesture.double-tap.description") //在视频播放器使用互点两下手势(Apple Watch Series 9 及以上)或快速操作(其他机型)暂停或播放视频
-            }
-        }
-    }
-}
-
-struct BatterySettingsView: View {
-    @State var batteryLevel = 0.0
-    @State var batteryState = WKInterfaceDeviceBatteryState.unknown
-    @State var isLowBatteryMode = isInLowBatteryMode
-    var body: some View {
-        List {
-            HStack {
-                Gauge(value: batteryLevel, in: -1...100) {
-                    EmptyView()
-                }
-                .gaugeStyle(.accessoryCircularCapacity)
-                Text("\(Int(batteryLevel))%")
-                    .font(.system(size: 30))
-                Spacer()
-            }
-            .listRowBackground(Color.clear)
-            Toggle("Battery.low-power-mode", isOn: $isLowBatteryMode)
-                .onChange(of: isLowBatteryMode) { value in
-                    isInLowBatteryMode = value
-                }
-        }
-        .onAppear {
-            batteryLevel = Double(WKInterfaceDevice.current().batteryLevel * 100.0)
-            batteryState = WKInterfaceDevice.current().batteryState
-            debugPrint(batteryLevel)
-        }
     }
 }
 

@@ -1,8 +1,9 @@
 //
-//  HistoryView.swift
-//  DarockBili Watch App
 //
-//  Created by WindowsMEMZ on 2023/7/3.
+//  HistoryView.swift
+//  MeowBili
+//
+//  Created by memz233 on 2024/2/10.
 //
 //===----------------------------------------------------------------------===//
 //

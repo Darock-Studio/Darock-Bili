@@ -97,9 +97,6 @@
         }
       }
     },
-    "“屏幕使用时间”会记录您每天使用喵哩喵哩的时间并作出统计" : {
-
-    },
     "%@" : {
       "localizations" : {
         "en" : {
@@ -970,6 +967,7 @@
       }
     },
     "DarockID.account" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -986,6 +984,7 @@
       }
     },
     "DarockID.code.unmatch" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1002,6 +1001,7 @@
       }
     },
     "DarockID.email" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1018,6 +1018,7 @@
       }
     },
     "DarockID.feedback-without-logging-in" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1034,6 +1035,7 @@
       }
     },
     "DarockID.incorrect" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1050,6 +1052,7 @@
       }
     },
     "DarockID.login" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1066,6 +1069,7 @@
       }
     },
     "DarockID.login.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1082,6 +1086,7 @@
       }
     },
     "DarockID.password" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1098,6 +1103,7 @@
       }
     },
     "DarockID.password.confirm" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1114,6 +1120,7 @@
       }
     },
     "DarockID.password.unmatch" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1130,6 +1137,7 @@
       }
     },
     "DarockID.register" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1146,6 +1154,7 @@
       }
     },
     "DarockID.register.success" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1162,6 +1171,7 @@
       }
     },
     "DarockID.register.title" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1178,6 +1188,7 @@
       }
     },
     "DarockID.unable-to-connect" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1194,6 +1205,7 @@
       }
     },
     "DarockID.verification-code" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1210,6 +1222,7 @@
       }
     },
     "DarockID.verification-code.send" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1803,6 +1816,7 @@
       }
     },
     "Feedback.nothing" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4280,6 +4294,9 @@
         }
       }
     },
+    "UsernamePlaceholder" : {
+
+    },
     "v%@ Build %@" : {
       "localizations" : {
         "en" : {
@@ -4711,6 +4728,9 @@
           }
         }
       }
+
+    "人机验证已完成" : {
+
     },
     "令枫" : {
       "localizations" : {
@@ -4728,10 +4748,25 @@
         }
       }
     },
+    "动态" : {
+
+    },
+    "动态内容" : {
+
+    },
+    "动态评论" : {
+
+    },
+    "动态详情" : {
+
+    },
     "发送动态" : {
 
     },
     "可选, 最多9个" : {
+
+    },
+    "国际冠字码" : {
 
     },
     "在使用本 App 前，您需要先知晓以下信息：\n· 本 App 由第三方开发者以及部分社区用户贡献，与哔哩哔哩无合作关系，哔哩哔哩是上海宽娱数码科技有限公司的商标。\n· 本 App 并不是哔哩哔哩的替代品，我们建议您在能够使用官方客户端时尽量使用官方客户端。\n· 本 App 均使用来源于网络的公开信息进行开发。\n· 本 App 中和B站相关的功能完全免费\n· 本 App 中所呈现的B站内容来自哔哩哔哩官方。\n· 本 App 的开发者、负责人和实际责任人是%@\n  联系QQ：3245146430" : {
@@ -4749,6 +4784,96 @@
           }
         }
       }
+    },
+    "将作为动态主体" : {
+
+    },
+    "小尾巴内容" : {
+
+    },
+    "已选择的图片" : {
+
+    },
+    "应用" : {
+
+    },
+    "开启“屏幕使用时间”" : {
+
+    },
+    "您可以更改默认的小尾巴内容, 如果不想添加小尾巴, 请清空上方文本框内容. 您可以随时在设置中更改此内容" : {
+
+    },
+    "我的" : {
+
+    },
+    "手机号" : {
+
+    },
+    "推荐" : {
+
+    },
+    "登录" : {
+
+    },
+    "稿件" : {
+
+    },
+    "第一步: 手机号信息" : {
+
+    },
+    "第三步: 验证码" : {
+
+    },
+    "第二步: 人机验证" : {
+
+    },
+    "获取验证码" : {
+
+    },
+    "要使用动态小尾巴吗?" : {
+
+    },
+    "评论" : {
+
+    },
+    "详情" : {
+
+    },
+    "进行人机验证" : {
+
+    },
+    "选择图片" : {
+
+    },
+    "重新载入" : {
+
+    },
+    "验证码" : {
+
+    },
+    "" : {
+
+    },
+    "" : {
+
+    },
+    "" : {
+
+    },
+    "" : {
+
+    },
+    "" : {
+
+    },
+    "" : {
+
+    },
+    "" : {
+
+    },
+    "" : {
+
     }
   },
   "version" : "1.0"
