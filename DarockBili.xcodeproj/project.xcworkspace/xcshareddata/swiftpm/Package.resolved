@@ -10,6 +10,24 @@
       }
     },
     {
+      "identity" : "alertkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sparrowcode/AlertKit",
+      "state" : {
+        "revision" : "3d35de60ad26aab58395ebecdd63b533546862ed",
+        "version" : "5.1.8"
+      }
+    },
+    {
+      "identity" : "azvideoplayer",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/adamzarn/AZVideoPlayer",
+      "state" : {
+        "revision" : "e2dde8754ee34706cc69fa640cde85506e239742",
+        "version" : "1.0.0"
+      }
+    },
+    {
       "identity" : "bplayer",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/WindowsMEMZ/bplayer",
