@@ -2555,6 +2555,7 @@
       }
     },
     "Player.third-party" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2571,6 +2572,7 @@
       }
     },
     "Player.third-party.description" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
