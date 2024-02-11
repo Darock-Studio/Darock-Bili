@@ -518,7 +518,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "FOLLOWERS"
+            "value" : "FANS"
           }
         },
         "zh-Hans" : {
@@ -598,7 +598,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Last Page"
+            "value" : "Previous"
           }
         },
         "zh-Hans" : {
@@ -614,7 +614,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Next Page"
+            "value" : "Next"
           }
         },
         "zh-Hans" : {
@@ -662,7 +662,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "SUBSCRIBES"
+            "value" : "FOLLOWS"
           }
         },
         "zh-Hans" : {
@@ -1028,7 +1028,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在不登陆的情况下反馈…"
+            "value" : "在不登录的情况下反馈…"
           }
         }
       }
@@ -1060,7 +1060,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "登陆"
+            "value" : "登录"
           }
         }
       }
@@ -1076,7 +1076,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "登陆Darock通行证"
+            "value" : "使用Darock通行证登录"
           }
         }
       }
@@ -1118,7 +1118,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Two password does not match"
+            "value" : "Password does not match"
           }
         },
         "zh-Hans" : {
@@ -1150,7 +1150,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Successfully Registered"
+            "value" : "Register Succeed"
           }
         },
         "zh-Hans" : {
@@ -1182,7 +1182,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Unable to connect to Darock server"
+            "value" : "Cannot connect to Darock server"
           }
         },
         "zh-Hans" : {
@@ -1246,7 +1246,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Failed Sending"
+            "value" : " Send Failed"
           }
         },
         "zh-Hans" : {
@@ -1263,7 +1263,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Page Auto Closing in 3sec"
+            "value" : "This Page will Close in 3s"
           }
         },
         "zh-Hans" : {
@@ -1295,7 +1295,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Download Task List"
+            "value" : "Download Tasks List"
           }
         },
         "zh-Hans" : {
@@ -1343,7 +1343,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "#%lld Paused"
+            "value" : "#%lld Aborted"
           }
         },
         "zh-Hans" : {
@@ -1375,7 +1375,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tap to Try Recontinue"
+            "value" : "Tap to Retry"
           }
         },
         "zh-Hans" : {
@@ -1407,7 +1407,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Download"
+            "value" : "Tasks List"
           }
         },
         "zh-Hans" : {
@@ -1471,7 +1471,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Before Running into the Problem..."
+            "value" : "Before Error Occurred..."
           }
         },
         "zh-Hans" : {
@@ -1567,7 +1567,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The error is fatal and Meowbili crashes."
+            "value" : "A fatal error occurred and Meowbili is crashed."
           }
         },
         "zh-Hans" : {
@@ -1615,7 +1615,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "We recommend running Network Troubleshooter"
+            "value" : "Recommend to run Network Troubleshooting"
           }
         },
         "zh-Hans" : {
@@ -1695,7 +1695,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "MeowBili Ran into a Problem"
+            "value" : "MeowBili Occurred a Problem"
           }
         },
         "zh-Hans" : {
@@ -1743,7 +1743,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sending"
+            "value" : "Sending..."
           }
         },
         "zh-Hans" : {
@@ -1775,7 +1775,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "App crashed in %@."
+            "value" : "App crashed at %@."
           }
         },
         "zh-Hans" : {
@@ -1791,13 +1791,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Continue on Other Devices"
+            "value" : "Continue on iPhone"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在其他设备上继续"
+            "value" : "在iPhone上继续"
           }
         }
       }
@@ -1999,7 +1999,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Failed to connect to Internet"
+            "value" : "Cannot to connect to Internet"
           }
         },
         "zh-Hans" : {
@@ -2063,7 +2063,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tap Again to Skip This Update"
+            "value" : "Re-Tap to Skip This Update"
           }
         },
         "zh-Hans" : {
@@ -2101,7 +2101,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Linecom"
+            "value" : "澪空"
           }
         }
       }
@@ -2143,13 +2143,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scan to continue"
+            "value" : "Scan to Login"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "扫描以继续"
+            "value" : "扫描以登录"
           }
         }
       }
@@ -2336,7 +2336,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "start broadcasting"
+            "value" : "started broadcasting"
           }
         },
         "zh-Hans" : {
@@ -2352,7 +2352,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Requires Login"
+            "value" : "Login Required"
           }
         },
         "zh-Hans" : {
@@ -2369,7 +2369,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " · Uploads Video"
+            "value" : " · Uploaded Video"
           }
         },
         "zh-Hans" : {
@@ -2417,7 +2417,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Switch analysis source when analysis fails"
+            "value" : "Switch analysis source when analysis failed"
           }
         },
         "zh-Hans" : {
@@ -2513,13 +2513,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "When Entering Detail Page"
+            "value" : "When Entered Detail Page"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "当进入详细页时"
+            "value" : "当进入详情页时"
           }
         }
       }
@@ -2529,7 +2529,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "When Video Plays"
+            "value" : "When Video Played"
           }
         },
         "zh-Hans" : {
@@ -2653,7 +2653,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Turn One Screen Time"
+            "value" : "Turn On Screen Time"
           }
         },
         "zh-Hans" : {
@@ -2733,7 +2733,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Matching Results"
+            "value" : "No Results"
           }
         },
         "zh-Hans" : {
@@ -3021,7 +3021,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Are you sure?"
+            "value" : "Are you sure to log out?"
           }
         },
         "zh-Hans" : {
@@ -3085,13 +3085,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Update"
+            "value" : "Software Update"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "更新"
+            "value" : "软件更新"
           }
         }
       }
@@ -3197,7 +3197,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Unzipping..."
+            "value" : "Decompressing..."
           }
         },
         "zh-Hans" : {
@@ -3245,7 +3245,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sleep Time will notify you too sleep at a specific time"
+            "value" : "Sleep Time will notify you to sleep at a specific time"
           }
         },
         "zh-Hans" : {
@@ -3373,7 +3373,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Troubleshooter"
+            "value" : "Troubleshooting"
           }
         },
         "zh-Hans" : {
@@ -3389,13 +3389,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Auto Pop-up"
+            "value" : "Auto Display"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "自动弹出疑难解答"
+            "value" : "自动显示疑难解答"
           }
         }
       }
@@ -3533,7 +3533,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Darock API: Invalid Returns"
+            "value" : "Darock API: Invalid Response"
           }
         },
         "zh-Hans" : {
@@ -3693,7 +3693,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Failed to connect to Bilibili server. The server maybe  crashed."
+            "value" : "Cannot connect to Bilibili server. Bilibili remote server maybe down."
           }
         },
         "zh-Hans" : {
@@ -3709,7 +3709,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Check your internet connection and try later."
+            "value" : "Check your Internet connection and try later."
           }
         },
         "zh-Hans" : {
@@ -3741,7 +3741,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Darock API server ran into a problem"
+            "value" : "Darock API server currently unavailable."
           }
         },
         "zh-Hans" : {
@@ -3757,7 +3757,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Report to Darock and wait"
+            "value" : "Report to Darock and waiting for repair"
           }
         },
         "zh-Hans" : {
@@ -3789,7 +3789,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apple Watch is currently unable to connect to Internet"
+            "value" : "Apple Watch is currently cannot connect to Internet"
           }
         },
         "zh-Hans" : {
@@ -3805,7 +3805,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Try turning off Wifi and Bluetooth in iPhone's Settings"
+            "value" : "Try to turn off Bluetooth and WLAN on iPhone"
           }
         },
         "zh-Hans" : {
@@ -3821,7 +3821,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Check if your watch connects to Internet"
+            "value" : "Ensure your Apple Watch connected to Internet"
           }
         },
         "zh-Hans" : {
@@ -3901,7 +3901,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tap to Learn More"
+            "value" : "Tap to View Details"
           }
         },
         "zh-Hans" : {
@@ -3949,7 +3949,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Darock API's Return is Invalid"
+            "value" : "Darock API's Response Invalid"
           }
         },
         "zh-Hans" : {
@@ -4029,7 +4029,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Checking Update..."
+            "value" : "Checking for Update..."
           }
         },
         "zh-Hans" : {
@@ -4061,7 +4061,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ran into a Problem while Checking Updates"
+            "value" : "An error occurred while Checking Updates"
           }
         },
         "zh-Hans" : {
@@ -4077,7 +4077,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Update via iPhone's Testflight"
+            "value" : "Update via Testflight on iPhone"
           }
         },
         "zh-Hans" : {
@@ -4157,7 +4157,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Subscribes"
+            "value" : "Follows"
           }
         },
         "zh-Hans" : {
@@ -4205,7 +4205,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Swipe right and delete will not log out."
+            "value" : "Right swipe and delete will not log out."
           }
         },
         "zh-Hans" : {
@@ -4259,7 +4259,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "轻点以登陆"
+            "value" : "轻点以登录"
           }
         }
       }
@@ -4621,7 +4621,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Play in Audio"
+            "value" : "Play as Audio"
           }
         },
         "zh-Hans" : {
@@ -4697,7 +4697,20 @@
       }
     },
     "于 %@ 开始" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Started at %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "于 %@ 开始"
+          }
+        }
+      }
     },
     "令枫" : {
       "localizations" : {
