@@ -49,6 +49,8 @@ struct VideoPlayerView: View {
                     player = AVPlayer(playerItem: item)
                     player.play()
                     
+                    player.seek(to: CMTime(seconds: UserDefaults.standard.double(forKey: "\(VideoDetailView.willPlayVideoBV)\(VideoDetailView.willPlayVideoCID)PlayTime"), preferredTimescale: 1))
+                    
                     debugPrint(URL(string: VideoDetailView.willPlayVideoLink)!)
                     let headers: HTTPHeaders = [
                         "cookie": "SESSDATA=\(sessdata)"
@@ -89,9 +91,6 @@ struct VideoPlayerView: View {
                                 let danmakuText = String(singleDanmaku.split(separator: "\">")[1].split(separator: "</d>")[0])
                                 if stredSpdP[5] == "0" {
                                     showDanmakus.append(["Appear": stredSpdP[0], "Type": stredSpdP[1], "Size": stredSpdP[2], "Color": stredSpdP[3], "Text": danmakuText])
-                                    if showDanmakus.count >= 1000 {
-                                        break
-                                    }
                                 }
                             }
                             showDanmakus.sort { dict1, dict2 in
@@ -99,6 +98,16 @@ struct VideoPlayerView: View {
                                     return Double(time1)! < Double(time2)!
                                 }
                                 return false
+                            }
+                            var removedCount = 0
+                            for i in 1..<showDanmakus.count {
+                                if showDanmakus.count - removedCount - i <= 0 {
+                                    break
+                                }
+                                if (Double(showDanmakus[i]["Appear"]!)! - Double(showDanmakus[i - 1]["Appear"]!)!) < 0.5 {
+                                    showDanmakus.remove(at: i)
+                                    removedCount++
+                                }
                             }
                             debugPrint(showDanmakus)
                         }
@@ -118,7 +127,7 @@ struct VideoPlayerView: View {
                 playerTimer?.invalidate()
                 danmakuTimer?.invalidate()
                 player?.pause()
-                player?.seek(to: .zero)
+                UserDefaults.standard.set(player.currentTime().seconds, forKey: "\(VideoDetailView.willPlayVideoBV)\(VideoDetailView.willPlayVideoCID)PlayTime")
             }
             .overlay {
                 ZStack {

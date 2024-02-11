@@ -297,16 +297,10 @@ struct SoftwareUpdateView: View {
 }
 
 struct PlayerSettingsView: View {
-    @AppStorage("IsUseModifiedPlayer") var isUseModifiedPlayer = true
     @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
     @AppStorage("VideoGetterSource") var videoGetterSource = "official"
     var body: some View {
         List {
-            Section {
-                Toggle("Player.third-party", isOn: $isUseModifiedPlayer)
-            } footer: {
-                Text("Player.third-party.description")
-            }
             Section {
                 Picker("Player.record-history", selection: $recordHistoryTime) {
                     Text("Player.record-history.when-entering-page").tag("into")
