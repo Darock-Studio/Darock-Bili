@@ -73,7 +73,7 @@ struct HistoryView: View {
                     HStack {
                         Spacer(minLength: 0)
                         Image(systemName: "xmark.bin.fill")
-                        Text("这里空空如也")
+                        Text("History.none")
                         Spacer(minLength: 0)
                     }
                     .padding()
