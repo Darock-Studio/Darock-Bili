@@ -29,7 +29,7 @@ struct VideoPlayerView: View {
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
     @AppStorage("bili_jct") var biliJct = ""
-    @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
+    @AppStorage("IsRecordHistory") var isRecordHistory = true
     @State var currentTime: Double = 0.0
     @State var playerTimer: Timer?
     @State var danmakuTimer: Timer?
@@ -55,20 +55,20 @@ struct VideoPlayerView: View {
                     let headers: HTTPHeaders = [
                         "cookie": "SESSDATA=\(sessdata)"
                     ]
-                    if recordHistoryTime == "play" {
+                    if isRecordHistory {
                         AF.request("https://api.bilibili.com/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": VideoDetailView.willPlayVideoBV, "mid": dedeUserID, "type": 3, "dt": 2, "play_type": 2, "csrf": biliJct], headers: headers).response { response in
                             debugPrint(response)
                         }
-                    }
-                    
-                    Timer.scheduledTimer(withTimeInterval: 15, repeats: true) { timer in
-                        playerTimer = timer
-                        debugPrint(player.currentTime())
-                        let headers: HTTPHeaders = [
-                            "cookie": "SESSDATA=\(sessdata)"
-                        ]
-                        AF.request("https://api.bilibili.com/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": VideoDetailView.willPlayVideoBV, "mid": dedeUserID, "played_time": Int(player.currentTime().seconds), "type": 3, "dt": 2, "play_type": 0, "csrf": biliJct], headers: headers).response { response in
-                            debugPrint(response)
+                        
+                        Timer.scheduledTimer(withTimeInterval: 15, repeats: true) { timer in
+                            playerTimer = timer
+                            debugPrint(player.currentTime())
+                            let headers: HTTPHeaders = [
+                                "cookie": "SESSDATA=\(sessdata)"
+                            ]
+                            AF.request("https://api.bilibili.com/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": VideoDetailView.willPlayVideoBV, "mid": dedeUserID, "played_time": Int(player.currentTime().seconds), "type": 3, "dt": 2, "play_type": 0, "csrf": biliJct], headers: headers).response { response in
+                                debugPrint(response)
+                            }
                         }
                     }
                     
