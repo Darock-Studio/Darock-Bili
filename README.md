@@ -3,7 +3,7 @@
     <img src="./Artwork/rm-ico.png" width="200" height="200">
 </p>
 
-# 喵哩喵哩 - Apple Watch 上的B站客户端
+# 喵哩喵哩 - 跨平台的 Swift 原生B站客户端
 
 ![Swift](https://img.shields.io/badge/Swift-5.9-orange.svg)&nbsp;
 ![GitHub Repo stars](https://img.shields.io/github/stars/Darock-Studio/Darock-Bili?style=flat)&nbsp;
@@ -211,3 +211,11 @@
 > responsibility，aw也能看视频
 > 
 > 高猛酸钾制氧气，喵哩喵哩真nb
+
+## 重要信息
+> [!IMPORTANT]
+> 本 App 中的视频等数据来自 Bilibili，版权属于 Bilibili 以及视频创作者。
+>
+> Darock 与 Bilibili 并无合作关系，本 App 仅作学习用途
+>
+> 本 App 所有源代码开源，仅用于学习 Swift 开发。
