@@ -98,14 +98,14 @@ struct DownloadsView: View {
                 }
             }
         }
+        .navigationTitle("离线缓存")
+        .navigationBarTitleDisplayMode(.large)
         .sheet(isPresented: $isPlayerPresented, content: {OfflineVideoPlayer()})
         .toolbar {
-            if #available(watchOS 10, *) {
-                ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink(destination: {DownloadingListView()}, label: {
-                        Image(systemName: "list.bullet.below.rectangle")
-                    })
-                }
+            ToolbarItem(placement: .topBarTrailing) {
+                NavigationLink(destination: {DownloadingListView()}, label: {
+                    Image(systemName: "list.bullet.below.rectangle")
+                })
             }
         }
         .onAppear {

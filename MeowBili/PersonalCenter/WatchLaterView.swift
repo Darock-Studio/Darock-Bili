@@ -20,6 +20,7 @@ import SwiftUI
 import DarockKit
 import Alamofire
 import SwiftyJSON
+import MobileCoreServices
 
 struct WatchLaterView: View {
     @AppStorage("DedeUserID") var dedeUserID = ""
@@ -27,12 +28,58 @@ struct WatchLaterView: View {
     @AppStorage("SESSDATA") var sessdata = ""
     @AppStorage("bili_jct") var biliJct = ""
     @State var laters = [[String: String]]()
+    @State var isMoreMenuPresented = false
     var body: some View {
         List {
-            if laters.count != 0 {
-                ForEach(0...laters.count - 1, id: \.self) { i in
-                    VideoCard(laters[i])
+            Group {
+                if laters.count != 0 {
+                    ForEach(0...laters.count - 1, id: \.self) { i in
+                        VideoCard(laters[i])
+                            .swipeActions {
+                                Button(role: .destructive, action: {
+                                    let headers: HTTPHeaders = [
+                                        "cookie": "SESSDATA=\(sessdata)",
+                                        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                    ]
+                                    AF.request("https://api.bilibili.com/x/v2/history/toview/del", method: .post, parameters: ["aid": bv2av(bvid: laters[i]["BV"]!), "csrf": biliJct], headers: headers).response { response in
+                                        debugPrint(response)
+                                        AlertKitAPI.present(title: "已移除", subtitle: "视频已从稍后再看中移除", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                    }
+                                }, label: {
+                                    Image(systemName: "trash.fill")
+                                })
+                            }
+                    }
                 }
+            }
+            .navigationTitle("稍后再看")
+            .navigationBarTitleDisplayMode(.large)
+            .onDrop(of: [kUTTypeData as String], isTargeted: nil) { items in
+                PlayHaptic(sharpness: 0.05, intensity: 0.5)
+                for item in items {
+                    item.loadDataRepresentation(forTypeIdentifier: kUTTypeData as String) { (data, error) in
+                        if let data = data, let dict = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [String: String] {
+                            if dict["BV"] != nil {
+                                laters.insert(dict, at: 0)
+                                let headers: HTTPHeaders = [
+                                    "cookie": "SESSDATA=\(sessdata)",
+                                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                ]
+                                AF.request("https://api.bilibili.com/x/v2/history/toview/add", method: .post, parameters: ["bvid": dict["BV"]!, "csrf": biliJct], headers: headers).response { _ in }
+                            }
+                        }
+                    }
+                }
+                return true
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(action: {
+                    isMoreMenuPresented = true
+                }, label: {
+                    Image(systemName: "ellipsis.circle")
+                })
             }
         }
         .onAppear {
@@ -50,6 +97,26 @@ struct WatchLaterView: View {
                     }
                 }
             }
+        }
+        .sheet(isPresented: $isMoreMenuPresented) {
+            List {
+                Section {
+                    Button(role: .destructive, action: {
+                        let headers: HTTPHeaders = [
+                            "cookie": "SESSDATA=\(sessdata)",
+                            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                        ]
+                        AF.request("https://api.bilibili.com/x/v2/history/toview/del", method: .post, parameters: ["viewed": true, "csrf": biliJct], headers: headers).response { response in
+                            debugPrint(response)
+                            AlertKitAPI.present(title: "已清除", subtitle: "所有以观看视频已清除", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                            isMoreMenuPresented = false
+                        }
+                    }, label: {
+                        Label("清除所有已观看视频", systemImage: "trash.slash.square.fill")
+                    })
+                }
+            }
+            .presentationDetents([.medium])
         }
     }
 }

@@ -161,6 +161,18 @@
         }
       }
     },
+    "%@ 人在看" : {
+
+    },
+    "%@ 弹幕" : {
+
+    },
+    "%@ 播放" : {
+
+    },
+    "%@ 粉丝" : {
+
+    },
     "%@MB / %@MB" : {
       "localizations" : {
         "en" : {
@@ -4786,6 +4798,12 @@
     "动态详情" : {
 
     },
+    "历史记录" : {
+
+    },
+    "发布于 %@" : {
+
+    },
     "发送动态" : {
 
     },
@@ -4863,21 +4881,10 @@
       }
 
     },
-    "login.phonemunber" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Phone Number"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "手机号"
-          }
-        }
-      }
+    "我的收藏" : {
+
+    },
+    "手机号" : {
 
     },
     "navbar.suggest" : {
@@ -4897,21 +4904,16 @@
       }
 
     },
-    "login.login" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Login"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "登录"
-          }
-        }
-      }
+    "清除所有已观看视频" : {
+
+    },
+    "登录" : {
+
+    },
+    "离线缓存" : {
+
+    },
+    "稍后再看" : {
 
     },
     "稿件" : {
@@ -4986,6 +4988,9 @@
 
     },
     "要使用动态小尾巴吗?" : {
+
+    },
+    "记录历史记录" : {
 
     },
     "评论" : {

@@ -24,6 +24,7 @@ import DarockKit
 import Alamofire
 import SwiftyJSON
 import Foundation
+import CoreHaptics
 import AVFoundation
 import CommonCrypto
 
@@ -621,6 +622,22 @@ public func getBuvid(url: String, callback: @escaping (String, String, String, S
                 callback(buvid3, buvid4, _uuid, response.debugDescription)
             }
         }
+    }
+}
+
+public func PlayHaptic(sharpness: Float, intensity: Float) {
+    guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+    var events = [CHHapticEvent]()
+    let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: intensity)
+    let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: sharpness)
+    let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 0)
+    events.append(event)
+    do {
+        let pattern = try CHHapticPattern(events: events, parameters: [])
+        let player = try globalHapticEngine?.makePlayer(with: pattern)
+        try player?.start(atTime: 0)
+    } catch {
+        print("Failed to play pattern: \(error.localizedDescription).")
     }
 }
 
