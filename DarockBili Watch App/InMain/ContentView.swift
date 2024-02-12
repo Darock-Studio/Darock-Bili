@@ -23,16 +23,14 @@ struct ContentView: View {
     @AppStorage("LastUsingVer") var lastUsingVer = ""
     @AppStorage("IsReadTerms") var isReadTerms = false
     @State var isTermsPresented = false
-    //@State var isSystemVerTipPresented = false
+    @State var mainTabSelection = 1
     var body: some View {
         NavigationStack {
-            TabView {
-                MainView()
+            TabView(selection: $mainTabSelection) {
+                MainView(mainTabSelection: $mainTabSelection)
                     .tag(1)
-                if #unavailable(watchOS 10) {
-                    PersonAccountView()
-                        .tag(2)
-                }
+                PersonAccountView()
+                    .tag(2)
                 UserDynamicMainView()
                     .tag(3)
             }

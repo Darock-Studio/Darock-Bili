@@ -24,8 +24,8 @@ import SDWebImageSwiftUI
 import CachedAsyncImage
 
 struct MainView: View {
+    @Binding var mainTabSelection: Int
     @Namespace public var imageAnimation
-    
     @AppStorage("DedeUserID") var dedeUserID = ""
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
@@ -60,93 +60,20 @@ struct MainView: View {
                         .accessibilityIdentifier("SearchButton")
                     }
                     ToolbarItem(placement: .topBarTrailing) {
-                        if dedeUserID != "" {
-                            NavigationLink(destination: {PersonAccountView(isSettingsButtonTrailing: true)}, label: {
+                        Button(action: {
+                            
+                        }, label: {
+                            if dedeUserID != "" {
                                 CachedAsyncImage(url: URL(string: userFaceUrl + "@30w"))
                                     .frame(width: 30)
                                     .clipShape(Circle())
                                     .matchedGeometryEffect(id: "image", in: imageAnimation)
-                            })
-                            .buttonStyle(.borderless)
-                        } else {
-                            NavigationLink(destination: {
-                                List {
-                                    if #available(watchOS 10.0, *) {} else {
-                                        Button(action: {
-                                            isNewUserPresenting = true
-                                        }, label: {
-                                            Label("User.switch.add", systemImage: "plus")
-                                        })
-                                    }
-                                    
-                                    if userList1.isEmpty {
-                                        Text("User.switch.none")
-                                            .bold()
-                                            .foregroundStyle(.secondary)
-                                    } else {
-                                        Section(content: {
-                                            ForEach(0..<userList1.count, id: \.self) { user in
-                                                Button(action: {
-                                                    dedeUserID = userList1[user] as! String
-                                                    dedeUserID__ckMd5 = userList2[user] as! String
-                                                    sessdata = userList3[user] as! String
-                                                    biliJct = userList4[user] as! String
-                                                }, label: {
-                                                    Text(userList1[user] as! String)
-                                                })
-                                            }
-                                            .onDelete(perform: { user in
-                                                userList1.remove(atOffsets: user)
-                                                userList2.remove(atOffsets: user)
-                                                userList3.remove(atOffsets: user)
-                                                userList4.remove(atOffsets: user)
-                                                UserDefaults.standard.set(userList1, forKey: "userList1")
-                                                UserDefaults.standard.set(userList2, forKey: "userList2")
-                                                UserDefaults.standard.set(userList3, forKey: "userList3")
-                                                UserDefaults.standard.set(userList4, forKey: "userList4")
-                                            })
-                                            .onMove(perform: { users, user  in
-                                                userList1.move(fromOffsets: users, toOffset: user)
-                                                userList2.move(fromOffsets: users, toOffset: user)
-                                                userList3.move(fromOffsets: users, toOffset: user)
-                                                userList4.move(fromOffsets: users, toOffset: user)
-                                                UserDefaults.standard.set(userList1, forKey: "userList1")
-                                                UserDefaults.standard.set(userList2, forKey: "userList2")
-                                                UserDefaults.standard.set(userList3, forKey: "userList3")
-                                                UserDefaults.standard.set(userList4, forKey: "userList4")
-                                            })
-                                        }, footer: {
-                                            Text("User.switch.description")
-                                            Text("User.switch.description.1")
-                                        })
-                                    }
-                                }
-                                .toolbar {
-                                    if #available(watchOS 10.0, *) {
-                                        ToolbarItem(placement: .bottomBar) {
-                                            HStack {
-                                                Spacer()
-                                                Button(action: {
-                                                    isNewUserPresenting = true
-                                                }, label: {
-                                                    Image(systemName: "plus")
-                                                })
-                                            }
-                                        }
-                                    }
-                                }
-                                .onAppear {
-                                    userList1 = UserDefaults.standard.array(forKey: "userList1") ?? []
-                                    userList2 = UserDefaults.standard.array(forKey: "userList2") ?? []
-                                    userList3 = UserDefaults.standard.array(forKey: "userList3") ?? []
-                                    userList4 = UserDefaults.standard.array(forKey: "userList4") ?? []
-                                }
-                            }, label: {
+                            } else {
                                 Image(systemName: "person")
                                     .foregroundColor(.accentColor)
                                     .matchedGeometryEffect(id: "image", in: imageAnimation)
-                            })
-                        }
+                            }
+                        })
                     }
                 }
                 .sheet(isPresented: $isNewUserPresenting, content: {LoginView()})
@@ -259,25 +186,18 @@ struct MainView: View {
                             autoreleasepool {
                                 ForEach(0...videos.count - 1, id: \.self) { i in
                                     VideoCard(videos[i])
-                                        .accessibility(identifier: "SuggestVideo")
+                                        .onAppear {
+                                            if i == videos.count - 1 {
+                                                LoadNewVideos()
+                                            }
+                                        }
                                 }
                             }
                         }
                         Section {
-                            Button(action: {
-                                LoadNewVideos()
-                            }, label: {
-                                if !isFailedToLoad {
-                                    if !isLoadingNew {
-                                        Text("Home.more")
-                                            .bold()
-                                    } else {
-                                        ProgressView()
-                                    }
-                                } else {
-                                    Label("Home.more.error", systemImage: "arrow.clockwise")
-                                }
-                            })
+                            if isLoadingNew {
+                                ProgressView()
+                            }
                         }
                     } else if isFailedToLoad {
                         Button {
@@ -352,8 +272,8 @@ struct MainView: View {
     }
 }
 
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView()
-    }
-}
+//struct MainView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MainView()
+//    }
+//}
