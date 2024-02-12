@@ -132,25 +132,25 @@ struct LoginView: View {
             //--SMS Login--
             List {
                 Section {
-                    TextField("国际冠字码", text: $phoneCode)
+                    TextField("login.phonearea", text: $phoneCode)
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
-                    TextField("手机号", text: $accountInput)
+                    TextField("login.phonenumber", text: $accountInput)
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
                 } header: {
-                    Text("第一步: 手机号信息")
+                    Text("login.first")
                 }
                 Section {
                     Button(action: {
                         UIApplication.shared.open(URL(string: "https://darock.top/geetest?gt=\(gt)&challenge=\(challenge)")!)
                     }, label: {
-                        Text(validate == "" ? "进行人机验证" : "人机验证已完成")
+                        Text(validate == "" ? "login.goonver" : "login.captchasucc")
                             .bold()
                     })
                     .disabled(validate != "")
                 } header: {
-                    Text("第二步: 人机验证")
+                    Text("login.second")
                 }
                 Section {
                     Button(action: {
@@ -167,12 +167,13 @@ struct LoginView: View {
                             smsLoginToken = json["data"]["captcha_key"].string!
                         }
                     }, label: {
-                        Text("获取验证码")
+                        Text(validate == "" ? "login.getcode" : "login.codesent")
                     })
                     .disabled(accountInput == "" || validate == "" || smsLoginToken != "")
-                    SecureField("验证码", text: $passwdInput)
+                    //SecureField no need! by Linecom-Lik
+                    TextField("login.code", text: $passwdInput)
                 } header: {
-                    Text("第三步: 验证码")
+                    Text("login.third")
                 }
                 Section {
                     Button(action: {
@@ -203,7 +204,7 @@ struct LoginView: View {
                             }
                         }
                     }, label: {
-                        Text("登录")
+                        Text("login.login")
                     })
                     .disabled(accountInput == "" || passwdInput == "")
                 }

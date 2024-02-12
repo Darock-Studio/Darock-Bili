@@ -30,17 +30,17 @@ struct ContentView: View {
                 MainView(mainTabSelection: $mainTabSelection)
                     .tag(1)
                     .tabItem {
-                        Label("推荐", systemImage: "sparkles")
+                        Label("navbar.suggest", systemImage: "sparkles")
                     }
                 PersonAccountView()
                     .tag(2)
                     .tabItem {
-                        Label("我的", systemImage: "person.fill")
+                        Label("navbar.my", systemImage: "person.fill")
                     }
                 UserDynamicMainView()
                     .tag(3)
                     .tabItem {
-                        Label("动态", systemImage: "rectangle.stack.fill")
+                        Label("navbar.dynamic", systemImage: "rectangle.stack.fill")
                     }
             }
             .accessibility(identifier: "MainTabView")
