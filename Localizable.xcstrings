@@ -5032,6 +5032,21 @@
           }
         }
       }
+    "login.codesent" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verification Code Sent"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "验证码已发送"
+          }
+        }
+      }
 
     },
     "" : {
