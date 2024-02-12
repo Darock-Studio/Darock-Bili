@@ -21,6 +21,7 @@ import SwiftUI
 import DarockKit
 import SwiftyJSON
 import SDWebImage
+import CoreHaptics
 import SDWebImagePDFCoder
 import SDWebImageSVGCoder
 import SDWebImageWebPCoder
@@ -41,6 +42,8 @@ var isInOfflineMode = false
 // BUVID
 var globalBuvid3 = ""
 var globalBuvid4 = ""
+
+var globalHapticEngine: CHHapticEngine?
 
 /*
  ::::::::::::::-:=**=========+===++++++++++*%+*%%%%#%%%%%*++#@%%%@@@%%@@@%%%%%%%*+*#****#%%@@@@@@@@@%
@@ -121,6 +124,9 @@ struct DarockBili_Watch_AppApp: App {
     @State var isShowMemoryUsage = false
     @State var currentHour = 0
     @State var currentMinute = 0
+    // Handoff
+    @State var handoffVideoDetails = [String: String]()
+    @State var shouldPushVideoView = false
     var body: some Scene {
         WindowGroup {
             if UserDefaults.standard.string(forKey: "NewSignalError") ?? "" != "" {
@@ -158,8 +164,8 @@ struct DarockBili_Watch_AppApp: App {
                         }
                         RunLoop.current.add(timer, forMode: .default)
                         timer.fire()
-                            RunLoop.current.add(sleepTimeCheck, forMode: .default)
-                            sleepTimeCheck.fire()
+                        RunLoop.current.add(sleepTimeCheck, forMode: .default)
+                        sleepTimeCheck.fire()
                     }
                     .overlay {
                         VStack {
@@ -227,6 +233,12 @@ struct DarockBili_Watch_AppApp: App {
                             .ignoresSafeArea()
                         }
                     }
+                    .onContinueUserActivity("com.darock.DarockBili.video-play") { activity in
+                        if let videoDetails = activity.userInfo as? [String: String] {
+                            handoffVideoDetails = videoDetails
+                            shouldPushVideoView = true
+                        }
+                    }
             }
         }
         .onChange(of: scenePhase) { value in
@@ -257,6 +269,15 @@ struct DarockBili_Watch_AppApp: App {
                         }
                     }
                 }
+                
+                if CHHapticEngine.capabilitiesForHardware().supportsHaptics {
+                    do {
+                        globalHapticEngine = try CHHapticEngine()
+                        try globalHapticEngine?.start()
+                    } catch {
+                        print("创建引擎时出现错误： \(error.localizedDescription)")
+                    }
+                }
             @unknown default:
                 break
             }
@@ -278,7 +299,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
     
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
-        AlertKitAPI.present(title: "低内存警告", subtitle: "喵哩喵哩收到了低内存警告", icon: .error, style: .iOS17AppleMusic, haptic: .warning)
+        //AlertKitAPI.present(title: "低内存警告", subtitle: "喵哩喵哩收到了低内存警告", icon: .error, style: .iOS17AppleMusic, haptic: .warning)
     }
 }
 
