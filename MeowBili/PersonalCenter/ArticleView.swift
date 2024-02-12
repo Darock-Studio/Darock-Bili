@@ -16,6 +16,7 @@
 //
 //===----------------------------------------------------------------------===//
 
+import WebKit
 import SwiftUI
 import DarockKit
 import SwiftSoup
@@ -23,17 +24,7 @@ import SwiftSoup
 struct ArticleView: View {
     var cvid: String
     var body: some View {
-        ScrollView {
-            
-        }
-        .onAppear {
-            DarockKit.Network.shared.requestString("https://www.bilibili.com/read/cv\(cvid)") { respStr, isSuccess in
-                if isSuccess {
-                    let doc: Document = try! SwiftSoup.parse(respStr)
-                    debugPrint(try! doc.text())
-                }
-            }
-        }
+        WebView(url: URL(string: "https://www.bilibili.com/read/cv\(cvid)")!)
     }
 }
 

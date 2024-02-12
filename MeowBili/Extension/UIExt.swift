@@ -17,6 +17,7 @@
 //===----------------------------------------------------------------------===//
 
 import UIKit
+import WebKit
 import SwiftUI
 import Foundation
 import SDWebImageSwiftUI
@@ -146,6 +147,43 @@ import AuthenticationServices
     .buttonBorderShape(.roundedRectangle(radius: 14))
 }
 
+@ViewBuilder func ArticleCard(_ article: [String: String]) -> some View {
+    NavigationLink(destination: {ArticleView(cvid: article["CV"]!)}, label: {
+        VStack {
+            HStack {
+                Text(article["Title"]!)
+                    .font(.system(size: 16, weight: .bold))
+                    .lineLimit(3)
+                Spacer()
+            }
+            HStack {
+                VStack {
+                    Text(article["Summary"]!)
+                        .font(.system(size: 14, weight: .bold))
+                        .lineLimit(3)
+                        .foregroundColor(.gray)
+                    HStack {
+                        Text(article["Type"]!)
+                            .font(.system(size: 12))
+                            .lineLimit(1)
+                            .foregroundColor(.gray)
+                        Label(article["View"]!, systemImage: "eye.fill")
+                            .font(.system(size: 12))
+                            .lineLimit(1)
+                            .foregroundColor(.gray)
+                        Label(article["Like"]!, systemImage: "hand.thumbsup.fill")
+                            .font(.system(size: 12))
+                            .lineLimit(1)
+                            .foregroundColor(.gray)
+                    }
+                }
+                WebImage(url: URL(string: article["Pic"]! + "@100w"), options: [.progressiveLoad])
+                    .cornerRadius(4)
+            }
+        }
+    })
+}
+
 //struct zoomable: ViewModifier {
 //    @AppStorage("MaxmiumScale") var maxmiumScale = 6.0
 //    @State var scale: CGFloat = 1.0
@@ -211,3 +249,14 @@ struct UIImageTransfer: Transferable {
   }
 }
 
+struct WebView: UIViewRepresentable {
+    let url: URL
+    
+    func makeUIView(context: Context) -> WKWebView  {
+        let webView = WKWebView()
+        webView.load(URLRequest(url: url))
+        return webView
+    }
+    
+    func updateUIView(_ uiView: WKWebView, context: Context) {}
+}
