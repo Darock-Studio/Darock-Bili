@@ -4797,13 +4797,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Country"
+            "value" : "Phone Area Code"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "国家"
+            "value" : "国际冠码"
           }
         }
       }
