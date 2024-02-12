@@ -56,9 +56,7 @@ struct VideoPlayerView: View {
                         "cookie": "SESSDATA=\(sessdata)"
                     ]
                     if recordHistoryTime == "play" {
-                        AF.request("https://api.bilibili.com/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": VideoDetailView.willPlayVideoBV, "mid": dedeUserID, "type": 3, "dt": 2, "play_type": 2, "csrf": biliJct], headers: headers).response { response in
-                            debugPrint(response)
-                        }
+                        AF.request("https://api.bilibili.com/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": VideoDetailView.willPlayVideoBV, "mid": dedeUserID, "type": 3, "dt": 2, "play_type": 2, "csrf": biliJct], headers: headers).response { _ in }
                     }
                     
                     Timer.scheduledTimer(withTimeInterval: 15, repeats: true) { timer in
@@ -67,14 +65,11 @@ struct VideoPlayerView: View {
                         let headers: HTTPHeaders = [
                             "cookie": "SESSDATA=\(sessdata)"
                         ]
-                        AF.request("https://api.bilibili.com/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": VideoDetailView.willPlayVideoBV, "mid": dedeUserID, "played_time": Int(player.currentTime().seconds), "type": 3, "dt": 2, "play_type": 0, "csrf": biliJct], headers: headers).response { response in
-                            debugPrint(response)
-                        }
+                        AF.request("https://api.bilibili.com/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": VideoDetailView.willPlayVideoBV, "mid": dedeUserID, "played_time": Int(player.currentTime().seconds), "type": 3, "dt": 2, "play_type": 0, "csrf": biliJct], headers: headers).response { _ in }
                     }
                     
                     AF.request("https://api.bilibili.com/x/v1/dm/list.so?oid=\(VideoDetailView.willPlayVideoCID)").response { response in
                         let danmakus = String(data: response.data!, encoding: .utf8)!
-                        debugPrint(danmakus)
                         if danmakus.contains("<d p=\"") {
                             let danmakuOnly = danmakus.split(separator: "</source>")[1].split(separator: "</i>")[0]
                             let danmakuSpd = danmakuOnly.split(separator: "</d>")
@@ -109,7 +104,6 @@ struct VideoPlayerView: View {
                                     removedCount++
                                 }
                             }
-                            debugPrint(showDanmakus)
                         }
                     }
                     

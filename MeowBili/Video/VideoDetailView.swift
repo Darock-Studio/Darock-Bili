@@ -52,7 +52,7 @@ struct VideoDetailView: View {
     @State var honors = [String]()
     @State var tags = [String]()
     @State var subTitles = [[String: String]]()
-    @State var ownerFansCount = 0
+    @State var ownerFansCount: Int64 = 0
     @State var nowPlayingCount = "0"
     @State var publishTime = ""
     @State var videoDesc = ""
@@ -222,7 +222,7 @@ struct VideoDetailView: View {
                                                 Spacer()
                                             }
                                             HStack {
-                                                Text("Video.fans.\(Int(String(ownerFansCount).shorter()) ?? 0)")
+                                                Text("Video.fans.\(String(ownerFansCount).shorter())")
                                                     .font(.system(size: 11))
                                                     .lineLimit(1)
                                                     .foregroundColor(.gray)
@@ -318,26 +318,26 @@ struct VideoDetailView: View {
                                 Spacer()
                                     .frame(height: 10)
                                 VStack {
+                                    // !!!: 不要为了本地化将此处字符串内插值进行类型转换
                                     HStack {
                                         Image(systemName: "text.word.spacing")
-                                        Text("Video.details.danmaku.\(Int(videoDetails["Danmaku"]!.shorter()) ?? 0)")
+                                        Text("\(videoDetails["Danmaku"]!.shorter()) 弹幕")
                                         Spacer()
                                     }
                                     HStack {
                                         Image(systemName: "person.2")
-                                        Text("Video.details.watching-people.\(Int(nowPlayingCount) ?? 0)")
-                                            .offset(x: -1)
+                                        Text("\(nowPlayingCount) 人在看")
                                         Spacer()
                                     }
                                     HStack {
                                         Image(systemName: "play.circle")
-                                        Text("Video.details.watches.\(Int(videoDetails["View"]!.shorter()) ?? 0)")
+                                        Text("\(videoDetails["View"]!.shorter()) 播放")
                                             .offset(x: 1)
                                         Spacer()
                                     }
                                     HStack {
                                         Image(systemName: "clock")
-                                        Text("Video.details.publish-time.\(publishTime)")
+                                        Text("发布于 \(publishTime)")
                                         Spacer()
                                     }
                                     HStack {
@@ -471,7 +471,7 @@ struct VideoDetailView: View {
                     if let mid = respJson["data"]["owner"]["mid"].int {
                         DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation/stat?vmid=\(mid)", headers: headers) { respJson, isSuccess in
                             if isSuccess {
-                                ownerFansCount = respJson["data"]["follower"].int ?? -1
+                                ownerFansCount = respJson["data"]["follower"].int64 ?? -1
                             }
                         }
                     }

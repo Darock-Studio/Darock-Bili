@@ -54,7 +54,7 @@ struct UserDetailView: View {
                     FirstPageBase(uid: uid, userFaceUrl: $userFaceUrl, username: $username, followCount: $followCount, fansCount: $fansCount, coinCount: $coinCount, isFollowed: $isFollowed)
                         .offset(y: -10)
                         .navigationTitle(username)
-                    SecondPageBase(officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign, userLevel: $userLevel, vipLabel: $vipLabel)
+                    SecondPageBase(uid: uid, officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign, userLevel: $userLevel, vipLabel: $vipLabel)
                 }
                 .tag(1)
                 .tabItem {
@@ -227,6 +227,7 @@ struct UserDetailView: View {
         }
     }
     struct SecondPageBase: View {
+        var uid: String
         @Binding var officialType: Int
         @Binding var officialTitle: String
         @Binding var userSign: String
@@ -241,6 +242,14 @@ struct UserDetailView: View {
                            Color(red: 234/255, green: 51/255, blue: 35/255)]  //6
         var body: some View {
             VStack {
+                HStack {
+                    Image(systemName: "person.text.rectangle")
+                        .foregroundColor(.secondary)
+                        .frame(width: 20, height: 20)
+                    Text(uid)
+                        .font(.system(size: 15))
+                    Spacer()
+                }
                 if officialType != -1 {
                     HStack {
                         Image(systemName: "bolt.circle")

@@ -4459,6 +4459,9 @@
         }
       }
     },
+    "Video.details.danmaku.%@" : {
+
+    },
     "Video.details.danmaku.%lld" : {
       "localizations" : {
         "en" : {
@@ -4503,6 +4506,9 @@
         }
       }
     },
+    "Video.details.watches.%@" : {
+
+    },
     "Video.details.watches.%lld" : {
       "localizations" : {
         "en" : {
@@ -4530,6 +4536,9 @@
           }
         }
       }
+    },
+    "Video.details.watching-people.%@" : {
+
     },
     "Video.details.watching-people.%lld" : {
       "localizations" : {
@@ -4574,6 +4583,9 @@
           }
         }
       }
+    },
+    "Video.fans.%@" : {
+
     },
     "Video.fans.%lld" : {
       "localizations" : {
