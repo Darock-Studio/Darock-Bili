@@ -4746,7 +4746,21 @@
         }
       }
     },
-    "动态" : {
+    "navbar.dynamic" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moments"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "动态"
+          }
+        }
+      }
 
     },
     "动态内容" : {
@@ -4804,13 +4818,41 @@
     "您可以更改默认的小尾巴内容, 如果不想添加小尾巴, 请清空上方文本框内容. 您可以随时在设置中更改此内容" : {
 
     },
-    "我的" : {
+    "navbar.my" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "我的"
+          }
+        }
+      }
 
     },
     "手机号" : {
 
     },
-    "推荐" : {
+    "navbar.suggest" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "推荐"
+          }
+        }
+      }
 
     },
     "登录" : {
