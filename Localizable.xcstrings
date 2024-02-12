@@ -4970,21 +4970,10 @@
       }
 
     },
-    "login.getcode" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Get Code"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "获取验证码"
-          }
-        }
-      }
+    "经验" : {
+
+    },
+    "获取验证码" : {
 
     },
     "要使用动态小尾巴吗?" : {
