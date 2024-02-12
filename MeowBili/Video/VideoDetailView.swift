@@ -26,11 +26,9 @@ import SwiftyJSON
 import AVFoundation
 import CachedAsyncImage
 import SDWebImageSwiftUI
+import MobileCoreServices
 
 struct VideoDetailView: View {
-    public static var willPlayVideoLink = ""
-    public static var willPlayVideoBV = ""
-    public static var willPlayVideoCID: Int64 = 0
     @State var videoDetails: [String: String]
     @Environment(\.colorScheme) var colorScheme
     @AppStorage("DedeUserID") var dedeUserID = ""
@@ -55,10 +53,9 @@ struct VideoDetailView: View {
     @State var nowPlayingCount = "0"
     @State var publishTime = ""
     @State var videoDesc = ""
-    @State var isVideoPlayerPresented = false
     @State var isMoreMenuPresented = false
     @State var isDownloadPresented = false
-    @State var isNowPlayingPresented = false
+    @State var isAudioPlayerPresented = false
     @State var backgroundPicOpacity = 0.0
     @State var mainVerticalTabViewSelection = 1
     @State var videoPartShouldShowDownloadTip = false
@@ -67,10 +64,15 @@ struct VideoDetailView: View {
     @State var isFavoriteChoosePresented = false
     @State var tagDisplayedNum = 0
     @State var currentDetailSelection = 1
+    @State var playingPageIndex = 0
+    @State var videoLink = ""
+    @State var videoBvid = ""
+    @State var videoCID: Int64 = 0
+    @State var shouldPausePlayer = false
     var body: some View {
         VStack {
             if isDecoded {
-                VideoPlayerView(isDanmakuEnabled: $isDanmakuEnabled)
+                VideoPlayerView(isDanmakuEnabled: $isDanmakuEnabled, videoLink: $videoLink, videoBvid: $videoBvid, videoCID: $videoCID, shouldPause: $shouldPausePlayer)
                     .frame(height: 240)
             } else {
                 Rectangle()
@@ -98,6 +100,9 @@ struct VideoDetailView: View {
                 }
                 .pickerStyle(.segmented)
                 .padding(.horizontal)
+                .onChange(of: currentDetailSelection) { _ in
+                    PlayHaptic(sharpness: 0.05, intensity: 0.5)
+                }
                 if currentDetailSelection == 1 {
                     ScrollView {
                         VStack {
@@ -133,78 +138,6 @@ struct VideoDetailView: View {
                             }
                             Spacer()
                                 .frame(height: 20)
-                            if #unavailable(watchOS 10) {
-                                NavigationLink("", isActive: $isNowPlayingPresented, destination: {AudioPlayerView(videoDetails: videoDetails, subTitles: subTitles)})
-                                    .frame(width: 0, height: 0)
-                                Button(action: {
-                                    if videoGetterSource == "official" {
-                                        let headers: HTTPHeaders = [
-                                            "cookie": "SESSDATA=\(sessdata)",
-                                            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                                        ]
-                                        AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers).response { response in
-                                            let cid = Int64((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
-                                            VideoDetailView.willPlayVideoCID = cid
-                                            AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers).response { response in
-                                                VideoDetailView.willPlayVideoLink = (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")
-                                                VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                                                isNowPlayingPresented = true
-                                                
-                                            }
-                                        }
-                                    } else if videoGetterSource == "injahow" {
-                                        DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=1&type=video&q=32&format=mp4&otype=url") { respStr, isSuccess in
-                                            if isSuccess {
-                                                VideoDetailView.willPlayVideoLink = respStr
-                                                VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                                                isNowPlayingPresented = true
-                                                
-                                            }
-                                        }
-                                    }
-                                }, label: {
-                                    Label("Video.play-in-audio", systemImage: "waveform")
-                                })
-                                Button(action: {
-                                    isMoreMenuPresented = true
-                                }, label: {
-                                    Label("Video.more", systemImage: "ellipsis")
-                                })
-                                .sheet(isPresented: $isMoreMenuPresented, content: {
-                                    List {
-                                        Button(action: {
-                                            isDownloadPresented = true
-                                        }, label: {
-                                            Label("Video.download", image: "arrow.down.doc")
-                                        })
-                                        .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
-                                        Button(action: {
-                                            let headers: HTTPHeaders = [
-                                                "cookie": "SESSDATA=\(sessdata)",
-                                                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                                            ]
-                                            AF.request("https://api.bilibili.com/x/v2/history/toview/add", method: .post, parameters: ["bvid": videoDetails["BV"]!, "csrf": biliJct], headers: headers).response { response in
-                                                do {
-                                                    let json = try JSON(data: response.data ?? Data())
-                                                    if let code = json["code"].int {
-                                                        if code == 0 {
-                                                            AlertKitAPI.present(title: String(localized: "Video.added"), icon: .done, style: .iOS17AppleMusic, haptic: .success)
-                                                        } else {
-                                                            AlertKitAPI.present(title: json["message"].string ?? String(localized: "Video.unkonwn-error"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
-                                                        }
-                                                    } else {
-                                                        AlertKitAPI.present(title: String(localized: "Video.unkonwn-error"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
-                                                    }
-                                                } catch {
-                                                    AlertKitAPI.present(title: String(localized: "Video.unkonwn-error"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
-                                                }
-                                            }
-                                        }, label: {
-                                            Label("Video.watch-later", systemImage: "memories.badge.plus")
-                                        })
-                                    }
-                                })
-                            }
                             if owner["ID"] != nil {
                                 NavigationLink(destination: {UserDetailView(uid: owner["ID"]!)}, label: {
                                     HStack {
@@ -221,7 +154,7 @@ struct VideoDetailView: View {
                                                 Spacer()
                                             }
                                             HStack {
-                                                Text("Video.fans.\(String(ownerFansCount).shorter())")
+                                                Text("\(String(ownerFansCount).shorter()) 粉丝")
                                                     .font(.system(size: 11))
                                                     .lineLimit(1)
                                                     .foregroundColor(.gray)
@@ -234,8 +167,14 @@ struct VideoDetailView: View {
                                     .background(Color.gray.opacity(0.35))
                                     .cornerRadius(12)
                                 })
+                                .onDrag {
+                                    PlayHaptic(sharpness: 0.05, intensity: 0.5)
+                                    let itemData = try? NSKeyedArchiver.archivedData(withRootObject: owner, requiringSecureCoding: false)
+                                    let provider = NSItemProvider(item: itemData as NSSecureCoding?, typeIdentifier: kUTTypeData as String)
+                                    return provider
+                                }
                             }
-                            LazyVStack {
+                            VStack {
                                 HStack {
                                     Button(action: {
                                         let headers: HTTPHeaders = [
@@ -314,76 +253,125 @@ struct VideoDetailView: View {
                                 }
                                 .buttonBorderShape(.roundedRectangle(radius: 18))
                                 .sheet(isPresented: $isFavoriteChoosePresented, content: {VideoFavoriteAddView(videoDetails: $videoDetails, isFavoured: $isFavoured)})
-                                Spacer()
-                                    .frame(height: 10)
-                                VStack {
-                                    // !!!: 不要为了本地化将此处字符串内插值进行类型转换
-                                    HStack {
-                                        Image(systemName: "text.word.spacing")
-                                        Text("\(videoDetails["Danmaku"]!.shorter()) 弹幕")
-                                        Spacer()
+                                if videoPages.count > 1 {
+                                    ScrollView(.horizontal) {
+                                        HStack {
+                                            ForEach(0..<videoPages.count, id: \.self) { i in
+                                                Button(action: {
+                                                    if videoGetterSource == "official" {
+                                                        let headers: HTTPHeaders = [
+                                                            "cookie": "SESSDATA=\(sessdata)",
+                                                            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                                        ]
+                                                        let cid = videoPages[i]["CID"]!
+                                                        videoCID = Int64(cid)!
+                                                        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?bvid=\(videoDetails["BV"]!)&cid=\(cid)&qn=\(sessdata == "" ? 64 : 80)", headers: headers) { respJson, isSuccess in
+                                                            if isSuccess {
+                                                                if !CheckBApiError(from: respJson) { return }
+                                                                videoLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
+                                                                videoBvid = videoDetails["BV"]!
+                                                                playingPageIndex = i
+                                                            }
+                                                        }
+                                                    } else if videoGetterSource == "injahow" {
+                                                        DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=\(i + 1)&type=video&q=32&format=mp4&otype=url") { respStr, isSuccess in
+                                                            if isSuccess {
+                                                                videoLink = respStr
+                                                                videoBvid = videoDetails["BV"]!
+                                                                playingPageIndex = i
+                                                            }
+                                                        }
+                                                    }
+                                                }, label: {
+                                                    HStack {
+                                                        VStack {
+                                                            Text(String(i + 1))
+                                                                .foregroundColor(playingPageIndex == i ? .accentColor : (colorScheme == .dark ? .white : .black))
+                                                            Spacer()
+                                                        }
+                                                        Text(videoPages[i]["Title"]!)
+                                                            .lineLimit(2)
+                                                            .foregroundColor(playingPageIndex == i ? .accentColor : (colorScheme == .dark ? .white : .black))
+                                                    }
+                                                    .font(.system(size: 14))
+                                                })
+                                                .buttonStyle(.bordered)
+                                                .frame(height: 60)
+                                                .frame(maxWidth: 160)
+                                            }
+                                        }
                                     }
-                                    HStack {
-                                        Image(systemName: "person.2")
-                                        Text("\(nowPlayingCount) 人在看")
-                                        Spacer()
-                                    }
-                                    HStack {
-                                        Image(systemName: "play.circle")
-                                        Text("\(videoDetails["View"]!.shorter()) 播放")
-                                            .offset(x: 1)
-                                        Spacer()
-                                    }
-                                    HStack {
-                                        Image(systemName: "clock")
-                                        Text("发布于 \(publishTime)")
-                                        Spacer()
-                                    }
-                                    HStack {
-                                        Image(systemName: "movieclapper")
-                                        Text(videoDetails["BV"]!)
-                                        Spacer()
-                                    }
+                                    .scrollIndicators(.never)
                                 }
-                                .font(.system(size: 11))
-                                .opacity(0.6)
-                                .padding(.horizontal, 10)
-                                Spacer()
-                                    .frame(height: 5)
-                                HStack {
+                                Group {
                                     VStack {
-                                        Image(systemName: "info.circle")
+                                        // !!!: 不要为了本地化将此处字符串内插值进行类型转换
+                                        HStack {
+                                            Image(systemName: "text.word.spacing")
+                                            Text("\(videoDetails["Danmaku"]!.shorter()) 弹幕")
+                                            Spacer()
+                                        }
+                                        HStack {
+                                            Image(systemName: "person.2")
+                                            Text("\(nowPlayingCount) 人在看")
+                                            Spacer()
+                                        }
+                                        HStack {
+                                            Image(systemName: "play.circle")
+                                            Text("\(videoDetails["View"]!.shorter()) 播放")
+                                                .offset(x: 1)
+                                            Spacer()
+                                        }
+                                        HStack {
+                                            Image(systemName: "clock")
+                                            Text("发布于 \(publishTime)")
+                                            Spacer()
+                                        }
+                                        HStack {
+                                            Image(systemName: "movieclapper")
+                                            Text(videoDetails["BV"]!)
+                                            Spacer()
+                                        }
+                                    }
+                                    .font(.system(size: 11))
+                                    .opacity(0.6)
+                                    Spacer()
+                                        .frame(height: 5)
+                                    HStack {
+                                        VStack {
+                                            Image(systemName: "info.circle")
+                                            Spacer()
+                                        }
+                                        Text(videoDesc)
                                         Spacer()
                                     }
-                                    Text(videoDesc)
-                                    Spacer()
-                                }
-                                .font(.system(size: 12))
-                                .opacity(0.65)
-                                .padding(.horizontal, 8)
-                                HStack {
-                                    VStack {
-                                        Image(systemName: "tag")
+                                    .font(.system(size: 12))
+                                    .opacity(0.65)
+                                    HStack {
+                                        VStack {
+                                            Image(systemName: "tag")
+                                            Spacer()
+                                        }
+                                        Text(tagText)
                                         Spacer()
                                     }
-                                    Text(tagText)
-                                    Spacer()
-                                }
-                                .font(.system(size: 12))
-                                .opacity(0.65)
-                                .padding(.horizontal, 8)
-                                .onAppear {
-                                    tagDisplayedNum = 0
-                                    tagText = ""
-                                    for text in tags {
-                                        tagDisplayedNum += 1
-                                        if tagDisplayedNum == tags.count {
-                                            tagText += text
-                                        } else {
-                                            tagText += text + " / "
+                                    .font(.system(size: 12))
+                                    .opacity(0.65)
+                                    .onAppear {
+                                        tagDisplayedNum = 0
+                                        tagText = ""
+                                        for text in tags {
+                                            tagDisplayedNum += 1
+                                            if tagDisplayedNum == tags.count {
+                                                tagText += text
+                                            } else {
+                                                tagText += text + " / "
+                                            }
                                         }
                                     }
                                 }
+                                .padding(.vertical, 3)
+                                .padding(.horizontal, 10)
                             }
                         }
                         .padding()
@@ -397,8 +385,6 @@ struct VideoDetailView: View {
                                 VideoCard(goodVideos[i])
                             }
                         }
-                    } else {
-                        
                     }
                 }
             }
@@ -519,23 +505,83 @@ struct VideoDetailView: View {
                     let cid = respJson["data"]["pages"][0]["cid"].int64!
                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?bvid=\(videoDetails["BV"]!)&cid=\(cid)&qn=\(sessdata == "" ? 64 : 80)", headers: headers) { respJson, isSuccess in
                         if !CheckBApiError(from: respJson) { return }
-                        VideoDetailView.willPlayVideoLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
-                        VideoDetailView.willPlayVideoCID = cid
-                        VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                        isVideoPlayerPresented = true
+                        videoLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
+                        videoCID = cid
+                        videoBvid = videoDetails["BV"]!
                         isDecoded = true
                     }
                 }
             } else if videoGetterSource == "injahow" {
                 DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=1&type=video&q=80&format=mp4&otype=url") { respStr, isSuccess in
                     if isSuccess {
-                        VideoDetailView.willPlayVideoLink = respStr
-                        VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                        isVideoPlayerPresented = true
+                        videoLink = respStr
+                        videoBvid = videoDetails["BV"]!
                         isDecoded = true
                     }
                 }
             }
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(action: {
+                    isMoreMenuPresented = true
+                }, label: {
+                    Image(systemName: "ellipsis.circle")
+                })
+            }
+        }
+        .sheet(isPresented: $isMoreMenuPresented) {
+            List {
+                Section {
+                    Button(action: {
+                        shouldPausePlayer = true
+                        isAudioPlayerPresented = true
+                        isMoreMenuPresented = false
+                    }, label: {
+                        Label("Video.play-in-audio", systemImage: "waveform")
+                    })
+                }
+                Section {
+                    Button(action: {
+                        isDownloadPresented = true
+                    }, label: {
+                        Label("Video.download", systemImage: "arrow.down.doc")
+                    })
+                    .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
+                }
+                Section {
+                    Button(action: {
+                        let headers: HTTPHeaders = [
+                            "cookie": "SESSDATA=\(sessdata)",
+                            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                        ]
+                        AF.request("https://api.bilibili.com/x/v2/history/toview/add", method: .post, parameters: ["bvid": videoDetails["BV"]!, "csrf": biliJct], headers: headers).response { response in
+                            do {
+                                let json = try JSON(data: response.data ?? Data())
+                                if let code = json["code"].int {
+                                    if code == 0 {
+                                        AlertKitAPI.present(title: String(localized: "Video.added"), icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                    } else {
+                                        AlertKitAPI.present(title: json["message"].string ?? String(localized: "Video.unkonwn-error"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                                    }
+                                } else {
+                                    AlertKitAPI.present(title: String(localized: "Video.unkonwn-error"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                                }
+                            } catch {
+                                AlertKitAPI.present(title: String(localized: "Video.unkonwn-error"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                            }
+                            isMoreMenuPresented = false
+                        }
+                    }, label: {
+                        Label("Video.watch-later", systemImage: "memories.badge.plus")
+                    })
+                }
+            }
+            .presentationDetents([.medium, .large])
+        }
+        .sheet(isPresented: $isAudioPlayerPresented, content: {AudioPlayerView(videoDetails: videoDetails, videoLink: $videoLink, videoBvid: $videoBvid, videoCID: $videoCID)})
+        .userActivity("com.darock.DarockBili.video-play", element: videoDetails) { url, activity in
+            activity.addUserInfoEntries(from: videoDetails)
         }
     }
     
@@ -608,6 +654,7 @@ struct VideoDetailView: View {
                 .navigationTitle(String(localized: "Video.add-to-favorites"))
                 .navigationBarTitleDisplayMode(.inline)
             }
+            .presentationDetents([.medium, .large])
             .onAppear {
                 let headers: HTTPHeaders = [
                     "cookie": "SESSDATA=\(sessdata);",
@@ -625,116 +672,6 @@ struct VideoDetailView: View {
                     }
                 }
             }
-        }
-    }
-    struct DetailViewVideoPartPageBase: View {
-        @Binding var videoDetails: [String: String]
-        @Binding var videoPages: [[String: String]]
-        @Binding var isLoading: Bool
-        @Binding var videoPartShouldShowDownloadTip: Bool
-        @AppStorage("DedeUserID") var dedeUserID = ""
-        @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-        @AppStorage("SESSDATA") var sessdata = ""
-        @AppStorage("bili_jct") var biliJct = ""
-        @AppStorage("VideoGetterSource") var videoGetterSource = "official"
-        @State var isVideoPlayerPresented = false
-        @State var downloadTipOffset: CGFloat = 0.0
-        @State var downloadTipOpacity: CGFloat = 1.0
-        @State var isDownloadPresented = false
-        var body: some View {
-            List {
-                if videoPages.count != 0 {
-                    ForEach(0..<videoPages.count, id: \.self) { i in
-                        Button(action: {
-                            isLoading = true
-                            
-                            if videoGetterSource == "official" {
-                                let headers: HTTPHeaders = [
-                                    "cookie": "SESSDATA=\(sessdata)",
-                                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                                ]
-                                let cid = videoPages[i]["CID"]!
-                                VideoDetailView.willPlayVideoCID = Int64(cid)!
-                                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers) { respJson, isSuccess in
-                                    if isSuccess {
-                                        if !CheckBApiError(from: respJson) { return }
-                                        VideoDetailView.willPlayVideoLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
-                                        VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                                        isVideoPlayerPresented = true
-                                        isLoading = false
-                                    }
-                                }
-                            } else if videoGetterSource == "injahow" {
-                                DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=\(i + 1)&type=video&q=32&format=mp4&otype=url") { respStr, isSuccess in
-                                    if isSuccess {
-                                        VideoDetailView.willPlayVideoLink = respStr
-                                        VideoDetailView.willPlayVideoBV = videoDetails["BV"]!
-                                        isVideoPlayerPresented = true
-                                        isLoading = false
-                                    }
-                                }
-                            }
-                        }, label: {
-                            ZStack {
-                                HStack {
-                                    Text(String(i + 1))
-                                    Text(videoPages[i]["Title"]!)
-                                    Spacer()
-                                }
-                                if videoPartShouldShowDownloadTip && i == 0 {
-                                    HStack {
-                                        Spacer()
-                                        Image(systemName: "hand.point.up.left")
-                                            .font(.system(size: 30))
-                                            .offset(x: downloadTipOffset, y: 10)
-                                            .opacity(downloadTipOpacity)
-                                            .animation(.easeOut(duration: 2.0), value: downloadTipOffset)
-                                            .animation(.easeIn(duration: 1.0), value: downloadTipOpacity)
-                                            .onAppear {
-                                                DispatchQueue(label: "com.darock.DarockBili.PartVideoDownloadTip", qos: .userInteractive).async {
-                                                    downloadTipOffset = -40
-                                                    sleep(3)
-                                                    downloadTipOpacity = 0
-                                                    sleep(1)
-                                                    videoPartShouldShowDownloadTip = false
-                                                }
-                                            }
-                                    }
-                                }
-                            }
-                        })
-                        .swipeActions {
-                            Button(action: {
-                                if videoGetterSource == "official" {
-                                    let headers: HTTPHeaders = [
-                                        "cookie": "SESSDATA=\(sessdata)",
-                                        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                                    ]
-                                    let cid = videoPages[i]["CID"]!
-                                    VideoDetailView.willPlayVideoCID = Int64(cid)!
-                                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers) { respJson, isSuccess in
-                                        if isSuccess {
-                                            if !CheckBApiError(from: respJson) { return }
-                                            VideoDownloadView.downloadLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
-                                            isDownloadPresented = true
-                                        }
-                                    }
-                                } else if videoGetterSource == "injahow" {
-                                    DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=\(i + 1)&type=video&q=32&format=mp4&otype=url") { respStr, isSuccess in
-                                        if isSuccess {
-                                            VideoDownloadView.downloadLink = respStr
-                                            isDownloadPresented = true
-                                        }
-                                    }
-                                }
-                            }, label: {
-                                Image(systemName: "arrow.down.doc")
-                            })
-                        }
-                    }
-                }
-            }
-            .sheet(isPresented: $isDownloadPresented, content: {VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails)})
         }
     }
 }
@@ -756,26 +693,6 @@ struct VideoThrowCoinView: View {
                     .tag(2)
             }
             .pickerStyle(.wheel)
-            /* HStack {
-                Button(action: {
-                    choseCoin = 1
-                }, label: {
-                    Image("Coin1Icon")
-                        .resizable()
-                })
-                .frame(width: 86, height: 126.5)
-                .buttonBorderShape(.roundedRectangle(radius: 8))
-                .border(choseCoin == 1 ? .blue : .black, width: 5)
-                Button(action: {
-                    choseCoin = 2
-                }, label: {
-                    Image("Coin2Icon")
-                        .resizable()
-                })
-                .frame(width: 86, height: 126.5)
-                .buttonBorderShape(.roundedRectangle(radius: 8))
-                .border(choseCoin == 2 ? .blue : .black, width: 5)
-            } */
             Button(action: {
                 let headers: HTTPHeaders = [
                     "cookie": "SESSDATA=\(sessdata)",

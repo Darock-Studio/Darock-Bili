@@ -10,7 +10,8 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "cd /Users/memz233/Desktop/Darock-Bili&#10;agvtool next-version -all&#10;">
+               scriptText = "cd &quot;${SRCROOT}&quot;&#10;agvtool next-version -all&#10;"
+               shellToInvoke = "/bin/bash">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
