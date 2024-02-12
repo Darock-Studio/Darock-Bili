@@ -37,7 +37,6 @@ struct VideoDetailView: View {
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
     @AppStorage("bili_jct") var biliJct = ""
-    @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
     @AppStorage("VideoGetterSource") var videoGetterSource = "official"
     @AppStorage("IsDanmakuEnabled") var isDanmakuEnabled = true
     @State var isDecoded = false
@@ -503,11 +502,6 @@ struct VideoDetailView: View {
                     for tag in respJson["data"] {
                         tags.append(tag.1["tag_name"].string ?? "[加载失败]")
                     }
-                }
-            }
-            if recordHistoryTime == "into" {
-                AF.request("https://api.bilibili.com/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": videoDetails["BV"]!, "mid": dedeUserID, "type": 3, "dt": 2, "play_type": 2, "csrf": biliJct], headers: headers).response { response in
-                    debugPrint(response)
                 }
             }
             

@@ -52,6 +52,7 @@ struct SettingsView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 5))
                             Image(systemName: "network")
                                 .font(.system(size: 16))
+                                .foregroundColor(.white)
                         }
                         Text("Settings.internet")
                     }
@@ -64,6 +65,7 @@ struct SettingsView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 5))
                             Image(systemName: "hourglass")
                                 .font(.system(size: 16))
+                                .foregroundColor(.white)
                         }
                         Text("Settings.screen-time")
                     }
@@ -76,6 +78,7 @@ struct SettingsView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 5))
                             Image(systemName: "bed.double.fill")
                                 .font(.system(size: 14))
+                                .foregroundColor(.white)
                         }
                         Text("Settings.sleep")
                     }
@@ -88,6 +91,7 @@ struct SettingsView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 5))
                             Image(systemName: "exclamationmark")
                                 .font(.system(size: 16))
+                                .foregroundColor(.white)
                         }
                         Text("Settings.feedback")
                     }
@@ -102,6 +106,7 @@ struct SettingsView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 5))
                             Image(systemName: "info")
                                 .font(.system(size: 16))
+                                .foregroundColor(.white)
                         }
                         Text("Settings.about")
                     }
@@ -116,6 +121,7 @@ struct SettingsView: View {
                                         .clipShape(RoundedRectangle(cornerRadius: 5))
                                     Image(systemName: "hammer.fill")
                                         .font(.system(size: 16))
+                                        .foregroundColor(.white)
                                 }
                                 Text("Settings.developer")
                             }
@@ -162,16 +168,12 @@ struct SettingsView: View {
 }
 
 struct PlayerSettingsView: View {
-    @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
+    @AppStorage("IsRecordHistory") var isRecordHistory = true
     @AppStorage("VideoGetterSource") var videoGetterSource = "official"
     var body: some View {
         List {
             Section {
-                Picker("Player.record-history", selection: $recordHistoryTime) {
-                    Text("Player.record-history.when-entering-page").tag("into")
-                    Text("Player.record-history.when-video-plays").tag("play")
-                    Text("Player.record-history.never").tag("never")
-                }
+                Toggle("记录历史记录", isOn: $isRecordHistory)
             }
             Section(footer: Text("Player.analyzying-source.description")) {
                 Picker("Player.analyzying-source", selection: $videoGetterSource) {

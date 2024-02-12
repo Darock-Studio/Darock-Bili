@@ -663,7 +663,7 @@ struct UserDetailView: View {
                             for article in articlesJson {
                                 articles.append(["Title": article.1["title"].string ?? "[加载失败]", "Summary": article.1["summary"].string ?? "[加载失败]", "Type": article.1["categories"][0]["name"].string ?? "[加载失败]", "View": String(article.1["stats"]["view"].int ?? -1), "Like": String(article.1["stats"]["like"].int ?? -1), "Pic": article.1["image_urls"][0].string ?? "E", "CV": String(article.1["id"].int ?? 0)])
                             }
-                            articleTotalPage = Int(respJson["data"]["count"].int ?? 0 / 30) + 1
+                            articleTotalPage = Int((respJson["data"]["count"].int ?? 0) / 30) + 1
                             articalCount = respJson["data"]["count"].int ?? 0
                             if !isArticlesLoaded {
                                 if articles.count == 0 {
