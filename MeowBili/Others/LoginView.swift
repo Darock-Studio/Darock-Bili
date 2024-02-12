@@ -167,7 +167,7 @@ struct LoginView: View {
                             smsLoginToken = json["data"]["captcha_key"].string!
                         }
                     }, label: {
-                        Text("login.getcode")
+                        Text(validate == "" ? "login.getcode" : "login.codesent")
                     })
                     .disabled(accountInput == "" || validate == "" || smsLoginToken != "")
                     //SecureField no need! by Linecom-Lik
