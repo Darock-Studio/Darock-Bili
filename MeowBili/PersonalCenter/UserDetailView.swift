@@ -598,13 +598,13 @@ struct UserDetailView: View {
             }
         }
     }
-    
-    struct ModifyUserRelation: Codable {
-        let fid: Int64
-        let act: Int
-        var re_src: Int = 11
-        let csrf: String
-    }
+}
+
+struct ModifyUserRelation: Codable {
+    let fid: Int64
+    let act: Int
+    var re_src: Int = 11
+    let csrf: String
 }
 
 enum UserDetailViewPubsType {

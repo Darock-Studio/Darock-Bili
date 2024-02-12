@@ -20,6 +20,7 @@ import SwiftUI
 import DarockKit
 import Alamofire
 import SwiftyJSON
+import MobileCoreServices
 
 struct FavoriteView: View {
     @AppStorage("DedeUserID") var dedeUserID = ""
@@ -40,6 +41,8 @@ struct FavoriteView: View {
                 }
             }
         }
+        .navigationTitle("我的收藏")
+        .navigationBarTitleDisplayMode(.large)
         .onAppear {
             if !isLoaded {
                 let headers: HTTPHeaders = [
@@ -77,6 +80,25 @@ struct FavoriteDetailView: View {
                 Section {
                     ForEach(0...details.count - 1, id: \.self) { i in
                         VideoCard(details[i])
+                            .onDrop(of: [kUTTypeData as String], isTargeted: nil) { items in
+                                PlayHaptic(sharpness: 0.05, intensity: 0.5)
+                                for item in items {
+                                    item.loadDataRepresentation(forTypeIdentifier: kUTTypeData as String) { (data, error) in
+                                        if let data = data, let dict = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [String: String] {
+                                            if dict["BV"] != nil {
+                                                details.insert(dict, at: 0)
+                                                let headers: HTTPHeaders = [
+                                                    "cookie": "SESSDATA=\(sessdata)",
+                                                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                                ]
+                                                let avid = bv2av(bvid: dict["BV"]!)
+                                                AF.request("https://api.bilibili.com/x/v3/fav/resource/deal", method: .post, parameters: ["rid": avid, "type": 2, "add_media_ids": Int(folderDatas["ID"]!)!, "csrf": biliJct], headers: headers).response { _ in }
+                                            }
+                                        }
+                                    }
+                                }
+                                return true
+                            }
                     }
                 }
                 Section {
@@ -103,6 +125,8 @@ struct FavoriteDetailView: View {
                 }
             }
         }
+        .navigationTitle(folderDatas["Title"]!)
+        .navigationBarTitleDisplayMode(.large)
         .onAppear {
             RefreshDetailData()
             totalPage = Int(Int(folderDatas["Count"]!)! / 20) + 1

@@ -26,7 +26,9 @@ import CachedAsyncImage
 
 struct AudioPlayerView: View {
     var videoDetails: [String: String]
-    var subTitles: [[String: String]]
+    @Binding var videoLink: String
+    @Binding var videoBvid: String
+    @Binding var videoCID: Int64
     @AppStorage("AudioPlayBehavior") var audioPlayBehavior = AudioPlayerBehavior.singleLoop.rawValue
     @State var audioPlayer = AVPlayer()
     @State var playerItem: AVPlayerItem! = nil
@@ -38,13 +40,21 @@ struct AudioPlayerView: View {
     var body: some View {
         VStack {
             VStack {
-                AsyncImage(url: URL(string: videoDetails["Pic"]! + "@110w_85h"))
-                    .cornerRadius(10)
-                Text(videoDetails["Title"]!)
-                    .font(.system(size: 14, weight: .bold))
-                    .lineLimit(1)
-                    .padding(.vertical, 7)
-                    .padding(.horizontal, 20)
+                AsyncImage(url: URL(string: videoDetails["Pic"]!)) { phase in
+                    switch phase {
+                    case .empty:
+                        RoundedRectangle(cornerRadius: 10)
+                            .redacted(reason: .placeholder)
+                    case .success(let image):
+                        image.resizable()
+                    case .failure(let error):
+                        RoundedRectangle(cornerRadius: 10)
+                            .redacted(reason: .placeholder)
+                    }
+                }
+                .cornerRadius(10)
+                .frame(width: 200, height: 120)
+                .scaledToFit()
                 Text(videoDetails["Title"]!)
                     .font(.system(size: 14, weight: .bold))
                     .lineLimit(1)
@@ -78,6 +88,7 @@ struct AudioPlayerView: View {
                         }
                     }())
                 })
+                .buttonStyle(.borderedProminent)
                 Button(action: {
                     isPlaying.toggle()
                     if isPlaying {
@@ -88,7 +99,7 @@ struct AudioPlayerView: View {
                 }, label: {
                     Image(systemName: isPlaying ? "pause.fill" : "play.fill")
                 })
-//                    VolumeControlView()
+                .buttonStyle(.borderedProminent)
             }
         }
         .onAppear {
@@ -100,7 +111,7 @@ struct AudioPlayerView: View {
                 print(error)
             }
             
-            let asset = AVURLAsset(url: URL(string: VideoDetailView.willPlayVideoLink)!, options: [AVURLAssetHTTPUserAgentKey: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"])
+            let asset = AVURLAsset(url: URL(string: videoLink)!, options: ["AVURLAssetHTTPHeaderFieldsKey": ["User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15", "Referer": "https://www.bilibili.com"]])
             playerItem = AVPlayerItem(asset: asset)
             audioPlayer = AVPlayer(playerItem: playerItem)
             
@@ -149,10 +160,4 @@ public enum AudioPlayerBehavior: String {
     case pauseWhenFinish = "pause"
     case listLoop = "listLoop"
     case exitWhenFinish = "exit"
-}
-
-struct AudioPlayerView_Previews: PreviewProvider {
-    static var previews: some View {
-        AudioPlayerView(videoDetails: ["Pic": "http://i1.hdslb.com/bfs/archive/453a7f8deacb98c3b083ead733291f080383723a.jpg", "Title": "解压视频：20000个小球Marble run动画", "BV": "BV1PP41137Px", "UP": "小球模拟", "View": "114514", "Danmaku": "1919810"], subTitles: [[:]])
-    }
 }

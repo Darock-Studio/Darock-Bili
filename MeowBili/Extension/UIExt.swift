@@ -20,6 +20,7 @@ import UIKit
 import SwiftUI
 import Foundation
 import SDWebImageSwiftUI
+import MobileCoreServices
 import AuthenticationServices
 
 @ViewBuilder func VideoCard(_ videoDetails: [String: String]) -> some View {
@@ -58,6 +59,14 @@ import AuthenticationServices
         }
     })
     .buttonBorderShape(.roundedRectangle(radius: 14))
+    .onDrag {
+        PlayHaptic(sharpness: 0.05, intensity: 0.5)
+        var cpdDetail = videoDetails
+        cpdDetail.updateValue("archive", forKey: "Type")
+        let itemData = try? NSKeyedArchiver.archivedData(withRootObject: cpdDetail, requiringSecureCoding: false)
+        let provider = NSItemProvider(item: itemData as NSSecureCoding?, typeIdentifier: kUTTypeData as String)
+        return provider
+    }
 }
 
 @ViewBuilder func BangumiCard(_ bangumiData: BangumiData) -> some View {

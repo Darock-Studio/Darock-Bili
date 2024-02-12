@@ -21,6 +21,7 @@ import DarockKit
 import Alamofire
 import SwiftyJSON
 import SDWebImageSwiftUI
+import MobileCoreServices
 
 struct FollowListView: View {
     @AppStorage("DedeUserID") var dedeUserID = ""
@@ -79,6 +80,24 @@ struct FollowListView: View {
                                     Image(systemName: "pin.fill")
                                 }
                             })
+                        }
+                        .onDrop(of: [kUTTypeData as String], isTargeted: nil) { items in
+                            PlayHaptic(sharpness: 0.05, intensity: 0.5)
+                            for item in items {
+                                item.loadDataRepresentation(forTypeIdentifier: kUTTypeData as String) { (data, error) in
+                                    if let data = data, let dict = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [String: String] {
+                                        if dict["ID"] != nil {
+                                            users.insert(dict, at: 0)
+                                            let headers: HTTPHeaders = [
+                                                "cookie": "SESSDATA=\(sessdata)",
+                                                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                            ]
+                                            AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(dict["ID"]!)!, act: 1, csrf: biliJct), headers: headers).response { _ in }
+                                        }
+                                    }
+                                }
+                            }
+                            return true
                         }
                     }
                 }

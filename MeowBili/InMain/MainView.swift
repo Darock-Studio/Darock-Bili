@@ -112,9 +112,7 @@ struct MainView: View {
                     Section {
                         if debug {
                             Button(action: {
-                                //tipWithText("Test")
-//                                Dynamic.PUICApplication.sharedPUICApplication._setStatusBarTimeHidden(true, animated: false, completion: nil)
-                                //Dynamic.WatchKit.sharedPUICApplication._setStatusBarTimeHidden(true, animated: false)
+                                PlayHaptic(sharpness: 0.7, intensity: 1)
                             }, label: {
                                 Text("Home.debug")
                             })
