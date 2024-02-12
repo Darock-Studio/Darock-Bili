@@ -55,6 +55,7 @@ struct VideoPlayerView: View {
                     let headers: HTTPHeaders = [
                         "cookie": "SESSDATA=\(sessdata)"
                     ]
+                  
                     if isRecordHistory {
                         AF.request("https://api.bilibili.com/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": VideoDetailView.willPlayVideoBV, "mid": dedeUserID, "type": 3, "dt": 2, "play_type": 2, "csrf": biliJct], headers: headers).response { response in
                             debugPrint(response)
@@ -74,7 +75,6 @@ struct VideoPlayerView: View {
                     
                     AF.request("https://api.bilibili.com/x/v1/dm/list.so?oid=\(VideoDetailView.willPlayVideoCID)").response { response in
                         let danmakus = String(data: response.data!, encoding: .utf8)!
-                        debugPrint(danmakus)
                         if danmakus.contains("<d p=\"") {
                             let danmakuOnly = danmakus.split(separator: "</source>")[1].split(separator: "</i>")[0]
                             let danmakuSpd = danmakuOnly.split(separator: "</d>")
@@ -109,7 +109,6 @@ struct VideoPlayerView: View {
                                     removedCount++
                                 }
                             }
-                            debugPrint(showDanmakus)
                         }
                     }
                     
