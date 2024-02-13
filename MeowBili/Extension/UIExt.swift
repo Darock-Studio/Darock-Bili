@@ -20,6 +20,7 @@ import UIKit
 import WebKit
 import SwiftUI
 import DarockKit
+import Alamofire
 import Foundation
 import SDWebImageSwiftUI
 import MobileCoreServices
@@ -68,6 +69,54 @@ import AuthenticationServices
         let itemData = try? NSKeyedArchiver.archivedData(withRootObject: cpdDetail, requiringSecureCoding: false)
         let provider = NSItemProvider(item: itemData as NSSecureCoding?, typeIdentifier: kUTTypeData as String)
         return provider
+    }
+    .onDrop(of: [kUTTypeData as String], isTargeted: nil) { items in
+        PlayHaptic(sharpness: 0.05, intensity: 0.5)
+        for item in items {
+            item.loadDataRepresentation(forTypeIdentifier: kUTTypeData as String) { (data, error) in
+                if let data = data, let dict = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [String: String] {
+                    if let action = dict["VideoAction"] {
+                        let headers: HTTPHeaders = [
+                            "cookie": "SESSDATA=\(UserDefaults.standard.string(forKey: "SESSDATA") ?? ""); buvid3=\(globalBuvid3)",
+                            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                        ]
+                        let biliJct = UserDefaults.standard.string(forKey: "bili_jct") ?? ""
+                        if action == "Like" {
+                            AF.request("https://api.bilibili.com/x/web-interface/archive/like", method: .post, parameters: ["bvid": videoDetails["BV"]!, "like": 1, "eab_x": 2, "ramval": 0, "source": "web_normal", "ga": 1, "csrf": biliJct], headers: headers).response { _ in
+                                if items.count == 1 {
+                                    AlertKitAPI.present(title: "已点赞", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                } else if item == items.last! {
+                                    AlertKitAPI.present(title: "已完成\(items.count)项操作", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                }
+                            }
+                        } else if action == "Coin" {
+                            AF.request("https://api.bilibili.com/x/web-interface/coin/add", method: .post, parameters: BiliVideoCoin(bvid: videoDetails["BV"]!, multiply: 1, csrf: biliJct), headers: headers).response { _ in
+                                if items.count == 1 {
+                                    AlertKitAPI.present(title: "已投币", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                } else if item == items.last! {
+                                    AlertKitAPI.present(title: "已完成\(items.count)项操作", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                }
+                            }
+                        } else if action == "Favorite" {
+                            let avid = bv2av(bvid: videoDetails["BV"]!)
+                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v3/fav/folder/created/list-all?type=2&rid=\(avid)&up_mid=\(UserDefaults.standard.string(forKey: "DedeUserID") ?? "")", headers: headers) { respJson, isSuccess in
+                                if isSuccess {
+                                    if !CheckBApiError(from: respJson) { return }
+                                    AF.request("https://api.bilibili.com/x/v3/fav/resource/deal", method: .post, parameters: ["rid": avid, "type": 2, "add_media_ids": respJson["data"]["list"][0]["id"].int ?? 0, "csrf": biliJct], headers: headers).response { _ in
+                                        if items.count == 1 {
+                                            AlertKitAPI.present(title: "已收藏", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                        } else if item == items.last! {
+                                            AlertKitAPI.present(title: "已完成\(items.count)项操作", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                        }
+                                     }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return true
     }
 }
 
@@ -283,10 +332,12 @@ struct TextSelectView: View {
 
 struct CopyableView<V: View>: View {
     var content: String
+    var allowSelect: Bool
     var view: () -> V
     @State var present = false
-    init(_ content: String, view: @escaping () -> V) {
+    init(_ content: String, allowSelect: Bool = true, view: @escaping () -> V) {
         self.content = content
+        self.allowSelect = allowSelect
         self.view = view
     }
     var body: some View {
@@ -298,11 +349,13 @@ struct CopyableView<V: View>: View {
                 }, label: {
                     Label("复制", systemImage: "doc.on.doc")
                 })
-                Button(action: {
-                    present = true
-                }, label: {
-                    Label("选择文本", systemImage: "selection.pin.in.out")
-                })
+                if allowSelect {
+                    Button(action: {
+                        present = true
+                    }, label: {
+                        Label("选择文本", systemImage: "selection.pin.in.out")
+                    })
+                }
             }
             .sheet(isPresented: $present, content: {
                 TextSelectView(text: content)
@@ -310,3 +363,17 @@ struct CopyableView<V: View>: View {
     }
 }
 
+extension View {
+    @usableFromInline func onPressChange(_ action: @escaping (Bool) -> Void) -> some View {
+        self.buttonStyle(ButtonStyleForPressAction(pressAction: action))
+    }
+}
+private struct ButtonStyleForPressAction: ButtonStyle {
+    var pressAction: (Bool) -> Void
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .onChange(of: configuration.isPressed) { value in
+                pressAction(value)
+            }
+    }
+}
