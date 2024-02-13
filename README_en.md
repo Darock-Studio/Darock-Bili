@@ -205,3 +205,10 @@ So, we only add build number on Testflight. However, on Github we use easy to un
 > [!TIP]
 > You're right, but Meowbili is an open source world Bilibili third-party Apple Watch client developed by Darock. The game takes place in a real world called "School", where the person selected by the teacher will confiscate the mobile phone and guide the power of Apple Watch. You will play a mysterious role named "student", browse videos with different personalities and abilities in the classroom, defeat the strong enemy with them, and find the lost MEMZ.
 
+## Important Information
+> [!IMPORTANT]
+> The videos and other data in this App come from Bilibili, the copyright belongs to Bilibili and the video creators.
+>
+> Darock has no partnership with Bilibili, this App is for learning purposes only.
+>
+> All source code of this App is open source, and it's only for learning Swift development.
