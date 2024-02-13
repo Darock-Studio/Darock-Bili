@@ -69,10 +69,17 @@ struct VideoDetailView: View {
     @State var videoBvid = ""
     @State var videoCID: Int64 = 0
     @State var shouldPausePlayer = false
+    @State var isDescSelectPresented = false
+    @State var danmakuSendCache = ""
+    @State var danmakuSendColor = Color(hex: 0xFFFFFF)
+    @State var currentPlayTime = 0.0
+    @State var danmakuSendFontSize = 25
+    @State var danmakuSendMode = 1
+    @FocusState var isEditingDanmaku: Bool
     var body: some View {
         VStack {
             if isDecoded {
-                VideoPlayerView(isDanmakuEnabled: $isDanmakuEnabled, videoLink: $videoLink, videoBvid: $videoBvid, videoCID: $videoCID, shouldPause: $shouldPausePlayer)
+                VideoPlayerView(isDanmakuEnabled: $isDanmakuEnabled, videoLink: $videoLink, videoBvid: $videoBvid, videoCID: $videoCID, shouldPause: $shouldPausePlayer, currentPlayTime: $currentPlayTime)
                     .frame(height: 240)
             } else {
                 Rectangle()
@@ -81,6 +88,48 @@ struct VideoDetailView: View {
             }
             HStack {
                 Spacer()
+                TextField("发送弹幕", text: $danmakuSendCache)
+                    .textFieldStyle(.roundedBorder)
+                    .submitLabel(.send)
+                    .onSubmit {
+                        let headers: HTTPHeaders = [
+                            "cookie": "SESSDATA=\(sessdata)",
+                            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                        ]
+                        AF.request("https://api.bilibili.com/x/v2/dm/post", method: .post, parameters: ["type": 1, "oid": videoCID, "msg": danmakuSendCache, "bvid": videoDetails["BV"]!, "progress": Int(currentPlayTime * 1000), "color": { () -> Int in
+                            var red: CGFloat = 0
+                            var green: CGFloat = 0
+                            var blue: CGFloat = 0
+                            var alpha: CGFloat = 0
+                            UIColor(danmakuSendColor).getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+                            return (Int(red * 255) << 16) + (Int(green * 255) << 8) + Int(blue * 255)
+                        }(), "fontsize": danmakuSendFontSize, "pool": 0, "mode": danmakuSendMode, "rnd": Date.now.timeStamp * 1000000, "csrf": biliJct], headers: headers).response { response in
+                            debugPrint(response)
+                            danmakuSendCache = ""
+                        }
+                    }
+                    .focused($isEditingDanmaku)
+                    .toolbar {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            ColorPicker("颜色", selection: $danmakuSendColor)
+                            Picker("字号", selection: $danmakuSendFontSize) {
+                                Text("极小").tag(12)
+                                Text("超小").tag(16)
+                                Text("小").tag(18)
+                                Text("标准").tag(25)
+                                Text("大").tag(36)
+                                Text("超大").tag(45)
+                                Text("极大").tag(64)
+                            }
+                            Picker("模式", selection: $danmakuSendMode) {
+                                Text("普通").tag(1)
+                                Text("顶部").tag(5)
+                                Text("底部").tag(4)
+                            }
+                        }
+                    }
+                    .frame(width: isEditingDanmaku ? nil : 90)
+                    .animation(.easeOut(duration: 0.2), value: isEditingDanmaku)
                 Button(action: {
                     isDanmakuEnabled.toggle()
                 }, label: {
@@ -337,16 +386,15 @@ struct VideoDetailView: View {
                                     .opacity(0.6)
                                     Spacer()
                                         .frame(height: 5)
-                                    HStack {
-                                        VStack {
+                                    CopyableView(videoDesc) {
+                                        HStack {
                                             Image(systemName: "info.circle")
+                                            Text(videoDesc)
                                             Spacer()
                                         }
-                                        Text(videoDesc)
-                                        Spacer()
+                                        .font(.system(size: 12))
+                                        .opacity(0.65)
                                     }
-                                    .font(.system(size: 12))
-                                    .opacity(0.65)
                                     HStack {
                                         VStack {
                                             Image(systemName: "tag")
@@ -391,6 +439,7 @@ struct VideoDetailView: View {
         }
         .navigationTitle("Video")
         .navigationBarTitleDisplayMode(.inline)
+        .scrollDismissesKeyboard(.immediately)
         .onAppear {
             let headers: HTTPHeaders = [
                 "cookie": "SESSDATA=\(sessdata)",
