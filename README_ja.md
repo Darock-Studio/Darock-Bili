@@ -3,7 +3,7 @@
     <img src="./Artwork/rm-ico.png" width="200" height="200">
 </p>
 
-# 喵哩喵哩 - Apple Watch上のB站クライアント
+# 喵哩喵哩 - クロスプラットフォームのSwiftネイティブB站クライアント
 
 ![Swift](https://img.shields.io/badge/Swift-5.9-orange.svg)&nbsp;
 ![GitHub Repo stars](https://img.shields.io/github/stars/Darock-Studio/Darock-Bili?style=flat)&nbsp;
