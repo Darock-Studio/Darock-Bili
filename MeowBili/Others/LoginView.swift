@@ -54,6 +54,7 @@ struct LoginView: View {
     @State var userList2: [Any] = []
     @State var userList3: [Any] = []
     @State var userList4: [Any] = []
+    @State var currentStep = 1
     var body: some View {
         TabView {
 //            ScrollView {
@@ -134,28 +135,37 @@ struct LoginView: View {
                 GroupBox {
                     VStack(alignment: .leading) {
                         Label("Login.step1.title", systemImage: "1.circle")
-                        Picker("+\(phoneCode)", selection: $phoneCode) {
-                            ForEach(callNations.indices) { codeIndex in
-                                Text(callNations[codeIndex]).tag(callCodes[codeIndex])
+                            .bold()
+                        HStack {
+                            Picker("+\(phoneCode)", selection: $phoneCode) {
+                                ForEach(callNations.indices) { codeIndex in
+                                    Text(callNations[codeIndex]).tag(callCodes[codeIndex])
+                                }
                             }
+                            TextField("Login.step1.phone-number", text: $accountInput)
+                                .autocorrectionDisabled()
+                                .textInputAutocapitalization(.never)
                         }
-                        Picker(selection: $phoneCode, content: {
-                            Text(phoneCode)
-                        }, label: {
-                            Text(phoneCode)
-                        })
                     }
                 }
-                Section {
-                    TextField("国际冠字码", text: $phoneCode)
-                        .autocorrectionDisabled()
-                        .textInputAutocapitalization(.never)
-                    TextField("手机号", text: $accountInput)
-                        .autocorrectionDisabled()
-                        .textInputAutocapitalization(.never)
-                } header: {
-                    Text("第一步: 手机号信息")
+//                Section {
+//                    TextField("国际冠字码", text: $phoneCode)
+//                        .autocorrectionDisabled()
+//                        .textInputAutocapitalization(.never)
+//                    TextField("手机号", text: $accountInput)
+//                        .autocorrectionDisabled()
+//                        .textInputAutocapitalization(.never)
+//                } header: {
+//                    Text("第一步: 手机号信息")
+//                }
+                GroupBox {
+                    VStack(alignment: .leading) {
+                        Label("Login.step2.title", systemImage: "2.circle")
+                            .bold()
+                        
+                    }
                 }
+                .disabled(currentStep >= 2)
                 Section {
                     Button(action: {
                         UIApplication.shared.open(URL(string: "https://darock.top/geetest?gt=\(gt)&challenge=\(challenge)")!)
