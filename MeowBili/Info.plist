@@ -20,6 +20,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>com.darock.DarockBili.video-play</string>
+	</array>
 	<key>UIAppFonts</key>
 	<array>
 		<string>BiliFont.ttf</string>
@@ -27,6 +31,7 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
+		<string>fetch</string>
 	</array>
 </dict>
 </plist>

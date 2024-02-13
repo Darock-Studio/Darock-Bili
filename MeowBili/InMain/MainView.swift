@@ -53,10 +53,23 @@ struct MainView: View {
                         Button(action: {
                             mainTabSelection = 2
                         }, label: {
-                            CachedAsyncImage(url: URL(string: userFaceUrl + "@35w"))
-                                .frame(width: 35)
-                                .clipShape(Circle())
-                                .matchedGeometryEffect(id: "image", in: imageAnimation)
+                            CachedAsyncImage(url: URL(string: userFaceUrl)) { phase in
+                                switch phase {
+                                case .empty:
+                                    Circle()
+                                        .frame(width: 35, height: 35)
+                                        .redacted(reason: .placeholder)
+                                case .success(let image):
+                                    image.resizable()
+                                case .failure(let error):
+                                    Circle()
+                                        .frame(width: 35, height: 35)
+                                        .redacted(reason: .placeholder)
+                                }
+                            }
+                            .frame(width: 35, height: 35)
+                            .clipShape(Circle())
+                            .matchedGeometryEffect(id: "image", in: imageAnimation)
                         })
                         .buttonStyle(.borderless)
                     }
@@ -112,9 +125,7 @@ struct MainView: View {
                     Section {
                         if debug {
                             Button(action: {
-                                //tipWithText("Test")
-//                                Dynamic.PUICApplication.sharedPUICApplication._setStatusBarTimeHidden(true, animated: false, completion: nil)
-                                //Dynamic.WatchKit.sharedPUICApplication._setStatusBarTimeHidden(true, animated: false)
+                                PlayHaptic(sharpness: 0.7, intensity: 1)
                             }, label: {
                                 Text("Home.debug")
                             })

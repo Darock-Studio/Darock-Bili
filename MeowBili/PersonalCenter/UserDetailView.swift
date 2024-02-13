@@ -47,14 +47,179 @@ struct UserDetailView: View {
     @State var coinCount = -1
     @State var isFollowed = false
     @State var isInfoSheetPresented = false
+    @State var currentExp = 0
+    @State var nextExp = 0
+    @State var minExp = 0
+    let levelColors = [Color(red: 192/255, green: 192/255, blue: 192/255), //0
+                       Color(red: 192/255, green: 192/255, blue: 192/255), //1
+                       Color(red: 155/255, green: 208/255, blue: 160/255), //2
+                       Color(red: 142/255, green: 203/255, blue: 235/255), //3
+                       Color(red: 244/255, green: 190/255, blue: 146/255), //4
+                       Color(red: 222/255, green: 111/255, blue: 60/255), //5
+                       Color(red: 234/255, green: 51/255, blue: 35/255)]  //6
     var body: some View {
         Group {
             TabView {
                 ScrollView {
-                    FirstPageBase(uid: uid, userFaceUrl: $userFaceUrl, username: $username, followCount: $followCount, fansCount: $fansCount, coinCount: $coinCount, isFollowed: $isFollowed)
-                        .offset(y: -10)
-                        .navigationTitle(username)
-                    SecondPageBase(officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign, userLevel: $userLevel, vipLabel: $vipLabel)
+                    VStack {
+                        Spacer()
+                            .frame(height: 20)
+                        HStack {
+                            Spacer()
+                            CachedAsyncImage(url: URL(string: userFaceUrl)) { phase in
+                                if let image = phase.image {
+                                    image
+                                        .resizable()
+                                } else {
+                                    Circle()
+                                        .redacted(reason: .placeholder)
+                                }
+                            }
+                            .clipShape(Circle())
+                            .frame(width: 150, height: 150)
+                            Spacer()
+                        }
+                        HStack {
+                            Spacer()
+                            VStack {
+                                if followCount != -1 {
+                                    Text(String(followCount))
+                                        .font(.system(size: 18))
+                                } else {
+                                    Text("114")
+                                        .font(.system(size: 18))
+                                        .redacted(reason: .placeholder)
+                                }
+                                Text("Account.subscribed")
+                                    .font(.system(size: 16))
+                                    .opacity(0.6)
+                                    .lineLimit(1)
+                            }
+                            Spacer()
+                            VStack {
+                                if fansCount != -1 {
+                                    Text(String(fansCount).shorter())
+                                        .font(.system(size: 18))
+                                } else {
+                                    Text("114")
+                                        .font(.system(size: 18))
+                                        .redacted(reason: .placeholder)
+                                }
+                                Text("Account.followers")
+                                    .font(.system(size: 16))
+                                    .opacity(0.6)
+                                    .lineLimit(1)
+                            }
+                            Spacer()
+                        }
+                        if dedeUserID == uid {
+                            HStack {
+                                Text("")
+                                    .font(.custom("bilibili", size: 20))
+                                    .opacity(0.55)
+                                    .offset(y: 1)
+                                Text(String(coinCount))
+                                    .font(.system(size: 20))
+                            }
+                        }
+                        HStack {
+                            if dedeUserID != uid {
+                                Button(action: {
+                                    let headers: HTTPHeaders = [
+                                        "cookie": "SESSDATA=\(sessdata);",
+                                        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                    ]
+                                    AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
+                                        debugPrint(response)
+                                        let json = try! JSON(data: response.data!)
+                                        let code = json["code"].int!
+                                        if code == 0 {
+                                            AlertKitAPI.present(title: isFollowed ? String(localized: "Account.tips.unfollowed") : String(localized: "Account.tips.followed"), icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                            isFollowed.toggle()
+                                        } else {
+                                            AlertKitAPI.present(title: json["message"].string!, icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                                        }
+                                    }
+                                }, label: {
+                                    HStack {
+                                        Image(systemName: isFollowed ? "person.badge.minus" : "person.badge.plus")
+                                        Text(isFollowed ? String(localized: "Account.unfollow") : String(localized: "Account.follow"))
+                                    }
+                                })
+                                .buttonStyle(.borderedProminent)
+                            }
+                            NavigationLink(destination: {bMessageSendView(uid: Int64(uid)!, username: username)}, label: {
+                                HStack {
+                                    Image(systemName: "ellipsis.bubble")
+                                    Text("Account.direct-message")
+                                }
+                            })
+                            .buttonStyle(.borderedProminent)
+                        }
+                        if uid == dedeUserID {
+                            if userLevel > 0 {
+                                Gauge(value: Double(currentExp), in: Double(minExp)...Double(nextExp), label: {
+                                    Text("经验")
+                                }, currentValueLabel: {
+                                    Text(String(currentExp))
+                                }, minimumValueLabel: {
+                                    Text(String(minExp))
+                                }, maximumValueLabel: {
+                                    Text(String(nextExp))
+                                })
+                                .gaugeStyle(.accessoryLinear)
+                                .tint(Gradient(colors: [levelColors[userLevel - 1], levelColors[userLevel]]))
+                            }
+                        }
+                        HStack {
+                            Image(systemName: "person.text.rectangle")
+                                .foregroundColor(.secondary)
+                                .frame(width: 20, height: 20)
+                            Text(uid)
+                                .font(.system(size: 15))
+                            Spacer()
+                        }
+                        if officialType != -1 {
+                            HStack {
+                                Image(systemName: "bolt.circle")
+                                    .foregroundColor(officialType == 0 ? Color(hex: 0xFDD663) : Color(hex: 0xA0C0F4))
+                                    .frame(width: 20, height: 20)
+                                Text("\(Text(String(localized: "Account.certification")).bold())\n\(officialTitle)")
+                                    .font(.system(size: 15))
+                                Spacer()
+                            }
+                        }
+                        if !vipLabel.isEmpty {
+                            HStack {
+                                WebImage(url: URL(string: "https://s1.hdslb.com/bfs/seed/jinkela/short/user-avatar/big-vip.svg"))
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                Text(vipLabel)
+                                    .font(.system(size: 15))
+                                    .bold()
+                                Spacer()
+                            }
+                        }
+                        HStack {
+                            Image(systemName: "graduationcap.circle")
+                                .foregroundColor(levelColors[userLevel])
+                                .frame(width: 20, height: 20)
+                            Text("Lv\(userLevel)")
+                                .font(.system(size: 15))
+                                .bold()
+                            Spacer()
+                        }
+                        HStack {
+                            Image(systemName: "info.circle")
+                                .foregroundColor(.secondary)
+                                .frame(width: 20, height: 20)
+                            Text(userSign)
+                                .font(.system(size: 14))
+                                .foregroundColor(.secondary)
+                            Spacer()
+                        }
+                    }
+                    .padding()
                 }
                 .tag(1)
                 .tabItem {
@@ -78,14 +243,8 @@ struct UserDetailView: View {
                     debugPrint(signed)
                     autoRetryRequestApi("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
-                            //debugPrint(respJson)
                             if !CheckBApiError(from: respJson) { return }
                             userFaceUrl = respJson["data"]["face"].string ?? "E"
-//                            AF.request(respJson["data"]["face"].string ?? "E").response { response in
-//                                let data = response.data!
-//                                let mColor = ColorThief.getColor(from: UIImage(data: data)!)!.makeUIColor()
-//                                debugPrint(mColor)
-//                            }
                             username = respJson["data"]["name"].string ?? "[加载失败]"
                             userLevel = respJson["data"]["level"].int ?? 0
                             officialType = respJson["data"]["official"]["type"].int ?? -1
@@ -111,183 +270,19 @@ struct UserDetailView: View {
                     }
                 }
             }
+            if uid == dedeUserID {
+                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/nav", headers: headers) { respJson, isSuccess in
+                    if isSuccess {
+                        if !CheckBApiError(from: respJson) { return }
+                        currentExp = respJson["data"]["level_info"]["current_exp"].int ?? 0
+                        nextExp = respJson["data"]["level_info"]["next_exp"].int ?? 0
+                        minExp = respJson["data"]["level_info"]["current_min"].int ?? 0
+                    }
+                }
+            }
         }
     }
     
-    struct FirstPageBase: View {
-        var uid: String
-        @Binding var userFaceUrl: String
-        @Binding var username: String
-        @Binding var followCount: Int
-        @Binding var fansCount: Int
-        @Binding var coinCount: Int
-        @Binding var isFollowed: Bool
-        @AppStorage("DedeUserID") var dedeUserID = ""
-        @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-        @AppStorage("SESSDATA") var sessdata = ""
-        @AppStorage("bili_jct") var biliJct = ""
-        var body: some View {
-            VStack {
-                Spacer()
-                    .frame(height: 20)
-                HStack {
-                    Spacer()
-                    CachedAsyncImage(url: URL(string: userFaceUrl)) { phase in
-                        if let image = phase.image {
-                            image
-                                .resizable()
-                        } else {
-                            Circle()
-                                .redacted(reason: .placeholder)
-                        }
-                    }
-                    .clipShape(Circle())
-                    .frame(width: 150, height: 150)
-                    Spacer()
-                }
-                HStack {
-                    Spacer()
-                    VStack {
-                        if followCount != -1 {
-                            Text(String(followCount))
-                                .font(.system(size: 18))
-                        } else {
-                            Text("114")
-                                .font(.system(size: 18))
-                                .redacted(reason: .placeholder)
-                        }
-                        Text("Account.subscribed")
-                            .font(.system(size: 16))
-                            .opacity(0.6)
-                            .lineLimit(1)
-                    }
-                    Spacer()
-                    VStack {
-                        if fansCount != -1 {
-                            Text(String(fansCount).shorter())
-                                .font(.system(size: 18))
-                        } else {
-                            Text("114")
-                                .font(.system(size: 18))
-                                .redacted(reason: .placeholder)
-                        }
-                        Text("Account.followers")
-                            .font(.system(size: 16))
-                            .opacity(0.6)
-                            .lineLimit(1)
-                    }
-                    Spacer()
-                }
-                if dedeUserID == uid {
-                    HStack {
-                        Text("")
-                            .font(.custom("bilibili", size: 20))
-                            .opacity(0.55)
-                            .offset(y: 1)
-                        Text(String(coinCount))
-                            .font(.system(size: 20))
-                    }
-                }
-                HStack {
-                    if dedeUserID != uid {
-                        Button(action: {
-                            let headers: HTTPHeaders = [
-                                "cookie": "SESSDATA=\(sessdata);",
-                                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                            ]
-                            AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
-                                debugPrint(response)
-                                let json = try! JSON(data: response.data!)
-                                let code = json["code"].int!
-                                if code == 0 {
-                                    AlertKitAPI.present(title: isFollowed ? String(localized: "Account.tips.unfollowed") : String(localized: "Account.tips.followed"), icon: .done, style: .iOS17AppleMusic, haptic: .success)
-                                    isFollowed.toggle()
-                                } else {
-                                    AlertKitAPI.present(title: json["message"].string!, icon: .error, style: .iOS17AppleMusic, haptic: .error)
-                                }
-                            }
-                        }, label: {
-                            HStack {
-                                Image(systemName: isFollowed ? "person.badge.minus" : "person.badge.plus")
-                                Text(isFollowed ? String(localized: "Account.unfollow") : String(localized: "Account.follow"))
-                            }
-                        })
-                        .buttonStyle(.borderedProminent)
-                    }
-                    NavigationLink(destination: {bMessageSendView(uid: Int64(uid)!, username: username)}, label: {
-                        HStack {
-                            Image(systemName: "ellipsis.bubble")
-                            Text("Account.direct-message")
-                        }
-                    })
-                    .buttonStyle(.borderedProminent)
-                }
-                .padding()
-            }
-        }
-    }
-    struct SecondPageBase: View {
-        @Binding var officialType: Int
-        @Binding var officialTitle: String
-        @Binding var userSign: String
-        @Binding var userLevel: Int
-        @Binding var vipLabel: String
-        let levelColors = [Color(red: 192/255, green: 192/255, blue: 192/255), //0
-                           Color(red: 192/255, green: 192/255, blue: 192/255), //1
-                           Color(red: 155/255, green: 208/255, blue: 160/255), //2
-                           Color(red: 142/255, green: 203/255, blue: 235/255), //3
-                           Color(red: 244/255, green: 190/255, blue: 146/255), //4
-                           Color(red: 222/255, green: 111/255, blue: 60/255), //5
-                           Color(red: 234/255, green: 51/255, blue: 35/255)]  //6
-        var body: some View {
-            VStack {
-                if officialType != -1 {
-                    HStack {
-                        Image(systemName: "bolt.circle")
-                            .foregroundColor(officialType == 0 ? Color(hex: 0xFDD663) : Color(hex: 0xA0C0F4))
-                            .frame(width: 20, height: 20)
-                        Text("\(Text(String(localized: "Account.certification")).bold())\n\(officialTitle)")
-                            .font(.system(size: 15))
-                        Spacer()
-                    }
-                }
-                if !vipLabel.isEmpty {
-                    HStack {
-                        WebImage(url: URL(string: "https://s1.hdslb.com/bfs/seed/jinkela/short/user-avatar/big-vip.svg"))
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                        Text(vipLabel)
-                            .font(.system(size: 15))
-                            .bold()
-                        Spacer()
-                    }
-                }
-                HStack {
-                    Image(systemName: "graduationcap.circle")
-                        .foregroundColor(levelColors[userLevel])
-                        .frame(width: 20, height: 20)
-                    Text("Lv\(userLevel)")
-                        .font(.system(size: 15))
-                        .bold()
-                    Spacer()
-                }
-                HStack {
-                    VStack {
-                        Image(systemName: "info.circle")
-                            .foregroundColor(.secondary)
-                            .frame(width: 20, height: 20)
-                        Spacer()
-                    }
-                    Text(userSign)
-                        .font(.system(size: 14))
-                        .foregroundColor(.secondary)
-//                            .opacity(0.6)
-                    Spacer()
-                }
-            }
-            .padding()
-        }
-    }
     struct VideosListBase: View {
         var uid: String
         @Binding var username: String
@@ -405,44 +400,7 @@ struct UserDetailView: View {
                     if articles.count != 0 {
                         Section {
                             ForEach(0...articles.count - 1, id: \.self) { i in
-                                Button(action: {
-                                    let session = ASWebAuthenticationSession(url: URL(string: "https://www.bilibili.com/read/cv\(articles[i]["CV"]!)")!, callbackURLScheme: nil) { _, _ in
-                                        return
-                                    }
-                                    session.prefersEphemeralWebBrowserSession = true
-                                    session.start()
-                                }, label: {
-                                    VStack {
-                                        Text(articles[i]["Title"]!)
-                                            .font(.system(size: 16, weight: .bold))
-                                            .lineLimit(3)
-                                        HStack {
-                                            VStack {
-                                                Text(articles[i]["Summary"]!)
-                                                    .font(.system(size: 10, weight: .bold))
-                                                    .lineLimit(3)
-                                                    .foregroundColor(.gray)
-                                                HStack {
-                                                    Text(articles[i]["Type"]!)
-                                                        .font(.system(size: 10))
-                                                        .lineLimit(1)
-                                                        .foregroundColor(.gray)
-                                                    Label(articles[i]["View"]!, systemImage: "eye.fill")
-                                                        .font(.system(size: 10))
-                                                        .lineLimit(1)
-                                                        .foregroundColor(.gray)
-                                                    Label(articles[i]["Like"]!, systemImage: "hand.thumbsup.fill")
-                                                        .font(.system(size: 10))
-                                                        .lineLimit(1)
-                                                        .foregroundColor(.gray)
-                                                }
-                                            }
-                                            WebImage(url: URL(string: articles[i]["Pic"]! + "@60w"), options: [.progressiveLoad])
-                                                .cornerRadius(5)
-                                        }
-                                    }
-                                })
-                                .buttonBorderShape(.roundedRectangle(radius: 14))
+                                ArticleCard(articles[i])
                             }
                         }
                         Section {
@@ -589,13 +547,13 @@ struct UserDetailView: View {
             }
         }
     }
-    
-    struct ModifyUserRelation: Codable {
-        let fid: Int64
-        let act: Int
-        var re_src: Int = 11
-        let csrf: String
-    }
+}
+
+struct ModifyUserRelation: Codable {
+    let fid: Int64
+    let act: Int
+    var re_src: Int = 11
+    let csrf: String
 }
 
 enum UserDetailViewPubsType {

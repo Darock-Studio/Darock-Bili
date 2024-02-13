@@ -161,6 +161,18 @@
         }
       }
     },
+    "%@ 人在看" : {
+
+    },
+    "%@ 弹幕" : {
+
+    },
+    "%@ 播放" : {
+
+    },
+    "%@ 粉丝" : {
+
+    },
     "%@MB / %@MB" : {
       "localizations" : {
         "en" : {
@@ -178,21 +190,7 @@
       }
     },
     "%lld" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld"
-          }
-        }
-      }
+      "extractionState" : "stale"
     },
     "%lld / %lld" : {
       "localizations" : {
@@ -242,6 +240,9 @@
         }
       }
     },
+    "+86" : {
+
+    },
     "114" : {
       "localizations" : {
         "en" : {
@@ -279,7 +280,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "About Me"
+            "value" : "My"
           }
         },
         "zh-Hans" : {
@@ -515,7 +516,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "FOLLOWERS"
+            "value" : "FANS"
           }
         },
         "zh-Hans" : {
@@ -595,7 +596,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Last Page"
+            "value" : "Previous"
           }
         },
         "zh-Hans" : {
@@ -611,7 +612,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Next Page"
+            "value" : "Next"
           }
         },
         "zh-Hans" : {
@@ -659,7 +660,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "SUBSCRIBES"
+            "value" : "FOLLOWS"
           }
         },
         "zh-Hans" : {
@@ -966,278 +967,6 @@
         }
       }
     },
-    "DarockID.account" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Account"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "帐户"
-          }
-        }
-      }
-    },
-    "DarockID.code.unmatch" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verification Code does not match"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "验证码不匹配"
-          }
-        }
-      }
-    },
-    "DarockID.email" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Email"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "邮箱"
-          }
-        }
-      }
-    },
-    "DarockID.feedback-without-logging-in" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Report without logging in..."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在不登陆的情况下反馈…"
-          }
-        }
-      }
-    },
-    "DarockID.incorrect" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Passsword or Account Incorrect"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "帐户或密码不正确"
-          }
-        }
-      }
-    },
-    "DarockID.login" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Login"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "登陆"
-          }
-        }
-      }
-    },
-    "DarockID.login.title" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Login with Darock ID"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "登陆Darock通行证"
-          }
-        }
-      }
-    },
-    "DarockID.password" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Password"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "密码"
-          }
-        }
-      }
-    },
-    "DarockID.password.confirm" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Confirm Password"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "确认密码"
-          }
-        }
-      }
-    },
-    "DarockID.password.unmatch" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Two password does not match"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "密码不匹配"
-          }
-        }
-      }
-    },
-    "DarockID.register" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Register"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "注册"
-          }
-        }
-      }
-    },
-    "DarockID.register.success" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Successfully Registered"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "注册成功"
-          }
-        }
-      }
-    },
-    "DarockID.register.title" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Register Darock ID"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "注册 Darock 通行证"
-          }
-        }
-      }
-    },
-    "DarockID.unable-to-connect" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unable to connect to Darock server"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "无法连接至Darock服务器"
-          }
-        }
-      }
-    },
-    "DarockID.verification-code" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verification Code"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "验证码"
-          }
-        }
-      }
-    },
-    "DarockID.verification-code.send" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Send Verification Code"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "发送验证码"
-          }
-        }
-      }
-    },
     "Dignite" : {
       "localizations" : {
         "en" : {
@@ -1259,30 +988,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Failed Sending"
+            "value" : "Send Failed"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "发送失败"
-          }
-        }
-      }
-    },
-    "Download.closing-in-3sec" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Page Auto Closing in 3sec"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "页面将于3秒后自动关闭"
           }
         }
       }
@@ -1356,7 +1068,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "#%lld Paused"
+            "value" : "#%lld Aborted"
           }
         },
         "zh-Hans" : {
@@ -1388,7 +1100,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tap to Try Recontinue"
+            "value" : "Tap to Try Re-continue"
           }
         },
         "zh-Hans" : {
@@ -1484,7 +1196,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Before Running into the Problem..."
+            "value" : "Before Error Occurred..."
           }
         },
         "zh-Hans" : {
@@ -1580,7 +1292,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The error is fatal and Meowbili crashes."
+            "value" : "A fatal error occurred and caused Meowbili crash."
           }
         },
         "zh-Hans" : {
@@ -1628,7 +1340,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "We recommend running Network Troubleshooter"
+            "value" : "Recommend run Network Troubleshooting"
           }
         },
         "zh-Hans" : {
@@ -1708,7 +1420,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "MeowBili Ran into a Problem"
+            "value" : "MeowBili Occurred a Problem"
           }
         },
         "zh-Hans" : {
@@ -1788,7 +1500,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "App crashed in %@."
+            "value" : "App crashed at %@."
           }
         },
         "zh-Hans" : {
@@ -1804,30 +1516,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Continue on Other Devices"
+            "value" : "Continue on iPhone"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在其他设备上继续"
-          }
-        }
-      }
-    },
-    "Feedback.nothing" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No Feedback"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "没有反馈"
+            "value" : "在iPhone上继续"
           }
         }
       }
@@ -2013,7 +1708,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Failed to connect to Internet"
+            "value" : "Cannot connect to Internet"
           }
         },
         "zh-Hans" : {
@@ -2077,7 +1772,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tap Again to Skip This Update"
+            "value" : "Re-Tap to Skip This Update"
           }
         },
         "zh-Hans" : {
@@ -2115,7 +1810,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Linecom"
+            "value" : "澪空"
           }
         }
       }
@@ -2152,18 +1847,28 @@
         }
       }
     },
+    "Login" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "登录"
+          }
+        }
+      }
+    },
     "Login.scan" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scan to continue"
+            "value" : "Scan to Login"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "扫描以继续"
+            "value" : "扫描以登录"
           }
         }
       }
@@ -2180,6 +1885,106 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "已扫描"
+          }
+        }
+      }
+    },
+    "Login.step1.phone-number" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "电话号码"
+          }
+        }
+      }
+    },
+    "Login.step1.title" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "手机号"
+          }
+        }
+      }
+    },
+    "Login.step2.CAPTCHA" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "进行人机验证"
+          }
+        }
+      }
+    },
+    "Login.step2.captcha-first" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "先进行人机验证"
+          }
+        }
+      }
+    },
+    "Login.step2.code" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "验证码"
+          }
+        }
+      }
+    },
+    "Login.step2.code.empty" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "手机号不得为空"
+          }
+        }
+      }
+    },
+    "Login.step2.code.get" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "获取验证码"
+          }
+        }
+      }
+    },
+    "Login.step2.code.sent" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已发送验证码"
+          }
+        }
+      }
+    },
+    "Login.step2.title" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "验证"
+          }
+        }
+      }
+    },
+    "Login.step3.title" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "登录"
           }
         }
       }
@@ -2344,52 +2149,18 @@
         }
       }
     },
-    "Moments.live" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "start broadcasting"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "直播了"
-          }
-        }
-      }
-    },
     "Moments.requires-login" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Requires Login"
+            "value" : "Login Required"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "需要登录"
-          }
-        }
-      }
-    },
-    "Moments.upload-video" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : " · Uploads Video"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : " · 投稿了视频"
           }
         }
       }
@@ -2406,6 +2177,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "name"
+          }
+        }
+      }
+    },
+    "navbar.dynamic" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moments"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "动态"
+          }
+        }
+      }
+    },
+    "navbar.my" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "我的"
+          }
+        }
+      }
+    },
+    "navbar.suggest" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "推荐"
           }
         }
       }
@@ -2431,7 +2250,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Switch analysis source when analysis fails"
+            "value" : "Switch analysis source when analysis failed"
           }
         },
         "zh-Hans" : {
@@ -2527,13 +2346,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "When Entering Detail Page"
+            "value" : "When Entered Detail Page"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "当进入详细页时"
+            "value" : "当进入详情页时"
           }
         }
       }
@@ -2543,45 +2362,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "When Video Plays"
+            "value" : "When Video Played"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "当视频播放时"
-          }
-        }
-      }
-    },
-    "Player.third-party" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Third-party Player"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "自定义播放器"
-          }
-        }
-      }
-    },
-    "Player.third-party.description" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Third-party Player offers more features, but it may shorten battery life"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "自定义播放器拥有更多功能，但续航可能会有所缩短"
           }
         }
       }
@@ -2667,7 +2454,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Turn One Screen Time"
+            "value" : "Turn On Screen Time"
           }
         },
         "zh-Hans" : {
@@ -2747,7 +2534,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Matching Results"
+            "value" : "No Results"
           }
         },
         "zh-Hans" : {
@@ -3035,7 +2822,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Are you sure?"
+            "value" : "Are you sure to log out?"
           }
         },
         "zh-Hans" : {
@@ -3099,13 +2886,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Update"
+            "value" : "Software Update"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "更新"
+            "value" : "软件更新"
           }
         }
       }
@@ -3211,7 +2998,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Unzipping..."
+            "value" : "Decompressing..."
           }
         },
         "zh-Hans" : {
@@ -3387,7 +3174,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Troubleshooter"
+            "value" : "Troubleshooting"
           }
         },
         "zh-Hans" : {
@@ -3403,13 +3190,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Auto Pop-up"
+            "value" : "Auto Display"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "自动弹出疑难解答"
+            "value" : "自动显示疑难解答"
           }
         }
       }
@@ -3547,7 +3334,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Darock API: Invalid Returns"
+            "value" : "Darock API: Invalid Response"
           }
         },
         "zh-Hans" : {
@@ -3707,7 +3494,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Failed to connect to Bilibili server. The server maybe  crashed."
+            "value" : "Failed to connect to Bilibili server. Bilibili remote server maybe crashed."
           }
         },
         "zh-Hans" : {
@@ -3803,7 +3590,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apple Watch is currently unable to connect to Internet"
+            "value" : "Apple Watch is currently cannot connect to Internet"
           }
         },
         "zh-Hans" : {
@@ -3819,7 +3606,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Try turning off Wifi and Bluetooth in iPhone's Settings"
+            "value" : "Try to turn off Buletooth and WLAN on iPhone"
           }
         },
         "zh-Hans" : {
@@ -3835,7 +3622,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Check if your watch connects to Internet"
+            "value" : "Ensure your Apple Watch connected to Internet"
           }
         },
         "zh-Hans" : {
@@ -3963,7 +3750,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Darock API's Return is Invalid"
+            "value" : "Darock API's Response Invalid"
           }
         },
         "zh-Hans" : {
@@ -4043,7 +3830,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Checking Update..."
+            "value" : "Checking for Update..."
           }
         },
         "zh-Hans" : {
@@ -4075,7 +3862,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ran into a Problem while Checking Updates"
+            "value" : "An Error Occurred while Checking Updates"
           }
         },
         "zh-Hans" : {
@@ -4091,7 +3878,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Update via iPhone's Testflight"
+            "value" : "Update via Testflight on iPhone"
           }
         },
         "zh-Hans" : {
@@ -4107,13 +3894,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You're using the latest version"
+            "value" : "Meowbili is up to date"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "您已在最新版本"
+            "value" : "喵哩喵哩已是最新版本"
           }
         }
       }
@@ -4171,7 +3958,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Subscribes"
+            "value" : "Follows"
           }
         },
         "zh-Hans" : {
@@ -4219,7 +4006,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Swipe right and delete will not log out."
+            "value" : "Right swipe and delete will not log out."
           }
         },
         "zh-Hans" : {
@@ -4273,7 +4060,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "轻点以登陆"
+            "value" : "轻点以登录"
           }
         }
       }
@@ -4457,6 +4244,9 @@
         }
       }
     },
+    "Video.details.danmaku.%@" : {
+
+    },
     "Video.details.danmaku.%lld" : {
       "localizations" : {
         "en" : {
@@ -4501,6 +4291,9 @@
         }
       }
     },
+    "Video.details.watches.%@" : {
+
+    },
     "Video.details.watches.%lld" : {
       "localizations" : {
         "en" : {
@@ -4528,6 +4321,9 @@
           }
         }
       }
+    },
+    "Video.details.watching-people.%@" : {
+
     },
     "Video.details.watching-people.%lld" : {
       "localizations" : {
@@ -4572,6 +4368,9 @@
           }
         }
       }
+    },
+    "Video.fans.%@" : {
+
     },
     "Video.fans.%lld" : {
       "localizations" : {
@@ -4638,7 +4437,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Play in Audio"
+            "value" : "Play as Audio"
           }
         },
         "zh-Hans" : {
@@ -4713,9 +4512,6 @@
         }
       }
     },
-    "人机验证已完成" : {
-
-    },
     "令枫" : {
       "localizations" : {
         "en" : {
@@ -4732,9 +4528,6 @@
         }
       }
     },
-    "动态" : {
-
-    },
     "动态内容" : {
 
     },
@@ -4744,13 +4537,19 @@
     "动态详情" : {
 
     },
+    "历史记录" : {
+
+    },
+    "发布于 %@" : {
+
+    },
     "发送动态" : {
 
     },
-    "可选, 最多9个" : {
+    "发送弹幕" : {
 
     },
-    "国际冠字码" : {
+    "可选, 最多9个" : {
 
     },
     "在使用本 App 前，您需要先知晓以下信息：\n· 本 App 由第三方开发者以及部分社区用户贡献，与哔哩哔哩无合作关系，哔哩哔哩是上海宽娱数码科技有限公司的商标。\n· 本 App 并不是哔哩哔哩的替代品，我们建议您在能够使用官方客户端时尽量使用官方客户端。\n· 本 App 均使用来源于网络的公开信息进行开发。\n· 本 App 中和B站相关的功能完全免费\n· 本 App 中所呈现的B站内容来自哔哩哔哩官方。\n· 本 App 的开发者、负责人和实际责任人是%@\n  联系QQ：3245146430" : {
@@ -4769,7 +4568,19 @@
         }
       }
     },
+    "复制" : {
+
+    },
+    "大" : {
+
+    },
+    "字号" : {
+
+    },
     "将作为动态主体" : {
+
+    },
+    "小" : {
 
     },
     "小尾巴内容" : {
@@ -4781,58 +4592,88 @@
     "应用" : {
 
     },
+    "底部" : {
+
+    },
     "开启“屏幕使用时间”" : {
+
+    },
+    "弹幕" : {
 
     },
     "您可以更改默认的小尾巴内容, 如果不想添加小尾巴, 请清空上方文本框内容. 您可以随时在设置中更改此内容" : {
 
     },
-    "我的" : {
-
-    },
-    "手机号" : {
+    "我的收藏" : {
 
     },
     "推荐" : {
 
     },
-    "登录" : {
+    "普通" : {
+
+    },
+    "极大" : {
+
+    },
+    "极小" : {
+
+    },
+    "标准" : {
+
+    },
+    "模式" : {
+
+    },
+    "清除所有已观看视频" : {
+
+    },
+    "离线缓存" : {
+
+    },
+    "稍后再看" : {
 
     },
     "稿件" : {
 
     },
-    "第一步: 手机号信息" : {
-
-    },
-    "第三步: 验证码" : {
-
-    },
-    "第二步: 人机验证" : {
-
-    },
-    "获取验证码" : {
+    "经验" : {
 
     },
     "要使用动态小尾巴吗?" : {
 
     },
+    "记录历史记录" : {
+
+    },
     "评论" : {
+
+    },
+    "评论回复" : {
 
     },
     "详情" : {
 
     },
-    "进行人机验证" : {
+    "超大" : {
+
+    },
+    "超小" : {
 
     },
     "选择图片" : {
 
     },
+    "选择文本" : {
+
+    },
     "重新载入" : {
 
     },
-    "验证码" : {
+    "顶部" : {
+
+    },
+    "颜色" : {
 
     },
     "" : {

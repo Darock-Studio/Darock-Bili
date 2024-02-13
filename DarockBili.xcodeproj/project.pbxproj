@@ -26,7 +26,7 @@
 		8CA7CBC52B77AC4A008E587F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC42B77AC4A008E587F /* ContentView.swift */; };
 		8CA7CBC72B77AC4C008E587F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC62B77AC4C008E587F /* Assets.xcassets */; };
 		8CA7CBCA2B77AC4C008E587F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC92B77AC4C008E587F /* Preview Assets.xcassets */; };
-		8CA7CBD02B77AC4C008E587F /* 喵哩喵哩.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 8CA7CBCF2B77AC4C008E587F /* 喵哩喵哩.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8CA7CBD02B77AC4C008E587F /* 喵哩喵哩.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 8CA7CBCF2B77AC4C008E587F /* 喵哩喵哩.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8CA7CBE52B77AC8A008E587F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBE42B77AC8A008E587F /* Alamofire */; };
 		8CA7CBE72B77AC8A008E587F /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBE62B77AC8A008E587F /* Marquee */; };
 		8CA7CBE92B77AC8A008E587F /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBE82B77AC8A008E587F /* SwiftDate */; };
@@ -275,6 +275,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8C0557E02B7A0480009D9CD0 /* MeowBili.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeowBili.entitlements; sourceTree = "<group>"; };
 		8C372ED62B6CF08D002033A1 /* LiveMessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveMessagesView.swift; sourceTree = "<group>"; };
 		8C72E32A2B6605B80087486E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8C72E32D2B6607240087486E /* DownloadObj.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadObj.swift; sourceTree = "<group>"; };
@@ -504,6 +505,7 @@
 		8CA7CBC12B77AC4A008E587F /* MeowBili */ = {
 			isa = PBXGroup;
 			children = (
+				8C0557E02B7A0480009D9CD0 /* MeowBili.entitlements */,
 				8CA7CC632B77AD5B008E587F /* Info.plist */,
 				8CA7CC752B77AF4B008E587F /* MeowBili-Bridging-Header.h */,
 				8CA7CBC22B77AC4A008E587F /* MeowBiliApp.swift */,
@@ -1348,6 +1350,7 @@
 /* Begin PBXTargetDependency section */
 		8CA7CBD22B77AC4C008E587F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = 8CA7CBCE2B77AC4C008E587F /* MeowBili Watch App */;
 			targetProxy = 8CA7CBD12B77AC4C008E587F /* PBXContainerItemProxy */;
 		};
@@ -1366,8 +1369,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 433;
+				CURRENT_PROJECT_VERSION = 554;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1386,15 +1390,20 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "MeowBili/MeowBili-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Debug;
 		};
@@ -1405,8 +1414,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 433;
+				CURRENT_PROJECT_VERSION = 554;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1425,14 +1435,19 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "MeowBili/MeowBili-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1443,7 +1458,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 433;
+				CURRENT_PROJECT_VERSION = 554;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1475,7 +1490,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 433;
+				CURRENT_PROJECT_VERSION = 554;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1628,7 +1643,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 433;
+				CURRENT_PROJECT_VERSION = 554;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1660,7 +1675,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 433;
+				CURRENT_PROJECT_VERSION = 554;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1692,7 +1707,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 433;
+				CURRENT_PROJECT_VERSION = 554;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				INFOPLIST_KEY_CFBundleDisplayName = DarockBili;
 				MARKETING_VERSION = 1.0.0;
@@ -1708,7 +1723,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 433;
+				CURRENT_PROJECT_VERSION = 554;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				INFOPLIST_KEY_CFBundleDisplayName = DarockBili;
 				MARKETING_VERSION = 1.0.0;

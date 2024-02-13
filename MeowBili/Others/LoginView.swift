@@ -41,7 +41,7 @@ struct LoginView: View {
     //User Input
     @State var accountInput = ""
     @State var passwdInput = ""
-    @State var phoneCode = "+86"
+    @State var phoneCode = "86"
     //---QR Login---
     @State var qrImage: CGImage?
     @State var qrKey = ""
@@ -57,149 +57,130 @@ struct LoginView: View {
     @State var currentStep = 1
     var body: some View {
         TabView {
-//            ScrollView {
-//                if qrImage != nil {
-//                    ZStack {
-//                        VStack {
-//                            Image(uiImage: UIImage(cgImage: qrImage!))
-//                                .resizable()
-//                                .frame(width: 140, height: 140)
-//                                .blur(radius: isScanned ? 8 : 0)
-//                            Text("Login.scan")
-//                                .bold()
-//                        }
-//                        if isScanned {
-//                            Text("Login.scanned")
-//                                .font(.title2)
-//                                //.foregroundColor(.white)
-//                        }
-//                    }
-//                } else {
-//                    ProgressView()
-//                }
-//            }
-//            .tag(0)
-//            .onAppear {
-//                userList1 = UserDefaults.standard.array(forKey: "userList1") ?? []
-//                userList2 = UserDefaults.standard.array(forKey: "userList2") ?? []
-//                userList3 = UserDefaults.standard.array(forKey: "userList3") ?? []
-//                userList4 = UserDefaults.standard.array(forKey: "userList4") ?? []
-//                let headers: HTTPHeaders = [
-//                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-//                ]
-//                DarockKit.Network.shared.requestJSON("https://passport.bilibili.com/x/passport-login/web/qrcode/generate", headers: headers) { respJson, isSuccess in
-//                    if isSuccess {
-//                        let qrUrl = respJson["data"]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
-//                        debugPrint(qrUrl)
-//                        if let image = EFQRCode.generate(for: qrUrl) {
-//                            qrImage = image
-//                        }
-//                        qrKey = respJson["data"]["qrcode_key"].string!
-//                        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
-//                            qrTimer = timer
-//                            DarockKit.Network.shared.requestJSON("https://passport.bilibili.com/x/passport-login/web/qrcode/poll?qrcode_key=\(qrKey)", headers: headers) { respJson, isSuccess in
-//                                if respJson["data"]["code"].int == 86090 {
-//                                    isScanned = true
-//                                } else if respJson["data"]["code"].int == 0 {
-//                                    timer.invalidate()
-//                                    debugPrint(respJson)
-//                                    let respUrl = respJson["data"]["url"].string!
-//                                    dedeUserID = String(respUrl.split(separator: "DedeUserID=")[1].split(separator: "&")[0])
-//                                    dedeUserID__ckMd5 = String(respUrl.split(separator: "DedeUserID__ckMd5=")[1].split(separator: "&")[0])
-//                                    sessdata = String(respUrl.split(separator: "SESSDATA=")[1].split(separator: "&")[0])
-//                                    biliJct = String(respUrl.split(separator: "bili_jct=")[1].split(separator: "&")[0])
-//                                    userList1.append(dedeUserID)
-//                                    userList2.append(dedeUserID__ckMd5)
-//                                    userList3.append(sessdata)
-//                                    userList4.append(biliJct)
-//                                    UserDefaults.standard.set(userList1, forKey: "userList1")
-//                                    UserDefaults.standard.set(userList2, forKey: "userList2")
-//                                    UserDefaults.standard.set(userList3, forKey: "userList3")
-//                                    UserDefaults.standard.set(userList4, forKey: "userList4")
-//                                    dismiss()
-//                                }
-//                                
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            .onDisappear {
-//                if qrTimer != nil {
-//                    qrTimer!.invalidate()
-//                }
-//            }
-            
             //--SMS Login--
-            List {
-                GroupBox {
-                    VStack(alignment: .leading) {
-                        Label("Login.step1.title", systemImage: "1.circle")
-                            .bold()
-                        HStack {
-                            Picker("+\(phoneCode)", selection: $phoneCode) {
-                                ForEach(callNations.indices) { codeIndex in
-                                    Text(callNations[codeIndex]).tag(callCodes[codeIndex])
-                                }
+            ScrollView {
+                VStack {
+                    GroupBox {
+                        VStack(alignment: .leading) {
+                            Label("Login.step1.title", systemImage: "1.circle")
+                                .bold()
+                            //                                .foregroundStyle(currentStep == 1 ? Color.accentColor : Color.primary)
+                            HStack {
+                                /* Picker("+\(phoneCode)", selection: $phoneCode) {
+                                 ForEach(callNations.indices) { codeIndex in
+                                 Text(callNations[codeIndex]).tag(callCodes[codeIndex])
+                                 }
+                                 } */
+                                Text("+86")
+                                TextField("Login.step1.phone-number", text: $accountInput)
+                                    .keyboardType(.phonePad)
+                                    .onChange(of: accountInput, perform: { value in
+                                        if !passwdInput.isEmpty {
+                                            currentStep = 3
+                                        } else if !accountInput.isEmpty {
+                                            currentStep = 2
+                                        } else {
+                                            currentStep = 1
+                                        }
+                                    })
                             }
-                            TextField("Login.step1.phone-number", text: $accountInput)
-                                .autocorrectionDisabled()
-                                .textInputAutocapitalization(.never)
                         }
                     }
-                }
-//                Section {
-//                    TextField("国际冠字码", text: $phoneCode)
-//                        .autocorrectionDisabled()
-//                        .textInputAutocapitalization(.never)
-//                    TextField("手机号", text: $accountInput)
-//                        .autocorrectionDisabled()
-//                        .textInputAutocapitalization(.never)
-//                } header: {
-//                    Text("第一步: 手机号信息")
-//                }
-                GroupBox {
-                    VStack(alignment: .leading) {
-                        Label("Login.step2.title", systemImage: "2.circle")
-                            .bold()
-                        
-                    }
-                }
-                .disabled(currentStep >= 2)
-                Section {
-                    Button(action: {
-                        UIApplication.shared.open(URL(string: "https://darock.top/geetest?gt=\(gt)&challenge=\(challenge)")!)
-                    }, label: {
-                        Text(validate == "" ? "进行人机验证" : "人机验证已完成")
-                            .bold()
-                    })
-                    .disabled(validate != "")
-                } header: {
-                    Text("第二步: 人机验证")
-                }
-                Section {
-                    Button(action: {
-                        let headers: HTTPHeaders = [
-                            "Host": "passport.bilibili.com",
-                            "Origin": "https://www.bilibili.com",
-                            "Referer": "https://www.bilibili.com/",
-                            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
-                            "Cookie": "browser_resolution=1580-497; FEED_LIVE_VERSION=V8; buvid4=818BA302-8EAC-0630-67AB-BB978A5797AF60982-023042618-ho21%2BqF6LZokzAShrGptM4EHZm2TE4%2FTXmfZyPpzfCnLuUmUckb8wg%3D%3D; buvid_fp=5a716236853dd1e737d439882c685594; header_theme_version=CLOSE; home_feed_column=5; _uuid=15B5A2103-BBC2-9109A-7458-6410C3CF101028B94909infoc; b_lsid=CCF71993_18991563B31; b_ut=7; i-wanna-go-back=-1; innersign=0; b_nut=1690360493; buvid3=6481EDF5-10C43-9593-251E-89210B4A1C10A193894infoc"
-                        ]
-                        AF.request("https://passport.bilibili.com/x/passport-login/web/sms/send", method: .post, parameters: BiliSmsCodePost(cid: Int(phoneCode)!, tel: Int(accountInput)!, token: loginToken, challenge: challenge, validate: validate, seccode: seccode), headers: headers).response { response in
-                            debugPrint(response)
-                            let json = try! JSON(data: response.data!)
-                            smsLoginToken = json["data"]["captcha_key"].string!
+                    GroupBox {
+                        VStack(alignment: .leading) {
+                            Label("Login.step2.title", systemImage: "2.circle")
+                                .bold()
+                            //                                .foregroundStyle(currentStep == 2 ? Color.accentColor : Color.primary)
+                            HStack {
+                                TextField(validate.isEmpty ? "Login.step2.captcha-first" : "Login.step2.code", text: $passwdInput)
+                                    .disabled(validate.isEmpty)
+                                    .keyboardType(.numberPad)
+                                    .onChange(of: passwdInput, perform: { value in
+                                        if !passwdInput.isEmpty {
+                                            currentStep = 3
+                                        } else if !accountInput.isEmpty {
+                                            currentStep = 2
+                                        } else {
+                                            currentStep = 1
+                                        }
+                                        print(currentStep)
+                                    })
+                                Button(action: {
+                                    if validate.isEmpty {
+                                        UIApplication.shared.open(URL(string: "https://darock.top/geetest?gt=\(gt)&challenge=\(challenge)")!)
+                                    } else {
+                                        let headers: HTTPHeaders = [
+                                            "Host": "passport.bilibili.com",
+                                            "Origin": "https://www.bilibili.com",
+                                            "Referer": "https://www.bilibili.com/",
+                                            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
+                                            "Cookie": "browser_resolution=1580-497; FEED_LIVE_VERSION=V8; buvid4=818BA302-8EAC-0630-67AB-BB978A5797AF60982-023042618-ho21%2BqF6LZokzAShrGptM4EHZm2TE4%2FTXmfZyPpzfCnLuUmUckb8wg%3D%3D; buvid_fp=5a716236853dd1e737d439882c685594; header_theme_version=CLOSE; home_feed_column=5; _uuid=15B5A2103-BBC2-9109A-7458-6410C3CF101028B94909infoc; b_lsid=CCF71993_18991563B31; b_ut=7; i-wanna-go-back=-1; innersign=0; b_nut=1690360493; buvid3=6481EDF5-10C43-9593-251E-89210B4A1C10A193894infoc"
+                                        ]
+                                        AF.request("https://passport.bilibili.com/x/passport-login/web/sms/send", method: .post, parameters: BiliSmsCodePost(cid: Int(phoneCode)!, tel: Int(accountInput)!, token: loginToken, challenge: challenge, validate: validate, seccode: seccode), headers: headers).response { response in
+                                            debugPrint(response)
+                                            let json = try! JSON(data: response.data!)
+                                            smsLoginToken = json["data"]["captcha_key"].string!
+                                        }
+                                    }
+                                }, label: {
+                                    if validate.isEmpty {
+                                        Text("Login.step2.CAPTCHA")
+                                            .foregroundStyle(!validate.isEmpty && accountInput.isEmpty ? Color.secondary : Color.accentColor)
+                                    } else if smsLoginToken.isEmpty {
+                                        if accountInput.isEmpty {
+                                            Text("Login.step2.code.empty")
+                                                .foregroundStyle(.secondary)
+                                        } else {
+                                            Text("Login.step2.code.get")
+                                                .foregroundStyle(Color.accentColor)
+                                        }
+                                    } else {
+                                        Text("Login.step2.code.sent")
+                                            .foregroundStyle(.secondary)
+                                    }
+                                })
+                                .disabled(!validate.isEmpty && accountInput.isEmpty)
+                                
+                            }
+                            
                         }
-                    }, label: {
-                        Text("获取验证码")
-                    })
-                    .disabled(accountInput == "" || validate == "" || smsLoginToken != "")
-                    SecureField("验证码", text: $passwdInput)
-                } header: {
-                    Text("第三步: 验证码")
-                }
-                Section {
+                    }
+                    .disabled(currentStep < 2)
+                    .foregroundStyle(currentStep >= 2 ? Color.primary : Color.secondary)
+                    /* Section {
+                     Button(action: {
+                     UIApplication.shared.open(URL(string: "https://darock.top/geetest?gt=\(gt)&challenge=\(challenge)")!)
+                     }, label: {
+                     Text(validate == "" ? "login.goonver" : "login.captchasucc")
+                     .bold()
+                     })
+                     .disabled(validate != "")
+                     } header: {
+                     Text("login.second")
+                     }
+                     Section {
+                     Button(action: {
+                     let headers: HTTPHeaders = [
+                     "Host": "passport.bilibili.com",
+                     "Origin": "https://www.bilibili.com",
+                     "Referer": "https://www.bilibili.com/",
+                     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
+                     "Cookie": "browser_resolution=1580-497; FEED_LIVE_VERSION=V8; buvid4=818BA302-8EAC-0630-67AB-BB978A5797AF60982-023042618-ho21%2BqF6LZokzAShrGptM4EHZm2TE4%2FTXmfZyPpzfCnLuUmUckb8wg%3D%3D; buvid_fp=5a716236853dd1e737d439882c685594; header_theme_version=CLOSE; home_feed_column=5; _uuid=15B5A2103-BBC2-9109A-7458-6410C3CF101028B94909infoc; b_lsid=CCF71993_18991563B31; b_ut=7; i-wanna-go-back=-1; innersign=0; b_nut=1690360493; buvid3=6481EDF5-10C43-9593-251E-89210B4A1C10A193894infoc"
+                     ]
+                     AF.request("https://passport.bilibili.com/x/passport-login/web/sms/send", method: .post, parameters: BiliSmsCodePost(cid: Int(phoneCode)!, tel: Int(accountInput)!, token: loginToken, challenge: challenge, validate: validate, seccode: seccode), headers: headers).response { response in
+                     debugPrint(response)
+                     let json = try! JSON(data: response.data!)
+                     smsLoginToken = json["data"]["captcha_key"].string!
+                     }
+                     }, label: {
+                     Text(validate == "" ? "login.getcode" : "login.codesent")
+                     })
+                     .disabled(accountInput == "" || validate == "" || smsLoginToken != "")
+                     //SecureField no need! by Linecom-Lik
+                     TextField("login.code", text: $passwdInput)
+                     } header: {
+                     Text("login.third")
+                     } */
                     Button(action: {
                         AF.request("https://passport.bilibili.com/x/passport-login/web/login/sms", method: .post, parameters: BiliLoginPost(cid: Int(phoneCode)!, tel: Int(accountInput)!, code: Int(passwdInput)!, captcha_key: smsLoginToken)).response { response in
                             let data = response.data
@@ -228,11 +209,22 @@ struct LoginView: View {
                             }
                         }
                     }, label: {
-                        Text("登录")
+                        GroupBox {
+                            HStack {
+                                Label("Login.step3.title", systemImage: "3.circle")
+                                    .bold()
+                                    //.foregroundStyle(currentStep == 3 ? Color.accentColor : Color.primary)
+                                Spacer()
+                                Image(systemName: "arrow.up.right.square")
+                            }
+                        }
                     })
-                    .disabled(accountInput == "" || passwdInput == "")
+                    .disabled(currentStep < 3)
+                    .foregroundStyle(currentStep >= 3 ? Color.primary : Color.secondary)
                 }
             }
+            .navigationTitle("Login")
+            .padding()
             .tag(1)
             .onOpenURL { url in
                 let surl = url.absoluteString.urlDecoded()
@@ -475,15 +467,10 @@ public let callNations = [
     "Uruguay",
     "Uzbekistan",
     "Vanuatu",
-    "Vatican City",
-    "Venezuela",
-    "Vietnam",
-    "Yemen",
-    "Zambia",
-    "Zimbabwe"
-]
+    "Vatican City"
+];
 
-let callCodes = [
+public let callCodes = [
     "93",
     "355",
     "213",
@@ -674,4 +661,3 @@ let callCodes = [
     "260",
     "263"
 ];
-

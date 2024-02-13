@@ -192,10 +192,23 @@ struct PersonAccountView: View {
                         NavigationLink(destination: {UserDetailView(uid: dedeUserID)}, label: {
                             HStack {
                                 if userFaceUrl != "" {
-                                    CachedAsyncImage(url: URL(string: userFaceUrl + "@60w"))
-                                        .frame(width: 60)
-                                        .clipShape(Circle())
-                                        .matchedGeometryEffect(id: "image", in: imageAnimation)
+                                    CachedAsyncImage(url: URL(string: userFaceUrl)) { phase in
+                                        switch phase {
+                                        case .empty:
+                                            Circle()
+                                                .frame(width: 60, height: 60)
+                                                .redacted(reason: .placeholder)
+                                        case .success(let image):
+                                            image.resizable()
+                                        case .failure(let error):
+                                            Circle()
+                                                .frame(width: 60, height: 60)
+                                                .redacted(reason: .placeholder)
+                                        }
+                                    }
+                                    .frame(width: 60, height: 60)
+                                    .clipShape(Circle())
+                                    .matchedGeometryEffect(id: "image", in: imageAnimation)
                                 } else {
                                     Image("Placeholder")
                                         .resizable()

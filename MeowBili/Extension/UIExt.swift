@@ -17,9 +17,12 @@
 //===----------------------------------------------------------------------===//
 
 import UIKit
+import WebKit
 import SwiftUI
+import DarockKit
 import Foundation
 import SDWebImageSwiftUI
+import MobileCoreServices
 import AuthenticationServices
 
 @ViewBuilder func VideoCard(_ videoDetails: [String: String]) -> some View {
@@ -58,6 +61,14 @@ import AuthenticationServices
         }
     })
     .buttonBorderShape(.roundedRectangle(radius: 14))
+    .onDrag {
+        PlayHaptic(sharpness: 0.05, intensity: 0.5)
+        var cpdDetail = videoDetails
+        cpdDetail.updateValue("archive", forKey: "Type")
+        let itemData = try? NSKeyedArchiver.archivedData(withRootObject: cpdDetail, requiringSecureCoding: false)
+        let provider = NSItemProvider(item: itemData as NSSecureCoding?, typeIdentifier: kUTTypeData as String)
+        return provider
+    }
 }
 
 @ViewBuilder func BangumiCard(_ bangumiData: BangumiData) -> some View {
@@ -137,6 +148,43 @@ import AuthenticationServices
     .buttonBorderShape(.roundedRectangle(radius: 14))
 }
 
+@ViewBuilder func ArticleCard(_ article: [String: String]) -> some View {
+    NavigationLink(destination: {ArticleView(cvid: article["CV"]!)}, label: {
+        VStack {
+            HStack {
+                Text(article["Title"]!)
+                    .font(.system(size: 16, weight: .bold))
+                    .lineLimit(3)
+                Spacer()
+            }
+            HStack {
+                VStack {
+                    Text(article["Summary"]!)
+                        .font(.system(size: 14, weight: .bold))
+                        .lineLimit(3)
+                        .foregroundColor(.gray)
+                    HStack {
+                        Text(article["Type"]!)
+                            .font(.system(size: 12))
+                            .lineLimit(1)
+                            .foregroundColor(.gray)
+                        Label(article["View"]!, systemImage: "eye.fill")
+                            .font(.system(size: 12))
+                            .lineLimit(1)
+                            .foregroundColor(.gray)
+                        Label(article["Like"]!, systemImage: "hand.thumbsup.fill")
+                            .font(.system(size: 12))
+                            .lineLimit(1)
+                            .foregroundColor(.gray)
+                    }
+                }
+                WebImage(url: URL(string: article["Pic"]! + "@100w"), options: [.progressiveLoad])
+                    .cornerRadius(4)
+            }
+        }
+    })
+}
+
 //struct zoomable: ViewModifier {
 //    @AppStorage("MaxmiumScale") var maxmiumScale = 6.0
 //    @State var scale: CGFloat = 1.0
@@ -200,5 +248,65 @@ struct UIImageTransfer: Transferable {
         return UIImageTransfer(image: uiImage)
     }
   }
+}
+
+struct WebView: UIViewRepresentable {
+    let url: URL
+    
+    func makeUIView(context: Context) -> WKWebView  {
+        let webView = WKWebView()
+        webView.load(URLRequest(url: url))
+        return webView
+    }
+    
+    func updateUIView(_ uiView: WKWebView, context: Context) {}
+}
+
+@usableFromInline
+struct TextSelectView: View {
+    @usableFromInline
+    var text: String
+    
+    @usableFromInline
+    init(text: String) {
+        self.text = text
+    }
+    
+    @usableFromInline
+    var body: some View {
+        VStack {
+            TextEditor(text: .constant(text))
+                .padding()
+        }
+    }
+}
+
+struct CopyableView<V: View>: View {
+    var content: String
+    var view: () -> V
+    @State var present = false
+    init(_ content: String, view: @escaping () -> V) {
+        self.content = content
+        self.view = view
+    }
+    var body: some View {
+        view()
+            .contextMenu {
+                Button(action: {
+                    UIPasteboard.general.string = content
+                    AlertKitAPI.present(title: "已复制", subtitle: "简介内容已复制到剪贴板", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                }, label: {
+                    Label("复制", systemImage: "doc.on.doc")
+                })
+                Button(action: {
+                    present = true
+                }, label: {
+                    Label("选择文本", systemImage: "selection.pin.in.out")
+                })
+            }
+            .sheet(isPresented: $present, content: {
+                TextSelectView(text: content)
+            })
+    }
 }
 

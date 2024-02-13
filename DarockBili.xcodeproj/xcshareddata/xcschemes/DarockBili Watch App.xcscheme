@@ -5,6 +5,25 @@
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
+      <PostActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "cd &quot;${SRCROOT}&quot;&#10;agvtool next-version -all&#10;"
+               shellToInvoke = "/bin/bash">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "B44689CF2B4FC15A002CCEB2"
+                     BuildableName = "&#x55b5;&#x54e9;&#x55b5;&#x54e9;.app"
+                     BlueprintName = "DarockBili Watch App"
+                     ReferencedContainer = "container:DarockBili.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PostActions>
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
@@ -40,40 +59,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
-      <TestPlans>
-         <TestPlanReference
-            reference = "container:DarockBili Watch App Unit Tests/WatchAppUnitTestPlan.xctestplan"
-            default = "YES">
-         </TestPlanReference>
-         <TestPlanReference
-            reference = "container:DarockBili Watch App UI Tests/WatchAppUITestPlan.xctestplan">
-         </TestPlanReference>
-      </TestPlans>
-      <Testables>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6BA20BC42A7185B100AAD0C7"
-               BuildableName = "DarockBili Watch App Unit Tests.xctest"
-               BlueprintName = "DarockBili Watch App Unit Tests"
-               ReferencedContainer = "container:DarockBili.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6BA20BD12A7185D300AAD0C7"
-               BuildableName = "DarockBili Watch App UI Tests.xctest"
-               BlueprintName = "DarockBili Watch App UI Tests"
-               ReferencedContainer = "container:DarockBili.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-      </Testables>
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      shouldAutocreateTestPlan = "YES">
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -85,15 +72,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <PostActions>
-         <ExecutionAction
-            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
-            <ActionContent
-               title = "Run Script"
-               scriptText = "cd /Users/memz233/Desktop/Darock-Bili&#10;agvtool next-version -all&#10;">
-            </ActionContent>
-         </ExecutionAction>
-      </PostActions>
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
