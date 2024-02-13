@@ -170,6 +170,9 @@ struct SettingsView: View {
 struct PlayerSettingsView: View {
     @AppStorage("IsRecordHistory") var isRecordHistory = true
     @AppStorage("VideoGetterSource") var videoGetterSource = "official"
+    @AppStorage("IsShowNormalDanmaku") var isShowNormalDanmaku = true
+    @AppStorage("IsShowTopDanmaku") var isShowTopDanmaku = true
+    @AppStorage("IsShowBottomDanmaku") var isShowBottomDanmaku = true
     var body: some View {
         List {
             Section {
@@ -180,6 +183,13 @@ struct PlayerSettingsView: View {
                     Text("Player.analyzying-source.offical").tag("official")
                     Text("Player.analyzying-source.third-party").tag("injahow")
                 }
+            }
+            Section {
+                Toggle("显示普通弹幕", isOn: $isShowNormalDanmaku)
+                Toggle("显示顶部弹幕", isOn: $isShowTopDanmaku)
+                Toggle("显示底部弹幕", isOn: $isShowBottomDanmaku)
+            } header: {
+                Text("弹幕")
             }
         }
     }
