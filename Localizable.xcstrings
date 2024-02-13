@@ -2164,6 +2164,154 @@
         }
       }
     },
+    "login.captchasucc" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Captcha Completed"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "人机验证已完成"
+          }
+        }
+      }
+    },
+    "login.code" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verification Code"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "验证码"
+          }
+        }
+      }
+    },
+    "login.codesent" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verification Code Sent"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "验证码已发送"
+          }
+        }
+      }
+    },
+    "login.first" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First: Phone Info"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "第一步: 手机号信息"
+          }
+        }
+      }
+    },
+    "login.getcode" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get Code"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "获取验证码"
+          }
+        }
+      }
+    },
+    "login.goonver" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start Captcha"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "进行人机验证"
+          }
+        }
+      }
+    },
+    "login.login" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "登录"
+          }
+        }
+      }
+    },
+    "login.phonearea" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Phone Area Code"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "国际冠码"
+          }
+        }
+      }
+    },
+    "login.phonemunber" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Phone Number"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "手机号"
+          }
+        }
+      }
+    },
+    "login.phonenumber" : {
+
+    },
     "Login.scan" : {
       "localizations" : {
         "en" : {
@@ -2192,6 +2340,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "已扫描"
+          }
+        }
+      }
+    },
+    "login.second" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Second: Captcha"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "第二步: 人机验证"
+          }
+        }
+      }
+    },
+    "login.third" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Third: Verification Code"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "第三步: 验证码"
           }
         }
       }
@@ -2418,6 +2598,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "name"
+          }
+        }
+      }
+    },
+    "navbar.dynamic" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moments"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "动态"
+          }
+        }
+      }
+    },
+    "navbar.my" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "我的"
+          }
+        }
+      }
+    },
+    "navbar.suggest" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "推荐"
           }
         }
       }
@@ -4739,23 +4967,6 @@
         }
       }
     },
-    "login.captchasucc" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Captcha Completed"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "人机验证已完成"
-          }
-        }
-      }
-
-    },
     "令枫" : {
       "localizations" : {
         "en" : {
@@ -4771,23 +4982,6 @@
           }
         }
       }
-    },
-    "navbar.dynamic" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Moments"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "动态"
-          }
-        }
-      }
-
     },
     "动态内容" : {
 
@@ -4807,24 +5001,10 @@
     "发送动态" : {
 
     },
-    "可选, 最多9个" : {
+    "发送弹幕" : {
 
     },
-    "login.phonearea" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Phone Area Code"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "国际冠码"
-          }
-        }
-      }
+    "可选, 最多9个" : {
 
     },
     "在使用本 App 前，您需要先知晓以下信息：\n· 本 App 由第三方开发者以及部分社区用户贡献，与哔哩哔哩无合作关系，哔哩哔哩是上海宽娱数码科技有限公司的商标。\n· 本 App 并不是哔哩哔哩的替代品，我们建议您在能够使用官方客户端时尽量使用官方客户端。\n· 本 App 均使用来源于网络的公开信息进行开发。\n· 本 App 中和B站相关的功能完全免费\n· 本 App 中所呈现的B站内容来自哔哩哔哩官方。\n· 本 App 的开发者、负责人和实际责任人是%@\n  联系QQ：3245146430" : {
@@ -4843,7 +5023,19 @@
         }
       }
     },
+    "复制" : {
+
+    },
+    "大" : {
+
+    },
+    "字号" : {
+
+    },
     "将作为动态主体" : {
+
+    },
+    "小" : {
 
     },
     "小尾巴内容" : {
@@ -4855,6 +5047,9 @@
     "应用" : {
 
     },
+    "底部" : {
+
+    },
     "开启“屏幕使用时间”" : {
 
     },
@@ -4864,82 +5059,30 @@
     "您可以更改默认的小尾巴内容, 如果不想添加小尾巴, 请清空上方文本框内容. 您可以随时在设置中更改此内容" : {
 
     },
-    "navbar.my" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "My"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我的"
-          }
-        }
-      }
-
-    },
-    "login.phonemunber" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Phone Number"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "手机号"
-          }
-        }
-      }
-    },
     "我的收藏" : {
 
     },
-
-    "navbar.suggest" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Home"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "推荐"
-          }
-        }
-      }
+    "推荐" : {
 
     },
+    "普通" : {
 
-    "login.login" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Login"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "登录"
-          }
-        }
-      }
     },
+    "极大" : {
 
+    },
+    "极小" : {
+
+    },
+    "标准" : {
+
+    },
+    "模式" : {
+
+    },
     "清除所有已观看视频" : {
 
     },
-
     "离线缓存" : {
 
     },
@@ -4949,78 +5092,9 @@
     "稿件" : {
 
     },
-    "login.first" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "First: Phone Info"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "第一步: 手机号信息"
-          }
-        }
-      }
-
-    },
-    "login.third" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Third: Verification Code"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "第三步: 验证码"
-          }
-        }
-      }
-
-    },
-    "login.second" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Second: Captcha"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "第二步: 人机验证"
-          }
-        }
-      }
-
-    },
-    "login.getcode" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Get Code"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "获取验证码"
-          }
-        }
-      }
-    },
-
     "经验" : {
 
     },
-
     "要使用动态小尾巴吗?" : {
 
     },
@@ -5030,63 +5104,32 @@
     "评论" : {
 
     },
+    "评论回复" : {
+
+    },
     "详情" : {
 
     },
-    "login.goonver" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Start Captcha"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "进行人机验证"
-          }
-        }
-      }
+    "超大" : {
+
+    },
+    "超小" : {
 
     },
     "选择图片" : {
 
     },
+    "选择文本" : {
+
+    },
     "重新载入" : {
 
     },
-    "login.code" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verification Code"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "验证码"
-          }
-        }
-      }
+    "顶部" : {
+
     },
-    "login.codesent" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verification Code Sent"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "验证码已发送"
-          }
-        }
-      }
+    "颜色" : {
+
     },
     "" : {
 
