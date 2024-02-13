@@ -75,6 +75,9 @@ struct VideoDetailView: View {
     @State var currentPlayTime = 0.0
     @State var danmakuSendFontSize = 25
     @State var danmakuSendMode = 1
+    @State var threeComboTimer: Timer?
+    @State var threeComboRevertStatus = [false, false, false]
+    @State var isFinishedThreeCombo = false
     @FocusState var isEditingDanmaku: Bool
     var body: some View {
         VStack {
@@ -253,9 +256,59 @@ struct VideoDetailView: View {
                                             .padding(.vertical, 5)
                                         }
                                     })
+                                    .onPressChange { value in
+                                        if value && !isLiked {
+                                            Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
+                                                if value && !isLiked {
+                                                    threeComboRevertStatus = [isLiked, isCoined, isFavoured]
+                                                    threeComboTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
+                                                        isFinishedThreeCombo = true
+                                                        let headers: HTTPHeaders = [
+                                                            "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3)",
+                                                            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                                        ]
+                                                        AF.request("https://api.bilibili.com/x/web-interface/archive/like/triple", method: .post, parameters: ["bvid": videoDetails["BV"]!, "csrf": biliJct], headers: headers).response { response in
+                                                            debugPrint(response)
+                                                            AlertKitAPI.present(title: "一键三连", subtitle: "成功", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                                        }
+                                                    }
+                                                    withAnimation(.linear(duration: 3.0)) {
+                                                        isLiked = true
+                                                        isCoined = true
+                                                        isFavoured = true
+                                                    }
+                                                }
+                                            }
+                                        } else if !value && threeComboTimer != nil {
+                                            threeComboTimer?.invalidate()
+                                            threeComboTimer = nil
+                                            if !isFinishedThreeCombo {
+                                                isLiked = threeComboRevertStatus[0]
+                                                isCoined = threeComboRevertStatus[1]
+                                                isFavoured = threeComboRevertStatus[2]
+                                            }
+                                        }
+                                    }
+                                    .onDrag {
+                                        Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { _ in
+                                            threeComboTimer?.invalidate()
+                                            threeComboTimer = nil
+                                            if !isFinishedThreeCombo {
+                                                isLiked = threeComboRevertStatus[0]
+                                                isCoined = threeComboRevertStatus[1]
+                                                isFavoured = threeComboRevertStatus[2]
+                                            }
+                                        }
+                                        PlayHaptic(sharpness: 0.05, intensity: 0.5)
+                                        let itemData = try? NSKeyedArchiver.archivedData(withRootObject: ["VideoAction": "Like"], requiringSecureCoding: false)
+                                        let provider = NSItemProvider(item: itemData as NSSecureCoding?, typeIdentifier: kUTTypeData as String)
+                                        return provider
+                                    }
                                     Button(action: {
                                         if !isCoined {
                                             isCoinViewPresented = true
+                                        } else {
+                                            AlertKitAPI.present(title: "不能取消投币", icon: .done, style: .iOS17AppleMusic, haptic: .success)
                                         }
                                     }, label: {
                                         ZStack {
@@ -276,9 +329,15 @@ struct VideoDetailView: View {
                                         }
                                     })
                                     .sheet(isPresented: $isCoinViewPresented, content: {
-                                        VideoThrowCoinView(bvid: videoDetails["BV"]!)
+                                        VideoThrowCoinView(bvid: videoDetails["BV"]!, isCoined: $isCoined)
                                             .presentationDetents([.medium])
                                     })
+                                    .onDrag {
+                                        PlayHaptic(sharpness: 0.05, intensity: 0.5)
+                                        let itemData = try? NSKeyedArchiver.archivedData(withRootObject: ["VideoAction": "Coin"], requiringSecureCoding: false)
+                                        let provider = NSItemProvider(item: itemData as NSSecureCoding?, typeIdentifier: kUTTypeData as String)
+                                        return provider
+                                    }
                                     Button(action: {
                                         isFavoriteChoosePresented = true
                                     }, label: {
@@ -299,6 +358,12 @@ struct VideoDetailView: View {
                                             .padding(.vertical, 5)
                                         }
                                     })
+                                    .onDrag {
+                                        PlayHaptic(sharpness: 0.05, intensity: 0.5)
+                                        let itemData = try? NSKeyedArchiver.archivedData(withRootObject: ["VideoAction": "Favorite"], requiringSecureCoding: false)
+                                        let provider = NSItemProvider(item: itemData as NSSecureCoding?, typeIdentifier: kUTTypeData as String)
+                                        return provider
+                                    }
                                 }
                                 .buttonBorderShape(.roundedRectangle(radius: 18))
                                 .sheet(isPresented: $isFavoriteChoosePresented, content: {VideoFavoriteAddView(videoDetails: $videoDetails, isFavoured: $isFavoured)})
@@ -727,6 +792,7 @@ struct VideoDetailView: View {
 
 struct VideoThrowCoinView: View {
     var bvid: String
+    @Binding var isCoined: Bool
     @Environment(\.dismiss) var dismiss
     @AppStorage("DedeUserID") var dedeUserID = ""
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
@@ -744,11 +810,13 @@ struct VideoThrowCoinView: View {
             .pickerStyle(.wheel)
             Button(action: {
                 let headers: HTTPHeaders = [
-                    "cookie": "SESSDATA=\(sessdata)",
+                    "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3)",
                     "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                 ]
                 AF.request("https://api.bilibili.com/x/web-interface/coin/add", method: .post, parameters: BiliVideoCoin(bvid: bvid, multiply: choseCoin, csrf: biliJct), headers: headers).response { response in
                     debugPrint(response)
+                    isCoined = true
+                    AlertKitAPI.present(title: "已投币", icon: .done, style: .iOS17AppleMusic, haptic: .success)
                     dismiss()
                 }
             }, label: {
