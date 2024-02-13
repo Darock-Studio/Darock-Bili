@@ -4121,13 +4121,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You're using the latest version"
+            "value" : "Meowbili is up to date"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "您已在最新版本"
+            "value" : "喵哩喵哩已是最新版本"
           }
         }
       }
