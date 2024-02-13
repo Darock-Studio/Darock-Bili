@@ -164,13 +164,28 @@ struct LoginView: View {
                         AF.request("https://passport.bilibili.com/x/passport-login/web/sms/send", method: .post, parameters: BiliSmsCodePost(cid: Int(phoneCode)!, tel: Int(accountInput)!, token: loginToken, challenge: challenge, validate: validate, seccode: seccode), headers: headers).response { response in
                             debugPrint(response)
                             let json = try! JSON(data: response.data!)
-                            smsLoginToken = json["data"]["captcha_key"].string!
+                            if let token = json["data"]["captcha_key"].string {
+                                smsLoginToken = token
+                            } else {
+                                AlertKitAPI.present(title: "发送验证码失败", subtitle: "请从第二步开始重试", icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                                let headers: HTTPHeaders = [
+                                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                ]
+                                DarockKit.Network.shared.requestJSON("https://passport.bilibili.com/x/passport-login/captcha?source=main_web", headers: headers) { respJson, isSuccess in
+                                    if isSuccess {
+                                        challenge = respJson["data"]["geetest"]["challenge"].string!
+                                        gt = respJson["data"]["geetest"]["gt"].string!
+                                        loginToken = respJson["data"]["token"].string!
+                                    }
+                                }
+                                validate = ""
+                                seccode = ""
+                            }
                         }
                     }, label: {
                         Text(validate == "" ? "login.getcode" : "login.codesent")
                     })
                     .disabled(accountInput == "" || validate == "" || smsLoginToken != "")
-                    //SecureField no need! by Linecom-Lik
                     TextField("login.code", text: $passwdInput)
                 } header: {
                     Text("login.third")
