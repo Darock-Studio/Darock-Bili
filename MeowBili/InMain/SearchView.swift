@@ -36,6 +36,7 @@ struct SearchMainView: View {
                             .frame(width: 0, height: 0)
                             .hidden()
                         TextField("Search.\(Image(systemName: "magnifyingglass"))", text: $searchText)
+                            .submitLabel(.search)
                             .onSubmit {
                                 isSearchPresented = true
                                 if searchText != (searchHistory.first ?? "") {

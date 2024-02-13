@@ -29,6 +29,7 @@ struct VideoPlayerView: View {
     @Binding var videoBvid: String
     @Binding var videoCID: Int64
     @Binding var shouldPause: Bool
+    @Binding var currentPlayTime: Double
     @AppStorage("DedeUserID") var dedeUserID = ""
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
@@ -117,10 +118,15 @@ struct VideoPlayerView: View {
                     
                     danmakuTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { _ in
                         danmakuOffset = player.currentTime().seconds * 50
+                        currentPlayTime = player.currentTime().seconds
                     }
                     
                     playProgressTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in
-                        UserDefaults.standard.set(player.currentTime().seconds, forKey: "\(videoBvid)\(videoCID)PlayTime")
+                        if (player.currentItem?.duration.seconds ?? 0) - player.currentTime().seconds > 10 {
+                            UserDefaults.standard.set(player.currentTime().seconds, forKey: "\(videoBvid)\(videoCID)PlayTime")
+                        } else {
+                            UserDefaults.standard.removeObject(forKey: "\(videoBvid)\(videoCID)PlayTime")
+                        }
                     }
                 }
             }
@@ -133,7 +139,11 @@ struct VideoPlayerView: View {
                 danmakuTimer?.invalidate()
                 playProgressTimer?.invalidate()
                 player?.pause()
-                UserDefaults.standard.set(player.currentTime().seconds, forKey: "\(videoBvid)\(videoCID)PlayTime")
+                if (player.currentItem?.duration.seconds ?? 0) - player.currentTime().seconds > 10 {
+                    UserDefaults.standard.set(player.currentTime().seconds, forKey: "\(videoBvid)\(videoCID)PlayTime")
+                } else {
+                    UserDefaults.standard.removeObject(forKey: "\(videoBvid)\(videoCID)PlayTime")
+                }
             }
             .onChange(of: videoLink) { value in
                 let asset = AVURLAsset(url: URL(string: value)!, options: ["AVURLAssetHTTPHeaderFieldsKey": ["User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15", "Referer": "https://www.bilibili.com"]])
