@@ -19,6 +19,7 @@
 import UIKit
 import WebKit
 import SwiftUI
+import DarockKit
 import Foundation
 import SDWebImageSwiftUI
 import MobileCoreServices
@@ -260,3 +261,52 @@ struct WebView: UIViewRepresentable {
     
     func updateUIView(_ uiView: WKWebView, context: Context) {}
 }
+
+@usableFromInline
+struct TextSelectView: View {
+    @usableFromInline
+    var text: String
+    
+    @usableFromInline
+    init(text: String) {
+        self.text = text
+    }
+    
+    @usableFromInline
+    var body: some View {
+        VStack {
+            TextEditor(text: .constant(text))
+                .padding()
+        }
+    }
+}
+
+struct CopyableView<V: View>: View {
+    var content: String
+    var view: () -> V
+    @State var present = false
+    init(_ content: String, view: @escaping () -> V) {
+        self.content = content
+        self.view = view
+    }
+    var body: some View {
+        view()
+            .contextMenu {
+                Button(action: {
+                    UIPasteboard.general.string = content
+                    AlertKitAPI.present(title: "已复制", subtitle: "简介内容已复制到剪贴板", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                }, label: {
+                    Label("复制", systemImage: "doc.on.doc")
+                })
+                Button(action: {
+                    present = true
+                }, label: {
+                    Label("选择文本", systemImage: "selection.pin.in.out")
+                })
+            }
+            .sheet(isPresented: $present, content: {
+                TextSelectView(text: content)
+            })
+    }
+}
+

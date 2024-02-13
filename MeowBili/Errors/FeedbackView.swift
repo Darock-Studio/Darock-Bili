@@ -80,21 +80,9 @@ import EFQRCode
 //}
 
 struct FeedbackView: View {
-    @State var qrImage: CGImage?
     var body: some View {
         VStack {
-            if qrImage != nil {
-                Image(uiImage: UIImage(cgImage: qrImage!))
-                    .resizable()
-                    .frame(width: 140, height: 140)
-                Text("Feedback.continue-on-other-device")
-                    .bold()
-            }
-        }
-        .onAppear {
-            if let image = EFQRCode.generate(for: "https://github.com/Darock-Studio/Darock-Bili/issues") {
-                qrImage = image
-            }
+            WebView(url: URL(string: "https://github.com/Darock-Studio/Darock-Bili/issues")!)
         }
     }
 }
