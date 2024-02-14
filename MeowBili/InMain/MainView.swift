@@ -119,13 +119,15 @@ struct MainView: View {
         @State var isShowDisableNewVerTip = false
         @State var isLoadingNew = false
         @State var isFailedToLoad = false
+        @State var showedAvidList = [UInt64]()
+        @State var freshCount = 0
         var body: some View {
             Group {
                 List {
                     Section {
                         if debug {
                             Button(action: {
-                                PlayHaptic(sharpness: 0.7, intensity: 1)
+                                print(OCCodeExt.memAvailable())
                             }, label: {
                                 Text("Home.debug")
                             })
@@ -194,6 +196,7 @@ struct MainView: View {
                         ProgressView()
                     }
                 }
+                .scrollIndicators(.never)
             }
             .navigationTitle("Home")
             .refreshable {
@@ -227,7 +230,14 @@ struct MainView: View {
                 "cookie": "SESSDATA=\(sessdata)",
                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             ]
-            biliWbiSign(paramEncoded: "ps=30".base64Encoded()) { signed in
+            var lastShowlist = "&last_showlist="
+            for avid in showedAvidList {
+                lastShowlist += "av_\(avid)"
+            }
+            if lastShowlist == "&last_showlist=" {
+                lastShowlist = ""
+            }
+            biliWbiSign(paramEncoded: "y_num=5&fresh_type=3&feed_version=V_FAVOR_WATCH_LATER&fresh_idx_1h=\(freshCount)&fetch_row=1&fresh_idx=\(freshCount)&brush=4&homepage_ver=1&ps=20&last_y_num=5&screen=2353-686&seo_info=\(lastShowlist)".base64Encoded()) { signed in
                 if let signed {
                     debugPrint(signed)
                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/wbi/index/top/feed/rcmd?\(signed)", headers: headers) { respJson, isSuccess in
@@ -239,9 +249,14 @@ struct MainView: View {
                                 videos = [[String: String]]()
                             }
                             for videoInfo in datas {
-                                videos.append(["Pic": videoInfo.1["pic"].string ?? "E", "Title": videoInfo.1["title"].string ?? "[加载失败]", "BV": videoInfo.1["bvid"].string ?? "E", "UP": videoInfo.1["owner"]["name"].string ?? "[加载失败]", "View": String(videoInfo.1["stat"]["view"].int ?? -1), "Danmaku": String(videoInfo.1["stat"]["danmaku"].int ?? -1)])
+                                // Bilibili inserts ADVERTISEMENTS here dirtctly. Ads don't have bvid, filter them
+                                if videoInfo.1["bvid"].string ?? "E" != "" {
+                                    videos.append(["Pic": videoInfo.1["pic"].string ?? "E", "Title": videoInfo.1["title"].string ?? "[加载失败]", "BV": videoInfo.1["bvid"].string ?? "E", "UP": videoInfo.1["owner"]["name"].string ?? "[加载失败]", "View": String(videoInfo.1["stat"]["view"].int ?? -1), "Danmaku": String(videoInfo.1["stat"]["danmaku"].int ?? -1)])
+                                    showedAvidList.append(bv2av(bvid: videoInfo.1["bvid"].string ?? "BV1PP41137Px"))
+                                }
                             }
                             isLoadingNew = false
+                            freshCount++
                         } else {
                             isFailedToLoad = true
                             if isShowNetworkFixing {

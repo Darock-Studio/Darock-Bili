@@ -228,6 +228,18 @@ struct PersonAccountView: View {
                                 }
                             }
                         })
+                        NavigationLink(destination: {SelfQrCardView()}, label: {
+                            HStack {
+                                HStack {
+                                    Image(systemName: "qrcode")
+                                        .foregroundColor(.accentColor)
+                                    Text("二维码名片")
+                                }
+                                .font(.system(size: 16))
+                                Spacer()
+                            }
+                        })
+                        .buttonBorderShape(.roundedRectangle(radius: 13))
                         Button(action: {isUserSwitchPresented = true}, label: {
                             HStack {
                                 HStack {
