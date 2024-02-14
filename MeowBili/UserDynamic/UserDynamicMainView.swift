@@ -29,7 +29,6 @@ struct UserDynamicMainView: View {
     @AppStorage("bili_jct") var biliJct = ""
     @State var dynamics = [[String: Any?]]()
     @State var isSenderDetailsPresented = [Bool]()
-    @State var isDynamicImagePresented = [[Bool]]()
     @State var isLoaded = false
     @State var nextLoadPage = 1
     @State var lastDynamicID = ""
@@ -98,17 +97,14 @@ struct UserDynamicMainView: View {
                                 }
                                 if dynamics[i]["Type"]! as! BiliDynamicType == .draw {
                                     if let draws = dynamics[i]["Draws"] as? [[String: String]] {
-                                        LazyVGrid(columns: [GridItem(.fixed(50)), GridItem(.fixed(50)), GridItem(.fixed(50))]) {
+                                        LazyVGrid(columns: [GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3)), GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3)), GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3))]) {
                                             ForEach(0..<draws.count, id: \.self) { j in
-                                                if isDynamicImagePresented[i].count > j {
-                                                    VStack {
-                                                        NavigationLink("", isActive: $isDynamicImagePresented[i][j], destination: {ImageViewerView(url: draws[j]["Src"]!)})
-                                                            .frame(width: 0, height: 0)
-                                                        WebImage(url: URL(string: draws[j]["Src"]! + "@60w_40h"), options: [.progressiveLoad])
+                                                VStack {
+                                                    NavigationLink(destination: {ImageViewerView(url: draws[j]["Src"]!)}) {
+                                                        WebImage(url: URL(string: draws[j]["Src"]!), options: [.progressiveLoad])
+                                                            .resizable()
+                                                            .scaledToFit()
                                                             .cornerRadius(5)
-                                                            .onTapGesture {
-                                                                isDynamicImagePresented[i][j] = true
-                                                            }
                                                     }
                                                 }
                                             }
@@ -197,11 +193,15 @@ struct UserDynamicMainView: View {
                                                     }
                                                     if orig["Type"]! as! BiliDynamicType == .draw {
                                                         if let draws = orig["Draws"] as? [[String: String]] {
-                                                            LazyVGrid(columns: [GridItem(.fixed(50)), GridItem(.fixed(50)), GridItem(.fixed(50))]) {
+                                                            LazyVGrid(columns: [GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3)), GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3)), GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3))]) {
                                                                 ForEach(0..<draws.count, id: \.self) { j in
                                                                     VStack {
-                                                                        WebImage(url: URL(string: draws[j]["Src"]! + "@60w_40h"), options: [.progressiveLoad])
-                                                                            .cornerRadius(5)
+                                                                        NavigationLink(destination: {ImageViewerView(url: draws[j]["Src"]!)}) {
+                                                                            WebImage(url: URL(string: draws[j]["Src"]!), options: [.progressiveLoad])
+                                                                                .resizable()
+                                                                                .scaledToFit()
+                                                                                .cornerRadius(5)
+                                                                        }
                                                                     }
                                                                 }
                                                             }
@@ -300,7 +300,6 @@ struct UserDynamicMainView: View {
                 var itemForCount = 0
                 for item in items {
                     isSenderDetailsPresented.append(false)
-                    isDynamicImagePresented.append([])
                     dynamics.append([
                         "WithText": item.1["modules"]["module_dynamic"]["desc"]["text"].string ?? "",
                         "Type": BiliDynamicType(rawValue: item.1["type"].string ?? "DYNAMIC_TYPE_WORD") ?? .text,
@@ -308,7 +307,6 @@ struct UserDynamicMainView: View {
                             if BiliDynamicType(rawValue: item.1["type"].string ?? "DYNAMIC_TYPE_WORD") == .draw {
                                 var dTmp = [[String: String]]()
                                 for draw in item.1["modules"]["module_dynamic"]["major"]["draw"]["items"] {
-                                    isDynamicImagePresented[itemForCount].append(false)
                                     dTmp.append(["Src": draw.1["src"].string ?? ""])
                                 }
                                 return dTmp
@@ -347,7 +345,6 @@ struct UserDynamicMainView: View {
                                         if BiliDynamicType(rawValue: origData["type"].string ?? "DYNAMIC_TYPE_WORD") == .draw {
                                             var dTmp = [[String: String]]()
                                             for draw in origData["modules"]["module_dynamic"]["major"]["draw"]["items"] {
-                                                isDynamicImagePresented[itemForCount].append(false)
                                                 dTmp.append(["Src": draw.1["src"].string ?? ""])
                                             }
                                             return dTmp

@@ -24,12 +24,14 @@ import AVFoundation
 import AZVideoPlayer
 
 struct VideoPlayerView: View {
+    @Binding var videoDetails: [String: String]
     @Binding var isDanmakuEnabled: Bool
     @Binding var videoLink: String
     @Binding var videoBvid: String
     @Binding var videoCID: Int64
     @Binding var shouldPause: Bool
     @Binding var currentPlayTime: Double
+    @Binding var willEnterGoodVideo: Bool
     @AppStorage("DedeUserID") var dedeUserID = ""
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
@@ -47,6 +49,7 @@ struct VideoPlayerView: View {
     @State var willBeginFullScreenPresentation = false
     @State var showDanmakus = [[String: String]]()
     @State var danmakuOffset: CGFloat = 0
+    @State var didEnterGoodVideo = false
     var body: some View {
         AZVideoPlayer(player: player, willBeginFullScreenPresentationWithAnimationCoordinator: willBeginFullScreen, willEndFullScreenPresentationWithAnimationCoordinator: willEndFullScreen)
             .onAppear {
@@ -59,6 +62,9 @@ struct VideoPlayerView: View {
                     player.play()
                     
                     player.seek(to: CMTime(seconds: UserDefaults.standard.double(forKey: "\(videoBvid)\(videoCID)PlayTime"), preferredTimescale: 1))
+                    
+                    let cover = UIImage(data: try! Data(contentsOf: URL(string: videoDetails["Pic"]!)!))!
+                    NowPlayingExtension.setPlayingInfoTitle(videoDetails["Title"]!, artist: videoDetails["UP"]!, artwork: cover)
                     
                     let headers: HTTPHeaders = [
                         "cookie": "SESSDATA=\(sessdata)"
@@ -99,6 +105,12 @@ struct VideoPlayerView: View {
             .onDisappear {
                 guard !willBeginFullScreenPresentation else {
                     willBeginFullScreenPresentation = false
+                    return
+                }
+                if willEnterGoodVideo {
+                    didEnterGoodVideo = true
+                    willEnterGoodVideo = false
+                    player?.pause()
                     return
                 }
                 playerTimer?.invalidate()
@@ -243,6 +255,14 @@ struct VideoPlayerView: View {
                             }
                         }
                         { () -> UnsafeMutablePointer<Int?> in if type == "5" { &&previousTopDanmakuIndex } else { &&previousBottomDanmakuIndex }}().pointee = i
+                    }
+                }
+                if showDanmakus.count > 500 {
+                    for _ in 1...5000 {
+                        if showDanmakus.count <= 500 {
+                            break
+                        }
+                        showDanmakus.remove(at: Int.random(in: 0..<showDanmakus.count))
                     }
                 }
             }

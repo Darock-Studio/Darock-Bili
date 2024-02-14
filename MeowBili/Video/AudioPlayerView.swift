@@ -21,6 +21,7 @@ import Combine
 import SwiftUI
 import DarockKit
 import Alamofire
+import MediaPlayer
 import AVFoundation
 import CachedAsyncImage
 
@@ -53,8 +54,8 @@ struct AudioPlayerView: View {
                     }
                 }
                 .cornerRadius(10)
-                .frame(width: 200, height: 120)
                 .scaledToFit()
+                .frame(width: UIScreen.main.bounds.width - 40)
                 Text(videoDetails["Title"]!)
                     .font(.system(size: 14, weight: .bold))
                     .lineLimit(1)
@@ -105,7 +106,7 @@ struct AudioPlayerView: View {
         .onAppear {
             // Background Session
             do {
-                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers])
+                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.allowAirPlay, .mixWithOthers, .allowBluetooth])
                 try AVAudioSession.sharedInstance().setActive(true)
             } catch {
                 print(error)
@@ -114,6 +115,32 @@ struct AudioPlayerView: View {
             let asset = AVURLAsset(url: URL(string: videoLink)!, options: ["AVURLAssetHTTPHeaderFieldsKey": ["User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15", "Referer": "https://www.bilibili.com"]])
             playerItem = AVPlayerItem(asset: asset)
             audioPlayer = AVPlayer(playerItem: playerItem)
+            
+            let cover = UIImage(data: try! Data(contentsOf: URL(string: videoDetails["Pic"]!)!))!
+            NowPlayingExtension.setPlayingInfoTitle(videoDetails["Title"]!, artist: videoDetails["UP"]!, artwork: cover)
+            
+            MPRemoteCommandCenter.shared().playCommand.addTarget { event in
+                if !isPlaying {
+                    isPlaying.toggle()
+                    audioPlayer.play()
+                }
+                return .success
+            }
+            MPRemoteCommandCenter.shared().pauseCommand.addTarget { event in
+                if isPlaying {
+                    isPlaying.toggle()
+                    audioPlayer.pause()
+                }
+                return .success
+            }
+            MPRemoteCommandCenter.shared().seekForwardCommand.addTarget { event in
+                audioPlayer.seek(to: CMTime(seconds: audioPlayer.currentTime().seconds + 15, preferredTimescale: 1))
+                return .success
+            }
+            MPRemoteCommandCenter.shared().seekBackwardCommand.addTarget { event in
+                audioPlayer.seek(to: CMTime(seconds: audioPlayer.currentTime().seconds - 15, preferredTimescale: 1))
+                return .success
+            }
             
             startObserver = playerItem.publisher(for: \.status)
                 .sink { status in
@@ -133,6 +160,11 @@ struct AudioPlayerView: View {
             startObserver?.cancel()
             finishObserver?.cancel()
             nowPlayTimeTimer?.invalidate()
+            
+            MPRemoteCommandCenter.shared().playCommand.removeTarget(self)
+            MPRemoteCommandCenter.shared().pauseCommand.removeTarget(self)
+            MPRemoteCommandCenter.shared().seekForwardCommand.removeTarget(self)
+            MPRemoteCommandCenter.shared().seekBackwardCommand.removeTarget(self)
         }
     }
     

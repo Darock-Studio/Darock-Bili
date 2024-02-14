@@ -225,8 +225,13 @@ struct UserDetailView: View {
                 .tabItem {
                     Label("详情", systemImage: "ellipsis")
                 }
-                VideosListBase(uid: uid, username: $username, videos: $videos, articles: $articles, viewSelector: $viewSelector, videoCount: $videoCount, articalCount: $articalCount)
+                UserDynamicListView(uid: uid)
                     .tag(2)
+                    .tabItem {
+                        Label("动态", systemImage: "rectangle.stack.fill")
+                    }
+                VideosListBase(uid: uid, username: $username, videos: $videos, articles: $articles, viewSelector: $viewSelector, videoCount: $videoCount, articalCount: $articalCount)
+                    .tag(3)
                     .navigationTitle(viewSelector == .video ? "Account.videos.\(videoCount)" : "Account.articals.\(articalCount)")
                     .tabItem {
                         Label("稿件", systemImage: "doc.on.doc.fill")

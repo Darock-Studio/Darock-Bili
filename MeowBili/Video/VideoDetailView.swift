@@ -75,14 +75,12 @@ struct VideoDetailView: View {
     @State var currentPlayTime = 0.0
     @State var danmakuSendFontSize = 25
     @State var danmakuSendMode = 1
-    @State var threeComboTimer: Timer?
-    @State var threeComboRevertStatus = [false, false, false]
-    @State var isFinishedThreeCombo = false
+    @State var willEnterGoodVideo = false
     @FocusState var isEditingDanmaku: Bool
     var body: some View {
         VStack {
             if isDecoded {
-                VideoPlayerView(isDanmakuEnabled: $isDanmakuEnabled, videoLink: $videoLink, videoBvid: $videoBvid, videoCID: $videoCID, shouldPause: $shouldPausePlayer, currentPlayTime: $currentPlayTime)
+                VideoPlayerView(videoDetails: $videoDetails, isDanmakuEnabled: $isDanmakuEnabled, videoLink: $videoLink, videoBvid: $videoBvid, videoCID: $videoCID, shouldPause: $shouldPausePlayer, currentPlayTime: $currentPlayTime, willEnterGoodVideo: $willEnterGoodVideo)
                     .frame(height: 240)
             } else {
                 Rectangle()
@@ -193,9 +191,22 @@ struct VideoDetailView: View {
                             if owner["ID"] != nil {
                                 NavigationLink(destination: {UserDetailView(uid: owner["ID"]!)}, label: {
                                     HStack {
-                                        AsyncImage(url: URL(string: owner["Face"]! + "@40w"))
-                                            .cornerRadius(100)
-                                            .frame(width: 40, height: 40)
+                                        AsyncImage(url: URL(string: owner["Face"]!)) { phase in
+                                            switch phase {
+                                            case .empty:
+                                                Circle()
+                                                    .frame(width: 40, height: 40)
+                                                    .redacted(reason: .placeholder)
+                                            case .success(let image):
+                                                image.resizable()
+                                            case .failure(let error):
+                                                Circle()
+                                                    .frame(width: 40, height: 40)
+                                                    .redacted(reason: .placeholder)
+                                            }
+                                        }
+                                        .clipShape(Circle())
+                                        .frame(width: 40, height: 40)
                                         VStack {
                                             HStack {
                                                 Text(owner["Name"]!)
@@ -256,49 +267,7 @@ struct VideoDetailView: View {
                                             .padding(.vertical, 5)
                                         }
                                     })
-                                    .onPressChange { value in
-                                        if value && !isLiked {
-                                            Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
-                                                if value && !isLiked {
-                                                    threeComboRevertStatus = [isLiked, isCoined, isFavoured]
-                                                    threeComboTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
-                                                        isFinishedThreeCombo = true
-                                                        let headers: HTTPHeaders = [
-                                                            "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3)",
-                                                            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                                                        ]
-                                                        AF.request("https://api.bilibili.com/x/web-interface/archive/like/triple", method: .post, parameters: ["bvid": videoDetails["BV"]!, "csrf": biliJct], headers: headers).response { response in
-                                                            debugPrint(response)
-                                                            AlertKitAPI.present(title: "一键三连", subtitle: "成功", icon: .done, style: .iOS17AppleMusic, haptic: .success)
-                                                        }
-                                                    }
-                                                    withAnimation(.linear(duration: 3.0)) {
-                                                        isLiked = true
-                                                        isCoined = true
-                                                        isFavoured = true
-                                                    }
-                                                }
-                                            }
-                                        } else if !value && threeComboTimer != nil {
-                                            threeComboTimer?.invalidate()
-                                            threeComboTimer = nil
-                                            if !isFinishedThreeCombo {
-                                                isLiked = threeComboRevertStatus[0]
-                                                isCoined = threeComboRevertStatus[1]
-                                                isFavoured = threeComboRevertStatus[2]
-                                            }
-                                        }
-                                    }
                                     .onDrag {
-                                        Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { _ in
-                                            threeComboTimer?.invalidate()
-                                            threeComboTimer = nil
-                                            if !isFinishedThreeCombo {
-                                                isLiked = threeComboRevertStatus[0]
-                                                isCoined = threeComboRevertStatus[1]
-                                                isFavoured = threeComboRevertStatus[2]
-                                            }
-                                        }
                                         PlayHaptic(sharpness: 0.05, intensity: 0.5)
                                         let itemData = try? NSKeyedArchiver.archivedData(withRootObject: ["VideoAction": "Like"], requiringSecureCoding: false)
                                         let provider = NSItemProvider(item: itemData as NSSecureCoding?, typeIdentifier: kUTTypeData as String)
@@ -495,7 +464,9 @@ struct VideoDetailView: View {
                     if goodVideos.count != 0 {
                         List {
                             ForEach(0...goodVideos.count - 1, id: \.self) { i in
-                                VideoCard(goodVideos[i])
+                                VideoCard(goodVideos[i]) {
+                                    willEnterGoodVideo = true
+                                }
                             }
                         }
                     }

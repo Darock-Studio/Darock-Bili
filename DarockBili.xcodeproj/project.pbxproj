@@ -164,6 +164,12 @@
 		8CA7CCDF2B77BB5A008E587F /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CCDE2B77BB5A008E587F /* AlertKit */; };
 		8CA7CCE02B77C3A8008E587F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E2B720932B67858E00ABB0A6 /* Localizable.xcstrings */; };
 		8CA7CCE12B77C3A9008E587F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E2B720932B67858E00ABB0A6 /* Localizable.xcstrings */; };
+		8CC3D5582B7CA209005636DC /* UserDynamicListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3D5572B7CA209005636DC /* UserDynamicListView.swift */; };
+		8CC3D55A2B7CB95D005636DC /* NowPlayingExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3D5592B7CB95D005636DC /* NowPlayingExtension.m */; };
+		8CC3D55D2B7CC936005636DC /* OCCodeExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3D55C2B7CC936005636DC /* OCCodeExt.m */; };
+		8CC3D5632B7CCE57005636DC /* ScreenshotableView in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC3D5622B7CCE57005636DC /* ScreenshotableView */; };
+		8CC3D5652B7CCF3C005636DC /* SelfQrCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3D5642B7CCF3C005636DC /* SelfQrCardView.swift */; };
+		8CC3D5672B7CDCE1005636DC /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CC3D5662B7CDCE1005636DC /* Intents.framework */; };
 		B44689D12B4FC15A002CCEB2 /* 喵哩喵哩.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B44689D02B4FC15A002CCEB2 /* 喵哩喵哩.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B4468A312B4FC24A002CCEB2 /* NetworkFixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44689E82B4FC249002CCEB2 /* NetworkFixView.swift */; };
 		B4468A322B4FC24A002CCEB2 /* SignalErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44689E92B4FC249002CCEB2 /* SignalErrorView.swift */; };
@@ -345,6 +351,13 @@
 		8CA7CCD72B77B54F008E587F /* LivePlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePlayerView.swift; sourceTree = "<group>"; };
 		8CA7CCD92B77B55F008E587F /* LiveDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDetailView.swift; sourceTree = "<group>"; };
 		8CA7CCDB2B77B571008E587F /* LiveMessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveMessagesView.swift; sourceTree = "<group>"; };
+		8CC3D5572B7CA209005636DC /* UserDynamicListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDynamicListView.swift; sourceTree = "<group>"; };
+		8CC3D5592B7CB95D005636DC /* NowPlayingExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NowPlayingExtension.m; sourceTree = "<group>"; };
+		8CC3D55B2B7CB96C005636DC /* NowPlayingExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NowPlayingExtension.h; sourceTree = "<group>"; };
+		8CC3D55C2B7CC936005636DC /* OCCodeExt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCCodeExt.m; sourceTree = "<group>"; };
+		8CC3D55E2B7CC941005636DC /* OCCodeExt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCCodeExt.h; sourceTree = "<group>"; };
+		8CC3D5642B7CCF3C005636DC /* SelfQrCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfQrCardView.swift; sourceTree = "<group>"; };
+		8CC3D5662B7CDCE1005636DC /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		8CD9463A2B64CD0F005D00D0 /* Bangumi_Detail_Season.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Bangumi_Detail_Season.json; sourceTree = "<group>"; };
 		B44689CA2B4FC15A002CCEB2 /* DarockBili.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarockBili.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B44689D02B4FC15A002CCEB2 /* 喵哩喵哩.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "喵哩喵哩.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -417,7 +430,9 @@
 				8CA7CCDF2B77BB5A008E587F /* AlertKit in Frameworks */,
 				8CA7CC192B77AC93008E587F /* SDWebImagePDFCoder in Frameworks */,
 				8CA7CC172B77AC93008E587F /* SDWebImageSVGCoder in Frameworks */,
+				8CC3D5672B7CDCE1005636DC /* Intents.framework in Frameworks */,
 				8CA7CC232B77AC93008E587F /* DarockKit in Frameworks */,
+				8CC3D5632B7CCE57005636DC /* ScreenshotableView in Frameworks */,
 				8CA7CC092B77AC93008E587F /* Marquee in Frameworks */,
 				8C0557DF2B791B84009D9CD0 /* AZVideoPlayer in Frameworks */,
 				8CA7CC0B2B77AC93008E587F /* SwiftDate in Frameworks */,
@@ -604,9 +619,13 @@
 			isa = PBXGroup;
 			children = (
 				8CA7CC8F2B77B0AE008E587F /* AVExtension.h */,
-				8CA7CC902B77B0C1008E587F /* CodingTime.h */,
 				8CA7CC8D2B77B094008E587F /* AVExtension.m */,
+				8CA7CC902B77B0C1008E587F /* CodingTime.h */,
 				8CA7CC912B77B0D4008E587F /* CodingTime.m */,
+				8CC3D55B2B7CB96C005636DC /* NowPlayingExtension.h */,
+				8CC3D5592B7CB95D005636DC /* NowPlayingExtension.m */,
+				8CC3D55E2B7CC941005636DC /* OCCodeExt.h */,
+				8CC3D55C2B7CC936005636DC /* OCCodeExt.m */,
 			);
 			path = CCodes;
 			sourceTree = "<group>";
@@ -639,8 +658,10 @@
 				8CA7CCB12B77B398008E587F /* FollowListView.swift */,
 				8CA7CCB32B77B3AC008E587F /* ArticleView.swift */,
 				8CA7CCB52B77B3BF008E587F /* UserDetailView.swift */,
+				8CC3D5572B7CA209005636DC /* UserDynamicListView.swift */,
 				8CA7CCB72B77B3D6008E587F /* HistoryView.swift */,
 				8CA7CCB92B77B3EA008E587F /* WatchLaterView.swift */,
+				8CC3D5642B7CCF3C005636DC /* SelfQrCardView.swift */,
 			);
 			path = PersonalCenter;
 			sourceTree = "<group>";
@@ -910,6 +931,7 @@
 		B4468A902B4FC8B7002CCEB2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8CC3D5662B7CDCE1005636DC /* Intents.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -961,6 +983,7 @@
 				8CA388982B789A0300F5F91F /* AZVideoPlayer */,
 				8CA3889E2B78B1E300F5F91F /* AZVideoPlayer */,
 				8C0557DE2B791B84009D9CD0 /* AZVideoPlayer */,
+				8CC3D5622B7CCE57005636DC /* ScreenshotableView */,
 			);
 			productName = MeowBili;
 			productReference = 8CA7CBC02B77AC4A008E587F /* MeowBili.app */;
@@ -1112,6 +1135,7 @@
 				8C372ED32B6CF079002033A1 /* XCRemoteSwiftPackageReference "Starscream" */,
 				8CA7CCDD2B77BB5A008E587F /* XCRemoteSwiftPackageReference "AlertKit" */,
 				8C0557DD2B791B84009D9CD0 /* XCRemoteSwiftPackageReference "AZVideoPlayer" */,
+				8CC3D5612B7CCE57005636DC /* XCRemoteSwiftPackageReference "ScreenshotableView" */,
 			);
 			productRefGroup = B44689CB2B4FC15A002CCEB2 /* Products */;
 			projectDirPath = "";
@@ -1184,11 +1208,14 @@
 				8CA7CCC52B77B47A008E587F /* AudioPlayerView.swift in Sources */,
 				8CA7CCC82B77B49D008E587F /* ImageViewerView.swift in Sources */,
 				8CA7CC972B77B115008E587F /* SkinExplorerView.swift in Sources */,
+				8CC3D5582B7CA209005636DC /* UserDynamicListView.swift in Sources */,
 				8CA7CC712B77AEE4008E587F /* MainView.swift in Sources */,
 				8CA7CCBF2B77B42E008E587F /* LyricerView.swift in Sources */,
+				8CC3D5652B7CCF3C005636DC /* SelfQrCardView.swift in Sources */,
 				8CA7CCB82B77B3D6008E587F /* HistoryView.swift in Sources */,
 				8CA7CCDC2B77B571008E587F /* LiveMessagesView.swift in Sources */,
 				8CA7CC792B77AF79008E587F /* backtrace.swift in Sources */,
+				8CC3D55A2B7CB95D005636DC /* NowPlayingExtension.m in Sources */,
 				8CA7CC6A2B77AE62008E587F /* Bangumi.swift in Sources */,
 				8CA7CBC52B77AC4A008E587F /* ContentView.swift in Sources */,
 				8CA7CCAA2B77B340008E587F /* bMessageSendView.swift in Sources */,
@@ -1223,6 +1250,7 @@
 				8CA7CC992B77B127008E587F /* SkinDownloadView.swift in Sources */,
 				8CA7CCDA2B77B55F008E587F /* LiveDetailView.swift in Sources */,
 				8CA7CC6C2B77AE80008E587F /* DownloadObj.swift in Sources */,
+				8CC3D55D2B7CC936005636DC /* OCCodeExt.m in Sources */,
 				8CA7CCD12B77B504008E587F /* BangumiDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1371,7 +1399,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 547;
+				CURRENT_PROJECT_VERSION = 595;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1379,6 +1407,7 @@
 				INFOPLIST_FILE = MeowBili/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "喵哩喵哩使用相册保存权限以保存二维码名片至本地";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1416,7 +1445,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 547;
+				CURRENT_PROJECT_VERSION = 595;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1424,6 +1453,7 @@
 				INFOPLIST_FILE = MeowBili/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "喵哩喵哩使用相册保存权限以保存二维码名片至本地";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1458,7 +1488,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 547;
+				CURRENT_PROJECT_VERSION = 595;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1490,7 +1520,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 547;
+				CURRENT_PROJECT_VERSION = 595;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1643,7 +1673,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 547;
+				CURRENT_PROJECT_VERSION = 595;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1675,7 +1705,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 547;
+				CURRENT_PROJECT_VERSION = 595;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1707,7 +1737,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 547;
+				CURRENT_PROJECT_VERSION = 595;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				INFOPLIST_KEY_CFBundleDisplayName = DarockBili;
 				MARKETING_VERSION = 1.0.0;
@@ -1723,7 +1753,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 547;
+				CURRENT_PROJECT_VERSION = 595;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				INFOPLIST_KEY_CFBundleDisplayName = DarockBili;
 				MARKETING_VERSION = 1.0.0;
@@ -1816,6 +1846,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.1.8;
+			};
+		};
+		8CC3D5612B7CCE57005636DC /* XCRemoteSwiftPackageReference "ScreenshotableView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RickeyBoy/ScreenshotableView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
 			};
 		};
 		B4468A6B2B4FC2C8002CCEB2 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
@@ -2127,6 +2165,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8CA7CCDD2B77BB5A008E587F /* XCRemoteSwiftPackageReference "AlertKit" */;
 			productName = AlertKit;
+		};
+		8CC3D5622B7CCE57005636DC /* ScreenshotableView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8CC3D5612B7CCE57005636DC /* XCRemoteSwiftPackageReference "ScreenshotableView" */;
+			productName = ScreenshotableView;
 		};
 		B4468A6C2B4FC2C8002CCEB2 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
