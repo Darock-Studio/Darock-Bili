@@ -21,6 +21,7 @@ import DarockKit
 import PhotosUI
 import Alamofire
 import SwiftyJSON
+import JournalingSuggestions
 
 struct DynamicSendView: View {
     @Environment(\.dismiss) var dismiss
@@ -36,94 +37,111 @@ struct DynamicSendView: View {
     @State var isSending = false
     @State var sendProgressText = ""
     var body: some View {
-        List {
-            Section {
-                TextField("动态内容", text: $dynamicText)
-            } footer: {
-                Text("将作为动态主体")
-            }
-            Section {
-                PhotosPicker(selection: $selectedPhotos, matching: .images) {
-                    Text("选择图片")
+        NavigationStack {
+            List {
+                if #available(iOS 17.2, *) {
+                    Section {
+                        JournalingSuggestionsPicker {
+                            Label("手记建议", systemImage: "sparkles")
+                        } onCompletion: { suggestion in
+                            dynamicText = suggestion.title
+                            await suggestion.content(forType: JournalingSuggestion.Photo.self).forEach { photo in
+                                convertedImages.append(UIImage(data: try! Data(contentsOf: photo.photo))!)
+                            }
+                        }
+                    }
                 }
-            } footer: {
-                Text("可选, 最多9个")
-            }
-            if convertedImages.count != 0 {
                 Section {
-                    ForEach(0..<convertedImages.count, id: \.self) { i in
-                        Image(uiImage: convertedImages[i])
-                            .resizable()
-                            .scaledToFit()
-                    }
+                    TextEditor(text: $dynamicText)
+                        .frame(height: 100)
                 } header: {
-                    Text("已选择的图片")
+                    Text("动态内容")
+                } footer: {
+                    Text("将作为动态主体")
+                }
+                Section {
+                    PhotosPicker(selection: $selectedPhotos, matching: .images) {
+                        Text("选择图片")
+                    }
+                } footer: {
+                    Text("可选, 最多9个")
+                }
+                if convertedImages.count != 0 {
+                    Section {
+                        ForEach(0..<convertedImages.count, id: \.self) { i in
+                            Image(uiImage: convertedImages[i])
+                                .resizable()
+                                .scaledToFit()
+                        }
+                    } header: {
+                        Text("已选择的图片")
+                    }
+                }
+                Section {
+                    Button(action: {
+                        if dynamicTailSetting == "NotSet" {
+                            isTailInitPresented = true
+                        } else {
+                            isSending = true
+                            let headers: HTTPHeaders = [
+                                "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3); bili_jct=\(biliJct)",
+                                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                            ]
+                            if convertedImages.count == 0 {
+                                sendProgressText = "正在发送..."
+                                AF.request("https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/create", method: .post, parameters: ["dynamic_id": 0, "type": 4, "rid": 0, "content": "\(dynamicText)\(dynamicTailSetting == "" ? "" : "\n\n    \(dynamicTailSetting)")", "csrf": biliJct], headers: headers).response { response in
+                                    debugPrint(response)
+                                    if let rd = response.data, let json = try? JSON(data: rd) {
+                                        if !CheckBApiError(from: json) { return }
+                                        AlertKitAPI.present(title: "发送成功", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                        dismiss()
+                                    } else {
+                                        AlertKitAPI.present(title: "发送失败,未知错误", icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                                    }
+                                    sendProgressText = ""
+                                }
+                            } else {
+                                let parameters: [String: String] = [
+                                    "category": "daily",
+                                    "csrf": biliJct
+                                ]
+                                let currentUploadImageIndex = UnsafeMutablePointer<Int>.allocate(capacity: 1)
+                                currentUploadImageIndex.initialize(to: 0)
+                                let uploadedImageUrl = UnsafeMutablePointer<String>.allocate(capacity: 9)
+                                for i in 0..<9 {
+                                    uploadedImageUrl.advanced(by: i).initialize(to: "")
+                                }
+                                uploadImageBfs(image: convertedImages[currentUploadImageIndex.pointee], params: parameters, headers: headers) { response in
+                                    uploadImageRespHander(response, cuiiPtr: currentUploadImageIndex, upliPtr: uploadedImageUrl, params: parameters, headers: headers)
+                                }
+                            }
+                        }
+                    }, label: {
+                        if isSending {
+                            ProgressView()
+                        } else {
+                            Text("发送动态")
+                        }
+                    })
+                    .disabled(isSending)
+                    .sheet(isPresented: $isTailInitPresented, content: {DynamicTailSetView()})
+                } footer: {
+                    Text(sendProgressText)
                 }
             }
-            Section {
-                Button(action: {
-                    if dynamicTailSetting == "NotSet" {
-                        isTailInitPresented = true
-                    } else {
-                        isSending = true
-                        let headers: HTTPHeaders = [
-                            "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3); bili_jct=\(biliJct)",
-                            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                        ]
-                        if convertedImages.count == 0 {
-                            sendProgressText = "正在发送..."
-                            AF.request("https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/create", method: .post, parameters: ["dynamic_id": 0, "type": 4, "rid": 0, "content": "\(dynamicText)\(dynamicTailSetting == "" ? "" : "\n\n    \(dynamicTailSetting)")", "csrf": biliJct], headers: headers).response { response in
-                                debugPrint(response)
-                                if let rd = response.data, let json = try? JSON(data: rd) {
-                                    if !CheckBApiError(from: json) { return }
-                                    AlertKitAPI.present(title: "发送成功", icon: .done, style: .iOS17AppleMusic, haptic: .success)
-                                    dismiss()
-                                } else {
-                                    AlertKitAPI.present(title: "发送失败,未知错误", icon: .error, style: .iOS17AppleMusic, haptic: .error)
-                                }
-                                sendProgressText = ""
+            .navigationTitle("发送动态")
+            .onChange(of: selectedPhotos) { value in
+                convertedImages.removeAll()
+                for photo in value {
+                    photo.loadTransferable(type: UIImageTransfer.self) { result in
+                        switch result {
+                        case .success(let success):
+                            if let image = success {
+                                convertedImages.append(image.image)
                             }
-                        } else {
-                            let parameters: [String: String] = [
-                                "category": "daily",
-                                "csrf": biliJct
-                            ]
-                            let currentUploadImageIndex = UnsafeMutablePointer<Int>.allocate(capacity: 1)
-                            currentUploadImageIndex.initialize(to: 0)
-                            let uploadedImageUrl = UnsafeMutablePointer<String>.allocate(capacity: 9)
-                            for i in 0..<9 {
-                                uploadedImageUrl.advanced(by: i).initialize(to: "")
-                            }
-                            uploadImageBfs(image: convertedImages[currentUploadImageIndex.pointee], params: parameters, headers: headers) { response in
-                                uploadImageRespHander(response, cuiiPtr: currentUploadImageIndex, upliPtr: uploadedImageUrl, params: parameters, headers: headers)
-                            }
+                        case .failure:
+                            break
                         }
-                    }
-                }, label: {
-                    if isSending {
-                        ProgressView()
-                    } else {
-                        Text("发送动态")
-                    }
-                })
-                .disabled(isSending)
-                .sheet(isPresented: $isTailInitPresented, content: {DynamicTailSetView()})
-            } footer: {
-                Text(sendProgressText)
-            }
-        }
-        .navigationTitle("发送动态")
-        .onChange(of: selectedPhotos) { value in
-            convertedImages.removeAll()
-            for photo in value {
-                photo.loadTransferable(type: UIImageTransfer.self) { result in
-                    switch result {
-                    case .success(let success):
-                        if let image = success {
-                            convertedImages.append(image.image)
-                        }
-                    case .failure:
-                        break
                     }
                 }
             }

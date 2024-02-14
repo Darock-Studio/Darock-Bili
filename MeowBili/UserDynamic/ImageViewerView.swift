@@ -25,11 +25,10 @@ struct ImageViewerView: View {
     var body: some View {
         WebImage(url: URL(string: url), options: [.progressiveLoad], isAnimating: .constant(true))
             .resizable()
-//            .indicator(.activity)
             .transition(.fade(duration: 0.5))
             .scaledToFit()
-            .frame(width: CGFloat(100), height: CGFloat(100), alignment: .center)
-//            .modifier(zoomable())
+            .frame(alignment: .center)
+            .modifier(zoomable())
     }
 }
 

@@ -92,6 +92,15 @@
       }
     },
     {
+      "identity" : "screenshotableview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/RickeyBoy/ScreenshotableView",
+      "state" : {
+        "revision" : "3c140215fb12c7e8aef78e853006110350455c5b",
+        "version" : "1.0.0"
+      }
+    },
+    {
       "identity" : "sdwebimage",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",

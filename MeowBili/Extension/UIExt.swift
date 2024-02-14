@@ -26,8 +26,8 @@ import SDWebImageSwiftUI
 import MobileCoreServices
 import AuthenticationServices
 
-@ViewBuilder func VideoCard(_ videoDetails: [String: String]) -> some View {
-    NavigationLink(destination: {VideoDetailView(videoDetails: videoDetails)}, label: {
+@ViewBuilder func VideoCard(_ videoDetails: [String: String], onAppear: @escaping () -> Void = {}) -> some View {
+    NavigationLink(destination: {VideoDetailView(videoDetails: videoDetails).onAppear { onAppear() }}, label: {
         VStack {
             HStack {
                 WebImage(url: URL(string: videoDetails["Pic"]! + "@200w")!, options: [.progressiveLoad, .scaleDownLargeImages])
@@ -234,40 +234,36 @@ import AuthenticationServices
     })
 }
 
-//struct zoomable: ViewModifier {
-//    @AppStorage("MaxmiumScale") var maxmiumScale = 6.0
-//    @State var scale: CGFloat = 1.0
-//    @State var offset = CGSize.zero
-//    @State var lastOffset = CGSize.zero
-//    func body(content: Content) -> some View {
-//            content
-//                .scaleEffect(self.scale)
-//                .focusable()
-//                .digitalCrownRotation($scale, from: 0.5, through: maxmiumScale, by: 0.02, sensitivity: .low, isHapticFeedbackEnabled: true)
-//                .offset(x: offset.width, y: offset.height)
-//                .gesture(
-//                    DragGesture()
-//                        .onChanged { gesture in
-//                            offset = CGSize(width: gesture.translation.width + lastOffset.width, height: gesture.translation.height + lastOffset.height)
-//                        }
-//                        .onEnded { _ in
-//                            lastOffset = offset
-//                        }
-//                )
-//                .onDisappear {
-//                    offset = CGSize.zero
-//                    lastOffset = CGSize.zero
-//                }
-//                .onChange(of: scale) { value in
-//                    if value < 2.0 {
-//                        withAnimation(.easeInOut(duration: 0.3)) {
-//                            offset = CGSize.zero
-//                            lastOffset = CGSize.zero
-//                        }
-//                    }
-//                }
-//    }
-//}
+struct zoomable: ViewModifier {
+    @AppStorage("MaxmiumScale") var maxmiumScale = 6.0
+    @State var scale: CGFloat = 1.0
+    @State var offset = CGSize.zero
+    @State var lastOffset = CGSize.zero
+    func body(content: Content) -> some View {
+            content
+                .scaleEffect(self.scale)
+                .offset(x: offset.width, y: offset.height)
+                .gesture(
+                    DragGesture()
+                        .onChanged { gesture in
+                            offset = CGSize(width: gesture.translation.width + lastOffset.width, height: gesture.translation.height + lastOffset.height)
+                        }
+                        .onEnded { _ in
+                            lastOffset = offset
+                        }
+                )
+                .gesture(
+                    MagnificationGesture()
+                        .onChanged { value in
+                            self.scale = value
+                        }
+                )
+                .onDisappear {
+                    offset = CGSize.zero
+                    lastOffset = CGSize.zero
+                }
+    }
+}
 
 extension Indicator where T == ProgressView<EmptyView, EmptyView> {
     static var activity: Indicator {
@@ -377,3 +373,4 @@ private struct ButtonStyleForPressAction: ButtonStyle {
             }
     }
 }
+
