@@ -19,6 +19,9 @@
 <p align="center">
     <img src="./Artwork/eg-vd.png" width="240" height="380">
 </p>
+<p align="center">
+    <img src="./Artwork/IMG_0833.png" width="234" height="506">
+</p>
 
 ## ✨功能
 - 个性化推荐
