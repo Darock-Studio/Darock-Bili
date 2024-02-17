@@ -280,7 +280,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "My"
+            "value" : "Me"
           }
         },
         "zh-Hans" : {
@@ -516,7 +516,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "FANS"
+            "value" : "Subscribers"
           }
         },
         "zh-Hans" : {
@@ -660,7 +660,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "FOLLOWS"
+            "value" : "Following"
           }
         },
         "zh-Hans" : {
@@ -2202,7 +2202,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "My"
+            "value" : "Me"
           }
         },
         "zh-Hans" : {
@@ -3929,7 +3929,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Histories"
+            "value" : "History"
           }
         },
         "zh-Hans" : {
@@ -3961,7 +3961,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Follows"
+            "value" : "Following"
           }
         },
         "zh-Hans" : {
@@ -4247,10 +4247,8 @@
         }
       }
     },
-    "Video.details.danmaku.%@" : {
-
-    },
     "Video.details.danmaku.%lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -4279,6 +4277,7 @@
       }
     },
     "Video.details.publish-time.%@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4294,10 +4293,8 @@
         }
       }
     },
-    "Video.details.watches.%@" : {
-
-    },
     "Video.details.watches.%lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -4534,6 +4531,9 @@
         }
       }
     },
+    "全屏" : {
+
+    },
     "动态" : {
 
     },
@@ -4559,6 +4559,9 @@
 
     },
     "可选, 最多9个" : {
+
+    },
+    "启用" : {
 
     },
     "在使用本 App 前，您需要先知晓以下信息：\n· 本 App 由第三方开发者以及部分社区用户贡献，与哔哩哔哩无合作关系，哔哩哔哩是上海宽娱数码科技有限公司的商标。\n· 本 App 并不是哔哩哔哩的替代品，我们建议您在能够使用官方客户端时尽量使用官方客户端。\n· 本 App 均使用来源于网络的公开信息进行开发。\n· 本 App 中和B站相关的功能完全免费\n· 本 App 中所呈现的B站内容来自哔哩哔哩官方。\n· 本 App 的开发者、负责人和实际责任人是%@\n  联系QQ：3245146430" : {
@@ -4610,6 +4613,9 @@
     "弹幕" : {
 
     },
+    "恢复" : {
+
+    },
     "您可以更改默认的小尾巴内容, 如果不想添加小尾巴, 请清空上方文本框内容. 您可以随时在设置中更改此内容" : {
 
     },
@@ -4647,6 +4653,9 @@
 
     },
     "清除所有已观看视频" : {
+
+    },
+    "画面" : {
 
     },
     "离线缓存" : {

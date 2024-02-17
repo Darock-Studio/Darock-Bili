@@ -132,9 +132,7 @@ struct MainView: View {
                     Section {
                         if debug {
                             Button(action: {
-                                tipWithText("Test")
-//                                Dynamic.PUICApplication.sharedPUICApplication._setStatusBarTimeHidden(true, animated: false, completion: nil)
-                                //Dynamic.WatchKit.sharedPUICApplication._setStatusBarTimeHidden(true, animated: false)
+                                
                             }, label: {
                                 Text("Home.debug")
                             })

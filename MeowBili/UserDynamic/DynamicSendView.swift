@@ -21,7 +21,9 @@ import DarockKit
 import PhotosUI
 import Alamofire
 import SwiftyJSON
+#if canImport(JournalingSuggestions)
 import JournalingSuggestions
+#endif
 
 struct DynamicSendView: View {
     @Environment(\.dismiss) var dismiss
@@ -39,6 +41,7 @@ struct DynamicSendView: View {
     var body: some View {
         NavigationStack {
             List {
+                #if canImport(JournalingSuggestions)
                 if #available(iOS 17.2, *) {
                     Section {
                         JournalingSuggestionsPicker {
@@ -51,6 +54,7 @@ struct DynamicSendView: View {
                         }
                     }
                 }
+                #endif
                 Section {
                     TextEditor(text: $dynamicText)
                         .frame(height: 100)
