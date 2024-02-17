@@ -197,7 +197,9 @@ struct UserDynamicMainView: View {
                                                     }
                                                     if orig["WithText"]! as! String != "" {
                                                         HStack {
-                                                            Text(orig["WithText"]! as! String)
+                                                             LinkDetectText(inputURL: Binding<String>(get:{
+                                                                orig["WithText"]! as! String
+                                                            },set:{ _ in}))
                                                                 .font(.system(size: 16))
                                                                 .lineLimit(5)
                                                             Spacer()
