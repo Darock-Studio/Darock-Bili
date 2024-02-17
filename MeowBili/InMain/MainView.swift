@@ -127,7 +127,7 @@ struct MainView: View {
                     Section {
                         if debug {
                             Button(action: {
-                                print(OCCodeExt.memAvailable())
+                                
                             }, label: {
                                 Text("Home.debug")
                             })

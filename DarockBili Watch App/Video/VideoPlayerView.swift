@@ -17,7 +17,6 @@
 
 import AVKit
 import SwiftUI
-import BPlayer
 import WatchKit
 import DarockKit
 import Alamofire
@@ -36,14 +35,16 @@ struct VideoPlayerView: View {
     @State var danmakuTimer: Timer?
     @State var showDanmakus = [[String: String]]()
     @State var tabviewChoseTab = 1
-    @State var playerRotate = 0.0
+    @State var isFullScreen = false
     @State var player: AVPlayer!
     @State var danmakuOffset = 0.0
     var body: some View {
         TabView(selection: $tabviewChoseTab) {
             ZStack {
                 VideoPlayer(player: player)
-                    .rotationEffect(.degrees(playerRotate))
+                    .rotationEffect(.degrees(isFullScreen ? 90 : 0))
+                    .frame(width: isFullScreen ? WKInterfaceDevice.current().screenBounds.height : nil, height: isFullScreen ? WKInterfaceDevice.current().screenBounds.width : nil)
+                    .offset(y: isFullScreen ? 20 : 0)
                     .ignoresSafeArea()
                     .onAppear {
                         hideDigitalTime(true)
@@ -72,7 +73,7 @@ struct VideoPlayerView: View {
                                                     if showDanmakus[j]["Type"]! == "1" || showDanmakus[j]["Type"]! == "2" || showDanmakus[j]["Type"]! == "3" {
                                                         if Double(showDanmakus[j]["Appear"]!)! < player.currentTime().seconds + 10 && Double(showDanmakus[j]["Appear"]!)! + 10 > player.currentTime().seconds {
                                                             Text(showDanmakus[j]["Text"]!)
-                                                                .font(.system(size: 14))
+                                                                .font(.system(size: 12))
                                                                 .foregroundColor(Color(hex: Int(showDanmakus[j]["Color"]!)!))
                                                                 .offset(x: Double(showDanmakus[j]["Appear"]!)! * 50)
                                                         }
@@ -88,32 +89,30 @@ struct VideoPlayerView: View {
                                 .animation(.smooth, value: danmakuOffset)
                             }
                         }
+                        .rotationEffect(.degrees(isFullScreen ? 90 : 0))
+                        .frame(width: isFullScreen ? WKInterfaceDevice.current().screenBounds.height : nil, height: isFullScreen ? WKInterfaceDevice.current().screenBounds.width : nil)
                     }
             }
             .tag(1)
-            ScrollView {
-                VStack {
-                    HStack {
-                        Button(action: {
-                            if playerRotate - 90 > 0 {
-                                playerRotate -= 90
-                            } else {
-                                playerRotate = 270
-                            }
-                        }, label: {
-                            Image(systemName: "rotate.left")
-                        })
-                        Button(action: {
-                            if playerRotate + 90 < 360 {
-                                playerRotate += 90
-                            } else {
-                                playerRotate = 0
-                            }
-                        }, label: {
-                            Image(systemName: "rotate.right")
-                        })
-                    }
-                    Toggle(isOn: $isDanmakuEnabled) { Text("弹幕") }
+            List {
+                Section {
+                    Button(action: {
+                        isFullScreen.toggle()
+                        tabviewChoseTab = 1
+                    }, label: {
+                        if isFullScreen {
+                            Label("恢复", systemImage: "arrow.down.forward.and.arrow.up.backward")
+                        } else {
+                            Label("全屏", systemImage: "arrow.down.backward.and.arrow.up.forward")
+                        }
+                    })
+                } header: {
+                    Text("画面")
+                }
+                Section {
+                    Toggle(isOn: $isDanmakuEnabled) { Text("启用") }
+                } header: {
+                    Text("弹幕")
                 }
             }
             .tag(2)
@@ -143,46 +142,7 @@ struct VideoPlayerView: View {
                 }
             }
             
-            AF.request("https://api.bilibili.com/x/v1/dm/list.so?oid=\(VideoDetailView.willPlayVideoCID)").response { response in
-                let danmakus = String(data: response.data!, encoding: .utf8)!
-                debugPrint(danmakus)
-                if danmakus.contains("<d p=\"") {
-                    let danmakuOnly = danmakus.split(separator: "</source>")[1].split(separator: "</i>")[0]
-                    let danmakuSpd = danmakuOnly.split(separator: "</d>")
-                    for singleDanmaku in danmakuSpd {
-                        let p = singleDanmaku.split(separator: "<d p=\"")[0].split(separator: "\"")[0]
-                        let spdP = p.split(separator: ",")
-                        var stredSpdP = [String]()
-                        for p in spdP {
-                            stredSpdP.append(String(p))
-                        }
-                        if singleDanmaku.split(separator: "\">").count < 2 {
-                            return
-                        }
-                        let danmakuText = String(singleDanmaku.split(separator: "\">")[1].split(separator: "</d>")[0])
-                        if stredSpdP[5] == "0" {
-                            showDanmakus.append(["Appear": stredSpdP[0], "Type": stredSpdP[1], "Size": stredSpdP[2], "Color": stredSpdP[3], "Text": danmakuText])
-                        }
-                    }
-                    showDanmakus.sort { dict1, dict2 in
-                        if let time1 = dict1["Appear"], let time2 = dict2["Appear"] {
-                            return Double(time1)! < Double(time2)!
-                        }
-                        return false
-                    }
-                    var removedCount = 0
-                    for i in 1..<showDanmakus.count {
-                        if showDanmakus.count - removedCount - i <= 0 {
-                            break
-                        }
-                        if (Double(showDanmakus[i]["Appear"]!)! - Double(showDanmakus[i - 1]["Appear"]!)!) < 0.5 {
-                            showDanmakus.remove(at: i)
-                            removedCount++
-                        }
-                    }
-                    debugPrint(showDanmakus)
-                }
-            }
+            UpdateDanmaku()
             
             Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
                 danmakuTimer = timer
@@ -194,6 +154,75 @@ struct VideoPlayerView: View {
             danmakuTimer?.invalidate()
         }
     }
+    
+    func UpdateDanmaku() {
+        AF.request("https://api.bilibili.com/x/v1/dm/list.so?oid=\(VideoDetailView.willPlayVideoCID)").response { response in
+            let danmakus = String(data: response.data!, encoding: .utf8)!
+            if danmakus.contains("<d p=\"") {
+                let danmakuOnly = danmakus.split(separator: "</source>")[1].split(separator: "</i>")[0]
+                let danmakuSpd = danmakuOnly.split(separator: "</d>")
+                for singleDanmaku in danmakuSpd {
+                    let p = singleDanmaku.split(separator: "<d p=\"")[0].split(separator: "\"")[0]
+                    let spdP = p.split(separator: ",")
+                    var stredSpdP = [String]()
+                    for p in spdP {
+                        stredSpdP.append(String(p))
+                    }
+                    if singleDanmaku.split(separator: "\">").count < 2 {
+                        return
+                    }
+                    let danmakuText = String(singleDanmaku.split(separator: "\">")[1].split(separator: "</d>")[0])
+                    if stredSpdP[5] == "0" {
+                        showDanmakus.append(["Appear": stredSpdP[0], "Type": stredSpdP[1], "Size": stredSpdP[2], "Color": stredSpdP[3], "Text": danmakuText])
+                    }
+                }
+                showDanmakus.sort { dict1, dict2 in
+                    if let time1 = dict1["Appear"], let time2 = dict2["Appear"] {
+                        return Double(time1)! < Double(time2)!
+                    }
+                    return false
+                }
+                var removedCount = 0
+                for i in 1..<showDanmakus.count {
+                    if showDanmakus.count - removedCount - i <= 0 {
+                        break
+                    }
+                    if (Double(showDanmakus[i]["Appear"]!)! - Double(showDanmakus[i - 1]["Appear"]!)!) < 1 {
+                        showDanmakus.remove(at: i)
+                        removedCount++
+                    }
+                }
+                removedCount = 0
+                var previousTopDanmakuIndex: Int? = nil
+                var previousBottomDanmakuIndex: Int? = nil
+                for i in 1..<showDanmakus.count {
+                    if showDanmakus.count - removedCount - i <= 0 {
+                        break
+                    }
+                    let type = showDanmakus[i]["Type"]!
+                    if type == "5" || type == "4" {
+                        if let preIndex = type == "5" ? previousTopDanmakuIndex : previousBottomDanmakuIndex {
+                            if Double(showDanmakus[i]["Appear"]!)! - Double(showDanmakus[preIndex]["Appear"]!)! < 10 {
+                                showDanmakus.remove(at: i)
+                                removedCount++
+                                continue
+                            }
+                        }
+                        { () -> UnsafeMutablePointer<Int?> in if type == "5" { &&previousTopDanmakuIndex } else { &&previousBottomDanmakuIndex }}().pointee = i
+                    }
+                }
+                if showDanmakus.count > 200 {
+                    for _ in 1...5000 {
+                        if showDanmakus.count <= 200 {
+                            break
+                        }
+                        showDanmakus.remove(at: Int.random(in: 0..<showDanmakus.count))
+                    }
+                }
+            }
+        }
+    }
+    
 }
 
 struct VideoPlayerView_Previews: PreviewProvider {
