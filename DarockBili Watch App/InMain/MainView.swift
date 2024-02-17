@@ -61,7 +61,7 @@ struct MainView: View {
                     }
                     ToolbarItem(placement: .topBarTrailing) {
                         Button(action: {
-                            
+                            mainTabSelection = 2
                         }, label: {
                             if dedeUserID != "" {
                                 CachedAsyncImage(url: URL(string: userFaceUrl + "@30w"))
