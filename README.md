@@ -15,6 +15,7 @@
 ![GitHub Release Date](https://img.shields.io/github/release-date-pre/Darock-Studio/Darock-Bili?label=Latest%20Release%20Date)&nbsp;
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/Darock-Studio/Darock-Bili/main?label=Main%20Branch%20Last%20Commit)&nbsp;
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/Darock-Studio/Darock-Bili/ios.yml)
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/8415/badge)](https://www.bestpractices.dev/projects/8415)
 
 <p align="center">
     <img src="./Artwork/eg-vd.png" width="240" height="380">
