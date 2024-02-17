@@ -64,7 +64,9 @@ struct DynamicDetailView: View {
                     .buttonStyle(.plain)
                     if dynamicDetails["WithText"]! as! String != "" {
                         HStack {
-                            Text(dynamicDetails["WithText"]! as! String)
+                             LinkDetectText(inputURL: Binding<String>(get:{
+                                                              dynamicDetails["WithText"]! as! String
+                                                            },set:{ _ in}))
                                 .font(.system(size: 16))
                             Spacer()
                         }
@@ -160,7 +162,9 @@ struct DynamicDetailView: View {
                                         }
                                         if orig["WithText"]! as! String != "" {
                                             HStack {
-                                                Text(orig["WithText"]! as! String)
+                                                 LinkDetectText(inputURL: Binding<String>(get:{
+                                                               orig["WithText"]! as! String
+                                                            },set:{ _ in}))
                                                     .font(.system(size: 16))
                                                     .lineLimit(5)
                                                 Spacer()
