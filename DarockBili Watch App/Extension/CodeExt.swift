@@ -709,3 +709,8 @@ extension Double {
         return String(format: "%.\(rhs)f", lhs)
     }
 }
+
+prefix operator &&
+prefix func &&<T>(input: inout T) -> UnsafeMutablePointer<T> {
+    withUnsafeMutablePointer(to: &input) { $0 }
+}

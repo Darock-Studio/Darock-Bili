@@ -61,7 +61,7 @@ struct MainView: View {
                     }
                     ToolbarItem(placement: .topBarTrailing) {
                         Button(action: {
-                            
+                            mainTabSelection = 2
                         }, label: {
                             if dedeUserID != "" {
                                 CachedAsyncImage(url: URL(string: userFaceUrl + "@30w"))
@@ -132,9 +132,7 @@ struct MainView: View {
                     Section {
                         if debug {
                             Button(action: {
-                                tipWithText("Test")
-//                                Dynamic.PUICApplication.sharedPUICApplication._setStatusBarTimeHidden(true, animated: false, completion: nil)
-                                //Dynamic.WatchKit.sharedPUICApplication._setStatusBarTimeHidden(true, animated: false)
+                                
                             }, label: {
                                 Text("Home.debug")
                             })

@@ -636,9 +636,20 @@ struct VideoDetailView: View {
                     if owner["ID"] != nil {
                         NavigationLink(destination: {UserDetailView(uid: owner["ID"]!)}, label: {
                             HStack {
-                                AsyncImage(url: URL(string: owner["Face"]! + "@40w"))
-                                    .cornerRadius(100)
-                                    .frame(width: 40, height: 40)
+                                CachedAsyncImage(url: URL(string: owner["Face"]! + "@100w")) { phase in
+                                    switch phase {
+                                    case .empty:
+                                        Circle()
+                                            .redacted(reason: .placeholder)
+                                    case .success(let image):
+                                        image.resizable()
+                                    case .failure(let error):
+                                        Circle()
+                                            .redacted(reason: .placeholder)
+                                    }
+                                }
+                                .frame(width: 40, height: 40)
+                                .clipShape(Circle())
                                 VStack {
                                     HStack {
                                         Text(owner["Name"]!)
@@ -737,7 +748,7 @@ struct VideoDetailView: View {
                         VStack {
                             HStack {
                                 Image(systemName: "text.word.spacing")
-                                Text("Video.details.danmaku.\(Int(videoDetails["Danmaku"]!.shorter()) ?? 0)")
+                                Text("\(videoDetails["Danmaku"]!.shorter()) 弹幕")
                                 Spacer()
                             }
                             .offset(y: danmakuCountOffset)
@@ -747,7 +758,7 @@ struct VideoDetailView: View {
                             }
                             HStack {
                                 Image(systemName: "person.2")
-                                Text("Video.details.watching-people.\(Int(nowPlayingCount) ?? 0)")
+                                Text("\(nowPlayingCount) 人在看")
                                     .offset(x: -1)
                                 Spacer()
                             }
@@ -758,7 +769,7 @@ struct VideoDetailView: View {
                             }
                             HStack {
                                 Image(systemName: "play.circle")
-                                Text("Video.details.watches.\(Int(videoDetails["View"]!.shorter()) ?? 0)")
+                                Text("\(videoDetails["View"]!.shorter()) 播放")
                                     .offset(x: 1)
                                 Spacer()
                             }
@@ -769,7 +780,7 @@ struct VideoDetailView: View {
                             }
                             HStack {
                                 Image(systemName: "clock")
-                                Text("Video.details.publish-time.\(publishTime)")
+                                Text("发布于 \(publishTime)")
                                 Spacer()
                             }
                             .offset(y: publishTimeTextOffset)
