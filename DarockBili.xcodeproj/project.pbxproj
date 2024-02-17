@@ -231,6 +231,9 @@
 		B4468A9C2B4FC8B7002CCEB2 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = B4468A9B2B4FC8B7002CCEB2 /* SwiftSoup */; };
 		B4468A9E2B4FC8B7002CCEB2 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = B4468A9D2B4FC8B7002CCEB2 /* CachedAsyncImage */; };
 		B4468AA02B4FC8B7002CCEB2 /* Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = B4468A9F2B4FC8B7002CCEB2 /* Dynamic */; };
+		B4DAF0DC2B80725800755F0C /* LinkDetectText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */; };
+		B4DAF0DD2B80725800755F0C /* LinkDetectText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */; };
+		B4DAF0DE2B80725800755F0C /* LinkDetectText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */; };
 		E2565AF32B52BFDF000E01ED /* BangumiDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2565AF22B52BFDF000E01ED /* BangumiDetailView.swift */; };
 		E2565AF52B52C017000E01ED /* BangumiDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2565AF42B52C017000E01ED /* BangumiDownloadView.swift */; };
 		E2565AF92B52C076000E01ED /* BangumiPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2565AF82B52C076000E01ED /* BangumiPlayerView.swift */; };
@@ -412,6 +415,7 @@
 		B4468A302B4FC24A002CCEB2 /* WatchLaterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchLaterView.swift; sourceTree = "<group>"; };
 		B4468A662B4FC286002CCEB2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B4C5E9562B4FD60600E2605B /* DarockBili-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "DarockBili-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
+		B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkDetectText.swift; sourceTree = "<group>"; };
 		E2565AF22B52BFDF000E01ED /* BangumiDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BangumiDetailView.swift; sourceTree = "<group>"; };
 		E2565AF42B52C017000E01ED /* BangumiDownloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BangumiDownloadView.swift; sourceTree = "<group>"; };
 		E2565AF82B52C076000E01ED /* BangumiPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BangumiPlayerView.swift; sourceTree = "<group>"; };
@@ -607,6 +611,7 @@
 				8CA7CC8C2B77B07E008E587F /* CCodes */,
 				8CA7CC932B77B0E4008E587F /* Skins */,
 				8CA7CC9A2B77B13D008E587F /* Passthroughs.swift */,
+				B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */,
 				8CA7CC9C2B77B150008E587F /* AboutView.swift */,
 				8CA7CC9E2B77B166008E587F /* SettingsView.swift */,
 				8CA7CCA02B77B2DC008E587F /* LoginView.swift */,
@@ -1224,6 +1229,7 @@
 				8CA7CC862B77B015008E587F /* CodeExt.swift in Sources */,
 				8CA7CC9F2B77B166008E587F /* SettingsView.swift in Sources */,
 				8CA7CC7D2B77AFAC008E587F /* SignalErrorView.swift in Sources */,
+				B4DAF0DD2B80725800755F0C /* LinkDetectText.swift in Sources */,
 				8CA7CCBA2B77B3EA008E587F /* WatchLaterView.swift in Sources */,
 				8CA7CCBD2B77B40B008E587F /* VideoPlayerView.swift in Sources */,
 				8CA7CC8E2B77B094008E587F /* AVExtension.m in Sources */,
@@ -1298,6 +1304,7 @@
 				8CA7CC2F2B77ACE8008E587F /* DownloadObj.swift in Sources */,
 				8CA7CC532B77ACE8008E587F /* BangumiDetailView.swift in Sources */,
 				8CA7CC3E2B77ACE8008E587F /* FavoriteView.swift in Sources */,
+				B4DAF0DE2B80725800755F0C /* LinkDetectText.swift in Sources */,
 				8CA7CC432B77ACE8008E587F /* LiveMessagesView.swift in Sources */,
 				8CA7CC3F2B77ACE8008E587F /* BangumiDownloadView.swift in Sources */,
 				8CA7CC342B77ACE8008E587F /* BangumiPlayerView.swift in Sources */,
@@ -1357,6 +1364,7 @@
 				B4468A362B4FC24A002CCEB2 /* FeedbackView.swift in Sources */,
 				B4468A652B4FC24A002CCEB2 /* WatchLaterView.swift in Sources */,
 				B4468A332B4FC24A002CCEB2 /* MemoryWarningView.swift in Sources */,
+				B4DAF0DC2B80725800755F0C /* LinkDetectText.swift in Sources */,
 				B4468A452B4FC24A002CCEB2 /* ContentView.swift in Sources */,
 				B4468A322B4FC24A002CCEB2 /* SignalErrorView.swift in Sources */,
 				B4468A3B2B4FC24A002CCEB2 /* ErrorGetView.swift in Sources */,

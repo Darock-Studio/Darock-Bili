@@ -60,7 +60,9 @@ struct UserDynamicListView: View {
                             if dynamics[i]["WithText"]! as! String != "" {
                                 NavigationLink(destination: {DynamicDetailView(dynamicDetails: dynamics[i])}, label: {
                                     HStack {
-                                        Text(dynamics[i]["WithText"]! as! String)
+                                         LinkDetectText(inputURL: Binding<String>(get:{
+                                                                dynamics[i]["WithText"]! as! String
+                                                            },set:{ _ in}))
                                             .font(.system(size: 16))
                                         Spacer()
                                     }
@@ -142,7 +144,9 @@ struct UserDynamicListView: View {
                                                 }
                                                 if orig["WithText"]! as! String != "" {
                                                     HStack {
-                                                        Text(orig["WithText"]! as! String)
+                                                         LinkDetectText(inputURL: Binding<String>(get:{
+                                                              orig["WithText"]! as! String
+                                                            },set:{ _ in}))
                                                             .font(.system(size: 16))
                                                             .lineLimit(5)
                                                         Spacer()
