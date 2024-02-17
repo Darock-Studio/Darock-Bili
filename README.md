@@ -20,7 +20,7 @@
     <img src="./Artwork/eg-vd.png" width="240" height="380">
 </p>
 <p align="center">
-    <img src="./Artwork/JieTu.png" width="254" height="502">
+    <img src="./Artwork/iOS-page.png" width="254" height="502">
 </p>
 
 ## ✨功能
@@ -207,13 +207,6 @@
 
 > [!TIP]
 > 你说的对，但是喵哩喵哩是由 Darock 研发的一款开源世界B站第三方 Apple Watch 客户端。游戏发生在一个名为“学校”的真实世界，在这里，被老师选中的人会被没收手机，引导 Apple Watch 之力。你将扮演一位名为“学生”的神秘角色，在教室中浏览性格各异能力独特的视频们，和他们一起击败强敌，找回失散的MEMZ。
-
-> [!TIP]
-> 巴山楚水凄凉地，平面直角坐标系
-> 
-> responsibility，aw也能看视频
-> 
-> 高猛酸钾制氧气，喵哩喵哩真nb
 
 ## 重要信息
 > [!IMPORTANT]
