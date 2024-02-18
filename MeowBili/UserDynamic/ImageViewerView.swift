@@ -29,6 +29,17 @@ struct ImageViewerView: View {
             .scaledToFit()
             .frame(alignment: .center)
             .modifier(zoomable())
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                        let img = UIImage(data: try! Data(contentsOf: URL(string: url)!))!
+                        UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil)
+                        AlertKitAPI.present(title: "已保存", subtitle: "图片已保存到相册", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                    }, label: {
+                        Image(systemName: "square.and.arrow.down")
+                    })
+                }
+            }
     }
 }
 
