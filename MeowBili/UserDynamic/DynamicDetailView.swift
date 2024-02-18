@@ -224,15 +224,22 @@ struct DynamicDetailView: View {
                         }
                     }
                 }
+                .padding()
             }
             .navigationTitle("动态详情")
             .navigationBarTitleDisplayMode(.inline)
             .tag(1)
+            .tabItem {
+                Label("内容", systemImage: "shippingbox.fill")
+            }
             if dynamicDetails["Type"]! as! BiliDynamicType == .text || dynamicDetails["Type"]! as! BiliDynamicType == .forward || dynamicDetails["Type"]! as! BiliDynamicType == .draw {
                 CommentsView(oid: dynamicDetails["DynamicID"]! as! String, type: (dynamicDetails["Type"]! as! BiliDynamicType) == .draw ? 11 : 17)
                     .navigationTitle("动态评论")
                     .navigationBarTitleDisplayMode(.inline)
                     .tag(2)
+                    .tabItem {
+                        Label("评论", systemImage: "bubble.left.and.text.bubble.right.fill")
+                    }
             }
         }
     }

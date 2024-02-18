@@ -24,9 +24,14 @@ import SDWebImageSwiftUI
 import AuthenticationServices
 
 struct SearchMainView: View {
+    @AppStorage("DedeUserID") var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") var sessdata = ""
+    @AppStorage("bili_jct") var biliJct = ""
     @State var searchText = ""
     @State var isSearchPresented = false
     @State var searchHistory = [String]()
+    @State var suggestions = [String]()
     var body: some View {
         NavigationStack {
             List {
@@ -45,6 +50,24 @@ struct SearchMainView: View {
                             }
                             .onDisappear {
                                 searchText = ""
+                            }
+                            .onChange(of: searchText) { value in
+                                if value != "" {
+                                    let headers: HTTPHeaders = [
+                                        "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3);",
+                                        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                    ]
+                                    DarockKit.Network.shared.requestJSON("https://s.search.bilibili.com/main/suggest", headers: headers) { respJson, isSuccess in
+                                        if isSuccess {
+                                            suggestions.removeAll()
+                                            for result in respJson["result"]["tag"] {
+                                                if let v = result.1["value"].string {
+                                                    suggestions.append(v)
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                     }
                     if debug {
@@ -78,6 +101,11 @@ struct SearchMainView: View {
             .onAppear {
                 searchHistory.removeAll()
                 searchHistory = UserDefaults.standard.stringArray(forKey: "SearchHistory") ?? [String]()
+            }
+            .searchSuggestions {
+                if suggestions.count != 0 {
+                    
+                }
             }
         }
     }
