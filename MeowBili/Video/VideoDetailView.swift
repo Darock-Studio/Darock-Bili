@@ -477,6 +477,8 @@ struct VideoDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .scrollDismissesKeyboard(.immediately)
         .onAppear {
+            if isDecoded { return } // After user enter a new video then exit, this onAppear method will be re-call
+            
             let headers: HTTPHeaders = [
                 "cookie": "SESSDATA=\(sessdata)",
                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
