@@ -20,6 +20,7 @@ import UIKit
 import AVKit
 import SwiftUI
 import Marquee
+import Mixpanel
 import DarockKit
 import Alamofire
 import SwiftyJSON
@@ -37,6 +38,8 @@ struct VideoDetailView: View {
     @AppStorage("bili_jct") var biliJct = ""
     @AppStorage("VideoGetterSource") var videoGetterSource = "official"
     @AppStorage("IsDanmakuEnabled") var isDanmakuEnabled = true
+    @AppStorage("IsAllowMixpanel") var isAllowMixpanel = true
+    @AppStorage("IsUseExtHaptic") var isUseExtHaptic = true
     @State var isDecoded = false
     @State var isLiked = false
     @State var isCoined = false
@@ -151,7 +154,9 @@ struct VideoDetailView: View {
                 .pickerStyle(.segmented)
                 .padding(.horizontal)
                 .onChange(of: currentDetailSelection) { _ in
-                    PlayHaptic(sharpness: 0.05, intensity: 0.5)
+                    if isUseExtHaptic {
+                        PlayHaptic(sharpness: 0.05, intensity: 0.5)
+                    }
                 }
                 if currentDetailSelection == 1 {
                     ScrollView {
@@ -606,6 +611,15 @@ struct VideoDetailView: View {
                         isDecoded = true
                     }
                 }
+            }
+            
+            if isAllowMixpanel {
+                Mixpanel.mainInstance().time(event: "Watch Video")
+            }
+        }
+        .onDisappear {
+            if isAllowMixpanel {
+                Mixpanel.mainInstance().track(event: "Watch Video", properties: videoDetails)
             }
         }
         .toolbar {

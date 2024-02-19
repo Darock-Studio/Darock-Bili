@@ -18,6 +18,7 @@
 import Darwin
 import SwiftUI
 import WatchKit
+import Mixpanel
 import DarockKit
 import SwiftyJSON
 import SDWebImage
@@ -328,18 +329,18 @@ public func tipWithText(_ text: String, symbol: String = "", time: Double = 3.0)
 
 class AppDelegate: NSObject, WKApplicationDelegate {
     func applicationDidFinishLaunching() {
-//        signal(SIGABRT, {error in
-//            signalErrorRecord(error, "SIGABRT")
-//        })
-//        signal(SIGTRAP, {error in
-//            signalErrorRecord(error, "SIGTRAP")
-//        })
-//        signal(SIGILL, {error in
-//            signalErrorRecord(error, "SIGILL")
-//        })
-//        signal(SIGKILL, {error in
-//            signalErrorRecord(error, "SIGKILL")
-//        })
+        Mixpanel.initialize(token: "37d4aaecc64cae16353c2fe7dbb0513c")
+        //                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //  Wow you see a token there, I'm not forget to hide it because you are no able to
+        //  do anything important by this token >_-
+        if (UserDefaults.standard.object(forKey: "IsAllowMixpanel") as? Bool) ?? true {
+            Mixpanel.mainInstance().track(event: "Open App", properties: [
+                "System": "watchOS"
+            ])
+            if let uid = UserDefaults.standard.string(forKey: "DedeUserId") {
+                Mixpanel.mainInstance().registerSuperPropertiesOnce(["DedeUserId": uid])
+            }
+        }
         
         SDImageCodersManager.shared.addCoder(SDImageWebPCoder.shared)
         SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)

@@ -115,6 +115,18 @@ struct SettingsView: View {
                         Text("Settings.feedback")
                     }
                 })
+                NavigationLink(destination: {PrivacySettingsView().navigationTitle("隐私与安全性")}, label: {
+                    HStack {
+                        ZStack {
+                            Color.blue
+                                .frame(width: 20, height: 20)
+                                .clipShape(Circle())
+                            Image(systemName: "hand.raised.fill")
+                                .font(.system(size: 12))
+                        }
+                        Text("隐私与安全性")
+                    }
+                })
             }
             Section {
                 NavigationLink(destination: {AboutView()}, label: {
@@ -550,6 +562,9 @@ struct DebugMenuView: View {
             NavigationLink(destination: {Buvid34Debug()}, label: {
                 Text("buvid3_4_actived")
             })
+            NavigationLink(destination: {bMessageSendView(uid: 1926849243, username: "MC...")}, label: {
+                Text("bMessagePatch")
+            })
         }
     }
 
@@ -616,6 +631,18 @@ struct DebugMenuView: View {
     }
 }
 
+struct PrivacySettingsView: View {
+    @AppStorage("IsAllowMixpanel") var isAllowMixpanel = true
+    var body: some View {
+        List {
+            Section {
+                Toggle("允许收集使用信息", isOn: $isAllowMixpanel)
+            } footer: {
+                Text("喵哩喵哩收集使用信息仅用以帮助改进质量，不会用于广告、个人画像之类，收集的信息不会关联到个人。此更改立即生效，不会影响哔哩哔哩官方对您的数据收集。")
+            }
+        }
+    }
+}
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {

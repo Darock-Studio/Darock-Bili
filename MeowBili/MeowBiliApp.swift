@@ -18,6 +18,7 @@
 
 import Darwin
 import SwiftUI
+import Mixpanel
 import DarockKit
 import SwiftyJSON
 import SDWebImage
@@ -127,118 +128,138 @@ struct DarockBili_Watch_AppApp: App {
     // Handoff
     @State var handoffVideoDetails = [String: String]()
     @State var shouldPushVideoView = false
+    
+    @State var shouldShowAppName = false
     var body: some Scene {
         WindowGroup {
             if UserDefaults.standard.string(forKey: "NewSignalError") ?? "" != "" {
                 SignalErrorView()
             } else {
-                ContentView()
-                    .onAppear {
-                        Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
-                            showTipText = pShowTipText
-                            showTipSymbol = pShowTipSymbol
-                            UserDefaults.standard.set(isLowBatteryMode, forKey: "IsInLowBatteryMode")
-                            Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { timer in
-                                tipBoxOffset = pTipBoxOffset
-                                timer.invalidate()
-                            }
-                        }
-                        
-                        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-                            if isShowMemoryInScreen {
-                                isShowMemoryUsage = true
-                                Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
-                                    memoryUsage = getMemory()
-                                }
-                                timer.invalidate()
-                            }
-                        }
-                        let timer = Timer(timeInterval: 1, repeats: true) { timer in
-                            currentHour = getCurrentTime().hour
-                            currentMinute = getCurrentTime().minute
-                        }
-                        let sleepTimeCheck = Timer(timeInterval: 60, repeats: true) { timer in
-                            if currentHour == notifyHour && currentMinute == notifyMinute && isSleepNotificationOn {
-                                AlertKitAPI.present(title: String(localized: "Sleep.notification"), icon: .heart, style: .iOS17AppleMusic, haptic: .warning)
-                            }
-                        }
-                        RunLoop.current.add(timer, forMode: .default)
-                        timer.fire()
-                        RunLoop.current.add(sleepTimeCheck, forMode: .default)
-                        sleepTimeCheck.fire()
-                    }
-                    .overlay {
+                ZStack {
+                    ContentView()
+                    if shouldShowAppName {
                         VStack {
-                            HStack {
-                                if isLowBatteryMode {
-                                    Image(systemName: "circle")
-                                        .font(.system(size: 17, weight: .heavy))
-                                        .foregroundColor(.accentColor)
-                                        .offset(y: 10)
-                                }
+                            Spacer()
+                                .frame(height: 5)
+                            ZStack {
+                                Capsule()
+                                    .fill(Color.accentColor)
+                                    .frame(width: 100, height: 25)
+                                Text("喵哩喵哩")
+                                    .foregroundStyle(Color.white)
+                                    .font(.system(size: 16, weight: .semibold))
                             }
                             Spacer()
                         }
                         .ignoresSafeArea()
-                        if isShowMemoryUsage {
-                            VStack {
-                                HStack {
-                                    Spacer()
-                                    Text("Memory.indicator.\(String(format: "%.2f", memoryUsage))")
-                                        .font(.system(size: 10, weight: .medium))
-                                        .offset(y: 26)
-                                }
-                                Spacer()
-                            }
-                            .ignoresSafeArea()
+                    }
+                }
+                .onAppear {
+                    Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
+                        showTipText = pShowTipText
+                        showTipSymbol = pShowTipSymbol
+                        UserDefaults.standard.set(isLowBatteryMode, forKey: "IsInLowBatteryMode")
+                        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { timer in
+                            tipBoxOffset = pTipBoxOffset
+                            timer.invalidate()
                         }
-                        if debug {
+                    }
+                    
+                    Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+                        if isShowMemoryInScreen {
+                            isShowMemoryUsage = true
+                            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
+                                memoryUsage = getMemory()
+                            }
+                            timer.invalidate()
+                        }
+                    }
+                    let timer = Timer(timeInterval: 1, repeats: true) { timer in
+                        currentHour = getCurrentTime().hour
+                        currentMinute = getCurrentTime().minute
+                    }
+                    let sleepTimeCheck = Timer(timeInterval: 60, repeats: true) { timer in
+                        if currentHour == notifyHour && currentMinute == notifyMinute && isSleepNotificationOn {
+                            AlertKitAPI.present(title: String(localized: "Sleep.notification"), icon: .heart, style: .iOS17AppleMusic, haptic: .warning)
+                        }
+                    }
+                    RunLoop.current.add(timer, forMode: .default)
+                    timer.fire()
+                    RunLoop.current.add(sleepTimeCheck, forMode: .default)
+                    sleepTimeCheck.fire()
+                }
+                .overlay {
+                    VStack {
+                        HStack {
+                            if isLowBatteryMode {
+                                Image(systemName: "circle")
+                                    .font(.system(size: 17, weight: .heavy))
+                                    .foregroundColor(.accentColor)
+                                    .offset(y: 10)
+                            }
+                        }
+                        Spacer()
+                    }
+                    .ignoresSafeArea()
+                    if isShowMemoryUsage {
+                        VStack {
                             HStack {
-                                VStack {
-                                    Button(action: {
-                                        isShowingDebugControls.toggle()
-                                    }, label: {
-                                        Text(isShowingDebugControls ? "Close Debug Controls" : "Show Debug Controls")
-                                            .font(.system(size: 12))
-                                            .foregroundColor(.blue)
-                                    })
-                                    .buttonStyle(.plain)
-                                    .offset(x: 15, y: 5)
-                                    if isShowingDebugControls {
-                                        VStack {
-                                            HStack {
-                                                Text("Memory Usage: \(memoryUsage) MB")
-                                                Spacer()
-                                            }
-                                            .allowsHitTesting(false)
+                                Spacer()
+                                Text("Memory.indicator.\(String(format: "%.2f", memoryUsage))")
+                                    .font(.system(size: 10, weight: .medium))
+                                    .offset(y: 26)
+                            }
+                            Spacer()
+                        }
+                        .ignoresSafeArea()
+                    }
+                    if debug {
+                        HStack {
+                            VStack {
+                                Button(action: {
+                                    isShowingDebugControls.toggle()
+                                }, label: {
+                                    Text(isShowingDebugControls ? "Close Debug Controls" : "Show Debug Controls")
+                                        .font(.system(size: 12))
+                                        .foregroundColor(.blue)
+                                })
+                                .buttonStyle(.plain)
+                                .offset(x: 15, y: 5)
+                                if isShowingDebugControls {
+                                    VStack {
+                                        HStack {
+                                            Text("Memory Usage: \(memoryUsage) MB")
+                                            Spacer()
                                         }
-                                        .font(.system(size: 10))
-                                        
-                                        .onAppear {
-                                            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-                                                systemResourceRefreshTimer = timer
-                                                memoryUsage = getMemory()
-                                            }
-                                        }
-                                        .onDisappear {
-                                            systemResourceRefreshTimer?.invalidate()
+                                        .allowsHitTesting(false)
+                                    }
+                                    .font(.system(size: 10))
+                                    
+                                    .onAppear {
+                                        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+                                            systemResourceRefreshTimer = timer
+                                            memoryUsage = getMemory()
                                         }
                                     }
-                                    Spacer()
+                                    .onDisappear {
+                                        systemResourceRefreshTimer?.invalidate()
+                                    }
                                 }
-                                .padding(.horizontal, 3)
-                                .padding(.vertical, 1)
                                 Spacer()
                             }
-                            .ignoresSafeArea()
+                            .padding(.horizontal, 3)
+                            .padding(.vertical, 1)
+                            Spacer()
                         }
+                        .ignoresSafeArea()
                     }
-                    .onContinueUserActivity("com.darock.DarockBili.video-play") { activity in
-                        if let videoDetails = activity.userInfo as? [String: String] {
-                            handoffVideoDetails = videoDetails
-                            shouldPushVideoView = true
-                        }
+                }
+                .onContinueUserActivity("com.darock.DarockBili.video-play") { activity in
+                    if let videoDetails = activity.userInfo as? [String: String] {
+                        handoffVideoDetails = videoDetails
+                        shouldPushVideoView = true
                     }
+                }
             }
         }
         .onChange(of: scenePhase) { value in
@@ -246,7 +267,7 @@ struct DarockBili_Watch_AppApp: App {
             case .background:
                 break
             case .inactive:
-                break
+                shouldShowAppName = false
             case .active:
                 SDImageCodersManager.shared.addCoder(SDImageWebPCoder.shared)
                 SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)
@@ -278,6 +299,8 @@ struct DarockBili_Watch_AppApp: App {
                         print("创建引擎时出现错误： \(error.localizedDescription)")
                     }
                 }
+                
+                shouldShowAppName = true
             @unknown default:
                 break
             }
@@ -287,14 +310,19 @@ struct DarockBili_Watch_AppApp: App {
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-//        let audioSession = AVAudioSession.sharedInstance()
-//        do {
-//            try audioSession.setCategory(.playback)
-//            try audioSession.setActive(true, options: [])
-//        } catch {
-//            print("Setting category to AVAudioSessionCategoryPlayback failed.")
-//        }
-        
+        Mixpanel.initialize(token: "37d4aaecc64cae16353c2fe7dbb0513c", trackAutomaticEvents: false)
+        //                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //  Wow you see a token there, I'm not forget to hide it because you are no able to
+        //  do anything important by this token >_-
+        if (UserDefaults.standard.object(forKey: "IsAllowMixpanel") as? Bool) ?? true {
+            Mixpanel.mainInstance().track(event: "Open App", properties: [
+                "System": "iOS"
+            ])
+            if let uid = UserDefaults.standard.string(forKey: "DedeUserId") {
+                Mixpanel.mainInstance().registerSuperPropertiesOnce(["DedeUserId": uid])
+            }
+        }
+            
         return true
     }
     

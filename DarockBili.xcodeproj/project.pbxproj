@@ -8,15 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		8C0557DF2B791B84009D9CD0 /* AZVideoPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8C0557DE2B791B84009D9CD0 /* AZVideoPlayer */; };
-		8C2337FA2B63DBF3009665B1 /* BPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8C2337F92B63DBF3009665B1 /* BPlayer */; };
-		8C372ED52B6CF079002033A1 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 8C372ED42B6CF079002033A1 /* Starscream */; };
 		8C372ED72B6CF08D002033A1 /* LiveMessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C372ED62B6CF08D002033A1 /* LiveMessagesView.swift */; };
 		8C72E32E2B6607240087486E /* DownloadObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C72E32D2B6607240087486E /* DownloadObj.swift */; };
 		8C72E3302B6621E00087486E /* Passthroughs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C72E32F2B6621E00087486E /* Passthroughs.swift */; };
 		8C72E3342B668B7B0087486E /* DynamicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C72E3332B668B7B0087486E /* DynamicDetailView.swift */; };
 		8C72E3392B66A76A0087486E /* DynamicSendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C72E3382B66A76A0087486E /* DynamicSendView.swift */; };
-		8C81A8EA2B620D130045E986 /* BPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8C81A8E92B620D130045E986 /* BPlayer */; };
 		8C8CA05A2B6108460020DEDD /* Bangumi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8CA0592B6108460020DEDD /* Bangumi.swift */; };
+		8CA370C02B824BC500CE0E9E /* SelfQrCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA370BF2B824BC500CE0E9E /* SelfQrCardView.swift */; };
+		8CA370C12B824C3B00CE0E9E /* SelfQrCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA370BF2B824BC500CE0E9E /* SelfQrCardView.swift */; };
+		8CA370D42B82690700CE0E9E /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA370D32B82690700CE0E9E /* Mixpanel */; };
+		8CA370D62B82691100CE0E9E /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA370D52B82691100CE0E9E /* Mixpanel */; };
+		8CA370D82B82691700CE0E9E /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA370D72B82691700CE0E9E /* Mixpanel */; };
+		8CA370DA2B82724400CE0E9E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */; };
+		8CA370DB2B82724400CE0E9E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */; };
+		8CA370DC2B82724400CE0E9E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */; };
+		8CA370DF2B827AAD00CE0E9E /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA370DE2B827AAD00CE0E9E /* AlertToast */; };
 		8CA388992B789A0300F5F91F /* AZVideoPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA388982B789A0300F5F91F /* AZVideoPlayer */; };
 		8CA3889F2B78B1E300F5F91F /* AZVideoPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA3889E2B78B1E300F5F91F /* AZVideoPlayer */; };
 		8CA388A12B78B5D800F5F91F /* BiliFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8CA388A02B78B5D800F5F91F /* BiliFont.ttf */; };
@@ -42,8 +48,6 @@
 		8CA7CBFD2B77AC8A008E587F /* Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBFC2B77AC8A008E587F /* Dynamic */; };
 		8CA7CBFF2B77AC8A008E587F /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBFE2B77AC8A008E587F /* SwiftyJSON */; };
 		8CA7CC012B77AC8A008E587F /* DarockKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC002B77AC8A008E587F /* DarockKit */; };
-		8CA7CC032B77AC8A008E587F /* BPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC022B77AC8A008E587F /* BPlayer */; };
-		8CA7CC052B77AC8A008E587F /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC042B77AC8A008E587F /* Starscream */; };
 		8CA7CC072B77AC93008E587F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC062B77AC93008E587F /* Alamofire */; };
 		8CA7CC092B77AC93008E587F /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC082B77AC93008E587F /* Marquee */; };
 		8CA7CC0B2B77AC93008E587F /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC0A2B77AC93008E587F /* SwiftDate */; };
@@ -292,6 +296,8 @@
 		8C72E3332B668B7B0087486E /* DynamicDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicDetailView.swift; sourceTree = "<group>"; };
 		8C72E3382B66A76A0087486E /* DynamicSendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSendView.swift; sourceTree = "<group>"; };
 		8C8CA0592B6108460020DEDD /* Bangumi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bangumi.swift; sourceTree = "<group>"; };
+		8CA370BF2B824BC500CE0E9E /* SelfQrCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfQrCardView.swift; sourceTree = "<group>"; };
+		8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		8CA388A02B78B5D800F5F91F /* BiliFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BiliFont.ttf; sourceTree = "<group>"; };
 		8CA7CBC02B77AC4A008E587F /* MeowBili.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeowBili.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA7CBC22B77AC4A008E587F /* MeowBiliApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeowBiliApp.swift; sourceTree = "<group>"; };
@@ -429,6 +435,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CA7CC132B77AC93008E587F /* SDWebImageSwiftUI in Frameworks */,
+				8CA370DF2B827AAD00CE0E9E /* AlertToast in Frameworks */,
 				8CA7CC0F2B77AC93008E587F /* ZipArchive in Frameworks */,
 				8CA7CC072B77AC93008E587F /* Alamofire in Frameworks */,
 				8CA7CCDF2B77BB5A008E587F /* AlertKit in Frameworks */,
@@ -437,6 +444,7 @@
 				8CC3D5672B7CDCE1005636DC /* Intents.framework in Frameworks */,
 				8CA7CC232B77AC93008E587F /* DarockKit in Frameworks */,
 				8CC3D5632B7CCE57005636DC /* ScreenshotableView in Frameworks */,
+				8CA370D42B82690700CE0E9E /* Mixpanel in Frameworks */,
 				8CA7CC092B77AC93008E587F /* Marquee in Frameworks */,
 				8C0557DF2B791B84009D9CD0 /* AZVideoPlayer in Frameworks */,
 				8CA7CC0B2B77AC93008E587F /* SwiftDate in Frameworks */,
@@ -461,7 +469,7 @@
 				8CA7CBF72B77AC8A008E587F /* SDWebImagePDFCoder in Frameworks */,
 				8CA7CBF52B77AC8A008E587F /* SDWebImageSVGCoder in Frameworks */,
 				8CA7CC012B77AC8A008E587F /* DarockKit in Frameworks */,
-				8CA7CC032B77AC8A008E587F /* BPlayer in Frameworks */,
+				8CA370D62B82691100CE0E9E /* Mixpanel in Frameworks */,
 				8CA7CBE72B77AC8A008E587F /* Marquee in Frameworks */,
 				8CA7CBE92B77AC8A008E587F /* SwiftDate in Frameworks */,
 				8CA7CBFD2B77AC8A008E587F /* Dynamic in Frameworks */,
@@ -471,7 +479,6 @@
 				8CA7CBFB2B77AC8A008E587F /* CachedAsyncImage in Frameworks */,
 				8CA7CBF32B77AC8A008E587F /* SDWebImageWebPCoder in Frameworks */,
 				8CA7CBEF2B77AC8A008E587F /* EFQRCode in Frameworks */,
-				8CA7CC052B77AC8A008E587F /* Starscream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,15 +490,13 @@
 				B4468A9A2B4FC8B7002CCEB2 /* SDWebImagePDFCoder in Frameworks */,
 				B4468A6D2B4FC2C8002CCEB2 /* Alamofire in Frameworks */,
 				B4468A8C2B4FC85A002CCEB2 /* SwiftyJSON in Frameworks */,
-				8C81A8EA2B620D130045E986 /* BPlayer in Frameworks */,
 				B4468A982B4FC8B7002CCEB2 /* SDWebImageSVGCoder in Frameworks */,
-				8C2337FA2B63DBF3009665B1 /* BPlayer in Frameworks */,
+				8CA370D82B82691700CE0E9E /* Mixpanel in Frameworks */,
 				B4468A702B4FC5E7002CCEB2 /* Marquee in Frameworks */,
 				B4468A9E2B4FC8B7002CCEB2 /* CachedAsyncImage in Frameworks */,
 				B4468A782B4FC60B002CCEB2 /* SFSymbol in Frameworks */,
 				B4468A732B4FC5F2002CCEB2 /* SwiftDate in Frameworks */,
 				B4468A922B4FC8B7002CCEB2 /* EFQRCode in Frameworks */,
-				8C372ED52B6CF079002033A1 /* Starscream in Frameworks */,
 				B4468A8F2B4FC8AC002CCEB2 /* DarockKit in Frameworks */,
 				B4468A962B4FC8B7002CCEB2 /* SDWebImageWebPCoder in Frameworks */,
 				B4468AA02B4FC8B7002CCEB2 /* Dynamic in Frameworks */,
@@ -725,6 +730,7 @@
 		B44689C32B4FC15A002CCEB2 = {
 			isa = PBXGroup;
 			children = (
+				8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */,
 				E2B720932B67858E00ABB0A6 /* Localizable.xcstrings */,
 				8C72E32A2B6605B80087486E /* README.md */,
 				8CA388A02B78B5D800F5F91F /* BiliFont.ttf */,
@@ -921,6 +927,7 @@
 				B4468A2E2B4FC24A002CCEB2 /* UserDetailView.swift */,
 				B4468A2F2B4FC24A002CCEB2 /* HistoryView.swift */,
 				B4468A302B4FC24A002CCEB2 /* WatchLaterView.swift */,
+				8CA370BF2B824BC500CE0E9E /* SelfQrCardView.swift */,
 			);
 			path = PersonalCenter;
 			sourceTree = "<group>";
@@ -989,6 +996,8 @@
 				8CA3889E2B78B1E300F5F91F /* AZVideoPlayer */,
 				8C0557DE2B791B84009D9CD0 /* AZVideoPlayer */,
 				8CC3D5622B7CCE57005636DC /* ScreenshotableView */,
+				8CA370D32B82690700CE0E9E /* Mixpanel */,
+				8CA370DE2B827AAD00CE0E9E /* AlertToast */,
 			);
 			productName = MeowBili;
 			productReference = 8CA7CBC02B77AC4A008E587F /* MeowBili.app */;
@@ -1023,8 +1032,7 @@
 				8CA7CBFC2B77AC8A008E587F /* Dynamic */,
 				8CA7CBFE2B77AC8A008E587F /* SwiftyJSON */,
 				8CA7CC002B77AC8A008E587F /* DarockKit */,
-				8CA7CC022B77AC8A008E587F /* BPlayer */,
-				8CA7CC042B77AC8A008E587F /* Starscream */,
+				8CA370D52B82691100CE0E9E /* Mixpanel */,
 			);
 			productName = "MeowBili Watch App";
 			productReference = 8CA7CBCF2B77AC4C008E587F /* 喵哩喵哩.app */;
@@ -1077,9 +1085,7 @@
 				B4468A9B2B4FC8B7002CCEB2 /* SwiftSoup */,
 				B4468A9D2B4FC8B7002CCEB2 /* CachedAsyncImage */,
 				B4468A9F2B4FC8B7002CCEB2 /* Dynamic */,
-				8C81A8E92B620D130045E986 /* BPlayer */,
-				8C2337F92B63DBF3009665B1 /* BPlayer */,
-				8C372ED42B6CF079002033A1 /* Starscream */,
+				8CA370D72B82691700CE0E9E /* Mixpanel */,
 			);
 			productName = "DarockBili Watch App";
 			productReference = B44689D02B4FC15A002CCEB2 /* 喵哩喵哩.app */;
@@ -1138,11 +1144,11 @@
 				B4468A852B4FC6C6002CCEB2 /* XCRemoteSwiftPackageReference "Dynamic" */,
 				B4468A8A2B4FC85A002CCEB2 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				B4468A8D2B4FC8AC002CCEB2 /* XCRemoteSwiftPackageReference "DarockKit" */,
-				8C2337F82B63DBF3009665B1 /* XCRemoteSwiftPackageReference "bplayer" */,
-				8C372ED32B6CF079002033A1 /* XCRemoteSwiftPackageReference "Starscream" */,
 				8CA7CCDD2B77BB5A008E587F /* XCRemoteSwiftPackageReference "AlertKit" */,
 				8C0557DD2B791B84009D9CD0 /* XCRemoteSwiftPackageReference "AZVideoPlayer" */,
 				8CC3D5612B7CCE57005636DC /* XCRemoteSwiftPackageReference "ScreenshotableView" */,
+				8CA370D22B82690700CE0E9E /* XCRemoteSwiftPackageReference "mixpanel-swift" */,
+				8CA370DD2B827AAD00CE0E9E /* XCRemoteSwiftPackageReference "AlertToast" */,
 			);
 			productRefGroup = B44689CB2B4FC15A002CCEB2 /* Products */;
 			projectDirPath = "";
@@ -1164,6 +1170,7 @@
 				8CA7CBCA2B77AC4C008E587F /* Preview Assets.xcassets in Resources */,
 				8CA388A22B78B5D800F5F91F /* BiliFont.ttf in Resources */,
 				8CA7CBC72B77AC4C008E587F /* Assets.xcassets in Resources */,
+				8CA370DB2B82724400CE0E9E /* PrivacyInfo.xcprivacy in Resources */,
 				8CA7CCE02B77C3A8008E587F /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1175,6 +1182,7 @@
 				8CA7CC542B77ACE8008E587F /* Assets.xcassets in Resources */,
 				8CA388A32B78B5D800F5F91F /* BiliFont.ttf in Resources */,
 				8CA7CC3B2B77ACE8008E587F /* Preview Assets.xcassets in Resources */,
+				8CA370DC2B82724400CE0E9E /* PrivacyInfo.xcprivacy in Resources */,
 				8CA7CCE12B77C3A9008E587F /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1193,6 +1201,7 @@
 				B4468A502B4FC24A002CCEB2 /* Preview Assets.xcassets in Resources */,
 				8CA388A12B78B5D800F5F91F /* BiliFont.ttf in Resources */,
 				E2B720942B67858E00ABB0A6 /* Localizable.xcstrings in Resources */,
+				8CA370DA2B82724400CE0E9E /* PrivacyInfo.xcprivacy in Resources */,
 				B4468A672B4FC286002CCEB2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1280,6 +1289,7 @@
 				8CA7CC442B77ACE8008E587F /* CommentsView.swift in Sources */,
 				8CA7CC292B77ACE8008E587F /* SkinDownloadView.swift in Sources */,
 				8CA7CC5D2B77ACE8008E587F /* bMessageSendView.swift in Sources */,
+				8CA370C12B824C3B00CE0E9E /* SelfQrCardView.swift in Sources */,
 				8CA7CC2E2B77ACE8008E587F /* DarockBiliApp.swift in Sources */,
 				8CA7CC5F2B77ACE8008E587F /* NetworkFixView.swift in Sources */,
 				8CA7CC422B77ACE8008E587F /* Backtrace.swift in Sources */,
@@ -1351,6 +1361,7 @@
 				B4468A422B4FC24A002CCEB2 /* DarockBiliApp.swift in Sources */,
 				B4468A572B4FC24A002CCEB2 /* SkinChooserView.swift in Sources */,
 				8C72E32E2B6607240087486E /* DownloadObj.swift in Sources */,
+				8CA370C02B824BC500CE0E9E /* SelfQrCardView.swift in Sources */,
 				B4468A582B4FC24A002CCEB2 /* SkinExplorerView.swift in Sources */,
 				B4468A602B4FC24A002CCEB2 /* FavoriteView.swift in Sources */,
 				B4468A532B4FC24A002CCEB2 /* AboutView.swift in Sources */,
@@ -1409,7 +1420,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 643;
+				CURRENT_PROJECT_VERSION = 693;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1455,7 +1466,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 643;
+				CURRENT_PROJECT_VERSION = 693;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1498,7 +1509,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 643;
+				CURRENT_PROJECT_VERSION = 693;
 				DEVELOPMENT_ASSET_PATHS = "DarockBili\\ Watch\\ App/Preview\\ Content";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1533,7 +1544,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 643;
+				CURRENT_PROJECT_VERSION = 693;
 				DEVELOPMENT_ASSET_PATHS = "DarockBili\\ Watch\\ App/Preview\\ Content";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1689,7 +1700,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 643;
+				CURRENT_PROJECT_VERSION = 693;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1722,7 +1733,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 643;
+				CURRENT_PROJECT_VERSION = 693;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1755,7 +1766,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 643;
+				CURRENT_PROJECT_VERSION = 693;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				INFOPLIST_KEY_CFBundleDisplayName = DarockBili;
 				MARKETING_VERSION = 1.0.0;
@@ -1771,7 +1782,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 643;
+				CURRENT_PROJECT_VERSION = 693;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				INFOPLIST_KEY_CFBundleDisplayName = DarockBili;
 				MARKETING_VERSION = 1.0.0;
@@ -1842,20 +1853,20 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		8C2337F82B63DBF3009665B1 /* XCRemoteSwiftPackageReference "bplayer" */ = {
+		8CA370D22B82690700CE0E9E /* XCRemoteSwiftPackageReference "mixpanel-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/WindowsMEMZ/bplayer";
+			repositoryURL = "https://github.com/mixpanel/mixpanel-swift";
 			requirement = {
-				branch = main;
+				branch = master;
 				kind = branch;
 			};
 		};
-		8C372ED32B6CF079002033A1 /* XCRemoteSwiftPackageReference "Starscream" */ = {
+		8CA370DD2B827AAD00CE0E9E /* XCRemoteSwiftPackageReference "AlertToast" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/daltoniam/Starscream";
+			repositoryURL = "https://github.com/elai950/AlertToast";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.6;
+				minimumVersion = 1.3.9;
 			};
 		};
 		8CA7CCDD2B77BB5A008E587F /* XCRemoteSwiftPackageReference "AlertKit" */ = {
@@ -2002,19 +2013,25 @@
 			package = 8C0557DD2B791B84009D9CD0 /* XCRemoteSwiftPackageReference "AZVideoPlayer" */;
 			productName = AZVideoPlayer;
 		};
-		8C2337F92B63DBF3009665B1 /* BPlayer */ = {
+		8CA370D32B82690700CE0E9E /* Mixpanel */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8C2337F82B63DBF3009665B1 /* XCRemoteSwiftPackageReference "bplayer" */;
-			productName = BPlayer;
+			package = 8CA370D22B82690700CE0E9E /* XCRemoteSwiftPackageReference "mixpanel-swift" */;
+			productName = Mixpanel;
 		};
-		8C372ED42B6CF079002033A1 /* Starscream */ = {
+		8CA370D52B82691100CE0E9E /* Mixpanel */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8C372ED32B6CF079002033A1 /* XCRemoteSwiftPackageReference "Starscream" */;
-			productName = Starscream;
+			package = 8CA370D22B82690700CE0E9E /* XCRemoteSwiftPackageReference "mixpanel-swift" */;
+			productName = Mixpanel;
 		};
-		8C81A8E92B620D130045E986 /* BPlayer */ = {
+		8CA370D72B82691700CE0E9E /* Mixpanel */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = BPlayer;
+			package = 8CA370D22B82690700CE0E9E /* XCRemoteSwiftPackageReference "mixpanel-swift" */;
+			productName = Mixpanel;
+		};
+		8CA370DE2B827AAD00CE0E9E /* AlertToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8CA370DD2B827AAD00CE0E9E /* XCRemoteSwiftPackageReference "AlertToast" */;
+			productName = AlertToast;
 		};
 		8CA388982B789A0300F5F91F /* AZVideoPlayer */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2098,16 +2115,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B4468A8D2B4FC8AC002CCEB2 /* XCRemoteSwiftPackageReference "DarockKit" */;
 			productName = DarockKit;
-		};
-		8CA7CC022B77AC8A008E587F /* BPlayer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8C2337F82B63DBF3009665B1 /* XCRemoteSwiftPackageReference "bplayer" */;
-			productName = BPlayer;
-		};
-		8CA7CC042B77AC8A008E587F /* Starscream */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8C372ED32B6CF079002033A1 /* XCRemoteSwiftPackageReference "Starscream" */;
-			productName = Starscream;
 		};
 		8CA7CC062B77AC93008E587F /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
