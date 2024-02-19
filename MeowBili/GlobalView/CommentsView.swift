@@ -72,6 +72,7 @@ struct CommentsView: View {
         @State var presentRepliesGoto = ""
         @State var presentRepliesRootData = [String: String]()
         @State var isCommentRepliesPresented = false
+        @State var isNoMore = false
         var body: some View {
             ScrollView {
                 LazyVStack {
@@ -179,16 +180,22 @@ struct CommentsView: View {
                                 commentOffsets[i] = 0
                             }
                         }
-                        Button(action: {
-                            nowPage += 1
-                            ContinueLoadComment()
-                        }, label: {
-                            Text("Home.more")
-                                .bold()
-                        })
-                        .buttonStyle(.borderedProminent)
+                        if !isNoMore {
+                            Button(action: {
+                                nowPage += 1
+                                ContinueLoadComment()
+                            }, label: {
+                                Text("Home.more")
+                                    .bold()
+                            })
+                            .buttonStyle(.borderedProminent)
+                        }
                     } else {
-                        ProgressView()
+                        if isNoMore {
+                            Text("什么都木有")
+                        } else {
+                            ProgressView()
+                        }
                     }
                 }
                 .padding(.horizontal)
@@ -218,6 +225,10 @@ struct CommentsView: View {
                     debugPrint(respJson)
                     if !CheckBApiError(from: respJson) { return }
                     let replies = respJson["data"]["replies"]
+                    if replies.count == 0 {
+                        isNoMore = true
+                        return
+                    }
                     var calNum = 0
                     for reply in replies {
                         isSenderDetailsPresented.append(false)
