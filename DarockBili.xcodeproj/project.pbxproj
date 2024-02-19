@@ -13,7 +13,6 @@
 		8C72E3302B6621E00087486E /* Passthroughs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C72E32F2B6621E00087486E /* Passthroughs.swift */; };
 		8C72E3342B668B7B0087486E /* DynamicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C72E3332B668B7B0087486E /* DynamicDetailView.swift */; };
 		8C72E3392B66A76A0087486E /* DynamicSendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C72E3382B66A76A0087486E /* DynamicSendView.swift */; };
-		8C81A8EA2B620D130045E986 /* BPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8C81A8E92B620D130045E986 /* BPlayer */; };
 		8C8CA05A2B6108460020DEDD /* Bangumi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8CA0592B6108460020DEDD /* Bangumi.swift */; };
 		8CA370C02B824BC500CE0E9E /* SelfQrCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA370BF2B824BC500CE0E9E /* SelfQrCardView.swift */; };
 		8CA370C12B824C3B00CE0E9E /* SelfQrCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA370BF2B824BC500CE0E9E /* SelfQrCardView.swift */; };
@@ -491,7 +490,6 @@
 				B4468A9A2B4FC8B7002CCEB2 /* SDWebImagePDFCoder in Frameworks */,
 				B4468A6D2B4FC2C8002CCEB2 /* Alamofire in Frameworks */,
 				B4468A8C2B4FC85A002CCEB2 /* SwiftyJSON in Frameworks */,
-				8C81A8EA2B620D130045E986 /* BPlayer in Frameworks */,
 				B4468A982B4FC8B7002CCEB2 /* SDWebImageSVGCoder in Frameworks */,
 				8CA370D82B82691700CE0E9E /* Mixpanel in Frameworks */,
 				B4468A702B4FC5E7002CCEB2 /* Marquee in Frameworks */,
@@ -1087,7 +1085,6 @@
 				B4468A9B2B4FC8B7002CCEB2 /* SwiftSoup */,
 				B4468A9D2B4FC8B7002CCEB2 /* CachedAsyncImage */,
 				B4468A9F2B4FC8B7002CCEB2 /* Dynamic */,
-				8C81A8E92B620D130045E986 /* BPlayer */,
 				8CA370D72B82691700CE0E9E /* Mixpanel */,
 			);
 			productName = "DarockBili Watch App";
@@ -2013,10 +2010,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8C0557DD2B791B84009D9CD0 /* XCRemoteSwiftPackageReference "AZVideoPlayer" */;
 			productName = AZVideoPlayer;
-		};
-		8C81A8E92B620D130045E986 /* BPlayer */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = BPlayer;
 		};
 		8CA370D32B82690700CE0E9E /* Mixpanel */ = {
 			isa = XCSwiftPackageProductDependency;
