@@ -20,7 +20,6 @@ import SwiftUI
 import DarockKit
 import Alamofire
 import SwiftyJSON
-import Starscream
 
 struct LiveMessagesView: View {
     var roomId: Int
