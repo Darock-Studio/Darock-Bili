@@ -265,6 +265,7 @@ struct UserDynamicMainView: View {
                                 ProgressView()
                             }
                         })
+                        .buttonStyle(.borderedProminent)
                     } else {
                         ProgressView()
                     }

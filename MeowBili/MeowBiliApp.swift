@@ -287,13 +287,13 @@ struct DarockBili_Watch_AppApp: App {
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        let audioSession = AVAudioSession.sharedInstance()
-        do {
-            try audioSession.setCategory(.playback)
-            try audioSession.setActive(true, options: [])
-        } catch {
-            print("Setting category to AVAudioSessionCategoryPlayback failed.")
-        }
+//        let audioSession = AVAudioSession.sharedInstance()
+//        do {
+//            try audioSession.setCategory(.playback)
+//            try audioSession.setActive(true, options: [])
+//        } catch {
+//            print("Setting category to AVAudioSessionCategoryPlayback failed.")
+//        }
         
         return true
     }
