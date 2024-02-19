@@ -63,7 +63,9 @@ import AuthenticationServices
     })
     .buttonBorderShape(.roundedRectangle(radius: 14))
     .onDrag {
-        PlayHaptic(sharpness: 0.05, intensity: 0.5)
+        if (UserDefaults.standard.object(forKey: "IsUseExtHaptic") as? Bool) ?? true {
+            PlayHaptic(sharpness: 0.05, intensity: 0.5)
+        }
         var cpdDetail = videoDetails
         cpdDetail.updateValue("archive", forKey: "Type")
         let itemData = try? NSKeyedArchiver.archivedData(withRootObject: cpdDetail, requiringSecureCoding: false)
@@ -71,7 +73,9 @@ import AuthenticationServices
         return provider
     }
     .onDrop(of: [kUTTypeData as String], isTargeted: nil) { items in
-        PlayHaptic(sharpness: 0.05, intensity: 0.5)
+        if (UserDefaults.standard.object(forKey: "IsUseExtHaptic") as? Bool) ?? true {
+            PlayHaptic(sharpness: 0.05, intensity: 0.5)
+        }
         for item in items {
             item.loadDataRepresentation(forTypeIdentifier: kUTTypeData as String) { (data, error) in
                 if let data = data, let dict = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [String: String] {

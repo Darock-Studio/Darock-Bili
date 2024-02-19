@@ -20,6 +20,7 @@ import Charts
 import SwiftUI
 import SwiftDate
 import DarockKit
+import UserNotifications
 import AuthenticationServices
 
 struct SettingsView: View {
@@ -31,19 +32,6 @@ struct SettingsView: View {
     var body: some View {
         List {
             Section {
-                NavigationLink(destination: {PlayerSettingsView().navigationTitle("Settings.player")}, label: {
-                    HStack {
-                        ZStack {
-                            Color.gray
-                                .frame(width: 26, height: 26)
-                                .clipShape(RoundedRectangle(cornerRadius: 5))
-                            Image(systemName: "play.square")
-                                .font(.system(size: 16))
-                                .foregroundColor(.white)
-                        }
-                        Text("Settings.player")
-                    }
-                })
                 NavigationLink(destination: {NetworkSettingsView().navigationTitle("Settings.internet")}, label: {
                     HStack {
                         ZStack {
@@ -55,6 +43,36 @@ struct SettingsView: View {
                                 .foregroundColor(.white)
                         }
                         Text("Settings.internet")
+                    }
+                })
+            }
+            Section {
+                if debug {
+                    NavigationLink(destination: {SoundAHapticSettingsView().navigationTitle("通知")}, label: {
+                        HStack {
+                            ZStack {
+                                Color.red
+                                    .frame(width: 26, height: 26)
+                                    .clipShape(RoundedRectangle(cornerRadius: 5))
+                                Image(systemName: "bell.badge.fill")
+                                    .font(.system(size: 16))
+                                    .foregroundColor(.white)
+                            }
+                            Text("通知")
+                        }
+                    })
+                }
+                NavigationLink(destination: {SoundAHapticSettingsView().navigationTitle("声音与触感")}, label: {
+                    HStack {
+                        ZStack {
+                            Color.red
+                                .frame(width: 26, height: 26)
+                                .clipShape(RoundedRectangle(cornerRadius: 5))
+                            Image(systemName: "speaker.wave.3.fill")
+                                .font(.system(size: 16))
+                                .foregroundColor(.white)
+                        }
+                        Text("声音与触感")
                     }
                 })
                 NavigationLink(destination: {ScreenTimeSettingsView().navigationTitle("Settings.screen-time")}, label: {
@@ -70,6 +88,22 @@ struct SettingsView: View {
                         Text("Settings.screen-time")
                     }
                 })
+            }
+            Section {
+                NavigationLink(destination: {PlayerSettingsView().navigationTitle("Settings.player")}, label: {
+                    HStack {
+                        ZStack {
+                            Color.gray
+                                .frame(width: 26, height: 26)
+                                .clipShape(RoundedRectangle(cornerRadius: 5))
+                            Image(systemName: "play.square")
+                                .font(.system(size: 16))
+                                .foregroundColor(.white)
+                        }
+                        Text("Settings.player")
+                    }
+                })
+                
                 NavigationLink(destination: {SleepTimeView().navigationTitle("Settings.sleep")}, label: {
                     HStack {
                         ZStack {
@@ -94,6 +128,19 @@ struct SettingsView: View {
                                 .foregroundColor(.white)
                         }
                         Text("Settings.feedback")
+                    }
+                })
+                NavigationLink(destination: {PrivacySettingsView().navigationTitle("隐私与安全性")}, label: {
+                    HStack {
+                        ZStack {
+                            Color.blue
+                                .frame(width: 26, height: 26)
+                                .clipShape(RoundedRectangle(cornerRadius: 5))
+                            Image(systemName: "hand.raised.fill")
+                                .font(.system(size: 16))
+                                .foregroundColor(.white)
+                        }
+                        Text("隐私与安全性")
                     }
                 })
             }
@@ -204,6 +251,44 @@ struct NetworkSettingsView: View {
                     Text("Troubleshoot")
                 })
                 Toggle("Troubleshoot.auto-pop-up", isOn: $isShowNetworkFixing)
+            }
+        }
+    }
+}
+
+struct NotificationSettingsView: View {
+    @AppStorage("IsNotificationEnabled") var isNotificationEnabled = false
+    var body: some View {
+        List {
+            Section {
+                Toggle("启用通知", isOn: $isNotificationEnabled)
+                    .onChange(of: isNotificationEnabled) { value in
+                        if value {
+                            UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.badge,.sound]) { (isGrand, error) in
+                                DispatchQueue.main.async {
+                                    if !isGrand {
+                                        isNotificationEnabled = false
+                                    }
+                                }
+                            }
+                        }
+                    }
+            }
+            if isNotificationEnabled {
+                
+            }
+        }
+    }
+}
+
+struct SoundAHapticSettingsView: View {
+    @AppStorage("IsUseExtHaptic") var isUseExtHaptic = true
+    var body: some View {
+        List {
+            Section {
+                Toggle("扩展的触感反馈", isOn: $isUseExtHaptic)
+            } header: {
+                Text("触感")
             }
         }
     }
@@ -368,8 +453,6 @@ func getCurrentTime() -> Time {
     return currentTime
 }
 
-
-
 struct DebugMenuView: View {
     var body: some View {
         List {
@@ -451,6 +534,23 @@ struct DebugMenuView: View {
     }
 }
 
+struct PrivacySettingsView: View {
+    @AppStorage("IsAllowMixpanel") var isAllowMixpanel = true
+    var body: some View {
+        List {
+            Section {
+                Toggle("允许收集使用信息", isOn: $isAllowMixpanel)
+            } footer: {
+                Text("喵哩喵哩收集使用信息仅用以帮助改进质量，不会用于广告、个人画像之类，收集的信息不会关联到个人。此更改立即生效，不会影响哔哩哔哩官方对您的数据收集。")
+            }
+            Section {
+                Link("喵哩喵哩开源页", destination: URL(string: "https://github.com/Darock-Studio/Darock-Bili")!)
+            } footer: {
+                Text("喵哩喵哩为完整开源项目，欢迎检查代码以确认无隐私问题")
+            }
+        }
+    }
+}
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {

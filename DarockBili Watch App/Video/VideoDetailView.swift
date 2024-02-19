@@ -20,6 +20,7 @@ import SwiftUI
 import Marquee
 import SFSymbol
 import WatchKit
+import Mixpanel
 import DarockKit
 import Alamofire
 import SwiftyJSON
@@ -38,6 +39,7 @@ struct VideoDetailView: View {
     @AppStorage("bili_jct") var biliJct = ""
     @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
     @AppStorage("VideoGetterSource") var videoGetterSource = "official"
+    @AppStorage("IsAllowMixpanel") var isAllowMixpanel = true
     @State var isLoading = false
     @State var isLiked = false
     @State var isCoined = false
@@ -400,6 +402,10 @@ struct VideoDetailView: View {
             if videoDetails["Title"]!.contains("<em class=\"keyword\">") {
                 videoDetails["Title"] = "\(String(videoDetails["Title"]!.hasPrefix("<em class=\"keyword\">") ? "" : (videoDetails["Title"]!.split(separator: "<em class=\"keyword\">")[0])))\(String(videoDetails["Title"]!.split(separator: "<em class=\"keyword\">")[videoDetails["Title"]!.hasPrefix("<em class=\"keyword\">") ? 0 : 1].split(separator: "</em>")[0]))\(String(videoDetails["Title"]!.hasSuffix("</em>") ? "" : videoDetails["Title"]!.split(separator: "</em>")[1]))"
             }
+            
+            if isAllowMixpanel {
+                Mixpanel.mainInstance().time(event: "Watch Video")
+            }
         }
         .onDisappear {
             goodVideos = [[String: String]]()
@@ -407,6 +413,10 @@ struct VideoDetailView: View {
             stat = [String: String]()
             videoDesc = ""
             SDImageCache.shared.clearMemory()
+            
+            if isAllowMixpanel {
+                Mixpanel.mainInstance().track(event: "Watch Video", properties: videoDetails)
+            }
         }
     }
     

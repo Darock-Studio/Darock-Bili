@@ -17,7 +17,6 @@
 
 import AVKit
 import SwiftUI
-import BPlayer
 import Alamofire
 
 struct BangumiPlayerView: View {

@@ -20,6 +20,7 @@ import SwiftUI
 import DarockKit
 import Alamofire
 import SwiftyJSON
+import AlertToast
 import SDWebImageSwiftUI
 import MobileCoreServices
 
@@ -35,76 +36,134 @@ struct FollowListView: View {
     @State var isLoadedFollows = false
     @State var isLoadingNew = false
     @State var pinnedUsers = [String]()
+    @State var isDeleteUndoPresented = false
+    @State var deletedUserName = ""
+    @State var deletedUserId: Int64 = 0
+    @State var isUndoCompletePresented = false
+    @State var undoTipText = ""
+    @State var isSelecting = false
+    @State var isSelected = [Bool]()
+    @State var deletedUserIds = [Int64]()
+    @State var isMultipleUndoPresented = false
     var body: some View {
         List {
             if users.count != 0 {
                 Section {
                     ForEach(0...users.count - 1, id: \.self) { i in
-                        NavigationLink(destination: {UserDetailView(uid: users[i]["UID"]!)}, label: {
-                            HStack {
-                                if pinnedUsers.contains(users[i]["UID"]!) {
-                                    Image(systemName: "pin.fill")
-                                        .foregroundColor(.gray)
-                                }
-                                WebImage(url: URL(string: users[i]["Face"]! + "@28w"), options: [.progressiveLoad])
-                                    .cornerRadius(100)
-                                VStack {
-                                    HStack {
-                                        Text(users[i]["Name"]!)
-                                            .font(.system(size: 16))
-                                            .lineLimit(2)
-                                        Spacer()
+                        if !isSelecting {
+                            NavigationLink(destination: {UserDetailView(uid: users[i]["UID"]!)}, label: {
+                                HStack {
+                                    if pinnedUsers.contains(users[i]["UID"]!) {
+                                        Image(systemName: "pin.fill")
+                                            .foregroundColor(.gray)
                                     }
-                                }
-                            }
-                        })
-                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                            Button(action: {
-                                if pinnedUsers.contains(users[i]["UID"]!) {
-                                    for j in 0..<pinnedUsers.count {
-                                        if pinnedUsers[j] == users[i]["UID"]! {
-                                            pinnedUsers.remove(at: j)
-                                            break
+                                    WebImage(url: URL(string: users[i]["Face"]! + "@28w"), options: [.progressiveLoad])
+                                        .cornerRadius(100)
+                                    VStack {
+                                        HStack {
+                                            Text(users[i]["Name"]!)
+                                                .font(.system(size: 16))
+                                                .lineLimit(2)
+                                            Spacer()
                                         }
                                     }
-                                } else {
-                                    pinnedUsers.append(users[i]["UID"]!)
-                                    let ud = users.remove(at: i)
-                                    users.insert(ud, at: 0)
-                                }
-                                UserDefaults.standard.set(pinnedUsers, forKey: "PinnedFollows")
-                            }, label: {
-                                if pinnedUsers.contains(users[i]["UID"]!) {
-                                    Image(systemName: "pin.slash.fill")
-                                } else {
-                                    Image(systemName: "pin.fill")
                                 }
                             })
-                        }
-                        .onDrop(of: [kUTTypeData as String], isTargeted: nil) { items in
-                            PlayHaptic(sharpness: 0.05, intensity: 0.5)
-                            for item in items {
-                                item.loadDataRepresentation(forTypeIdentifier: kUTTypeData as String) { (data, error) in
-                                    if let data = data, let dict = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [String: String] {
-                                        if dict["ID"] != nil {
-                                            users.insert(dict, at: 0)
-                                            let headers: HTTPHeaders = [
-                                                "cookie": "SESSDATA=\(sessdata)",
-                                                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                                            ]
-                                            AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(dict["ID"]!)!, act: 1, csrf: biliJct), headers: headers).response { _ in }
+                            .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                                Button(action: {
+                                    if pinnedUsers.contains(users[i]["UID"]!) {
+                                        for j in 0..<pinnedUsers.count {
+                                            if pinnedUsers[j] == users[i]["UID"]! {
+                                                pinnedUsers.remove(at: j)
+                                                break
+                                            }
+                                        }
+                                    } else {
+                                        pinnedUsers.append(users[i]["UID"]!)
+                                        let ud = users.remove(at: i)
+                                        users.insert(ud, at: 0)
+                                    }
+                                    UserDefaults.standard.set(pinnedUsers, forKey: "PinnedFollows")
+                                }, label: {
+                                    if pinnedUsers.contains(users[i]["UID"]!) {
+                                        Image(systemName: "pin.slash.fill")
+                                    } else {
+                                        Image(systemName: "pin.fill")
+                                    }
+                                })
+                            }
+                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                Button(role: .destructive, action: {
+                                    let headers: HTTPHeaders = [
+                                        "cookie": "SESSDATA=\(sessdata);",
+                                        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                    ]
+                                    AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(users[i]["UID"]!)!, act: 2, csrf: biliJct), headers: headers).response { response in
+                                        debugPrint(response)
+                                        let json = try! JSON(data: response.data!)
+                                        let code = json["code"].int!
+                                        if code == 0 {
+                                            deletedUserName = users[i]["Name"]!
+                                            deletedUserId = Int64(users[i]["UID"]!)!
+                                            isDeleteUndoPresented = true
+                                        } else {
+                                            AlertKitAPI.present(title: json["message"].string!, icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                                        }
+                                    }
+                                }, label: {
+                                    Image(systemName: "trash.fill")
+                                })
+                            }
+                            .onDrop(of: [kUTTypeData as String], isTargeted: nil) { items in
+                                PlayHaptic(sharpness: 0.05, intensity: 0.5)
+                                for item in items {
+                                    item.loadDataRepresentation(forTypeIdentifier: kUTTypeData as String) { (data, error) in
+                                        if let data = data, let dict = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [String: String] {
+                                            if dict["ID"] != nil {
+                                                users.insert(dict, at: 0)
+                                                let headers: HTTPHeaders = [
+                                                    "cookie": "SESSDATA=\(sessdata)",
+                                                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                                ]
+                                                AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(dict["ID"]!)!, act: 1, csrf: biliJct), headers: headers).response { _ in }
+                                            }
                                         }
                                     }
                                 }
+                                return true
                             }
-                            return true
+                        } else {
+                            Button(action: {
+                                isSelected[i].toggle()
+                            }, label: {
+                                HStack {
+                                    Image(systemName: isSelected[i] ? "checkmark.circle.fill" : "circle")
+                                        .foregroundStyle(Color.blue)
+                                    Spacer()
+                                        .frame(width: 2)
+                                    if pinnedUsers.contains(users[i]["UID"]!) {
+                                        Image(systemName: "pin.fill")
+                                            .foregroundColor(.gray)
+                                    }
+                                    WebImage(url: URL(string: users[i]["Face"]! + "@28w"), options: [.progressiveLoad])
+                                        .cornerRadius(100)
+                                    VStack {
+                                        HStack {
+                                            Text(users[i]["Name"]!)
+                                                .font(.system(size: 16))
+                                                .lineLimit(2)
+                                            Spacer()
+                                        }
+                                    }
+                                }
+                            })
                         }
                     }
                 }
             } else {
                 ProgressView()
             }
-            if nowPage < totalPage {
+            if (nowPage < totalPage) && !isSelecting {
                 Section {
                     if !isLoadingNew {
                         Button(action: {
@@ -126,12 +185,91 @@ struct FollowListView: View {
         }
         .navigationTitle("User.subcribed-accounts")
         .navigationBarTitleDisplayMode(.large)
+        .navigationBarHidden(isDeleteUndoPresented || isMultipleUndoPresented || isUndoCompletePresented)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(action: {
+                    isSelected.removeAll()
+                    for _ in users {
+                        isSelected.append(false)
+                    }
+                    isSelecting.toggle()
+                }, label: {
+                    Text(isSelecting ? "完成" : "编辑")
+                        .foregroundStyle(Color.blue)
+                })
+            }
+            ToolbarItemGroup(placement: .bottomBar) {
+                if isSelecting {
+                    Spacer()
+                    if isSelected.contains(where: { $0 }) {
+                        Button(role: .destructive, action: {
+                            isSelecting = false
+                            let headers: HTTPHeaders = [
+                                "cookie": "SESSDATA=\(sessdata);",
+                                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                            ]
+                            for i in 0..<users.count {
+                                if !isSelected[i] { continue }
+                                AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(users[i]["UID"]!)!, act: 2, csrf: biliJct), headers: headers).response { _ in }
+                                deletedUserIds.append(Int64(users[i]["UID"]!)!)
+                            }
+                            isMultipleUndoPresented = true
+                        }, label: {
+                            Text("从关注列表中移除")
+                        })
+                    }
+                }
+            }
+        }
         .onAppear {
             pinnedUsers = UserDefaults.standard.stringArray(forKey: "PinnedFollows") ?? [String]()
             if !isLoadedFollows {
                 RefreshNew()
                 isLoadedFollows = true
             }
+        }
+        .toast(isPresenting: $isDeleteUndoPresented, duration: 8.0, tapToDismiss: true) {
+            AlertToast(displayMode: .hud, type: .complete(.accentColor), title: "已将“\(deletedUserName)”从关注列表中移除", subTitle: "轻触以撤销", style: .style(titleFont: .system(size: 13, weight: .semibold), subTitleFont: .system(size: 11)))
+        } onTap: {
+            let headers: HTTPHeaders = [
+                "cookie": "SESSDATA=\(sessdata);",
+                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            ]
+            AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: deletedUserId, act: 1, csrf: biliJct), headers: headers).response { response in
+                debugPrint(response)
+                let json = try! JSON(data: response.data!)
+                let code = json["code"].int!
+                if code == 0 {
+                    undoTipText = "已撤销移除关注"
+                    isUndoCompletePresented = true
+                    nowPage = 1
+                    users.removeAll()
+                    RefreshNew()
+                } else {
+                    AlertKitAPI.present(title: json["message"].string!, icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                }
+            }
+        }
+        .toast(isPresenting: $isUndoCompletePresented, duration: 3.0) {
+            AlertToast(displayMode: .hud, type: .systemImage("arrow.uturn.backward", .accentColor), title: undoTipText)
+        }
+        .toast(isPresenting: $isMultipleUndoPresented, duration: 10.0, tapToDismiss: true) {
+            AlertToast(displayMode: .hud, type: .complete(.accentColor), title: "已将\(deletedUserIds.count)用户从关注列表中移除", subTitle: "轻触以撤销", style: .style(titleFont: .system(size: 13, weight: .semibold), subTitleFont: .system(size: 11)))
+        } onTap: {
+            let headers: HTTPHeaders = [
+                "cookie": "SESSDATA=\(sessdata);",
+                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            ]
+            for uid in deletedUserIds {
+                AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: uid, act: 1, csrf: biliJct), headers: headers).response { _ in }
+            }
+            undoTipText = "已撤销\(deletedUserIds.count)个移除关注"
+            isUndoCompletePresented = true
+            nowPage = 1
+            users.removeAll()
+            RefreshNew()
+            deletedUserIds.removeAll()
         }
     }
     func RefreshNew() {
