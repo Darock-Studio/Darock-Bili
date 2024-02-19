@@ -172,8 +172,10 @@ struct bMessageSendView: View {
                 if deleteAll {
                     messages.removeAll()
                 }
-                for message in respJson["data"]["messages"] {
-                    messages.insert(["SenderID": String(message.1["sender_uid"].int!), "Text": String(message.1["content"].string!.split(separator: ":\"")[1].split(separator: "\"}")[0]).replacingOccurrences(of: "\\n", with: "\n"), "Timestamp": String(message.1["timestamp"].int!)], at: 0)
+                if respJson["data"]["messages"].dictionary != nil {
+                    for message in respJson["data"]["messages"] {
+                        messages.insert(["SenderID": String(message.1["sender_uid"].int ?? dedeUserID), "Text": String((message.1["content"].string ?? "获取失败").split(separator: ":\"")[1].split(separator: "\"}")[0]).replacingOccurrences(of: "\\n", with: "\n"), "Timestamp": String(message.1["timestamp"].int ?? Date.now.timeStamp)], at: 0)
+                    }
                 }
             }
         }
