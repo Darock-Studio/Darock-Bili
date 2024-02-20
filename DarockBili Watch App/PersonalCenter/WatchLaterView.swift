@@ -31,6 +31,20 @@ struct WatchLaterView: View {
             if laters.count != 0 {
                 ForEach(0...laters.count - 1, id: \.self) { i in
                     VideoCard(laters[i])
+                        .swipeActions {
+                            Button(role: .destructive, action: {
+                                let headers: HTTPHeaders = [
+                                    "cookie": "SESSDATA=\(sessdata)",
+                                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                ]
+                                AF.request("https://api.bilibili.com/x/v2/history/toview/del", method: .post, parameters: ["aid": bv2av(bvid: laters[i]["BV"]!), "csrf": biliJct], headers: headers).response { response in
+                                    debugPrint(response)
+                                    tipWithText("已移除", symbol: "checkmark.circle.fill")
+                                }
+                            }, label: {
+                                Image(systemName: "trash.fill")
+                            })
+                        }
                 }
             }
         }
