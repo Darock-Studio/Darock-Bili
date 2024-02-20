@@ -20,10 +20,13 @@ import SwiftUI
 import DarockKit
 import Alamofire
 import SwiftyJSON
+import AuthenticationServices
 #if !os(visionOS)
 import SDWebImageSwiftUI
 #endif
-import AuthenticationServices
+#if os(watchOS)
+import WatchKit
+#endif
 
 struct SearchMainView: View {
     @AppStorage("DedeUserID") var dedeUserID = ""
@@ -139,6 +142,10 @@ struct SearchView: View {
                     Text("Search.type.bangumi").tag(SearchType.bangumi)
                     Text("Search.type.live").tag(SearchType.liveRoom)
                 }
+                #if os(watchOS)
+                .pickerStyle(.navigationLink)
+                .buttonBorderShape(.roundedRectangle(radius: 16))
+                #endif
                 .onChange(of: searchType) { value in
                     NewSearch(keyword: keyword, type: value, clear: true)
                 }

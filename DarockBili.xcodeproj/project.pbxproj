@@ -368,7 +368,6 @@
 		8CA370BF2B824BC500CE0E9E /* SelfQrCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfQrCardView.swift; sourceTree = "<group>"; };
 		8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		8CA370E82B83BB4F00CE0E9E /* MeowBili Vision App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MeowBili Vision App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8CA370EB2B83BB5000CE0E9E /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
 		8CA371332B83BE7D00CE0E9E /* MeowBili Vision App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "MeowBili Vision App.entitlements"; sourceTree = "<group>"; };
 		8CA388A02B78B5D800F5F91F /* BiliFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BiliFont.ttf; sourceTree = "<group>"; };
 		8CA7CBC02B77AC4A008E587F /* MeowBili.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeowBili.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -618,14 +617,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		8CA370EA2B83BB5000CE0E9E /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				8CA370EB2B83BB5000CE0E9E /* RealityKitContent */,
-			);
-			path = Packages;
-			sourceTree = "<group>";
-		};
 		8CA7CBC12B77AC4A008E587F /* MeowBili */ = {
 			isa = PBXGroup;
 			children = (
@@ -838,7 +829,6 @@
 				B4468A142B4FC24A002CCEB2 /* JSONReturnExamples */,
 				B44689D42B4FC15A002CCEB2 /* DarockBili Watch App */,
 				8CA7CBC12B77AC4A008E587F /* MeowBili */,
-				8CA370EA2B83BB5000CE0E9E /* Packages */,
 				B44689CB2B4FC15A002CCEB2 /* Products */,
 				B4468A902B4FC8B7002CCEB2 /* Frameworks */,
 			);
@@ -1628,7 +1618,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 703;
+				CURRENT_PROJECT_VERSION = 704;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1660,7 +1650,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 703;
+				CURRENT_PROJECT_VERSION = 704;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1694,7 +1684,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 703;
+				CURRENT_PROJECT_VERSION = 704;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1740,7 +1730,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 703;
+				CURRENT_PROJECT_VERSION = 704;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1783,7 +1773,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 703;
+				CURRENT_PROJECT_VERSION = 704;
 				DEVELOPMENT_ASSET_PATHS = "DarockBili\\ Watch\\ App/Preview\\ Content";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1818,7 +1808,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 703;
+				CURRENT_PROJECT_VERSION = 704;
 				DEVELOPMENT_ASSET_PATHS = "DarockBili\\ Watch\\ App/Preview\\ Content";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1974,7 +1964,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 703;
+				CURRENT_PROJECT_VERSION = 704;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2007,7 +1997,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 703;
+				CURRENT_PROJECT_VERSION = 704;
 				DEVELOPMENT_ASSET_PATHS = "\"DarockBili Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2040,7 +2030,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 703;
+				CURRENT_PROJECT_VERSION = 704;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				INFOPLIST_KEY_CFBundleDisplayName = DarockBili;
 				MARKETING_VERSION = 1.0.0;
@@ -2056,7 +2046,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 703;
+				CURRENT_PROJECT_VERSION = 704;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				INFOPLIST_KEY_CFBundleDisplayName = DarockBili;
 				MARKETING_VERSION = 1.0.0;
