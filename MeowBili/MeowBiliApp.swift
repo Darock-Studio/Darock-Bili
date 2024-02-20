@@ -126,6 +126,7 @@ struct DarockBili_Watch_AppApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     #endif
     @Environment(\.scenePhase) var scenePhase
+    @AppStorage("IsActived") var isActived = false
     // Screen Time
     @AppStorage("isSleepNotificationOn") var isSleepNotificationOn = false
     @AppStorage("notifyHour") var notifyHour = 0
@@ -202,7 +203,11 @@ struct DarockBili_Watch_AppApp: App {
                         }
                     }
                     #else
-                    ContentView()
+                    if isActived {
+                        ContentView()
+                    } else {
+                        FirstActiveView(isActived: $isActived)
+                    }
                     if shouldShowAppName {
                         VStack {
                             Spacer()

@@ -24,6 +24,7 @@ import SwiftyJSON
 import AuthenticationServices
 
 struct LoginView: View {
+    @Binding var status: String
     @Environment(\.dismiss) var dismiss
     @AppStorage("DedeUserID") var dedeUserID = ""
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
@@ -55,6 +56,11 @@ struct LoginView: View {
     @State var userList3: [Any] = []
     @State var userList4: [Any] = []
     @State var currentStep = 1
+    
+    init(status: Binding<String> = .constant("nil")) {
+        self._status = status
+    }
+    
     var body: some View {
         TabView {
             //--SMS Login--
@@ -203,7 +209,11 @@ struct LoginView: View {
                                             sessdata = String(setCookie.split(separator: "SESSDATA=")[1].split(separator: ";")[0])
                                         }
                                         biliJct = String(setCookie.split(separator: "bili_jct=")[1].split(separator: ";")[0])
-                                        dismiss()
+                                        if status == "nil" {
+                                            dismiss()
+                                        } else {
+                                            status = "true"
+                                        }
                                     } else if json["data"]["status"].int == 1006 {
                                         
                                     } else if json["data"]["status"].int == 1007 {
@@ -271,12 +281,6 @@ struct LoginView: View {
         let challenge: String
         let validate: String
         let seccode: String
-    }
-}
-
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
     }
 }
 

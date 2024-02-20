@@ -77,7 +77,7 @@ struct TermsListView: View {
                     · 本 App 均使用来源于网络的公开信息进行开发。
                     · 本 App 中和B站相关的功能完全免费
                     · 本 App 中所呈现的B站内容来自哔哩哔哩官方。
-                    · 本 App 的开发者、负责人和实际责任人是\(Text("WindowsMEMZ").foregroundColor(Color.accentColor))\n  联系QQ：3245146430
+                    · 本 App 的开发者、负责人和实际责任人是\(Text("WindowsMEMZ").foregroundColor(Color.accentColor))
                     """)
                 Button(action: {
                     isReadTerms = true
