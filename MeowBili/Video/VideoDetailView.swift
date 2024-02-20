@@ -26,7 +26,9 @@ import Alamofire
 import SwiftyJSON
 import AVFoundation
 import CachedAsyncImage
+#if !os(visionOS)
 import SDWebImageSwiftUI
+#endif
 import MobileCoreServices
 
 struct VideoDetailView: View {
@@ -114,6 +116,7 @@ struct VideoDetailView: View {
                     }
                     .focused($isEditingDanmaku)
                     .toolbar {
+                        #if !os(visionOS)
                         ToolbarItemGroup(placement: .keyboard) {
                             ColorPicker("颜色", selection: $danmakuSendColor)
                             Picker("字号", selection: $danmakuSendFontSize) {
@@ -131,6 +134,7 @@ struct VideoDetailView: View {
                                 Text("底部").tag(4)
                             }
                         }
+                        #endif
                     }
                     .frame(width: isEditingDanmaku ? nil : 90)
                     .animation(.easeOut(duration: 0.2), value: isEditingDanmaku)
@@ -251,7 +255,9 @@ struct VideoDetailView: View {
                                         ]
                                         AF.request("https://api.bilibili.com/x/web-interface/archive/like", method: .post, parameters: ["bvid": videoDetails["BV"]!, "like": isLiked ? 2 : 1, "eab_x": 2, "ramval": 0, "source": "web_normal", "ga": 1, "csrf": biliJct], headers: headers).response { response in
                                             debugPrint(response)
+                                            #if !os(visionOS)
                                             isLiked ? AlertKitAPI.present(title: String(localized: "Video.action.canceled"), icon: .done, style: .iOS17AppleMusic, haptic: .success) : AlertKitAPI.present(title: String(localized: "Video.action.liked"), icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                            #endif
                                             isLiked.toggle()
                                         }
                                     }, label: {
@@ -282,7 +288,9 @@ struct VideoDetailView: View {
                                         if !isCoined {
                                             isCoinViewPresented = true
                                         } else {
+                                            #if !os(visionOS)
                                             AlertKitAPI.present(title: "不能取消投币", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                            #endif
                                         }
                                     }, label: {
                                         ZStack {
@@ -480,7 +488,9 @@ struct VideoDetailView: View {
         }
         .navigationTitle("Video")
         .navigationBarTitleDisplayMode(.inline)
+        #if !os(visionOS)
         .scrollDismissesKeyboard(.immediately)
+        #endif
         .onAppear {
             if isDecoded { return } // After user enter a new video then exit, this onAppear method will be re-call
             
@@ -661,15 +671,23 @@ struct VideoDetailView: View {
                                 let json = try JSON(data: response.data ?? Data())
                                 if let code = json["code"].int {
                                     if code == 0 {
+                                        #if !os(visionOS)
                                         AlertKitAPI.present(title: String(localized: "Video.added"), icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                        #endif
                                     } else {
+                                        #if !os(visionOS)
                                         AlertKitAPI.present(title: json["message"].string ?? String(localized: "Video.unkonwn-error"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                                        #endif
                                     }
                                 } else {
+                                    #if !os(visionOS)
                                     AlertKitAPI.present(title: String(localized: "Video.unkonwn-error"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                                    #endif
                                 }
                             } catch {
+                                #if !os(visionOS)
                                 AlertKitAPI.present(title: String(localized: "Video.unkonwn-error"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                                #endif
                             }
                             isMoreMenuPresented = false
                         }
@@ -803,7 +821,9 @@ struct VideoThrowCoinView: View {
                 AF.request("https://api.bilibili.com/x/web-interface/coin/add", method: .post, parameters: BiliVideoCoin(bvid: bvid, multiply: choseCoin, csrf: biliJct), headers: headers).response { response in
                     debugPrint(response)
                     isCoined = true
+                    #if !os(visionOS)
                     AlertKitAPI.present(title: "已投币", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                    #endif
                     dismiss()
                 }
             }, label: {

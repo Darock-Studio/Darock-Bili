@@ -97,10 +97,14 @@ struct DynamicSendView: View {
                                     debugPrint(response)
                                     if let rd = response.data, let json = try? JSON(data: rd) {
                                         if !CheckBApiError(from: json) { return }
+                                        #if !os(visionOS)
                                         AlertKitAPI.present(title: "发送成功", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                        #endif
                                         dismiss()
                                     } else {
+                                        #if !os(visionOS)
                                         AlertKitAPI.present(title: "发送失败,未知错误", icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                                        #endif
                                     }
                                     sendProgressText = ""
                                 }
@@ -174,7 +178,9 @@ struct DynamicSendView: View {
                 upliPtr.advanced(by: currentUploadImageIndex.pointee).pointee = "\(url)||\(convertedImages[currentUploadImageIndex.pointee].size.width)||\(convertedImages[currentUploadImageIndex.pointee].size.height)||\(Double(convertedImages[currentUploadImageIndex.pointee].pngData()!.count) / 1024.0)"
             } else {
                 currentUploadImageIndex.deallocate()
+                #if !os(visionOS)
                 AlertKitAPI.present(title: "上传图片时失败,未知错误", icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                #endif
                 return
             }
             currentUploadImageIndex.pointee++
@@ -219,7 +225,9 @@ struct DynamicSendView: View {
             }
         } else {
             currentUploadImageIndex.deallocate()
+            #if !os(visionOS)
             AlertKitAPI.present(title: "上传图片时失败,未知错误", icon: .error, style: .iOS17AppleMusic, haptic: .error)
+            #endif
         }
     }
     

@@ -22,7 +22,9 @@ import SwiftUI
 import DarockKit
 import Alamofire
 import Foundation
+#if !os(visionOS)
 import SDWebImageSwiftUI
+#endif
 import MobileCoreServices
 import AuthenticationServices
 
@@ -30,6 +32,7 @@ import AuthenticationServices
     NavigationLink(destination: {VideoDetailView(videoDetails: videoDetails).onAppear { onAppear() }}, label: {
         VStack {
             HStack {
+                #if !os(visionOS)
                 WebImage(url: URL(string: videoDetails["Pic"]! + "@200w")!, options: [.progressiveLoad, .scaleDownLargeImages])
                     .placeholder {
                         RoundedRectangle(cornerRadius: 7)
@@ -41,6 +44,27 @@ import AuthenticationServices
                     .scaledToFit()
                     .frame(width: 100)
                     .cornerRadius(7)
+                #else
+                AsyncImage(url: URL(string: videoDetails["Pic"]! + "@200w")!) { phase in
+                    switch phase {
+                    case .empty:
+                        RoundedRectangle(cornerRadius: 7)
+                            .frame(width: 100, height: 60)
+                            .foregroundColor(Color(hex: 0x3D3D3D))
+                            .redacted(reason: .placeholder)
+                    case .success(let image):
+                        image.resizable()
+                    case .failure(let error):
+                        RoundedRectangle(cornerRadius: 7)
+                            .frame(width: 100, height: 60)
+                            .foregroundColor(Color(hex: 0x3D3D3D))
+                            .redacted(reason: .placeholder)
+                    }
+                }
+                .scaledToFit()
+                .frame(width: 100)
+                .cornerRadius(7)
+                #endif
                 Text(videoDetails["Title"]!)
                     .font(.system(size: 14, weight: .bold))
                     .lineLimit(4)
@@ -88,17 +112,25 @@ import AuthenticationServices
                         if action == "Like" {
                             AF.request("https://api.bilibili.com/x/web-interface/archive/like", method: .post, parameters: ["bvid": videoDetails["BV"]!, "like": 1, "eab_x": 2, "ramval": 0, "source": "web_normal", "ga": 1, "csrf": biliJct], headers: headers).response { _ in
                                 if items.count == 1 {
+                                    #if !os(visionOS)
                                     AlertKitAPI.present(title: "已点赞", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                    #endif
                                 } else if item == items.last! {
+                                    #if !os(visionOS)
                                     AlertKitAPI.present(title: "已完成\(items.count)项操作", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                    #endif
                                 }
                             }
                         } else if action == "Coin" {
                             AF.request("https://api.bilibili.com/x/web-interface/coin/add", method: .post, parameters: BiliVideoCoin(bvid: videoDetails["BV"]!, multiply: 1, csrf: biliJct), headers: headers).response { _ in
                                 if items.count == 1 {
+                                    #if !os(visionOS)
                                     AlertKitAPI.present(title: "已投币", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                    #endif
                                 } else if item == items.last! {
+                                    #if !os(visionOS)
                                     AlertKitAPI.present(title: "已完成\(items.count)项操作", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                    #endif
                                 }
                             }
                         } else if action == "Favorite" {
@@ -108,9 +140,13 @@ import AuthenticationServices
                                     if !CheckBApiError(from: respJson) { return }
                                     AF.request("https://api.bilibili.com/x/v3/fav/resource/deal", method: .post, parameters: ["rid": avid, "type": 2, "add_media_ids": respJson["data"]["list"][0]["id"].int ?? 0, "csrf": biliJct], headers: headers).response { _ in
                                         if items.count == 1 {
+                                            #if !os(visionOS)
                                             AlertKitAPI.present(title: "已收藏", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                            #endif
                                         } else if item == items.last! {
+                                            #if !os(visionOS)
                                             AlertKitAPI.present(title: "已完成\(items.count)项操作", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                            #endif
                                         }
                                      }
                                 }
@@ -128,6 +164,7 @@ import AuthenticationServices
     NavigationLink(destination: {BangumiDetailView(bangumiData: bangumiData)}, label: {
         VStack {
             HStack {
+                #if !os(visionOS)
                 WebImage(url: URL(string: bangumiData.cover + "@100w")!, options: [.progressiveLoad, .scaleDownLargeImages])
                     .placeholder {
                         RoundedRectangle(cornerRadius: 7)
@@ -139,6 +176,27 @@ import AuthenticationServices
                     .scaledToFit()
                     .frame(width: 50)
                     .cornerRadius(7)
+                #else
+                AsyncImage(url: URL(string: bangumiData.cover + "@100w")!) { phase in
+                    switch phase {
+                    case .empty:
+                        RoundedRectangle(cornerRadius: 7)
+                            .frame(width: 50, height: 30)
+                            .foregroundColor(Color(hex: 0x3D3D3D))
+                            .redacted(reason: .placeholder)
+                    case .success(let image):
+                        image.resizable()
+                    case .failure(let error):
+                        RoundedRectangle(cornerRadius: 7)
+                            .frame(width: 50, height: 30)
+                            .foregroundColor(Color(hex: 0x3D3D3D))
+                            .redacted(reason: .placeholder)
+                    }
+                }
+                .scaledToFit()
+                .frame(width: 50)
+                .cornerRadius(7)
+                #endif
                 Text(bangumiData.title)
                     .font(.system(size: 14, weight: .bold))
                     .lineLimit(2)
@@ -170,6 +228,7 @@ import AuthenticationServices
     NavigationLink(destination: {LiveDetailView(liveDetails: liveDetails)}, label: {
         VStack {
             HStack {
+                #if !os(visionOS)
                 WebImage(url: URL(string: liveDetails["Cover"]! + "@100w")!, options: [.progressiveLoad, .scaleDownLargeImages])
                     .placeholder {
                         RoundedRectangle(cornerRadius: 7)
@@ -181,6 +240,27 @@ import AuthenticationServices
                     .scaledToFit()
                     .frame(width: 50)
                     .cornerRadius(7)
+                #else
+                AsyncImage(url: URL(string: liveDetails["Cover"]! + "@100w")!) { phase in
+                    switch phase {
+                    case .empty:
+                        RoundedRectangle(cornerRadius: 7)
+                            .frame(width: 50, height: 30)
+                            .foregroundColor(Color(hex: 0x3D3D3D))
+                            .redacted(reason: .placeholder)
+                    case .success(let image):
+                        image.resizable()
+                    case .failure(let error):
+                        RoundedRectangle(cornerRadius: 7)
+                            .frame(width: 50, height: 30)
+                            .foregroundColor(Color(hex: 0x3D3D3D))
+                            .redacted(reason: .placeholder)
+                    }
+                }
+                .scaledToFit()
+                .frame(width: 50)
+                .cornerRadius(7)
+                #endif
                 Text(liveDetails["Title"]!)
                     .font(.system(size: 14, weight: .bold))
                     .lineLimit(2)
@@ -231,8 +311,13 @@ import AuthenticationServices
                             .foregroundColor(.gray)
                     }
                 }
+                #if !os(visionOS)
                 WebImage(url: URL(string: article["Pic"]! + "@100w"), options: [.progressiveLoad])
                     .cornerRadius(4)
+                #else
+                AsyncImage(url: URL(string: article["Pic"]! + "@100w"))
+                    .cornerRadius(4)
+                #endif
             }
         }
     })
@@ -269,6 +354,7 @@ struct zoomable: ViewModifier {
     }
 }
 
+#if !os(visionOS)
 extension Indicator where T == ProgressView<EmptyView, EmptyView> {
     static var activity: Indicator {
         Indicator { isAnimating, progress in
@@ -282,6 +368,7 @@ extension Indicator where T == ProgressView<EmptyView, EmptyView> {
         }
     }
 }
+#endif
 
 struct UIImageTransfer: Transferable {
   let image: UIImage
@@ -345,7 +432,9 @@ struct CopyableView<V: View>: View {
             .contextMenu {
                 Button(action: {
                     UIPasteboard.general.string = content
+                    #if !os(visionOS)
                     AlertKitAPI.present(title: "已复制", subtitle: "简介内容已复制到剪贴板", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                    #endif
                 }, label: {
                     Label("复制", systemImage: "doc.on.doc")
                 })

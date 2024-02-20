@@ -20,7 +20,9 @@ import SwiftUI
 import DarockKit
 import Alamofire
 import SwiftyJSON
+#if !os(visionOS)
 import SDWebImageSwiftUI
+#endif
 
 struct UserDynamicMainView: View {
     @AppStorage("DedeUserID") var dedeUserID = ""
@@ -48,8 +50,13 @@ struct UserDynamicMainView: View {
                         ForEach(0..<dynamics.count, id: \.self) { i in
                             VStack {
                                 HStack {
+                                    #if !os(visionOS)
                                     WebImage(url: URL(string: dynamics[i]["SenderPic"]! as! String + "@30w"), options: [.progressiveLoad])
-                                        .cornerRadius(100)
+                                        .clipShape(Circle())
+                                    #else
+                                    AsyncImage(url: URL(string: dynamics[i]["SenderPic"]! as! String + "@30w"))
+                                        .clipShape(Circle())
+                                    #endif
                                     VStack {
                                         NavigationLink("", isActive: $isSenderDetailsPresented[i], destination: {UserDetailView(uid: dynamics[i]["SenderID"]! as! String)})
                                             .frame(width: 0, height: 0)
@@ -99,6 +106,7 @@ struct UserDynamicMainView: View {
                                 }
                                 if dynamics[i]["Type"]! as! BiliDynamicType == .draw {
                                     if let draws = dynamics[i]["Draws"] as? [[String: String]] {
+                                        #if !os(visionOS)
                                         LazyVGrid(columns: [GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3)), GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3)), GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3))]) {
                                             ForEach(0..<draws.count, id: \.self) { j in
                                                 VStack {
@@ -111,6 +119,30 @@ struct UserDynamicMainView: View {
                                                 }
                                             }
                                         }
+                                        #else
+                                        LazyVGrid(columns: [GridItem(.fixed((globalWindowSize.width - 50) / 3)), GridItem(.fixed((globalWindowSize.width - 50) / 3)), GridItem(.fixed((globalWindowSize.width - 50) / 3))]) {
+                                            ForEach(0..<draws.count, id: \.self) { j in
+                                                VStack {
+                                                    NavigationLink(destination: {ImageViewerView(url: draws[j]["Src"]!)}) {
+                                                        AsyncImage(url: URL(string: draws[j]["Src"]!)) { phase in
+                                                            switch phase {
+                                                            case .empty:
+                                                                Color.clear
+                                                                    .frame(width: 0, height: 0)
+                                                            case .success(let image):
+                                                                image.resizable()
+                                                            case .failure(let error):
+                                                                Color.clear
+                                                                    .frame(width: 0, height: 0)
+                                                            }
+                                                        }
+                                                        .scaledToFit()
+                                                        .cornerRadius(5)
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        #endif
                                     }
                                 } else if dynamics[i]["Type"]! as! BiliDynamicType == .video {
                                     if let archive = dynamics[i]["Archive"] as? [String: String] {
@@ -121,6 +153,7 @@ struct UserDynamicMainView: View {
                                         NavigationLink(destination: {LiveDetailView(liveDetails: liveInfo)}, label: {
                                             VStack {
                                                 HStack {
+                                                    #if !os(visionOS)
                                                     WebImage(url: URL(string: liveInfo["Cover"]! + "@50w")!, options: [.progressiveLoad, .scaleDownLargeImages])
                                                         .placeholder {
                                                             RoundedRectangle(cornerRadius: 7)
@@ -129,6 +162,25 @@ struct UserDynamicMainView: View {
                                                                 .redacted(reason: .placeholder)
                                                         }
                                                         .cornerRadius(7)
+                                                    #else
+                                                    AsyncImage(url: URL(string: liveInfo["Cover"]! + "@50w")!) { phase in
+                                                        switch phase {
+                                                        case .empty:
+                                                            RoundedRectangle(cornerRadius: 7)
+                                                                .frame(width: 50)
+                                                                .foregroundColor(Color(hex: 0x3D3D3D))
+                                                                .redacted(reason: .placeholder)
+                                                        case .success(let image):
+                                                            image
+                                                        case .failure(let error):
+                                                            RoundedRectangle(cornerRadius: 7)
+                                                                .frame(width: 50)
+                                                                .foregroundColor(Color(hex: 0x3D3D3D))
+                                                                .redacted(reason: .placeholder)
+                                                        }
+                                                    }
+                                                    .cornerRadius(7)
+                                                    #endif
                                                     Text(liveInfo["Title"]!)
                                                         .font(.system(size: 14, weight: .bold))
                                                         .lineLimit(2)
@@ -151,8 +203,13 @@ struct UserDynamicMainView: View {
                                             NavigationLink(destination: {DynamicDetailView(dynamicDetails: orig)}, label: {
                                                 VStack {
                                                     HStack {
-                                                        WebImage(url: URL(string: orig["SenderPic"]! as! String + "@30w"), options: [.progressiveLoad])
-                                                            .cornerRadius(100)
+                                                        #if !os(visionOS)
+                                                        WebImage(url: URL(string: dynamics[i]["SenderPic"]! as! String + "@30w"), options: [.progressiveLoad])
+                                                            .clipShape(Circle())
+                                                        #else
+                                                        AsyncImage(url: URL(string: dynamics[i]["SenderPic"]! as! String + "@30w"))
+                                                            .clipShape(Circle())
+                                                        #endif
                                                         VStack {
                                                             NavigationLink("", isActive: $isSenderDetailsPresented[i], destination: {UserDetailView(uid: orig["SenderID"]! as! String)})
                                                                 .frame(width: 0, height: 0)
@@ -197,6 +254,7 @@ struct UserDynamicMainView: View {
                                                     }
                                                     if orig["Type"]! as! BiliDynamicType == .draw {
                                                         if let draws = orig["Draws"] as? [[String: String]] {
+                                                            #if !os(visionOS)
                                                             LazyVGrid(columns: [GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3)), GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3)), GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3))]) {
                                                                 ForEach(0..<draws.count, id: \.self) { j in
                                                                     VStack {
@@ -209,6 +267,30 @@ struct UserDynamicMainView: View {
                                                                     }
                                                                 }
                                                             }
+                                                            #else
+                                                            LazyVGrid(columns: [GridItem(.fixed((globalWindowSize.width - 50) / 3)), GridItem(.fixed((globalWindowSize.width - 50) / 3)), GridItem(.fixed((globalWindowSize.width - 50) / 3))]) {
+                                                                ForEach(0..<draws.count, id: \.self) { j in
+                                                                    VStack {
+                                                                        NavigationLink(destination: {ImageViewerView(url: draws[j]["Src"]!)}) {
+                                                                            AsyncImage(url: URL(string: draws[j]["Src"]!)) { phase in
+                                                                                switch phase {
+                                                                                case .empty:
+                                                                                    Color.clear
+                                                                                        .frame(width: 0, height: 0)
+                                                                                case .success(let image):
+                                                                                    image.resizable()
+                                                                                case .failure(let error):
+                                                                                    Color.clear
+                                                                                        .frame(width: 0, height: 0)
+                                                                                }
+                                                                            }
+                                                                            .scaledToFit()
+                                                                            .cornerRadius(5)
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                            #endif
                                                         }
                                                     } else if orig["Type"]! as! BiliDynamicType == .video {
                                                         if let archive = orig["Archive"] as? [String: String] {
@@ -220,6 +302,7 @@ struct UserDynamicMainView: View {
                                                             NavigationLink(destination: {LiveDetailView(liveDetails: liveInfo)}, label: {
                                                                 VStack {
                                                                     HStack {
+                                                                        #if !os(visionOS)
                                                                         WebImage(url: URL(string: liveInfo["Cover"]! + "@50w")!, options: [.progressiveLoad, .scaleDownLargeImages])
                                                                             .placeholder {
                                                                                 RoundedRectangle(cornerRadius: 7)
@@ -228,6 +311,25 @@ struct UserDynamicMainView: View {
                                                                                     .redacted(reason: .placeholder)
                                                                             }
                                                                             .cornerRadius(7)
+                                                                        #else
+                                                                        AsyncImage(url: URL(string: liveInfo["Cover"]! + "@50w")!) { phase in
+                                                                            switch phase {
+                                                                            case .empty:
+                                                                                RoundedRectangle(cornerRadius: 7)
+                                                                                    .frame(width: 50)
+                                                                                    .foregroundColor(Color(hex: 0x3D3D3D))
+                                                                                    .redacted(reason: .placeholder)
+                                                                            case .success(let image):
+                                                                                image
+                                                                            case .failure(let error):
+                                                                                RoundedRectangle(cornerRadius: 7)
+                                                                                    .frame(width: 50)
+                                                                                    .foregroundColor(Color(hex: 0x3D3D3D))
+                                                                                    .redacted(reason: .placeholder)
+                                                                            }
+                                                                        }
+                                                                        .cornerRadius(7)
+                                                                        #endif
                                                                         Text(liveInfo["Title"]!)
                                                                             .font(.system(size: 14, weight: .bold))
                                                                             .lineLimit(2)

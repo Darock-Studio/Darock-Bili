@@ -21,7 +21,9 @@ import SwiftUI
 import DarockKit
 import Alamofire
 import SwiftyJSON
+#if !os(visionOS)
 import SDWebImageSwiftUI
+#endif
 
 struct CommentsView: View {
     var oid: String
@@ -80,10 +82,27 @@ struct CommentsView: View {
                         ForEach(0...comments.count - 1, id: \.self) { i in
                             VStack {
                                 HStack {
+                                    #if !os(visionOS)
                                     WebImage(url: URL(string: comments[i]["SenderPic"]!))
                                         .resizable()
                                         .frame(width: 35, height: 35)
                                         .clipShape(Circle())
+                                    #else
+                                    AsyncImage(url: URL(string: comments[i]["SenderPic"]!)) { phase in
+                                        switch phase {
+                                        case .empty:
+                                            Circle()
+                                                .redacted(reason: .placeholder)
+                                        case .success(let image):
+                                            image.resizable()
+                                        case .failure(let error):
+                                            Circle()
+                                                .redacted(reason: .placeholder)
+                                        }
+                                    }
+                                    .frame(width: 35, height: 35)
+                                    .clipShape(Circle())
+                                    #endif
                                     VStack {
                                         NavigationLink("", isActive: $isSenderDetailsPresented[i], destination: {UserDetailView(uid: comments[i]["SenderID"]!)})
                                             .frame(width: 0, height: 0)
@@ -302,10 +321,27 @@ struct CommentsView: View {
                                     ForEach(0...replies.count - 1, id: \.self) { i in
                                         VStack {
                                             HStack {
+                                                #if !os(visionOS)
                                                 WebImage(url: URL(string: replies[i]["SenderPic"]!))
                                                     .resizable()
                                                     .frame(width: 35, height: 35)
                                                     .clipShape(Circle())
+                                                #else
+                                                AsyncImage(url: URL(string: replies[i]["SenderPic"]!)) { phase in
+                                                    switch phase {
+                                                    case .empty:
+                                                        Circle()
+                                                            .redacted(reason: .placeholder)
+                                                    case .success(let image):
+                                                        image.resizable()
+                                                    case .failure(let error):
+                                                        Circle()
+                                                            .redacted(reason: .placeholder)
+                                                    }
+                                                }
+                                                .frame(width: 35, height: 35)
+                                                .clipShape(Circle())
+                                                #endif
                                                 VStack {
                                                     NavigationLink("", isActive: $isSenderDetailsPresented[i], destination: {UserDetailView(uid: replies[i]["SenderID"]!)})
                                                         .frame(width: 0, height: 0)
