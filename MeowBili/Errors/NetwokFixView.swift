@@ -452,7 +452,9 @@ public func CheckBApiError(from input: JSON, noTip: Bool = false) -> Bool {
     }
     let msg = errorCodeTextDic[code] ?? (input["message"].string ?? "")
     if !noTip {
+        #if !os(visionOS)
         AlertKitAPI.present(title: msg, icon: .error, style: .iOS17AppleMusic, haptic: .error)
+        #endif
     }
     return false
 }

@@ -21,11 +21,15 @@ import SwiftUI
 import Mixpanel
 import DarockKit
 import SwiftyJSON
-import SDWebImage
 import CoreHaptics
+#if !os(visionOS)
+import SDWebImage
 import SDWebImagePDFCoder
 import SDWebImageSVGCoder
 import SDWebImageWebPCoder
+#else
+import RealityKit
+#endif
 
 //!!!: Debug Setting, Set false Before Release
 var debug = false
@@ -45,6 +49,10 @@ var globalBuvid3 = ""
 var globalBuvid4 = ""
 
 var globalHapticEngine: CHHapticEngine?
+
+#if os(visionOS)
+var globalWindowSize = Size3D()
+#endif
 
 /*
  ::::::::::::::-:=**=========+===++++++++++*%+*%%%%#%%%%%*++#@%%%@@@%%@@@%%%%%%%*+*#****#%%@@@@@@@@@%
@@ -130,12 +138,13 @@ struct DarockBili_Watch_AppApp: App {
     @State var shouldPushVideoView = false
     
     @State var shouldShowAppName = false
-    var body: some Scene {
+    var body: some SwiftUI.Scene {
         WindowGroup {
             if UserDefaults.standard.string(forKey: "NewSignalError") ?? "" != "" {
                 SignalErrorView()
             } else {
                 ZStack {
+                    #if !os(visionOS)
                     ContentView()
                     if shouldShowAppName {
                         VStack {
@@ -153,6 +162,19 @@ struct DarockBili_Watch_AppApp: App {
                         }
                         .ignoresSafeArea()
                     }
+                    #else
+                    GeometryReader3D { proxy3D in
+                        ContentView()
+                            .onAppear {
+                                Task {
+                                    // Delay first - rdar://so?77970699
+                                    // rdar://so?76698516
+                                    try await Task.sleep(nanoseconds: 1_000_000_000)
+                                    globalWindowSize = proxy3D.size
+                                }
+                            }
+                    }
+                    #endif
                 }
                 .onAppear {
                     Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
@@ -180,7 +202,9 @@ struct DarockBili_Watch_AppApp: App {
                     }
                     let sleepTimeCheck = Timer(timeInterval: 60, repeats: true) { timer in
                         if currentHour == notifyHour && currentMinute == notifyMinute && isSleepNotificationOn {
+                            #if !os(visionOS)
                             AlertKitAPI.present(title: String(localized: "Sleep.notification"), icon: .heart, style: .iOS17AppleMusic, haptic: .warning)
+                            #endif
                         }
                     }
                     RunLoop.current.add(timer, forMode: .default)
@@ -269,6 +293,7 @@ struct DarockBili_Watch_AppApp: App {
             case .inactive:
                 shouldShowAppName = false
             case .active:
+                #if !os(visionOS)
                 SDImageCodersManager.shared.addCoder(SDImageWebPCoder.shared)
                 SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)
                 SDImageCodersManager.shared.addCoder(SDImagePDFCoder.shared)
@@ -276,6 +301,7 @@ struct DarockBili_Watch_AppApp: App {
                 SDImageCache.shared.config.shouldCacheImagesInMemory = false
                 SDImageCache.shared.config.shouldUseWeakMemoryCache = true
                 SDImageCache.shared.clearMemory()
+                #endif
                 
                 updateBuvid()
                 

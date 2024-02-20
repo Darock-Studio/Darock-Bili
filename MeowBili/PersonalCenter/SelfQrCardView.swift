@@ -22,8 +22,10 @@ import EFQRCode
 import DarockKit
 import Alamofire
 import SwiftyJSON
+#if !os(visionOS)
 import SDWebImageSwiftUI
 import ScreenshotableView
+#endif
 
 struct SelfQrCardView: View {
     @AppStorage("DedeUserID") var dedeUserID = ""
@@ -36,6 +38,7 @@ struct SelfQrCardView: View {
     @State var qrcodeImg: CGImage?
     var body: some View {
         VStack {
+            #if !os(visionOS)
             ScreenshotableView(shotting: $shotting) { image in
                 UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                 AlertKitAPI.present(title: "已保存", subtitle: "二维码名片已保存到相册", icon: .done, style: .iOS17AppleMusic, haptic: .success)
@@ -68,8 +71,50 @@ struct SelfQrCardView: View {
                 .background(Color(hex: 0xFAFAFD))
                 .padding(.horizontal)
             }
+            #else
+            VStack {
+                HStack {
+                    AsyncImage(url: URL(string: userFaceUrl)) { phase in
+                        switch phase {
+                        case .empty:
+                            Circle()
+                                .frame(width: 50, height: 50)
+                                .redacted(reason: .placeholder)
+                        case .success(let image):
+                            image.resizable()
+                        case .failure(let error):
+                            Circle()
+                                .frame(width: 50, height: 50)
+                                .redacted(reason: .placeholder)
+                        }
+                    }
+                    .frame(width: 50, height: 50)
+                    .clipShape(Circle())
+                    VStack {
+                        Text(username)
+                            .foregroundColor(.black)
+                        Text("UID: \(dedeUserID)")
+                            .foregroundColor(.black)
+                    }
+                    .padding()
+                    Spacer()
+                }
+                ZStack {
+                    Image("QRCard")
+                    if let img = qrcodeImg {
+                        Image(uiImage: UIImage(cgImage: img))
+                            .resizable()
+                            .frame(width: 150, height: 150)
+                            .offset(y: -45)
+                    }
+                }
+            }
+            .background(Color(hex: 0xFAFAFD))
+            .padding(.horizontal)
+            #endif
         }
         .toolbar {
+            #if !os(visionOS)
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {
                     shotting.toggle()
@@ -77,6 +122,7 @@ struct SelfQrCardView: View {
                     Image(systemName: "square.and.arrow.down")
                 })
             }
+            #endif
         }
         .onAppear {
             qrcodeImg = EFQRCode.generate(for: "https://space.bilibili.com/\(dedeUserID)", foregroundColor: Color(hex: 0x2b4785).cgColor!)

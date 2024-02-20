@@ -22,7 +22,9 @@ import DarockKit
 import Alamofire
 import SwiftyJSON
 import CachedAsyncImage
+#if !os(visionOS)
 import SDWebImageSwiftUI
+#endif
 
 struct BangumiDetailView: View {
     public static var willPlayBangumiLink = ""
@@ -118,6 +120,7 @@ struct BangumiDetailView: View {
         var body: some View {
             VStack {
                 Spacer()
+                #if !os(visionOS)
                 WebImage(url: URL(string: bangumiData.cover + "@130w_180h")!, options: [.progressiveLoad, .scaleDownLargeImages])
                     .placeholder {
                         RoundedRectangle(cornerRadius: 13)
@@ -135,6 +138,34 @@ struct BangumiDetailView: View {
                     .onTapGesture {
                         isCoverImageViewPresented = true
                     }
+                #else
+                AsyncImage(url: URL(string: bangumiData.cover + "@130w_180h")!) { phase in
+                    switch phase {
+                    case .empty:
+                        RoundedRectangle(cornerRadius: 13)
+                            .frame(width: 65, height: 90)
+                            .foregroundColor(Color(hex: 0x3D3D3D))
+                            .redacted(reason: .placeholder)
+                    case .success(let image):
+                        image.resizable()
+                    case .failure(let error):
+                        RoundedRectangle(cornerRadius: 13)
+                            .frame(width: 65, height: 90)
+                            .foregroundColor(Color(hex: 0x3D3D3D))
+                            .redacted(reason: .placeholder)
+                    }
+                }
+                .scaledToFit()
+                .frame(width: 65, height: 90)
+                .cornerRadius(13)
+                .shadow(color: .black.opacity(0.5), radius: 5, x: 1, y: 2)
+                .offset(y: 8)
+                .sheet(isPresented: $isCoverImageViewPresented, content: {ImageViewerView(url: bangumiData.cover)})
+                .onTapGesture {
+                    isCoverImageViewPresented = true
+                }
+                #endif
+                
                 Spacer()
                     .frame(height: 20)
                 Marquee {

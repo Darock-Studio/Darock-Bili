@@ -22,7 +22,9 @@ import DarockKit
 import Alamofire
 import SwiftyJSON
 import CachedAsyncImage
+#if !os(visionOS)
 import SDWebImageSwiftUI
+#endif
 
 struct LiveDetailView: View {
     var liveDetails: [String: String]

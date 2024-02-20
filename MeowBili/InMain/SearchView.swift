@@ -20,7 +20,9 @@ import SwiftUI
 import DarockKit
 import Alamofire
 import SwiftyJSON
+#if !os(visionOS)
 import SDWebImageSwiftUI
+#endif
 import AuthenticationServices
 
 struct SearchMainView: View {
@@ -155,8 +157,13 @@ struct SearchView: View {
                             ForEach(0..<users.count, id: \.self) { i in
                                 VStack {
                                     HStack {
+                                        #if !os(visionOS)
                                         WebImage(url: URL(string: users[i]["Pic"]! as! String + "@30w"), options: [.progressiveLoad])
-                                            .cornerRadius(100)
+                                            .clipShape(Circle())
+                                        #else
+                                        AsyncImage(url: URL(string: users[i]["Pic"]! as! String + "@30w"))
+                                            .clipShape(Circle())
+                                        #endif
                                         VStack {
                                             NavigationLink("", isActive: $isUserDetailPresented[i], destination: {UserDetailView(uid: users[i]["ID"]! as! String)})
                                                 .frame(width: 0, height: 0)
@@ -225,8 +232,13 @@ struct SearchView: View {
                                                         .foregroundColor(.gray)
                                                 }
                                             }
+                                            #if !os(visionOS)
                                             WebImage(url: URL(string: articles[i]["Pic"]! + "@60w"), options: [.progressiveLoad])
                                                 .cornerRadius(5)
+                                            #else
+                                            AsyncImage(url: URL(string: articles[i]["Pic"]! + "@60w"))
+                                                .cornerRadius(5)
+                                            #endif
                                         }
                                     }
                                 })

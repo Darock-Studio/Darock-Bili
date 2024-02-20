@@ -24,7 +24,9 @@ import Alamofire
 import SwiftyJSON
 import AVFoundation
 import CachedAsyncImage
+#if !os(visionOS)
 import SDWebImageSwiftUI
+#endif
 
 struct PersonAccountView: View {
     var isSettingsButtonTrailing = false

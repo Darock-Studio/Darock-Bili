@@ -21,7 +21,9 @@ import DarockKit
 import SwiftyJSON
 import Dynamic
 import Alamofire
+#if !os(visionOS)
 import SDWebImageSwiftUI
+#endif
 import CachedAsyncImage
 
 struct MainView: View {

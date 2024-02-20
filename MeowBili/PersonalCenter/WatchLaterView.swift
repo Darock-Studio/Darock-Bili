@@ -43,7 +43,9 @@ struct WatchLaterView: View {
                                     ]
                                     AF.request("https://api.bilibili.com/x/v2/history/toview/del", method: .post, parameters: ["aid": bv2av(bvid: laters[i]["BV"]!), "csrf": biliJct], headers: headers).response { response in
                                         debugPrint(response)
+                                        #if !os(visionOS)
                                         AlertKitAPI.present(title: "已移除", subtitle: "视频已从稍后再看中移除", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                        #endif
                                     }
                                 }, label: {
                                     Image(systemName: "trash.fill")
@@ -108,7 +110,9 @@ struct WatchLaterView: View {
                         ]
                         AF.request("https://api.bilibili.com/x/v2/history/toview/del", method: .post, parameters: ["viewed": true, "csrf": biliJct], headers: headers).response { response in
                             debugPrint(response)
+                            #if !os(visionOS)
                             AlertKitAPI.present(title: "已清除", subtitle: "所有以观看视频已清除", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                            #endif
                             isMoreMenuPresented = false
                         }
                     }, label: {
