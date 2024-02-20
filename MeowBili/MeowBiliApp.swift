@@ -21,11 +21,18 @@ import SwiftUI
 import Mixpanel
 import DarockKit
 import SwiftyJSON
-import SDWebImage
 import CoreHaptics
+#if !os(visionOS)
+import SDWebImage
 import SDWebImagePDFCoder
 import SDWebImageSVGCoder
 import SDWebImageWebPCoder
+#else
+import RealityKit
+#endif
+#if os(watchOS)
+import WatchKit
+#endif
 
 //!!!: Debug Setting, Set false Before Release
 var debug = false
@@ -40,11 +47,19 @@ var isShowMemoryInScreen = false
 
 var isInOfflineMode = false
 
+#if os(watchOS)
+var isInLowBatteryMode = false
+#endif
+
 // BUVID
 var globalBuvid3 = ""
 var globalBuvid4 = ""
 
 var globalHapticEngine: CHHapticEngine?
+
+#if os(visionOS)
+var globalWindowSize = Size3D()
+#endif
 
 /*
  ::::::::::::::-:=**=========+===++++++++++*%+*%%%%#%%%%%*++#@%%%@@@%%@@@%%%%%%%*+*#****#%%@@@@@@@@@%
@@ -105,7 +120,11 @@ var globalHapticEngine: CHHapticEngine?
 */
 @main
 struct DarockBili_Watch_AppApp: App {
+    #if os(watchOS)
+    @WKApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    #else
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    #endif
     @Environment(\.scenePhase) var scenePhase
     // Screen Time
     @AppStorage("isSleepNotificationOn") var isSleepNotificationOn = false
@@ -128,14 +147,61 @@ struct DarockBili_Watch_AppApp: App {
     // Handoff
     @State var handoffVideoDetails = [String: String]()
     @State var shouldPushVideoView = false
-    
+    #if os(watchOS)
+    @State var isMemoryWarningPresented = false
+    #else
     @State var shouldShowAppName = false
-    var body: some Scene {
+    #endif
+    var body: some SwiftUI.Scene {
         WindowGroup {
             if UserDefaults.standard.string(forKey: "NewSignalError") ?? "" != "" {
                 SignalErrorView()
             } else {
                 ZStack {
+                    #if !os(visionOS)
+                    #if os(watchOS)
+                    if isOfflineMode {
+                        OfflineMainView()
+                    } else {
+                        ContentView()
+                    }
+                    VStack {
+                        Spacer()
+                        if #available(watchOS 10, *) {
+                            HStack {
+                                Image(systemName: showTipSymbol)
+                                Text(showTipText)
+                            }
+                            .font(.system(size: 14, weight: .bold))
+                            .frame(width: 110, height: 40)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.1)
+                            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                            .offset(y: tipBoxOffset)
+                            .animation(.easeOut(duration: 0.4), value: tipBoxOffset)
+                        } else {
+                            HStack {
+                                Image(systemName: showTipSymbol)
+                                Text(showTipText)
+                            }
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundColor(.black)
+                            .frame(width: 110, height: 40)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.1)
+                            .background {
+                                Color.white
+                                    .ignoresSafeArea()
+                                    .frame(width: 120, height: 40)
+                                    .cornerRadius(8)
+                                    .foregroundColor(Color(hex: 0xF5F5F5))
+                                    .opacity(0.95)
+                            }
+                            .offset(y: tipBoxOffset)
+                            .animation(.easeOut(duration: 0.4), value: tipBoxOffset)
+                        }
+                    }
+                    #else
                     ContentView()
                     if shouldShowAppName {
                         VStack {
@@ -153,8 +219,29 @@ struct DarockBili_Watch_AppApp: App {
                         }
                         .ignoresSafeArea()
                     }
+                    #endif
+                    #else
+                    GeometryReader3D { proxy3D in
+                        ContentView()
+                            .onAppear {
+                                Task {
+                                    // Delay first - rdar://so?77970699
+                                    // rdar://so?76698516
+                                    try await Task.sleep(nanoseconds: 1_000_000_000)
+                                    globalWindowSize = proxy3D.size
+                                }
+                            }
+                    }
+                    #endif
                 }
+                #if os(watchOS)
+                .sheet(isPresented: $isMemoryWarningPresented, content: {MemoryWarningView()})
+                #endif
                 .onAppear {
+                    #if os(watchOS)
+                    isInLowBatteryMode = UserDefaults.standard.bool(forKey: "IsInLowBatteryMode")
+                    #endif
+                    
                     Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
                         showTipText = pShowTipText
                         showTipSymbol = pShowTipSymbol
@@ -164,6 +251,15 @@ struct DarockBili_Watch_AppApp: App {
                             timer.invalidate()
                         }
                     }
+                    
+                    #if os(watchOS)
+                    Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { timer in
+                        if getMemory() > 240.0 {
+                            isMemoryWarningPresented = true
+                            timer.invalidate()
+                        }
+                    }
+                    #endif
                     
                     Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
                         if isShowMemoryInScreen {
@@ -180,7 +276,9 @@ struct DarockBili_Watch_AppApp: App {
                     }
                     let sleepTimeCheck = Timer(timeInterval: 60, repeats: true) { timer in
                         if currentHour == notifyHour && currentMinute == notifyMinute && isSleepNotificationOn {
+                            #if !os(visionOS)
                             AlertKitAPI.present(title: String(localized: "Sleep.notification"), icon: .heart, style: .iOS17AppleMusic, haptic: .warning)
+                            #endif
                         }
                     }
                     RunLoop.current.add(timer, forMode: .default)
@@ -269,6 +367,7 @@ struct DarockBili_Watch_AppApp: App {
             case .inactive:
                 shouldShowAppName = false
             case .active:
+                #if !os(visionOS)
                 SDImageCodersManager.shared.addCoder(SDImageWebPCoder.shared)
                 SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)
                 SDImageCodersManager.shared.addCoder(SDImagePDFCoder.shared)
@@ -276,8 +375,24 @@ struct DarockBili_Watch_AppApp: App {
                 SDImageCache.shared.config.shouldCacheImagesInMemory = false
                 SDImageCache.shared.config.shouldUseWeakMemoryCache = true
                 SDImageCache.shared.clearMemory()
+                #endif
                 
                 updateBuvid()
+                
+                #if os(watchOS)
+                WKInterfaceDevice.current().isBatteryMonitoringEnabled = true
+                #else
+                if CHHapticEngine.capabilitiesForHardware().supportsHaptics {
+                    do {
+                        globalHapticEngine = try CHHapticEngine()
+                        try globalHapticEngine?.start()
+                    } catch {
+                        print("创建引擎时出现错误： \(error.localizedDescription)")
+                    }
+                }
+                
+                shouldShowAppName = true
+                #endif
                 
                 if isScreenTimeEnabled {
                     if screenTimeCaculateTimer == nil {
@@ -290,17 +405,6 @@ struct DarockBili_Watch_AppApp: App {
                         }
                     }
                 }
-                
-                if CHHapticEngine.capabilitiesForHardware().supportsHaptics {
-                    do {
-                        globalHapticEngine = try CHHapticEngine()
-                        try globalHapticEngine?.start()
-                    } catch {
-                        print("创建引擎时出现错误： \(error.localizedDescription)")
-                    }
-                }
-                
-                shouldShowAppName = true
             @unknown default:
                 break
             }
@@ -308,6 +412,19 @@ struct DarockBili_Watch_AppApp: App {
     }
 }
 
+#if os(watchOS)
+public func tipWithText(_ text: String, symbol: String = "", time: Double = 3.0) {
+    pShowTipText = text
+    pShowTipSymbol = symbol
+    pTipBoxOffset = 7
+    Timer.scheduledTimer(withTimeInterval: time, repeats: false) { timer in
+        pTipBoxOffset = 80
+        timer.invalidate()
+    }
+}
+#endif
+
+#if !os(watchOS)
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         Mixpanel.initialize(token: "37d4aaecc64cae16353c2fe7dbb0513c", trackAutomaticEvents: false)
@@ -315,9 +432,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         //  Wow you see a token there, I'm not forget to hide it because you are no able to
         //  do anything important by this token >_-
         if (UserDefaults.standard.object(forKey: "IsAllowMixpanel") as? Bool) ?? true {
-            Mixpanel.mainInstance().track(event: "Open App", properties: [
-                "System": "iOS"
-            ])
+            Mixpanel.mainInstance().track(event: "Open App")
             if let uid = UserDefaults.standard.string(forKey: "DedeUserId") {
                 Mixpanel.mainInstance().registerSuperPropertiesOnce(["DedeUserId": uid])
             }
@@ -372,6 +487,30 @@ func signalErrorRecord(_ errorNum: Int32, _ errorSignal: String) {
     try! fullString.write(to: URL(string: (urlForDocument[0] as URL).absoluteString + "\(dateStr.replacingOccurrences(of: " ", with: "_").replacingOccurrences(of: "/", with: "-").replacingOccurrences(of: ":", with: "__")).ddf")!, atomically: true, encoding: .utf8)
     UserDefaults.standard.set("\(dateStr).ddf", forKey: "NewSignalError")
 }
+#else
+class AppDelegate: NSObject, WKApplicationDelegate {
+    func applicationDidFinishLaunching() {
+        Mixpanel.initialize(token: "37d4aaecc64cae16353c2fe7dbb0513c")
+        //                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //  Wow you see a token there, I'm not forget to hide it because you are no able to
+        //  do anything important by this token >_-
+        if (UserDefaults.standard.object(forKey: "IsAllowMixpanel") as? Bool) ?? true {
+            Mixpanel.mainInstance().track(event: "Open App")
+            if let uid = UserDefaults.standard.string(forKey: "DedeUserId") {
+                Mixpanel.mainInstance().registerSuperPropertiesOnce(["DedeUserId": uid])
+            }
+        }
+        
+        SDImageCodersManager.shared.addCoder(SDImageWebPCoder.shared)
+        SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)
+        SDImageCodersManager.shared.addCoder(SDImagePDFCoder.shared)
+        SDImageCache.shared.config.maxMemoryCost = 1024 * 1024 * 10
+        SDImageCache.shared.config.shouldCacheImagesInMemory = false
+        SDImageCache.shared.config.shouldUseWeakMemoryCache = true
+        SDImageCache.shared.clearMemory()
+    }
+}
+#endif
 
 public func updateBuvid() {
     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/frontend/finger/spi") { respJson, isSuccess in

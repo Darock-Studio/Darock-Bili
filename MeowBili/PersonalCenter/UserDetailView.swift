@@ -21,7 +21,9 @@ import DarockKit
 import Alamofire
 import SwiftyJSON
 import CachedAsyncImage
+#if !os(visionOS)
 import SDWebImageSwiftUI
+#endif
 import AuthenticationServices
 
 struct UserDetailView: View {
@@ -134,10 +136,14 @@ struct UserDetailView: View {
                                         let json = try! JSON(data: response.data!)
                                         let code = json["code"].int!
                                         if code == 0 {
+                                            #if !os(visionOS)
                                             AlertKitAPI.present(title: isFollowed ? String(localized: "Account.tips.unfollowed") : String(localized: "Account.tips.followed"), icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                            #endif
                                             isFollowed.toggle()
                                         } else {
+                                            #if !os(visionOS)
                                             AlertKitAPI.present(title: json["message"].string!, icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                                            #endif
                                         }
                                     }
                                 }, label: {
@@ -191,9 +197,25 @@ struct UserDetailView: View {
                         }
                         if !vipLabel.isEmpty {
                             HStack {
+                                #if !os(visionOS)
                                 WebImage(url: URL(string: "https://s1.hdslb.com/bfs/seed/jinkela/short/user-avatar/big-vip.svg"))
                                     .resizable()
                                     .frame(width: 20, height: 20)
+                                #else
+                                AsyncImage(url: URL(string: "https://s1.hdslb.com/bfs/seed/jinkela/short/user-avatar/big-vip.svg")) { phase in
+                                    switch phase {
+                                    case .empty:
+                                        Circle()
+                                            .redacted(reason: .placeholder)
+                                    case .success(let image):
+                                        image.resizable()
+                                    case .failure(let error):
+                                        Circle()
+                                            .redacted(reason: .placeholder)
+                                    }
+                                }
+                                .frame(width: 20, height: 20)
+                                #endif
                                 Text(vipLabel)
                                     .font(.system(size: 15))
                                     .bold()

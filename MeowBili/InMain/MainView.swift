@@ -17,12 +17,14 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
-import DarockKit
-import SwiftyJSON
 import Dynamic
+import DarockKit
 import Alamofire
-import SDWebImageSwiftUI
+import SwiftyJSON
 import CachedAsyncImage
+#if !os(visionOS)
+import SDWebImageSwiftUI
+#endif
 
 struct MainView: View {
     @Binding var mainTabSelection: Int
@@ -43,6 +45,7 @@ struct MainView: View {
     @State var userList4: [Any] = []
     @State var isNewUserPresenting = false
     var body: some View {
+        #if !os(watchOS)
         MainViewMain()
             .navigationBarTitleDisplayMode(.large)
             .sheet(isPresented: $isNetworkFixPresented, content: {NetworkFixView()})
@@ -102,8 +105,77 @@ struct MainView: View {
                     }
                 }
             }
+        #else
+        if #available(watchOS 10, *) {
+            MainViewMain()
+                .navigationBarTitleDisplayMode(.large)
+                .sheet(isPresented: $isSearchPresented, content: {SearchMainView()})
+                .sheet(isPresented: $isNetworkFixPresented, content: {NetworkFixView()})
+                .sheet(isPresented: $isLoginPresented, content: {LoginView()})
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button(action: {
+                            isSearchPresented = true
+                        }, label: {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.accentColor)
+                        })
+                        .accessibilityIdentifier("SearchButton")
+                    }
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(action: {
+                            mainTabSelection = 2
+                        }, label: {
+                            if dedeUserID != "" {
+                                CachedAsyncImage(url: URL(string: userFaceUrl + "@30w"))
+                                    .frame(width: 30)
+                                    .clipShape(Circle())
+                                    .matchedGeometryEffect(id: "image", in: imageAnimation)
+                            } else {
+                                Image(systemName: "person")
+                                    .foregroundColor(.accentColor)
+                                    .matchedGeometryEffect(id: "image", in: imageAnimation)
+                            }
+                        })
+                    }
+                }
+                .sheet(isPresented: $isNewUserPresenting, content: {LoginView()})
+                .onAppear {
+                    if username == "" {
+                        getBuvid(url: "https://api.bilibili.com/x/space/wbi/acc/info".urlEncoded()) { buvid3, buvid4, _uuid, resp in
+                            let headers: HTTPHeaders = [
+                                "cookie": "SESSDATA=\(sessdata); innersign=0; buvid3=\(buvid3); b_nut=1704873471; i-wanna-go-back=-1; b_ut=7; b_lsid=9910433CB_18CF260AB89; _uuid=\(_uuid); enable_web_push=DISABLE; header_theme_version=undefined; home_feed_column=4; browser_resolution=3440-1440; buvid4=\(buvid4);",
+                                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                            ]
+                            biliWbiSign(paramEncoded: "mid=\(dedeUserID)".base64Encoded()) { signed in
+                                if let signed {
+                                    debugPrint(signed)
+                                    autoRetryRequestApi("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
+                                        if isSuccess {
+                                            debugPrint(respJson)
+                                            if !CheckBApiError(from: respJson) { return }
+                                            username = respJson["data"]["name"].string ?? ""
+                                            userSign = respJson["data"]["sign"].string ?? ""
+                                            userFaceUrl = respJson["data"]["face"].string ?? "E"
+                                        } else if isShowNetworkFixing {
+                                            isNetworkFixPresented = true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+        } else {
+            MainViewMain(isShowSearchButton: true)
+                .navigationBarTitleDisplayMode(.inline)
+        }
+        #endif
     }
     struct MainViewMain: View {
+        #if os(watchOS)
+        var isShowSearchButton: Bool = false
+        #endif
         @AppStorage("DedeUserID") var dedeUserID = ""
         @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
         @AppStorage("SESSDATA") var sessdata = ""
@@ -160,6 +232,7 @@ struct MainView: View {
                             }
                         }
                     }
+                    #if !os(watchOS)
                     Section {
                         NavigationLink(destination: {SearchMainView()}, label: {
                             HStack {
@@ -169,6 +242,19 @@ struct MainView: View {
                             .foregroundColor(.gray)
                         })
                     }
+                    #else
+                    if isShowSearchButton {
+                        Section {
+                            NavigationLink(destination: {SearchMainView()}, label: {
+                                HStack {
+                                    Image(systemName: "magnifyingglass")
+                                    Text("Home.search")
+                                }
+                                .foregroundColor(.gray)
+                            })
+                        }
+                    }
+                    #endif
                     if videos.count != 0 {
                         Section {
                             ForEach(0...videos.count - 1, id: \.self) { i in
@@ -274,4 +360,3 @@ struct MainView: View {
         }
     }
 }
-

@@ -59,7 +59,11 @@ struct bMessageSendView: View {
                                             }
                                         Spacer(minLength: 5)
                                     }
+                                    #if !os(visionOS)
                                     .frame(width: UIScreen.main.bounds.width - 10)
+                                    #else
+                                    .frame(width: globalWindowSize.width - 10)
+                                    #endif
                                     Spacer()
                                         .frame(width: 15)
                                     Text({ () -> String in
@@ -90,7 +94,11 @@ struct bMessageSendView: View {
                                                 }())
                                             }
                                     }
+                                    #if !os(visionOS)
                                     .frame(width: UIScreen.main.bounds.width - 10)
+                                    #else
+                                    .frame(width: globalWindowSize.width - 10)
+                                    #endif
                                     Spacer()
                                         .frame(width: 15)
                                     Text({ () -> String in

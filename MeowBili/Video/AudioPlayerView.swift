@@ -55,7 +55,11 @@ struct AudioPlayerView: View {
                 }
                 .cornerRadius(10)
                 .scaledToFit()
+                #if !os(visionOS)
                 .frame(width: UIScreen.main.bounds.width - 40)
+                #else
+                .frame(width: globalWindowSize.width - 40)
+                #endif
                 Text(videoDetails["Title"]!)
                     .font(.system(size: 14, weight: .bold))
                     .lineLimit(1)

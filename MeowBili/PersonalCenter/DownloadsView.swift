@@ -22,7 +22,9 @@ import SwiftUI
 import Marquee
 import Alamofire
 import AVFoundation
+#if !os(visionOS)
 import SDWebImageSwiftUI
+#endif
 
 struct DownloadsView: View {
     public static var willPlayVideoPath = ""
@@ -62,6 +64,7 @@ struct DownloadsView: View {
                             isPlayerPresented = true
                         }, label: {
                             HStack {
+                                #if !os(visionOS)
                                 WebImage(url: URL(string: metadatas[i]["Pic"]! + "@100w")!, options: [.progressiveLoad, .scaleDownLargeImages])
                                     .placeholder {
                                         RoundedRectangle(cornerRadius: 7)
@@ -73,6 +76,27 @@ struct DownloadsView: View {
                                     .scaledToFit()
                                     .frame(width: 50)
                                     .cornerRadius(7)
+                                #else
+                                AsyncImage(url: URL(string: metadatas[i]["Pic"]! + "@100w")!) { phase in
+                                    switch phase {
+                                    case .empty:
+                                        RoundedRectangle(cornerRadius: 7)
+                                            .frame(width: 50, height: 30)
+                                            .foregroundColor(Color(hex: 0x3D3D3D))
+                                            .redacted(reason: .placeholder)
+                                    case .success(let image):
+                                        image.resizable()
+                                    case .failure(let error):
+                                        RoundedRectangle(cornerRadius: 7)
+                                            .frame(width: 50, height: 30)
+                                            .foregroundColor(Color(hex: 0x3D3D3D))
+                                            .redacted(reason: .placeholder)
+                                    }
+                                }
+                                .scaledToFit()
+                                .frame(width: 50)
+                                .cornerRadius(7)
+                                #endif
                                 VStack {
                                     Text(metadatas[i]["Title"]!)
                                         .font(.system(size: 14, weight: .bold))
