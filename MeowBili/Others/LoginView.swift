@@ -17,10 +17,10 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
+import EFQRCode
+import Alamofire
 import DarockKit
 import SwiftyJSON
-import Alamofire
-import EFQRCode
 import AuthenticationServices
 
 struct LoginView: View {
@@ -64,7 +64,7 @@ struct LoginView: View {
                         VStack(alignment: .leading) {
                             Label("Login.step1.title", systemImage: "1.circle")
                                 .bold()
-                            //                                .foregroundStyle(currentStep == 1 ? Color.accentColor : Color.primary)
+                            //  .foregroundStyle(currentStep == 1 ? Color.accentColor : Color.primary)
                             HStack {
                                 /* Picker("+\(phoneCode)", selection: $phoneCode) {
                                  ForEach(callNations.indices) { codeIndex in
@@ -90,7 +90,7 @@ struct LoginView: View {
                         VStack(alignment: .leading) {
                             Label("Login.step2.title", systemImage: "2.circle")
                                 .bold()
-                            //                                .foregroundStyle(currentStep == 2 ? Color.accentColor : Color.primary)
+                            //  .foregroundStyle(currentStep == 2 ? Color.accentColor : Color.primary)
                             HStack {
                                 TextField(validate.isEmpty ? "Login.step2.captcha-first" : "Login.step2.code", text: $passwdInput)
                                     .disabled(validate.isEmpty)
@@ -106,21 +106,25 @@ struct LoginView: View {
                                         print(currentStep)
                                     })
                                 Button(action: {
-                                    if validate.isEmpty {
-                                        UIApplication.shared.open(URL(string: "https://darock.top/geetest?gt=\(gt)&challenge=\(challenge)")!)
-                                    } else {
-                                        let headers: HTTPHeaders = [
-                                            "Host": "passport.bilibili.com",
-                                            "Origin": "https://www.bilibili.com",
-                                            "Referer": "https://www.bilibili.com/",
-                                            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
-                                            "Cookie": "browser_resolution=1580-497; FEED_LIVE_VERSION=V8; buvid4=818BA302-8EAC-0630-67AB-BB978A5797AF60982-023042618-ho21%2BqF6LZokzAShrGptM4EHZm2TE4%2FTXmfZyPpzfCnLuUmUckb8wg%3D%3D; buvid_fp=5a716236853dd1e737d439882c685594; header_theme_version=CLOSE; home_feed_column=5; _uuid=15B5A2103-BBC2-9109A-7458-6410C3CF101028B94909infoc; b_lsid=CCF71993_18991563B31; b_ut=7; i-wanna-go-back=-1; innersign=0; b_nut=1690360493; buvid3=6481EDF5-10C43-9593-251E-89210B4A1C10A193894infoc"
-                                        ]
-                                        AF.request("https://passport.bilibili.com/x/passport-login/web/sms/send", method: .post, parameters: BiliSmsCodePost(cid: Int(phoneCode)!, tel: Int(accountInput)!, token: loginToken, challenge: challenge, validate: validate, seccode: seccode), headers: headers).response { response in
-                                            debugPrint(response)
-                                            let json = try! JSON(data: response.data!)
-                                            smsLoginToken = json["data"]["captcha_key"].string!
+                                    if accountInput.count == 11 && !accountInput.contains(" ") {
+                                        if validate.isEmpty {
+                                            UIApplication.shared.open(URL(string: "https://darock.top/geetest?gt=\(gt)&challenge=\(challenge)")!)
+                                        } else {
+                                            let headers: HTTPHeaders = [
+                                                "Host": "passport.bilibili.com",
+                                                "Origin": "https://www.bilibili.com",
+                                                "Referer": "https://www.bilibili.com/",
+                                                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
+                                                "Cookie": "browser_resolution=1580-497; FEED_LIVE_VERSION=V8; buvid4=818BA302-8EAC-0630-67AB-BB978A5797AF60982-023042618-ho21%2BqF6LZokzAShrGptM4EHZm2TE4%2FTXmfZyPpzfCnLuUmUckb8wg%3D%3D; buvid_fp=5a716236853dd1e737d439882c685594; header_theme_version=CLOSE; home_feed_column=5; _uuid=15B5A2103-BBC2-9109A-7458-6410C3CF101028B94909infoc; b_lsid=CCF71993_18991563B31; b_ut=7; i-wanna-go-back=-1; innersign=0; b_nut=1690360493; buvid3=6481EDF5-10C43-9593-251E-89210B4A1C10A193894infoc"
+                                            ]
+                                            AF.request("https://passport.bilibili.com/x/passport-login/web/sms/send", method: .post, parameters: BiliSmsCodePost(cid: Int(phoneCode)!, tel: Int(accountInput)!, token: loginToken, challenge: challenge, validate: validate, seccode: seccode), headers: headers).response { response in
+                                                debugPrint(response)
+                                                let json = try! JSON(data: response.data!)
+                                                smsLoginToken = json["data"]["captcha_key"].string!
+                                            }
                                         }
+                                    } else {
+                                        AlertKitAPI.present(title: "手机号错误", subtitle: "请输入正确的11位手机号", icon: .error, style: .iOS17AppleMusic, haptic: .error)
                                     }
                                 }, label: {
                                     if validate.isEmpty {
