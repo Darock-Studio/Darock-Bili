@@ -904,7 +904,7 @@ struct VideoDetailView: View {
     
     func DecodeVideo() {
         let headers: HTTPHeaders = [
-            "cookie": "SESSDATA=\(sessdata)",
+            "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3); buvid4=\(globalBuvid4)",
             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         ]
         if videoGetterSource == "official" {
