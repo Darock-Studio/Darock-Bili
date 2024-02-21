@@ -17,11 +17,11 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
-import AlertKit
 import DarockKit
 import Alamofire
 import SwiftyJSON
 
+// swiftlint:disable:next type_name
 struct bMessageSendView: View {
     var uid: Int64
     var username: String
@@ -59,10 +59,14 @@ struct bMessageSendView: View {
                                             }
                                         Spacer(minLength: 5)
                                     }
-                                    #if !os(visionOS)
+                                    #if !os(visionOS) && !os(watchOS)
                                     .frame(width: UIScreen.main.bounds.width - 10)
                                     #else
+                                    #if os(visionOS)
                                     .frame(width: globalWindowSize.width - 10)
+                                    #else
+                                    .frame(width: WKInterfaceDevice.current().screenBounds.width - 10)
+                                    #endif
                                     #endif
                                     Spacer()
                                         .frame(width: 15)
@@ -94,10 +98,14 @@ struct bMessageSendView: View {
                                                 }())
                                             }
                                     }
-                                    #if !os(visionOS)
+                                    #if !os(visionOS) && !os(watchOS)
                                     .frame(width: UIScreen.main.bounds.width - 10)
                                     #else
+                                    #if os(visionOS)
                                     .frame(width: globalWindowSize.width - 10)
+                                    #else
+                                    .frame(width: WKInterfaceDevice.current().screenBounds.width - 10)
+                                    #endif
                                     #endif
                                     Spacer()
                                         .frame(width: 15)
@@ -154,7 +162,11 @@ struct bMessageSendView: View {
                                 if json["code"].int! == 0 {
                                     //tipWithText("发送成功", symbol: "checkmark.circle.fill")
                                 } else {
+                                    #if !os(watchOS) && !os(visionOS)
                                     AlertKitAPI.present(title: String(localized: "Direct-message.failed"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                                    #else
+                                    tipWithText(String(localized: "Direct-message.failed"), symbol: "xmark.circle.fill")
+                                    #endif
                                 }
                             }
                         }
@@ -223,9 +235,9 @@ struct bMessageSendView: View {
     }
 }
 
+// swiftlint:disable:next type_name
 struct bMessageSendView_Previews: PreviewProvider {
     static var previews: some View {
         bMessageSendView(uid: 114514, username: "ReX-We")
     }
 }
-

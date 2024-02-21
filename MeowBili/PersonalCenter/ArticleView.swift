@@ -16,11 +16,14 @@
 //
 //===----------------------------------------------------------------------===//
 
-import WebKit
 import SwiftUI
 import DarockKit
 import SwiftSoup
+#if !os(watchOS)
+import WebKit
+#endif
 
+#if !os(watchOS)
 struct ArticleView: View {
     var cvid: String
     var body: some View {
@@ -33,3 +36,4 @@ struct ArticleView_Previews: PreviewProvider {
         ArticleView(cvid: "24554473")
     }
 }
+#endif

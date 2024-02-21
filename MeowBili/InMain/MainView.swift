@@ -44,74 +44,23 @@ struct MainView: View {
     @State var userList3: [Any] = []
     @State var userList4: [Any] = []
     @State var isNewUserPresenting = false
+    #if os(watchOS)
+    @State var isSearchPresented = false
+    #endif
     var body: some View {
         #if !os(watchOS)
         MainViewMain()
             .navigationBarTitleDisplayMode(.large)
-            .sheet(isPresented: $isNetworkFixPresented, content: {NetworkFixView()})
-            .sheet(isPresented: $isLoginPresented, content: {LoginView()})
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    if dedeUserID != "" {
-                        Button(action: {
-                            mainTabSelection = 2
-                        }, label: {
-                            CachedAsyncImage(url: URL(string: userFaceUrl)) { phase in
-                                switch phase {
-                                case .empty:
-                                    Circle()
-                                        .frame(width: 35, height: 35)
-                                        .redacted(reason: .placeholder)
-                                case .success(let image):
-                                    image.resizable()
-                                case .failure(let error):
-                                    Circle()
-                                        .frame(width: 35, height: 35)
-                                        .redacted(reason: .placeholder)
-                                }
-                            }
-                            .frame(width: 35, height: 35)
-                            .clipShape(Circle())
-                            .matchedGeometryEffect(id: "image", in: imageAnimation)
-                        })
-                        .buttonStyle(.borderless)
-                    }
-                }
-            }
-            .sheet(isPresented: $isNewUserPresenting, content: {LoginView()})
-            .onAppear {
-                if username == "" {
-                    getBuvid(url: "https://api.bilibili.com/x/space/wbi/acc/info".urlEncoded()) { buvid3, buvid4, _uuid, resp in
-                    let headers: HTTPHeaders = [
-                        "cookie": "SESSDATA=\(sessdata); innersign=0; buvid3=\(buvid3); b_nut=1704873471; i-wanna-go-back=-1; b_ut=7; b_lsid=9910433CB_18CF260AB89; _uuid=\(_uuid); enable_web_push=DISABLE; header_theme_version=undefined; home_feed_column=4; browser_resolution=3440-1440; buvid4=\(buvid4);",
-                        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                    ]
-                        biliWbiSign(paramEncoded: "mid=\(dedeUserID)".base64Encoded()) { signed in
-                            if let signed {
-                                debugPrint(signed)
-                                autoRetryRequestApi("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
-                                    if isSuccess {
-                                        debugPrint(respJson)
-                                        if !CheckBApiError(from: respJson) { return }
-                                        username = respJson["data"]["name"].string ?? ""
-                                        userSign = respJson["data"]["sign"].string ?? ""
-                                        userFaceUrl = respJson["data"]["face"].string ?? "E"
-                                    } else if isShowNetworkFixing {
-                                        isNetworkFixPresented = true
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            .sheet(isPresented: $isNetworkFixPresented, content: { NetworkFixView() })
+            .sheet(isPresented: $isLoginPresented, content: { LoginView() })
+            .sheet(isPresented: $isNewUserPresenting, content: { LoginView() })
         #else
         if #available(watchOS 10, *) {
             MainViewMain()
                 .navigationBarTitleDisplayMode(.large)
-                .sheet(isPresented: $isSearchPresented, content: {SearchMainView()})
-                .sheet(isPresented: $isNetworkFixPresented, content: {NetworkFixView()})
-                .sheet(isPresented: $isLoginPresented, content: {LoginView()})
+                .sheet(isPresented: $isSearchPresented, content: { SearchMainView() })
+                .sheet(isPresented: $isNetworkFixPresented, content: { NetworkFixView() })
+                .sheet(isPresented: $isLoginPresented, content: { LoginView() })
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Button(action: {
@@ -137,12 +86,13 @@ struct MainView: View {
                                     .matchedGeometryEffect(id: "image", in: imageAnimation)
                             }
                         })
+                        .buttonStyle(.plain)
                     }
                 }
-                .sheet(isPresented: $isNewUserPresenting, content: {LoginView()})
+                .sheet(isPresented: $isNewUserPresenting, content: { LoginView() })
                 .onAppear {
                     if username == "" {
-                        getBuvid(url: "https://api.bilibili.com/x/space/wbi/acc/info".urlEncoded()) { buvid3, buvid4, _uuid, resp in
+                        getBuvid(url: "https://api.bilibili.com/x/space/wbi/acc/info".urlEncoded()) { buvid3, buvid4, _uuid, _ in
                             let headers: HTTPHeaders = [
                                 "cookie": "SESSDATA=\(sessdata); innersign=0; buvid3=\(buvid3); b_nut=1704873471; i-wanna-go-back=-1; b_ut=7; b_lsid=9910433CB_18CF260AB89; _uuid=\(_uuid); enable_web_push=DISABLE; header_theme_version=undefined; home_feed_column=4; browser_resolution=3440-1440; buvid4=\(buvid4);",
                                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
@@ -205,7 +155,7 @@ struct MainView: View {
                             })
                         }
                         if notice != "" {
-                            NavigationLink(destination: {NoticeView()}, label: {
+                            NavigationLink(destination: { NoticeView() }, label: {
                                 Text(notice)
                                     .bold()
                             })
@@ -232,20 +182,10 @@ struct MainView: View {
                             }
                         }
                     }
-                    #if !os(watchOS)
-                    Section {
-                        NavigationLink(destination: {SearchMainView()}, label: {
-                            HStack {
-                                Image(systemName: "magnifyingglass")
-                                Text("Home.search")
-                            }
-                            .foregroundColor(.gray)
-                        })
-                    }
-                    #else
+                    #if os(watchOS)
                     if isShowSearchButton {
                         Section {
-                            NavigationLink(destination: {SearchMainView()}, label: {
+                            NavigationLink(destination: { SearchMainView() }, label: {
                                 HStack {
                                     Image(systemName: "magnifyingglass")
                                     Text("Home.search")
@@ -306,7 +246,7 @@ struct MainView: View {
                     }
                 }
             }
-            .sheet(isPresented: $isNetworkFixPresented, content: {NetworkFixView()})
+            .sheet(isPresented: $isNetworkFixPresented, content: { NetworkFixView() })
         }
         
         func LoadNewVideos(clearWhenFinish: Bool = false) {

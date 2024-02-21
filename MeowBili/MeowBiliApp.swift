@@ -21,7 +21,6 @@ import SwiftUI
 import Mixpanel
 import DarockKit
 import SwiftyJSON
-import CoreHaptics
 #if !os(visionOS)
 import SDWebImage
 import SDWebImagePDFCoder
@@ -32,6 +31,8 @@ import RealityKit
 #endif
 #if os(watchOS)
 import WatchKit
+#else
+import CoreHaptics
 #endif
 
 //!!!: Debug Setting, Set false Before Release
@@ -55,12 +56,15 @@ var isInLowBatteryMode = false
 var globalBuvid3 = ""
 var globalBuvid4 = ""
 
+#if !os(watchOS)
 var globalHapticEngine: CHHapticEngine?
+#endif
 
 #if os(visionOS)
 var globalWindowSize = Size3D()
 #endif
 
+// swiftlint:disable no_c_style_comment
 /*
  ::::::::::::::-:=**=========+===++++++++++*%+*%%%%#%%%%%*++#@%%%@@@%%@@@%%%%%%%*+*#****#%%@@@@@@@@@%
  ::::::::::::::::===========+===++++++++++#@*+%%%%%%%%%%@%*++#@%%@@@@%%@@%%%%%%@%*+********#%@@@@@@@%
@@ -118,6 +122,7 @@ var globalWindowSize = Size3D()
    |
   \/
 */
+// swiftlint:enable no_c_style_comment
 @main
 struct DarockBili_Watch_AppApp: App {
     #if os(watchOS)
@@ -131,11 +136,10 @@ struct DarockBili_Watch_AppApp: App {
     @AppStorage("notifyHour") var notifyHour = 0
     @AppStorage("notifyMinute") var notifyMinute = 0
     @AppStorage("IsScreenTimeEnabled") var isScreenTimeEnabled = true
-    @State var screenTimeCaculateTimer: Timer? = nil
+    @State var screenTimeCaculateTimer: Timer?
     @State var showTipText = ""
     @State var showTipSymbol = ""
     @State var tipBoxOffset: CGFloat = 80
-    @State var isOfflineMode = false
     @State var isLowBatteryMode = false
     // Debug Controls
     @State var isShowingDebugControls = false
@@ -160,11 +164,7 @@ struct DarockBili_Watch_AppApp: App {
                 ZStack {
                     #if !os(visionOS)
                     #if os(watchOS)
-                    if isOfflineMode {
-                        OfflineMainView()
-                    } else {
-                        ContentView()
-                    }
+                    ContentView()
                     VStack {
                         Spacer()
                         if #available(watchOS 10, *) {
@@ -235,7 +235,7 @@ struct DarockBili_Watch_AppApp: App {
                     #endif
                 }
                 #if os(watchOS)
-                .sheet(isPresented: $isMemoryWarningPresented, content: {MemoryWarningView()})
+                .sheet(isPresented: $isMemoryWarningPresented, content: { MemoryWarningView() })
                 #endif
                 .onAppear {
                     #if os(watchOS)
@@ -270,14 +270,16 @@ struct DarockBili_Watch_AppApp: App {
                             timer.invalidate()
                         }
                     }
-                    let timer = Timer(timeInterval: 1, repeats: true) { timer in
+                    let timer = Timer(timeInterval: 1, repeats: true) { _ in
                         currentHour = getCurrentTime().hour
                         currentMinute = getCurrentTime().minute
                     }
-                    let sleepTimeCheck = Timer(timeInterval: 60, repeats: true) { timer in
+                    let sleepTimeCheck = Timer(timeInterval: 60, repeats: true) { _ in
                         if currentHour == notifyHour && currentMinute == notifyMinute && isSleepNotificationOn {
-                            #if !os(visionOS)
+                            #if !os(visionOS) && !os(watchOS)
                             AlertKitAPI.present(title: String(localized: "Sleep.notification"), icon: .heart, style: .iOS17AppleMusic, haptic: .warning)
+                            #else
+                            tipWithText(String(localized: "Sleep.notification"), symbol: "bed.double.fill")
                             #endif
                         }
                     }
@@ -365,7 +367,9 @@ struct DarockBili_Watch_AppApp: App {
             case .background:
                 break
             case .inactive:
+                #if !os(watchOS) && !os(visionOS)
                 shouldShowAppName = false
+                #endif
             case .active:
                 #if !os(visionOS)
                 SDImageCodersManager.shared.addCoder(SDImageWebPCoder.shared)
@@ -412,7 +416,7 @@ struct DarockBili_Watch_AppApp: App {
     }
 }
 
-#if os(watchOS)
+#if os(watchOS) || os(visionOS)
 public func tipWithText(_ text: String, symbol: String = "", time: Double = 3.0) {
     pShowTipText = text
     pShowTipSymbol = symbol
@@ -426,7 +430,7 @@ public func tipWithText(_ text: String, symbol: String = "", time: Double = 3.0)
 
 #if !os(watchOS)
 class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         Mixpanel.initialize(token: "37d4aaecc64cae16353c2fe7dbb0513c", trackAutomaticEvents: false)
         //                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         //  Wow you see a token there, I'm not forget to hide it because you are no able to

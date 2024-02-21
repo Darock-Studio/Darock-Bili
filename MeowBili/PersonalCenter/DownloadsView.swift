@@ -33,11 +33,13 @@ struct DownloadsView: View {
     @State var vRootPath = ""
     var body: some View {
         List {
+            #if os(watchOS)
             if #unavailable(watchOS 10) {
-                NavigationLink(destination: {DownloadingListView()}, label: {
+                NavigationLink(destination: { DownloadingListView() }, label: {
                     Label("Download.list", systemImage: "list.bullet.below.rectangle")
                 })
             }
+            #endif
             if metadatas.count != 0 {
                 ForEach(0...metadatas.count - 1, id: \.self) { i in
                     if metadatas[i]["notGet"] == nil {
@@ -124,13 +126,23 @@ struct DownloadsView: View {
         }
         .navigationTitle("离线缓存")
         .navigationBarTitleDisplayMode(.large)
-        .sheet(isPresented: $isPlayerPresented, content: {OfflineVideoPlayer()})
+        .sheet(isPresented: $isPlayerPresented, content: { OfflineVideoPlayer() })
         .toolbar {
+            #if !os(watchOS)
             ToolbarItem(placement: .topBarTrailing) {
-                NavigationLink(destination: {DownloadingListView()}, label: {
+                NavigationLink(destination: { DownloadingListView() }, label: {
                     Image(systemName: "list.bullet.below.rectangle")
                 })
             }
+            #else
+            if #available(watchOS 10, *) {
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink(destination: { DownloadingListView() }, label: {
+                        Image(systemName: "list.bullet.below.rectangle")
+                    })
+                }
+            }
+            #endif
         }
         .onAppear {
             vRootPath = String(AppFileManager(path: "dlds").GetPath("").path)
@@ -281,7 +293,7 @@ struct DownloadingListView: View {
 }
 
 struct OfflineVideoPlayer: View {
-    var path: String? = nil
+    var path: String?
     @State var timeUpdateTimer: Timer?
     var body: some View {
         let asset = AVAsset(url: URL(fileURLWithPath: path == nil ? DownloadsView.willPlayVideoPath : path!))
@@ -313,4 +325,3 @@ struct DownloadsView_Previews: PreviewProvider {
         DownloadsView()
     }
 }
-

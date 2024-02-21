@@ -44,7 +44,7 @@ struct CommentsView: View {
                             }, label: {
                                 Image(systemName: "square.and.pencil")
                             })
-                            .sheet(isPresented: $isSendCommentPresented, content: {CommentSendView(oid: oid, type: type)})
+                            .sheet(isPresented: $isSendCommentPresented, content: { CommentSendView(oid: oid, type: type) })
                         }
                     }
             } else {
@@ -71,13 +71,26 @@ struct CommentsView: View {
         @State var commentOffsets = [CGFloat]()
         @State var isLoaded = false
         @State var isSendCommentPresented = false
+        @State var isNoMore = false
         @State var presentRepliesGoto = ""
         @State var presentRepliesRootData = [String: String]()
         @State var isCommentRepliesPresented = false
-        @State var isNoMore = false
         var body: some View {
             ScrollView {
                 LazyVStack {
+                    #if os(watchOS)
+                    if #unavailable(watchOS 10) {
+                        Button(action: {
+                            isSendCommentPresented = true
+                        }, label: {
+                            HStack {
+                                Image(systemName: "square.and.pencil")
+                                Text("Comment.send")
+                            }
+                        })
+                        .sheet(isPresented: $isSendCommentPresented, content: { CommentSendView(oid: oid, type: type) })
+                    }
+                    #endif
                     if comments.count != 0 {
                         ForEach(0...comments.count - 1, id: \.self) { i in
                             VStack {
@@ -104,7 +117,7 @@ struct CommentsView: View {
                                     .clipShape(Circle())
                                     #endif
                                     VStack {
-                                        NavigationLink("", isActive: $isSenderDetailsPresented[i], destination: {UserDetailView(uid: comments[i]["SenderID"]!)})
+                                        NavigationLink("", isActive: $isSenderDetailsPresented[i], destination: { UserDetailView(uid: comments[i]["SenderID"]!) })
                                             .frame(width: 0, height: 0)
                                         HStack {
                                             Text(comments[i]["Sender"]!)
@@ -122,6 +135,7 @@ struct CommentsView: View {
                                     isSenderDetailsPresented[i] = true
                                 }
                                 HStack {
+                                    #if !os(watchOS)
                                     CopyableView(comments[i]["Text"]!) {
                                         Text(comments[i]["Text"]!)
                                             .font(.system(size: 16, weight: .bold))
@@ -130,6 +144,14 @@ struct CommentsView: View {
                                                 comments[i].updateValue((comments[i]["isFull"] ?? "false") == "true" ? "false" : "true", forKey: "isFull")
                                             }
                                     }
+                                    #else
+                                    Text(comments[i]["Text"]!)
+                                        .font(.system(size: 16, weight: .bold))
+                                        .lineLimit((comments[i]["isFull"] ?? "false") == "true" ? 1000 : 8)
+                                        .onTapGesture {
+                                            comments[i].updateValue((comments[i]["isFull"] ?? "false") == "true" ? "false" : "true", forKey: "isFull")
+                                        }
+                                    #endif
                                     Spacer()
                                 }
                                 if commentReplies[i].count != 0 {
@@ -218,7 +240,7 @@ struct CommentsView: View {
                     }
                 }
                 .padding(.horizontal)
-                .sheet(isPresented: $isCommentRepliesPresented, content: {CommentRepliesView(avid: id, type: type, goto: $presentRepliesGoto, rootData: $presentRepliesRootData)})
+                .sheet(isPresented: $isCommentRepliesPresented, content: { CommentRepliesView(avid: id, type: type, goto: $presentRepliesGoto, rootData: $presentRepliesRootData) })
             }
             .onAppear {
                 if !isLoaded {
@@ -343,7 +365,7 @@ struct CommentsView: View {
                                                 .clipShape(Circle())
                                                 #endif
                                                 VStack {
-                                                    NavigationLink("", isActive: $isSenderDetailsPresented[i], destination: {UserDetailView(uid: replies[i]["SenderID"]!)})
+                                                    NavigationLink("", isActive: $isSenderDetailsPresented[i], destination: { UserDetailView(uid: replies[i]["SenderID"]!) })
                                                         .frame(width: 0, height: 0)
                                                     HStack {
                                                         Text(replies[i]["Sender"]!)
@@ -518,8 +540,8 @@ struct BiliCommentLike: Codable {
 struct BiliSubmitComment: Codable {
     var type: Int
     let oid: String
-    var root: Int? = nil
-    var parent: Int? = nil
+    var root: Int?
+    var parent: Int?
     let message: String
     let csrf: String
 }
@@ -529,4 +551,3 @@ struct CommentsView_Previews: PreviewProvider {
         CommentsView(oid: "1tV4y1379v")
     }
 }
-

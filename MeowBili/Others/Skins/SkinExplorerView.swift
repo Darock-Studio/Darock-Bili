@@ -24,7 +24,7 @@ struct SkinExplorerView: View {
             MainView()
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
-                        NavigationLink(destination: {SkinChooserView()}, label: {
+                        NavigationLink(destination: { SkinChooserView() }, label: {
                             Image(systemName: "plus")
                         })
                     }
@@ -40,7 +40,7 @@ struct SkinExplorerView: View {
         var body: some View {
             List {
                 if #unavailable(watchOS 10) {
-                    NavigationLink(destination: {SkinChooserView()}, label: {
+                    NavigationLink(destination: { SkinChooserView() }, label: {
                         HStack {
                             Image(systemName: "plus")
                             Text("Skin.add")

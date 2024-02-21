@@ -18,7 +18,7 @@
 
 import Foundation
 
-public func backtrace(thread: Thread)->String{
+public func backtrace(thread: Thread) -> String {
     let name = "Backtrace of : \(thread.description)\n"
     if Thread.current == thread {
         return name +  Thread.callStackSymbols.joined(separator: "\n")
@@ -26,13 +26,13 @@ public func backtrace(thread: Thread)->String{
     let mach = machThread(from: thread)
     return name + backtrace(t: mach)
 }
-public func backtraceMainThread()->String{
+public func backtraceMainThread() -> String {
     return backtrace(thread: Thread.main)
 }
-public func backtraceCurrentThread()->String{
+public func backtraceCurrentThread() -> String {
     return backtrace(thread: Thread.current)
 }
-public func backtraceAllThread()->[String]{
+public func backtraceAllThread() -> [String] {
     var count: mach_msg_type_number_t = 0
     var threads: thread_act_array_t!
     guard task_threads(mach_task_self_, &(threads), &count) == KERN_SUCCESS else {
@@ -46,7 +46,7 @@ public func backtraceAllThread()->[String]{
     return symbols
 }
 
-fileprivate func backtrace(t:thread_t)-> String{
+fileprivate func backtrace(t: thread_t) -> String {
     let maxSize: Int32 = 128
     let addrs = UnsafeMutablePointer<UnsafeMutableRawPointer?>.allocate(capacity: Int(maxSize))
     defer { addrs.deallocate() }
@@ -74,7 +74,7 @@ fileprivate func backtrace_symbols(_ stack: UnsafePointer<UnsafeMutableRawPointe
 /**
     这里主要利用了Thread 和 pThread 共用一个Name的特性，找到对应 thread的内核线程thread_t
     但是主线程不行，主线程设置Name无效.
- */
+*/
 public var main_thread_t: mach_port_t?
 fileprivate func machThread(from thread: Thread) -> thread_t {
     var count: mach_msg_type_number_t = 0
@@ -101,7 +101,7 @@ fileprivate func machThread(from thread: Thread) -> thread_t {
     for i in 0..<count {
         let machThread = threads[Int(i)]
         if let p_thread = pthread_from_mach_thread_np(machThread) {
-            var name: [Int8] = Array<Int8>(repeating: 0, count: 128)
+            var name: [Int8] = Array<Int8>(repeating: 0, count: 128) // swiftlint:disable:this syntactic_sugar
             pthread_getname_np(p_thread, &name, name.count)
             if thread.name == String(cString: name) {
                 return machThread
@@ -110,4 +110,3 @@ fileprivate func machThread(from thread: Thread) -> thread_t {
     }
     return mach_thread_self()
 }
-
