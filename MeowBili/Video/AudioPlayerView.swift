@@ -40,6 +40,7 @@ struct AudioPlayerView: View {
     @State var nowPlayTimeTimer: Timer?
     var body: some View {
         VStack {
+            #if !os(watchOS)
             VStack {
                 AsyncImage(url: URL(string: videoDetails["Pic"]!)) { phase in
                     switch phase {
@@ -48,7 +49,10 @@ struct AudioPlayerView: View {
                             .redacted(reason: .placeholder)
                     case .success(let image):
                         image.resizable()
-                    case .failure(let error):
+                    case .failure:
+                        RoundedRectangle(cornerRadius: 10)
+                            .redacted(reason: .placeholder)
+                    @unknown default:
                         RoundedRectangle(cornerRadius: 10)
                             .redacted(reason: .placeholder)
                     }
@@ -106,11 +110,151 @@ struct AudioPlayerView: View {
                 })
                 .buttonStyle(.borderedProminent)
             }
+            #else
+            if #available(watchOS 10, *) {
+                VStack {
+                    AsyncImage(url: URL(string: videoDetails["Pic"]! + "@110w_85h"))
+                        .cornerRadius(10)
+                    Text(videoDetails["Title"]!)
+                        .font(.system(size: 14, weight: .bold))
+                        .lineLimit(1)
+                        .padding(.vertical, 7)
+                        .padding(.horizontal, 20)
+                }
+                .containerBackground(for: .navigation) {
+                    ZStack {
+                        CachedAsyncImage(url: URL(string: videoDetails["Pic"]!)) { phase in
+                            switch phase {
+                            case .empty:
+                                Color.black
+                            case .success(let image):
+                                image
+                                    .onAppear {
+                                        backgroundPicOpacity = 1.0
+                                    }
+                            case .failure:
+                                Color.black
+                            @unknown default:
+                                Color.black
+                            }
+                        }
+                        .blur(radius: 20)
+                        .opacity(backgroundPicOpacity)
+                        .animation(.easeOut(duration: 1.2), value: backgroundPicOpacity)
+                        Color.black
+                            .opacity(0.4)
+                    }
+                }
+                .toolbar {
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        Button(action: {
+                            let behaviorCase = AudioPlayerBehavior(rawValue: audioPlayBehavior)!
+                            switch behaviorCase {
+                            case .singleLoop:
+                                audioPlayBehavior = AudioPlayerBehavior.pauseWhenFinish.rawValue
+                            case .pauseWhenFinish:
+                                audioPlayBehavior = AudioPlayerBehavior.singleLoop.rawValue
+                            case .listLoop:
+                                audioPlayBehavior = AudioPlayerBehavior.singleLoop.rawValue
+                            case .exitWhenFinish:
+                                audioPlayBehavior = AudioPlayerBehavior.singleLoop.rawValue
+                            }
+                            RefreshPlayerBehavior(player: audioPlayer, playerItem: playerItem)
+                        }, label: {
+                            Image(systemName: { () -> String in
+                                let behaviorCase = AudioPlayerBehavior(rawValue: audioPlayBehavior)!
+                                switch behaviorCase {
+                                case .singleLoop:
+                                    return "repeat.1"
+                                case .pauseWhenFinish:
+                                    return "pause"
+                                case .listLoop:
+                                    return "repeat"
+                                case .exitWhenFinish:
+                                    return "rectangle.portrait.and.arrow.forward"
+                                }
+                            }())
+                        })
+                        Button(action: {
+                            isPlaying.toggle()
+                            if isPlaying {
+                                audioPlayer.play()
+                            } else {
+                                audioPlayer.pause()
+                            }
+                        }, label: {
+                            Image(systemName: isPlaying ? "pause.fill" : "play.fill")
+                        })
+                        .controlSize(.large)
+                        VolumeControlView()
+                            .controlSize(.regular)
+                    }
+                }
+            } else {
+                VStack {
+                    AsyncImage(url: URL(string: videoDetails["Pic"]! + "@110w_85h"))
+                        .cornerRadius(10)
+                    Text(videoDetails["Title"]!)
+                        .font(.system(size: 14, weight: .bold))
+                        .lineLimit(1)
+                        .padding(.vertical, 7)
+                        .padding(.horizontal, 20)
+                    Text(videoDetails["Title"]!)
+                        .font(.system(size: 14, weight: .bold))
+                        .lineLimit(1)
+                        .padding(.vertical, 7)
+                        .padding(.horizontal, 20)
+                    Button(action: {
+                        let behaviorCase = AudioPlayerBehavior(rawValue: audioPlayBehavior)!
+                        switch behaviorCase {
+                        case .singleLoop:
+                            audioPlayBehavior = AudioPlayerBehavior.pauseWhenFinish.rawValue
+                        case .pauseWhenFinish:
+                            audioPlayBehavior = AudioPlayerBehavior.singleLoop.rawValue
+                        case .listLoop:
+                            audioPlayBehavior = AudioPlayerBehavior.singleLoop.rawValue
+                        case .exitWhenFinish:
+                            audioPlayBehavior = AudioPlayerBehavior.singleLoop.rawValue
+                        }
+                        RefreshPlayerBehavior(player: audioPlayer, playerItem: playerItem)
+                    }, label: {
+                        Image(systemName: { () -> String in
+                            let behaviorCase = AudioPlayerBehavior(rawValue: audioPlayBehavior)!
+                            switch behaviorCase {
+                            case .singleLoop:
+                                return "repeat.1"
+                            case .pauseWhenFinish:
+                                return "pause"
+                            case .listLoop:
+                                return "repeat"
+                            case .exitWhenFinish:
+                                return "rectangle.portrait.and.arrow.forward"
+                            }
+                        }())
+                    })
+                    Button(action: {
+                        isPlaying.toggle()
+                        if isPlaying {
+                            audioPlayer.play()
+                        } else {
+                            audioPlayer.pause()
+                        }
+                    }, label: {
+                        Image(systemName: isPlaying ? "pause.fill" : "play.fill")
+                    })
+                    VolumeControlView()
+                }
+            }
+            #endif
         }
         .onAppear {
             // Background Session
             do {
+                #if !os(watchOS)
                 try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.allowAirPlay, .mixWithOthers, .allowBluetooth])
+                #else
+                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers])
+                #endif
                 try AVAudioSession.sharedInstance().setActive(true)
             } catch {
                 print(error)
@@ -123,25 +267,25 @@ struct AudioPlayerView: View {
             let cover = UIImage(data: try! Data(contentsOf: URL(string: videoDetails["Pic"]!)!))!
             NowPlayingExtension.setPlayingInfoTitle(videoDetails["Title"]!, artist: videoDetails["UP"]!, artwork: cover)
             
-            MPRemoteCommandCenter.shared().playCommand.addTarget { event in
+            MPRemoteCommandCenter.shared().playCommand.addTarget { _ in
                 if !isPlaying {
                     isPlaying.toggle()
                     audioPlayer.play()
                 }
                 return .success
             }
-            MPRemoteCommandCenter.shared().pauseCommand.addTarget { event in
+            MPRemoteCommandCenter.shared().pauseCommand.addTarget { _ in
                 if isPlaying {
                     isPlaying.toggle()
                     audioPlayer.pause()
                 }
                 return .success
             }
-            MPRemoteCommandCenter.shared().seekForwardCommand.addTarget { event in
+            MPRemoteCommandCenter.shared().seekForwardCommand.addTarget { _ in
                 audioPlayer.seek(to: CMTime(seconds: audioPlayer.currentTime().seconds + 15, preferredTimescale: 1))
                 return .success
             }
-            MPRemoteCommandCenter.shared().seekBackwardCommand.addTarget { event in
+            MPRemoteCommandCenter.shared().seekBackwardCommand.addTarget { _ in
                 audioPlayer.seek(to: CMTime(seconds: audioPlayer.currentTime().seconds - 15, preferredTimescale: 1))
                 return .success
             }

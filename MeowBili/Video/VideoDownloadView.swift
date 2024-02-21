@@ -27,7 +27,7 @@ var videoDownloadRequests = [DownloadRequest]()
 struct VideoDownloadView: View {
     var bvid: String
     var videoDetails: [String: String]
-    public static var downloadLink: String? = nil
+    public static var downloadLink: String?
     @Environment(\.dismiss) var dismiss
     @AppStorage("DedeUserID") var dedeUserID = ""
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
@@ -50,7 +50,7 @@ struct VideoDownloadView: View {
                         }
                     }
                     Section {
-                        NavigationLink(destination: {DownloadingListView()}, label: {
+                        NavigationLink(destination: { DownloadingListView() }, label: {
                             HStack {
                                 Text("Download.title")
                                 Spacer()

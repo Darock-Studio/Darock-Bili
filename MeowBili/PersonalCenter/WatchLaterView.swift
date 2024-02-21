@@ -43,8 +43,10 @@ struct WatchLaterView: View {
                                     ]
                                     AF.request("https://api.bilibili.com/x/v2/history/toview/del", method: .post, parameters: ["aid": bv2av(bvid: laters[i]["BV"]!), "csrf": biliJct], headers: headers).response { response in
                                         debugPrint(response)
-                                        #if !os(visionOS)
+                                        #if !os(visionOS) && !os(watchOS)
                                         AlertKitAPI.present(title: "已移除", subtitle: "视频已从稍后再看中移除", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                        #else
+                                        tipWithText("已移除", symbol: "checkmark.circle.fill")
                                         #endif
                                     }
                                 }, label: {
@@ -56,10 +58,11 @@ struct WatchLaterView: View {
             }
             .navigationTitle("稍后再看")
             .navigationBarTitleDisplayMode(.large)
-            .onDrop(of: [kUTTypeData as String], isTargeted: nil) { items in
+            #if !os(watchOS)
+            .onDrop(of: [UTType.data.identifier], isTargeted: nil) { items in
                 PlayHaptic(sharpness: 0.05, intensity: 0.5)
                 for item in items {
-                    item.loadDataRepresentation(forTypeIdentifier: kUTTypeData as String) { (data, error) in
+                    item.loadDataRepresentation(forTypeIdentifier: UTType.data.identifier) { (data, _) in
                         if let data = data, let dict = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [String: String] {
                             if dict["BV"] != nil {
                                 laters.insert(dict, at: 0)
@@ -74,8 +77,10 @@ struct WatchLaterView: View {
                 }
                 return true
             }
+            #endif
         }
         .toolbar {
+            #if !os(watchOS)
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {
                     isMoreMenuPresented = true
@@ -83,6 +88,17 @@ struct WatchLaterView: View {
                     Image(systemName: "ellipsis.circle")
                 })
             }
+            #else
+            if #available(watchOS 10, *) {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                        isMoreMenuPresented = true
+                    }, label: {
+                        Image(systemName: "ellipsis.circle")
+                    })
+                }
+            }
+            #endif
         }
         .onAppear {
             let headers: HTTPHeaders = [
@@ -110,8 +126,10 @@ struct WatchLaterView: View {
                         ]
                         AF.request("https://api.bilibili.com/x/v2/history/toview/del", method: .post, parameters: ["viewed": true, "csrf": biliJct], headers: headers).response { response in
                             debugPrint(response)
-                            #if !os(visionOS)
-                            AlertKitAPI.present(title: "已清除", subtitle: "所有以观看视频已清除", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                            #if !os(visionOS) && !os(watchOS)
+                            AlertKitAPI.present(title: "已清除", subtitle: "所有已观看视频已清除", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                            #else
+                            tipWithText("已清除", symbol: "checkmark.circle.fill")
                             #endif
                             isMoreMenuPresented = false
                         }

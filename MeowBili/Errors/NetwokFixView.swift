@@ -46,7 +46,7 @@ struct NetworkFixView: View {
                                 Text("Troubleshoot.fine")
                                     .bold()
                             }
-                            NavigationLink(destination: {FeedbackView()}, label: {
+                            NavigationLink(destination: { FeedbackView() }, label: {
                                 VStack(alignment: .leading) {
                                     Text("Troubleshoot.fine.weird")
                                     Text("Troubleshoot.feedback")
@@ -58,17 +58,17 @@ struct NetworkFixView: View {
                             Text("Troubleshoot.problems-found")
                                 .bold()
                             if networkState == 2 {
-                                NavigationLink(destination: {networkProblemDetailsView()}, label: {
+                                NavigationLink(destination: { NetworkProblemDetailsView() }, label: {
                                     Text("Troubleshoot.problems.internet")
                                 })
                             }
                             if darockAPIState == 2 || darockAPIState == 4 {
-                                NavigationLink(destination: {darockAPIProblemDetailsView()}, label: {
+                                NavigationLink(destination: { DarockAPIProblemDetailsView() }, label: {
                                     Text(darockAPIState == 2 ? "Troubleshoot.problems.darock-api.unavailable" : "Troubleshoot.problems.darock-api.invalid-return")
                                 })
                             }
                             if bilibiliAPIState == 2 {
-                                NavigationLink(destination: {bilibiliAPIProblemDetailsView()}, label: {
+                                NavigationLink(destination: { BilibiliAPIProblemDetailsView() }, label: {
                                     Text("Troubleshoot.problems.bilibili-api.unavailable")
                                 })
                             }
@@ -317,7 +317,7 @@ struct NetworkFixView: View {
     }
 }
 
-struct networkProblemDetailsView: View {
+struct NetworkProblemDetailsView: View {
     var body: some View {
         List {
             Section {
@@ -338,7 +338,7 @@ struct networkProblemDetailsView: View {
     }
 }
 
-struct darockAPIProblemDetailsView: View {
+struct DarockAPIProblemDetailsView: View {
     var body: some View {
         NavigationStack {
             List {
@@ -357,7 +357,7 @@ struct darockAPIProblemDetailsView: View {
     }
 }
 
-struct bilibiliAPIProblemDetailsView: View {
+struct BilibiliAPIProblemDetailsView: View {
     var body: some View {
         List {
             Section {
@@ -452,8 +452,10 @@ public func CheckBApiError(from input: JSON, noTip: Bool = false) -> Bool {
     }
     let msg = errorCodeTextDic[code] ?? (input["message"].string ?? "")
     if !noTip {
-        #if !os(visionOS)
+        #if !os(visionOS) && !os(watchOS)
         AlertKitAPI.present(title: msg, icon: .error, style: .iOS17AppleMusic, haptic: .error)
+        #else
+        tipWithText(msg, symbol: "xmark.circle.fill")
         #endif
     }
     return false

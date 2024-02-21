@@ -30,51 +30,36 @@ import SDWebImageSwiftUI
 
 struct PersonAccountView: View {
     var isSettingsButtonTrailing = false
-    @AppStorage("UsingSkin") var usingSkin = ""
-    @AppStorage("IsSkinNoBlur") var isSkinNoBlur = false
     var body: some View {
         NavigationStack {
+            #if os(watchOS)
+            if #available(watchOS 10, *) {
+                MainView()
+                    .toolbar {
+                        if isSettingsButtonTrailing {
+                            ToolbarItem(placement: .topBarTrailing) {
+                                NavigationLink(destination: { SettingsView() }, label: {
+                                    Image(systemName: "gear")
+                                        .foregroundColor(.accentColor)
+                                })
+                                .accessibility(identifier: "AppSettingsButton")
+                            }
+                        } else {
+                            ToolbarItem(placement: .topBarLeading) {
+                                NavigationLink(destination: { SettingsView() }, label: {
+                                    Image(systemName: "gear")
+                                        .foregroundColor(.accentColor)
+                                })
+                                .accessibility(identifier: "AppSettingsButton")
+                            }
+                        }
+                    }
+            } else {
+                MainView(isShowSettingsButton: true)
+            }
+            #else
             MainView(isShowSettingsButton: true)
-                .toolbar {
-//                        ToolbarItem(placement: .topBarTrailing) {
-//                            NavigationLink(destination: {SkinExplorerView()}, label: {
-//                                Image(systemName: "paintbrush")
-//                                    .foregroundColor(.accentColor)
-//                            })
-//                        }
-                }
-//                    .containerBackground(for: .navigation) {
-//                        if usingSkin != "" {
-//                            let playerItem = AVPlayerItem(url: AppFileManager(path: "skin/\(usingSkin)").GetFilePath(name: "head_myself_mp4_bg.mp4"))
-//                            let player = AVPlayer(playerItem: playerItem)
-//                            var finishObserver: AnyCancellable?
-//                            ZStack {
-//                                VideoPlayer(player: player)
-//                                    .ignoresSafeArea()
-//                                    .scaleEffect(1.5)
-//                                    .onAppear {
-//                                        finishObserver = NotificationCenter.default
-//                                            .publisher(for: .AVPlayerItemDidPlayToEndTime, object: playerItem)
-//                                            .sink { _ in
-//                                                player.seek(to: CMTime.zero)
-//                                                player.play()
-//                                            }
-//
-//                                        debugPrint(AppFileManager(path: "skin/\(usingSkin)").GetFilePath(name: "head_myself_mp4_bg.mp4"))
-//                                        player.play()
-//                                    }
-//                                    .onDisappear {
-//                                        finishObserver?.cancel()
-//                                    }
-//                                if !isSkinNoBlur {
-//                                    Color.black
-//                                        .ignoresSafeArea()
-//                                        .opacity(0.4)
-//                                }
-//                            }
-//                            .blur(radius: isSkinNoBlur ? 0 : 16)
-//                        }
-//                    }
+            #endif
         }
     }
     
@@ -100,12 +85,11 @@ struct PersonAccountView: View {
         @State var isNewUserPresenting = false
         var body: some View {
             List {
-                //VStack {
                     if sessdata == "" {
-                        NavigationLink(destination: {LoginView()}, label: {
+                        NavigationLink(destination: { LoginView() }, label: {
                             Label("User.tap-to-login", systemImage: "rectangle.and.pencil.and.ellipsis")
                         })
-                        Button(action: {isUserSwitchPresented = true}, label: {
+                        Button(action: { isUserSwitchPresented = true }, label: {
                             HStack {
                                 HStack {
                                     Image(systemName: "person.2.badge.key.fill")
@@ -118,7 +102,7 @@ struct PersonAccountView: View {
                         })
                         .sheet(isPresented: $isUserSwitchPresented, content: {
                             List {
-                                if #available(watchOS 10.0, *) {} else {
+                                if #unavailable(watchOS 10.0) {
                                     Button(action: {
                                         isNewUserPresenting = true
                                     }, label: {
@@ -189,48 +173,66 @@ struct PersonAccountView: View {
                             userList3 = UserDefaults.standard.array(forKey: "userList3") ?? []
                             userList4 = UserDefaults.standard.array(forKey: "userList4") ?? []
                         }
-                        .sheet(isPresented: $isNewUserPresenting, content: {LoginView()})
+                        .sheet(isPresented: $isNewUserPresenting, content: { LoginView() })
                     } else {
-                        NavigationLink(destination: {UserDetailView(uid: dedeUserID)}, label: {
+                        NavigationLink(destination: { UserDetailView(uid: dedeUserID) }, label: {
                             HStack {
                                 if userFaceUrl != "" {
                                     CachedAsyncImage(url: URL(string: userFaceUrl)) { phase in
                                         switch phase {
                                         case .empty:
                                             Circle()
-                                                .frame(width: 60, height: 60)
                                                 .redacted(reason: .placeholder)
                                         case .success(let image):
                                             image.resizable()
-                                        case .failure(let error):
+                                        case .failure:
                                             Circle()
-                                                .frame(width: 60, height: 60)
+                                                .redacted(reason: .placeholder)
+                                        @unknown default:
+                                            Circle()
                                                 .redacted(reason: .placeholder)
                                         }
                                     }
+                                    #if !os(watchOS)
                                     .frame(width: 60, height: 60)
+                                    #else
+                                    .frame(width: 30, height: 30)
+                                    #endif
                                     .clipShape(Circle())
                                     .matchedGeometryEffect(id: "image", in: imageAnimation)
                                 } else {
                                     Image("Placeholder")
                                         .resizable()
+                                    #if !os(watchOS)
                                         .frame(width: 60, height: 60)
+                                    #else
+                                        .frame(width: 28, height: 28)
+                                    #endif
                                         .redacted(reason: .placeholder)
-                                        .cornerRadius(100)
+                                        .clipShape(Circle())
                                 }
                                 VStack {
                                     if username != "" {
                                         Text(username)
+                                        #if !os(watchOS)
                                             .font(.system(size: 20))
+                                        #else
+                                            .font(.system(size: 15))
+                                        #endif
                                     } else {
                                         Text("UsernamePlaceholder")
+                                        #if !os(watchOS)
                                             .font(.system(size: 20))
+                                        #else
+                                            .font(.system(size: 15))
+                                        #endif
                                             .redacted(reason: .placeholder)
                                     }
                                 }
                             }
                         })
-                        NavigationLink(destination: {SelfQrCardView()}, label: {
+                        #if !os(watchOS)
+                        NavigationLink(destination: { SelfQrCardView() }, label: {
                             HStack {
                                 HStack {
                                     Image(systemName: "qrcode")
@@ -242,7 +244,8 @@ struct PersonAccountView: View {
                             }
                         })
                         .buttonBorderShape(.roundedRectangle(radius: 13))
-                        Button(action: {isUserSwitchPresented = true}, label: {
+                        #endif
+                        Button(action: { isUserSwitchPresented = true }, label: {
                             HStack {
                                 HStack {
                                     Image(systemName: "person.2.badge.key.fill")
@@ -253,10 +256,10 @@ struct PersonAccountView: View {
                                 Spacer()
                             }
                         })
-                        .sheet(isPresented: $isNewUserPresenting, content: {LoginView()})
+                        .sheet(isPresented: $isNewUserPresenting, content: { LoginView() })
                         .sheet(isPresented: $isUserSwitchPresented, content: {
                             List {
-                                if #available(watchOS 10.0, *) {} else {
+                                if #unavailable(watchOS 10.0) {
                                     Button(action: {
                                         isNewUserPresenting = true
                                     }, label: {
@@ -321,104 +324,103 @@ struct PersonAccountView: View {
                             userList3 = UserDefaults.standard.array(forKey: "userList3") ?? []
                             userList4 = UserDefaults.standard.array(forKey: "userList4") ?? []
                         }
-                            Group {
-                                Section {
-                                    NavigationLink(destination: {FollowListView(viewUserId: dedeUserID)}, label: {
+                        Group {
+                            Section {
+                                NavigationLink(destination: { FollowListView(viewUserId: dedeUserID) }, label: {
+                                    HStack {
                                         HStack {
-                                            HStack {
-                                                Image(systemName: "person.2.fill")
-                                                    .foregroundColor(.accentColor)
-                                                    .offset(x: -3)
-                                                Text("User.subcribed-accounts")
-                                                    .offset(x: -6)
-                                            }
-                                            .font(.system(size: 16))
-                                            Spacer()
+                                            Image(systemName: "person.2.fill")
+                                                .foregroundColor(.accentColor)
+                                                .offset(x: -3)
+                                            Text("User.subcribed-accounts")
+                                                .offset(x: -6)
                                         }
-                                    })
-                                    .buttonBorderShape(.roundedRectangle(radius: 13))
-                                    NavigationLink(destination: {DownloadsView()}, label: {
-                                        HStack {
-                                            HStack {
-                                                Image(systemName: "square.and.arrow.down.fill")
-                                                    .foregroundColor(.accentColor)
-                                                Text("User.offline-cache")
-                                            }
-                                            .font(.system(size: 16))
-                                            Spacer()
-                                        }
-                                    })
-                                    .buttonBorderShape(.roundedRectangle(radius: 13))
-                                    NavigationLink(destination: {FavoriteView()}, label: {
-                                        HStack {
-                                            HStack {
-                                                Image(systemName: "star.fill")
-                                                    .foregroundColor(.accentColor)
-                                                Text("User.favorites")
-                                            }
-                                            .font(.system(size: 16))
-                                            Spacer()
-                                        }
-                                    })
-                                    .buttonBorderShape(.roundedRectangle(radius: 13))
-                                    NavigationLink(destination: {HistoryView()}, label: {
-                                        HStack {
-                                            HStack {
-                                                Image(systemName: "clock.arrow.circlepath")
-                                                    .foregroundColor(.accentColor)
-                                                Text("User.histories")
-                                            }
-                                            .font(.system(size: 16))
-                                            Spacer()
-                                        }
-                                    })
-                                    .buttonBorderShape(.roundedRectangle(radius: 13))
-                                    NavigationLink(destination: {WatchLaterView()}, label: {
-                                        HStack {
-                                            HStack {
-                                                Image(systemName: "memories")
-                                                    .foregroundColor(.accentColor)
-                                                Text("User.watch-later")
-                                            }
-                                            .font(.system(size: 16))
-                                            Spacer()
-                                        }
-                                    })
-                                    .buttonBorderShape(.roundedRectangle(radius: 13))
-                                }
-                                if isShowSettingsButton {
-                                    Section {
-                                        NavigationLink(destination: {SettingsView()}, label: {
-                                            HStack {
-                                                HStack {
-                                                    Image(systemName: "gear")
-                                                        .foregroundColor(.accentColor)
-                                                    Text("Settings")
-                                                }
-                                                .font(.system(size: 16))
-                                                Spacer()
-                                            }
-                                        })
+                                        .font(.system(size: 16))
+                                        Spacer()
                                     }
+                                })
+                                .buttonBorderShape(.roundedRectangle(radius: 13))
+                                NavigationLink(destination: { DownloadsView() }, label: {
+                                    HStack {
+                                        HStack {
+                                            Image(systemName: "square.and.arrow.down.fill")
+                                                .foregroundColor(.accentColor)
+                                            Text("User.offline-cache")
+                                        }
+                                        .font(.system(size: 16))
+                                        Spacer()
+                                    }
+                                })
+                                .buttonBorderShape(.roundedRectangle(radius: 13))
+                                NavigationLink(destination: { FavoriteView() }, label: {
+                                    HStack {
+                                        HStack {
+                                            Image(systemName: "star.fill")
+                                                .foregroundColor(.accentColor)
+                                            Text("User.favorites")
+                                        }
+                                        .font(.system(size: 16))
+                                        Spacer()
+                                    }
+                                })
+                                .buttonBorderShape(.roundedRectangle(radius: 13))
+                                NavigationLink(destination: { HistoryView() }, label: {
+                                    HStack {
+                                        HStack {
+                                            Image(systemName: "clock.arrow.circlepath")
+                                                .foregroundColor(.accentColor)
+                                            Text("User.histories")
+                                        }
+                                        .font(.system(size: 16))
+                                        Spacer()
+                                    }
+                                })
+                                .buttonBorderShape(.roundedRectangle(radius: 13))
+                                NavigationLink(destination: { WatchLaterView() }, label: {
+                                    HStack {
+                                        HStack {
+                                            Image(systemName: "memories")
+                                                .foregroundColor(.accentColor)
+                                            Text("User.watch-later")
+                                        }
+                                        .font(.system(size: 16))
+                                        Spacer()
+                                    }
+                                })
+                                .buttonBorderShape(.roundedRectangle(radius: 13))
+                            }
+                            if isShowSettingsButton {
+                                Section {
+                                    NavigationLink(destination: { SettingsView() }, label: {
+                                        HStack {
+                                            HStack {
+                                                Image(systemName: "gear")
+                                                    .foregroundColor(.accentColor)
+                                                Text("Settings")
+                                            }
+                                            .font(.system(size: 16))
+                                            Spacer()
+                                        }
+                                    })
                                 }
                             }
-                            .navigationTitle("About-me")
-                            .navigationBarTitleDisplayMode(.large)
-                        .onAppear {
-                            getAccountInfos()
                         }
-                        .sheet(isPresented: $isNetworkFixPresented, content: {NetworkFixView()})
                     }
-                //}
             }
+            .navigationTitle("About-me")
+            .navigationBarTitleDisplayMode(.large)
+            .onAppear {
+                getAccountInfos()
+            }
+            .sheet(isPresented: $isNetworkFixPresented, content: { NetworkFixView() })
         }
         func getAccountInfos() {
             if username == "" {
-                getBuvid(url: "https://api.bilibili.com/x/space/wbi/acc/info".urlEncoded()) { buvid3, buvid4, _uuid, resp in
-                let headers: HTTPHeaders = [
-                    "cookie": "SESSDATA=\(sessdata); innersign=0; buvid3=\(buvid3); b_nut=1704873471; i-wanna-go-back=-1; b_ut=7; b_lsid=9910433CB_18CF260AB89; _uuid=\(_uuid); enable_web_push=DISABLE; header_theme_version=undefined; home_feed_column=4; browser_resolution=3440-1440; buvid4=\(buvid4);",
-                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                ]
+                getBuvid(url: "https://api.bilibili.com/x/space/wbi/acc/info".urlEncoded()) { buvid3, buvid4, _uuid, _ in
+                    let headers: HTTPHeaders = [
+                        "cookie": "SESSDATA=\(sessdata); innersign=0; buvid3=\(buvid3); b_nut=1704873471; i-wanna-go-back=-1; b_ut=7; b_lsid=9910433CB_18CF260AB89; _uuid=\(_uuid); enable_web_push=DISABLE; header_theme_version=undefined; home_feed_column=4; browser_resolution=3440-1440; buvid4=\(buvid4);",
+                        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                    ]
                     biliWbiSign(paramEncoded: "mid=\(dedeUserID)".base64Encoded()) { signed in
                         if let signed {
                             debugPrint(signed)

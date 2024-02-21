@@ -17,19 +17,25 @@
 //===----------------------------------------------------------------------===//
 
 import UIKit
-import WebKit
 import SwiftUI
 import DarockKit
 import Alamofire
 import Foundation
+import MobileCoreServices
+import AuthenticationServices
 #if !os(visionOS)
 import SDWebImageSwiftUI
 #endif
-import MobileCoreServices
-import AuthenticationServices
+#if os(watchOS)
+import WatchKit
+#else
+import WebKit
+#endif
 
-@ViewBuilder func VideoCard(_ videoDetails: [String: String], onAppear: @escaping () -> Void = {}) -> some View {
-    NavigationLink(destination: {VideoDetailView(videoDetails: videoDetails).onAppear { onAppear() }}, label: {
+#if !os(watchOS)
+@ViewBuilder
+func VideoCard(_ videoDetails: [String: String], onAppear: @escaping () -> Void = {}) -> some View {
+    NavigationLink(destination: { VideoDetailView(videoDetails: videoDetails).onAppear { onAppear() } }, label: {
         VStack {
             HStack {
                 #if !os(visionOS)
@@ -93,15 +99,15 @@ import AuthenticationServices
         var cpdDetail = videoDetails
         cpdDetail.updateValue("archive", forKey: "Type")
         let itemData = try? NSKeyedArchiver.archivedData(withRootObject: cpdDetail, requiringSecureCoding: false)
-        let provider = NSItemProvider(item: itemData as NSSecureCoding?, typeIdentifier: kUTTypeData as String)
+        let provider = NSItemProvider(item: itemData as NSSecureCoding?, typeIdentifier: UTType.data.identifier)
         return provider
     }
-    .onDrop(of: [kUTTypeData as String], isTargeted: nil) { items in
+    .onDrop(of: [UTType.data.identifier], isTargeted: nil) { items in
         if (UserDefaults.standard.object(forKey: "IsUseExtHaptic") as? Bool) ?? true {
             PlayHaptic(sharpness: 0.05, intensity: 0.5)
         }
         for item in items {
-            item.loadDataRepresentation(forTypeIdentifier: kUTTypeData as String) { (data, error) in
+            item.loadDataRepresentation(forTypeIdentifier: UTType.data.identifier) { (data, _) in
                 if let data = data, let dict = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [String: String] {
                     if let action = dict["VideoAction"] {
                         let headers: HTTPHeaders = [
@@ -148,7 +154,7 @@ import AuthenticationServices
                                             AlertKitAPI.present(title: "已完成\(items.count)项操作", icon: .done, style: .iOS17AppleMusic, haptic: .success)
                                             #endif
                                         }
-                                     }
+                                    }
                                 }
                             }
                         }
@@ -160,8 +166,9 @@ import AuthenticationServices
     }
 }
 
-@ViewBuilder func BangumiCard(_ bangumiData: BangumiData) -> some View {
-    NavigationLink(destination: {BangumiDetailView(bangumiData: bangumiData)}, label: {
+@ViewBuilder
+func BangumiCard(_ bangumiData: BangumiData) -> some View {
+    NavigationLink(destination: { BangumiDetailView(bangumiData: bangumiData) }, label: {
         VStack {
             HStack {
                 #if !os(visionOS)
@@ -224,8 +231,9 @@ import AuthenticationServices
     .buttonBorderShape(.roundedRectangle(radius: 14))
 }
 
-@ViewBuilder func LiveCard(_ liveDetails: [String: String]) -> some View {
-    NavigationLink(destination: {LiveDetailView(liveDetails: liveDetails)}, label: {
+@ViewBuilder
+func LiveCard(_ liveDetails: [String: String]) -> some View {
+    NavigationLink(destination: { LiveDetailView(liveDetails: liveDetails) }, label: {
         VStack {
             HStack {
                 #if !os(visionOS)
@@ -281,8 +289,9 @@ import AuthenticationServices
     .buttonBorderShape(.roundedRectangle(radius: 14))
 }
 
-@ViewBuilder func ArticleCard(_ article: [String: String]) -> some View {
-    NavigationLink(destination: {ArticleView(cvid: article["CV"]!)}, label: {
+@ViewBuilder
+func ArticleCard(_ article: [String: String]) -> some View {
+    NavigationLink(destination: { ArticleView(cvid: article["CV"]!) }, label: {
         VStack {
             HStack {
                 Text(article["Title"]!)
@@ -323,7 +332,7 @@ import AuthenticationServices
     })
 }
 
-struct zoomable: ViewModifier {
+struct Zoomable: ViewModifier {
     @AppStorage("MaxmiumScale") var maxmiumScale = 6.0
     @State var scale: CGFloat = 1.0
     @State var offset = CGSize.zero
@@ -353,7 +362,176 @@ struct zoomable: ViewModifier {
                 }
     }
 }
+#else
+@ViewBuilder
+func VideoCard(_ videoDetails: [String: String]) -> some View {
+    NavigationLink(destination: { VideoDetailView(videoDetails: videoDetails) }, label: {
+        VStack {
+            HStack {
+                WebImage(url: URL(string: videoDetails["Pic"]! + "@100w")!, options: [.progressiveLoad, .scaleDownLargeImages])
+                    .placeholder {
+                        RoundedRectangle(cornerRadius: 7)
+                            .frame(width: 50, height: 30)
+                            .foregroundColor(Color(hex: 0x3D3D3D))
+                            .redacted(reason: .placeholder)
+                    }
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 50)
+                    .cornerRadius(7)
+                Text(videoDetails["Title"]!)
+                    .font(.system(size: 14, weight: .bold))
+                    .lineLimit(2)
+                    .multilineTextAlignment(.leading)
+                Spacer()
+            }
+            HStack {
+                Image(systemName: "play.circle")
+                Text(videoDetails["View"]!.shorter())
+                    .offset(x: -3)
+                Image(systemName: "person")
+                Text(videoDetails["UP"]!)
+                    .offset(x: -3)
+                Spacer()
+            }
+            .lineLimit(1)
+            .font(.system(size: 11))
+            .foregroundColor(.gray)
+        }
+    })
+    .buttonBorderShape(.roundedRectangle(radius: 14))
+}
 
+@ViewBuilder
+func BangumiCard(_ bangumiData: BangumiData) -> some View {
+    NavigationLink(destination: { BangumiDetailView(bangumiData: bangumiData) }, label: {
+        VStack {
+            HStack {
+                WebImage(url: URL(string: bangumiData.cover + "@100w")!, options: [.progressiveLoad, .scaleDownLargeImages])
+                    .placeholder {
+                        RoundedRectangle(cornerRadius: 7)
+                            .frame(width: 50, height: 30)
+                            .foregroundColor(Color(hex: 0x3D3D3D))
+                            .redacted(reason: .placeholder)
+                    }
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 50)
+                    .cornerRadius(7)
+                Text(bangumiData.title)
+                    .font(.system(size: 14, weight: .bold))
+                    .lineLimit(2)
+                Spacer()
+            }
+            HStack {
+                if let score = bangumiData.score {
+                    Image(systemName: "star.fill")
+                    Text(score.score ~ 1)
+                        .offset(x: -3)
+                }
+                if let style = bangumiData.style {
+                    Image(systemName: "sparkles")
+                    Text(style)
+                        .lineLimit(1)
+                        .offset(x: -3)
+                }
+                Spacer()
+            }
+            .lineLimit(1)
+            .font(.system(size: 11))
+            .foregroundColor(.gray)
+        }
+    })
+    .buttonBorderShape(.roundedRectangle(radius: 14))
+}
+
+@ViewBuilder
+func LiveCard(_ liveDetails: [String: String]) -> some View {
+    NavigationLink(destination: { LiveDetailView(liveDetails: liveDetails) }, label: {
+        VStack {
+            HStack {
+                WebImage(url: URL(string: liveDetails["Cover"]! + "@100w")!, options: [.progressiveLoad, .scaleDownLargeImages])
+                    .placeholder {
+                        RoundedRectangle(cornerRadius: 7)
+                            .frame(width: 50, height: 30)
+                            .foregroundColor(Color(hex: 0x3D3D3D))
+                            .redacted(reason: .placeholder)
+                    }
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 50)
+                    .cornerRadius(7)
+                Text(liveDetails["Title"]!)
+                    .font(.system(size: 14, weight: .bold))
+                    .lineLimit(2)
+                    .multilineTextAlignment(.leading)
+                Spacer()
+            }
+            HStack {
+                Image(systemName: "tag")
+                Text(liveDetails["Type"]!)
+                    .offset(x: -3)
+                Spacer()
+            }
+            .lineLimit(1)
+            .font(.system(size: 11))
+            .foregroundColor(.gray)
+        }
+    })
+    .buttonBorderShape(.roundedRectangle(radius: 14))
+}
+
+struct VolumeControlView: WKInterfaceObjectRepresentable {
+    typealias WKInterfaceObjectType = WKInterfaceVolumeControl
+    
+    
+    func makeWKInterfaceObject(context: WKInterfaceObjectRepresentableContext<VolumeControlView>) -> WKInterfaceVolumeControl {
+        // Return the interface object that the view displays.
+        return WKInterfaceVolumeControl(origin: .local)
+    }
+    
+    func updateWKInterfaceObject(_ map: WKInterfaceVolumeControl, context: WKInterfaceObjectRepresentableContext<VolumeControlView>) {
+        
+    }
+}
+
+struct Zoomable: ViewModifier {
+    @AppStorage("MaxmiumScale") var maxmiumScale = 6.0
+    @State var scale: CGFloat = 1.0
+    @State var offset = CGSize.zero
+    @State var lastOffset = CGSize.zero
+    func body(content: Content) -> some View {
+            content
+                .scaleEffect(self.scale)
+                .focusable()
+                .digitalCrownRotation($scale, from: 0.5, through: maxmiumScale, by: 0.02, sensitivity: .low, isHapticFeedbackEnabled: true)
+                .offset(x: offset.width, y: offset.height)
+                .gesture(
+                    DragGesture()
+                        .onChanged { gesture in
+                            offset = CGSize(width: gesture.translation.width + lastOffset.width, height: gesture.translation.height + lastOffset.height)
+                        }
+                        .onEnded { _ in
+                            lastOffset = offset
+                        }
+                )
+                .onDisappear {
+                    offset = CGSize.zero
+                    lastOffset = CGSize.zero
+                }
+                .onChange(of: scale) { value in
+                    if value < 2.0 {
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            offset = CGSize.zero
+                            lastOffset = CGSize.zero
+                        }
+                    }
+                }
+    }
+}
+#endif
+
+// swiftlint:disable unused_closure_parameter
 #if !os(visionOS)
 extension Indicator where T == ProgressView<EmptyView, EmptyView> {
     static var activity: Indicator {
@@ -369,6 +547,7 @@ extension Indicator where T == ProgressView<EmptyView, EmptyView> {
     }
 }
 #endif
+// swiftlint:enable unused_closure_parameter
 
 struct UIImageTransfer: Transferable {
   let image: UIImage
@@ -386,10 +565,11 @@ struct UIImageTransfer: Transferable {
   }
 }
 
+#if !os(watchOS)
 struct WebView: UIViewRepresentable {
     let url: URL
     
-    func makeUIView(context: Context) -> WKWebView  {
+    func makeUIView(context: Context) -> WKWebView {
         let webView = WKWebView()
         webView.load(URLRequest(url: url))
         return webView
@@ -400,16 +580,14 @@ struct WebView: UIViewRepresentable {
 
 @usableFromInline
 struct TextSelectView: View {
-    @usableFromInline
-    var text: String
+    @usableFromInline var text: String
     
     @usableFromInline
     init(text: String) {
         self.text = text
     }
     
-    @usableFromInline
-    var body: some View {
+    @usableFromInline var body: some View {
         VStack {
             TextEditor(text: .constant(text))
                 .padding()
@@ -451,9 +629,11 @@ struct CopyableView<V: View>: View {
             })
     }
 }
+#endif
 
 extension View {
-    @usableFromInline func onPressChange(_ action: @escaping (Bool) -> Void) -> some View {
+    @usableFromInline
+    func onPressChange(_ action: @escaping (Bool) -> Void) -> some View {
         self.buttonStyle(ButtonStyleForPressAction(pressAction: action))
     }
 }
@@ -467,3 +647,23 @@ private struct ButtonStyleForPressAction: ButtonStyle {
     }
 }
 
+extension Binding {
+    // From - rdar://so?64655458
+    func onUpdate(_ closure: @escaping () -> Void) -> Binding<Value> {
+        Binding(get: {
+            wrappedValue
+        }, set: { newValue in
+            wrappedValue = newValue
+            closure()
+        })
+    }
+    func onUpdate(_ closure: @escaping (_ oldValue: Value, _ newValue: Value) -> Void) -> Binding<Value> {
+        Binding(get: {
+            wrappedValue
+        }, set: { newValue in
+            let oldValue = wrappedValue
+            wrappedValue = newValue
+            closure(oldValue, newValue)
+        })
+    }
+}

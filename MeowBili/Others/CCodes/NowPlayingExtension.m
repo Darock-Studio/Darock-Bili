@@ -23,6 +23,7 @@
 @implementation NowPlayingExtension: NSObject
 
 +(void) setPlayingInfoTitle: (NSString *) title artist: (NSString *) artist artwork: (UIImage *) artwork {
+    #if TARGET_OS_IOS
     AVAudioSession *session = [AVAudioSession sharedInstance];
     [session setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionAllowAirPlay error:nil];
     [session setActive:true error:nil];
@@ -34,6 +35,7 @@
     MPMediaItemArtwork *relArtwork = [[MPMediaItemArtwork alloc] initWithBoundsSize:artwork.size requestHandler:^(CGSize _){ return artwork; }];
     [info setValue:relArtwork forKey:MPMediaItemPropertyArtwork];
     MPNowPlayingInfoCenter.defaultCenter.nowPlayingInfo = info;
+    #endif
 }
 
 @end

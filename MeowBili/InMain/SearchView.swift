@@ -29,6 +29,9 @@ import WatchKit
 #endif
 
 struct SearchMainView: View {
+    #if !os(watchOS)
+    var isSearchKeyboardFocused: FocusState<Bool>.Binding
+    #endif
     @AppStorage("DedeUserID") var dedeUserID = ""
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
@@ -38,79 +41,90 @@ struct SearchMainView: View {
     @State var searchHistory = [String]()
     @State var suggestions = [String]()
     var body: some View {
-        NavigationStack {
-            List {
-                Section {
-                    VStack {
-                        NavigationLink("", destination: SearchView(keyword: searchText), isActive: $isSearchPresented)
-                            .frame(width: 0, height: 0)
-                            .hidden()
-                        TextField("Search.\(Image(systemName: "magnifyingglass"))", text: $searchText)
-                            .submitLabel(.search)
-                            .onSubmit {
-                                isSearchPresented = true
-                                if searchText != (searchHistory.first ?? "") {
-                                    UserDefaults.standard.set([searchText] + searchHistory, forKey: "SearchHistory")
-                                }
+        List {
+            Section {
+                VStack {
+                    NavigationLink("", destination: SearchView(keyword: searchText), isActive: $isSearchPresented)
+                        .frame(width: 0, height: 0)
+                        .hidden()
+                    TextField("Search.\(Image(systemName: "magnifyingglass"))", text: $searchText)
+                        .submitLabel(.search)
+                    #if !os(watchOS)
+                        .focused(isSearchKeyboardFocused)
+                    #endif
+                        .onSubmit {
+                            isSearchPresented = true
+                            if searchText != (searchHistory.first ?? "") {
+                                UserDefaults.standard.set([searchText] + searchHistory, forKey: "SearchHistory")
                             }
-                            .onDisappear {
-                                searchText = ""
-                            }
-                            .onChange(of: searchText) { value in
-                                if value != "" {
-                                    let headers: HTTPHeaders = [
-                                        "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3);",
-                                        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                                    ]
-                                    DarockKit.Network.shared.requestJSON("https://s.search.bilibili.com/main/suggest", headers: headers) { respJson, isSuccess in
-                                        if isSuccess {
-                                            suggestions.removeAll()
-                                            for result in respJson["result"]["tag"] {
-                                                if let v = result.1["value"].string {
-                                                    suggestions.append(v)
-                                                }
+                        }
+                        .onDisappear {
+                            searchText = ""
+                        }
+                        .onChange(of: searchText) { value in
+                            if value != "" {
+                                let headers: HTTPHeaders = [
+                                    "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3);",
+                                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                ]
+                                DarockKit.Network.shared.requestJSON("https://s.search.bilibili.com/main/suggest", headers: headers) { respJson, isSuccess in
+                                    if isSuccess {
+                                        suggestions.removeAll()
+                                        for result in respJson["result"]["tag"] {
+                                            if let v = result.1["value"].string {
+                                                suggestions.append(v)
                                             }
                                         }
                                     }
                                 }
                             }
-                    }
-                    if debug {
-                        Button(action: {
-                            searchText = "Darock"
-                            isSearchPresented = true
-                        }, label: {
-                            Text("Search.debug")
-                        })
-                        .accessibilityIdentifier("SearchDebugButton")
-                    }
+                        }
                 }
-                if searchHistory.count != 0 {
-                    Section(header: Text("Search.history")) {
-                        ForEach(0...searchHistory.count - 1, id: \.self) { i in
-                            NavigationLink(destination: {SearchView(keyword: searchHistory[i])}, label: {
-                                Text(searchHistory[i])
+                if debug {
+                    Button(action: {
+                        searchText = "Darock"
+                        isSearchPresented = true
+                    }, label: {
+                        Text("Search.debug")
+                    })
+                    .accessibilityIdentifier("SearchDebugButton")
+                    #if !os(watchOS)
+                    Button(action: {
+                        isSearchKeyboardFocused.wrappedValue = true
+                    }, label: {
+                        Text("FocusStateDebug")
+                    })
+                    #endif
+                }
+            }
+            if searchHistory.count != 0 {
+                Section(header: Text("Search.history")) {
+                    ForEach(0...searchHistory.count - 1, id: \.self) { i in
+                        NavigationLink(destination: { SearchView(keyword: searchHistory[i]) }, label: {
+                            Text(searchHistory[i])
+                        })
+                        .swipeActions {
+                            Button(role: .destructive, action: {
+                                searchHistory.remove(at: i)
+                                UserDefaults.standard.set(searchHistory, forKey: "SearchHistory")
+                            }, label: {
+                                Image(systemName: "trash")
                             })
-                            .swipeActions {
-                                Button(role: .destructive, action: {
-                                    searchHistory.remove(at: i)
-                                    UserDefaults.standard.set(searchHistory, forKey: "SearchHistory")
-                                }, label: {
-                                    Image(systemName: "trash")
-                                })
-                            }
                         }
                     }
                 }
             }
-            .onAppear {
-                searchHistory.removeAll()
-                searchHistory = UserDefaults.standard.stringArray(forKey: "SearchHistory") ?? [String]()
-            }
-            .searchSuggestions {
-                if suggestions.count != 0 {
-                    
-                }
+        }
+        #if !os(visionOS)
+        .scrollDismissesKeyboard(.immediately)
+        #endif
+        .onAppear {
+            searchHistory.removeAll()
+            searchHistory = UserDefaults.standard.stringArray(forKey: "SearchHistory") ?? [String]()
+        }
+        .searchSuggestions {
+            if suggestions.count != 0 {
+                
             }
         }
     }
@@ -134,7 +148,6 @@ struct SearchView: View {
     var body: some View {
         ScrollView {
             VStack {
-                // FIXME: Wtf is Apple doing? It shows a really fking bad view when the selecter presents.
                 Picker("Search.type", selection: $searchType) {
                     Text("Search.type.video").tag(SearchType.video)
                     Text("Search.type.user").tag(SearchType.user)
@@ -172,7 +185,7 @@ struct SearchView: View {
                                             .clipShape(Circle())
                                         #endif
                                         VStack {
-                                            NavigationLink("", isActive: $isUserDetailPresented[i], destination: {UserDetailView(uid: users[i]["ID"]! as! String)})
+                                            NavigationLink("", isActive: $isUserDetailPresented[i], destination: { UserDetailView(uid: users[i]["ID"]! as! String) })
                                                 .frame(width: 0, height: 0)
                                             HStack {
                                                 Text(users[i]["Name"]! as! String)
@@ -343,7 +356,7 @@ struct SearchView: View {
                                 }
                             case .bangumi:
                                 for bangumi in result {
-                                    if (bangumi.1["type"].string ?? "") == "media_bangumi" {
+                                    if (bangumi.1["type"].string ?? "") == "media_bangumi" { // swiftlint:disable:this for_where
                                         bangumis.append(BangumiData(mediaId: bangumi.1["media_id"].int64 ?? 0, seasonId: bangumi.1["season_id"].int64 ?? 0, title: (bangumi.1["title"].string ?? "[加载失败]").replacingOccurrences(of: "<em class=\"keyword\">", with: "").replacingOccurrences(of: "</em>", with: ""), originalTitle: bangumi.1["org_title"].string ?? "[加载失败]", cover: /*"https:" + */(bangumi.1["cover"].string ?? "E"), area: bangumi.1["areas"].string ?? "[加载失败]", style: bangumi.1["styles"].string ?? "[加载失败]", cvs: (bangumi.1["cv"].string ?? "[加载失败]").split(separator: "\\n").map { String($0) }, staffs: (bangumi.1["staff"].string ?? "[加载失败]").split(separator: "\\n").map { String($0) }, description: bangumi.1["desc"].string ?? "[加载失败]", pubtime: bangumi.1["pubtime"].int ?? 0, eps: { () -> [BangumiEp] in
                                             let eps = bangumi.1["eps"]
                                             var tmp = [BangumiEp]()
@@ -378,12 +391,5 @@ struct SearchView: View {
         case liveRoom = "live_room"
         case article = "article"
         case user = "bili_user"
-    }
-}
-
-struct SearchView_Previews: PreviewProvider {
-    static var previews: some View {
-        //SearchView(keyword: "Darock")
-        SearchMainView()
     }
 }

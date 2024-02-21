@@ -24,9 +24,11 @@ import DarockKit
 import Alamofire
 import SwiftyJSON
 import Foundation
-import CoreHaptics
 import AVFoundation
 import CommonCrypto
+#if !os(watchOS)
+import CoreHaptics
+#endif
 
 extension String {
     func shorter() -> String {
@@ -68,25 +70,23 @@ extension String {
             print("⚠️⚠️⚠️md5加密无效的字符串⚠️⚠️⚠️")
             return ""
         }
-        /// 1.把待加密的字符串转成char类型数据 因为MD5加密是C语言加密
+        // 1.把待加密的字符串转成char类型数据 因为MD5加密是C语言加密
         let cCharArray = self.cString(using: .utf8)
-        /// 2.创建一个字符串数组接受MD5的值
+        // 2.创建一个字符串数组接受MD5的值
         var uint8Array = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
-        /// 3.计算MD5的值
-        /*
-         第一个参数:要加密的字符串
-         第二个参数: 获取要加密字符串的长度
-         第三个参数: 接收结果的数组
-         */
+        // 3.计算MD5的值
+//      第一个参数:要加密的字符串
+//      第二个参数: 获取要加密字符串的长度
+//      第三个参数: 接收结果的数组
         CC_MD5(cCharArray, CC_LONG(cCharArray!.count - 1), &uint8Array)
         
         switch md5Type {
             /// 32位小写
         case .lowercase32:
-            return uint8Array.reduce("") { $0 + String(format: "%02x", $1)}
+            return uint8Array.reduce("") { $0 + String(format: "%02x", $1) }
             /// 32位大写
         case .uppercase32:
-            return uint8Array.reduce("") { $0 + String(format: "%02X", $1)}
+            return uint8Array.reduce("") { $0 + String(format: "%02X", $1) }
             /// 16位小写
         case .lowercase16:
             //let tempStr = uint8Array.reduce("") { $0 + String(format: "%02x", $1)}
@@ -129,7 +129,11 @@ public func getMemory() -> Float {
     }
     let usedMb = Float(taskInfo.phys_footprint) / 1048576.0
     let totalMb = Float(ProcessInfo.processInfo.physicalMemory) / 1048576.0
-    result != KERN_SUCCESS ? debugPrint("Memory used: ? of \(totalMb)") : debugPrint("Memory used: \(usedMb) of \(totalMb)")
+    if result != KERN_SUCCESS {
+        debugPrint("Memory used: ? of \(totalMb)")
+    } else {
+        debugPrint("Memory used: \(usedMb) of \(totalMb)")
+    }
     return usedMb
 }
 
@@ -473,6 +477,7 @@ func randomChoice(range: [Int], separator: String, choices: [String]) -> String 
     return result
 }
 
+// swiftlint:disable colon
 public func getBuvid(url: String, callback: @escaping (String, String, String, String) -> Void) {
     let _uuid = UuidInfoc.gen()
     let postParams: [String: Any] = [
@@ -624,7 +629,9 @@ public func getBuvid(url: String, callback: @escaping (String, String, String, S
         }
     }
 }
+// swiftlint:enable colon
 
+#if !os(watchOS)
 public func PlayHaptic(sharpness: Float, intensity: Float) {
     guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
     var events = [CHHapticEvent]()
@@ -640,6 +647,7 @@ public func PlayHaptic(sharpness: Float, intensity: Float) {
         print("Failed to play pattern: \(error.localizedDescription).")
     }
 }
+#endif
 
 postfix operator ++
 postfix operator --
@@ -694,6 +702,6 @@ extension Double {
 }
 
 prefix operator &&
-prefix func &&<T>(input: inout T) -> UnsafeMutablePointer<T> {
+prefix func && <T>(input: inout T) -> UnsafeMutablePointer<T> {
     withUnsafeMutablePointer(to: &input) { $0 }
 }

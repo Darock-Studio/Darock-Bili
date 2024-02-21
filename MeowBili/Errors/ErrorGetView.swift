@@ -45,7 +45,7 @@ struct ErrorGetView: View {
                     }, label: {
                         Text("Error.network-troubleshoot")
                     })
-                    .sheet(isPresented: $isNetworkFixPresented, content: {NetworkFixView()})
+                    .sheet(isPresented: $isNetworkFixPresented, content: { NetworkFixView() })
                 }
                 Spacer()
                     .frame(height: 10)

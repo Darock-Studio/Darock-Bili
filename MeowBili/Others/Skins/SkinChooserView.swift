@@ -385,7 +385,7 @@ struct SkinChooserView: View {
         if listSearchCache.isEmpty {
             return skinsPath
         } else {
-            return skinsPath.filter { key, value in
+            return skinsPath.filter { key, _ in
                 key.localizedCaseInsensitiveContains(listSearchCache)
             }
         }
@@ -395,7 +395,7 @@ struct SkinChooserView: View {
         List {
             Section {
                 ForEach(filteredSkins.sorted(by: <), id: \.key) { key, value in
-                    NavigationLink(destination: {SkinDownloadView(name: key, link: value)}, label: {
+                    NavigationLink(destination: { SkinDownloadView(name: key, link: value) }, label: {
                         Text(key)
                     })
                 }

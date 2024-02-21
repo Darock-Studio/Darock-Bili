@@ -83,10 +83,11 @@ struct HistoryView: View {
                     }
                 }
             }
-            .onDrop(of: [kUTTypeData as String], isTargeted: nil) { items in
+            #if !os(watchOS)
+            .onDrop(of: [UTType.data.identifier], isTargeted: nil) { items in
                 PlayHaptic(sharpness: 0.05, intensity: 0.5)
                 for item in items {
-                    item.loadDataRepresentation(forTypeIdentifier: kUTTypeData as String) { (data, error) in
+                    item.loadDataRepresentation(forTypeIdentifier: UTType.data.identifier) { (data, _) in
                         if let data = data, let dict = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [String: String] {
                             if dict["BV"] != nil {
                                 histories.insert(dict, at: 0)
@@ -101,6 +102,7 @@ struct HistoryView: View {
                 }
                 return true
             }
+            #endif
         }
         .navigationTitle("历史记录")
         .navigationBarTitleDisplayMode(.large)

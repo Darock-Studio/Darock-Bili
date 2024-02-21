@@ -34,6 +34,9 @@ struct UserDynamicListView: View {
     @State var isLoaded = false
     @State var lastDynamicID = ""
     @State var isLoadingNew = false
+    #if os(watchOS)
+    @State var isDynamicImagePresented = [[Bool]]()
+    #endif
     var body: some View {
         ScrollView {
             LazyVStack {
@@ -60,11 +63,11 @@ struct UserDynamicListView: View {
                                 Spacer()
                             }
                             if dynamics[i]["WithText"]! as! String != "" {
-                                NavigationLink(destination: {DynamicDetailView(dynamicDetails: dynamics[i])}, label: {
+                                NavigationLink(destination: { DynamicDetailView(dynamicDetails: dynamics[i]) }, label: {
                                     HStack {
-                                         LinkDetectText(inputURL: Binding<String>(get:{
-                                                                dynamics[i]["WithText"]! as! String
-                                                            },set:{ _ in}))
+                                        LinkDetectText(inputURL: Binding<String>(get: {
+                                            dynamics[i]["WithText"]! as! String
+                                        }, set: { _ in }))
                                             .font(.system(size: 16))
                                         Spacer()
                                     }
@@ -74,10 +77,11 @@ struct UserDynamicListView: View {
                             if dynamics[i]["Type"]! as! BiliDynamicType == .draw {
                                 if let draws = dynamics[i]["Draws"] as? [[String: String]] {
                                     #if !os(visionOS)
+                                    #if !os(watchOS)
                                     LazyVGrid(columns: [GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3)), GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3)), GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3))]) {
                                         ForEach(0..<draws.count, id: \.self) { j in
                                             VStack {
-                                                NavigationLink(destination: {ImageViewerView(url: draws[j]["Src"]!)}) {
+                                                NavigationLink(destination: { ImageViewerView(url: draws[j]["Src"]!) }) {
                                                     WebImage(url: URL(string: draws[j]["Src"]!), options: [.progressiveLoad])
                                                         .resizable()
                                                         .scaledToFit()
@@ -87,10 +91,27 @@ struct UserDynamicListView: View {
                                         }
                                     }
                                     #else
+                                    LazyVGrid(columns: [GridItem(.fixed(50)), GridItem(.fixed(50)), GridItem(.fixed(50))]) {
+                                        ForEach(0..<draws.count, id: \.self) { j in
+                                            if isDynamicImagePresented[i].count > j {
+                                                VStack {
+                                                    NavigationLink("", isActive: $isDynamicImagePresented[i][j], destination: { ImageViewerView(url: draws[j]["Src"]!) })
+                                                        .frame(width: 0, height: 0)
+                                                    WebImage(url: URL(string: draws[j]["Src"]! + "@60w_40h"), options: [.progressiveLoad])
+                                                        .cornerRadius(5)
+                                                        .onTapGesture {
+                                                            isDynamicImagePresented[i][j] = true
+                                                        }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    #endif
+                                    #else
                                     LazyVGrid(columns: [GridItem(.fixed((globalWindowSize.width - 50) / 3)), GridItem(.fixed((globalWindowSize.width - 50) / 3)), GridItem(.fixed((globalWindowSize.width - 50) / 3))]) {
                                         ForEach(0..<draws.count, id: \.self) { j in
                                             VStack {
-                                                NavigationLink(destination: {ImageViewerView(url: draws[j]["Src"]!)}) {
+                                                NavigationLink(destination: { ImageViewerView(url: draws[j]["Src"]!) }) {
                                                     AsyncImage(url: URL(string: draws[j]["Src"]!)) { phase in
                                                         switch phase {
                                                         case .empty:
@@ -117,7 +138,7 @@ struct UserDynamicListView: View {
                                 }
                             } else if dynamics[i]["Type"]! as! BiliDynamicType == .live {
                                 if let liveInfo = dynamics[i]["Live"] as? [String: String] {
-                                    NavigationLink(destination: {LiveDetailView(liveDetails: liveInfo)}, label: {
+                                    NavigationLink(destination: { LiveDetailView(liveDetails: liveInfo) }, label: {
                                         VStack {
                                             HStack {
                                                 #if !os(visionOS)
@@ -167,7 +188,7 @@ struct UserDynamicListView: View {
                             } else if dynamics[i]["Type"]! as! BiliDynamicType == .forward {
                                 if let origData = dynamics[i]["Forward"] as? [String: Any?]? {
                                     if let orig = origData {
-                                        NavigationLink(destination: {DynamicDetailView(dynamicDetails: orig)}, label: {
+                                        NavigationLink(destination: { DynamicDetailView(dynamicDetails: orig) }, label: {
                                             VStack {
                                                 HStack {
                                                     Text(orig["SendTimeStr"]! as! String + { () -> String in
@@ -191,21 +212,22 @@ struct UserDynamicListView: View {
                                                 }
                                                 if orig["WithText"]! as! String != "" {
                                                     HStack {
-                                                         LinkDetectText(inputURL: Binding<String>(get:{
-                                                              orig["WithText"]! as! String
-                                                            },set:{ _ in}))
-                                                            .font(.system(size: 16))
-                                                            .lineLimit(5)
+                                                        LinkDetectText(inputURL: Binding<String>(get: {
+                                                            orig["WithText"]! as! String
+                                                        }, set: { _ in }))
+                                                        .font(.system(size: 16))
+                                                        .lineLimit(5)
                                                         Spacer()
                                                     }
                                                 }
                                                 if orig["Type"]! as! BiliDynamicType == .draw {
                                                     if let draws = orig["Draws"] as? [[String: String]] {
                                                         #if !os(visionOS)
+                                                        #if !os(watchOS)
                                                         LazyVGrid(columns: [GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3)), GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3)), GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3))]) {
                                                             ForEach(0..<draws.count, id: \.self) { j in
                                                                 VStack {
-                                                                    NavigationLink(destination: {ImageViewerView(url: draws[j]["Src"]!)}) {
+                                                                    NavigationLink(destination: { ImageViewerView(url: draws[j]["Src"]!) }) {
                                                                         WebImage(url: URL(string: draws[j]["Src"]!), options: [.progressiveLoad])
                                                                             .resizable()
                                                                             .scaledToFit()
@@ -215,10 +237,27 @@ struct UserDynamicListView: View {
                                                             }
                                                         }
                                                         #else
+                                                        LazyVGrid(columns: [GridItem(.fixed(50)), GridItem(.fixed(50)), GridItem(.fixed(50))]) {
+                                                            ForEach(0..<draws.count, id: \.self) { j in
+                                                                if isDynamicImagePresented[i].count > j {
+                                                                    VStack {
+                                                                        NavigationLink("", isActive: $isDynamicImagePresented[i][j], destination: { ImageViewerView(url: draws[j]["Src"]!) })
+                                                                            .frame(width: 0, height: 0)
+                                                                        WebImage(url: URL(string: draws[j]["Src"]! + "@60w_40h"), options: [.progressiveLoad])
+                                                                            .cornerRadius(5)
+                                                                            .onTapGesture {
+                                                                                isDynamicImagePresented[i][j] = true
+                                                                            }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        #endif
+                                                        #else
                                                         LazyVGrid(columns: [GridItem(.fixed((globalWindowSize.width - 50) / 3)), GridItem(.fixed((globalWindowSize.width - 50) / 3)), GridItem(.fixed((globalWindowSize.width - 50) / 3))]) {
                                                             ForEach(0..<draws.count, id: \.self) { j in
                                                                 VStack {
-                                                                    NavigationLink(destination: {ImageViewerView(url: draws[j]["Src"]!)}) {
+                                                                    NavigationLink(destination: { ImageViewerView(url: draws[j]["Src"]!) }) {
                                                                         AsyncImage(url: URL(string: draws[j]["Src"]!)) { phase in
                                                                             switch phase {
                                                                             case .empty:
@@ -246,7 +285,7 @@ struct UserDynamicListView: View {
                                                     }
                                                 } else if orig["Type"]! as! BiliDynamicType == .live {
                                                     if let liveInfo = orig["Live"] as? [String: String] {
-                                                        NavigationLink(destination: {LiveDetailView(liveDetails: liveInfo)}, label: {
+                                                        NavigationLink(destination: { LiveDetailView(liveDetails: liveInfo) }, label: {
                                                             VStack {
                                                                 HStack {
                                                                     #if !os(visionOS)
@@ -345,6 +384,9 @@ struct UserDynamicListView: View {
                 let items = respJson["data"]["items"]
                 var itemForCount = 0
                 for item in items {
+                    #if os(watchOS)
+                    isDynamicImagePresented.append([])
+                    #endif
                     dynamics.append([
                         "WithText": item.1["modules"]["module_dynamic"]["desc"]["text"].string ?? "",
                         "Type": BiliDynamicType(rawValue: item.1["type"].string ?? "DYNAMIC_TYPE_WORD") ?? .text,
@@ -352,6 +394,9 @@ struct UserDynamicListView: View {
                             if BiliDynamicType(rawValue: item.1["type"].string ?? "DYNAMIC_TYPE_WORD") == .draw {
                                 var dTmp = [[String: String]]()
                                 for draw in item.1["modules"]["module_dynamic"]["major"]["draw"]["items"] {
+                                    #if os(watchOS)
+                                    isDynamicImagePresented[itemForCount].append(false)
+                                    #endif
                                     dTmp.append(["Src": draw.1["src"].string ?? ""])
                                 }
                                 return dTmp
@@ -390,6 +435,9 @@ struct UserDynamicListView: View {
                                         if BiliDynamicType(rawValue: origData["type"].string ?? "DYNAMIC_TYPE_WORD") == .draw {
                                             var dTmp = [[String: String]]()
                                             for draw in origData["modules"]["module_dynamic"]["major"]["draw"]["items"] {
+                                                #if os(watchOS)
+                                                isDynamicImagePresented[itemForCount].append(false)
+                                                #endif
                                                 dTmp.append(["Src": draw.1["src"].string ?? ""])
                                             }
                                             return dTmp
@@ -450,4 +498,3 @@ struct UserDynamicListView: View {
         }
     }
 }
-
