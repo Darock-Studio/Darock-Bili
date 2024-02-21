@@ -28,10 +28,11 @@ struct ImageViewerView: View {
         #if !os(visionOS)
         WebImage(url: URL(string: url), options: [.progressiveLoad], isAnimating: .constant(true))
             .resizable()
+        #if !os(watchOS)
             .transition(.fade(duration: 0.5))
             .scaledToFit()
             .frame(alignment: .center)
-            .modifier(zoomable())
+            .modifier(Zoomable())
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {
@@ -43,6 +44,13 @@ struct ImageViewerView: View {
                     })
                 }
             }
+        #else
+            .indicator(.activity)
+            .transition(.fade(duration: 0.5))
+            .scaledToFit()
+            .frame(width: CGFloat(100), height: CGFloat(100), alignment: .center)
+            .modifier(Zoomable())
+        #endif
         #else
         AsyncImage(url: URL(string: url)) { phase in
             switch phase {
@@ -56,7 +64,7 @@ struct ImageViewerView: View {
         }
         .scaledToFit()
         .frame(alignment: .center)
-        .modifier(zoomable())
+        .modifier(Zoomable())
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {

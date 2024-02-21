@@ -56,8 +56,12 @@ struct DynamicSendView: View {
                 }
                 #endif
                 Section {
+                    #if !os(watchOS)
                     TextEditor(text: $dynamicText)
                         .frame(height: 100)
+                    #else
+                    TextField("内容", text: $dynamicText)
+                    #endif
                 } header: {
                     Text("动态内容")
                 } footer: {
@@ -97,13 +101,17 @@ struct DynamicSendView: View {
                                     debugPrint(response)
                                     if let rd = response.data, let json = try? JSON(data: rd) {
                                         if !CheckBApiError(from: json) { return }
-                                        #if !os(visionOS)
+                                        #if !os(visionOS) && !os(watchOS)
                                         AlertKitAPI.present(title: "发送成功", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                        #else
+                                        tipWithText("发送成功", symbol: "checkmark.circle.fill")
                                         #endif
                                         dismiss()
                                     } else {
-                                        #if !os(visionOS)
+                                        #if !os(visionOS) && !os(watchOS)
                                         AlertKitAPI.present(title: "发送失败,未知错误", icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                                        #else
+                                        tipWithText("发送失败,未知错误", symbol: "xmark.circle.fill")
                                         #endif
                                     }
                                     sendProgressText = ""
@@ -132,7 +140,7 @@ struct DynamicSendView: View {
                         }
                     })
                     .disabled(isSending)
-                    .sheet(isPresented: $isTailInitPresented, content: {DynamicTailSetView()})
+                    .sheet(isPresented: $isTailInitPresented, content: { DynamicTailSetView() })
                 } footer: {
                     Text(sendProgressText)
                 }
@@ -178,8 +186,10 @@ struct DynamicSendView: View {
                 upliPtr.advanced(by: currentUploadImageIndex.pointee).pointee = "\(url)||\(convertedImages[currentUploadImageIndex.pointee].size.width)||\(convertedImages[currentUploadImageIndex.pointee].size.height)||\(Double(convertedImages[currentUploadImageIndex.pointee].pngData()!.count) / 1024.0)"
             } else {
                 currentUploadImageIndex.deallocate()
-                #if !os(visionOS)
+                #if !os(visionOS) && !os(watchOS)
                 AlertKitAPI.present(title: "上传图片时失败,未知错误", icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                #else
+                tipWithText("上传图片时失败,未知错误", symbol: "xmark.circle.fill")
                 #endif
                 return
             }
@@ -213,7 +223,7 @@ struct DynamicSendView: View {
                                     "img_src": String(upliPtr.advanced(by: i).pointee.split(separator: "||")[0]),
                                     "img_height": Int(Float(upliPtr.advanced(by: i).pointee.split(separator: "||")[1])!),
                                     "img_width": Int(Float(upliPtr.advanced(by: i).pointee.split(separator: "||")[2])!),
-                                    "img_size": Double(upliPtr.advanced(by: i).pointee.split(separator: "||")[3])!,
+                                    "img_size": Double(upliPtr.advanced(by: i).pointee.split(separator: "||")[3])!
                                 ])
                             }
                             return tmp
@@ -225,8 +235,10 @@ struct DynamicSendView: View {
             }
         } else {
             currentUploadImageIndex.deallocate()
-            #if !os(visionOS)
+            #if !os(visionOS) && !os(watchOS)
             AlertKitAPI.present(title: "上传图片时失败,未知错误", icon: .error, style: .iOS17AppleMusic, haptic: .error)
+            #else
+            tipWithText("上传图片时失败,未知错误", symbol: "xmark.circle.fill")
             #endif
         }
     }

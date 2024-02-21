@@ -33,7 +33,7 @@ struct FavoriteView: View {
         List {
             if favoriteFolders.count != 0 {
                 ForEach(0...favoriteFolders.count - 1, id: \.self) { i in
-                    NavigationLink(destination: {FavoriteDetailView(folderDatas: favoriteFolders[i])}, label: {
+                    NavigationLink(destination: { FavoriteDetailView(folderDatas: favoriteFolders[i]) }, label: {
                         Text(favoriteFolders[i]["Title"]!)
                             .font(.system(size: 16, weight: .bold))
                             .lineLimit(3)
@@ -80,10 +80,11 @@ struct FavoriteDetailView: View {
                 Section {
                     ForEach(0...details.count - 1, id: \.self) { i in
                         VideoCard(details[i])
-                            .onDrop(of: [kUTTypeData as String], isTargeted: nil) { items in
+                        #if !os(watchOS)
+                            .onDrop(of: [UTType.data.identifier], isTargeted: nil) { items in
                                 PlayHaptic(sharpness: 0.05, intensity: 0.5)
                                 for item in items {
-                                    item.loadDataRepresentation(forTypeIdentifier: kUTTypeData as String) { (data, error) in
+                                    item.loadDataRepresentation(forTypeIdentifier: UTType.data.identifier) { (data, _) in
                                         if let data = data, let dict = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [String: String] {
                                             if dict["BV"] != nil {
                                                 details.insert(dict, at: 0)
@@ -99,6 +100,7 @@ struct FavoriteDetailView: View {
                                 }
                                 return true
                             }
+                        #endif
                     }
                 }
                 Section {

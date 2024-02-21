@@ -35,14 +35,14 @@ struct BangumiDetailView: View {
     @AppStorage("SESSDATA") var sessdata = ""
     @AppStorage("bili_jct") var biliJct = ""
     @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
-    @State var paymentData: BangumiPayment? = nil
+    @State var paymentData: BangumiPayment?
     @State var epDatas = [BangumiEp]()
     @State var isLoading = false
     @State var mainTabSelection = 1
     @State var isBangumiPlayerPresented = false
     @State var isMoreMenuPresented = false
     @State var backgroundPicOpacity = 0.0
-    @State var navigationSelectedEpdata: BangumiEp? = nil
+    @State var navigationSelectedEpdata: BangumiEp?
     var body: some View {
         TabView {
             ZStack {
@@ -69,7 +69,7 @@ struct BangumiDetailView: View {
                             .listRowBackground(Color.clear)
                         ForEach(0..<epDatas.count, id: \.self) { i in
                             if let aid = epDatas[i].aid {
-                                NavigationLink(destination: {CommentsView(oid: av2bv(avid: UInt64(aid)))}, label: {
+                                NavigationLink(destination: { CommentsView(oid: av2bv(avid: UInt64(aid))) }, label: {
                                     Text(epDatas[i].longTitle)
                                 })
                             }
@@ -134,7 +134,7 @@ struct BangumiDetailView: View {
                     .cornerRadius(13)
                     .shadow(color: .black.opacity(0.5), radius: 5, x: 1, y: 2)
                     .offset(y: 8)
-                    .sheet(isPresented: $isCoverImageViewPresented, content: {ImageViewerView(url: bangumiData.cover)})
+                    .sheet(isPresented: $isCoverImageViewPresented, content: { ImageViewerView(url: bangumiData.cover) })
                     .onTapGesture {
                         isCoverImageViewPresented = true
                     }
@@ -160,7 +160,7 @@ struct BangumiDetailView: View {
                 .cornerRadius(13)
                 .shadow(color: .black.opacity(0.5), radius: 5, x: 1, y: 2)
                 .offset(y: 8)
-                .sheet(isPresented: $isCoverImageViewPresented, content: {ImageViewerView(url: bangumiData.cover)})
+                .sheet(isPresented: $isCoverImageViewPresented, content: { ImageViewerView(url: bangumiData.cover) })
                 .onTapGesture {
                     isCoverImageViewPresented = true
                 }
@@ -207,7 +207,7 @@ struct BangumiDetailView: View {
                             Spacer()
                         }
                         HStack {
-                            Text("Bangumi.score.joined-people.\(Int(score.userCount) ?? 0)")
+                            Text("Bangumi.score.joined-people.\(score.userCount)")
                                 .font(.footnote)
                                 .opacity(0.65)
                             Spacer()

@@ -23,7 +23,7 @@ public struct DownloadProgressData: Equatable {
     var currentSize: Int64
     var totalSize: Int64
     
-    public static func ==(lhs: DownloadProgressData, rhs: DownloadProgressData) -> Bool {
+    public static func == (lhs: DownloadProgressData, rhs: DownloadProgressData) -> Bool {
         return lhs.progress == rhs.progress
     }
 }

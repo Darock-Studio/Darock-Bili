@@ -21,13 +21,10 @@ import SwiftUI
 import AuthenticationServices
 
 struct LinkDetectText: View {
-    @Binding
-    var inputURL:String
-    @State
-    var markdownText = try! AttributedString(markdown: "")
+    @Binding var inputURL: String
+    @State var markdownText = try! AttributedString(markdown: "")
     @State var linkColor = Color.blue
-    @State
-    var error:Error?
+    @State var error: Error?
     var body: some View {
         Group {
             if let error {
@@ -39,7 +36,7 @@ struct LinkDetectText: View {
             } else {
                 Text(markdownText)
                     .tint(linkColor)
-#if os(watchOS)
+                #if os(watchOS)
                 //拦截，然后用暗礁浏览器打开
                     .environment(\.openURL, OpenURLAction(handler: { url in
                         //加一个小动画，因为下一步操作【真机上】会卡1秒
@@ -58,19 +55,19 @@ struct LinkDetectText: View {
                         return .handled
                     }))
                 //iOS端可以直接用系统浏览器打开链接，不需要拦截
-#endif
+                #endif
             }
         }
         .onAppear {
-            loadText(inputURL:inputURL)
+            loadText(inputURL: inputURL)
         }
         .onChange(of: inputURL, perform: { newValue in
-            loadText(inputURL:newValue)
+            loadText(inputURL: newValue)
         })
         .animation(.smooth, value: markdownText)
      
     }
-    func loadText(inputURL:String) {
+    func loadText(inputURL: String) {
         let markdownURLs = detectURLs(in: inputURL)
         do {
             let markdownLink = try AttributedString(markdown: markdownURLs)
@@ -106,5 +103,4 @@ struct LinkDetectText: View {
 
             return markdownString
         }
-
 }

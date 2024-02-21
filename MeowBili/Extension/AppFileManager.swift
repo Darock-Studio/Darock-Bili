@@ -57,10 +57,8 @@ class AppFileManager {
         let contentsOfPath = try? manager.contentsOfDirectory(atPath: folderUrl.path)
         if contentsOfPath != nil {
             var urls = [URL]()
-            for i in contentsOfPath! {
-                if !directoryIsExists(folderUrl.absoluteString + "/\(i)") {
-                    urls.append(URL(string: folderUrl.absoluteString + "/\(i)")!)
-                }
+            for i in contentsOfPath! where !directoryIsExists(folderUrl.absoluteString + "/\(i)") {
+                urls.append(URL(string: folderUrl.absoluteString + "/\(i)")!)
             }
             return urls
         } else {
@@ -84,12 +82,8 @@ class AppFileManager {
         let contentsOfPath = try? manager.contentsOfDirectory(atPath: folderUrl.path)
         if contentsOfPath != nil {
             var names = [String]()
-            for i in contentsOfPath! {
-                if i.contains(".") {
-                    if i.split(separator: ".")[1] != "plist" {
-                        names.append(withExt ? i : String(i.split(separator: ".")[0]))
-                    }
-                }
+            for i in contentsOfPath! where i.contains(".") && i.split(separator: ".")[1] != "plist" {
+                names.append(withExt ? i : String(i.split(separator: ".")[0]))
             }
             return names
         } else {

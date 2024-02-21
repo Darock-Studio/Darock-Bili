@@ -20,8 +20,12 @@ import Charts
 import SwiftUI
 import SwiftDate
 import DarockKit
-import UserNotifications
 import AuthenticationServices
+#if os(watchOS)
+import WatchKit
+#else
+import UserNotifications
+#endif
 
 struct SettingsView: View {
     @AppStorage("DedeUserID") var dedeUserID = ""
@@ -31,8 +35,9 @@ struct SettingsView: View {
     @State var isLogoutAlertPresented = false
     var body: some View {
         List {
+            #if !os(watchOS)
             Section {
-                NavigationLink(destination: {NetworkSettingsView().navigationTitle("Settings.internet")}, label: {
+                NavigationLink(destination: { NetworkSettingsView().navigationTitle("Settings.internet") }, label: {
                     HStack {
                         ZStack {
                             Color.blue
@@ -48,7 +53,7 @@ struct SettingsView: View {
             }
             Section {
                 if debug {
-                    NavigationLink(destination: {SoundAHapticSettingsView().navigationTitle("通知")}, label: {
+                    NavigationLink(destination: { SoundAHapticSettingsView().navigationTitle("通知") }, label: {
                         HStack {
                             ZStack {
                                 Color.red
@@ -62,7 +67,7 @@ struct SettingsView: View {
                         }
                     })
                 }
-                NavigationLink(destination: {SoundAHapticSettingsView().navigationTitle("声音与触感")}, label: {
+                NavigationLink(destination: { SoundAHapticSettingsView().navigationTitle("声音与触感") }, label: {
                     HStack {
                         ZStack {
                             Color.red
@@ -75,7 +80,7 @@ struct SettingsView: View {
                         Text("声音与触感")
                     }
                 })
-                NavigationLink(destination: {ScreenTimeSettingsView().navigationTitle("Settings.screen-time")}, label: {
+                NavigationLink(destination: { ScreenTimeSettingsView().navigationTitle("Settings.screen-time") }, label: {
                     HStack {
                         ZStack {
                             Color.blue
@@ -90,7 +95,7 @@ struct SettingsView: View {
                 })
             }
             Section {
-                NavigationLink(destination: {PlayerSettingsView().navigationTitle("Settings.player")}, label: {
+                NavigationLink(destination: { PlayerSettingsView().navigationTitle("Settings.player") }, label: {
                     HStack {
                         ZStack {
                             Color.gray
@@ -104,7 +109,7 @@ struct SettingsView: View {
                     }
                 })
                 
-                NavigationLink(destination: {SleepTimeView().navigationTitle("Settings.sleep")}, label: {
+                NavigationLink(destination: { SleepTimeView().navigationTitle("Settings.sleep") }, label: {
                     HStack {
                         ZStack {
                             Color.cyan
@@ -117,7 +122,7 @@ struct SettingsView: View {
                         Text("Settings.sleep")
                     }
                 })
-                NavigationLink(destination: {FeedbackView().navigationTitle("Settings.feedback")}, label: {
+                NavigationLink(destination: { FeedbackView().navigationTitle("Settings.feedback") }, label: {
                     HStack {
                         ZStack {
                             Color.purple
@@ -130,7 +135,7 @@ struct SettingsView: View {
                         Text("Settings.feedback")
                     }
                 })
-                NavigationLink(destination: {PrivacySettingsView().navigationTitle("隐私与安全性")}, label: {
+                NavigationLink(destination: { PrivacySettingsView().navigationTitle("隐私与安全性") }, label: {
                     HStack {
                         ZStack {
                             Color.blue
@@ -145,7 +150,7 @@ struct SettingsView: View {
                 })
             }
             Section {
-                NavigationLink(destination: {AboutView()}, label: {
+                NavigationLink(destination: { AboutView() }, label: {
                     HStack {
                         ZStack {
                             Color.gray
@@ -160,7 +165,7 @@ struct SettingsView: View {
                 })
                 if debug {
                     Section {
-                        NavigationLink(destination: {DebugMenuView().navigationTitle("Settings.debug")}, label: {
+                        NavigationLink(destination: { DebugMenuView().navigationTitle("Settings.debug") }, label: {
                             HStack {
                                 ZStack {
                                     Color.blue
@@ -180,13 +185,6 @@ struct SettingsView: View {
                         isLogoutAlertPresented = true
                     }, label: {
                         HStack {
-//                            ZStack {
-//                                Color.red
-//                                    .frame(width: 20, height: 20)
-//                                    .clipShape(Circle())
-//                                Image(systemName: "person.slash")
-//                                    .font(.system(size: 12))
-//                            }
                             Text("Settings.log-out")
                         }
                     })
@@ -208,6 +206,178 @@ struct SettingsView: View {
                     })
                 }
             }
+            #else
+            Section {
+                NavigationLink(destination: { PlayerSettingsView().navigationTitle("Settings.player") }, label: {
+                    HStack {
+                        ZStack {
+                            Color.gray
+                                .frame(width: 20, height: 20)
+                                .clipShape(Circle())
+                            Image(systemName: "play.circle")
+                                .font(.system(size: 12))
+                        }
+                        Text("Settings.player")
+                    }
+                })
+                NavigationLink(destination: { NetworkSettingsView().navigationTitle("Settings.internet") }, label: {
+                    HStack {
+                        ZStack {
+                            Color.blue
+                                .frame(width: 20, height: 20)
+                                .clipShape(Circle())
+                            Image(systemName: "network")
+                                .font(.system(size: 12))
+                        }
+                        Text("Settings.internet")
+                    }
+                })
+                NavigationLink(destination: { GestureSettingsView().navigationTitle("Settings.gesture") }, label: {
+                    HStack {
+                        ZStack {
+                            Color.blue
+                                .frame(width: 20, height: 20)
+                                .clipShape(Circle())
+                            Image(systemName: "hand.wave.fill")
+                                .font(.system(size: 12))
+                        }
+                        Text("Settings.gesture")
+                    }
+                })
+                NavigationLink(destination: { ScreenTimeSettingsView().navigationTitle("Settings.screen-time") }, label: {
+                    HStack {
+                        ZStack {
+                            Color.blue
+                                .frame(width: 20, height: 20)
+                                .clipShape(Circle())
+                            Image(systemName: "hourglass")
+                                .font(.system(size: 12))
+                        }
+                        Text("Settings.screen-time")
+                    }
+                })
+                NavigationLink(destination: { BatterySettingsView().navigationTitle("Settings.battery") }, label: {
+                    HStack {
+                        ZStack {
+                            Color.green
+                                .frame(width: 20, height: 20)
+                                .clipShape(Circle())
+                            Image(systemName: "bolt.fill")
+                                .font(.system(size: 12))
+                        }
+                        Text("Settings.battery")
+                    }
+                })
+                NavigationLink(destination: { SleepTimeView().navigationTitle("Settings.sleep") }, label: {
+                    HStack {
+                        ZStack {
+                            Color.cyan
+                                .frame(width: 20, height: 20)
+                                .clipShape(Circle())
+                            Image(systemName: "bed.double.fill")
+                                .font(.system(size: 12))
+                        }
+                        Text("Settings.sleep")
+                    }
+                })
+                NavigationLink(destination: { FeedbackView().navigationTitle("Settings.feedback") }, label: {
+                    HStack {
+                        ZStack {
+                            Color.purple
+                                .frame(width: 20, height: 20)
+                                .clipShape(Circle())
+                            Image(systemName: "exclamationmark")
+                                .font(.system(size: 12))
+                        }
+                        Text("Settings.feedback")
+                    }
+                })
+                NavigationLink(destination: { PrivacySettingsView().navigationTitle("隐私与安全性") }, label: {
+                    HStack {
+                        ZStack {
+                            Color.blue
+                                .frame(width: 20, height: 20)
+                                .clipShape(Circle())
+                            Image(systemName: "hand.raised.fill")
+                                .font(.system(size: 12))
+                        }
+                        Text("隐私与安全性")
+                    }
+                })
+            }
+            Section {
+                NavigationLink(destination: { AboutView() }, label: {
+                    HStack {
+                        ZStack {
+                            Color.gray
+                                .frame(width: 20, height: 20)
+                                .clipShape(Circle())
+                            Image(systemName: "info")
+                                .font(.system(size: 12))
+                        }
+                        Text("Settings.about")
+                    }
+                })
+                NavigationLink(destination: { SoftwareUpdateView().navigationTitle("Settings.update") }, label: {
+                    HStack {
+                        ZStack {
+                            Color.gray
+                                .frame(width: 20, height: 20)
+                                .clipShape(Circle())
+                            Image(systemName: "arrow.clockwise")
+                                .font(.system(size: 12))
+                        }
+                        Text("Settings.update")
+                    }
+                })
+                if debug {
+                    Section {
+                        NavigationLink(destination: { DebugMenuView().navigationTitle("Settings.debug") }, label: {
+                            HStack {
+                                ZStack {
+                                    Color.blue
+                                        .frame(width: 20, height: 20)
+                                        .clipShape(Circle())
+                                    Image(systemName: "hammer.fill")
+                                        .font(.system(size: 12))
+                                }
+                                Text("Settings.developer")
+                            }
+                        })
+                    }
+                }
+                if !sessdata.isEmpty {
+                    Button(role: .destructive, action: {
+                        isLogoutAlertPresented = true
+                    }, label: {
+                        HStack {
+                            Text("Settings.log-out")
+                        }
+                    })
+                    .buttonBorderShape(.roundedRectangle(radius: 13))
+                    .alert("Settings.log-out", isPresented: $isLogoutAlertPresented, actions: {
+                        Button(role: .destructive, action: {
+                            dedeUserID = ""
+                            dedeUserID__ckMd5 = ""
+                            sessdata = ""
+                            biliJct = ""
+                        }, label: {
+                            HStack {
+                                Text("Settings.log-out.confirm")
+                                Spacer()
+                            }
+                        })
+                        Button(action: {
+                            
+                        }, label: {
+                            Text("Settings.log-out.cancel")
+                        })
+                    }, message: {
+                        Text("Settings.log-out.message")
+                    })
+                }
+            }
+            #endif
         }
         .navigationTitle("Settings")
         .navigationBarTitleDisplayMode(.large)
@@ -215,15 +385,27 @@ struct SettingsView: View {
 }
 
 struct PlayerSettingsView: View {
-    @AppStorage("IsRecordHistory") var isRecordHistory = true
     @AppStorage("VideoGetterSource") var videoGetterSource = "official"
     @AppStorage("IsShowNormalDanmaku") var isShowNormalDanmaku = true
     @AppStorage("IsShowTopDanmaku") var isShowTopDanmaku = true
     @AppStorage("IsShowBottomDanmaku") var isShowBottomDanmaku = true
+    #if os(watchOS)
+    @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
+    #else
+    @AppStorage("IsRecordHistory") var isRecordHistory = true
+    #endif
     var body: some View {
         List {
             Section {
+                #if !os(watchOS)
                 Toggle("记录历史记录", isOn: $isRecordHistory)
+                #else
+                Picker("Player.record-history", selection: $recordHistoryTime) {
+                    Text("Player.record-history.when-entering-page").tag("into")
+                    Text("Player.record-history.when-video-plays").tag("play")
+                    Text("Player.record-history.never").tag("never")
+                }
+                #endif
             }
             Section(footer: Text("Player.analyzying-source.description")) {
                 Picker("Player.analyzying-source", selection: $videoGetterSource) {
@@ -247,7 +429,7 @@ struct NetworkSettingsView: View {
     var body: some View {
         List {
             Section {
-                NavigationLink(destination: {NetworkFixView()}, label: {
+                NavigationLink(destination: { NetworkFixView() }, label: {
                     Text("Troubleshoot")
                 })
                 Toggle("Troubleshoot.auto-pop-up", isOn: $isShowNetworkFixing)
@@ -256,6 +438,7 @@ struct NetworkSettingsView: View {
     }
 }
 
+#if !os(watchOS)
 struct NotificationSettingsView: View {
     @AppStorage("IsNotificationEnabled") var isNotificationEnabled = false
     var body: some View {
@@ -264,7 +447,7 @@ struct NotificationSettingsView: View {
                 Toggle("启用通知", isOn: $isNotificationEnabled)
                     .onChange(of: isNotificationEnabled) { value in
                         if value {
-                            UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.badge,.sound]) { (isGrand, error) in
+                            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { isGrand, _ in
                                 DispatchQueue.main.async {
                                     if !isGrand {
                                         isNotificationEnabled = false
@@ -280,6 +463,7 @@ struct NotificationSettingsView: View {
         }
     }
 }
+#endif
 
 struct SoundAHapticSettingsView: View {
     @AppStorage("IsUseExtHaptic") var isUseExtHaptic = true
@@ -376,7 +560,7 @@ struct ScreenTimeSettingsView: View {
     struct SingleTimeBarMarkData: Identifiable {
         let name: String
         let time: Int
-        var id: String{ name }
+        var id: String { name }
     }
 }
 
@@ -410,7 +594,7 @@ struct SleepTimeView: View {
         }
         .navigationTitle("Sleep")
         .onAppear {
-            let timer = Timer(timeInterval: 0.5, repeats: true) { timer in
+            let timer = Timer(timeInterval: 0.5, repeats: true) { _ in
                 currentHour = getCurrentTime().hour
                 currentMinute = getCurrentTime().minute
                 currentSecond = getCurrentTime().second
@@ -456,16 +640,16 @@ func getCurrentTime() -> Time {
 struct DebugMenuView: View {
     var body: some View {
         List {
-            NavigationLink(destination: {UserDetailView(uid: "3546572635768935")}, label: {
+            NavigationLink(destination: { UserDetailView(uid: "3546572635768935") }, label: {
                 Text("LongUIDUserTest")
             })
-            NavigationLink(destination: {BuvidFpDebug()}, label: {
+            NavigationLink(destination: { BuvidFpDebug() }, label: {
                 Text("buvid_fpTest")
             })
-            NavigationLink(destination: {UuidDebug()}, label: {
+            NavigationLink(destination: { UuidDebug() }, label: {
                 Text("_uuid_Gen")
             })
-            NavigationLink(destination: {Buvid34Debug()}, label: {
+            NavigationLink(destination: { Buvid34Debug() }, label: {
                 Text("buvid3_4_actived")
             })
         }
@@ -551,6 +735,144 @@ struct PrivacySettingsView: View {
         }
     }
 }
+
+#if os(watchOS)
+struct SoftwareUpdateView: View {
+    @State var shouldUpdate = false
+    @State var isLoading = true
+    @State var isFailed = false
+    @State var latestVer = ""
+    @State var latestBuild = ""
+    @State var releaseNote = ""
+    var body: some View {
+        ScrollView {
+            VStack {
+                if !isLoading {
+                    if shouldUpdate {
+                        HStack {
+                            Spacer()
+                                .frame(width: 10)
+                            Image("AppIconImage")
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                                .cornerRadius(8)
+                            Spacer()
+                                .frame(width: 10)
+                            VStack {
+                                Text("v\(latestVer) Build \(latestBuild)")
+                                    .font(.system(size: 14, weight: .medium))
+                                HStack {
+                                    Text("Darock-studio")
+                                        .font(.system(size: 13))
+                                        .foregroundColor(.gray)
+                                    Spacer()
+                                }
+                            }
+                        }
+                        Divider()
+                        Text(releaseNote)
+                        if (Bundle.main.infoDictionary?["CFBundleIdentifier"] as! String) != "com.darock.DarockBili.watchkitapp" {
+                            Button(action: {
+                                let session = ASWebAuthenticationSession(url: URL(string: "https://cd.darock.top:32767/meowbili/install.html")!, callbackURLScheme: "mlhd") { _, _ in
+                                    return
+                                }
+                                session.prefersEphemeralWebBrowserSession = true
+                                session.start()
+                            }, label: {
+                                Text("Update.download-and-install")
+                            })
+                        } else {
+                            Spacer()
+                                .frame(height: 10)
+                            Text("Update.install-by-testflight")
+                                .bold()
+                        }
+                    } else if isFailed {
+                        Text("Update.error")
+                    } else {
+                        Text("Update.latest")
+                    }
+                } else {
+                    HStack {
+                        Text("Update.checking")
+                            .lineLimit(1)
+                            .multilineTextAlignment(.leading)
+                            .frame(width: 130)
+                        Spacer()
+                            .frame(maxWidth: .infinity)
+                        ProgressView()
+                    }
+                }
+            }
+        }
+        .onAppear {
+            DarockKit.Network.shared.requestString("https://api.darock.top/bili/newver") { respStr, isSuccess in
+                if isSuccess && respStr.apiFixed().contains("|") {
+                    latestVer = String(respStr.apiFixed().split(separator: "|")[0])
+                    latestBuild = String(respStr.apiFixed().split(separator: "|")[1])
+                    let nowMajorVer = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+                    let nowBuildVer = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
+                    if nowMajorVer != latestVer || Int(nowBuildVer)! < Int(latestBuild)! {
+                        shouldUpdate = true
+                    }
+                    DarockKit.Network.shared.requestString("https://api.darock.top/bili/newver/note") { respStr, isSuccess in
+                        if isSuccess {
+                            releaseNote = respStr.apiFixed()
+                            isLoading = false
+                        } else {
+                            isFailed = true
+                        }
+                    }
+                } else {
+                    isFailed = true
+                }
+            }
+        }
+    }
+}
+
+struct GestureSettingsView: View {
+    @AppStorage("IsVideoPlayerGestureEnabled") var isVideoPlayerGestureEnabled = true
+    var body: some View {
+        List {
+            Section {
+                Toggle("Gesture.double-tap", isOn: $isVideoPlayerGestureEnabled)
+            } footer: {
+                Text("Gesture.double-tap.description") //在视频播放器使用互点两下手势(Apple Watch Series 9 及以上)或快速操作(其他机型)暂停或播放视频
+            }
+        }
+    }
+}
+
+struct BatterySettingsView: View {
+    @State var batteryLevel = 0.0
+    @State var batteryState = WKInterfaceDeviceBatteryState.unknown
+    @State var isLowBatteryMode = isInLowBatteryMode
+    var body: some View {
+        List {
+            HStack {
+                Gauge(value: batteryLevel, in: -1...100) {
+                    EmptyView()
+                }
+                .gaugeStyle(.accessoryCircularCapacity)
+                Text("\(Int(batteryLevel))%")
+                    .font(.system(size: 30))
+                Spacer()
+            }
+            .listRowBackground(Color.clear)
+            Toggle("Battery.low-power-mode", isOn: $isLowBatteryMode)
+                .onChange(of: isLowBatteryMode) { value in
+                    isInLowBatteryMode = value
+                }
+        }
+        .onAppear {
+            batteryLevel = Double(WKInterfaceDevice.current().batteryLevel * 100.0)
+            batteryState = WKInterfaceDevice.current().batteryState
+            debugPrint(batteryLevel)
+        }
+    }
+}
+#endif
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {

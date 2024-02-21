@@ -20,11 +20,13 @@ import SwiftUI
 import DarockKit
 import Alamofire
 import SwiftyJSON
+import MobileCoreServices
 #if !os(visionOS)
-import AlertToast
 import SDWebImageSwiftUI
 #endif
-import MobileCoreServices
+#if !os(watchOS) && !os(visionOS)
+import AlertToast
+#endif
 
 struct FollowListView: View {
     @AppStorage("DedeUserID") var dedeUserID = ""
@@ -53,7 +55,7 @@ struct FollowListView: View {
                 Section {
                     ForEach(0...users.count - 1, id: \.self) { i in
                         if !isSelecting {
-                            NavigationLink(destination: {UserDetailView(uid: users[i]["UID"]!)}, label: {
+                            NavigationLink(destination: { UserDetailView(uid: users[i]["UID"]!) }, label: {
                                 HStack {
                                     if pinnedUsers.contains(users[i]["UID"]!) {
                                         Image(systemName: "pin.fill")
@@ -79,11 +81,9 @@ struct FollowListView: View {
                             .swipeActions(edge: .leading, allowsFullSwipe: true) {
                                 Button(action: {
                                     if pinnedUsers.contains(users[i]["UID"]!) {
-                                        for j in 0..<pinnedUsers.count {
-                                            if pinnedUsers[j] == users[i]["UID"]! {
-                                                pinnedUsers.remove(at: j)
-                                                break
-                                            }
+                                        for j in 0..<pinnedUsers.count where pinnedUsers[j] == users[i]["UID"]! {
+                                            pinnedUsers.remove(at: j)
+                                            break
                                         }
                                     } else {
                                         pinnedUsers.append(users[i]["UID"]!)
@@ -114,8 +114,10 @@ struct FollowListView: View {
                                             deletedUserId = Int64(users[i]["UID"]!)!
                                             isDeleteUndoPresented = true
                                         } else {
-                                            #if !os(visionOS)
+                                            #if !os(visionOS) && !os(watchOS)
                                             AlertKitAPI.present(title: json["message"].string!, icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                                            #else
+                                            tipWithText(json["message"].string!, symbol: "xmark.circle.fill")
                                             #endif
                                         }
                                     }
@@ -123,10 +125,11 @@ struct FollowListView: View {
                                     Image(systemName: "trash.fill")
                                 })
                             }
-                            .onDrop(of: [kUTTypeData as String], isTargeted: nil) { items in
+                            #if !os(watchOS)
+                            .onDrop(of: [UTType.data.identifier], isTargeted: nil) { items in
                                 PlayHaptic(sharpness: 0.05, intensity: 0.5)
                                 for item in items {
-                                    item.loadDataRepresentation(forTypeIdentifier: kUTTypeData as String) { (data, error) in
+                                    item.loadDataRepresentation(forTypeIdentifier: UTType.data.identifier) { (data, _) in
                                         if let data = data, let dict = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [String: String] {
                                             if dict["ID"] != nil {
                                                 users.insert(dict, at: 0)
@@ -141,6 +144,7 @@ struct FollowListView: View {
                                 }
                                 return true
                             }
+                            #endif
                         } else {
                             Button(action: {
                                 isSelected[i].toggle()
@@ -200,6 +204,7 @@ struct FollowListView: View {
         .navigationTitle("User.subcribed-accounts")
         .navigationBarTitleDisplayMode(.large)
         .navigationBarHidden(isDeleteUndoPresented || isMultipleUndoPresented || isUndoCompletePresented)
+        #if !os(watchOS)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {
@@ -236,6 +241,7 @@ struct FollowListView: View {
                 }
             }
         }
+        #endif
         .onAppear {
             pinnedUsers = UserDefaults.standard.stringArray(forKey: "PinnedFollows") ?? [String]()
             if !isLoadedFollows {
@@ -243,7 +249,7 @@ struct FollowListView: View {
                 isLoadedFollows = true
             }
         }
-        #if !os(visionOS)
+        #if !os(visionOS) && !os(watchOS)
         .toast(isPresenting: $isDeleteUndoPresented, duration: 8.0, tapToDismiss: true) {
             AlertToast(displayMode: .hud, type: .complete(.accentColor), title: "已将“\(deletedUserName)”从关注列表中移除", subTitle: "轻触以撤销", style: .style(titleFont: .system(size: 13, weight: .semibold), subTitleFont: .system(size: 11)))
         } onTap: {
@@ -318,4 +324,3 @@ struct FollowListView_Previews: PreviewProvider {
         FollowListView(viewUserId: "356891781")
     }
 }
-
