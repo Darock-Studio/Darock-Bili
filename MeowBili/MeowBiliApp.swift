@@ -206,14 +206,16 @@ struct DarockBili_Watch_AppApp: App {
                     if shouldShowAppName {
                         VStack {
                             Spacer()
-                                .frame(height: 5)
+                                .frame(height: 12)
                             ZStack {
                                 Capsule()
                                     .fill(Color.accentColor)
-                                    .frame(width: 100, height: 25)
-                                Text("喵哩喵哩")
-                                    .foregroundStyle(Color.white)
-                                    .font(.system(size: 16, weight: .semibold))
+                                    .frame(width: 60, height: 20)
+                                HStack {
+                                    Text("喵哩喵哩")
+                                        .foregroundStyle(Color.white)
+                                        .font(.system(size: 12, weight: .medium))
+                                }
                             }
                             Spacer()
                         }
@@ -367,7 +369,7 @@ struct DarockBili_Watch_AppApp: App {
             case .background:
                 break
             case .inactive:
-                #if !os(watchOS) && !os(visionOS)
+                #if os(iOS)
                 shouldShowAppName = false
                 #endif
             case .active:

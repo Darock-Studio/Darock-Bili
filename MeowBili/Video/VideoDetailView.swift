@@ -66,8 +66,6 @@ struct VideoDetailView: View {
     @State var nowPlayingCount = "0"
     @State var publishTime = ""
     @State var videoDesc = ""
-    @State var isMoreMenuPresented = false
-    @State var isDownloadPresented = false
     @State var isAudioPlayerPresented = false
     @State var backgroundPicOpacity = 0.0
     @State var mainVerticalTabViewSelection = 1
@@ -83,6 +81,8 @@ struct VideoDetailView: View {
     @State var videoCID: Int64 = 0
     @State var isDescSelectPresented = false
     #if !os(watchOS)
+    @State var isMoreMenuPresented = false
+    @State var isDownloadPresented = false
     @State var shouldPausePlayer = false
     @State var danmakuSendCache = ""
     @State var danmakuSendColor = Color(hex: 0xFFFFFF)
@@ -523,24 +523,20 @@ struct VideoDetailView: View {
                                         .offset(y: 16)
                                         .toolbar {
                                             ToolbarItem(placement: .topBarTrailing) {
-                                                Button(action: {
-                                                    isMoreMenuPresented = true
-                                                }, label: {
-                                                    Image(systemName: "ellipsis")
-                                                })
-                                                .sheet(isPresented: $isMoreMenuPresented, content: {
+                                                NavigationLink(destination: {
                                                     List {
-                                                        Button(action: {
-                                                            if videoPages.count <= 1 {
-                                                                isDownloadPresented = true
-                                                            } else {
+                                                        if videoPages.count <= 1 {
+                                                            NavigationLink(destination: { VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails) }, label: {
+                                                                Label("Video.download", systemImage: "arrow.down.doc")
+                                                            })
+                                                        } else {
+                                                            Button(action: {
                                                                 videoPartShouldShowDownloadTip = true
                                                                 mainVerticalTabViewSelection = 3
-                                                                isMoreMenuPresented = false
-                                                            }
-                                                        }, label: {
-                                                            Label("Video.download", systemImage: "arrow.down.doc")
-                                                        })
+                                                            }, label: {
+                                                                Label("Video.download", systemImage: "arrow.down.doc")
+                                                            })
+                                                        }
                                                         Button(action: {
                                                             let headers: HTTPHeaders = [
                                                                 "cookie": "SESSDATA=\(sessdata)",
@@ -566,6 +562,8 @@ struct VideoDetailView: View {
                                                             Label("Video.watch-later", systemImage: "memories.badge.plus")
                                                         })
                                                     }
+                                                }, label: {
+                                                    Image(systemName: "ellipsis")
                                                 })
                                             }
                                             ToolbarItemGroup(placement: .bottomBar) {
@@ -611,7 +609,6 @@ struct VideoDetailView: View {
                                 .bold()
                         }
                     }
-                    .sheet(isPresented: $isDownloadPresented, content: { VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails) })
                     .sheet(isPresented: $isVideoPlayerPresented, content: {
                         VideoPlayerView(videoDetails: $videoDetails, videoLink: $videoLink, videoBvid: $videoBvid, videoCID: $videoCID)
                             .navigationBarHidden(true)
