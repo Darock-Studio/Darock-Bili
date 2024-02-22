@@ -88,7 +88,7 @@
 		8CA7CBC52B77AC4A008E587F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC42B77AC4A008E587F /* ContentView.swift */; };
 		8CA7CBC72B77AC4C008E587F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC62B77AC4C008E587F /* Assets.xcassets */; };
 		8CA7CBCA2B77AC4C008E587F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC92B77AC4C008E587F /* Preview Assets.xcassets */; };
-		8CA7CBD02B77AC4C008E587F /* 喵哩喵哩.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 8CA7CBCF2B77AC4C008E587F /* 喵哩喵哩.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8CA7CBD02B77AC4C008E587F /* 喵哩喵哩.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 8CA7CBCF2B77AC4C008E587F /* 喵哩喵哩.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8CA7CBE52B77AC8A008E587F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBE42B77AC8A008E587F /* Alamofire */; };
 		8CA7CBE72B77AC8A008E587F /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBE62B77AC8A008E587F /* Marquee */; };
 		8CA7CBE92B77AC8A008E587F /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBE82B77AC8A008E587F /* SwiftDate */; };
@@ -235,6 +235,81 @@
 		8CC5B6BF2B8652C000BAD89E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC62B77AC4C008E587F /* Assets.xcassets */; };
 		8CC5B6C02B86539700BAD89E /* BiliFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8CA388A02B78B5D800F5F91F /* BiliFont.ttf */; };
 		8CC5B6C12B86539700BAD89E /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E2B720932B67858E00ABB0A6 /* Localizable.xcstrings */; };
+		8CC5B6DD2B873FA000BAD89E /* CodeExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC852B77B015008E587F /* CodeExt.swift */; };
+		8CC5B6DE2B873FA000BAD89E /* backtrace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC782B77AF79008E587F /* backtrace.swift */; };
+		8CC5B6DF2B873FA000BAD89E /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC802B77AFDE008E587F /* FeedbackView.swift */; };
+		8CC5B6E02B873FA000BAD89E /* UserDynamicListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3D5572B7CA209005636DC /* UserDynamicListView.swift */; };
+		8CC5B6E12B873FA000BAD89E /* BangumiDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCD22B77B51A008E587F /* BangumiDownloadView.swift */; };
+		8CC5B6E22B873FA000BAD89E /* LivePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCD72B77B54F008E587F /* LivePlayerView.swift */; };
+		8CC5B6E32B873FA000BAD89E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCA02B77B2DC008E587F /* LoginView.swift */; };
+		8CC5B6E42B873FA000BAD89E /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCB72B77B3D6008E587F /* HistoryView.swift */; };
+		8CC5B6E52B873FA000BAD89E /* UserDynamicMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCC92B77B4B2008E587F /* UserDynamicMainView.swift */; };
+		8CC5B6E62B873FA000BAD89E /* UIExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC872B77B039008E587F /* UIExt.swift */; };
+		8CC5B6E72B873FA000BAD89E /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCAF2B77B383008E587F /* FavoriteView.swift */; };
+		8CC5B6E82B873FA000BAD89E /* Bangumi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC692B77AE62008E587F /* Bangumi.swift */; };
+		8CC5B6E92B873FA000BAD89E /* DownloadsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCAB2B77B354008E587F /* DownloadsView.swift */; };
+		8CC5B6EA2B873FA000BAD89E /* CodingTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC912B77B0D4008E587F /* CodingTime.m */; };
+		8CC5B6EB2B873FA000BAD89E /* MemoryWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC7E2B77AFC5008E587F /* MemoryWarningView.swift */; };
+		8CC5B6EC2B873FA000BAD89E /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCB32B77B3AC008E587F /* ArticleView.swift */; };
+		8CC5B6ED2B873FA000BAD89E /* BangumiPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCD42B77B530008E587F /* BangumiPlayerView.swift */; };
+		8CC5B6EE2B873FA000BAD89E /* backtrace.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC762B77AF4C008E587F /* backtrace.c */; };
+		8CC5B6EF2B873FA000BAD89E /* SignalErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC7C2B77AFAC008E587F /* SignalErrorView.swift */; };
+		8CC5B6F02B873FA000BAD89E /* ErrorGetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC822B77AFF2008E587F /* ErrorGetView.swift */; };
+		8CC5B6F12B873FA000BAD89E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC42B77AC4A008E587F /* ContentView.swift */; };
+		8CC5B6F22B873FA000BAD89E /* LiveDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCD92B77B55F008E587F /* LiveDetailView.swift */; };
+		8CC5B6F32B873FA000BAD89E /* FollowListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCB12B77B398008E587F /* FollowListView.swift */; };
+		8CC5B6F42B873FA000BAD89E /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC6E2B77AEB4008E587F /* SearchView.swift */; };
+		8CC5B6F52B873FA000BAD89E /* BangumiDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCD02B77B504008E587F /* BangumiDetailView.swift */; };
+		8CC5B6F62B873FA000BAD89E /* SelfQrCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3D5642B7CCF3C005636DC /* SelfQrCardView.swift */; };
+		8CC5B6F72B873FA000BAD89E /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCC42B77B47A008E587F /* AudioPlayerView.swift */; };
+		8CC5B6F82B873FA000BAD89E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC9E2B77B166008E587F /* SettingsView.swift */; };
+		8CC5B6F92B873FA000BAD89E /* WatchLaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCB92B77B3EA008E587F /* WatchLaterView.swift */; };
+		8CC5B6FA2B873FA000BAD89E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC62B77AC4C008E587F /* Assets.xcassets */; };
+		8CC5B6FB2B873FA000BAD89E /* DynamicSendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCCD2B77B4DF008E587F /* DynamicSendView.swift */; };
+		8CC5B6FC2B873FA000BAD89E /* NowPlayingExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3D5592B7CB95D005636DC /* NowPlayingExtension.m */; };
+		8CC5B6FD2B873FA000BAD89E /* LinkDetectText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */; };
+		8CC5B6FE2B873FA000BAD89E /* PersonAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCAD2B77B36E008E587F /* PersonAccountView.swift */; };
+		8CC5B6FF2B873FA000BAD89E /* AppFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC892B77B061008E587F /* AppFileManager.swift */; };
+		8CC5B7002B873FA000BAD89E /* DynamicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCCB2B77B4CA008E587F /* DynamicDetailView.swift */; };
+		8CC5B7012B873FA000BAD89E /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCBC2B77B40B008E587F /* VideoPlayerView.swift */; };
+		8CC5B7022B873FA000BAD89E /* OCCodeExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3D55C2B7CC936005636DC /* OCCodeExt.m */; };
+		8CC5B7032B873FA000BAD89E /* SkinDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC982B77B127008E587F /* SkinDownloadView.swift */; };
+		8CC5B7042B873FA000BAD89E /* VideoDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCC02B77B44E008E587F /* VideoDownloadView.swift */; };
+		8CC5B7052B873FA000BAD89E /* DownloadObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC6B2B77AE80008E587F /* DownloadObj.swift */; };
+		8CC5B7062B873FA000BAD89E /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCA52B77B314008E587F /* CommentsView.swift */; };
+		8CC5B7072B873FA000BAD89E /* SkinChooserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC942B77B0FB008E587F /* SkinChooserView.swift */; };
+		8CC5B7082B873FA000BAD89E /* NetwokFixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC7A2B77AF93008E587F /* NetwokFixView.swift */; };
+		8CC5B7092B873FA000BAD89E /* AVExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC8D2B77B094008E587F /* AVExtension.m */; };
+		8CC5B70A2B873FA000BAD89E /* VideoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCC22B77B45F008E587F /* VideoDetailView.swift */; };
+		8CC5B70B2B873FA000BAD89E /* ImageViewerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCC72B77B49D008E587F /* ImageViewerView.swift */; };
+		8CC5B70C2B873FA000BAD89E /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC9C2B77B150008E587F /* AboutView.swift */; };
+		8CC5B70D2B873FA000BAD89E /* MeowBiliApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC22B77AC4A008E587F /* MeowBiliApp.swift */; };
+		8CC5B70E2B873FA000BAD89E /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCA22B77B2F2008E587F /* NoticeView.swift */; };
+		8CC5B70F2B873FA000BAD89E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC702B77AEE4008E587F /* MainView.swift */; };
+		8CC5B7102B873FA000BAD89E /* LiveMessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCDB2B77B571008E587F /* LiveMessagesView.swift */; };
+		8CC5B7112B873FA000BAD89E /* SkinExplorerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC962B77B115008E587F /* SkinExplorerView.swift */; };
+		8CC5B7122B873FA000BAD89E /* UserDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCB52B77B3BF008E587F /* UserDetailView.swift */; };
+		8CC5B7132B873FA000BAD89E /* Passthroughs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC9A2B77B13D008E587F /* Passthroughs.swift */; };
+		8CC5B7152B8742D300BAD89E /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7142B8742D300BAD89E /* Alamofire */; };
+		8CC5B7172B8742D300BAD89E /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7162B8742D300BAD89E /* Marquee */; };
+		8CC5B7192B8742D300BAD89E /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7182B8742D300BAD89E /* SwiftDate */; };
+		8CC5B71B2B8742D300BAD89E /* SFSymbol in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B71A2B8742D300BAD89E /* SFSymbol */; };
+		8CC5B71D2B8742D300BAD89E /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B71C2B8742D300BAD89E /* ZipArchive */; };
+		8CC5B71F2B8742D300BAD89E /* EFQRCode in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B71E2B8742D300BAD89E /* EFQRCode */; };
+		8CC5B7212B8742D300BAD89E /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7202B8742D300BAD89E /* SDWebImageSwiftUI */; };
+		8CC5B7232B8742D300BAD89E /* SDWebImageWebPCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7222B8742D300BAD89E /* SDWebImageWebPCoder */; };
+		8CC5B7252B8742D300BAD89E /* SDWebImageSVGCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7242B8742D300BAD89E /* SDWebImageSVGCoder */; };
+		8CC5B7272B8742D300BAD89E /* SDWebImagePDFCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7262B8742D300BAD89E /* SDWebImagePDFCoder */; };
+		8CC5B7292B8742D300BAD89E /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7282B8742D300BAD89E /* SwiftSoup */; };
+		8CC5B72B2B8742D300BAD89E /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B72A2B8742D300BAD89E /* CachedAsyncImage */; };
+		8CC5B72D2B8742D300BAD89E /* Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B72C2B8742D300BAD89E /* Dynamic */; };
+		8CC5B72F2B8742D300BAD89E /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B72E2B8742D300BAD89E /* SwiftyJSON */; };
+		8CC5B7312B8742D300BAD89E /* DarockKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7302B8742D300BAD89E /* DarockKit */; };
+		8CC5B7332B8742D300BAD89E /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7322B8742D300BAD89E /* AlertKit */; };
+		8CC5B7352B8742D300BAD89E /* AZVideoPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7342B8742D300BAD89E /* AZVideoPlayer */; };
+		8CC5B7372B8742D300BAD89E /* ScreenshotableView in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7362B8742D300BAD89E /* ScreenshotableView */; };
+		8CC5B7392B8742D300BAD89E /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7382B8742D300BAD89E /* Mixpanel */; };
+		8CC5B73B2B8742D300BAD89E /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B73A2B8742D300BAD89E /* AlertToast */; };
 		B4DAF0DD2B80725800755F0C /* LinkDetectText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */; };
 /* End PBXBuildFile section */
 
@@ -336,6 +411,9 @@
 		8CC3D55E2B7CC941005636DC /* OCCodeExt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCCodeExt.h; sourceTree = "<group>"; };
 		8CC3D5642B7CCF3C005636DC /* SelfQrCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfQrCardView.swift; sourceTree = "<group>"; };
 		8CC3D5662B7CDCE1005636DC /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
+		8CC5B6CC2B873E7500BAD89E /* MeowBili Mac App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MeowBili Mac App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CC5B6DB2B873ED400BAD89E /* MeowBili Mac App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "MeowBili Mac App.entitlements"; sourceTree = "<group>"; };
+		8CC5B6DC2B873EF600BAD89E /* MeowBili-Mac-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MeowBili-Mac-App-Info.plist"; sourceTree = "<group>"; };
 		8CD9463A2B64CD0F005D00D0 /* Bangumi_Detail_Season.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Bangumi_Detail_Season.json; sourceTree = "<group>"; };
 		B4468A152B4FC24A002CCEB2 /* Dynamic_Feed_All.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Dynamic_Feed_All.json; sourceTree = "<group>"; };
 		B4468A162B4FC24A002CCEB2 /* Search_With_UP_V2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Search_With_UP_V2.json; sourceTree = "<group>"; };
@@ -416,6 +494,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8CC5B6C92B873E7500BAD89E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CC5B7212B8742D300BAD89E /* SDWebImageSwiftUI in Frameworks */,
+				8CC5B71D2B8742D300BAD89E /* ZipArchive in Frameworks */,
+				8CC5B7152B8742D300BAD89E /* Alamofire in Frameworks */,
+				8CC5B7272B8742D300BAD89E /* SDWebImagePDFCoder in Frameworks */,
+				8CC5B7252B8742D300BAD89E /* SDWebImageSVGCoder in Frameworks */,
+				8CC5B7312B8742D300BAD89E /* DarockKit in Frameworks */,
+				8CC5B7172B8742D300BAD89E /* Marquee in Frameworks */,
+				8CC5B7192B8742D300BAD89E /* SwiftDate in Frameworks */,
+				8CC5B7332B8742D300BAD89E /* AlertKit in Frameworks */,
+				8CC5B7372B8742D300BAD89E /* ScreenshotableView in Frameworks */,
+				8CC5B72D2B8742D300BAD89E /* Dynamic in Frameworks */,
+				8CC5B72F2B8742D300BAD89E /* SwiftyJSON in Frameworks */,
+				8CC5B7392B8742D300BAD89E /* Mixpanel in Frameworks */,
+				8CC5B73B2B8742D300BAD89E /* AlertToast in Frameworks */,
+				8CC5B7292B8742D300BAD89E /* SwiftSoup in Frameworks */,
+				8CC5B7352B8742D300BAD89E /* AZVideoPlayer in Frameworks */,
+				8CC5B71B2B8742D300BAD89E /* SFSymbol in Frameworks */,
+				8CC5B72B2B8742D300BAD89E /* CachedAsyncImage in Frameworks */,
+				8CC5B7232B8742D300BAD89E /* SDWebImageWebPCoder in Frameworks */,
+				8CC5B71F2B8742D300BAD89E /* EFQRCode in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -424,7 +529,9 @@
 			children = (
 				8C0557E02B7A0480009D9CD0 /* MeowBili.entitlements */,
 				8CA371332B83BE7D00CE0E9E /* MeowBili Vision App.entitlements */,
+				8CC5B6DB2B873ED400BAD89E /* MeowBili Mac App.entitlements */,
 				8CA7CC632B77AD5B008E587F /* Info.plist */,
+				8CC5B6DC2B873EF600BAD89E /* MeowBili-Mac-App-Info.plist */,
 				8CA7CC752B77AF4B008E587F /* MeowBili-Bridging-Header.h */,
 				8CA7CBC22B77AC4A008E587F /* MeowBiliApp.swift */,
 				8CA7CC642B77AE33008E587F /* Models */,
@@ -641,6 +748,7 @@
 				8CA7CBC02B77AC4A008E587F /* MeowBili.app */,
 				8CA7CBCF2B77AC4C008E587F /* 喵哩喵哩.app */,
 				8CA370E82B83BB4F00CE0E9E /* MeowBili Vision App.app */,
+				8CC5B6CC2B873E7500BAD89E /* MeowBili Mac App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -778,6 +886,45 @@
 			productReference = 8CA7CBCF2B77AC4C008E587F /* 喵哩喵哩.app */;
 			productType = "com.apple.product-type.application";
 		};
+		8CC5B6CB2B873E7500BAD89E /* MeowBili Mac App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8CC5B6D82B873E7800BAD89E /* Build configuration list for PBXNativeTarget "MeowBili Mac App" */;
+			buildPhases = (
+				8CC5B6C82B873E7500BAD89E /* Sources */,
+				8CC5B6C92B873E7500BAD89E /* Frameworks */,
+				8CC5B6CA2B873E7500BAD89E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MeowBili Mac App";
+			packageProductDependencies = (
+				8CC5B7142B8742D300BAD89E /* Alamofire */,
+				8CC5B7162B8742D300BAD89E /* Marquee */,
+				8CC5B7182B8742D300BAD89E /* SwiftDate */,
+				8CC5B71A2B8742D300BAD89E /* SFSymbol */,
+				8CC5B71C2B8742D300BAD89E /* ZipArchive */,
+				8CC5B71E2B8742D300BAD89E /* EFQRCode */,
+				8CC5B7202B8742D300BAD89E /* SDWebImageSwiftUI */,
+				8CC5B7222B8742D300BAD89E /* SDWebImageWebPCoder */,
+				8CC5B7242B8742D300BAD89E /* SDWebImageSVGCoder */,
+				8CC5B7262B8742D300BAD89E /* SDWebImagePDFCoder */,
+				8CC5B7282B8742D300BAD89E /* SwiftSoup */,
+				8CC5B72A2B8742D300BAD89E /* CachedAsyncImage */,
+				8CC5B72C2B8742D300BAD89E /* Dynamic */,
+				8CC5B72E2B8742D300BAD89E /* SwiftyJSON */,
+				8CC5B7302B8742D300BAD89E /* DarockKit */,
+				8CC5B7322B8742D300BAD89E /* AlertKit */,
+				8CC5B7342B8742D300BAD89E /* AZVideoPlayer */,
+				8CC5B7362B8742D300BAD89E /* ScreenshotableView */,
+				8CC5B7382B8742D300BAD89E /* Mixpanel */,
+				8CC5B73A2B8742D300BAD89E /* AlertToast */,
+			);
+			productName = "MeowBili Mac App";
+			productReference = 8CC5B6CC2B873E7500BAD89E /* MeowBili Mac App.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -796,6 +943,9 @@
 						LastSwiftMigration = 1520;
 					};
 					8CA7CBCE2B77AC4C008E587F = {
+						CreatedOnToolsVersion = 15.2;
+					};
+					8CC5B6CB2B873E7500BAD89E = {
 						CreatedOnToolsVersion = 15.2;
 					};
 				};
@@ -841,6 +991,7 @@
 				8CA7CBBF2B77AC4A008E587F /* MeowBili */,
 				8CA7CBCE2B77AC4C008E587F /* MeowBili Watch App */,
 				8CA370E72B83BB4F00CE0E9E /* MeowBili Vision App */,
+				8CC5B6CB2B873E7500BAD89E /* MeowBili Mac App */,
 			);
 		};
 /* End PBXProject section */
@@ -876,6 +1027,14 @@
 				8CA370DC2B82724400CE0E9E /* PrivacyInfo.xcprivacy in Resources */,
 				8CA7CCE12B77C3A9008E587F /* Localizable.xcstrings in Resources */,
 				8CBFF0D32B85E55F00350E0F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CC5B6CA2B873E7500BAD89E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CC5B6FA2B873FA000BAD89E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1126,12 +1285,72 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8CC5B6C82B873E7500BAD89E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CC5B6EE2B873FA000BAD89E /* backtrace.c in Sources */,
+				8CC5B7082B873FA000BAD89E /* NetwokFixView.swift in Sources */,
+				8CC5B7062B873FA000BAD89E /* CommentsView.swift in Sources */,
+				8CC5B6ED2B873FA000BAD89E /* BangumiPlayerView.swift in Sources */,
+				8CC5B70A2B873FA000BAD89E /* VideoDetailView.swift in Sources */,
+				8CC5B6F12B873FA000BAD89E /* ContentView.swift in Sources */,
+				8CC5B6FC2B873FA000BAD89E /* NowPlayingExtension.m in Sources */,
+				8CC5B7022B873FA000BAD89E /* OCCodeExt.m in Sources */,
+				8CC5B6F62B873FA000BAD89E /* SelfQrCardView.swift in Sources */,
+				8CC5B6DE2B873FA000BAD89E /* backtrace.swift in Sources */,
+				8CC5B7052B873FA000BAD89E /* DownloadObj.swift in Sources */,
+				8CC5B6F42B873FA000BAD89E /* SearchView.swift in Sources */,
+				8CC5B6FF2B873FA000BAD89E /* AppFileManager.swift in Sources */,
+				8CC5B7122B873FA000BAD89E /* UserDetailView.swift in Sources */,
+				8CC5B70F2B873FA000BAD89E /* MainView.swift in Sources */,
+				8CC5B7112B873FA000BAD89E /* SkinExplorerView.swift in Sources */,
+				8CC5B6F52B873FA000BAD89E /* BangumiDetailView.swift in Sources */,
+				8CC5B6F92B873FA000BAD89E /* WatchLaterView.swift in Sources */,
+				8CC5B7072B873FA000BAD89E /* SkinChooserView.swift in Sources */,
+				8CC5B6E92B873FA000BAD89E /* DownloadsView.swift in Sources */,
+				8CC5B7132B873FA000BAD89E /* Passthroughs.swift in Sources */,
+				8CC5B6E42B873FA000BAD89E /* HistoryView.swift in Sources */,
+				8CC5B6E32B873FA000BAD89E /* LoginView.swift in Sources */,
+				8CC5B6E82B873FA000BAD89E /* Bangumi.swift in Sources */,
+				8CC5B6DD2B873FA000BAD89E /* CodeExt.swift in Sources */,
+				8CC5B70D2B873FA000BAD89E /* MeowBiliApp.swift in Sources */,
+				8CC5B6F22B873FA000BAD89E /* LiveDetailView.swift in Sources */,
+				8CC5B6EF2B873FA000BAD89E /* SignalErrorView.swift in Sources */,
+				8CC5B6F32B873FA000BAD89E /* FollowListView.swift in Sources */,
+				8CC5B6DF2B873FA000BAD89E /* FeedbackView.swift in Sources */,
+				8CC5B7092B873FA000BAD89E /* AVExtension.m in Sources */,
+				8CC5B6F02B873FA000BAD89E /* ErrorGetView.swift in Sources */,
+				8CC5B6E72B873FA000BAD89E /* FavoriteView.swift in Sources */,
+				8CC5B70C2B873FA000BAD89E /* AboutView.swift in Sources */,
+				8CC5B6FE2B873FA000BAD89E /* PersonAccountView.swift in Sources */,
+				8CC5B6E22B873FA000BAD89E /* LivePlayerView.swift in Sources */,
+				8CC5B7012B873FA000BAD89E /* VideoPlayerView.swift in Sources */,
+				8CC5B6FB2B873FA000BAD89E /* DynamicSendView.swift in Sources */,
+				8CC5B70E2B873FA000BAD89E /* NoticeView.swift in Sources */,
+				8CC5B70B2B873FA000BAD89E /* ImageViewerView.swift in Sources */,
+				8CC5B6E12B873FA000BAD89E /* BangumiDownloadView.swift in Sources */,
+				8CC5B6E52B873FA000BAD89E /* UserDynamicMainView.swift in Sources */,
+				8CC5B6F82B873FA000BAD89E /* SettingsView.swift in Sources */,
+				8CC5B6EC2B873FA000BAD89E /* ArticleView.swift in Sources */,
+				8CC5B6E02B873FA000BAD89E /* UserDynamicListView.swift in Sources */,
+				8CC5B7002B873FA000BAD89E /* DynamicDetailView.swift in Sources */,
+				8CC5B6FD2B873FA000BAD89E /* LinkDetectText.swift in Sources */,
+				8CC5B6F72B873FA000BAD89E /* AudioPlayerView.swift in Sources */,
+				8CC5B6EA2B873FA000BAD89E /* CodingTime.m in Sources */,
+				8CC5B7102B873FA000BAD89E /* LiveMessagesView.swift in Sources */,
+				8CC5B7042B873FA000BAD89E /* VideoDownloadView.swift in Sources */,
+				8CC5B6EB2B873FA000BAD89E /* MemoryWarningView.swift in Sources */,
+				8CC5B6E62B873FA000BAD89E /* UIExt.swift in Sources */,
+				8CC5B7032B873FA000BAD89E /* SkinDownloadView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
 		8CA7CBD22B77AC4C008E587F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			platformFilter = ios;
 			target = 8CA7CBCE2B77AC4C008E587F /* MeowBili Watch App */;
 			targetProxy = 8CA7CBD12B77AC4C008E587F /* PBXContainerItemProxy */;
 		};
@@ -1146,7 +1365,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 774;
+				CURRENT_PROJECT_VERSION = 775;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1168,7 +1387,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "MeowBili/MeowBili-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = 7;
 				XROS_DEPLOYMENT_TARGET = 1.0;
 			};
 			name = Debug;
@@ -1181,7 +1400,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 774;
+				CURRENT_PROJECT_VERSION = 775;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1203,7 +1422,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "MeowBili/MeowBili-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = 7;
 				VALIDATE_PRODUCT = YES;
 				XROS_DEPLOYMENT_TARGET = 1.0;
 			};
@@ -1218,7 +1437,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 774;
+				CURRENT_PROJECT_VERSION = 775;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1245,7 +1464,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1265,7 +1484,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 774;
+				CURRENT_PROJECT_VERSION = 775;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1292,7 +1511,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1309,7 +1528,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 774;
+				CURRENT_PROJECT_VERSION = 775;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1345,7 +1564,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 774;
+				CURRENT_PROJECT_VERSION = 775;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1373,6 +1592,72 @@
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Release;
+		};
+		8CC5B6D92B873E7800BAD89E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconMac;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 775;
+				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
+				DEVELOPMENT_TEAM = B57D8PP775;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MeowBili/MeowBili-Mac-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "MeowBili/MeowBili-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		8CC5B6DA2B873E7800BAD89E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconMac;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 775;
+				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
+				DEVELOPMENT_TEAM = B57D8PP775;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MeowBili/MeowBili-Mac-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "MeowBili/MeowBili-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -1430,13 +1715,16 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+				XROS_DEPLOYMENT_TARGET = 1.0;
 			};
 			name = Debug;
 		};
@@ -1488,11 +1776,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+				XROS_DEPLOYMENT_TARGET = 1.0;
 			};
 			name = Release;
 		};
@@ -1522,6 +1813,15 @@
 			buildConfigurations = (
 				8CA7CBDD2B77AC4D008E587F /* Debug */,
 				8CA7CBDE2B77AC4D008E587F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8CC5B6D82B873E7800BAD89E /* Build configuration list for PBXNativeTarget "MeowBili Mac App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CC5B6D92B873E7800BAD89E /* Debug */,
+				8CC5B6DA2B873E7800BAD89E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1948,6 +2248,106 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8CC3D5612B7CCE57005636DC /* XCRemoteSwiftPackageReference "ScreenshotableView" */;
 			productName = ScreenshotableView;
+		};
+		8CC5B7142B8742D300BAD89E /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4468A6B2B4FC2C8002CCEB2 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		8CC5B7162B8742D300BAD89E /* Marquee */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4468A6E2B4FC5E7002CCEB2 /* XCRemoteSwiftPackageReference "Marquee" */;
+			productName = Marquee;
+		};
+		8CC5B7182B8742D300BAD89E /* SwiftDate */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4468A712B4FC5F1002CCEB2 /* XCRemoteSwiftPackageReference "SwiftDate" */;
+			productName = SwiftDate;
+		};
+		8CC5B71A2B8742D300BAD89E /* SFSymbol */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4468A742B4FC602002CCEB2 /* XCRemoteSwiftPackageReference "SFSymbol" */;
+			productName = SFSymbol;
+		};
+		8CC5B71C2B8742D300BAD89E /* ZipArchive */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4468A792B4FC618002CCEB2 /* XCRemoteSwiftPackageReference "ZipArchive" */;
+			productName = ZipArchive;
+		};
+		8CC5B71E2B8742D300BAD89E /* EFQRCode */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4468A7E2B4FC675002CCEB2 /* XCRemoteSwiftPackageReference "EFQRCode" */;
+			productName = EFQRCode;
+		};
+		8CC5B7202B8742D300BAD89E /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4468A7F2B4FC681002CCEB2 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+		8CC5B7222B8742D300BAD89E /* SDWebImageWebPCoder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4468A802B4FC68C002CCEB2 /* XCRemoteSwiftPackageReference "SDWebImageWebPCoder" */;
+			productName = SDWebImageWebPCoder;
+		};
+		8CC5B7242B8742D300BAD89E /* SDWebImageSVGCoder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4468A812B4FC697002CCEB2 /* XCRemoteSwiftPackageReference "SDWebImageSVGCoder" */;
+			productName = SDWebImageSVGCoder;
+		};
+		8CC5B7262B8742D300BAD89E /* SDWebImagePDFCoder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4468A822B4FC6A1002CCEB2 /* XCRemoteSwiftPackageReference "SDWebImagePDFCoder" */;
+			productName = SDWebImagePDFCoder;
+		};
+		8CC5B7282B8742D300BAD89E /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4468A832B4FC6B1002CCEB2 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+		8CC5B72A2B8742D300BAD89E /* CachedAsyncImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4468A842B4FC6BE002CCEB2 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
+			productName = CachedAsyncImage;
+		};
+		8CC5B72C2B8742D300BAD89E /* Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4468A852B4FC6C6002CCEB2 /* XCRemoteSwiftPackageReference "Dynamic" */;
+			productName = Dynamic;
+		};
+		8CC5B72E2B8742D300BAD89E /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4468A8A2B4FC85A002CCEB2 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		8CC5B7302B8742D300BAD89E /* DarockKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4468A8D2B4FC8AC002CCEB2 /* XCRemoteSwiftPackageReference "DarockKit" */;
+			productName = DarockKit;
+		};
+		8CC5B7322B8742D300BAD89E /* AlertKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8CA7CCDD2B77BB5A008E587F /* XCRemoteSwiftPackageReference "AlertKit" */;
+			productName = AlertKit;
+		};
+		8CC5B7342B8742D300BAD89E /* AZVideoPlayer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C0557DD2B791B84009D9CD0 /* XCRemoteSwiftPackageReference "AZVideoPlayer" */;
+			productName = AZVideoPlayer;
+		};
+		8CC5B7362B8742D300BAD89E /* ScreenshotableView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8CC3D5612B7CCE57005636DC /* XCRemoteSwiftPackageReference "ScreenshotableView" */;
+			productName = ScreenshotableView;
+		};
+		8CC5B7382B8742D300BAD89E /* Mixpanel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8CA370D22B82690700CE0E9E /* XCRemoteSwiftPackageReference "mixpanel-swift" */;
+			productName = Mixpanel;
+		};
+		8CC5B73A2B8742D300BAD89E /* AlertToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8CA370DD2B827AAD00CE0E9E /* XCRemoteSwiftPackageReference "AlertToast" */;
+			productName = AlertToast;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

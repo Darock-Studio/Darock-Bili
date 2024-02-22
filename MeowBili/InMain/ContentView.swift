@@ -36,6 +36,7 @@ struct ContentView: View {
     @State var userFaceUrl = ""
     @FocusState var isSearchKeyboardFocused: Bool
     var body: some View {
+        #if !os(visionOS) && !os(macOS)
         NavigationStack {
             TabView(selection: $mainTabSelection.onUpdate { oldValue, newValue in
                 if oldValue == newValue && newValue == 4 {
@@ -132,6 +133,19 @@ struct ContentView: View {
                 }
             }
         }
+        #else
+        TabView(selection: $mainTabSelection) {
+            NavigationSplitView(sidebar: {
+                MainView(mainTabSelection: $mainTabSelection)
+            }, detail: {
+                
+            })
+            .tag(1)
+            .tabItem {
+                Label("navbar.suggest", systemImage: "sparkles")
+            }
+        }
+        #endif
     }
 }
 

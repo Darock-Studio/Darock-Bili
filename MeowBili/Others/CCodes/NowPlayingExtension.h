@@ -21,7 +21,11 @@
 
 @interface NowPlayingExtension : NSObject
 
+#if !TARGET_OS_MAC
+
 +(void) setPlayingInfoTitle: (NSString *) title artist: (NSString *) artist artwork: (UIImage *) artwork;
+
+#endif
 
 @end
 

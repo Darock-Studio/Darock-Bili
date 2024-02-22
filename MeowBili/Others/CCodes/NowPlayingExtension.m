@@ -22,6 +22,7 @@
 
 @implementation NowPlayingExtension: NSObject
 
+#if !TARGET_OS_MAC
 +(void) setPlayingInfoTitle: (NSString *) title artist: (NSString *) artist artwork: (UIImage *) artwork {
     #if TARGET_OS_IOS
     AVAudioSession *session = [AVAudioSession sharedInstance];
@@ -37,5 +38,6 @@
     MPNowPlayingInfoCenter.defaultCenter.nowPlayingInfo = info;
     #endif
 }
+#endif
 
 @end
