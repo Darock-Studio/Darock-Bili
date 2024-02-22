@@ -248,15 +248,21 @@ struct VideoDetailView: View {
                                                     Text("\(String(ownerFansCount).shorter()) 粉丝")
                                                         .font(.system(size: 11))
                                                         .lineLimit(1)
+                                                    #if !os(visionOS)
                                                         .foregroundColor(.gray)
+                                                    #else
+                                                        .opacity(0.65)
+                                                    #endif
                                                     Spacer()
                                                 }
                                             }
                                             Spacer()
                                         }
                                         .padding(5)
-                                        .background(Color.gray.opacity(0.35))
                                         .cornerRadius(12)
+                                        #if !os(visionOS)
+                                        .background(Color.gray.opacity(0.35))
+                                        #endif
                                     })
                                     .onDrag {
                                         PlayHaptic(sharpness: 0.05, intensity: 0.5)
@@ -285,8 +291,10 @@ struct VideoDetailView: View {
                                             }
                                         }, label: {
                                             ZStack {
+                                                #if !os(visionOS)
                                                 RoundedRectangle(cornerRadius: 12)
                                                     .foregroundStyle(isLiked ? Color(hex: 0xfa678e) : Color.gray.opacity(0.35))
+                                                #endif
                                                 VStack {
                                                     Text(isLiked ? "" : "")
                                                         .font(.custom("bilibili", size: 20))
@@ -317,8 +325,10 @@ struct VideoDetailView: View {
                                             }
                                         }, label: {
                                             ZStack {
+                                                #if !os(visionOS)
                                                 RoundedRectangle(cornerRadius: 12)
                                                     .foregroundStyle(isCoined ? Color(hex: 0xfa678e) : Color.gray.opacity(0.35))
+                                                #endif
                                                 VStack {
                                                     Text(isCoined ? "" : "")
                                                         .font(.custom("bilibili", size: 20))
@@ -347,8 +357,10 @@ struct VideoDetailView: View {
                                             isFavoriteChoosePresented = true
                                         }, label: {
                                             ZStack {
+                                                #if !os(visionOS)
                                                 RoundedRectangle(cornerRadius: 12)
                                                     .foregroundStyle(isFavoured ? Color(hex: 0xfa678e) : Color.gray.opacity(0.35))
+                                                #endif
                                                 VStack {
                                                     Text(isFavoured ? "" : "")
                                                         .font(.custom("bilibili", size: 20))
@@ -839,58 +851,69 @@ struct VideoDetailView: View {
             }
         }
         .sheet(isPresented: $isMoreMenuPresented) {
-            List {
-                Section {
-                    Button(action: {
-                        shouldPausePlayer = true
-                        isAudioPlayerPresented = true
-                        isMoreMenuPresented = false
-                    }, label: {
-                        Label("Video.play-in-audio", systemImage: "waveform")
-                    })
-                }
-                Section {
-                    Button(action: {
-                        isDownloadPresented = true
-                    }, label: {
-                        Label("Video.download", systemImage: "arrow.down.doc")
-                    })
-                    .sheet(isPresented: $isDownloadPresented, content: { VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails) })
-                }
-                Section {
-                    Button(action: {
-                        let headers: HTTPHeaders = [
-                            "cookie": "SESSDATA=\(sessdata)",
-                            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                        ]
-                        AF.request("https://api.bilibili.com/x/v2/history/toview/add", method: .post, parameters: ["bvid": videoDetails["BV"]!, "csrf": biliJct], headers: headers).response { response in
-                            do {
-                                let json = try JSON(data: response.data ?? Data())
-                                if let code = json["code"].int {
-                                    if code == 0 {
-                                        #if !os(visionOS)
-                                        AlertKitAPI.present(title: String(localized: "Video.added"), icon: .done, style: .iOS17AppleMusic, haptic: .success)
-                                        #endif
+            NavigationStack {
+                List {
+                    Section {
+                        Button(action: {
+                            shouldPausePlayer = true
+                            isAudioPlayerPresented = true
+                            isMoreMenuPresented = false
+                        }, label: {
+                            Label("Video.play-in-audio", systemImage: "waveform")
+                        })
+                    }
+                    Section {
+                        Button(action: {
+                            isDownloadPresented = true
+                        }, label: {
+                            Label("Video.download", systemImage: "arrow.down.doc")
+                        })
+                        .sheet(isPresented: $isDownloadPresented, content: { VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails) })
+                    }
+                    Section {
+                        Button(action: {
+                            let headers: HTTPHeaders = [
+                                "cookie": "SESSDATA=\(sessdata)",
+                                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                            ]
+                            AF.request("https://api.bilibili.com/x/v2/history/toview/add", method: .post, parameters: ["bvid": videoDetails["BV"]!, "csrf": biliJct], headers: headers).response { response in
+                                do {
+                                    let json = try JSON(data: response.data ?? Data())
+                                    if let code = json["code"].int {
+                                        if code == 0 {
+                                            #if !os(visionOS)
+                                            AlertKitAPI.present(title: String(localized: "Video.added"), icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                            #endif
+                                        } else {
+                                            #if !os(visionOS)
+                                            AlertKitAPI.present(title: json["message"].string ?? String(localized: "Video.unkonwn-error"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                                            #endif
+                                        }
                                     } else {
                                         #if !os(visionOS)
-                                        AlertKitAPI.present(title: json["message"].string ?? String(localized: "Video.unkonwn-error"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                                        AlertKitAPI.present(title: String(localized: "Video.unkonwn-error"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
                                         #endif
                                     }
-                                } else {
+                                } catch {
                                     #if !os(visionOS)
                                     AlertKitAPI.present(title: String(localized: "Video.unkonwn-error"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
                                     #endif
                                 }
-                            } catch {
-                                #if !os(visionOS)
-                                AlertKitAPI.present(title: String(localized: "Video.unkonwn-error"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
-                                #endif
+                                isMoreMenuPresented = false
                             }
+                        }, label: {
+                            Label("Video.watch-later", systemImage: "memories.badge.plus")
+                        })
+                    }
+                }
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(action: {
                             isMoreMenuPresented = false
-                        }
-                    }, label: {
-                        Label("Video.watch-later", systemImage: "memories.badge.plus")
-                    })
+                        }, label: {
+                            Text("完成")
+                        })
+                    }
                 }
             }
             .presentationDetents([.medium, .large])
