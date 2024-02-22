@@ -23,6 +23,9 @@
 <p align="center">
     <img src="./Artwork/iOS-page.png" width="254" height="502">
 </p>
+<p align="center">
+    <img src="./Artwork/sim-vision.png" width="273" height="204">
+</p>
 
 ## ✨功能
 - 个性化推荐
