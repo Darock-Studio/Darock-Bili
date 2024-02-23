@@ -43,10 +43,10 @@ struct SearchMainView: View {
     var body: some View {
         List {
             Section {
-                VStack {
+                ZStack {
                     NavigationLink("", destination: SearchView(keyword: searchText), isActive: $isSearchPresented)
                         .frame(width: 0, height: 0)
-                        .hidden()
+                        .disabled(true)
                     TextField("Search.\(Image(systemName: "magnifyingglass"))", text: $searchText)
                         .submitLabel(.search)
                     #if !os(watchOS)
@@ -286,7 +286,9 @@ struct SearchView: View {
                         }
                     }
                 }
+                #if !os(watchOS)
                 .padding(.horizontal)
+                #endif
                 if videos.isEmpty && users.isEmpty && articles.isEmpty && bangumis.isEmpty && liverooms.isEmpty && !isNoResult {
                     ProgressView()
                 }

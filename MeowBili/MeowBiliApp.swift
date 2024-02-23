@@ -151,6 +151,12 @@ struct DarockBili_Watch_AppApp: App {
     // Handoff
     @State var handoffVideoDetails = [String: String]()
     @State var shouldPushVideoView = false
+    // FileLocker
+    @State var fileLockerPwd = UserDefaults.standard.string(forKey: "FileLockerPassword") ?? ""
+    @State var fileLockerRecoverCode = UserDefaults.standard.string(forKey: "FileLockerRecoverCode") ?? ""
+    @State var fileLockerRetryCount = 0
+    @State var fileLockerInput = ""
+    @State var recoveryCodeInput = ""
     #if os(watchOS)
     @State var isMemoryWarningPresented = false
     #else
@@ -158,8 +164,41 @@ struct DarockBili_Watch_AppApp: App {
     #endif
     var body: some SwiftUI.Scene {
         WindowGroup {
-            if UserDefaults.standard.string(forKey: "NewSignalError") ?? "" != "" {
-                SignalErrorView()
+            if fileLockerPwd != "" {
+                List {
+                    Section {
+                        Text(fileLockerRetryCount == 0 ? "文件保险箱已启用" : "输入错误")
+                            .font(.title3)
+                            .bold()
+                            .listRowBackground(Color.clear)
+                    }
+                    Section {
+                        TextField("密码", text: $fileLockerInput)
+                            .submitLabel(.continue)
+                            .onSubmit {
+                                if fileLockerInput == fileLockerPwd {
+                                    fileLockerPwd = ""
+                                } else {
+                                    fileLockerInput = ""
+                                    fileLockerRetryCount++
+                                }
+                            }
+                    }
+                    if fileLockerRetryCount >= 3 {
+                        Section {
+                            TextField("使用恢复密钥", text: $recoveryCodeInput)
+                                .submitLabel(.continue)
+                                .onSubmit {
+                                    if recoveryCodeInput == fileLockerRecoverCode {
+                                        fileLockerPwd = ""
+                                    } else {
+                                        recoveryCodeInput = ""
+                                        fileLockerRetryCount++
+                                    }
+                                }
+                        }
+                    }
+                }
             } else {
                 ZStack {
                     #if !os(visionOS)

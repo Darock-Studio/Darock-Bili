@@ -44,9 +44,6 @@ struct MainView: View {
     @State var userList3: [Any] = []
     @State var userList4: [Any] = []
     @State var isNewUserPresenting = false
-    #if os(watchOS)
-    @State var isSearchPresented = false
-    #endif
     var body: some View {
         #if !os(watchOS)
         MainViewMain()
@@ -58,14 +55,11 @@ struct MainView: View {
         if #available(watchOS 10, *) {
             MainViewMain()
                 .navigationBarTitleDisplayMode(.large)
-                .sheet(isPresented: $isSearchPresented, content: { SearchMainView() })
                 .sheet(isPresented: $isNetworkFixPresented, content: { NetworkFixView() })
                 .sheet(isPresented: $isLoginPresented, content: { LoginView() })
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
-                        Button(action: {
-                            isSearchPresented = true
-                        }, label: {
+                        NavigationLink(destination: { SearchMainView() }, label: {
                             Image(systemName: "magnifyingglass")
                                 .foregroundColor(.accentColor)
                         })
