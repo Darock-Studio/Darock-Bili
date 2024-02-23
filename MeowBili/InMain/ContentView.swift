@@ -9,7 +9,7 @@
 //
 // This source file is part of the MeowBili open source project
 //
-// Copyright (c) 2023 Darock Studio and the MeowBili project authors
+//  Copyright (c) 2024 Darock Studio and the MeowBili project authors
 // Licensed under GNU General Public License v3
 //
 // See https://darock.top/LICENSE.txt for license information
@@ -143,6 +143,29 @@ struct ContentView: View {
             .tag(1)
             .tabItem {
                 Label("navbar.suggest", systemImage: "sparkles")
+            }
+            NavigationStack {
+                PersonAccountView()
+            }
+            .tag(2)
+            .tabItem {
+                Label("navbar.my", systemImage: "person.fill")
+            }
+            NavigationStack {
+                UserDynamicMainView()
+            }
+            .tag(3)
+            .tabItem {
+                Label("navbar.dynamic", systemImage: "rectangle.stack.fill")
+            }
+            NavigationSplitView(sidebar: {
+                SearchMainView(isSearchKeyboardFocused: $isSearchKeyboardFocused)
+            }, detail: {
+                
+            })
+            .tag(4)
+            .tabItem {
+                Label("搜索", systemImage: "magnifyingglass")
             }
         }
         #endif

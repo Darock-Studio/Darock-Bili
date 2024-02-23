@@ -1,0 +1,30 @@
+{
+  "configurations" : [
+    {
+      "id" : "22998E7C-5DA8-4E75-9771-DD7A1832539C",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:DarockBili.xcodeproj",
+      "identifier" : "8CA7CBBF2B77AC4A008E587F",
+      "name" : "MeowBili"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:DarockBili.xcodeproj",
+        "identifier" : "8CC5B73F2B8749BC00BAD89E",
+        "name" : "MeowBiliUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

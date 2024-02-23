@@ -310,6 +310,7 @@
 		8CC5B7372B8742D300BAD89E /* ScreenshotableView in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7362B8742D300BAD89E /* ScreenshotableView */; };
 		8CC5B7392B8742D300BAD89E /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7382B8742D300BAD89E /* Mixpanel */; };
 		8CC5B73B2B8742D300BAD89E /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B73A2B8742D300BAD89E /* AlertToast */; };
+		8CC5B7432B8749BC00BAD89E /* MeowBiliUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC5B7422B8749BC00BAD89E /* MeowBiliUITests.swift */; };
 		B4DAF0DD2B80725800755F0C /* LinkDetectText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */; };
 /* End PBXBuildFile section */
 
@@ -320,6 +321,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8CA7CBCE2B77AC4C008E587F;
 			remoteInfo = "MeowBili Watch App";
+		};
+		8CC5B7462B8749BC00BAD89E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B44689C42B4FC15A002CCEB2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CA7CBBF2B77AC4A008E587F;
+			remoteInfo = MeowBili;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -414,6 +422,9 @@
 		8CC5B6CC2B873E7500BAD89E /* MeowBili Mac App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MeowBili Mac App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CC5B6DB2B873ED400BAD89E /* MeowBili Mac App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "MeowBili Mac App.entitlements"; sourceTree = "<group>"; };
 		8CC5B6DC2B873EF600BAD89E /* MeowBili-Mac-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MeowBili-Mac-App-Info.plist"; sourceTree = "<group>"; };
+		8CC5B7402B8749BC00BAD89E /* MeowBiliUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeowBiliUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CC5B7422B8749BC00BAD89E /* MeowBiliUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeowBiliUITests.swift; sourceTree = "<group>"; };
+		8CC5B74B2B8749FC00BAD89E /* MeowBili.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = MeowBili.xctestplan; sourceTree = "<group>"; };
 		8CD9463A2B64CD0F005D00D0 /* Bangumi_Detail_Season.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Bangumi_Detail_Season.json; sourceTree = "<group>"; };
 		B4468A152B4FC24A002CCEB2 /* Dynamic_Feed_All.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Dynamic_Feed_All.json; sourceTree = "<group>"; };
 		B4468A162B4FC24A002CCEB2 /* Search_With_UP_V2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Search_With_UP_V2.json; sourceTree = "<group>"; };
@@ -521,6 +532,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8CC5B73D2B8749BC00BAD89E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -533,6 +551,7 @@
 				8CA7CC632B77AD5B008E587F /* Info.plist */,
 				8CC5B6DC2B873EF600BAD89E /* MeowBili-Mac-App-Info.plist */,
 				8CA7CC752B77AF4B008E587F /* MeowBili-Bridging-Header.h */,
+				8CC5B74B2B8749FC00BAD89E /* MeowBili.xctestplan */,
 				8CA7CBC22B77AC4A008E587F /* MeowBiliApp.swift */,
 				8CA7CC642B77AE33008E587F /* Models */,
 				8CA7CC6D2B77AEA4008E587F /* InMain */,
@@ -727,6 +746,14 @@
 			path = Live;
 			sourceTree = "<group>";
 		};
+		8CC5B7412B8749BC00BAD89E /* MeowBiliUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8CC5B7422B8749BC00BAD89E /* MeowBiliUITests.swift */,
+			);
+			path = MeowBiliUITests;
+			sourceTree = "<group>";
+		};
 		B44689C32B4FC15A002CCEB2 = {
 			isa = PBXGroup;
 			children = (
@@ -737,6 +764,7 @@
 				8CBFF1272B86188D00350E0F /* .swiftlint.yml */,
 				B4468A142B4FC24A002CCEB2 /* JSONReturnExamples */,
 				8CA7CBC12B77AC4A008E587F /* MeowBili */,
+				8CC5B7412B8749BC00BAD89E /* MeowBiliUITests */,
 				B44689CB2B4FC15A002CCEB2 /* Products */,
 				B4468A902B4FC8B7002CCEB2 /* Frameworks */,
 			);
@@ -749,6 +777,7 @@
 				8CA7CBCF2B77AC4C008E587F /* 喵哩喵哩.app */,
 				8CA370E82B83BB4F00CE0E9E /* MeowBili Vision App.app */,
 				8CC5B6CC2B873E7500BAD89E /* MeowBili Mac App.app */,
+				8CC5B7402B8749BC00BAD89E /* MeowBiliUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -925,6 +954,24 @@
 			productReference = 8CC5B6CC2B873E7500BAD89E /* MeowBili Mac App.app */;
 			productType = "com.apple.product-type.application";
 		};
+		8CC5B73F2B8749BC00BAD89E /* MeowBiliUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8CC5B74A2B8749BC00BAD89E /* Build configuration list for PBXNativeTarget "MeowBiliUITests" */;
+			buildPhases = (
+				8CC5B73C2B8749BC00BAD89E /* Sources */,
+				8CC5B73D2B8749BC00BAD89E /* Frameworks */,
+				8CC5B73E2B8749BC00BAD89E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8CC5B7472B8749BC00BAD89E /* PBXTargetDependency */,
+			);
+			name = MeowBiliUITests;
+			productName = MeowBiliUITests;
+			productReference = 8CC5B7402B8749BC00BAD89E /* MeowBiliUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -947,6 +994,10 @@
 					};
 					8CC5B6CB2B873E7500BAD89E = {
 						CreatedOnToolsVersion = 15.2;
+					};
+					8CC5B73F2B8749BC00BAD89E = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = 8CA7CBBF2B77AC4A008E587F;
 					};
 				};
 			};
@@ -992,6 +1043,7 @@
 				8CA7CBCE2B77AC4C008E587F /* MeowBili Watch App */,
 				8CA370E72B83BB4F00CE0E9E /* MeowBili Vision App */,
 				8CC5B6CB2B873E7500BAD89E /* MeowBili Mac App */,
+				8CC5B73F2B8749BC00BAD89E /* MeowBiliUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1035,6 +1087,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CC5B6FA2B873FA000BAD89E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CC5B73E2B8749BC00BAD89E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1346,6 +1405,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8CC5B73C2B8749BC00BAD89E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CC5B7432B8749BC00BAD89E /* MeowBiliUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1353,6 +1420,11 @@
 			isa = PBXTargetDependency;
 			target = 8CA7CBCE2B77AC4C008E587F /* MeowBili Watch App */;
 			targetProxy = 8CA7CBD12B77AC4C008E587F /* PBXContainerItemProxy */;
+		};
+		8CC5B7472B8749BC00BAD89E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8CA7CBBF2B77AC4A008E587F /* MeowBili */;
+			targetProxy = 8CC5B7462B8749BC00BAD89E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1365,7 +1437,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 775;
+				CURRENT_PROJECT_VERSION = 800;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1400,7 +1472,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 775;
+				CURRENT_PROJECT_VERSION = 800;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1437,7 +1509,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 775;
+				CURRENT_PROJECT_VERSION = 800;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1484,7 +1556,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 775;
+				CURRENT_PROJECT_VERSION = 800;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1528,7 +1600,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 775;
+				CURRENT_PROJECT_VERSION = 800;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1564,7 +1636,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 775;
+				CURRENT_PROJECT_VERSION = 800;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1603,7 +1675,7 @@
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 775;
+				CURRENT_PROJECT_VERSION = 800;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1636,7 +1708,7 @@
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 775;
+				CURRENT_PROJECT_VERSION = 800;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1658,6 +1730,53 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "MeowBili/MeowBili-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		8CC5B7482B8749BC00BAD89E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 800;
+				DEVELOPMENT_TEAM = B57D8PP775;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.darock.MeowBiliUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MeowBili;
+			};
+			name = Debug;
+		};
+		8CC5B7492B8749BC00BAD89E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 800;
+				DEVELOPMENT_TEAM = B57D8PP775;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.darock.MeowBiliUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MeowBili;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -1822,6 +1941,15 @@
 			buildConfigurations = (
 				8CC5B6D92B873E7800BAD89E /* Debug */,
 				8CC5B6DA2B873E7800BAD89E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8CC5B74A2B8749BC00BAD89E /* Build configuration list for PBXNativeTarget "MeowBiliUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CC5B7482B8749BC00BAD89E /* Debug */,
+				8CC5B7492B8749BC00BAD89E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

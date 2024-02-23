@@ -73,6 +73,17 @@
                ReferencedContainer = "container:DarockBili.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8CC5B73F2B8749BC00BAD89E"
+               BuildableName = "MeowBiliUITests.xctest"
+               BlueprintName = "MeowBiliUITests"
+               ReferencedContainer = "container:DarockBili.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
