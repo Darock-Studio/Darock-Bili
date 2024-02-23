@@ -72,6 +72,8 @@ struct AboutApp: View {
             Group {
                 Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)")
                     .font(.system(size: 18))
+                Text("\(Bundle.main.url(forResource: "CurrentChannel", withExtension: "drkdatac")!)")
+                    .font(.system(size: 18))
                 Group {
                     if debug {
                         Text(CodingTime.getCodingTime())
