@@ -106,6 +106,7 @@ struct VideoDetailView: View {
                     Rectangle()
                         .frame(height: 240)
                         .redacted(reason: .placeholder)
+                        .accessibilityIdentifier("VideoNotLoadPlaceholder")
                 }
                 HStack {
                     Spacer()
@@ -170,6 +171,7 @@ struct VideoDetailView: View {
                             Text("推荐").tag(3)
                         }
                     }
+                    .accessibilityIdentifier("DetailSelectionPicker")
                     .pickerStyle(.segmented)
                     .padding(.horizontal)
                     .onChange(of: currentDetailSelection) { _ in
@@ -264,6 +266,7 @@ struct VideoDetailView: View {
                                         .background(Color.gray.opacity(0.35))
                                         #endif
                                     })
+                                    .accessibilityIdentifier("OwnerDetailButton")
                                     .onDrag {
                                         PlayHaptic(sharpness: 0.05, intensity: 0.5)
                                         let itemData = try? NSKeyedArchiver.archivedData(withRootObject: owner, requiringSecureCoding: false)
