@@ -411,6 +411,7 @@
 		8CA7CCD72B77B54F008E587F /* LivePlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePlayerView.swift; sourceTree = "<group>"; };
 		8CA7CCD92B77B55F008E587F /* LiveDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDetailView.swift; sourceTree = "<group>"; };
 		8CA7CCDB2B77B571008E587F /* LiveMessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveMessagesView.swift; sourceTree = "<group>"; };
+		8CB0D0232B88CEC40057EF1C /* ci_post_xcodebuild.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_xcodebuild.sh; sourceTree = "<group>"; };
 		8CBFF1272B86188D00350E0F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		8CC3D5572B7CA209005636DC /* UserDynamicListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDynamicListView.swift; sourceTree = "<group>"; };
 		8CC3D5592B7CB95D005636DC /* NowPlayingExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NowPlayingExtension.m; sourceTree = "<group>"; };
@@ -746,6 +747,14 @@
 			path = Live;
 			sourceTree = "<group>";
 		};
+		8CB0D0222B88CE980057EF1C /* ci_scripts */ = {
+			isa = PBXGroup;
+			children = (
+				8CB0D0232B88CEC40057EF1C /* ci_post_xcodebuild.sh */,
+			);
+			path = ci_scripts;
+			sourceTree = "<group>";
+		};
 		8CC5B7412B8749BC00BAD89E /* MeowBiliUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -762,6 +771,7 @@
 				8C72E32A2B6605B80087486E /* README.md */,
 				8CA388A02B78B5D800F5F91F /* BiliFont.ttf */,
 				8CBFF1272B86188D00350E0F /* .swiftlint.yml */,
+				8CB0D0222B88CE980057EF1C /* ci_scripts */,
 				B4468A142B4FC24A002CCEB2 /* JSONReturnExamples */,
 				8CA7CBC12B77AC4A008E587F /* MeowBili */,
 				8CC5B7412B8749BC00BAD89E /* MeowBiliUITests */,
