@@ -38,6 +38,31 @@ final class MeowBiliUITests: XCTestCase {
         app.launch()
 
         takeScreenshot(of: app, named: "AppLaunch")
+        app.buttons["SuggestedVideo0"].firstMatch.tap()
+        sleep(5)
+        takeScreenshot(of: app, named: "FirstVideoDetail")
+        app.buttons["评论"].firstMatch.tap()
+        sleep(3)
+        takeScreenshot(of: app, named: "VideoComments")
+        app.buttons["推荐"].firstMatch.tap()
+        sleep(1)
+        takeScreenshot(of: app, named: "VideoSuggestions")
+        app.buttons["详情"].firstMatch.tap()
+        app.buttons["OwnerDetailButton"].firstMatch.tap()
+        sleep(3)
+        takeScreenshot(of: app, named: "OwnerDetails")
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+        app.tabBars.buttons["搜索"].firstMatch.tap()
+        sleep(1)
+        takeScreenshot(of: app, named: "SearchView")
+        app.tabBars.buttons["搜索"].firstMatch.tap()
+        sleep(1)
+        app.textFields["SearchInput"].typeText("Darock")
+        app.keyboards.buttons["search"].tap()
+        sleep(5)
+        takeScreenshot(of: app, named: "SearchResults")
+        
     }
 
     func testLaunchPerformance() throws {

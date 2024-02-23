@@ -199,6 +199,7 @@ struct MainView: View {
                         Section {
                             ForEach(0...videos.count - 1, id: \.self) { i in
                                 VideoCard(videos[i])
+                                    .accessibilityIdentifier("SuggestedVideo\(i)")
                                     .onAppear {
                                         if i == videos.count - 1 {
                                             LoadNewVideos()
