@@ -9,12 +9,23 @@
     }
   ],
   "defaultOptions" : {
-    "codeCoverage" : false,
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:DarockBili.xcodeproj",
+          "identifier" : "8CA7CBBF2B77AC4A008E587F",
+          "name" : "MeowBili"
+        }
+      ]
+    },
+    "diagnosticCollectionPolicy" : "Always",
     "targetForVariableExpansion" : {
       "containerPath" : "container:DarockBili.xcodeproj",
       "identifier" : "8CA7CBBF2B77AC4A008E587F",
       "name" : "MeowBili"
-    }
+    },
+    "uiTestingScreenshotsLifetime" : "keepAlways",
+    "userAttachmentLifetime" : "keepAlways"
   },
   "testTargets" : [
     {

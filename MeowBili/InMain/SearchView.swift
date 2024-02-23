@@ -52,6 +52,7 @@ struct SearchMainView: View {
                     #if !os(watchOS)
                         .focused(isSearchKeyboardFocused)
                     #endif
+                        .accessibilityIdentifier("SearchInput")
                         .onSubmit {
                             isSearchPresented = true
                             if searchText != (searchHistory.first ?? "") {
