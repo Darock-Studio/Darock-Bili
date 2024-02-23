@@ -212,8 +212,10 @@ struct VideoPlayerView: View {
                 
                 player.seek(to: CMTime(seconds: UserDefaults.standard.double(forKey: "\(videoBvid)\(videoCID)PlayTime"), preferredTimescale: 1))
                 
-                let cover = UIImage(data: try! Data(contentsOf: URL(string: videoDetails["Pic"]!)!))!
-                NowPlayingExtension.setPlayingInfoTitle(videoDetails["Title"]!, artist: videoDetails["UP"]!, artwork: cover)
+                if let coverData = try? Data(contentsOf: URL(string: videoDetails["Pic"] ?? "") ?? URL(string: "http://example.com")!) {
+                    let cover = UIImage(data: coverData)!
+                    NowPlayingExtension.setPlayingInfoTitle(videoDetails["Title"]!, artist: videoDetails["UP"]!, artwork: cover)
+                }
                 
                 let headers: HTTPHeaders = [
                     "cookie": "SESSDATA=\(sessdata)"
