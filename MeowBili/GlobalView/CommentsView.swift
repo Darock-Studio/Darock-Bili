@@ -495,27 +495,33 @@ struct CommentsView: View {
         @State var isSendingComment = false
         @State var id = ""
         var body: some View {
-            VStack {
-                if !isSendingComment {
-                    TextField("Comment.send", text: $sendCommentCache)
-                        .onSubmit {
-                            if sendCommentCache != "" {
-                                let headers: HTTPHeaders = [
-                                    "cookie": "SESSDATA=\(sessdata)",
-                                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                                ]
-                                AF.request("https://api.bilibili.com/x/v2/reply/add", method: .post, parameters: BiliSubmitComment(type: type, oid: id, message: sendCommentCache, csrf: biliJct), headers: headers).response { response in
-                                    sendCommentCache = ""
-                                    debugPrint(response)
-                                    isSendingComment = false
-                                    dismiss()
+            NavigationStack {
+                VStack {
+                    if !isSendingComment {
+                        TextField("Comment.send", text: $sendCommentCache)
+                            .textFieldStyle(.roundedBorder)
+                            .submitLabel(.send)
+                            .onSubmit {
+                                if sendCommentCache != "" {
+                                    let headers: HTTPHeaders = [
+                                        "cookie": "SESSDATA=\(sessdata)",
+                                        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                    ]
+                                    AF.request("https://api.bilibili.com/x/v2/reply/add", method: .post, parameters: BiliSubmitComment(type: type, oid: id, message: sendCommentCache, csrf: biliJct), headers: headers).response { response in
+                                        sendCommentCache = ""
+                                        debugPrint(response)
+                                        isSendingComment = false
+                                        dismiss()
+                                    }
                                 }
                             }
-                        }
-                    Spacer()
-                } else {
-                    ProgressView()
+                        Spacer()
+                    } else {
+                        ProgressView()
+                    }
                 }
+                .navigationTitle("发送评论")
+                .padding(.horizontal)
             }
             .onAppear {
                 if Int(oid) == nil, type == 1 {
