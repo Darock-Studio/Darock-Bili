@@ -62,7 +62,6 @@ final class MeowBiliUITests: XCTestCase {
         app.keyboards.buttons["search"].tap()
         sleep(5)
         takeScreenshot(of: app, named: "SearchResults")
-        
     }
 
     func testLaunchPerformance() throws {
