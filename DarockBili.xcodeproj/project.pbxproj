@@ -169,6 +169,10 @@
 		8CA7CCDF2B77BB5A008E587F /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CCDE2B77BB5A008E587F /* AlertKit */; };
 		8CA7CCE02B77C3A8008E587F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E2B720932B67858E00ABB0A6 /* Localizable.xcstrings */; };
 		8CA7CCE12B77C3A9008E587F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E2B720932B67858E00ABB0A6 /* Localizable.xcstrings */; };
+		8CB0D0262B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */ = {isa = PBXBuildFile; fileRef = 8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */; };
+		8CB0D0272B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */ = {isa = PBXBuildFile; fileRef = 8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */; };
+		8CB0D0282B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */ = {isa = PBXBuildFile; fileRef = 8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */; };
+		8CB0D0292B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */ = {isa = PBXBuildFile; fileRef = 8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */; };
 		8CBFF0B72B85E55F00350E0F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC42B77AC4A008E587F /* ContentView.swift */; };
 		8CBFF0B82B85E55F00350E0F /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCA52B77B314008E587F /* CommentsView.swift */; };
 		8CBFF0B92B85E55F00350E0F /* LinkDetectText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */; };
@@ -413,6 +417,7 @@
 		8CA7CCDB2B77B571008E587F /* LiveMessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveMessagesView.swift; sourceTree = "<group>"; };
 		8CB0D0232B88CEC40057EF1C /* ci_post_xcodebuild.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_xcodebuild.sh; sourceTree = "<group>"; };
 		8CB0D0242B88D20F0057EF1C /* ci_pre_xcodebuild.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_pre_xcodebuild.sh; sourceTree = "<group>"; };
+		8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */ = {isa = PBXFileReference; lastKnownFileType = text; path = CurrentChannel.drkdatac; sourceTree = "<group>"; };
 		8CBFF1272B86188D00350E0F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		8CC3D5572B7CA209005636DC /* UserDynamicListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDynamicListView.swift; sourceTree = "<group>"; };
 		8CC3D5592B7CB95D005636DC /* NowPlayingExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NowPlayingExtension.m; sourceTree = "<group>"; };
@@ -768,6 +773,7 @@
 		B44689C32B4FC15A002CCEB2 = {
 			isa = PBXGroup;
 			children = (
+				8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */,
 				8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */,
 				E2B720932B67858E00ABB0A6 /* Localizable.xcstrings */,
 				8C72E32A2B6605B80087486E /* README.md */,
@@ -1068,6 +1074,7 @@
 				8CC5B6BF2B8652C000BAD89E /* Assets.xcassets in Resources */,
 				8CC5B6C02B86539700BAD89E /* BiliFont.ttf in Resources */,
 				8CC5B6C12B86539700BAD89E /* Localizable.xcstrings in Resources */,
+				8CB0D0282B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1078,6 +1085,7 @@
 				8CA7CBCA2B77AC4C008E587F /* Preview Assets.xcassets in Resources */,
 				8CA388A22B78B5D800F5F91F /* BiliFont.ttf in Resources */,
 				8CA7CBC72B77AC4C008E587F /* Assets.xcassets in Resources */,
+				8CB0D0262B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */,
 				8CA370DB2B82724400CE0E9E /* PrivacyInfo.xcprivacy in Resources */,
 				8CA7CCE02B77C3A8008E587F /* Localizable.xcstrings in Resources */,
 			);
@@ -1087,6 +1095,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CB0D0272B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */,
 				8CA388A32B78B5D800F5F91F /* BiliFont.ttf in Resources */,
 				8CA370DC2B82724400CE0E9E /* PrivacyInfo.xcprivacy in Resources */,
 				8CA7CCE12B77C3A9008E587F /* Localizable.xcstrings in Resources */,
@@ -1099,6 +1108,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CC5B6FA2B873FA000BAD89E /* Assets.xcassets in Resources */,
+				8CB0D0292B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
