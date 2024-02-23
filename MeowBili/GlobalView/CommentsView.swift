@@ -499,7 +499,9 @@ struct CommentsView: View {
                 VStack {
                     if !isSendingComment {
                         TextField("Comment.send", text: $sendCommentCache)
+                        #if !os(watchOS)
                             .textFieldStyle(.roundedBorder)
+                        #endif
                             .submitLabel(.send)
                             .onSubmit {
                                 if sendCommentCache != "" {
