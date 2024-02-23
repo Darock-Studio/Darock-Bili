@@ -173,6 +173,7 @@
 		8CB0D0272B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */ = {isa = PBXBuildFile; fileRef = 8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */; };
 		8CB0D0282B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */ = {isa = PBXBuildFile; fileRef = 8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */; };
 		8CB0D0292B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */ = {isa = PBXBuildFile; fileRef = 8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */; };
+		8CB0D02A2B88E5B20057EF1C /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E2B720932B67858E00ABB0A6 /* Localizable.xcstrings */; };
 		8CBFF0B72B85E55F00350E0F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC42B77AC4A008E587F /* ContentView.swift */; };
 		8CBFF0B82B85E55F00350E0F /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCA52B77B314008E587F /* CommentsView.swift */; };
 		8CBFF0B92B85E55F00350E0F /* LinkDetectText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */; };
@@ -1109,6 +1110,7 @@
 			files = (
 				8CC5B6FA2B873FA000BAD89E /* Assets.xcassets in Resources */,
 				8CB0D0292B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */,
+				8CB0D02A2B88E5B20057EF1C /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
