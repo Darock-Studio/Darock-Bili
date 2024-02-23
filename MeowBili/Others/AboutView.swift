@@ -72,7 +72,7 @@ struct AboutApp: View {
             Group {
                 Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)")
                     .font(.system(size: 18))
-                Text("\(Bundle.main.url(forResource: "CurrentChannel", withExtension: "drkdatac")!)")
+                Text("\(String(try! String(contentsOf: Bundle.main.url(forResource: "CurrentChannel", withExtension: "drkdatac")!).split(separator: "\n")[0])) 频道")
                     .font(.system(size: 18))
                 Group {
                     if debug {
@@ -190,6 +190,7 @@ struct AboutApp: View {
                 .font(.title3)
             Group {
                 Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)")
+                Text("\(String(try! String(contentsOf: Bundle.main.url(forResource: "CurrentChannel", withExtension: "drkdatac")!).split(separator: "\n")[0])) 频道")
                 if debug {
                     Text(CodingTime.getCodingTime())
                 } else {
