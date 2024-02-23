@@ -224,7 +224,7 @@ struct PersonAccountView: View {
                                         #if !os(watchOS)
                                             .font(.system(size: 20))
                                         #else
-                                            .font(.system(size: 15))
+                                            .font(.system(size: 13))
                                         #endif
                                             .redacted(reason: .placeholder)
                                     }

@@ -27,7 +27,9 @@ var videoDownloadRequests = [DownloadRequest]()
 struct VideoDownloadView: View {
     var bvid: String
     var videoDetails: [String: String]
+    var isPaged = false
     public static var downloadLink: String?
+    public static var downloadCID: Int64?
     @Environment(\.dismiss) var dismiss
     @AppStorage("DedeUserID") var dedeUserID = ""
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
@@ -86,7 +88,7 @@ struct VideoDownloadView: View {
                         ]
                         let destination: DownloadRequest.Destination = { _, _ in
                             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-                            let fileURL = documentsURL.appendingPathComponent("dlds/\(bvid).mp4")
+                            let fileURL = documentsURL.appendingPathComponent("dlds/\(bvid)\(isPaged ? String(VideoDownloadView.downloadCID!) : "").mp4")
                             
                             return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
                         }

@@ -1593,26 +1593,18 @@ struct VideoDetailView: View {
                         })
                         .swipeActions {
                             Button(action: {
-                                if videoGetterSource == "official" {
-                                    let headers: HTTPHeaders = [
-                                        "cookie": "SESSDATA=\(sessdata)",
-                                        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                                    ]
-                                    let cid = videoPages[i]["CID"]!
-                                    videoCID = Int64(cid)!
-                                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers) { respJson, isSuccess in
-                                        if isSuccess {
-                                            if !CheckBApiError(from: respJson) { return }
-                                            VideoDownloadView.downloadLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
-                                            isDownloadPresented = true
-                                        }
-                                    }
-                                } else if videoGetterSource == "injahow" {
-                                    DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=\(i + 1)&type=video&q=32&format=mp4&otype=url") { respStr, isSuccess in
-                                        if isSuccess {
-                                            VideoDownloadView.downloadLink = respStr
-                                            isDownloadPresented = true
-                                        }
+                                let headers: HTTPHeaders = [
+                                    "cookie": "SESSDATA=\(sessdata)",
+                                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                ]
+                                let cid = videoPages[i]["CID"]!
+                                videoCID = Int64(cid)!
+                                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers) { respJson, isSuccess in
+                                    if isSuccess {
+                                        if !CheckBApiError(from: respJson) { return }
+                                        VideoDownloadView.downloadLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
+                                        VideoDownloadView.downloadCID = videoCID
+                                        isDownloadPresented = true
                                     }
                                 }
                             }, label: {
@@ -1622,7 +1614,7 @@ struct VideoDetailView: View {
                     }
                 }
             }
-            .sheet(isPresented: $isDownloadPresented, content: { VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails) })
+            .sheet(isPresented: $isDownloadPresented, content: { VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails, isPaged: true) })
             .sheet(isPresented: $isVideoPlayerPresented, content: {
                 VideoPlayerView(videoDetails: $videoDetails, videoLink: $videoLink, videoBvid: $videoBvid, videoCID: $videoCID)
                     .navigationBarHidden(true)
