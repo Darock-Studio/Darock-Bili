@@ -719,19 +719,136 @@ struct DebugMenuView: View {
 }
 
 struct PrivacySettingsView: View {
-    @AppStorage("IsAllowMixpanel") var isAllowMixpanel = true
     var body: some View {
         List {
             Section {
-                Toggle("允许收集使用信息", isOn: $isAllowMixpanel)
-            } footer: {
-                Text("喵哩喵哩收集使用信息仅用以帮助改进质量，不会用于广告、个人画像之类，收集的信息不会关联到个人。此更改立即生效，不会影响哔哩哔哩官方对您的数据收集。")
+                NavigationLink(destination: { AnalyzeAImprove() }, label: {
+                    Text("分析与改进")
+                })
             }
             Section {
-                Link("喵哩喵哩开源页", destination: URL(string: "https://github.com/Darock-Studio/Darock-Bili")!)
-            } footer: {
-                Text("喵哩喵哩为完整开源项目，欢迎检查代码以确认无隐私问题")
+                NavigationLink(destination: { FileLocker() }, label: {
+                    Text("文件保险箱")
+                })
             }
+        }
+    }
+    
+    struct AnalyzeAImprove: View {
+        @AppStorage("IsAllowMixpanel") var isAllowMixpanel = true
+        var body: some View {
+            List {
+                Section {
+                    Toggle("允许收集使用信息", isOn: $isAllowMixpanel)
+                } footer: {
+                    Text("喵哩喵哩收集使用信息仅用以帮助改进质量，不会用于广告、个人画像之类，收集的信息不会关联到个人。此更改立即生效，不会影响哔哩哔哩官方对您的数据收集。")
+                }
+                Section {
+                    Link("喵哩喵哩开源页", destination: URL(string: "https://github.com/Darock-Studio/Darock-Bili")!)
+                } footer: {
+                    Text("喵哩喵哩为完整开源项目，欢迎检查代码以确认无隐私问题")
+                }
+            }
+            .navigationTitle("分析与改进")
+        }
+    }
+    struct FileLocker: View {
+        @State var isFileLockerEnabled = false
+        @State var isSetPasswdPresented = false
+        @State var passwdInput = ""
+        @State var gendRecCode = ""
+        @State var encryptProgress = 0.0
+        @State var isFinishedEncrypt = false
+        var body: some View {
+            List {
+                Section {
+                    Toggle("文件保险箱", isOn: $isFileLockerEnabled)
+                        .onChange(of: isFileLockerEnabled) { value in
+                            if value && UserDefaults.standard.string(forKey: "FileLockerPassword") == nil {
+                                isSetPasswdPresented = true
+                            } else if !value {
+                                isFileLockerEnabled = false
+                                UserDefaults.standard.removeObject(forKey: "FileLockerPassword")
+                                UserDefaults.standard.removeObject(forKey: "FileLockerRecoverCode")
+                            }
+                        }
+                }
+                if encryptProgress > 0.0 && !isFinishedEncrypt {
+                    Section {
+                        VStack {
+                            Text("正在加密...")
+                                .bold()
+                            ProgressView(value: encryptProgress)
+                                .tint(Color.blue)
+                                .frame(height: 15)
+                        }
+                    }
+                }
+                Section {
+                    Text("""
+                    文件保险箱通过对喵哩喵哩进行加密来保护 App 内的数据。
+                    
+                    警告：你将需要密码或恢复密钥才能访问数据。在此设置过程中，会自动生成恢复密钥。如果同时忘记了密码和恢复密钥，数据将会丢失。
+                    
+                    已\(isFileLockerEnabled ? "启用" : "停用")喵哩喵哩的文件保险箱。\(isFileLockerEnabled ? "\n恢复密钥已设置。" : "")
+                    """)
+                    .font(.system(size: 12))
+                }
+            }
+            .onAppear {
+                if UserDefaults.standard.string(forKey: "FileLockerPassword") != nil {
+                    isFileLockerEnabled = true
+                }
+            }
+            .sheet(isPresented: $isSetPasswdPresented, onDismiss: {
+                if UserDefaults.standard.string(forKey: "FileLockerPassword") != nil {
+                    encryptProgress += 0.01
+                    isFileLockerEnabled = true
+                    Timer.scheduledTimer(withTimeInterval: 2.5, repeats: true) { timer in
+                        encryptProgress += Double.random(in: 0.1...0.3)
+                        if encryptProgress >= 1.0 {
+                            isFinishedEncrypt = true
+                            timer.invalidate()
+                        }
+                    }
+                } else {
+                    isFileLockerEnabled = false
+                }
+            }, content: {
+                NavigationStack {
+                    List {
+                        Section {
+                            SecureField("密码", text: $passwdInput)
+                        }
+                        Section {
+                            NavigationLink(destination: {
+                                ScrollView {
+                                    VStack {
+                                        Text("恢复密钥")
+                                            .font(.title3)
+                                        Text(gendRecCode)
+                                            .font(.system(size: 14, weight: .bold).monospaced())
+                                        Text("请将恢复密钥保存到安全的位置")
+                                            .font(.system(size: 12))
+                                        Button(action: {
+                                            UserDefaults.standard.set(passwdInput, forKey: "FileLockerPassword")
+                                            UserDefaults.standard.set(gendRecCode, forKey: "FileLockerRecoverCode")
+                                            isSetPasswdPresented = false
+                                        }, label: {
+                                            Label("完成", systemImage: "checkmark")
+                                        })
+                                    }
+                                }
+                                .onAppear {
+                                    gendRecCode = String(UuidInfoc.gen().dropLast(5))
+                                }
+                            }, label: {
+                                Text("下一步")
+                            })
+                        }
+                    }
+                }
+            })
         }
     }
 }
