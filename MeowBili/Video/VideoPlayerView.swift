@@ -223,7 +223,7 @@ struct VideoPlayerView: View {
                 
                 #if !os(watchOS)
                 if isRecordHistory {
-                    AF.request("https://api.bilibili.com/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": videoBvid, "mid": dedeUserID, "type": 3, "dt": 2, "play_type": 2, "csrf": biliJct], headers: headers).response { response in
+                    AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": videoBvid, "mid": dedeUserID, "type": 3, "dt": 2, "play_type": 2, "csrf": biliJct], headers: headers).response { response in
                         debugPrint(response)
                     }
                     
@@ -232,14 +232,14 @@ struct VideoPlayerView: View {
                         let headers: HTTPHeaders = [
                             "cookie": "SESSDATA=\(sessdata)"
                         ]
-                        AF.request("https://api.bilibili.com/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": videoBvid, "mid": dedeUserID, "played_time": Int(player.currentTime().seconds), "type": 3, "dt": 2, "play_type": 0, "csrf": biliJct], headers: headers).response { response in
+                        AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": videoBvid, "mid": dedeUserID, "played_time": Int(player.currentTime().seconds), "type": 3, "dt": 2, "play_type": 0, "csrf": biliJct], headers: headers).response { response in
                             debugPrint(response)
                         }
                     }
                 }
                 #else
                 if recordHistoryTime == "play" {
-                    AF.request("https://api.bilibili.com/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": videoBvid, "mid": dedeUserID, "type": 3, "dt": 2, "play_type": 2, "csrf": biliJct], headers: headers).response { response in
+                    AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": videoBvid, "mid": dedeUserID, "type": 3, "dt": 2, "play_type": 2, "csrf": biliJct], headers: headers).response { response in
                         debugPrint(response)
                     }
                 }
@@ -310,7 +310,7 @@ struct VideoPlayerView: View {
     }
     
     func UpdateDanmaku() {
-        AF.request("https://api.bilibili.com/x/v1/dm/list.so?oid=\(videoCID)").response { response in
+        AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v1/dm/list.so?oid=\(videoCID)").response { response in
             let danmakus = String(data: response.data!, encoding: .utf8)!
             if danmakus.contains("<d p=\"") {
                 let danmakuOnly = danmakus.split(separator: "</source>")[1].split(separator: "</i>")[0]

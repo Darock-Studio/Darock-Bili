@@ -135,7 +135,7 @@ struct UserDetailView: View {
                                         "cookie": "SESSDATA=\(sessdata);",
                                         "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                     ]
-                                    AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
+                                    AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
                                         debugPrint(response)
                                         let json = try! JSON(data: response.data!)
                                         let code = json["code"].int!
@@ -278,7 +278,7 @@ struct UserDetailView: View {
                                 let headers: HTTPHeaders = [
                                     "cookie": "SESSDATA=\(sessdata);"
                                 ]
-                                AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
+                                AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
                                     debugPrint(response)
                                     let json = try! JSON(data: response.data!)
                                     let code = json["code"].int!
@@ -374,7 +374,7 @@ struct UserDetailView: View {
             biliWbiSign(paramEncoded: "mid=\(uid)".base64Encoded()) { signed in
                 if let signed {
                     debugPrint(signed)
-                    autoRetryRequestApi("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
+                    autoRetryRequestApi("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             if !CheckBApiError(from: respJson) { return }
                             userFaceUrl = respJson["data"]["face"].string ?? "E"
@@ -385,7 +385,7 @@ struct UserDetailView: View {
                             userSign = respJson["data"]["sign"].string ?? "[加载失败]"
                             coinCount = respJson["data"]["coins"].int ?? -1
                             vipLabel = respJson["data"]["vip"]["label"]["text"].string ?? ""
-                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation/stat?vmid=\(uid)", headers: headers) { respJson, isSuccess in
+                            DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/relation/stat?vmid=\(uid)", headers: headers) { respJson, isSuccess in
                                 if isSuccess {
                                     followCount = respJson["data"]["following"].int ?? -1
                                     fansCount = respJson["data"]["follower"].int ?? -1
@@ -395,7 +395,7 @@ struct UserDetailView: View {
                     }
                 }
             }
-            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation?fid=\(uid)", headers: headers) { respJson, isSuccess in
+            DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/relation?fid=\(uid)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
                     if !CheckBApiError(from: respJson) { return }
                     if respJson["data"]["attribute"].int ?? 0 == 2 || respJson["data"]["attribute"].int ?? 0 == 6 {
@@ -404,7 +404,7 @@ struct UserDetailView: View {
                 }
             }
             if uid == dedeUserID {
-                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/nav", headers: headers) { respJson, isSuccess in
+                DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/web-interface/nav", headers: headers) { respJson, isSuccess in
                     if isSuccess {
                         if !CheckBApiError(from: respJson) { return }
                         currentExp = respJson["data"]["level_info"]["current_exp"].int ?? 0
@@ -626,7 +626,7 @@ struct UserDetailView: View {
             biliWbiSign(paramEncoded: "mid=\(uid)&ps=50&pn=\(videoNowPage)&dm_img_list=[]&dm_img_str=V2ViR0wgMS4wIChPcGVuR0wgRVMgMi4wIENocm9taXVtKQ&dm_cover_img_str=VjNEIDQuMkJyb2FkY2".base64Encoded()) { signed in
                 if let signed {
                     debugPrint(signed)
-                    autoRetryRequestApi("https://api.bilibili.com/x/space/wbi/arc/search?\(signed)", headers: headers) { respJson, isSuccess in
+                    autoRetryRequestApi("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/space/wbi/arc/search?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             debugPrint(respJson)
                             if !CheckBApiError(from: respJson) { return }
@@ -658,7 +658,7 @@ struct UserDetailView: View {
             biliWbiSign(paramEncoded: "mid=\(uid)&ps=30&pn=\(articleNowPage)&sort=publish_time&platform=web".base64Encoded()) { signed in
                 if let signed {
                     debugPrint(signed)
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/article?\(signed)", headers: headers) { respJson, isSuccess in
+                    DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/space/wbi/article?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             debugPrint(respJson)
                             if !CheckBApiError(from: respJson) { return }
@@ -755,7 +755,7 @@ struct UserDetailView: View {
                             "cookie": "SESSDATA=\(sessdata);",
                             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                         ]
-                        AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
+                        AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
                             debugPrint(response)
                             let json = try! JSON(data: response.data!)
                             let code = json["code"].int!
@@ -1112,7 +1112,7 @@ struct UserDetailView: View {
             biliWbiSign(paramEncoded: "mid=\(uid)&ps=50&pn=\(videoNowPage)&dm_img_list=[]&dm_img_str=V2ViR0wgMS4wIChPcGVuR0wgRVMgMi4wIENocm9taXVtKQ&dm_cover_img_str=VjNEIDQuMkJyb2FkY2".base64Encoded()) { signed in
                 if let signed {
                     debugPrint(signed)
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/arc/search?\(signed)", headers: headers) { respJson, isSuccess in
+                    DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/space/wbi/arc/search?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             debugPrint(respJson)
                             if !CheckBApiError(from: respJson) { return }
@@ -1144,7 +1144,7 @@ struct UserDetailView: View {
             biliWbiSign(paramEncoded: "mid=\(uid)&ps=30&pn=\(articleNowPage)&sort=publish_time&platform=web".base64Encoded()) { signed in
                 if let signed {
                     debugPrint(signed)
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/article?\(signed)", headers: headers) { respJson, isSuccess in
+                    DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/space/wbi/article?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             debugPrint(respJson)
                             if !CheckBApiError(from: respJson) { return }

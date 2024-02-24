@@ -254,12 +254,12 @@ struct LiveDetailView: View {
                         biliWbiSign(paramEncoded: "mid=\(upUid)".base64Encoded()) { signed in
                             if let signed {
                                 debugPrint(signed)
-                                autoRetryRequestApi("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
+                                autoRetryRequestApi("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
                                     if isSuccess {
                                         if !CheckBApiError(from: respJson) { return }
                                         streamerFaceUrl = respJson["data"]["face"].string ?? "E"
                                         streamerName = respJson["data"]["name"].string ?? "[加载失败]"
-                                        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation/stat?vmid=\(upUid)", headers: headers) { respJson, isSuccess in
+                                        DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/relation/stat?vmid=\(upUid)", headers: headers) { respJson, isSuccess in
                                             if isSuccess {
                                                 streamerFansCount = respJson["data"]["follower"].int ?? -1
                                             }

@@ -105,7 +105,7 @@ struct FollowListView: View {
                                         "cookie": "SESSDATA=\(sessdata);",
                                         "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                     ]
-                                    AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(users[i]["UID"]!)!, act: 2, csrf: biliJct), headers: headers).response { response in
+                                    AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(users[i]["UID"]!)!, act: 2, csrf: biliJct), headers: headers).response { response in
                                         debugPrint(response)
                                         let json = try! JSON(data: response.data!)
                                         let code = json["code"].int!
@@ -137,7 +137,7 @@ struct FollowListView: View {
                                                     "cookie": "SESSDATA=\(sessdata)",
                                                     "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                                 ]
-                                                AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(dict["ID"]!)!, act: 1, csrf: biliJct), headers: headers).response { _ in }
+                                                AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(dict["ID"]!)!, act: 1, csrf: biliJct), headers: headers).response { _ in }
                                             }
                                         }
                                     }
@@ -230,7 +230,7 @@ struct FollowListView: View {
                             ]
                             for i in 0..<users.count {
                                 if !isSelected[i] { continue }
-                                AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(users[i]["UID"]!)!, act: 2, csrf: biliJct), headers: headers).response { _ in }
+                                AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(users[i]["UID"]!)!, act: 2, csrf: biliJct), headers: headers).response { _ in }
                                 deletedUserIds.append(Int64(users[i]["UID"]!)!)
                             }
                             isMultipleUndoPresented = true
@@ -257,7 +257,7 @@ struct FollowListView: View {
                 "cookie": "SESSDATA=\(sessdata);",
                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             ]
-            AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: deletedUserId, act: 1, csrf: biliJct), headers: headers).response { response in
+            AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: deletedUserId, act: 1, csrf: biliJct), headers: headers).response { response in
                 debugPrint(response)
                 let json = try! JSON(data: response.data!)
                 let code = json["code"].int!
@@ -285,7 +285,7 @@ struct FollowListView: View {
                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             ]
             for uid in deletedUserIds {
-                AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: uid, act: 1, csrf: biliJct), headers: headers).response { _ in }
+                AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: uid, act: 1, csrf: biliJct), headers: headers).response { _ in }
             }
             undoTipText = "已撤销\(deletedUserIds.count)个移除关注"
             isUndoCompletePresented = true
@@ -301,7 +301,7 @@ struct FollowListView: View {
             "cookie": "SESSDATA=\(sessdata);",
             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         ]
-        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation/followings?vmid=\(viewUserId)&order_type=&ps=20&pn=\(nowPage)", headers: headers) { respJson, isSuccess in
+        DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/relation/followings?vmid=\(viewUserId)&order_type=&ps=20&pn=\(nowPage)", headers: headers) { respJson, isSuccess in
             if isSuccess {
                 if !CheckBApiError(from: respJson) { return }
                 let datas = respJson["data"]["list"]

@@ -128,7 +128,7 @@ struct SelfQrCardView: View {
         .onAppear {
             qrcodeImg = EFQRCode.generate(for: "https://space.bilibili.com/\(dedeUserID)", foregroundColor: Color(hex: 0x2b4785).cgColor!)
             
-            getBuvid(url: "https://api.bilibili.com/x/space/wbi/acc/info".urlEncoded()) { buvid3, buvid4, _uuid, _ in
+            getBuvid(url: "https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/space/wbi/acc/info".urlEncoded()) { buvid3, buvid4, _uuid, _ in
             let headers: HTTPHeaders = [
                 "cookie": "SESSDATA=\(sessdata); innersign=0; buvid3=\(buvid3); b_nut=1704873471; i-wanna-go-back=-1; b_ut=7; b_lsid=9910433CB_18CF260AB89; _uuid=\(_uuid); enable_web_push=DISABLE; header_theme_version=undefined; home_feed_column=4; browser_resolution=3440-1440; buvid4=\(buvid4);",
                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
@@ -136,7 +136,7 @@ struct SelfQrCardView: View {
                 biliWbiSign(paramEncoded: "mid=\(dedeUserID)".base64Encoded()) { signed in
                     if let signed {
                         debugPrint(signed)
-                        autoRetryRequestApi("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
+                        autoRetryRequestApi("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
                             if isSuccess {
                                 debugPrint(respJson)
                                 if !CheckBApiError(from: respJson) { return }

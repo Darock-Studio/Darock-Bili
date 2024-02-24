@@ -174,7 +174,7 @@ struct DynamicSendView: View {
                     multipartFormData.append(data, withName: key)
                 }
             }
-        }, to: "https://api.bilibili.com/x/dynamic/feed/draw/upload_bfs", method: .post, headers: headers).response { response in
+        }, to: "https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/dynamic/feed/draw/upload_bfs", method: .post, headers: headers).response { response in
            callback(response)
         }
     }
@@ -201,7 +201,7 @@ struct DynamicSendView: View {
             } else {
                 currentUploadImageIndex.deallocate()
                 sendProgressText = "正在上传动态"
-                AF.request("https://api.bilibili.com/x/dynamic/feed/create/dyn?csrf=\(biliJct)", method: .post, parameters: [
+                AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/dynamic/feed/create/dyn?csrf=\(biliJct)", method: .post, parameters: [
                     "dyn_req": [
                         "content": [
                             "contents": [
@@ -246,7 +246,7 @@ struct DynamicSendView: View {
     struct DynamicTailSetView: View {
         @Environment(\.dismiss) var dismiss
         @AppStorage("DynamicTailSetting") var dynamicTailSetting = "NotSet"
-        @State var tailContent = "———— 来自 watchOS 喵哩喵哩客户端"
+        @State var tailContent = "———— 来自 watchOS 暗礁流媒体客户端"
         var body: some View {
             List {
                 Section {

@@ -87,7 +87,7 @@ struct BangumiDetailView: View {
                 "cookie": "SESSDATA=\(sessdata)",
                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             ]
-            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/pgc/view/web/season?season_id=\(bangumiData.seasonId)", headers: headers) { respJson, isSuccess in
+            DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/pgc/view/web/season?season_id=\(bangumiData.seasonId)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
                     if !CheckBApiError(from: respJson) { return }
                     debugPrint(respJson)
@@ -97,7 +97,7 @@ struct BangumiDetailView: View {
                     }
                 }
             }
-            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/pgc/web/season/section?season_id=\(bangumiData.seasonId)", headers: headers) { respJson, isSuccess in
+            DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/pgc/web/season/section?season_id=\(bangumiData.seasonId)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
                     for ep in respJson["result"]["main_section"]["episodes"] {
                         epDatas.append(BangumiEp(aid: ep.1["aid"].int64 ?? 0, epid: ep.1["id"].int64 ?? 0, cid: ep.1["cid"].int64 ?? 0, cover: ep.1["cover"].string ?? "E", title: ep.1["title"].string ?? "[加载失败]", longTitle: ep.1["long_title"].string ?? "[加载失败]"))
@@ -265,7 +265,7 @@ struct BangumiDetailView: View {
                                 "cookie": "SESSDATA=\(sessdata)",
                                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                             ]
-                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/pgc/player/web/playurl?ep_id=\(epDatas[i].epid)&qn=16&fnval=1", headers: headers) { respJson, isSuccess in
+                            DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/pgc/player/web/playurl?ep_id=\(epDatas[i].epid)&qn=16&fnval=1", headers: headers) { respJson, isSuccess in
                                 if isSuccess {
                                     if !CheckBApiError(from: respJson) { return }
                                     BangumiDetailView.willPlayBangumiLink = respJson["result"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")

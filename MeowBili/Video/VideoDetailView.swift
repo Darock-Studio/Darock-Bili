@@ -120,7 +120,7 @@ struct VideoDetailView: View {
                                 "cookie": "SESSDATA=\(sessdata)",
                                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                             ]
-                            AF.request("https://api.bilibili.com/x/v2/dm/post", method: .post, parameters: ["type": 1, "oid": videoCID, "msg": danmakuSendCache, "bvid": videoDetails["BV"]!, "progress": Int(currentPlayTime * 1000), "color": { () -> Int in
+                            AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v2/dm/post", method: .post, parameters: ["type": 1, "oid": videoCID, "msg": danmakuSendCache, "bvid": videoDetails["BV"]!, "progress": Int(currentPlayTime * 1000), "color": { () -> Int in
                                 var red: CGFloat = 0
                                 var green: CGFloat = 0
                                 var blue: CGFloat = 0
@@ -283,7 +283,7 @@ struct VideoDetailView: View {
                                                 "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3)",
                                                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                             ]
-                                            AF.request("https://api.bilibili.com/x/web-interface/archive/like", method: .post, parameters: ["bvid": videoDetails["BV"]!, "like": isLiked ? 2 : 1, "eab_x": 2, "ramval": 0, "source": "web_normal", "ga": 1, "csrf": biliJct], headers: headers).response { response in
+                                            AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/web-interface/archive/like", method: .post, parameters: ["bvid": videoDetails["BV"]!, "like": isLiked ? 2 : 1, "eab_x": 2, "ramval": 0, "source": "web_normal", "ga": 1, "csrf": biliJct], headers: headers).response { response in
                                                 debugPrint(response)
                                                 #if !os(visionOS)
                                                 if isLiked {
@@ -401,7 +401,7 @@ struct VideoDetailView: View {
                                                             ]
                                                             let cid = videoPages[i]["CID"]!
                                                             videoCID = Int64(cid)!
-                                                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?bvid=\(videoDetails["BV"]!)&cid=\(cid)&qn=\(sessdata == "" ? 64 : 80)", headers: headers) { respJson, isSuccess in
+                                                            DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/player/playurl?bvid=\(videoDetails["BV"]!)&cid=\(cid)&qn=\(sessdata == "" ? 64 : 80)", headers: headers) { respJson, isSuccess in
                                                                 if isSuccess {
                                                                     if !CheckBApiError(from: respJson) { return }
                                                                     videoLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
@@ -559,7 +559,7 @@ struct VideoDetailView: View {
                                                                 "cookie": "SESSDATA=\(sessdata)",
                                                                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                                             ]
-                                                            AF.request("https://api.bilibili.com/x/v2/history/toview/add", method: .post, parameters: ["bvid": videoDetails["BV"]!, "csrf": biliJct], headers: headers).response { response in
+                                                            AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v2/history/toview/add", method: .post, parameters: ["bvid": videoDetails["BV"]!, "csrf": biliJct], headers: headers).response { response in
                                                                 do {
                                                                     let json = try JSON(data: response.data ?? Data())
                                                                     if let code = json["code"].int {
@@ -736,21 +736,21 @@ struct VideoDetailView: View {
                 "cookie": "SESSDATA=\(sessdata)",
                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             ]
-            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/archive/has/like?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
+            DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/web-interface/archive/has/like?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
                     if respJson["data"].int ?? 0 == 1 {
                         isLiked = true
                     }
                 }
             }
-            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/archive/coins?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
+            DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/web-interface/archive/coins?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
                     if respJson["data"]["multiply"].int ?? 0 != 0 {
                         isCoined = true
                     }
                 }
             }
-            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v2/fav/video/favoured?aid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
+            DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v2/fav/video/favoured?aid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
                     if respJson["data"]["favoured"].bool ?? false == true {
                         isFavoured = true
@@ -758,7 +758,7 @@ struct VideoDetailView: View {
                 }
             }
             
-            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/archive/related?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
+            DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/web-interface/archive/related?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
                     let datas = respJson["data"]
                     for data in datas {
@@ -769,7 +769,7 @@ struct VideoDetailView: View {
                     }
                 }
             }
-            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
+            DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
                     debugPrint("----------Prints from VideoDetailView.onAppear.*.requsetJSON(*/view)----------")
                     debugPrint(respJson)
@@ -794,19 +794,19 @@ struct VideoDetailView: View {
                         videoPages.append(["CID": String(page.1["cid"].int ?? 0), "Index": String(page.1["page"].int ?? 0), "Title": page.1["part"].string ?? "[加载失败]"])
                     }
                     if let mid = respJson["data"]["owner"]["mid"].int {
-                        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation/stat?vmid=\(mid)", headers: headers) { respJson, isSuccess in
+                        DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/relation/stat?vmid=\(mid)", headers: headers) { respJson, isSuccess in
                             if isSuccess {
                                 ownerFansCount = respJson["data"]["follower"].int64 ?? -1
                             }
                         }
                     }
                     if let cid = respJson["data"]["pages"][0]["cid"].int {
-                        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/online/total?bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers) { respJson, isSuccess in
+                        DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/player/online/total?bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers) { respJson, isSuccess in
                             if isSuccess {
                                 nowPlayingCount = respJson["data"]["total"].string ?? "[加载失败]"
                             }
                         }
-                        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/v2?bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers) { respJson, isSuccess in
+                        DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/player/v2?bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers) { respJson, isSuccess in
                             if isSuccess {
                                 debugPrint("----------Prints from VideoDetailView.onAppear.*.requsetJSON(*/player/v2)----------")
                                 debugPrint(respJson)
@@ -825,7 +825,7 @@ struct VideoDetailView: View {
                     }
                 }
             }
-            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/tag/archive/tags?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
+            DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/tag/archive/tags?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
                     debugPrint("----------Prints from VideoDetailView.onAppear.*.requsetJSON(*/tags)----------")
                     debugPrint(respJson)
@@ -843,7 +843,7 @@ struct VideoDetailView: View {
             DecodeVideo()
             #else
             if recordHistoryTime == "into" {
-                AF.request("https://api.bilibili.com/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": videoDetails["BV"]!, "mid": dedeUserID, "type": 3, "dt": 2, "play_type": 2, "csrf": biliJct], headers: headers).response { response in
+                AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": videoDetails["BV"]!, "mid": dedeUserID, "type": 3, "dt": 2, "play_type": 2, "csrf": biliJct], headers: headers).response { response in
                     debugPrint(response)
                 }
             }
@@ -902,7 +902,7 @@ struct VideoDetailView: View {
                                 "cookie": "SESSDATA=\(sessdata)",
                                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                             ]
-                            AF.request("https://api.bilibili.com/x/v2/history/toview/add", method: .post, parameters: ["bvid": videoDetails["BV"]!, "csrf": biliJct], headers: headers).response { response in
+                            AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v2/history/toview/add", method: .post, parameters: ["bvid": videoDetails["BV"]!, "csrf": biliJct], headers: headers).response { response in
                                 do {
                                     let json = try JSON(data: response.data ?? Data())
                                     if let code = json["code"].int {
@@ -957,11 +957,11 @@ struct VideoDetailView: View {
             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         ]
         if videoGetterSource == "official" {
-            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
+            DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
                     if !CheckBApiError(from: respJson) { return }
                     let cid = respJson["data"]["pages"][0]["cid"].int64!
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?bvid=\(videoDetails["BV"]!)&cid=\(cid)&qn=\(sessdata == "" ? 64 : 80)", headers: headers) { respJson, isSuccess in
+                    DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/player/playurl?bvid=\(videoDetails["BV"]!)&cid=\(cid)&qn=\(sessdata == "" ? 64 : 80)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             if !CheckBApiError(from: respJson) { return }
                             videoLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
@@ -1017,7 +1017,7 @@ struct VideoDetailView: View {
                                     "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                 ]
                                 let avid = bv2av(bvid: videoDetails["BV"]!)
-                                AF.request("https://api.bilibili.com/x/v3/fav/resource/deal", method: .post, parameters: ["rid": avid, "type": 2, "\(isFavoriteTargetIn[i] ? "del" : "add")_media_ids": Int(favoriteFolderList[i]["ID"]!)!, "csrf": biliJct], headers: headers).response { response in
+                                AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v3/fav/resource/deal", method: .post, parameters: ["rid": avid, "type": 2, "\(isFavoriteTargetIn[i] ? "del" : "add")_media_ids": Int(favoriteFolderList[i]["ID"]!)!, "csrf": biliJct], headers: headers).response { response in
                                     debugPrint(response)
                                     if let rpd = response.data {
                                         if !CheckBApiError(from: try! JSON(data: rpd)) {
@@ -1069,7 +1069,7 @@ struct VideoDetailView: View {
                     "User-Agent": "Mozilla/5.0"
                 ]
                 let avid = bv2av(bvid: videoDetails["BV"]!)
-                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v3/fav/folder/created/list-all?type=2&rid=\(avid)&up_mid=\(dedeUserID)", headers: headers) { respJson, isSuccess in
+                DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v3/fav/folder/created/list-all?type=2&rid=\(avid)&up_mid=\(dedeUserID)", headers: headers) { respJson, isSuccess in
                     if isSuccess {
                         if !CheckBApiError(from: respJson) { return }
                         for folder in respJson["data"]["list"] {
@@ -1156,11 +1156,11 @@ struct VideoDetailView: View {
                             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                         ]
                         if videoGetterSource == "official" {
-                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
+                            DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
                                 if isSuccess {
                                     if !CheckBApiError(from: respJson) { return }
                                     let cid = respJson["data"]["pages"][0]["cid"].int64!
-                                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?bvid=\(videoDetails["BV"]!)&cid=\(cid)&qn=\(sessdata == "" ? 64 : 80)", headers: headers) { respJson, isSuccess in
+                                    DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/player/playurl?bvid=\(videoDetails["BV"]!)&cid=\(cid)&qn=\(sessdata == "" ? 64 : 80)", headers: headers) { respJson, isSuccess in
                                         if isSuccess {
                                             if !CheckBApiError(from: respJson) { return }
                                             videoLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
@@ -1199,11 +1199,11 @@ struct VideoDetailView: View {
                                 "cookie": "SESSDATA=\(sessdata)",
                                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                             ]
-                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
+                            DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
                                 if isSuccess {
                                     if !CheckBApiError(from: respJson) { return }
                                     let cid = respJson["data"]["pages"][0]["cid"].int64!
-                                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?bvid=\(videoDetails["BV"]!)&cid=\(cid)&qn=\(sessdata == "" ? 64 : 80)", headers: headers) { respJson, isSuccess in
+                                    DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/player/playurl?bvid=\(videoDetails["BV"]!)&cid=\(cid)&qn=\(sessdata == "" ? 64 : 80)", headers: headers) { respJson, isSuccess in
                                         if isSuccess {
                                             if !CheckBApiError(from: respJson) { return }
                                             videoLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
@@ -1246,7 +1246,7 @@ struct VideoDetailView: View {
                                     "cookie": "SESSDATA=\(sessdata)",
                                     "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                 ]
-                                AF.request("https://api.bilibili.com/x/v2/history/toview/add", method: .post, parameters: ["bvid": videoDetails["BV"]!, "csrf": biliJct], headers: headers).response { response in
+                                AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v2/history/toview/add", method: .post, parameters: ["bvid": videoDetails["BV"]!, "csrf": biliJct], headers: headers).response { response in
                                     do {
                                         let json = try JSON(data: response.data ?? Data())
                                         if let code = json["code"].int {
@@ -1355,7 +1355,7 @@ struct VideoDetailView: View {
                                     "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3)",
                                     "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                 ]
-                                AF.request("https://api.bilibili.com/x/web-interface/archive/like", method: .post, parameters: ["bvid": videoDetails["BV"]!, "like": isLiked ? 2 : 1, "eab_x": 2, "ramval": 0, "source": "web_normal", "ga": 1, "csrf": biliJct], headers: headers).response { response in
+                                AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/web-interface/archive/like", method: .post, parameters: ["bvid": videoDetails["BV"]!, "like": isLiked ? 2 : 1, "eab_x": 2, "ramval": 0, "source": "web_normal", "ga": 1, "csrf": biliJct], headers: headers).response { response in
                                     debugPrint(response)
                                     if isLiked {
                                         tipWithText(String(localized: "Video.action.canceled"), symbol: "checkmark.circle.fill")
@@ -1566,7 +1566,7 @@ struct VideoDetailView: View {
                                 ]
                                 let cid = videoPages[i]["CID"]!
                                 videoCID = Int64(cid)!
-                                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers) { respJson, isSuccess in
+                                DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers) { respJson, isSuccess in
                                     if isSuccess {
                                         if !CheckBApiError(from: respJson) { return }
                                         videoLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
@@ -1622,7 +1622,7 @@ struct VideoDetailView: View {
                                 ]
                                 let cid = videoPages[i]["CID"]!
                                 videoCID = Int64(cid)!
-                                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers) { respJson, isSuccess in
+                                DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers) { respJson, isSuccess in
                                     if isSuccess {
                                         if !CheckBApiError(from: respJson) { return }
                                         VideoDownloadView.downloadLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
@@ -1670,7 +1670,7 @@ struct VideoThrowCoinView: View {
                     "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3)",
                     "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                 ]
-                AF.request("https://api.bilibili.com/x/web-interface/coin/add", method: .post, parameters: BiliVideoCoin(bvid: bvid, multiply: choseCoin, csrf: biliJct), headers: headers).response { response in
+                AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/web-interface/coin/add", method: .post, parameters: BiliVideoCoin(bvid: bvid, multiply: choseCoin, csrf: biliJct), headers: headers).response { response in
                     debugPrint(response)
                     isCoined = true
                     #if !os(visionOS) && !os(watchOS)

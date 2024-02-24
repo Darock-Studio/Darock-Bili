@@ -190,7 +190,7 @@ struct CommentsView: View {
                                                 "cookie": "SESSDATA=\(sessdata)",
                                                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                             ]
-                                            AF.request("https://api.bilibili.com/x/v2/reply/action", method: .post, parameters: BiliCommentLike(type: type, oid: id, rpid: Int(comments[i]["Rpid"]!)!, action: comments[i]["UserAction"]! == "1" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
+                                            AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v2/reply/action", method: .post, parameters: BiliCommentLike(type: type, oid: id, rpid: Int(comments[i]["Rpid"]!)!, action: comments[i]["UserAction"]! == "1" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
                                                 debugPrint(response)
                                                 comments[i]["UserAction"]! = comments[i]["UserAction"]! == "1" ? "0" : "1"
                                             }
@@ -205,7 +205,7 @@ struct CommentsView: View {
                                                 "cookie": "SESSDATA=\(sessdata)",
                                                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                             ]
-                                            AF.request("https://api.bilibili.com/x/v2/reply/hate", method: .post, parameters: BiliCommentLike(type: type, oid: id, rpid: Int(comments[i]["Rpid"]!)!, action: comments[i]["UserAction"]! == "2" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
+                                            AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v2/reply/hate", method: .post, parameters: BiliCommentLike(type: type, oid: id, rpid: Int(comments[i]["Rpid"]!)!, action: comments[i]["UserAction"]! == "2" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
                                                 debugPrint(response)
                                                 comments[i]["UserAction"]! = comments[i]["UserAction"]! == "2" ? "0" : "2"
                                             }
@@ -261,7 +261,7 @@ struct CommentsView: View {
                 "cookie": "SESSDATA=\(sessdata);",
                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             ]
-            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v2/reply?type=\(type)&oid=\(id)&sort=1&ps=20&pn=\(nowPage)", headers: headers) { respJson, isSuccess in
+            DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v2/reply?type=\(type)&oid=\(id)&sort=1&ps=20&pn=\(nowPage)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
                     debugPrint(respJson)
                     if !CheckBApiError(from: respJson) { return }
@@ -421,7 +421,7 @@ struct CommentsView: View {
                                                             "cookie": "SESSDATA=\(sessdata)",
                                                             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                                         ]
-                                                        AF.request("https://api.bilibili.com/x/v2/reply/action", method: .post, parameters: BiliCommentLike(type: type, oid: avid, rpid: Int(replies[i]["Rpid"]!)!, action: replies[i]["UserAction"]! == "1" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
+                                                        AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v2/reply/action", method: .post, parameters: BiliCommentLike(type: type, oid: avid, rpid: Int(replies[i]["Rpid"]!)!, action: replies[i]["UserAction"]! == "1" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
                                                             debugPrint(response)
                                                             replies[i]["UserAction"]! = replies[i]["UserAction"]! == "1" ? "0" : "1"
                                                         }
@@ -436,7 +436,7 @@ struct CommentsView: View {
                                                             "cookie": "SESSDATA=\(sessdata)",
                                                             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                                         ]
-                                                        AF.request("https://api.bilibili.com/x/v2/reply/hate", method: .post, parameters: BiliCommentLike(type: type, oid: avid, rpid: Int(replies[i]["Rpid"]!)!, action: replies[i]["UserAction"]! == "2" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
+                                                        AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v2/reply/hate", method: .post, parameters: BiliCommentLike(type: type, oid: avid, rpid: Int(replies[i]["Rpid"]!)!, action: replies[i]["UserAction"]! == "2" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
                                                             debugPrint(response)
                                                             replies[i]["UserAction"]! = replies[i]["UserAction"]! == "2" ? "0" : "2"
                                                         }
@@ -463,7 +463,7 @@ struct CommentsView: View {
                                 "cookie": "SESSDATA=\(sessdata);",
                                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                             ]
-                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v2/reply/reply?type=\(type)&oid=\(avid)&root=\(rootData["Rpid"]!)", headers: headers) { respJson, isSuccess in
+                            DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v2/reply/reply?type=\(type)&oid=\(avid)&root=\(rootData["Rpid"]!)", headers: headers) { respJson, isSuccess in
                                 if isSuccess {
                                     if !CheckBApiError(from: respJson) { return }
                                     for reply in respJson["data"]["replies"] {
@@ -509,7 +509,7 @@ struct CommentsView: View {
                                         "cookie": "SESSDATA=\(sessdata)",
                                         "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                     ]
-                                    AF.request("https://api.bilibili.com/x/v2/reply/add", method: .post, parameters: BiliSubmitComment(type: type, oid: id, message: sendCommentCache, csrf: biliJct), headers: headers).response { response in
+                                    AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v2/reply/add", method: .post, parameters: BiliSubmitComment(type: type, oid: id, message: sendCommentCache, csrf: biliJct), headers: headers).response { response in
                                         sendCommentCache = ""
                                         debugPrint(response)
                                         isSendingComment = false

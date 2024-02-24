@@ -48,7 +48,7 @@ struct HistoryView: View {
                                             "cookie": "SESSDATA=\(sessdata);",
                                             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                         ]
-                                        AF.request("https://api.bilibili.com/x/v2/history/delete?kid=archive_\(bv2av(bvid: (histories[i] as! [String: String])["BV"]!))&csrf=\(biliJct)", method: .post, headers: headers).response { response in
+                                        AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v2/history/delete?kid=archive_\(bv2av(bvid: (histories[i] as! [String: String])["BV"]!))&csrf=\(biliJct)", method: .post, headers: headers).response { response in
                                             debugPrint(response)
                                         }
                                     }, label: {
@@ -63,7 +63,7 @@ struct HistoryView: View {
                                             "cookie": "SESSDATA=\(sessdata);",
                                             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                         ]
-                                        AF.request("https://api.bilibili.com/x/v2/history/delete?kid=pgc_\(((histories[i] as! [String: Any])["Data"] as! BangumiData).seasonId)&csrf=\(biliJct)", method: .post, headers: headers).response { response in
+                                        AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v2/history/delete?kid=pgc_\(((histories[i] as! [String: Any])["Data"] as! BangumiData).seasonId)&csrf=\(biliJct)", method: .post, headers: headers).response { response in
                                             debugPrint(response)
                                         }
                                     }, label: {
@@ -98,7 +98,7 @@ struct HistoryView: View {
                                     "cookie": "SESSDATA=\(sessdata)",
                                     "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                 ]
-                                AF.request("https://api.bilibili.com/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": dict["BV"]!, "mid": dedeUserID, "type": 3, "dt": 2, "play_type": 2, "csrf": biliJct], headers: headers).response { _ in }
+                                AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": dict["BV"]!, "mid": dedeUserID, "type": 3, "dt": 2, "play_type": 2, "csrf": biliJct], headers: headers).response { _ in }
                             }
                         }
                     }
@@ -115,7 +115,7 @@ struct HistoryView: View {
                     "cookie": "SESSDATA=\(sessdata);",
                     "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                 ]
-                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v2/history", headers: headers) { respJson, isSuccess in
+                DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v2/history", headers: headers) { respJson, isSuccess in
                     if isSuccess {
                         debugPrint(respJson)
                         if !CheckBApiError(from: respJson) { return }
@@ -216,7 +216,7 @@ struct HistoryView: View {
                                                 "cookie": "SESSDATA=\(sessdata);",
                                                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                             ]
-                                            AF.request("https://api.bilibili.com/x/v2/history/clear", method: .post, parameters: ["csrf": biliJct], headers: headers).response { _ in
+                                            AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v2/history/clear", method: .post, parameters: ["csrf": biliJct], headers: headers).response { _ in
                                                 isEmptyHistoryPresented = false
                                             }
                                         } else {
@@ -239,11 +239,11 @@ struct HistoryView: View {
                                                 let ct = Int64(Date.now.timeStamp)
                                                 if ct - vt < clearSec {
                                                     if (history as! [String: Any])["Type"]! as! String == "archive" {
-                                                        AF.request("https://api.bilibili.com/x/v2/history/delete?kid=archive_\(bv2av(bvid: (history as! [String: String])["BV"]!))&csrf=\(biliJct)", method: .post, headers: headers).response { response in
+                                                        AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v2/history/delete?kid=archive_\(bv2av(bvid: (history as! [String: String])["BV"]!))&csrf=\(biliJct)", method: .post, headers: headers).response { response in
                                                             debugPrint(response)
                                                         }
                                                     } else if (history as! [String: Any])["Type"]! as! String == "pgc" {
-                                                        AF.request("https://api.bilibili.com/x/v2/history/delete?kid=pgc_\(((history as! [String: Any])["Data"] as! BangumiData).seasonId)&csrf=\(biliJct)", method: .post, headers: headers).response { response in
+                                                        AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v2/history/delete?kid=pgc_\(((history as! [String: Any])["Data"] as! BangumiData).seasonId)&csrf=\(biliJct)", method: .post, headers: headers).response { response in
                                                             debugPrint(response)
                                                         }
                                                     }

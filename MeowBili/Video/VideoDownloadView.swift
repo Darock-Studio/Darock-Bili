@@ -70,9 +70,9 @@ struct VideoDownloadView: View {
                     "cookie": "SESSDATA=\(sessdata)",
                     "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                 ]
-                AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(bvid)").response { response in
+                AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/web-interface/view?bvid=\(bvid)").response { response in
                     let cid = Int64((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
-                    AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(bvid)&cid=\(cid)", headers: headers).response { response in
+                    AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/player/playurl?platform=html5&bvid=\(bvid)&cid=\(cid)", headers: headers).response { response in
                         let headers: HTTPHeaders = [
                             "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
                             "accept-encoding": "gzip, deflate, br",

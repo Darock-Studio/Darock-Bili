@@ -179,7 +179,7 @@ struct NetworkFixView: View {
                             
                             func checkBilibili() {
                                 bilibiliAPIState = 2
-                                DarockKit.Network.shared.requestString("https://api.bilibili.com/") { _, isSuccess in
+                                DarockKit.Network.shared.requestString("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/") { _, isSuccess in
                                     if isSuccess {
                                         bilibiliAPIState = 3
                                     } else {
@@ -301,7 +301,7 @@ struct NetworkFixView: View {
                 
             func checkBilibili() {
                 bilibiliAPIState = 2
-                DarockKit.Network.shared.requestString("https://api.bilibili.com/") { _, isSuccess in
+                DarockKit.Network.shared.requestString("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/") { _, isSuccess in
                     if isSuccess {
                         bilibiliAPIState = 3
                     } else {

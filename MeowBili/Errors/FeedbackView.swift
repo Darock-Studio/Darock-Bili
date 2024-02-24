@@ -137,7 +137,7 @@ struct InAppFeedbackView: View {
                         Time：\(Date.now.timeIntervalSince1970)
                         Sender: User
                         """
-                        DarockKit.Network.shared.requestString("https://api.darock.top/feedback/submit/anony/喵哩喵哩/\(msgToSend.base64Encoded().replacingOccurrences(of: "/", with: "{slash}"))") { respStr, isSuccess in
+                        DarockKit.Network.shared.requestString("https://api.darock.top/feedback/submit/anony/暗礁流媒体/\(msgToSend.base64Encoded().replacingOccurrences(of: "/", with: "{slash}"))") { respStr, isSuccess in
                             if isSuccess {
                                 if Int(respStr) != nil {
                                     var arr = UserDefaults.standard.stringArray(forKey: "RadarFBIDs") ?? [String]()
@@ -239,7 +239,7 @@ struct InAppFeedbackView: View {
             }
             .navigationTitle(id)
             .onAppear {
-                DarockKit.Network.shared.requestString("https://api.darock.top/radar/details/喵哩喵哩/\(id)") { respStr, isSuccess in
+                DarockKit.Network.shared.requestString("https://api.darock.top/radar/details/暗礁流媒体/\(id)") { respStr, isSuccess in
                     if isSuccess {
                         let lineSpd = respStr.apiFixed().split(separator: "\\n").map { String($0) }
                         title = lineSpd[0]
@@ -299,7 +299,7 @@ struct InAppFeedbackView: View {
                                     Content：\(replyInput)
                                     Sender：User
                                     """.base64Encoded().replacingOccurrences(of: "/", with: "{slash}")
-                                    DarockKit.Network.shared.requestString("https://api.darock.top/radar/reply/喵哩喵哩/\(id)/\(enced)") { respStr, isSuccess in
+                                    DarockKit.Network.shared.requestString("https://api.darock.top/radar/reply/暗礁流媒体/\(id)/\(enced)") { respStr, isSuccess in
                                         if isSuccess {
                                             if respStr.apiFixed() == "Success" {
                                                 isSendReplyPresented = false

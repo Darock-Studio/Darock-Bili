@@ -329,7 +329,7 @@ struct SearchView: View {
             ]
             biliWbiSign(paramEncoded: "keyword=\(keyword)&search_type=\(type.rawValue)&page=\(page)".base64Encoded()) { signed in
                 if let signed {
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/wbi/search/type?\(signed)", headers: headers) { respJson, isSuccess in
+                    DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/web-interface/wbi/search/type?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             debugPrint(respJson)
                             if !CheckBApiError(from: respJson) { return }

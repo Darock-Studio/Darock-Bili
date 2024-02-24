@@ -616,14 +616,14 @@ public func getBuvid(url: String, callback: @escaping (String, String, String, S
         "5f45":0, // laboratory, set from cookie, null if empty, source remains unknown
         "db46":0 // is_selfdef, default 0
     ]
-    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/frontend/finger/spi") { respJson, isSuccess in
+    DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/frontend/finger/spi") { respJson, isSuccess in
         if isSuccess {
             let buvid3 = respJson["data"]["b_3"].string ?? ""
             let buvid4 = respJson["data"]["b_4"].string ?? ""
             let postHeaders: HTTPHeaders = [
                 "cookie": "innersign=0; buvid3=\(buvid3); b_nut=\(Date.now.timeStamp); i-wanna-go-back=-1; b_ut=7; b_lsid=9910433CB_18CF260AB89; _uuid=\(_uuid); enable_web_push=DISABLE; header_theme_version=undefined; home_feed_column=4; browser_resolution=3440-1440; buvid4=\(buvid4); buvid_fp=e651c1a382430ea93631e09474e0b395"
             ]
-            AF.request("https://api.bilibili.com/x/internal/gaia-gateway/ExClimbWuzhi", method: .post, parameters: postParams, encoding: JSONEncoding.default, headers: postHeaders).response { response in
+            AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/internal/gaia-gateway/ExClimbWuzhi", method: .post, parameters: postParams, encoding: JSONEncoding.default, headers: postHeaders).response { response in
                 callback(buvid3, buvid4, _uuid, response.debugDescription)
             }
         }

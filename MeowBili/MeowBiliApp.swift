@@ -160,6 +160,8 @@ struct DarockBili_Watch_AppApp: App {
     // Navigators
     @State var isUrlOpenVideoPresented = false
     @State var urlOpenVideoDetails = [String: String]()
+    // Server(Exempt)
+    @State var apiServerLink = UserDefaults.standard.string(forKey: "APIServer") ?? ""
     #if os(watchOS)
     @State var isMemoryWarningPresented = false
     #else
@@ -203,229 +205,227 @@ struct DarockBili_Watch_AppApp: App {
                     }
                 }
             } else {
-                ZStack {
-                    #if !os(visionOS)
-                    #if os(watchOS)
-                    ContentView()
-                    VStack {
-                        Spacer()
-                        if #available(watchOS 10, *) {
-                            HStack {
-                                Image(systemName: showTipSymbol)
-                                Text(showTipText)
-                            }
-                            .font(.system(size: 14, weight: .bold))
-                            .frame(width: 110, height: 40)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.1)
-                            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
-                            .offset(y: tipBoxOffset)
-                            .animation(.easeOut(duration: 0.4), value: tipBoxOffset)
-                        } else {
-                            HStack {
-                                Image(systemName: showTipSymbol)
-                                Text(showTipText)
-                            }
-                            .font(.system(size: 14, weight: .bold))
-                            .foregroundColor(.black)
-                            .frame(width: 110, height: 40)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.1)
-                            .background {
-                                Color.white
-                                    .ignoresSafeArea()
-                                    .frame(width: 120, height: 40)
-                                    .cornerRadius(8)
-                                    .foregroundColor(Color(hex: 0xF5F5F5))
-                                    .opacity(0.95)
-                            }
-                            .offset(y: tipBoxOffset)
-                            .animation(.easeOut(duration: 0.4), value: tipBoxOffset)
-                        }
-                    }
-                    #else
-                    NavigationStack {
-                        ZStack {
-                            // Hide NavigationLinks behind
-                            NavigationLink("", isActive: $isUrlOpenVideoPresented, destination: { VideoDetailView(videoDetails: urlOpenVideoDetails) })
-                            ContentView()
-                                .onOpenURL { url in
-                                    let dec = url.absoluteString.urlDecoded()
-                                    let spd = dec.split(separator: "/").dropFirst()
-                                    debugPrint(spd)
-                                    switch spd[1] {
-                                    case "withvideodetail":
-                                        let kvs = dec.split(separator: "/", maxSplits: 1).dropFirst()[2].split(separator: "&") // e.g.: ["BV=xxx", "Title=xxx"]
-                                        urlOpenVideoDetails.removeAll()
-                                        for kv in kvs {
-                                            let kav = kv.split(separator: "=")
-                                            urlOpenVideoDetails.updateValue(String(kav[1]), forKey: String(kav[0]))
-                                        }
-                                        isUrlOpenVideoPresented = true
-                                    default:
-                                        break
-                                    }
-                                }
-                        }
-                    }
-                    if shouldShowAppName {
-                        VStack {
-                            Spacer()
-                                .frame(height: 12)
-                            ZStack {
-                                Capsule()
-                                    .fill(Color.accentColor)
-                                    .frame(width: 60, height: 20)
-                                HStack {
-                                    Text("喵哩喵哩")
-                                        .foregroundStyle(Color.white)
-                                        .font(.system(size: 12, weight: .medium))
-                                }
-                            }
-                            Spacer()
-                        }
-                        .ignoresSafeArea()
-                    }
-                    #endif
-                    #else
-                    GeometryReader3D { proxy3D in
+                if apiServerLink != "" {
+                    ZStack {
+#if !os(visionOS)
+#if os(watchOS)
                         ContentView()
-                            .onAppear {
-                                Task {
-                                    // Delay first - rdar://so?77970699
-                                    // rdar://so?76698516
-                                    try await Task.sleep(nanoseconds: 1_000_000_000)
-                                    globalWindowSize = proxy3D.size
+                        VStack {
+                            Spacer()
+                            if #available(watchOS 10, *) {
+                                HStack {
+                                    Image(systemName: showTipSymbol)
+                                    Text(showTipText)
                                 }
-                            }
-                    }
-                    #endif
-                }
-                #if os(watchOS)
-                .sheet(isPresented: $isMemoryWarningPresented, content: { MemoryWarningView() })
-                #endif
-                .onAppear {
-                    #if os(watchOS)
-                    isInLowBatteryMode = UserDefaults.standard.bool(forKey: "IsInLowBatteryMode")
-                    #endif
-                    
-                    Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
-                        showTipText = pShowTipText
-                        showTipSymbol = pShowTipSymbol
-                        UserDefaults.standard.set(isLowBatteryMode, forKey: "IsInLowBatteryMode")
-                        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { timer in
-                            tipBoxOffset = pTipBoxOffset
-                            timer.invalidate()
-                        }
-                    }
-                    
-                    #if os(watchOS)
-                    Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { timer in
-                        if getMemory() > 240.0 {
-                            isMemoryWarningPresented = true
-                            timer.invalidate()
-                        }
-                    }
-                    #endif
-                    
-                    Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-                        if isShowMemoryInScreen {
-                            isShowMemoryUsage = true
-                            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
-                                memoryUsage = getMemory()
-                            }
-                            timer.invalidate()
-                        }
-                    }
-                    let timer = Timer(timeInterval: 1, repeats: true) { _ in
-                        currentHour = getCurrentTime().hour
-                        currentMinute = getCurrentTime().minute
-                    }
-                    let sleepTimeCheck = Timer(timeInterval: 60, repeats: true) { _ in
-                        if currentHour == notifyHour && currentMinute == notifyMinute && isSleepNotificationOn {
-                            #if !os(visionOS) && !os(watchOS)
-                            AlertKitAPI.present(title: String(localized: "Sleep.notification"), icon: .heart, style: .iOS17AppleMusic, haptic: .warning)
-                            #else
-                            tipWithText(String(localized: "Sleep.notification"), symbol: "bed.double.fill")
-                            #endif
-                        }
-                    }
-                    RunLoop.current.add(timer, forMode: .default)
-                    timer.fire()
-                    RunLoop.current.add(sleepTimeCheck, forMode: .default)
-                    sleepTimeCheck.fire()
-                }
-                .overlay {
-                    VStack {
-                        HStack {
-                            if isLowBatteryMode {
-                                Image(systemName: "circle")
-                                    .font(.system(size: 17, weight: .heavy))
-                                    .foregroundColor(.accentColor)
-                                    .offset(y: 10)
+                                .font(.system(size: 14, weight: .bold))
+                                .frame(width: 110, height: 40)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.1)
+                                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                                .offset(y: tipBoxOffset)
+                                .animation(.easeOut(duration: 0.4), value: tipBoxOffset)
+                            } else {
+                                HStack {
+                                    Image(systemName: showTipSymbol)
+                                    Text(showTipText)
+                                }
+                                .font(.system(size: 14, weight: .bold))
+                                .foregroundColor(.black)
+                                .frame(width: 110, height: 40)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.1)
+                                .background {
+                                    Color.white
+                                        .ignoresSafeArea()
+                                        .frame(width: 120, height: 40)
+                                        .cornerRadius(8)
+                                        .foregroundColor(Color(hex: 0xF5F5F5))
+                                        .opacity(0.95)
+                                }
+                                .offset(y: tipBoxOffset)
+                                .animation(.easeOut(duration: 0.4), value: tipBoxOffset)
                             }
                         }
-                        Spacer()
+#else
+                        NavigationStack {
+                            ZStack {
+                                // Hide NavigationLinks behind
+                                NavigationLink("", isActive: $isUrlOpenVideoPresented, destination: { VideoDetailView(videoDetails: urlOpenVideoDetails) })
+                                ContentView()
+                                    .onOpenURL { url in
+                                        let dec = url.absoluteString.urlDecoded()
+                                        let spd = dec.split(separator: "/").dropFirst()
+                                        debugPrint(spd)
+                                        switch spd[1] {
+                                        case "withvideodetail":
+                                            let kvs = dec.split(separator: "/", maxSplits: 1).dropFirst()[2].split(separator: "&") // e.g.: ["BV=xxx", "Title=xxx"]
+                                            urlOpenVideoDetails.removeAll()
+                                            for kv in kvs {
+                                                let kav = kv.split(separator: "=")
+                                                urlOpenVideoDetails.updateValue(String(kav[1]), forKey: String(kav[0]))
+                                            }
+                                            isUrlOpenVideoPresented = true
+                                        default:
+                                            break
+                                        }
+                                    }
+                            }
+                        }
+                        if shouldShowAppName {
+                            VStack {
+                                Spacer()
+                                    .frame(height: 12)
+                                ZStack {
+                                    Capsule()
+                                        .fill(Color.accentColor)
+                                        .frame(width: 60, height: 20)
+                                    HStack {
+                                        Text("暗礁流媒体")
+                                            .foregroundStyle(Color.white)
+                                            .font(.system(size: 12, weight: .medium))
+                                    }
+                                }
+                                Spacer()
+                            }
+                            .ignoresSafeArea()
+                        }
+#endif
+#else
+                        GeometryReader3D { proxy3D in
+                            ContentView()
+                                .onAppear {
+                                    Task {
+                                        // Delay first - rdar://so?77970699
+                                        // rdar://so?76698516
+                                        try await Task.sleep(nanoseconds: 1_000_000_000)
+                                        globalWindowSize = proxy3D.size
+                                    }
+                                }
+                        }
+#endif
                     }
-                    .ignoresSafeArea()
-                    if isShowMemoryUsage {
+#if os(watchOS)
+                    .sheet(isPresented: $isMemoryWarningPresented, content: { MemoryWarningView() })
+#endif
+                    .onAppear {
+#if os(watchOS)
+                        isInLowBatteryMode = UserDefaults.standard.bool(forKey: "IsInLowBatteryMode")
+#endif
+                        
+                        Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
+                            showTipText = pShowTipText
+                            showTipSymbol = pShowTipSymbol
+                            UserDefaults.standard.set(isLowBatteryMode, forKey: "IsInLowBatteryMode")
+                            Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { timer in
+                                tipBoxOffset = pTipBoxOffset
+                                timer.invalidate()
+                            }
+                        }
+                        
+#if os(watchOS)
+                        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { timer in
+                            if getMemory() > 240.0 {
+                                isMemoryWarningPresented = true
+                                timer.invalidate()
+                            }
+                        }
+#endif
+                        
+                        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+                            if isShowMemoryInScreen {
+                                isShowMemoryUsage = true
+                                Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
+                                    memoryUsage = getMemory()
+                                }
+                                timer.invalidate()
+                            }
+                        }
+                        let timer = Timer(timeInterval: 1, repeats: true) { _ in
+                            currentHour = getCurrentTime().hour
+                            currentMinute = getCurrentTime().minute
+                        }
+                        let sleepTimeCheck = Timer(timeInterval: 60, repeats: true) { _ in
+                            if currentHour == notifyHour && currentMinute == notifyMinute && isSleepNotificationOn {
+#if !os(visionOS) && !os(watchOS)
+                                AlertKitAPI.present(title: String(localized: "Sleep.notification"), icon: .heart, style: .iOS17AppleMusic, haptic: .warning)
+#else
+                                tipWithText(String(localized: "Sleep.notification"), symbol: "bed.double.fill")
+#endif
+                            }
+                        }
+                        RunLoop.current.add(timer, forMode: .default)
+                        timer.fire()
+                        RunLoop.current.add(sleepTimeCheck, forMode: .default)
+                        sleepTimeCheck.fire()
+                    }
+                    .overlay {
                         VStack {
                             HStack {
-                                Spacer()
-                                Text("Memory.indicator.\(String(format: "%.2f", memoryUsage))")
-                                    .font(.system(size: 10, weight: .medium))
-                                    .offset(y: 26)
+                                if isLowBatteryMode {
+                                    Image(systemName: "circle")
+                                        .font(.system(size: 17, weight: .heavy))
+                                        .foregroundColor(.accentColor)
+                                        .offset(y: 10)
+                                }
                             }
                             Spacer()
                         }
                         .ignoresSafeArea()
-                    }
-                    if debug {
-                        HStack {
+                        if isShowMemoryUsage {
                             VStack {
-                                Button(action: {
-                                    isShowingDebugControls.toggle()
-                                }, label: {
-                                    Text(isShowingDebugControls ? "Close Debug Controls" : "Show Debug Controls")
-                                        .font(.system(size: 12))
-                                        .foregroundColor(.blue)
-                                })
-                                .buttonStyle(.plain)
-                                .offset(x: 15, y: 5)
-                                if isShowingDebugControls {
-                                    VStack {
-                                        HStack {
-                                            Text("Memory Usage: \(memoryUsage) MB")
-                                            Spacer()
-                                        }
-                                        .allowsHitTesting(false)
-                                    }
-                                    .font(.system(size: 10))
-                                    
-                                    .onAppear {
-                                        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-                                            systemResourceRefreshTimer = timer
-                                            memoryUsage = getMemory()
-                                        }
-                                    }
-                                    .onDisappear {
-                                        systemResourceRefreshTimer?.invalidate()
-                                    }
+                                HStack {
+                                    Spacer()
+                                    Text("Memory.indicator.\(String(format: "%.2f", memoryUsage))")
+                                        .font(.system(size: 10, weight: .medium))
+                                        .offset(y: 26)
                                 }
                                 Spacer()
                             }
-                            .padding(.horizontal, 3)
-                            .padding(.vertical, 1)
-                            Spacer()
+                            .ignoresSafeArea()
                         }
-                        .ignoresSafeArea()
+                        if debug {
+                            HStack {
+                                VStack {
+                                    Button(action: {
+                                        isShowingDebugControls.toggle()
+                                    }, label: {
+                                        Text(isShowingDebugControls ? "Close Debug Controls" : "Show Debug Controls")
+                                            .font(.system(size: 12))
+                                            .foregroundColor(.blue)
+                                    })
+                                    .buttonStyle(.plain)
+                                    .offset(x: 15, y: 5)
+                                    if isShowingDebugControls {
+                                        VStack {
+                                            HStack {
+                                                Text("Memory Usage: \(memoryUsage) MB")
+                                                Spacer()
+                                            }
+                                            .allowsHitTesting(false)
+                                        }
+                                        .font(.system(size: 10))
+                                        
+                                        .onAppear {
+                                            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+                                                systemResourceRefreshTimer = timer
+                                                memoryUsage = getMemory()
+                                            }
+                                        }
+                                        .onDisappear {
+                                            systemResourceRefreshTimer?.invalidate()
+                                        }
+                                    }
+                                    Spacer()
+                                }
+                                .padding(.horizontal, 3)
+                                .padding(.vertical, 1)
+                                Spacer()
+                            }
+                            .ignoresSafeArea()
+                        }
                     }
-                }
-                .onContinueUserActivity("com.darock.DarockBili.video-play") { activity in
-                    if let videoDetails = activity.userInfo as? [String: String] {
-                        handoffVideoDetails = videoDetails
-                        shouldPushVideoView = true
-                    }
+                } else {
+                    ExemptServerDataView(serverBind: $apiServerLink)
                 }
             }
         }
@@ -513,7 +513,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
     
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
-        //AlertKitAPI.present(title: "低内存警告", subtitle: "喵哩喵哩收到了低内存警告", icon: .error, style: .iOS17AppleMusic, haptic: .warning)
+        //AlertKitAPI.present(title: "低内存警告", subtitle: "暗礁流媒体收到了低内存警告", icon: .error, style: .iOS17AppleMusic, haptic: .warning)
     }
 }
 
@@ -584,7 +584,7 @@ class AppDelegate: NSObject, WKApplicationDelegate {
 #endif
 
 public func updateBuvid() {
-    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/frontend/finger/spi") { respJson, isSuccess in
+    DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/frontend/finger/spi") { respJson, isSuccess in
         if isSuccess {
             globalBuvid3 = respJson["data"]["b_3"].string ?? globalBuvid3
             globalBuvid4 = respJson["data"]["b_4"].string ?? globalBuvid4

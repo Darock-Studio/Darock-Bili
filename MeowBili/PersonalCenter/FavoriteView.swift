@@ -49,7 +49,7 @@ struct FavoriteView: View {
                     "cookie": "SESSDATA=\(sessdata);",
                     "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                 ]
-                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v3/fav/folder/created/list-all?up_mid=\(dedeUserID)", headers: headers) { respJson, isSuccess in
+                DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v3/fav/folder/created/list-all?up_mid=\(dedeUserID)", headers: headers) { respJson, isSuccess in
                     if isSuccess {
                         debugPrint(respJson)
                         if !CheckBApiError(from: respJson) { return }
@@ -93,7 +93,7 @@ struct FavoriteDetailView: View {
                                                     "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                                 ]
                                                 let avid = bv2av(bvid: dict["BV"]!)
-                                                AF.request("https://api.bilibili.com/x/v3/fav/resource/deal", method: .post, parameters: ["rid": avid, "type": 2, "add_media_ids": Int(folderDatas["ID"]!)!, "csrf": biliJct], headers: headers).response { _ in }
+                                                AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v3/fav/resource/deal", method: .post, parameters: ["rid": avid, "type": 2, "add_media_ids": Int(folderDatas["ID"]!)!, "csrf": biliJct], headers: headers).response { _ in }
                                             }
                                         }
                                     }
@@ -141,7 +141,7 @@ struct FavoriteDetailView: View {
             "cookie": "SESSDATA=\(sessdata);",
             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         ]
-        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v3/fav/resource/list?media_id=\(folderDatas["ID"]!)&ps=20&pn=\(nowPage)", headers: headers) { respJson, isSuccess in
+        DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v3/fav/resource/list?media_id=\(folderDatas["ID"]!)&ps=20&pn=\(nowPage)", headers: headers) { respJson, isSuccess in
             if isSuccess {
                 debugPrint(respJson)
                 if !CheckBApiError(from: respJson) { return }

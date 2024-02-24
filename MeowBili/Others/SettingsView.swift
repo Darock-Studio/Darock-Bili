@@ -33,9 +33,23 @@ struct SettingsView: View {
     @AppStorage("SESSDATA") var sessdata = ""
     @AppStorage("bili_jct") var biliJct = ""
     @State var isLogoutAlertPresented = false
+    @State var serverLinkInput = ""
     var body: some View {
         List {
             #if !os(watchOS)
+            Section {
+                TextField("服务器地址", text: $serverLinkInput)
+                    .onSubmit {
+                        UserDefaults.standard.set(serverLinkInput, forKey: "APIServer")
+                    }
+            } header: {
+                Text("服务器地址")
+            } footer: {
+                Text("更改将立即生效")
+            }
+            .onAppear {
+                serverLinkInput = UserDefaults.standard.string(forKey: "APIServer") ?? ""
+            }
             Section {
                 NavigationLink(destination: { NetworkSettingsView().navigationTitle("Settings.internet") }, label: {
                     HStack {
@@ -741,12 +755,12 @@ struct PrivacySettingsView: View {
                 Section {
                     Toggle("允许收集使用信息", isOn: $isAllowMixpanel)
                 } footer: {
-                    Text("喵哩喵哩收集使用信息仅用以帮助改进质量，不会用于广告、个人画像之类，收集的信息不会关联到个人。此更改立即生效，不会影响哔哩哔哩官方对您的数据收集。")
+                    Text("暗礁流媒体收集使用信息仅用以帮助改进质量，不会用于广告、个人画像之类，收集的信息不会关联到个人。此更改立即生效，不会影响哔哩哔哩官方对您的数据收集。")
                 }
                 Section {
-                    Link("喵哩喵哩开源页", destination: URL(string: "https://github.com/Darock-Studio/Darock-Bili")!)
+                    Link("暗礁流媒体开源页", destination: URL(string: "https://github.com/Darock-Studio/Darock-Bili")!)
                 } footer: {
-                    Text("喵哩喵哩为完整开源项目，欢迎检查代码以确认无隐私问题")
+                    Text("暗礁流媒体为完整开源项目，欢迎检查代码以确认无隐私问题")
                 }
             }
             .navigationTitle("分析与改进")
@@ -786,11 +800,11 @@ struct PrivacySettingsView: View {
                 }
                 Section {
                     Text("""
-                    文件保险箱通过对喵哩喵哩进行加密来保护 App 内的数据。
+                    文件保险箱通过对暗礁流媒体进行加密来保护 App 内的数据。
                     
                     警告：你将需要密码或恢复密钥才能访问数据。在此设置过程中，会自动生成恢复密钥。如果同时忘记了密码和恢复密钥，数据将会丢失。
                     
-                    已\(isFileLockerEnabled ? "启用" : "停用")喵哩喵哩的文件保险箱。\(isFileLockerEnabled ? "\n恢复密钥已设置。" : "")
+                    已\(isFileLockerEnabled ? "启用" : "停用")暗礁流媒体的文件保险箱。\(isFileLockerEnabled ? "\n恢复密钥已设置。" : "")
                     """)
                     .font(.system(size: 12))
                 }

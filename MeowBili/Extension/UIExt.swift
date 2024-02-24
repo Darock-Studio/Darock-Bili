@@ -116,7 +116,7 @@ func VideoCard(_ videoDetails: [String: String], onAppear: @escaping () -> Void 
                         ]
                         let biliJct = UserDefaults.standard.string(forKey: "bili_jct") ?? ""
                         if action == "Like" {
-                            AF.request("https://api.bilibili.com/x/web-interface/archive/like", method: .post, parameters: ["bvid": videoDetails["BV"]!, "like": 1, "eab_x": 2, "ramval": 0, "source": "web_normal", "ga": 1, "csrf": biliJct], headers: headers).response { _ in
+                            AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/web-interface/archive/like", method: .post, parameters: ["bvid": videoDetails["BV"]!, "like": 1, "eab_x": 2, "ramval": 0, "source": "web_normal", "ga": 1, "csrf": biliJct], headers: headers).response { _ in
                                 if items.count == 1 {
                                     #if !os(visionOS)
                                     AlertKitAPI.present(title: "已点赞", icon: .done, style: .iOS17AppleMusic, haptic: .success)
@@ -128,7 +128,7 @@ func VideoCard(_ videoDetails: [String: String], onAppear: @escaping () -> Void 
                                 }
                             }
                         } else if action == "Coin" {
-                            AF.request("https://api.bilibili.com/x/web-interface/coin/add", method: .post, parameters: BiliVideoCoin(bvid: videoDetails["BV"]!, multiply: 1, csrf: biliJct), headers: headers).response { _ in
+                            AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/web-interface/coin/add", method: .post, parameters: BiliVideoCoin(bvid: videoDetails["BV"]!, multiply: 1, csrf: biliJct), headers: headers).response { _ in
                                 if items.count == 1 {
                                     #if !os(visionOS)
                                     AlertKitAPI.present(title: "已投币", icon: .done, style: .iOS17AppleMusic, haptic: .success)
@@ -141,10 +141,10 @@ func VideoCard(_ videoDetails: [String: String], onAppear: @escaping () -> Void 
                             }
                         } else if action == "Favorite" {
                             let avid = bv2av(bvid: videoDetails["BV"]!)
-                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v3/fav/folder/created/list-all?type=2&rid=\(avid)&up_mid=\(UserDefaults.standard.string(forKey: "DedeUserID") ?? "")", headers: headers) { respJson, isSuccess in
+                            DarockKit.Network.shared.requestJSON("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v3/fav/folder/created/list-all?type=2&rid=\(avid)&up_mid=\(UserDefaults.standard.string(forKey: "DedeUserID") ?? "")", headers: headers) { respJson, isSuccess in
                                 if isSuccess {
                                     if !CheckBApiError(from: respJson) { return }
-                                    AF.request("https://api.bilibili.com/x/v3/fav/resource/deal", method: .post, parameters: ["rid": avid, "type": 2, "add_media_ids": respJson["data"]["list"][0]["id"].int ?? 0, "csrf": biliJct], headers: headers).response { _ in
+                                    AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/v3/fav/resource/deal", method: .post, parameters: ["rid": avid, "type": 2, "add_media_ids": respJson["data"]["list"][0]["id"].int ?? 0, "csrf": biliJct], headers: headers).response { _ in
                                         if items.count == 1 {
                                             #if !os(visionOS)
                                             AlertKitAPI.present(title: "已收藏", icon: .done, style: .iOS17AppleMusic, haptic: .success)

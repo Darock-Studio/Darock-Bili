@@ -90,7 +90,7 @@ struct BangumiPlayerView: View {
 //                "cookie": "SESSDATA=\(sessdata)"
 //            ]
 //            if recordHistoryTime == "play" {
-//                AF.request("https://api.bilibili.com/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": VideoDetailView.willPlayVideoBV, "mid": dedeUserID, "type": 3, "dt": 2, "play_type": 2, "csrf": biliJct], headers: headers).response { response in
+//                AF.request("https://\(UserDefaults.standard.string(forKey: "APIServer") ?? "")/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": VideoDetailView.willPlayVideoBV, "mid": dedeUserID, "type": 3, "dt": 2, "play_type": 2, "csrf": biliJct], headers: headers).response { response in
 //                    debugPrint(response)
 //                }
 //            }

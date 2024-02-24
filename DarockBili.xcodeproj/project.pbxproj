@@ -174,6 +174,10 @@
 		8CB0D0282B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */ = {isa = PBXBuildFile; fileRef = 8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */; };
 		8CB0D0292B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */ = {isa = PBXBuildFile; fileRef = 8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */; };
 		8CB0D02A2B88E5B20057EF1C /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E2B720932B67858E00ABB0A6 /* Localizable.xcstrings */; };
+		8CB0D02E2B89E21C0057EF1C /* ExemptServerDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB0D02D2B89E21C0057EF1C /* ExemptServerDataView.swift */; };
+		8CB0D02F2B89E21C0057EF1C /* ExemptServerDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB0D02D2B89E21C0057EF1C /* ExemptServerDataView.swift */; };
+		8CB0D0302B89E21C0057EF1C /* ExemptServerDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB0D02D2B89E21C0057EF1C /* ExemptServerDataView.swift */; };
+		8CB0D0312B89E21C0057EF1C /* ExemptServerDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB0D02D2B89E21C0057EF1C /* ExemptServerDataView.swift */; };
 		8CBFF0B72B85E55F00350E0F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC42B77AC4A008E587F /* ContentView.swift */; };
 		8CBFF0B82B85E55F00350E0F /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCA52B77B314008E587F /* CommentsView.swift */; };
 		8CBFF0B92B85E55F00350E0F /* LinkDetectText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */; };
@@ -419,6 +423,7 @@
 		8CB0D0232B88CEC40057EF1C /* ci_post_xcodebuild.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_xcodebuild.sh; sourceTree = "<group>"; };
 		8CB0D0242B88D20F0057EF1C /* ci_pre_xcodebuild.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_pre_xcodebuild.sh; sourceTree = "<group>"; };
 		8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */ = {isa = PBXFileReference; lastKnownFileType = text; path = CurrentChannel.drkdatac; sourceTree = "<group>"; };
+		8CB0D02D2B89E21C0057EF1C /* ExemptServerDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExemptServerDataView.swift; sourceTree = "<group>"; };
 		8CBFF1272B86188D00350E0F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		8CC3D5572B7CA209005636DC /* UserDynamicListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDynamicListView.swift; sourceTree = "<group>"; };
 		8CC3D5592B7CB95D005636DC /* NowPlayingExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NowPlayingExtension.m; sourceTree = "<group>"; };
@@ -561,6 +566,7 @@
 				8CA7CC752B77AF4B008E587F /* MeowBili-Bridging-Header.h */,
 				8CC5B74B2B8749FC00BAD89E /* MeowBili.xctestplan */,
 				8CA7CBC22B77AC4A008E587F /* MeowBiliApp.swift */,
+				8CB0D02C2B89E1AD0057EF1C /* Exempt */,
 				8CA7CC642B77AE33008E587F /* Models */,
 				8CA7CC6D2B77AEA4008E587F /* InMain */,
 				8CA7CC722B77AEFB008E587F /* Errors */,
@@ -761,6 +767,14 @@
 				8CB0D0242B88D20F0057EF1C /* ci_pre_xcodebuild.sh */,
 			);
 			path = ci_scripts;
+			sourceTree = "<group>";
+		};
+		8CB0D02C2B89E1AD0057EF1C /* Exempt */ = {
+			isa = PBXGroup;
+			children = (
+				8CB0D02D2B89E21C0057EF1C /* ExemptServerDataView.swift */,
+			);
+			path = Exempt;
 			sourceTree = "<group>";
 		};
 		8CC5B7412B8749BC00BAD89E /* MeowBiliUITests */ = {
@@ -1198,6 +1212,7 @@
 				8CA371222B83BB9100CE0E9E /* ImageViewerView.swift in Sources */,
 				8CA3711D2B83BB9100CE0E9E /* ArticleView.swift in Sources */,
 				8CA370FD2B83BB9100CE0E9E /* BangumiDetailView.swift in Sources */,
+				8CB0D0302B89E21C0057EF1C /* ExemptServerDataView.swift in Sources */,
 				8CA370FB2B83BB9100CE0E9E /* UserDynamicMainView.swift in Sources */,
 				8CA3710D2B83BB9100CE0E9E /* UIExt.swift in Sources */,
 				8CA371242B83BB9100CE0E9E /* FavoriteView.swift in Sources */,
@@ -1260,6 +1275,7 @@
 				8CA7CCC82B77B49D008E587F /* ImageViewerView.swift in Sources */,
 				8CA7CC972B77B115008E587F /* SkinExplorerView.swift in Sources */,
 				8CC3D5582B7CA209005636DC /* UserDynamicListView.swift in Sources */,
+				8CB0D02E2B89E21C0057EF1C /* ExemptServerDataView.swift in Sources */,
 				8CA7CC712B77AEE4008E587F /* MainView.swift in Sources */,
 				8CC3D5652B7CCF3C005636DC /* SelfQrCardView.swift in Sources */,
 				8CA7CCB82B77B3D6008E587F /* HistoryView.swift in Sources */,
@@ -1322,6 +1338,7 @@
 				8CBFF0DB2B85E55F00350E0F /* SignalErrorView.swift in Sources */,
 				8CBFF0D82B85E55F00350E0F /* VideoDetailView.swift in Sources */,
 				8CBFF0D72B85E55F00350E0F /* MainView.swift in Sources */,
+				8CB0D02F2B89E21C0057EF1C /* ExemptServerDataView.swift in Sources */,
 				8CBFF0C22B85E55F00350E0F /* WatchLaterView.swift in Sources */,
 				8CBFF0E82B85E55F00350E0F /* LivePlayerView.swift in Sources */,
 				8CBFF0BD2B85E55F00350E0F /* DynamicSendView.swift in Sources */,
@@ -1408,6 +1425,7 @@
 				8CC5B70C2B873FA000BAD89E /* AboutView.swift in Sources */,
 				8CC5B6FE2B873FA000BAD89E /* PersonAccountView.swift in Sources */,
 				8CC5B6E22B873FA000BAD89E /* LivePlayerView.swift in Sources */,
+				8CB0D0312B89E21C0057EF1C /* ExemptServerDataView.swift in Sources */,
 				8CC5B7012B873FA000BAD89E /* VideoPlayerView.swift in Sources */,
 				8CC5B6FB2B873FA000BAD89E /* DynamicSendView.swift in Sources */,
 				8CC5B70E2B873FA000BAD89E /* NoticeView.swift in Sources */,
@@ -1461,7 +1479,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 846;
+				CURRENT_PROJECT_VERSION = 853;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1496,7 +1514,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 846;
+				CURRENT_PROJECT_VERSION = 853;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1533,14 +1551,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 846;
+				CURRENT_PROJECT_VERSION = 853;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MeowBili/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
+				INFOPLIST_KEY_CFBundleDisplayName = "暗礁流媒体";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "喵哩喵哩使用相册保存权限以保存二维码名片至本地";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -1580,14 +1598,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 846;
+				CURRENT_PROJECT_VERSION = 853;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MeowBili/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
+				INFOPLIST_KEY_CFBundleDisplayName = "暗礁流媒体";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "喵哩喵哩使用相册保存权限以保存二维码名片至本地";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -1624,7 +1642,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 846;
+				CURRENT_PROJECT_VERSION = 853;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1632,6 +1650,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MeowBili-Watch-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "暗礁流媒体";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.darock.DarockBili;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
@@ -1660,7 +1679,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 846;
+				CURRENT_PROJECT_VERSION = 853;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1668,6 +1687,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MeowBili-Watch-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "暗礁流媒体";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.darock.DarockBili;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
@@ -1699,7 +1719,7 @@
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 846;
+				CURRENT_PROJECT_VERSION = 853;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1732,7 +1752,7 @@
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 846;
+				CURRENT_PROJECT_VERSION = 853;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1761,7 +1781,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 846;
+				CURRENT_PROJECT_VERSION = 853;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1784,7 +1804,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 846;
+				CURRENT_PROJECT_VERSION = 853;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
