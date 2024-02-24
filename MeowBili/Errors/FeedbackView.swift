@@ -179,6 +179,8 @@ struct InAppFeedbackView: View {
         @State var content = ""
         @State var status = 8
         @State var replies = [(status: Int, content: String, sender: String)]()
+        @State var isSendReplyPresented = false
+        @State var replyInput = ""
         var body: some View {
             List {
                 Section {
@@ -279,6 +281,39 @@ struct InAppFeedbackView: View {
                                 replies.append((status: st, content: co, sender: se))
                             }
                         }
+                    }
+                }
+            }
+            .toolbar {
+                if #available(watchOS 10, *) {
+                    Button(action: {
+                        isSendReplyPresented = true
+                    }, label: {
+                        Image(systemName: "arrowshape.turn.up.left.fill")
+                    })
+                    .sheet(isPresented: $isSendReplyPresented) {
+                        TextField("回复信息", text: $replyInput)
+                            .onSubmit {
+                                if replyInput != "" {
+                                    let enced = """
+                                    Content：\(replyInput)
+                                    Sender：User
+                                    """.base64Encoded().replacingOccurrences(of: "/", with: "{slash}")
+                                    DarockKit.Network.shared.requestString("https://api.darock.top/radar/reply/喵哩喵哩/\(id)/\(enced)") { respStr, isSuccess in
+                                        if isSuccess {
+                                            if respStr.apiFixed() == "Success" {
+                                                isSendReplyPresented = false
+                                            } else {
+                                                #if os(watchOS) || os(visionOS)
+                                                tipWithText("未知错误", symbol: "xmark.circle.fill")
+                                                #else
+                                                AlertKitAPI.present(title: "未知错误", subtitle: "可能未发送此回复", icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                                                #endif
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                     }
                 }
             }
