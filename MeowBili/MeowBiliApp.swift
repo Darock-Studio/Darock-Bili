@@ -157,6 +157,9 @@ struct DarockBili_Watch_AppApp: App {
     @State var fileLockerRetryCount = 0
     @State var fileLockerInput = ""
     @State var recoveryCodeInput = ""
+    // Navigators
+    @State var isUrlOpenVideoPresented = false
+    @State var urlOpenVideoDetails = [String: String]()
     #if os(watchOS)
     @State var isMemoryWarningPresented = false
     #else
@@ -241,7 +244,30 @@ struct DarockBili_Watch_AppApp: App {
                         }
                     }
                     #else
-                    ContentView()
+                    NavigationStack {
+                        ZStack {
+                            // Hide NavigationLinks behind
+                            NavigationLink("", isActive: $isUrlOpenVideoPresented, destination: { VideoDetailView(videoDetails: urlOpenVideoDetails) })
+                            ContentView()
+                                .onOpenURL { url in
+                                    let dec = url.absoluteString.urlDecoded()
+                                    let spd = dec.split(separator: "/").dropFirst()
+                                    debugPrint(spd)
+                                    switch spd[1] {
+                                    case "withvideodetail":
+                                        let kvs = dec.split(separator: "/", maxSplits: 1).dropFirst()[2].split(separator: "&") // e.g.: ["BV=xxx", "Title=xxx"]
+                                        urlOpenVideoDetails.removeAll()
+                                        for kv in kvs {
+                                            let kav = kv.split(separator: "=")
+                                            urlOpenVideoDetails.updateValue(String(kav[1]), forKey: String(kav[0]))
+                                        }
+                                        isUrlOpenVideoPresented = true
+                                    default:
+                                        break
+                                    }
+                                }
+                        }
+                    }
                     if shouldShowAppName {
                         VStack {
                             Spacer()

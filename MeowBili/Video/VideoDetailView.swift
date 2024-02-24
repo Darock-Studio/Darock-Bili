@@ -21,6 +21,7 @@ import AVKit
 import SwiftUI
 import Marquee
 import Mixpanel
+import EFQRCode
 import DarockKit
 import Alamofire
 import SwiftyJSON
@@ -94,6 +95,7 @@ struct VideoDetailView: View {
     #else
     @State var isVideoPlayerPresented = false
     @State var isNowPlayingPresented = false
+    @State var continueQr: CGImage?
     #endif
     var body: some View {
         Group {
@@ -575,6 +577,27 @@ struct VideoDetailView: View {
                                                             }
                                                         }, label: {
                                                             Label("Video.watch-later", systemImage: "memories.badge.plus")
+                                                        })
+                                                        NavigationLink(destination: {
+                                                            VStack {
+                                                                if let qrImg = continueQr {
+                                                                    Image(uiImage: UIImage(cgImage: qrImg))
+                                                                        .resizable()
+                                                                        .frame(width: 130, height: 130)
+                                                                    Text("使用“相机”App")
+                                                                        .bold()
+                                                                }
+                                                            }
+                                                            .onAppear {
+                                                                var tmpStr = ""
+                                                                for (key, value) in videoDetails {
+                                                                    tmpStr += "\(key)=\(value)&"
+                                                                }
+                                                                tmpStr.removeLast()
+                                                                continueQr = EFQRCode.generate(for: "drkbili://withvideodetail/\(tmpStr)")
+                                                            }
+                                                        }, label: {
+                                                            Label("在iPhone上继续", systemImage: "iphone.and.arrow.forward")
                                                         })
                                                     }
                                                 }, label: {
