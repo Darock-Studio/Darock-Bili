@@ -46,6 +46,7 @@ struct SearchMainView: View {
                 ZStack {
                     NavigationLink("", destination: SearchView(keyword: searchText), isActive: $isSearchPresented)
                         .frame(width: 0, height: 0)
+                        .hidden()
                         .disabled(true)
                     TextField("Search.\(Image(systemName: "magnifyingglass"))", text: $searchText)
                         .submitLabel(.search)
