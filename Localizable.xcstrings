@@ -672,25 +672,25 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "MeowBili"
+            "value" : "Darock Media"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "喵哩喵哩"
+            "value" : "暗礁流媒体"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "喵哩喵哩"
+            "value" : "暗礁流媒体"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "喵哩喵哩"
+            "value" : "暗礁流媒体"
           }
         }
       }
@@ -2247,7 +2247,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "A fatal error occurred and caused Meowbili crash."
+            "value" : "A fatal error occurred and caused Darock Media crash."
           }
         },
         "ja" : {
@@ -2459,25 +2459,25 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "MeowBili Occurred a Problem"
+            "value" : "Darock Media Occurred a Problem"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "喵哩喵哩に問題が発生したようです。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "喵哩喵哩似乎出现了问题"
+            "value" : "暗礁流媒体似乎出现了问题"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "喵哩喵哩似乎出現了問題"
+            "value" : "暗礁流媒体似乎出現了問題"
           }
         }
       }
@@ -4379,25 +4379,25 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Screen Time will record and count the time you use MeowBili"
+            "value" : "Screen Time will record and count the time you use Darock Media"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "「スクリーン使用時間」は、あなたが毎日ミャオリミャオリを使う時間を記録し統計します。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "“屏幕使用时间”会记录并统计您每天使用喵哩喵哩的时间"
+            "value" : "“屏幕使用时间”会记录并统计您每天使用暗礁流媒体的时间"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "\"屏幕使用時間\"會記錄並統計您每天使用喵哩喵哩的時間"
+            "value" : "\"屏幕使用時間\"會記錄並統計您每天使用暗礁流媒体的時間"
           }
         }
       }
@@ -7103,19 +7103,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Meowbili is up to date"
+            "value" : "Darock Media is up to date"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "喵哩喵哩はすでに最新バージョンです。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "喵哩喵哩已是最新版本"
+            "value" : "暗礁流媒体已是最新版本"
           }
         }
       }
