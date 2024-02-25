@@ -1,6 +1,7 @@
 言語：<a href="./README.md">简体中文</a>｜<a href="./README_en.md">English</a>｜日本語
 <p align="center">
     <img src="./Artwork/rm-ico.png" width="200" height="200">
+    <img src="./Artwork/rm-ico-vision.png" width="200" height="200">
 </p>
 
 # 喵哩喵哩 - クロスプラットフォームのSwiftネイティブB站クライアント
