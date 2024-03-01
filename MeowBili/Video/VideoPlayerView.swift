@@ -213,7 +213,7 @@ struct VideoPlayerView: View {
                 player.seek(to: CMTime(seconds: UserDefaults.standard.double(forKey: "\(videoBvid)\(videoCID)PlayTime"), preferredTimescale: 1))
                 
                 if let coverData = try? Data(contentsOf: URL(string: videoDetails["Pic"] ?? "") ?? URL(string: "http://example.com")!) {
-                    let cover = UIImage(data: coverData)!
+                    let cover = UIImage(data: coverData) ?? UIImage()
                     NowPlayingExtension.setPlayingInfoTitle(videoDetails["Title"]!, artist: videoDetails["UP"]!, artwork: cover)
                 }
                 

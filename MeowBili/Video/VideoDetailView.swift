@@ -774,6 +774,11 @@ struct VideoDetailView: View {
                     debugPrint("----------Prints from VideoDetailView.onAppear.*.requsetJSON(*/view)----------")
                     debugPrint(respJson)
                     if !CheckBApiError(from: respJson) { return }
+                    videoDetails.updateValue(respJson["data"]["title"].string ?? "[加载失败]", forKey: "Title")
+                    videoDetails.updateValue(respJson["data"]["pic"].string ?? "E", forKey: "Pic")
+                    videoDetails.updateValue(String(respJson["data"]["stat"]["view"].int ?? 0), forKey: "View")
+                    videoDetails.updateValue(String(respJson["data"]["stat"]["danmaku"].int ?? 0), forKey: "Danmaku")
+                    
                     owner = ["Name": respJson["data"]["owner"]["name"].string ?? "[加载失败]", "Face": respJson["data"]["owner"]["face"].string ?? "E", "ID": String(respJson["data"]["owner"]["mid"].int64 ?? -1)]
                     stat = ["Like": String(respJson["data"]["stat"]["like"].int ?? -1), "Coin": String(respJson["data"]["stat"]["coin"].int ?? -1), "Favorite": String(respJson["data"]["stat"]["favorite"].int ?? -1)]
                     videoDesc = respJson["data"]["desc"].string ?? "[加载失败]".replacingOccurrences(of: "\\n", with: "\n")

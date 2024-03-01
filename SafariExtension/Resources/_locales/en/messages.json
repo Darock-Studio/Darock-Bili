@@ -1,0 +1,10 @@
+{
+    "extension_name": {
+        "message": "喵哩喵哩",
+        "description": "喵哩喵哩 Safari 扩展"
+    },
+    "extension_description": {
+        "message": "This is SafariExtension. You should tell us what your extension does here.",
+        "description": "Description of what the extension does."
+    }
+}
