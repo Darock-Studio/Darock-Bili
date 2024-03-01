@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 if [[ -n $CI_PULL_REQUEST_NUMBER ]];
 then

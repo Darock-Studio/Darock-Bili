@@ -1,5 +1,4 @@
-#!/bin/zsh
-#  ci_post_xcodebuild.sh
+#!/bin/bash
 
 if [[ "$CI_WORKFLOW" == "Canary Deploy" ]]; then
   TESTFLIGHT_DIR_PATH=../TestFlight
