@@ -379,6 +379,7 @@
 
 /* Begin PBXFileReference section */
 		8C0557E02B7A0480009D9CD0 /* MeowBili.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeowBili.entitlements; sourceTree = "<group>"; };
+		8C617F5B2B924C5B000A3687 /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
 		8C617F3E2B92334B000A3687 /* SafariExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SafariExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C617F402B92334B000A3687 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
 		8C617F432B92334B000A3687 /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; path = _locales; sourceTree = "<group>"; };
@@ -828,6 +829,7 @@
 			children = (
 				8CB0D0232B88CEC40057EF1C /* ci_post_xcodebuild.sh */,
 				8CB0D0242B88D20F0057EF1C /* ci_pre_xcodebuild.sh */,
+				8C617F5B2B924C5B000A3687 /* ci_post_clone.sh */,
 			);
 			path = ci_scripts;
 			sourceTree = "<group>";
