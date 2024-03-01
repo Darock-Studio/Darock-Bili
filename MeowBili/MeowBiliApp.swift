@@ -262,6 +262,10 @@ struct DarockBili_Watch_AppApp: App {
                                             urlOpenVideoDetails.updateValue(String(kav[1]), forKey: String(kav[0]))
                                         }
                                         isUrlOpenVideoPresented = true
+                                    case "openbvid":
+                                        let bvid = spd[2]
+                                        urlOpenVideoDetails = ["Pic": "", "Title": "Loading...", "BV": String(bvid), "UP": "Loading...", "View": "1", "Danmaku": "1"]
+                                        isUrlOpenVideoPresented = true
                                     default:
                                         break
                                     }
