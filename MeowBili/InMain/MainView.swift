@@ -69,7 +69,7 @@ struct MainView: View {
                         Button(action: {
                             mainTabSelection = 2
                         }, label: {
-                            if dedeUserID != "" {
+                            if dedeUserID != "" && userFaceUrl != "" {
                                 CachedAsyncImage(url: URL(string: userFaceUrl + "@30w"))
                                     .frame(width: 30)
                                     .clipShape(Circle())
