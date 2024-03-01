@@ -8,7 +8,7 @@ if [[ "$CI_WORKFLOW" == "Canary Deploy" ]]; then
 elif [[ "$CI_WORKFLOW" == "Public Release" ]]; then
   TESTFLIGHT_DIR_PATH=../TestFlight
   mkdir $TESTFLIGHT_DIR_PATH
-  echo "当前语义化版本：${{ CI_TAG }}\n\nRelease Notes: https://github.com/Darock-Studio/Darock-Bili/releases/tag/${{ CI_TAG }}\n\n若要使用watchOS App，请打开“在Apple Watch上显示App”开关" > $TESTFLIGHT_DIR_PATH/WhatToTest.zh-Hans.txt
+  echo "当前语义化版本：$CI_TAG\n\nRelease Notes: https://github.com/Darock-Studio/Darock-Bili/releases/tag/$CI_TAG\n\n若要使用watchOS App，请打开“在Apple Watch上显示App”开关" > $TESTFLIGHT_DIR_PATH/WhatToTest.zh-Hans.txt
 fi
 
 if [[ -n $CI_PULL_REQUEST_NUMBER ]]; then
@@ -22,8 +22,8 @@ if [[ -n $CI_PULL_REQUEST_NUMBER ]]; then
         --method POST \
         -H "Accept: application/vnd.github+json" \
         -H "X-GitHub-Api-Version: 2022-11-28" \
-        /repos/${{ CI_PULL_REQUEST_SOURCE_REPO }}/statuses/${{ CI_COMMIT }} \
+        /repos/$CI_PULL_REQUEST_SOURCE_REPO/statuses/$CI_COMMIT \
         -f state='$NEW_STATUS' \
-        -f target_url='${{ CI_BUILD_URL }}' \
+        -f target_url='$CI_BUILD_URL' \
         -f context='API Status Checker'
 fi
