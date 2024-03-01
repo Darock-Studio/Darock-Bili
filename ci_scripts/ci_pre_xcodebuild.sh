@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 if [ "$CI_WORKFLOW" = "Canary Deploy" ]; then
     NEW_TEXT="Canary"
