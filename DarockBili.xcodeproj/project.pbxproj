@@ -277,6 +277,13 @@
 			remoteGlobalIDString = 8C617F3D2B92334B000A3687;
 			remoteInfo = SafariExtension;
 		};
+		8CA68F092B93264B00870AAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B44689C42B4FC15A002CCEB2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CA68EF92B93224B00870AAA;
+			remoteInfo = DarockBili.dynamic;
+		};
 		8CA7CBD12B77AC4C008E587F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B44689C42B4FC15A002CCEB2 /* Project object */;
@@ -290,6 +297,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8CA7CBBF2B77AC4A008E587F;
 			remoteInfo = MeowBili;
+		};
+		8CE523B52B9359B100C89318 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B44689C42B4FC15A002CCEB2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CA68EF92B93224B00870AAA;
+			remoteInfo = DarockBili.dynamic;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1026,6 +1040,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				8CA68F0A2B93264B00870AAA /* PBXTargetDependency */,
 				8CA7CBD22B77AC4C008E587F /* PBXTargetDependency */,
 				8C617F552B92334B000A3687 /* PBXTargetDependency */,
 			);
@@ -1069,6 +1084,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				8CE523B62B9359B100C89318 /* PBXTargetDependency */,
 			);
 			name = "MeowBili Watch App";
 			packageProductDependencies = (
@@ -1633,6 +1649,11 @@
 			target = 8C617F3D2B92334B000A3687 /* SafariExtension */;
 			targetProxy = 8C617F542B92334B000A3687 /* PBXContainerItemProxy */;
 		};
+		8CA68F0A2B93264B00870AAA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8CA68EF92B93224B00870AAA /* DarockBili.dynamic */;
+			targetProxy = 8CA68F092B93264B00870AAA /* PBXContainerItemProxy */;
+		};
 		8CA7CBD22B77AC4C008E587F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8CA7CBCE2B77AC4C008E587F /* MeowBili Watch App */;
@@ -1642,6 +1663,11 @@
 			isa = PBXTargetDependency;
 			target = 8CA7CBBF2B77AC4A008E587F /* MeowBili */;
 			targetProxy = 8CC5B7462B8749BC00BAD89E /* PBXContainerItemProxy */;
+		};
+		8CE523B62B9359B100C89318 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8CA68EF92B93224B00870AAA /* DarockBili.dynamic */;
+			targetProxy = 8CE523B52B9359B100C89318 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
