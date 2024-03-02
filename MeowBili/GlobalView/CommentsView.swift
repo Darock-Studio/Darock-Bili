@@ -229,7 +229,9 @@ struct CommentsView: View {
                                 Text("Home.more")
                                     .bold()
                             })
+                            #if !os(watchOS)
                             .buttonStyle(.borderedProminent)
+                            #endif
                         }
                     } else {
                         if isNoMore {
@@ -239,7 +241,9 @@ struct CommentsView: View {
                         }
                     }
                 }
+                #if !os(watchOS)
                 .padding(.horizontal)
+                #endif
                 .sheet(isPresented: $isCommentRepliesPresented, content: { CommentRepliesView(avid: id, type: type, goto: $presentRepliesGoto, rootData: $presentRepliesRootData) })
             }
             .onAppear {

@@ -27,14 +27,13 @@ import SDWebImageSwiftUI
 #endif
 
 struct BangumiDetailView: View {
-    public static var willPlayBangumiLink = ""
-    public static var willPlayBangumiData: BangumiData?
     @State var bangumiData: BangumiData
     @AppStorage("DedeUserID") var dedeUserID = ""
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
     @AppStorage("bili_jct") var biliJct = ""
     @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
+    @AppStorage("IsDanmakuEnabled") var isDanmakuEnabled = true
     @State var paymentData: BangumiPayment?
     @State var epDatas = [BangumiEp]()
     @State var isLoading = false
@@ -43,15 +42,37 @@ struct BangumiDetailView: View {
     @State var isMoreMenuPresented = false
     @State var backgroundPicOpacity = 0.0
     @State var navigationSelectedEpdata: BangumiEp?
+    @State var bangumiLink = ""
+    @State var isDecoded = false
+    @State var isShouldPause = false
+    @State var currentPlayTime = 0.0
     var body: some View {
         TabView {
             ZStack {
                 Group {
+                    #if os(watchOS)
                     ScrollView {
                         DetailViewFirstPageBase(bangumiData: $bangumiData, isBangumiPlayerPresented: $isBangumiPlayerPresented, isLoading: $isLoading)
                         DetailViewSecondPageBase(bangumiData: $bangumiData, paymentData: $paymentData)
-                        EpisodeListView(bangumiData: $bangumiData, epDatas: $epDatas, isBangumiPlayerPresented: $isBangumiPlayerPresented, isLoading: $isLoading)
+                        EpisodeListView(bangumiData: $bangumiData, epDatas: $epDatas, isBangumiPlayerPresented: $isBangumiPlayerPresented, isLoading: $isLoading, bangumiLink: $bangumiLink)
                     }
+                    #else
+                    VStack {
+                        if isDecoded {
+                            BangumiPlayerView(bangumiData: $bangumiData, isDanmakuEnabled: $isDanmakuEnabled, bangumiLink: $bangumiLink, shouldPause: $isShouldPause, currentPlayTime: $currentPlayTime)
+                                .frame(height: 240)
+                        } else {
+                            Rectangle()
+                                .frame(height: 240)
+                                .redacted(reason: .placeholder)
+                                .accessibilityIdentifier("BangumiNotLoadPlaceholder")
+                        }
+                        ScrollView {
+                            EpisodeListView(bangumiData: $bangumiData, epDatas: $epDatas, isBangumiPlayerPresented: $isBangumiPlayerPresented, isLoading: $isLoading, bangumiLink: $bangumiLink)
+                            DetailViewSecondPageBase(bangumiData: $bangumiData, paymentData: $paymentData)
+                        }
+                    }
+                    #endif
                 }
                 .blur(radius: isLoading ? 14 : 0)
                 if isLoading {
@@ -102,6 +123,15 @@ struct BangumiDetailView: View {
                     for ep in respJson["result"]["main_section"]["episodes"] {
                         epDatas.append(BangumiEp(aid: ep.1["aid"].int64 ?? 0, epid: ep.1["id"].int64 ?? 0, cid: ep.1["cid"].int64 ?? 0, cover: ep.1["cover"].string ?? "E", title: ep.1["title"].string ?? "[加载失败]", longTitle: ep.1["long_title"].string ?? "[加载失败]"))
                     }
+                    #if !os(watchOS)
+                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/pgc/player/web/playurl?ep_id=\(epDatas[0].epid)&qn=16&fnval=1", headers: headers) { respJson, isSuccess in
+                        if isSuccess {
+                            if !CheckBApiError(from: respJson) { return }
+                            bangumiLink = respJson["result"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
+                            isDecoded = true
+                        }
+                    }
+                    #endif
                 }
             }
         }
@@ -116,7 +146,6 @@ struct BangumiDetailView: View {
         @AppStorage("SESSDATA") var sessdata = ""
         @AppStorage("bili_jct") var biliJct = ""
         @State var isCoverImageViewPresented = false
-        
         var body: some View {
             VStack {
                 Spacer()
@@ -229,20 +258,63 @@ struct BangumiDetailView: View {
         @Binding var epDatas: [BangumiEp]
         @Binding var isBangumiPlayerPresented: Bool
         @Binding var isLoading: Bool
+        @Binding var bangumiLink: String
+        @Environment(\.colorScheme) var colorScheme
         @AppStorage("DedeUserID") var dedeUserID = ""
         @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
         @AppStorage("SESSDATA") var sessdata = ""
         @AppStorage("bili_jct") var biliJct = ""
+        @State var playingPageIndex = 0
         var body: some View {
+            #if os(watchOS)
             if #available(watchOS 10, *) {
                 List {
-                    DetailCore(bangumiData: $bangumiData, epDatas: $epDatas, isBangumiPlayerPresented: $isBangumiPlayerPresented, isLoading: $isLoading)
+                    DetailCore(bangumiData: $bangumiData, epDatas: $epDatas, isBangumiPlayerPresented: $isBangumiPlayerPresented, isLoading: $isLoading, bangumiLink: $bangumiLink)
                 }
             } else {
                 VStack {
-                    DetailCore(bangumiData: $bangumiData, epDatas: $epDatas, isBangumiPlayerPresented: $isBangumiPlayerPresented, isLoading: $isLoading)
+                    DetailCore(bangumiData: $bangumiData, epDatas: $epDatas, isBangumiPlayerPresented: $isBangumiPlayerPresented, isLoading: $isLoading, bangumiLink: $bangumiLink)
                 }
             }
+            #else
+            if epDatas.count != 0 {
+                ScrollView(.horizontal) {
+                    HStack {
+                        ForEach(0..<epDatas.count, id: \.self) { i in
+                            Button(action: {
+                                playingPageIndex = i
+                                let headers: HTTPHeaders = [
+                                    "cookie": "SESSDATA=\(sessdata)",
+                                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                ]
+                                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/pgc/player/web/playurl?ep_id=\(epDatas[i].epid)&qn=16&fnval=1", headers: headers) { respJson, isSuccess in
+                                    if isSuccess {
+                                        if !CheckBApiError(from: respJson) { return }
+                                        bangumiLink = respJson["result"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
+                                    }
+                                }
+                            }, label: {
+                                HStack {
+                                    VStack {
+                                        Text(String(i + 1))
+                                            .foregroundColor(playingPageIndex == i ? .accentColor : (colorScheme == .dark ? .white : .black))
+                                        Spacer()
+                                    }
+                                    Text(epDatas[i].longTitle)
+                                        .lineLimit(2)
+                                        .foregroundColor(playingPageIndex == i ? .accentColor : (colorScheme == .dark ? .white : .black))
+                                }
+                                .font(.system(size: 14))
+                            })
+                            .buttonStyle(.bordered)
+                            .frame(height: 60)
+                            .frame(maxWidth: 160)
+                        }
+                    }
+                }
+                .scrollIndicators(.never)
+            }
+            #endif
         }
         
         // OS 10- support
@@ -251,6 +323,7 @@ struct BangumiDetailView: View {
             @Binding var epDatas: [BangumiEp]
             @Binding var isBangumiPlayerPresented: Bool
             @Binding var isLoading: Bool
+            @Binding var bangumiLink: String
             @AppStorage("DedeUserID") var dedeUserID = ""
             @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
             @AppStorage("SESSDATA") var sessdata = ""
@@ -268,8 +341,7 @@ struct BangumiDetailView: View {
                             DarockKit.Network.shared.requestJSON("https://api.bilibili.com/pgc/player/web/playurl?ep_id=\(epDatas[i].epid)&qn=16&fnval=1", headers: headers) { respJson, isSuccess in
                                 if isSuccess {
                                     if !CheckBApiError(from: respJson) { return }
-                                    BangumiDetailView.willPlayBangumiLink = respJson["result"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
-                                    BangumiDetailView.willPlayBangumiData = bangumiData
+                                    bangumiLink = respJson["result"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
                                     isBangumiPlayerPresented = true
                                     isLoading = false
                                 }

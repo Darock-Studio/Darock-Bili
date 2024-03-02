@@ -1335,7 +1335,7 @@ struct VideoDetailView: View {
                                         Spacer()
                                     }
                                     HStack {
-                                        Text("Video.fans.\(Int(String(ownerFansCount).shorter()) ?? 0)")
+                                        Text("\(String(ownerFansCount).shorter())粉丝")
                                             .font(.system(size: 11))
                                             .lineLimit(1)
                                             .opacity(0.6)

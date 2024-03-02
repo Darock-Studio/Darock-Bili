@@ -376,6 +376,9 @@
         }
       }
     },
+    "%@粉丝" : {
+
+    },
     "%lld" : {
       "extractionState" : "stale",
       "localizations" : {
