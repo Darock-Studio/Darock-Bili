@@ -113,7 +113,19 @@ struct DarockBili_Watch_AppApp: App {
                         dlclose(handle)
                     }
                 } else {
-                    Text("Cannot get handle")
+                    VStack {
+                        Text("Cannot get handle")
+                            .onAppear {
+                                print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("main.dylib").path())
+                                print(FileManager.default.fileExists(atPath: FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("main.dylib").path()))
+                            }
+                        Button(action: {
+                            shouldDownload = true
+                        }, label: {
+                            Text("尝试重新下载资源包")
+                                .foregroundStyle(Color.blue)
+                        })
+                    }
                 }
             } else {
                 DylibDownloadView(statusSymbol: $shouldDownload)

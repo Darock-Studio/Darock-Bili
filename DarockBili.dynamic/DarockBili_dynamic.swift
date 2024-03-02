@@ -39,5 +39,5 @@ final class Wrapper {
 
 @_cdecl("GetDylibVersion")
 public func GetDylibVersion() -> String {
-    return "1.0.2"
+    return "1.0.3"
 }
