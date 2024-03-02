@@ -705,3 +705,40 @@ prefix operator &&
 prefix func && <T>(input: inout T) -> UnsafeMutablePointer<T> {
     withUnsafeMutablePointer(to: &input) { $0 }
 }
+
+public class DKDynamic {
+    public func testPrint() {
+        fromHandle { handle in
+            if let sym = dlsym(handle, "testPrint") {
+                let f = unsafeBitCast(sym, to: (@convention(c) () -> Void).self)
+                f()
+            } else {
+                print("Cannot get sym")
+            }
+        }
+    }
+    public func GetDylibVersion() -> String {
+        if let handle = dlopen(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("main.dylib").path(), RTLD_NOW) {
+            if let sym = dlsym(handle, "GetDylibVersion") {
+                let f = unsafeBitCast(sym, to: (@convention(c) () -> String).self)
+                return f()
+            } else {
+                print("Cannot get sym")
+            }
+            dlclose(handle)
+        } else {
+            print("Cannot get handle")
+        }
+        return "Unknown"
+    }
+    
+    
+    private func fromHandle(_ closure: (UnsafeMutableRawPointer) -> Void) {
+        if let handle = dlopen(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("main.dylib").path(), RTLD_NOW) {
+            closure(handle)
+            dlclose(handle)
+        } else {
+            print("Cannot get handle")
+        }
+    }
+}
