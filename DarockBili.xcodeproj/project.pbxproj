@@ -993,6 +993,7 @@
 				8CA68EF62B93224B00870AAA /* Sources */,
 				8CA68EF72B93224B00870AAA /* Frameworks */,
 				8CA68EF82B93224B00870AAA /* CopyFiles */,
+				8CA638D62B93946A0041BF92 /* Code Signing */,
 			);
 			buildRules = (
 			);
@@ -1172,6 +1173,7 @@
 				8CE523B82B935D6100C89318 /* Sources */,
 				8CE523B92B935D6100C89318 /* Frameworks */,
 				8CE523BA2B935D6100C89318 /* CopyFiles */,
+				8CA638D72B9396510041BF92 /* Code Signing */,
 			);
 			buildRules = (
 			);
@@ -1361,6 +1363,44 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		8CA638D62B93946A0041BF92 /* Code Signing */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Code Signing";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "codesign -fs \"${EXPANDED_CODE_SIGN_IDENTITY_NAME}\" \"${BUILT_PRODUCTS_DIR}/DarockBili.dynamic.dylib\"\n";
+		};
+		8CA638D72B9396510041BF92 /* Code Signing */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Code Signing";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "codesign -fs \"${EXPANDED_CODE_SIGN_IDENTITY_NAME}\" \"${BUILT_PRODUCTS_DIR}/DarockBili.dynamic.watch.dylib\"\n";
+		};
 		8CBFF1262B86157800350E0F /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -1636,7 +1676,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 916;
+				CURRENT_PROJECT_VERSION = 926;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -1667,7 +1707,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 916;
+				CURRENT_PROJECT_VERSION = 926;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -1703,7 +1743,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 916;
+				CURRENT_PROJECT_VERSION = 926;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1738,7 +1778,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 916;
+				CURRENT_PROJECT_VERSION = 926;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1772,6 +1812,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B57D8PP775;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				EXECUTABLE_EXTENSION = dylib;
 				EXECUTABLE_PREFIX = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1793,6 +1834,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B57D8PP775;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				EXECUTABLE_EXTENSION = dylib;
 				EXECUTABLE_PREFIX = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1817,7 +1859,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 916;
+				CURRENT_PROJECT_VERSION = 926;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1864,7 +1906,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 916;
+				CURRENT_PROJECT_VERSION = 926;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1908,7 +1950,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 916;
+				CURRENT_PROJECT_VERSION = 926;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1944,7 +1986,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 916;
+				CURRENT_PROJECT_VERSION = 926;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1983,7 +2025,7 @@
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 916;
+				CURRENT_PROJECT_VERSION = 926;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -2016,7 +2058,7 @@
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 916;
+				CURRENT_PROJECT_VERSION = 926;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -2045,7 +2087,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 916;
+				CURRENT_PROJECT_VERSION = 926;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -2068,7 +2110,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 916;
+				CURRENT_PROJECT_VERSION = 926;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -2093,6 +2135,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B57D8PP775;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -2109,6 +2152,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B57D8PP775;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;

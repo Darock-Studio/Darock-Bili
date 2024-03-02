@@ -8777,6 +8777,9 @@
         }
       }
     },
+    "尝试重新下载资源包" : {
+
+    },
     "已选择的图片" : {
       "extractionState" : "stale",
       "localizations" : {
