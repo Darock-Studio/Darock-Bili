@@ -428,7 +428,9 @@ struct UserDynamicMainView: View {
                         ProgressView()
                     }
                 }
+                #if !os(watchOS)
                 .padding()
+                #endif
             }
             .navigationTitle("Moments")
             .navigationBarTitleDisplayMode(.large)
