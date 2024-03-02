@@ -141,7 +141,7 @@ struct MainView: View {
                     Section {
                         if debug {
                             Button(action: {
-                                
+                                DKDynamic().testPrint()
                             }, label: {
                                 Text("Home.debug")
                             })

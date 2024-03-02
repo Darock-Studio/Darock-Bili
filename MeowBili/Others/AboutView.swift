@@ -72,6 +72,8 @@ struct AboutApp: View {
             Group {
                 Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)")
                     .font(.system(size: 18))
+                Text("资源包版本 v\(DKDynamic().GetDylibVersion())")
+                    .font(.system(size: 18))
                 Text("\(String(try! String(contentsOf: Bundle.main.url(forResource: "CurrentChannel", withExtension: "drkdatac")!).split(separator: "\n")[0])) 频道")
                     .font(.system(size: 18))
                 Group {
@@ -190,6 +192,7 @@ struct AboutApp: View {
                 .font(.title3)
             Group {
                 Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)")
+                Text("资源包版本 v\(DKDynamic().GetDylibVersion())")
                 Text("\(String(try! String(contentsOf: Bundle.main.url(forResource: "CurrentChannel", withExtension: "drkdatac")!).split(separator: "\n")[0])) 频道")
                 if debug {
                     Text(CodingTime.getCodingTime())
@@ -197,7 +200,7 @@ struct AboutApp: View {
                     Text("\(CodingTime.getCodingTime().components(separatedBy: " ")[0] + " " + CodingTime.getCodingTime().components(separatedBy: " ")[1] + " " +  CodingTime.getCodingTime().components(separatedBy: " ")[2])")
                 }
             }
-            .font(.caption)
+            .font(.system(size: 13))
             .monospaced()
             .foregroundStyle(.secondary)
             .onTapGesture(count: 9) {

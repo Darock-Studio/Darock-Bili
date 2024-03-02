@@ -18,6 +18,7 @@
 
 #import <Foundation/Foundation.h>
 #import <os/proc.h>
+#import <dlfcn.h>
 #import "OCCodeExt.h"
 
 @implementation OCCodeExt: NSObject

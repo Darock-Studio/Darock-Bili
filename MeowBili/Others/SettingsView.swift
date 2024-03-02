@@ -20,6 +20,7 @@ import Charts
 import SwiftUI
 import SwiftDate
 import DarockKit
+import Alamofire
 import AuthenticationServices
 #if os(watchOS)
 import WatchKit
@@ -150,6 +151,19 @@ struct SettingsView: View {
                 })
             }
             Section {
+                NavigationLink(destination: { SoftwareUpdateView() }, label: {
+                    HStack {
+                        ZStack {
+                            Color.gray
+                                .frame(width: 26, height: 26)
+                                .clipShape(RoundedRectangle(cornerRadius: 5))
+                            Image(systemName: "arrow.clockwise")
+                                .font(.system(size: 16))
+                                .foregroundColor(.white)
+                        }
+                        Text("Settings.update")
+                    }
+                })
                 NavigationLink(destination: { AboutView() }, label: {
                     HStack {
                         ZStack {
@@ -853,30 +867,38 @@ struct PrivacySettingsView: View {
     }
 }
 
-#if os(watchOS)
 struct SoftwareUpdateView: View {
     @State var shouldUpdate = false
+    @State var shouldUpdateLib = false
     @State var isLoading = true
     @State var isFailed = false
     @State var latestVer = ""
     @State var latestBuild = ""
     @State var releaseNote = ""
+    @State var latestLibVer = ""
+    @State var libReleaseNote = ""
+    @State var isDownloadingRes = false
+    @State var downloadProgress = 0.0
+    @State var downloadedSize: Int64 = 0
+    @State var totalSize: Int64 = 0
+    @State var isCanInstall = {
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let fileURL = documentsURL.appendingPathComponent("mainnew.dylib")
+        return FileManager.default.fileExists(atPath: fileURL.path())
+    }()
+    @State var isFinishedInstall = false
     var body: some View {
-        ScrollView {
-            VStack {
-                if !isLoading {
-                    if shouldUpdate {
+        List {
+            if !isLoading {
+                Section {
+                    if shouldUpdateLib {
                         HStack {
-                            Spacer()
-                                .frame(width: 10)
                             Image("AppIconImage")
                                 .resizable()
                                 .frame(width: 40, height: 40)
                                 .cornerRadius(8)
-                            Spacer()
-                                .frame(width: 10)
                             VStack {
-                                Text("v\(latestVer) Build \(latestBuild)")
+                                Text("资源包 v\(latestLibVer)")
                                     .font(.system(size: 14, weight: .medium))
                                 HStack {
                                     Text("Darock-studio")
@@ -886,40 +908,162 @@ struct SoftwareUpdateView: View {
                                 }
                             }
                         }
-                        Divider()
-                        Text(releaseNote)
-                        if (Bundle.main.infoDictionary?["CFBundleIdentifier"] as! String) != "com.darock.DarockBili.watchkitapp" {
-                            Button(action: {
-                                let session = ASWebAuthenticationSession(url: URL(string: "https://cd.darock.top:32767/meowbili/install.html")!, callbackURLScheme: "mlhd") { _, _ in
-                                    return
+                        Group {
+                            Divider()
+                            Text(libReleaseNote)
+                        }
+                        .listRowBackground(Color.clear)
+                        if !isCanInstall {
+                            if !isDownloadingRes {
+                                Button(action: {
+                                    isDownloadingRes = true
+                                    let destination: DownloadRequest.Destination = { _, _ in
+                                        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                                        let fileURL = documentsURL.appendingPathComponent("mainnew.dylib")
+                                        return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
+                                    }
+#if targetEnvironment(simulator)
+#if os(watchOS)
+                                    let link = "https://cd.darock.top:32767/meowbili/res/dylib/watchsimulator.dylib"
+#elseif os(iOS)
+                                    let link = "https://cd.darock.top:32767/meowbili/res/dylib/iphonesimulator.dylib"
+#endif
+#else
+#if os(watchOS)
+                                    let link = "https://cd.darock.top:32767/meowbili/res/dylib/watchos.dylib"
+#elseif os(iOS)
+                                    let link = "https://cd.darock.top:32767/meowbili/res/dylib/iphoneos.dylib"
+#endif
+#endif
+                                    AF.download(link, to: destination)
+                                        .downloadProgress { p in
+                                            downloadProgress = p.fractionCompleted
+                                            downloadedSize = p.completedUnitCount
+                                            totalSize = p.totalUnitCount
+                                        }
+                                        .response { r in
+                                            if r.error == nil, let filePath = r.fileURL?.path {
+                                                debugPrint(filePath)
+                                                isCanInstall = true
+                                            } else {
+                                                debugPrint(r.error as Any)
+                                            }
+                                        }
+                                }, label: {
+                                    Text("下载并安装")
+                                })
+                            } else {
+                                VStack {
+                                    ProgressView(value: downloadProgress)
+                                    HStack {
+                                        Spacer()
+                                        Text("\(String(format: "%.2f", downloadProgress * 100) + " %")")
+                                        Spacer()
+                                    }
+                                    HStack {
+                                        Spacer()
+                                        Text("\(String(format: "%.2f", Double(downloadedSize) / 1024 / 1024))MB / \(String(format: "%.2f", Double(totalSize) / 1024 / 1024))MB")
+                                            .font(.system(size: 16))
+                                            .lineLimit(1)
+                                            .minimumScaleFactor(0.1)
+                                        Spacer()
+                                    }
                                 }
-                                session.prefersEphemeralWebBrowserSession = true
-                                session.start()
-                            }, label: {
-                                Text("Update.download-and-install")
-                            })
+                                .listRowBackground(Color.clear)
+                            }
                         } else {
-                            Spacer()
-                                .frame(height: 10)
+                            NavigationLink(destination: {
+                                if !isFinishedInstall {
+                                    ZStack {
+                                        Color.black
+                                            .ignoresSafeArea()
+                                        VStack {
+                                            Image("AppIconImage")
+                                                .resizable()
+                                                .frame(width: 60, height: 60)
+                                                .clipShape(Circle())
+                                            ProgressView()
+                                                .padding(3)
+                                        }
+                                    }
+                                    .navigationBarHidden(true)
+                                    .navigationBarBackButtonHidden()
+                                    .onAppear {
+                                        let fileManager = FileManager.default
+                                        let documentsDirectory = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+                                        let mainDylibPath = documentsDirectory.appendingPathComponent("main.dylib")
+                                        let mainNewDylibPath = documentsDirectory.appendingPathComponent("mainnew.dylib")
+                                        do {
+                                            try fileManager.removeItem(at: mainDylibPath)
+                                            try fileManager.moveItem(at: mainNewDylibPath, to: mainDylibPath)
+                                            sleep(2)
+                                            isFinishedInstall = true
+                                        } catch {
+                                            print("错误：\(error)")
+                                        }
+                                    }
+                                } else {
+                                    List {
+                                        Section {
+                                            Text("已完成更新")
+                                            Text("需要重启喵哩喵哩以应用")
+                                        }
+                                        Section {
+                                            Button(action: {
+                                                exit(0)
+                                            }, label: {
+                                                Text("退出")
+                                            })
+                                        }
+                                    }
+                                }
+                            }, label: {
+                                Text("安装")
+                            })
+                        }
+                    } else if !isFailed {
+                        Text("喵哩喵哩资源包已是最新版本")
+                    }
+                }
+                Section {
+                    if shouldUpdate {
+                        VStack {
+                            HStack {
+                                Image("AppIconImage")
+                                    .resizable()
+                                    .frame(width: 40, height: 40)
+                                    .cornerRadius(8)
+                                VStack {
+                                    Text("v\(latestVer) Build \(latestBuild)")
+                                        .font(.system(size: 14, weight: .medium))
+                                    HStack {
+                                        Text("Darock-studio")
+                                            .font(.system(size: 13))
+                                            .foregroundColor(.gray)
+                                        Spacer()
+                                    }
+                                }
+                            }
+                            Divider()
+                            Text(releaseNote)
                             Text("Update.install-by-testflight")
                                 .bold()
                         }
                     } else if isFailed {
                         Text("Update.error")
                     } else {
-                        Text("Update.latest")
-                    }
-                } else {
-                    HStack {
-                        Text("Update.checking")
-                            .lineLimit(1)
-                            .multilineTextAlignment(.leading)
-                            .frame(width: 130)
-                        Spacer()
-                            .frame(maxWidth: .infinity)
-                        ProgressView()
+                        Text("喵哩喵哩 App 已是最新版本")
                     }
                 }
+            } else {
+                HStack {
+                    Text("Update.checking")
+                        .lineLimit(1)
+                        .multilineTextAlignment(.leading)
+                    Spacer()
+                    ProgressView()
+                }
+                .listRowBackground(Color.clear)
             }
         }
         .onAppear {
@@ -935,6 +1079,23 @@ struct SoftwareUpdateView: View {
                     DarockKit.Network.shared.requestString("https://api.darock.top/bili/newver/note") { respStr, isSuccess in
                         if isSuccess {
                             releaseNote = respStr.apiFixed()
+                        } else {
+                            isFailed = true
+                        }
+                    }
+                } else {
+                    isFailed = true
+                }
+            }
+            DarockKit.Network.shared.requestString("https://api.darock.top/bili/libnewver") { respStr, isSuccess in
+                if isSuccess {
+                    latestLibVer = respStr.apiFixed()
+                    if DKDynamic().GetDylibVersion() != latestLibVer {
+                        shouldUpdateLib = true
+                    }
+                    DarockKit.Network.shared.requestString("https://api.darock.top/bili/libnewver/note") { respStr, isSuccess in
+                        if isSuccess {
+                            libReleaseNote = respStr.apiFixed()
                             isLoading = false
                         } else {
                             isFailed = true
@@ -948,6 +1109,7 @@ struct SoftwareUpdateView: View {
     }
 }
 
+#if os(watchOS)
 struct GestureSettingsView: View {
     @AppStorage("IsVideoPlayerGestureEnabled") var isVideoPlayerGestureEnabled = true
     var body: some View {
