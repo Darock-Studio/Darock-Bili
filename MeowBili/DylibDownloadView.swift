@@ -26,7 +26,6 @@ struct DylibDownloadView: View {
     @State var totalSize: Int64 = 0
     var body: some View {
         NavigationStack {
-#if os(watchOS)
             List {
                 Section {
                     Text("正在下载资源...")
@@ -51,9 +50,6 @@ struct DylibDownloadView: View {
                     }
                 }
             }
-#else
-            
-#endif
         }
         .onAppear {
             let destination: DownloadRequest.Destination = { _, _ in
