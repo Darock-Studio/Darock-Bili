@@ -95,6 +95,7 @@ struct AppMainView: View {
     // Navigators
     @State var isUrlOpenVideoPresented = false
     @State var urlOpenVideoDetails = [String: String]()
+    @State var isFirstOpen = false
 #if os(watchOS)
     @State var isMemoryWarningPresented = false
 #else
@@ -415,6 +416,20 @@ struct AppMainView: View {
                         }
                     }
                 }
+                
+                if !isFirstOpen {
+                    Mixpanel.initialize(token: "37d4aaecc64cae16353c2fe7dbb0513c", trackAutomaticEvents: false)
+                    //                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                    //  Wow you see a token there, I'm not forget to hide it because you are no able to
+                    //  do anything important by this token >_-
+                    if (UserDefaults.standard.object(forKey: "IsAllowMixpanel") as? Bool) ?? true {
+                        Mixpanel.mainInstance().track(event: "Open App")
+                        if let uid = UserDefaults.standard.string(forKey: "DedeUserId") {
+                            Mixpanel.mainInstance().registerSuperPropertiesOnce(["DedeUserId": uid])
+                        }
+                    }
+                    isFirstOpen = true
+                }
             @unknown default:
                 break
             }
@@ -422,40 +437,7 @@ struct AppMainView: View {
     }
 }
 
-#if os(watchOS) || os(visionOS)
-public func tipWithText(_ text: String, symbol: String = "", time: Double = 3.0) {
-    pShowTipText = text
-    pShowTipSymbol = symbol
-    pTipBoxOffset = 7
-    Timer.scheduledTimer(withTimeInterval: time, repeats: false) { timer in
-        pTipBoxOffset = 80
-        timer.invalidate()
-    }
-}
-#endif
-
 #if !os(watchOS)
-class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        Mixpanel.initialize(token: "37d4aaecc64cae16353c2fe7dbb0513c", trackAutomaticEvents: false)
-        //                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        //  Wow you see a token there, I'm not forget to hide it because you are no able to
-        //  do anything important by this token >_-
-        if (UserDefaults.standard.object(forKey: "IsAllowMixpanel") as? Bool) ?? true {
-            Mixpanel.mainInstance().track(event: "Open App")
-            if let uid = UserDefaults.standard.string(forKey: "DedeUserId") {
-                Mixpanel.mainInstance().registerSuperPropertiesOnce(["DedeUserId": uid])
-            }
-        }
-        
-        return true
-    }
-    
-    func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
-        //AlertKitAPI.present(title: "低内存警告", subtitle: "喵哩喵哩收到了低内存警告", icon: .error, style: .iOS17AppleMusic, haptic: .warning)
-    }
-}
-
 func signalErrorRecord(_ errorNum: Int32, _ errorSignal: String) {
     var symbols = ""
     for symbol in Thread.callStackSymbols {
