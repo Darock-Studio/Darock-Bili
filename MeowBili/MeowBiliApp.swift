@@ -137,16 +137,7 @@ struct DarockBili_Watch_AppApp: App {
 #if !os(watchOS)
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        Mixpanel.initialize(token: "37d4aaecc64cae16353c2fe7dbb0513c", trackAutomaticEvents: false)
-        //                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        //  Wow you see a token there, I'm not forget to hide it because you are no able to
-        //  do anything important by this token >_-
-        if (UserDefaults.standard.object(forKey: "IsAllowMixpanel") as? Bool) ?? true {
-            Mixpanel.mainInstance().track(event: "Open App")
-            if let uid = UserDefaults.standard.string(forKey: "DedeUserId") {
-                Mixpanel.mainInstance().registerSuperPropertiesOnce(["DedeUserId": uid])
-            }
-        }
+        
             
         return true
     }
@@ -158,17 +149,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 #else
 class AppDelegate: NSObject, WKApplicationDelegate {
     func applicationDidFinishLaunching() {
-        Mixpanel.initialize(token: "37d4aaecc64cae16353c2fe7dbb0513c")
-        //                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        //  Wow you see a token there, I'm not forget to hide it because you are no able to
-        //  do anything important by this token >_-
-        if (UserDefaults.standard.object(forKey: "IsAllowMixpanel") as? Bool) ?? true {
-            Mixpanel.mainInstance().track(event: "Open App")
-            if let uid = UserDefaults.standard.string(forKey: "DedeUserId") {
-                Mixpanel.mainInstance().registerSuperPropertiesOnce(["DedeUserId": uid])
-            }
-        }
-        
         SDImageCodersManager.shared.addCoder(SDImageWebPCoder.shared)
         SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)
         SDImageCodersManager.shared.addCoder(SDImagePDFCoder.shared)
