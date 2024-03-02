@@ -49,13 +49,34 @@ struct DylibDownloadView: View {
                         }
                     }
                 }
+                #if os(watchOS)
+                Section {
+                    Text("请不要让Apple Watch熄屏，可以通过保持滚动表冠以使屏幕常亮")
+                }
+                Section {
+                    Text("""
+                    顺便了解一些知识来打发时间吧！
+                    
+                    - 为什么要下载资源包？
+                      喵哩喵哩通过资源包运行主要代码，这也就意味着您无需经常使用iPhone更新App。
+                    - 获取新功能的方法？
+                      在设置->软件更新中可以更新资源包，无论iPhone是否在身边
+                    - 使用技巧？
+                       - 保持良好的网络环境，最好不连接iPhone或在设置中关闭iPhone上的无线局域网与蓝牙
+                       - 遇到问题在用户群内反馈效率最高
+                       - 登录账号以获取最佳体验
+                    - 开源！
+                      喵哩喵哩为开源项目，您可以在GitHub上找到我们的源代码
+                    """)
+                }
+                #endif
             }
         }
         .onAppear {
             let destination: DownloadRequest.Destination = { _, _ in
                 let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
                 let fileURL = documentsURL.appendingPathComponent("main.dylib")
-                return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
+                return (fileURL, [.removePreviousFile])
             }
             #if targetEnvironment(simulator)
                 #if os(watchOS)
@@ -70,20 +91,22 @@ struct DylibDownloadView: View {
                 let link = "https://cd.darock.top:32767/meowbili/res/dylib/iphoneos.dylib"
                 #endif
             #endif
-            AF.download(link, to: destination)
-                .downloadProgress { p in
-                    downloadProgress = p.fractionCompleted
-                    downloadedSize = p.completedUnitCount
-                    totalSize = p.totalUnitCount
-                }
-                .response { r in
-                    if r.error == nil, let filePath = r.fileURL?.path {
-                        debugPrint(filePath)
-                        statusSymbol.toggle()
-                    } else {
-                        debugPrint(r.error as Any)
+            DispatchQueue(label: "com.darock.DarockBili.resDownload").async {
+                AF.download(link, to: destination)
+                    .downloadProgress { p in
+                        downloadProgress = p.fractionCompleted
+                        downloadedSize = p.completedUnitCount
+                        totalSize = p.totalUnitCount
                     }
-                }
+                    .response { r in
+                        if r.error == nil, let filePath = r.fileURL?.path {
+                            debugPrint(filePath)
+                            statusSymbol.toggle()
+                        } else {
+                            debugPrint(r.error as Any)
+                        }
+                    }
+            }
         }
     }
 }
