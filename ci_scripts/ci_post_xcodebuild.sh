@@ -1,14 +1,11 @@
 #!/bin/bash
 
-if [[ "$CI_WORKFLOW" == "Canary Deploy" ]]; then
-  TESTFLIGHT_DIR_PATH=../TestFlight
-  mkdir $TESTFLIGHT_DIR_PATH
-  echo -e "CI 自动生成信息，24小时内的main分支的提交：\n" > $TESTFLIGHT_DIR_PATH/WhatToTest.zh-Hans.txt
-  git fetch -a --deepen 40 && git log --since="24 hours ago" main --pretty=format:"%s" >> $TESTFLIGHT_DIR_PATH/WhatToTest.zh-Hans.txt
-elif [[ "$CI_WORKFLOW" == "Public Release" ]]; then
-  TESTFLIGHT_DIR_PATH=../TestFlight
-  mkdir $TESTFLIGHT_DIR_PATH
-  echo -e "当前语义化版本：$CI_TAG\n\nRelease Notes: https://github.com/Darock-Studio/Darock-Bili/releases/tag/$CI_TAG\n\n若要使用watchOS App，请打开“在Apple Watch上显示App”开关" > $TESTFLIGHT_DIR_PATH/WhatToTest.zh-Hans.txt
+if [ "$CI_WORKFLOW" == "Dylib Release Update" ] || [ "$CI_WORKFLOW" == "Dylib Snapshot Update" ]; then
+    if [[ "$CI_PRODUCT_PLATFORM" == "iOS" ]]; then
+        codesign -fs "${EXPANDED_CODE_SIGN_IDENTITY_NAME}" "${BUILT_PRODUCTS_DIR}/DarockBili.dynamic.dylib"
+    elif [[ "$CI_PRODUCT_PLATFORM" == "watchOS" ]]; then
+        codesign -fs "${EXPANDED_CODE_SIGN_IDENTITY_NAME}" "${BUILT_PRODUCTS_DIR}/DarockBili.dynamic.watch.dylib"
+    fi
 fi
 
 if [[ -n $CI_PULL_REQUEST_NUMBER ]]; then
