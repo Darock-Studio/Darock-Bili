@@ -6,6 +6,24 @@
 	objectVersion = 56;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		8CA97C222B945EE00008A99B /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 8CA97C252B945EE10008A99B /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				8CA97C2C2B945F440008A99B /* CopyFiles */,
+				8CA97C2D2B945F670008A99B /* Export Dylibs */,
+			);
+			dependencies = (
+				8CA97C272B945F1C0008A99B /* PBXTargetDependency */,
+				8CA97C292B945F1C0008A99B /* PBXTargetDependency */,
+				8CA97C2B2B945F1C0008A99B /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		8C0557DF2B791B84009D9CD0 /* AZVideoPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8C0557DE2B791B84009D9CD0 /* AZVideoPlayer */; };
 		8C617F412B92334B000A3687 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C617F402B92334B000A3687 /* SafariWebExtensionHandler.swift */; };
@@ -291,6 +309,27 @@
 			remoteGlobalIDString = 8CA7CBCE2B77AC4C008E587F;
 			remoteInfo = "MeowBili Watch App";
 		};
+		8CA97C262B945F1C0008A99B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B44689C42B4FC15A002CCEB2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CA68EF92B93224B00870AAA;
+			remoteInfo = DarockBili.dynamic;
+		};
+		8CA97C282B945F1C0008A99B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B44689C42B4FC15A002CCEB2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CE523BB2B935D6100C89318;
+			remoteInfo = DarockBili.dynamic.watch;
+		};
+		8CA97C2A2B945F1C0008A99B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B44689C42B4FC15A002CCEB2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CA7CBBF2B77AC4A008E587F;
+			remoteInfo = MeowBili;
+		};
 		8CC5B7462B8749BC00BAD89E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B44689C42B4FC15A002CCEB2 /* Project object */;
@@ -337,6 +376,15 @@
 				8CA7CBD02B77AC4C008E587F /* 喵哩喵哩.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CA97C2C2B945F440008A99B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8CE523BA2B935D6100C89318 /* CopyFiles */ = {
@@ -1229,6 +1277,9 @@
 					8CA7CBCE2B77AC4C008E587F = {
 						CreatedOnToolsVersion = 15.2;
 					};
+					8CA97C222B945EE00008A99B = {
+						CreatedOnToolsVersion = 15.2;
+					};
 					8CC5B6CB2B873E7500BAD89E = {
 						CreatedOnToolsVersion = 15.2;
 					};
@@ -1287,6 +1338,7 @@
 				8C617F3D2B92334B000A3687 /* SafariExtension */,
 				8CA68EF92B93224B00870AAA /* DarockBili.dynamic */,
 				8CE523BB2B935D6100C89318 /* DarockBili.dynamic.watch */,
+				8CA97C222B945EE00008A99B /* ALL_BUILD */,
 			);
 		};
 /* End PBXProject section */
@@ -1400,6 +1452,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "codesign -fs \"${EXPANDED_CODE_SIGN_IDENTITY_NAME}\" \"${BUILT_PRODUCTS_DIR}/DarockBili.dynamic.watch.dylib\"\n";
+		};
+		8CA97C2D2B945F670008A99B /* Export Dylibs */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Export Dylibs";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "BUILD_FOLDER=\"${SRCROOT}/build\"\n\nif [ ! -d \"$BUILD_FOLDER\" ]; then\n    mkdir -p \"$BUILD_FOLDER\"\nfi\n\ncp \"${BUILD_DIR}/Release-iphoneos/DarockBili.dynamic.dylib\" \"${BUILD_FOLDER}/iphoneos.dylib\"\ncp \"${BUILD_DIR}/Release-watchos/DarockBili.dynamic.watch.dylib\" \"${BUILD_FOLDER}/watchos.dylib\"\n";
 		};
 		8CBFF1262B86157800350E0F /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1659,6 +1730,21 @@
 			target = 8CA7CBCE2B77AC4C008E587F /* MeowBili Watch App */;
 			targetProxy = 8CA7CBD12B77AC4C008E587F /* PBXContainerItemProxy */;
 		};
+		8CA97C272B945F1C0008A99B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8CA68EF92B93224B00870AAA /* DarockBili.dynamic */;
+			targetProxy = 8CA97C262B945F1C0008A99B /* PBXContainerItemProxy */;
+		};
+		8CA97C292B945F1C0008A99B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8CE523BB2B935D6100C89318 /* DarockBili.dynamic.watch */;
+			targetProxy = 8CA97C282B945F1C0008A99B /* PBXContainerItemProxy */;
+		};
+		8CA97C2B2B945F1C0008A99B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8CA7CBBF2B77AC4A008E587F /* MeowBili */;
+			targetProxy = 8CA97C2A2B945F1C0008A99B /* PBXContainerItemProxy */;
+		};
 		8CC5B7472B8749BC00BAD89E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8CA7CBBF2B77AC4A008E587F /* MeowBili */;
@@ -1676,7 +1762,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 930;
+				CURRENT_PROJECT_VERSION = 931;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -1707,7 +1793,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 930;
+				CURRENT_PROJECT_VERSION = 931;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -1743,7 +1829,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 930;
+				CURRENT_PROJECT_VERSION = 931;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1778,7 +1864,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 930;
+				CURRENT_PROJECT_VERSION = 931;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1859,7 +1945,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 930;
+				CURRENT_PROJECT_VERSION = 931;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1906,7 +1992,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 930;
+				CURRENT_PROJECT_VERSION = 931;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1950,7 +2036,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 930;
+				CURRENT_PROJECT_VERSION = 931;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1986,7 +2072,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 930;
+				CURRENT_PROJECT_VERSION = 931;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2017,6 +2103,28 @@
 			};
 			name = Release;
 		};
+		8CA97C232B945EE10008A99B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B57D8PP775;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		8CA97C242B945EE10008A99B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B57D8PP775;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
 		8CC5B6D92B873E7800BAD89E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2025,7 +2133,7 @@
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 930;
+				CURRENT_PROJECT_VERSION = 931;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -2058,7 +2166,7 @@
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 930;
+				CURRENT_PROJECT_VERSION = 931;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -2087,7 +2195,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 930;
+				CURRENT_PROJECT_VERSION = 931;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -2110,7 +2218,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 930;
+				CURRENT_PROJECT_VERSION = 931;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -2335,6 +2443,15 @@
 			buildConfigurations = (
 				8CA7CBDD2B77AC4D008E587F /* Debug */,
 				8CA7CBDE2B77AC4D008E587F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8CA97C252B945EE10008A99B /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CA97C232B945EE10008A99B /* Debug */,
+				8CA97C242B945EE10008A99B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
