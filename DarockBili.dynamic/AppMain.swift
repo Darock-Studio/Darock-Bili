@@ -437,6 +437,16 @@ struct AppMainView: View {
     }
 }
 
+public func tipWithText(_ text: String, symbol: String = "", time: Double = 3.0) {
+    pShowTipText = text
+    pShowTipSymbol = symbol
+    pTipBoxOffset = 7
+    Timer.scheduledTimer(withTimeInterval: time, repeats: false) { timer in
+        pTipBoxOffset = 80
+        timer.invalidate()
+    }
+}
+
 #if !os(watchOS)
 func signalErrorRecord(_ errorNum: Int32, _ errorSignal: String) {
     var symbols = ""
