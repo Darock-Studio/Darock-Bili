@@ -1,13 +1,5 @@
 #!/bin/bash
 
-if [ "$CI_WORKFLOW" == "Dylib Release Update" ] || [ "$CI_WORKFLOW" == "Dylib Snapshot Update" ]; then
-    if [[ "$CI_PRODUCT_PLATFORM" == "iOS" ]]; then
-        codesign -fs "Apple Development" "${BUILT_PRODUCTS_DIR}/DarockBili.dynamic.dylib"
-    elif [[ "$CI_PRODUCT_PLATFORM" == "watchOS" ]]; then
-        codesign -fs "Apple Development" "${BUILT_PRODUCTS_DIR}/DarockBili.dynamic.watch.dylib"
-    fi
-fi
-
 if [[ -n $CI_PULL_REQUEST_NUMBER ]]; then
     if [[ "$CI_XCODEBUILD_EXIT_CODE" == "0" ]]; then
         NEW_STATUS=success
