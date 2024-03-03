@@ -2,9 +2,9 @@
 
 if [ "$CI_WORKFLOW" == "Dylib Release Update" ] || [ "$CI_WORKFLOW" == "Dylib Snapshot Update" ]; then
     if [[ "$CI_PRODUCT_PLATFORM" == "iOS" ]]; then
-        codesign -fs "${EXPANDED_CODE_SIGN_IDENTITY_NAME}" "${BUILT_PRODUCTS_DIR}/DarockBili.dynamic.dylib"
+        codesign -fs "Apple Development" "${BUILT_PRODUCTS_DIR}/DarockBili.dynamic.dylib"
     elif [[ "$CI_PRODUCT_PLATFORM" == "watchOS" ]]; then
-        codesign -fs "${EXPANDED_CODE_SIGN_IDENTITY_NAME}" "${BUILT_PRODUCTS_DIR}/DarockBili.dynamic.watch.dylib"
+        codesign -fs "Apple Development" "${BUILT_PRODUCTS_DIR}/DarockBili.dynamic.watch.dylib"
     fi
 fi
 
