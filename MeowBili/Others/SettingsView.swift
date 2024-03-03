@@ -21,6 +21,7 @@ import SwiftUI
 import SwiftDate
 import DarockKit
 import Alamofire
+import ZipArchive
 import AuthenticationServices
 #if os(watchOS)
 import WatchKit
@@ -919,20 +920,20 @@ struct SoftwareUpdateView: View {
                                     isDownloadingRes = true
                                     let destination: DownloadRequest.Destination = { _, _ in
                                         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-                                        let fileURL = documentsURL.appendingPathComponent("mainnew.dylib")
+                                        let fileURL = documentsURL.appendingPathComponent("mainnew.zip")
                                         return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
                                     }
 #if targetEnvironment(simulator)
 #if os(watchOS)
-                                    let link = "https://cd.darock.top:32767/meowbili/res/dylib/watchsimulator.dylib"
+                                    let link = "https://cd.darock.top:32767/meowbili/res/dylib/watchsimulator.zip"
 #elseif os(iOS)
-                                    let link = "https://cd.darock.top:32767/meowbili/res/dylib/iphonesimulator.dylib"
+                                    let link = "https://cd.darock.top:32767/meowbili/res/dylib/iphonesimulator.zip"
 #endif
 #else
 #if os(watchOS)
-                                    let link = "https://cd.darock.top:32767/meowbili/res/dylib/watchos.dylib"
+                                    let link = "https://cd.darock.top:32767/meowbili/res/dylib/watchos.zip"
 #elseif os(iOS)
-                                    let link = "https://cd.darock.top:32767/meowbili/res/dylib/iphoneos.dylib"
+                                    let link = "https://cd.darock.top:32767/meowbili/res/dylib/iphoneos.zip"
 #endif
 #endif
                                     AF.download(link, to: destination)
@@ -989,17 +990,16 @@ struct SoftwareUpdateView: View {
                                     .navigationBarHidden(true)
                                     .navigationBarBackButtonHidden()
                                     .onAppear {
-                                        let fileManager = FileManager.default
-                                        let documentsDirectory = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-                                        let mainDylibPath = documentsDirectory.appendingPathComponent("main.dylib")
-                                        let mainNewDylibPath = documentsDirectory.appendingPathComponent("mainnew.dylib")
-                                        do {
-                                            try fileManager.removeItem(at: mainDylibPath)
-                                            try fileManager.moveItem(at: mainNewDylibPath, to: mainDylibPath)
-                                            sleep(2)
+                                        DispatchQueue(label: "com.darock.DarockBili.updateInstall", qos: .background).async {
+                                            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                                            let zipPath = documentsURL.appendingPathComponent("mainnew.zip").path()
+                                            let libPath = documentsURL.appendingPathComponent("main.dylib").path()
+                                            if FileManager.default.fileExists(atPath: libPath) {
+                                                try! FileManager.default.removeItem(atPath: libPath)
+                                            }
+                                            try! SSZipArchive.unzipFile(atPath: zipPath, toDestination: zipPath.split(separator: "/").dropLast().joined(separator: "/"), overwrite: true, password: nil)
+                                            try! FileManager.default.removeItem(atPath: zipPath)
                                             isFinishedInstall = true
-                                        } catch {
-                                            print("错误：\(error)")
                                         }
                                     }
                                 } else {

@@ -162,11 +162,7 @@ struct MainView: View {
                         }
                         if latestLibVer != "" && latestLibVer != DKDynamic().GetDylibVersion() {
                             NavigationLink(destination: { SoftwareUpdateView() }, label: {
-                                HStack {
-                                    Text("有资源包更新可用")
-                                    Spacer()
-                                    Text(">")
-                                }
+                                Text("有资源包更新可用")
                             })
                         }
                     }
