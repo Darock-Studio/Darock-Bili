@@ -418,7 +418,11 @@ struct AppMainView: View {
                 }
                 
                 if !isFirstOpen {
+                    #if !os(watchOS)
                     Mixpanel.initialize(token: "37d4aaecc64cae16353c2fe7dbb0513c", trackAutomaticEvents: false)
+                    #else
+                    Mixpanel.initialize(token: "37d4aaecc64cae16353c2fe7dbb0513c")
+                    #endif
                     //                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                     //  Wow you see a token there, I'm not forget to hide it because you are no able to
                     //  do anything important by this token >_-
