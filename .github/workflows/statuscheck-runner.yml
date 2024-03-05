@@ -24,7 +24,7 @@ jobs:
             echo "The comment content contains the specified text. Continuing with further actions."
             echo "::set-output name=shouldc::true"
           fi
-          if [[ "${{ github.event.comment.body }}" != *"!Export IPA"* ]]; then
+          if [[ "${{ github.event.comment.body }}" != *"!Export Dylib"* ]]; then
             echo "::set-output name=shouldtun::false"
           else
             echo "::set-output name=shouldtun::true"
@@ -70,7 +70,7 @@ jobs:
         with:
           workflow: status-check.yml
           inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}", "repository": "${{ needs.get-head-sha.outputs.repository }}", "lsha": "${{ needs.get-head-sha.outputs.lsha }}" }'
-  call-company-export-workflow:
+  call-dylib-export-workflow:
     name: Call Company Export Overflow
     needs: 
       - get-head-sha
@@ -83,7 +83,7 @@ jobs:
       - name: Call
         uses: benc-uk/workflow-dispatch@v1.2.2
         with:
-          workflow: company-export.yml
+          workflow: dylib-export.yml
           inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}", "repository": "${{ needs.get-head-sha.outputs.repository }}", "lsha": "${{ needs.get-head-sha.outputs.lsha }}" }'
   call-tf-deploy-workflow:
     name: Call TestFlight Internal Deploy Overflow
