@@ -71,7 +71,7 @@ jobs:
           workflow: status-check.yml
           inputs: '{ "psha": "${{ needs.get-head-sha.outputs.psha }}", "repository": "${{ needs.get-head-sha.outputs.repository }}", "lsha": "${{ needs.get-head-sha.outputs.lsha }}" }'
   call-dylib-export-workflow:
-    name: Call Company Export Overflow
+    name: Call Dylib Export Overflow
     needs: 
       - get-head-sha
       - checkif
