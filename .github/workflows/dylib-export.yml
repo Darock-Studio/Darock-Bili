@@ -77,7 +77,8 @@ jobs:
 
       - name: Resign Dylibs
         run: |
-          codesign -fs "Yuxuan Chen" build/Build/Products/Release-watchos/DarockBili.dynamic.watch.dylib
+          security find-identity -v
+          codesign -fs "B57D8PP775" build/Build/Products/Release-watchos/DarockBili.dynamic.watch.dylib
           
       - name: Upload watchOS Dylib
         uses: actions/upload-artifact@v3
