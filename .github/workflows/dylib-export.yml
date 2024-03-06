@@ -74,7 +74,11 @@ jobs:
         run: |
           mkdir build
           xcodebuild build -project ./DarockBili.xcodeproj -scheme 'DarockBili.dynamic.watch' -destination generic/platform=watchOS -IDEPostProgressNotifications=YES CODE_SIGN_IDENTITY=- AD_HOC_CODE_SIGNING_ALLOWED=YES CODE_SIGN_STYLE=Automatic COMPILER_INDEX_STORE_ENABLE=NO -quiet -derivedDataPath ./build
-        
+
+      - name: Resign Dylibs
+        run: |
+          codesign -fs "Apple Development" build/Build/Products/Release-watchos/DarockBili.dynamic.watch.dylib
+          
       - name: Upload watchOS Dylib
         uses: actions/upload-artifact@v3
         with:
