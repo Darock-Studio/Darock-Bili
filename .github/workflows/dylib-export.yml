@@ -44,9 +44,9 @@ jobs:
 
       - name: Install Apple certificate and provisioning profile for Xcode
         env:
-          BUILD_CERTIFICATE_BASE64: ${{ secrets.COMPANY_P12 }}
-          P12_PASSWORD: ${{ secrets.COMPANY_P12_PASSWORD }}
-          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.COMPANY_PROV }}
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
         run: |
           # create variables
@@ -78,7 +78,7 @@ jobs:
       - name: Resign Dylibs
         run: |
           security find-identity -v
-          codesign -fs "B57D8PP775" build/Build/Products/Release-watchos/DarockBili.dynamic.watch.dylib
+          codesign -fs "Apple Development" build/Build/Products/Release-watchos/DarockBili.dynamic.watch.dylib
           
       - name: Upload watchOS Dylib
         uses: actions/upload-artifact@v3
