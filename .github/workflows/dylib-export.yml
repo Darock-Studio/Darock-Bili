@@ -74,7 +74,7 @@ jobs:
           path: ~/Library/Developer/Xcode/DerivedData
 
       - name: Resolve Package Dependencies
-        run: xcodebuild -resolvePackageDependencies -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App'
+        run: xcodebuild -resolvePackageDependencies -project ./DarockBili.xcodeproj -scheme 'DarockBili.dynamic.watch'
 
       - name: Get Current Time
         id: current-time
