@@ -67,36 +67,19 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
-      - name: Restore Caches
-        uses: actions/cache/restore@v3
-        with:
-          key: ${{ runner.os }}-pr-dylib-export-cache-
-          path: ~/Library/Developer/Xcode/DerivedData
-
-      - name: Resolve Package Dependencies
-        run: xcodebuild -resolvePackageDependencies -project ./DarockBili.xcodeproj -scheme 'DarockBili.dynamic.watch'
-
-      - name: Get Current Time
-        id: current-time
-        run: echo "time=$(date +"%Y%m%d%H%M%S")" >> $GITHUB_OUTPUT
-
-      - name: Save Caches
-        uses: actions/cache/save@v3
-        with:
-          key: ${{ runner.os }}-pr-dylib-export-cache-${{ steps.current-time.outputs.time }}
-          path: ~/Library/Developer/Xcode/DerivedData
-
       - name: Update Status Env
         run: echo "FIN_STATUS=failure" >> $GITHUB_ENV
           
       - name: Build Dylibs
-        run: xcodebuild build -project ./DarockBili.xcodeproj -scheme 'DarockBili.dynamic.watch' -destination generic/platform=watchOS -IDEPostProgressNotifications=YES CODE_SIGN_IDENTITY=- AD_HOC_CODE_SIGNING_ALLOWED=YES CODE_SIGN_STYLE=Automatic COMPILER_INDEX_STORE_ENABLE=NO -quiet
+        run: |
+          mkdir build
+          xcodebuild build -project ./DarockBili.xcodeproj -scheme 'DarockBili.dynamic.watch' -destination generic/platform=watchOS -IDEPostProgressNotifications=YES CODE_SIGN_IDENTITY=- AD_HOC_CODE_SIGNING_ALLOWED=YES CODE_SIGN_STYLE=Automatic COMPILER_INDEX_STORE_ENABLE=NO -quiet -derivedDataPath ./build
         
       - name: Upload watchOS Dylib
         uses: actions/upload-artifact@v3
         with:
           name: Release-watchos
-          path: ~/Library/Developer/Xcode/DerivedData/Build/Products/Release-watchos/DarockBili.dynamic.watch.dylib
+          path: ./build/Build/Products/Release-watchos/DarockBili.dynamic.watch.dylib
 
       - name: Update Check Status
         if: always()
