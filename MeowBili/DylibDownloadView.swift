@@ -18,46 +18,34 @@
 
 import SwiftUI
 import Alamofire
-import ZipArchive
 
 struct DylibDownloadView: View {
     @Binding var statusSymbol: Bool
     @State var downloadProgress = 0.0
     @State var downloadedSize: Int64 = 0
     @State var totalSize: Int64 = 0
-    @State var isUnziping = false
     var body: some View {
         NavigationStack {
             List {
-                if !isUnziping {
-                    Section {
-                        Text("正在下载资源...")
-                            .bold()
-                    }
-                    Section {
-                        VStack {
-                            ProgressView(value: downloadProgress)
-                            HStack {
-                                Spacer()
-                                Text("\(String(format: "%.2f", downloadProgress * 100) + " %")")
-                                Spacer()
-                            }
-                            HStack {
-                                Spacer()
-                                Text("\(String(format: "%.2f", Double(downloadedSize) / 1024 / 1024))MB / \(String(format: "%.2f", Double(totalSize) / 1024 / 1024))MB")
-                                    .font(.system(size: 16, weight: .bold))
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.1)
-                                Spacer()
-                            }
+                Section {
+                    Text("正在下载资源...")
+                        .bold()
+                }
+                Section {
+                    VStack {
+                        ProgressView(value: downloadProgress)
+                        HStack {
+                            Spacer()
+                            Text("\(String(format: "%.2f", downloadProgress * 100) + " %")")
+                            Spacer()
                         }
-                    }
-                } else {
-                    Section {
-                        VStack {
-                            Text("正在安装...")
-                                .bold()
-                            ProgressView()
+                        HStack {
+                            Spacer()
+                            Text("\(String(format: "%.2f", Double(downloadedSize) / 1024 / 1024))MB / \(String(format: "%.2f", Double(totalSize) / 1024 / 1024))MB")
+                                .font(.system(size: 16, weight: .bold))
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.1)
+                            Spacer()
                         }
                     }
                 }
@@ -87,20 +75,20 @@ struct DylibDownloadView: View {
         .onAppear {
             let destination: DownloadRequest.Destination = { _, _ in
                 let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-                let fileURL = documentsURL.appendingPathComponent("maind.zip")
+                let fileURL = documentsURL.appendingPathComponent("main.dylib")
                 return (fileURL, [.removePreviousFile])
             }
             #if targetEnvironment(simulator)
                 #if os(watchOS)
-                let link = "https://cd.darock.top:32767/meowbili/res/dylib/watchsimulator.zip"
+                let link = "https://cd.darock.top:32767/meowbili/res/dylib/watchsimulator.dylib"
                 #elseif os(iOS)
-                let link = "https://cd.darock.top:32767/meowbili/res/dylib/iphonesimulator.zip"
+                let link = "https://cd.darock.top:32767/meowbili/res/dylib/iphonesimulator.dylib"
                 #endif
             #else
                 #if os(watchOS)
-                let link = "https://cd.darock.top:32767/meowbili/res/dylib/watchos.zip"
+                let link = "https://cd.darock.top:32767/meowbili/res/dylib/watchos.dylib"
                 #elseif os(iOS)
-                let link = "https://cd.darock.top:32767/meowbili/res/dylib/iphoneos.zip"
+                let link = "https://cd.darock.top:32767/meowbili/res/dylib/iphoneos.dylib"
                 #endif
             #endif
             DispatchQueue(label: "com.darock.DarockBili.resDownload").async {
@@ -113,17 +101,7 @@ struct DylibDownloadView: View {
                     .response { r in
                         if r.error == nil, let filePath = r.fileURL?.path {
                             debugPrint(filePath)
-                            isUnziping = true
-                            DispatchQueue(label: "com.darock.DarockBili.resUnzip", qos: .background).async {
-                                let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-                                let fileURL = documentsURL.appendingPathComponent("main.dylib")
-                                if FileManager.default.fileExists(atPath: fileURL.path()) {
-                                    try! FileManager.default.removeItem(atPath: fileURL.path())
-                                }
-                                try! SSZipArchive.unzipFile(atPath: filePath, toDestination: fileURL.path().split(separator: "/").dropLast().joined(separator: "/"), overwrite: true, password: nil)
-                                try! FileManager.default.removeItem(atPath: filePath)
-                                statusSymbol.toggle()
-                            }
+                            statusSymbol.toggle()
                         } else {
                             debugPrint(r.error as Any)
                         }
