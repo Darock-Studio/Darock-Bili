@@ -1,4 +1,4 @@
-name: Dylib Export Workflow
+name: Company IPA Export Workflow
 
 on:
   workflow_dispatch:
@@ -12,7 +12,7 @@ on:
 
 jobs:  
   build:
-    name: Build and Export Dylibs
+    name: Build and Export Company App
     runs-on: macos-13
     permissions:
       checks: write
@@ -31,7 +31,7 @@ jobs:
             -f state='pending' \
             -f target_url='https://github.com/Darock-Studio/Darock-Bili/actions/runs/${{ github.run_id }}' \
             -f description='Building...' \
-            -f context='Dylibs Export' 
+            -f context='Company IPA Export' 
     
       - name: Checkout
         uses: actions/checkout@v3
@@ -67,23 +67,50 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
+      - name: Replace Bundle ID
+        run: |
+          sed -i "" 's/com.darock.DarockBili.watchkitapp/com.djbx.life.agent.dat/g' DarockBili.xcodeproj/project.pbxproj
+          sed -i "" 's/com.darock.DarockBili/com.djbx.life.agent.dat/g' DarockBili.xcodeproj/project.pbxproj
+
+      - name: Restore Caches
+        uses: actions/cache/restore@v3
+        with:
+          key: ${{ runner.os }}-pr-company-export-cache-
+          path: ~/Library/Developer/Xcode/DerivedData
+
+      - name: Resolve Package Dependencies
+        run: xcodebuild -resolvePackageDependencies -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App'
+
+      - name: Get Current Time
+        id: current-time
+        run: echo "time=$(date +"%Y%m%d%H%M%S")" >> $GITHUB_OUTPUT
+
+      - name: Save Caches
+        uses: actions/cache/save@v3
+        with:
+          key: ${{ runner.os }}-pr-company-export-cache-${{ steps.current-time.outputs.time }}
+          path: ~/Library/Developer/Xcode/DerivedData
+
       - name: Update Status Env
         run: echo "FIN_STATUS=failure" >> $GITHUB_ENV
           
-      - name: Build Dylibs
-        run: |
-          mkdir build
-          xcodebuild build -project ./DarockBili.xcodeproj -scheme 'DarockBili.dynamic.watch' -destination generic/platform=watchOS -IDEPostProgressNotifications=YES CODE_SIGN_IDENTITY=- AD_HOC_CODE_SIGNING_ALLOWED=YES CODE_SIGN_STYLE=Automatic COMPILER_INDEX_STORE_ENABLE=NO -quiet -derivedDataPath ./build
-
-      - name: Resign Dylibs
-        run: |
-          codesign -fs B57D8PP775 build/Build/Products/Release-watchos/DarockBili.dynamic.watch.dylib
+      - name: Archive DarockBili App
+        env:
+          COMPANY_PROV_UUID: ${{ secrets.COMPANY_PROV_UUID }}
+          COMPANY_P12_NAME: ${{ secrets.COMPANY_P12_NAME }}
+        run: xcodebuild archive -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -archivePath ./build.xcarchive -IDEPostProgressNotifications=YES CODE_SIGN_IDENTITY=- AD_HOC_CODE_SIGNING_ALLOWED=YES CODE_SIGN_STYLE=Automatic DEVELOPMENT_TEAM=H5SM6ZV38F COMPILER_INDEX_STORE_ENABLE=NO -quiet
           
-      - name: Upload watchOS Dylib
+      - name: Export IPA File
+        run: |
+          xcodebuild -exportArchive -archivePath ./build.xcarchive -exportPath ./ -exportOptionsPlist ./ExportOptions/ad-hoc.plist -DVTProvisioningIsManaged=YES -DVTSkipCertificateValidityCheck=YES
+          mv '喵哩喵哩.ipa' DarockBili_Company.ipa
+          echo "FIN_STATUS=success" >> $GITHUB_ENV
+
+      - name: Upload IPA File
         uses: actions/upload-artifact@v3
         with:
-          name: Release-watchos
-          path: ./build/Build/Products/Release-watchos/DarockBili.dynamic.watch.dylib
+          name: Company IPA
+          path: ./DarockBili_Company.ipa
 
       - name: Update Check Status
         if: always()
@@ -95,5 +122,5 @@ jobs:
             /repos/${{ github.repository }}/statuses/${{ inputs.lsha }} \
             -f state='${{ env.FIN_STATUS }}' \
             -f target_url='https://github.com/Darock-Studio/Darock-Bili/actions/runs/${{ github.run_id }}' \
-            -f context='Dylibs Export'
+            -f context='Company IPA Export'
     

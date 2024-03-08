@@ -130,7 +130,6 @@ struct MainView: View {
         @State var isFirstLoaded = false
         @State var newMajorVer = ""
         @State var newBuildVer = ""
-        @State var latestLibVer = ""
         @State var isShowDisableNewVerTip = false
         @State var isLoadingNew = false
         @State var isFailedToLoad = false
@@ -142,7 +141,7 @@ struct MainView: View {
                     Section {
                         if debug {
                             Button(action: {
-                                DKDynamic().testPrint()
+                                
                             }, label: {
                                 Text("Home.debug")
                             })
@@ -157,13 +156,22 @@ struct MainView: View {
                             let nowMajorVer = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
                             let nowBuildVer = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
                             if (nowMajorVer < newMajorVer || nowBuildVer < newBuildVer) && updateTipIgnoreVersion != "\(newMajorVer)\(newBuildVer)" {
-                                Text("Home.update.\(newMajorVer).\(newBuildVer)")
+                                VStack {
+                                    Text("Home.update.\(newMajorVer).\(newBuildVer)")
+                                    if isShowDisableNewVerTip {
+                                        Text("Home.update.skip")
+                                            .font(.system(size: 12))
+                                            .foregroundColor(.gray)
+                                    }
+                                }
+                                .onTapGesture {
+                                    if isShowDisableNewVerTip {
+                                        updateTipIgnoreVersion = "\(newMajorVer)\(newBuildVer)"
+                                    } else {
+                                        isShowDisableNewVerTip = true
+                                    }
+                                }
                             }
-                        }
-                        if latestLibVer != "" && latestLibVer != DKDynamic().GetDylibVersion() {
-                            NavigationLink(destination: { SoftwareUpdateView() }, label: {
-                                Text("有资源包更新可用")
-                            })
                         }
                     }
                     #if os(watchOS)
@@ -228,11 +236,6 @@ struct MainView: View {
                     if isSuccess && respStr.apiFixed().contains("|") {
                         newMajorVer = String(respStr.apiFixed().split(separator: "|")[0])
                         newBuildVer = String(respStr.apiFixed().split(separator: "|")[1])
-                    }
-                }
-                DarockKit.Network.shared.requestString("https://api.darock.top/bili/libnewver") { respStr, isSuccess in
-                    if isSuccess {
-                        latestLibVer = respStr.apiFixed()
                     }
                 }
             }

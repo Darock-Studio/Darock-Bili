@@ -2,7 +2,6 @@
   "sourceLanguage" : "zh-Hans",
   "strings" : {
     "" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -19,7 +18,6 @@
       }
     },
     " / %lld" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -48,7 +46,6 @@
       }
     },
     "_uuid_Gen" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -77,7 +74,6 @@
       }
     },
     "-- And You --" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -106,7 +102,6 @@
       }
     },
     ":" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -123,7 +118,6 @@
       }
     },
     ".%lld" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -180,7 +174,6 @@
       }
     },
     "%@\n%@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -209,7 +202,6 @@
       }
     },
     "%@ · %@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -238,7 +230,6 @@
       }
     },
     "%@ %@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -267,7 +258,6 @@
       }
     },
     "%@ 人在看" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -290,7 +280,6 @@
       }
     },
     "%@ 弹幕" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -313,7 +302,6 @@
       }
     },
     "%@ 播放" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -336,7 +324,6 @@
       }
     },
     "%@ 粉丝" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -357,6 +344,9 @@
           }
         }
       }
+    },
+    "%@ 频道" : {
+
     },
     "%@MB / %@MB" : {
       "localizations" : {
@@ -386,6 +376,9 @@
         }
       }
     },
+    "%@粉丝" : {
+
+    },
     "%lld" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -410,7 +403,6 @@
       }
     },
     "%lld / %lld" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -439,7 +431,6 @@
       }
     },
     "%lld%@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -468,7 +459,6 @@
       }
     },
     "%lld%%" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -497,7 +487,6 @@
       }
     },
     "+86" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -520,7 +509,6 @@
       }
     },
     "114" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -543,7 +531,6 @@
       }
     },
     "About" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -572,7 +559,6 @@
       }
     },
     "About-me" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -601,7 +587,6 @@
       }
     },
     "About.confirm" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -630,7 +615,6 @@
       }
     },
     "About.credits" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -659,7 +643,6 @@
       }
     },
     "About.genshin" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -688,7 +671,6 @@
       }
     },
     "About.meowbili" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -717,7 +699,6 @@
       }
     },
     "About.mystery-code" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -746,7 +727,6 @@
       }
     },
     "About.mystery-code.error" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -775,7 +755,6 @@
       }
     },
     "About.open-source" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -804,7 +783,6 @@
       }
     },
     "Account.articals.%lld" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -845,7 +823,6 @@
       }
     },
     "Account.certification" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -874,7 +851,6 @@
       }
     },
     "Account.check-articles" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -903,7 +879,6 @@
       }
     },
     "Account.check-videos" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -932,7 +907,6 @@
       }
     },
     "Account.direct-message" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -961,7 +935,6 @@
       }
     },
     "Account.follow" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -990,7 +963,6 @@
       }
     },
     "Account.followers" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1019,7 +991,6 @@
       }
     },
     "Account.info" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1048,7 +1019,6 @@
       }
     },
     "Account.list.destination" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1071,7 +1041,6 @@
       }
     },
     "Account.list.go" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1100,7 +1069,6 @@
       }
     },
     "Account.list.goto" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1129,7 +1097,6 @@
       }
     },
     "Account.list.last-page" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1158,7 +1125,6 @@
       }
     },
     "Account.list.next-page" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1187,7 +1153,6 @@
       }
     },
     "Account.list.no-article" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1216,7 +1181,6 @@
       }
     },
     "Account.list.no-video" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1245,7 +1209,6 @@
       }
     },
     "Account.subscribed" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1274,7 +1237,6 @@
       }
     },
     "Account.tips.followed" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1303,7 +1265,6 @@
       }
     },
     "Account.tips.unfollowed" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1332,7 +1293,6 @@
       }
     },
     "Account.unfollow" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1361,7 +1321,6 @@
       }
     },
     "Account.videos.%lld" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -1402,7 +1361,6 @@
       }
     },
     "activeBdUrl" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1425,7 +1383,6 @@
       }
     },
     "Bangumi" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1454,7 +1411,6 @@
       }
     },
     "Bangumi.comments.select" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1483,7 +1439,6 @@
       }
     },
     "Bangumi.commnets" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1512,7 +1467,6 @@
       }
     },
     "Bangumi.score.joined-people.%lld" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -1553,7 +1507,6 @@
       }
     },
     "Battery.low-power-mode" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1582,7 +1535,6 @@
       }
     },
     "buvid_fpTest" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1605,7 +1557,6 @@
       }
     },
     "buvid3_4_actived" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1627,14 +1578,7 @@
         }
       }
     },
-    "Cannot get handle" : {
-
-    },
-    "Cannot get sym" : {
-
-    },
     "Close Debug Controls" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1657,7 +1601,6 @@
       }
     },
     "Comment.send" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1686,7 +1629,6 @@
       }
     },
     "Current Global Buvid3: %@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1709,7 +1651,6 @@
       }
     },
     "Current Global Buvid4: %@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1732,7 +1673,6 @@
       }
     },
     "Darock 会收集必要的诊断信息以便进行改进，信息不会关联到您个人。如果您不愿意被收集信息，请勿发送。" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -1743,7 +1683,6 @@
       }
     },
     "Darock-studio" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1772,7 +1711,6 @@
       }
     },
     "Dignite" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1795,7 +1733,6 @@
       }
     },
     "Direct-message.failed" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1824,7 +1761,6 @@
       }
     },
     "Download.finished.%lld" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1853,7 +1789,6 @@
       }
     },
     "Download.list" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1882,7 +1817,6 @@
       }
     },
     "Download.nothing" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1911,7 +1845,6 @@
       }
     },
     "Download.num.%lld" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1940,7 +1873,6 @@
       }
     },
     "Download.paused.%lld" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1969,7 +1901,6 @@
       }
     },
     "Download.preloading..." : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1998,7 +1929,6 @@
       }
     },
     "Download.tap-2-retry" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2027,7 +1957,6 @@
       }
     },
     "Download.task-created" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2056,7 +1985,6 @@
       }
     },
     "Download.title" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2085,7 +2013,6 @@
       }
     },
     "Error" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2114,7 +2041,6 @@
       }
     },
     "Error.appriciate" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2143,7 +2069,6 @@
       }
     },
     "Error.area.%@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2172,7 +2097,6 @@
       }
     },
     "Error.before-ranning-into-problem" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2201,7 +2125,6 @@
       }
     },
     "Error.details" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2230,7 +2153,6 @@
       }
     },
     "Error.details.%@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2259,7 +2181,6 @@
       }
     },
     "Error.do-not-send" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2288,7 +2209,6 @@
       }
     },
     "Error.exit" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2311,7 +2231,6 @@
       }
     },
     "Error.exiting" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2334,7 +2253,6 @@
       }
     },
     "Error.fatal" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2363,7 +2281,6 @@
       }
     },
     "Error.information" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2386,7 +2303,6 @@
       }
     },
     "Error.leave" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2409,7 +2325,6 @@
       }
     },
     "Error.network-troubleshoot" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2438,7 +2353,6 @@
       }
     },
     "Error.no-need-to-send" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2467,7 +2381,6 @@
       }
     },
     "Error.number.%@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2496,7 +2409,6 @@
       }
     },
     "Error.oops" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2525,7 +2437,6 @@
       }
     },
     "Error.place.%@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2554,7 +2465,6 @@
       }
     },
     "Error.ran-into-a-problem" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2583,7 +2493,6 @@
       }
     },
     "Error.send" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2612,7 +2521,6 @@
       }
     },
     "Error.send-to-Darock-advice" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2641,7 +2549,6 @@
       }
     },
     "Error.sending" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2670,7 +2577,6 @@
       }
     },
     "Error.sent" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2699,7 +2605,6 @@
       }
     },
     "Error.sorry.%@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2728,7 +2633,6 @@
       }
     },
     "Feedback.continue-on-other-device" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -2804,8 +2708,10 @@
         }
       }
     },
+    "FocusStateDebug" : {
+
+    },
     "fp" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2828,7 +2734,6 @@
       }
     },
     "Gen" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2851,7 +2756,6 @@
       }
     },
     "Gesture.double-tap" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2880,7 +2784,6 @@
       }
     },
     "Gesture.double-tap.description" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2909,7 +2812,6 @@
       }
     },
     "Get new & active" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2932,7 +2834,6 @@
       }
     },
     "Hello, World!" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2955,7 +2856,6 @@
       }
     },
     "History.none" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2984,7 +2884,6 @@
       }
     },
     "Home" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3013,7 +2912,6 @@
       }
     },
     "Home.debug" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3042,7 +2940,6 @@
       }
     },
     "Home.more" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3071,7 +2968,6 @@
       }
     },
     "Home.more.error" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3100,7 +2996,6 @@
       }
     },
     "Home.no-internet" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3129,7 +3024,6 @@
       }
     },
     "Home.search" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3158,7 +3052,6 @@
       }
     },
     "Home.understand" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3187,7 +3080,6 @@
       }
     },
     "Home.update.%@.%@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3216,7 +3108,6 @@
       }
     },
     "Home.update.skip" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3244,8 +3135,10 @@
         }
       }
     },
+    "ID: %@" : {
+
+    },
     "Lightning-Lion" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3274,7 +3167,6 @@
       }
     },
     "Linecom" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3303,7 +3195,6 @@
       }
     },
     "Live" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3332,7 +3223,6 @@
       }
     },
     "Live.starting.%@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3361,7 +3251,6 @@
       }
     },
     "Login" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3390,7 +3279,6 @@
       }
     },
     "Login.scan" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3419,7 +3307,6 @@
       }
     },
     "Login.scanned" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3448,7 +3335,6 @@
       }
     },
     "Login.step1.phone-number" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3477,7 +3363,6 @@
       }
     },
     "Login.step1.title" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3506,7 +3391,6 @@
       }
     },
     "Login.step2.CAPTCHA" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3535,7 +3419,6 @@
       }
     },
     "Login.step2.captcha-first" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3564,7 +3447,6 @@
       }
     },
     "Login.step2.code" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3593,7 +3475,6 @@
       }
     },
     "Login.step2.code.empty" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3622,7 +3503,6 @@
       }
     },
     "Login.step2.code.get" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3651,7 +3531,6 @@
       }
     },
     "Login.step2.code.sent" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3680,7 +3559,6 @@
       }
     },
     "Login.step2.title" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3709,7 +3587,6 @@
       }
     },
     "Login.step3.title" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3738,7 +3615,6 @@
       }
     },
     "LongUIDUserTest" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3767,7 +3643,6 @@
       }
     },
     "Lv%lld" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3796,7 +3671,6 @@
       }
     },
     "Memory Usage: %f MB" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3819,7 +3693,6 @@
       }
     },
     "Memory.caution" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3842,7 +3715,6 @@
       }
     },
     "Memory.display-usage" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3865,7 +3737,6 @@
       }
     },
     "Memory.indicator.%@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3888,7 +3759,6 @@
       }
     },
     "Memory.limit" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3911,7 +3781,6 @@
       }
     },
     "Memory.too-much-occupied" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3934,7 +3803,6 @@
       }
     },
     "Memory.understand" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3963,7 +3831,6 @@
       }
     },
     "Moments" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3986,7 +3853,6 @@
       }
     },
     "Moments.requires-login" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4015,7 +3881,6 @@
       }
     },
     "name" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4038,7 +3903,6 @@
       }
     },
     "navbar.dynamic" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4061,7 +3925,6 @@
       }
     },
     "navbar.my" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4090,7 +3953,6 @@
       }
     },
     "navbar.suggest" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4119,7 +3981,6 @@
       }
     },
     "Player.analyzying-source" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4148,7 +4009,6 @@
       }
     },
     "Player.analyzying-source.description" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4177,7 +4037,6 @@
       }
     },
     "Player.analyzying-source.offical" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4206,7 +4065,6 @@
       }
     },
     "Player.analyzying-source.third-party" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4235,7 +4093,6 @@
       }
     },
     "Player.pause" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4264,7 +4121,6 @@
       }
     },
     "Player.record-history" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4293,7 +4149,6 @@
       }
     },
     "Player.record-history.never" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4322,7 +4177,6 @@
       }
     },
     "Player.record-history.when-entering-page" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4351,7 +4205,6 @@
       }
     },
     "Player.record-history.when-video-plays" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4380,7 +4233,6 @@
       }
     },
     "Screen-time.daily-average" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4409,7 +4261,6 @@
       }
     },
     "Screen-time.description" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4438,7 +4289,6 @@
       }
     },
     "Screen-time.minutes.%lld" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -4479,7 +4329,6 @@
       }
     },
     "Screen-time.off" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4508,7 +4357,6 @@
       }
     },
     "Screen-time.on" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4537,7 +4385,6 @@
       }
     },
     "Screen-time.usage" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4566,7 +4413,6 @@
       }
     },
     "Search.%@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4595,7 +4441,6 @@
       }
     },
     "Search.debug" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4618,7 +4463,6 @@
       }
     },
     "Search.history" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4647,7 +4491,6 @@
       }
     },
     "Search.no-result" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4676,7 +4519,6 @@
       }
     },
     "Search.type" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4705,7 +4547,6 @@
       }
     },
     "Search.type.article" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4734,7 +4575,6 @@
       }
     },
     "Search.type.bangumi" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4763,7 +4603,6 @@
       }
     },
     "Search.type.live" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4792,7 +4631,6 @@
       }
     },
     "Search.type.user" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4821,7 +4659,6 @@
       }
     },
     "Search.type.video" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4850,7 +4687,6 @@
       }
     },
     "Settings" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4879,7 +4715,6 @@
       }
     },
     "Settings.about" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4908,7 +4743,6 @@
       }
     },
     "Settings.battery" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4937,7 +4771,6 @@
       }
     },
     "Settings.debug" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4960,7 +4793,6 @@
       }
     },
     "Settings.developer" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4989,7 +4821,6 @@
       }
     },
     "Settings.feedback" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5018,7 +4849,6 @@
       }
     },
     "Settings.gesture" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5047,7 +4877,6 @@
       }
     },
     "Settings.internet" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5076,7 +4905,6 @@
       }
     },
     "Settings.log-out" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5105,7 +4933,6 @@
       }
     },
     "Settings.log-out.cancel" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5134,7 +4961,6 @@
       }
     },
     "Settings.log-out.confirm" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5163,7 +4989,6 @@
       }
     },
     "Settings.log-out.message" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5192,7 +5017,6 @@
       }
     },
     "Settings.player" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5221,7 +5045,6 @@
       }
     },
     "Settings.screen-time" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5250,7 +5073,6 @@
       }
     },
     "Settings.sleep" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5279,7 +5101,6 @@
       }
     },
     "Settings.update" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5308,7 +5129,6 @@
       }
     },
     "Show Debug Controls" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5331,7 +5151,6 @@
       }
     },
     "Skin" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5348,7 +5167,6 @@
       }
     },
     "Skin.add" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5365,7 +5183,6 @@
       }
     },
     "Skin.downloading" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5382,7 +5199,6 @@
       }
     },
     "Skin.none" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5399,7 +5215,6 @@
       }
     },
     "Skin.nothing" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5416,7 +5231,6 @@
       }
     },
     "Skin.unzipping" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5433,7 +5247,6 @@
       }
     },
     "Sleep" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5462,7 +5275,6 @@
       }
     },
     "Sleep.current.%@.%@.%@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5491,7 +5303,6 @@
       }
     },
     "Sleep.discription" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5520,7 +5331,6 @@
       }
     },
     "Sleep.edit.%@.%@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5549,7 +5359,6 @@
       }
     },
     "Sleep.edit.hour" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5572,7 +5381,6 @@
       }
     },
     "Sleep.edit.minute" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5595,7 +5403,6 @@
       }
     },
     "Sleep.edit.title" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5624,7 +5431,6 @@
       }
     },
     "Sleep.notification" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5653,7 +5459,6 @@
       }
     },
     "ThreeManager785" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5682,7 +5487,6 @@
       }
     },
     "time" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5705,7 +5509,6 @@
       }
     },
     "Troubleshoot" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5734,7 +5537,6 @@
       }
     },
     "Troubleshoot.auto-pop-up" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5763,7 +5565,6 @@
       }
     },
     "Troubleshoot.bilibili-api" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5792,7 +5593,6 @@
       }
     },
     "Troubleshoot.bilibili-api.available" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5821,7 +5621,6 @@
       }
     },
     "Troubleshoot.bilibili-api.checking" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5850,7 +5649,6 @@
       }
     },
     "Troubleshoot.bilibili-api.unavailable" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5879,7 +5677,6 @@
       }
     },
     "Troubleshoot.connection-states" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5908,7 +5705,6 @@
       }
     },
     "Troubleshoot.darock-api" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5937,7 +5733,6 @@
       }
     },
     "Troubleshoot.darock-api.available" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5966,7 +5761,6 @@
       }
     },
     "Troubleshoot.darock-api.checking" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5995,7 +5789,6 @@
       }
     },
     "Troubleshoot.darock-api.invalid-return" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6024,7 +5817,6 @@
       }
     },
     "Troubleshoot.darock-api.unavailable" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6053,7 +5845,6 @@
       }
     },
     "Troubleshoot.feedback" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6082,7 +5873,6 @@
       }
     },
     "Troubleshoot.fine" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6111,7 +5901,6 @@
       }
     },
     "Troubleshoot.fine.weird" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6140,7 +5929,6 @@
       }
     },
     "Troubleshoot.internet" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6169,7 +5957,6 @@
       }
     },
     "Troubleshoot.internet.checking" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6198,7 +5985,6 @@
       }
     },
     "Troubleshoot.internet.offline" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6227,7 +6013,6 @@
       }
     },
     "Troubleshoot.internet.online" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6256,7 +6041,6 @@
       }
     },
     "Troubleshoot.problem.bilibili-api" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6285,7 +6069,6 @@
       }
     },
     "Troubleshoot.problem.bilibili-api.meaning" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6314,7 +6097,6 @@
       }
     },
     "Troubleshoot.problem.bilibili-api.solution" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6343,7 +6125,6 @@
       }
     },
     "Troubleshoot.problem.darock-api" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6372,7 +6153,6 @@
       }
     },
     "Troubleshoot.problem.darock-api.meaning" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6401,7 +6181,6 @@
       }
     },
     "Troubleshoot.problem.darock-api.solution" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6430,7 +6209,6 @@
       }
     },
     "Troubleshoot.problem.internet" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6459,7 +6237,6 @@
       }
     },
     "Troubleshoot.problem.internet.meaning" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -6632,7 +6409,6 @@
       }
     },
     "Troubleshoot.problem.internet.plan-b" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -6709,7 +6485,6 @@
       }
     },
     "Troubleshoot.problem.internet.solution1" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -6882,7 +6657,6 @@
       }
     },
     "Troubleshoot.problem.internet.solution2" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -6959,7 +6733,6 @@
       }
     },
     "Troubleshoot.problem.meaning" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6982,7 +6755,6 @@
       }
     },
     "Troubleshoot.problem.plan-b" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7005,7 +6777,6 @@
       }
     },
     "Troubleshoot.problem.solution" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7028,7 +6799,6 @@
       }
     },
     "Troubleshoot.problem.tips" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7051,7 +6821,6 @@
       }
     },
     "Troubleshoot.problems-found" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7074,7 +6843,6 @@
       }
     },
     "Troubleshoot.problems.bilibili-api.unavailable" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7097,7 +6865,6 @@
       }
     },
     "Troubleshoot.problems.darock-api.invalid-return" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7120,7 +6887,6 @@
       }
     },
     "Troubleshoot.problems.darock-api.unavailable" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7143,7 +6909,6 @@
       }
     },
     "Troubleshoot.problems.internet" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7172,7 +6937,6 @@
       }
     },
     "Troubleshoot.re-troubleshoot" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7201,7 +6965,6 @@
       }
     },
     "Troubleshoot.troubleshooting" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7230,7 +6993,6 @@
       }
     },
     "UID: %@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -7247,7 +7009,6 @@
       }
     },
     "Update.checking" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7276,7 +7037,6 @@
       }
     },
     "Update.download-and-install" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7299,7 +7059,6 @@
       }
     },
     "Update.error" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7322,7 +7081,6 @@
       }
     },
     "Update.install-by-testflight" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -7381,7 +7139,6 @@
       }
     },
     "Update.latest" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7410,7 +7167,6 @@
       }
     },
     "User.favorites" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7439,7 +7195,6 @@
       }
     },
     "User.histories" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7468,7 +7223,6 @@
       }
     },
     "User.offline-cache" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7497,7 +7251,6 @@
       }
     },
     "User.subcribed-accounts" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7526,7 +7279,6 @@
       }
     },
     "User.switch" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7555,7 +7307,6 @@
       }
     },
     "User.switch.add" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7584,7 +7335,6 @@
       }
     },
     "User.switch.description" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7613,7 +7363,6 @@
       }
     },
     "User.switch.description.1" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7642,7 +7391,6 @@
       }
     },
     "User.switch.none" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7665,7 +7413,6 @@
       }
     },
     "User.tap-to-login" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7694,7 +7441,6 @@
       }
     },
     "User.watch-later" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7723,7 +7469,6 @@
       }
     },
     "UsernamePlaceholder" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -7734,7 +7479,6 @@
       }
     },
     "v%@ Build %@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7757,7 +7501,6 @@
       }
     },
     "Video" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7780,7 +7523,6 @@
       }
     },
     "Video.action.canceled" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7803,7 +7545,6 @@
       }
     },
     "Video.action.liked" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7826,7 +7567,6 @@
       }
     },
     "Video.add-to-favorites" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7849,7 +7589,6 @@
       }
     },
     "Video.added" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7872,7 +7611,6 @@
       }
     },
     "Video.analyzing" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7895,7 +7633,6 @@
       }
     },
     "Video.coin.throw" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7918,7 +7655,6 @@
       }
     },
     "Video.coin.throw.1" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7941,7 +7677,6 @@
       }
     },
     "Video.coin.throw.2" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8057,7 +7792,6 @@
       }
     },
     "Video.details.watching-people.%@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -8068,7 +7802,6 @@
       }
     },
     "Video.details.watching-people.%lld" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -8103,7 +7836,6 @@
       }
     },
     "Video.download" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8126,7 +7858,6 @@
       }
     },
     "Video.fans.%@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -8137,7 +7868,6 @@
       }
     },
     "Video.fans.%lld" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -8172,7 +7902,6 @@
       }
     },
     "Video.more" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8195,7 +7924,6 @@
       }
     },
     "Video.play" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8218,7 +7946,6 @@
       }
     },
     "Video.play-in-audio" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8241,7 +7968,6 @@
       }
     },
     "Video.trending" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8264,7 +7990,6 @@
       }
     },
     "Video.unkonwn-error" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8287,7 +8012,6 @@
       }
     },
     "Video.watch-later" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8316,7 +8040,6 @@
       }
     },
     "WindowsMEMZ" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8344,8 +8067,13 @@
         }
       }
     },
+    "上一小时" : {
+
+    },
+    "下一步" : {
+
+    },
     "二维码名片" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8368,7 +8096,6 @@
       }
     },
     "什么都木有" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -8378,8 +8105,13 @@
         }
       }
     },
+    "今天" : {
+
+    },
+    "从关注列表中移除" : {
+
+    },
     "令枫" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8401,8 +8133,16 @@
         }
       }
     },
+    "使用“相机”App" : {
+
+    },
+    "使用恢复密钥" : {
+
+    },
+    "允许收集使用信息" : {
+
+    },
     "全屏" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8425,7 +8165,6 @@
       }
     },
     "内容" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -8435,8 +8174,10 @@
         }
       }
     },
+    "分析与改进" : {
+
+    },
     "动态" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8459,7 +8200,6 @@
       }
     },
     "动态内容" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8482,7 +8222,6 @@
       }
     },
     "动态评论" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8505,7 +8244,6 @@
       }
     },
     "动态详情" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8522,7 +8260,6 @@
       }
     },
     "历史记录" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8544,8 +8281,13 @@
         }
       }
     },
+    "反馈助理" : {
+
+    },
+    "反馈类型" : {
+
+    },
     "发布于 %@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8567,8 +8309,10 @@
         }
       }
     },
+    "发送" : {
+
+    },
     "发送动态" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8585,7 +8329,6 @@
       }
     },
     "发送弹幕" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8607,8 +8350,13 @@
         }
       }
     },
+    "发送的反馈" : {
+
+    },
+    "发送评论" : {
+
+    },
     "可选, 最多9个" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8631,7 +8379,6 @@
       }
     },
     "启用" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8647,8 +8394,34 @@
         }
       }
     },
+    "启用通知" : {
+
+    },
+    "喵哩喵哩" : {
+
+    },
+    "喵哩喵哩为完整开源项目，欢迎检查代码以确认无隐私问题" : {
+
+    },
+    "喵哩喵哩开源页" : {
+
+    },
+    "喵哩喵哩收集使用信息仅用以帮助改进质量，不会用于广告、个人画像之类，收集的信息不会关联到个人。此更改立即生效，不会影响哔哩哔哩官方对您的数据收集。" : {
+
+    },
+    "回复 %lld" : {
+
+    },
+    "回复信息" : {
+
+    },
+    "回复内容" : {
+
+    },
+    "在App内反馈" : {
+
+    },
     "在iPhone上继续" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -8659,7 +8432,6 @@
       }
     },
     "在使用本 App 前，您需要先知晓以下信息：\n· 本 App 由第三方开发者以及部分社区用户贡献，与哔哩哔哩无合作关系，哔哩哔哩是上海宽娱数码科技有限公司的商标。\n· 本 App 并不是哔哩哔哩的替代品，我们建议您在能够使用官方客户端时尽量使用官方客户端。\n· 本 App 均使用来源于网络的公开信息进行开发。\n· 本 App 中和B站相关的功能完全免费\n· 本 App 中所呈现的B站内容来自哔哩哔哩官方。\n· 本 App 的开发者、负责人和实际责任人是%@\n  联系QQ：3245146430" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8687,8 +8459,10 @@
         }
       }
     },
+    "声音与触感" : {
+
+    },
     "复制" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8705,7 +8479,6 @@
       }
     },
     "大" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8722,7 +8495,6 @@
       }
     },
     "字号" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8738,8 +8510,13 @@
         }
       }
     },
+    "完成" : {
+
+    },
+    "密码" : {
+
+    },
     "将作为动态主体" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -8750,7 +8527,6 @@
       }
     },
     "小" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8767,7 +8543,6 @@
       }
     },
     "小尾巴内容" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -8777,11 +8552,7 @@
         }
       }
     },
-    "尝试重新下载资源包" : {
-
-    },
     "已选择的图片" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8804,7 +8575,6 @@
       }
     },
     "应用" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8821,7 +8591,6 @@
       }
     },
     "底部" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8836,6 +8605,9 @@
           }
         }
       }
+    },
+    "建议" : {
+
     },
     "开启“屏幕使用时间”" : {
       "extractionState" : "stale",
@@ -8861,7 +8633,6 @@
       }
     },
     "弹幕" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8884,7 +8655,6 @@
       }
     },
     "恢复" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8900,8 +8670,10 @@
         }
       }
     },
+    "恢复密钥" : {
+
+    },
     "您可以更改默认的小尾巴内容, 如果不想添加小尾巴, 请清空上方文本框内容. 您可以随时在设置中更改此内容" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8924,7 +8696,6 @@
       }
     },
     "我的收藏" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8946,8 +8717,10 @@
         }
       }
     },
+    "所有历史记录" : {
+
+    },
     "手记建议" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -8957,8 +8730,10 @@
         }
       }
     },
+    "扩展的触感反馈" : {
+
+    },
     "推荐" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8980,6 +8755,25 @@
         }
       }
     },
+    "搜索" : {
+
+    },
+    "文件保险箱" : {
+
+    },
+    "文件保险箱已启用" : {
+
+    },
+    "文件保险箱通过对喵哩喵哩进行加密来保护 App 内的数据。\n\n警告：你将需要密码或恢复密钥才能访问数据。在此设置过程中，会自动生成恢复密钥。如果同时忘记了密码和恢复密钥，数据将会丢失。\n\n已%@喵哩喵哩的文件保险箱。%@" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "文件保险箱通过对喵哩喵哩进行加密来保护 App 内的数据。\n\n警告：你将需要密码或恢复密钥才能访问数据。在此设置过程中，会自动生成恢复密钥。如果同时忘记了密码和恢复密钥，数据将会丢失。\n\n已%1$@喵哩喵哩的文件保险箱。%2$@"
+          }
+        }
+      }
+    },
     "文本加载失败" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -8997,8 +8791,13 @@
         }
       }
     },
+    "新建反馈" : {
+
+    },
+    "昨天和今天" : {
+
+    },
     "显示底部弹幕" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9021,7 +8820,6 @@
       }
     },
     "显示普通弹幕" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9044,7 +8842,6 @@
       }
     },
     "显示顶部弹幕" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9067,7 +8864,6 @@
       }
     },
     "普通" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9083,8 +8879,10 @@
         }
       }
     },
+    "来自" : {
+
+    },
     "极大" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9101,7 +8899,6 @@
       }
     },
     "极小" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9118,7 +8915,6 @@
       }
     },
     "标准" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9134,8 +8930,10 @@
         }
       }
     },
+    "标题" : {
+
+    },
     "模式" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9151,11 +8949,7 @@
         }
       }
     },
-    "正在下载资源..." : {
-
-    },
     "正在加密..." : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -9165,11 +8959,10 @@
         }
       }
     },
-    "正在安装..." : {
+    "清除历史记录" : {
 
     },
     "清除所有已观看视频" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9191,8 +8984,13 @@
         }
       }
     },
+    "清除时间段" : {
+
+    },
+    "状态" : {
+
+    },
     "画面" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -9209,7 +9007,6 @@
       }
     },
     "离线缓存" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9232,7 +9029,6 @@
       }
     },
     "稍后再看" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9255,7 +9051,6 @@
       }
     },
     "稿件" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -9271,8 +9066,13 @@
         }
       }
     },
+    "简洁地描述问题" : {
+
+    },
+    "类型" : {
+
+    },
     "经验" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9294,8 +9094,10 @@
         }
       }
     },
+    "编辑" : {
+
+    },
     "要使用动态小尾巴吗?" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -9305,8 +9107,10 @@
         }
       }
     },
+    "触感" : {
+
+    },
     "记录历史记录" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9329,7 +9133,6 @@
       }
     },
     "评论" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9352,7 +9155,6 @@
       }
     },
     "评论回复" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9375,7 +9177,6 @@
       }
     },
     "详情" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9397,11 +9198,10 @@
         }
       }
     },
-    "请不要让Apple Watch熄屏，可以通过保持滚动表冠以使屏幕常亮" : {
+    "请将恢复密钥保存到安全的位置" : {
 
     },
     "超大" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9418,7 +9218,6 @@
       }
     },
     "超小" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9434,8 +9233,10 @@
         }
       }
     },
+    "输入错误" : {
+
+    },
     "选择图片" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9458,7 +9259,6 @@
       }
     },
     "选择文本" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9480,8 +9280,10 @@
         }
       }
     },
+    "通知" : {
+
+    },
     "重新载入" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9503,8 +9305,13 @@
         }
       }
     },
+    "错误/异常行为" : {
+
+    },
+    "隐私与安全性" : {
+
+    },
     "顶部" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9520,11 +9327,7 @@
         }
       }
     },
-    "顺便了解一些知识来打发时间吧！\n\n- 为什么要下载资源包？\n  喵哩喵哩通过资源包运行主要代码，这也就意味着您无需经常使用iPhone更新App。\n- 获取新功能的方法？\n  在设置->软件更新中可以更新资源包，无论iPhone是否在身边\n- 使用技巧？\n   - 保持良好的网络环境，最好不连接iPhone或在设置中关闭iPhone上的无线局域网与蓝牙\n   - 遇到问题在用户群内反馈效率最高\n   - 登录账号以获取最佳体验\n- 开源！\n  喵哩喵哩为开源项目，您可以在GitHub上找到我们的源代码" : {
-
-    },
     "颜色" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9539,6 +9342,30 @@
           }
         }
       }
+    },
+    "" : {
+
+    },
+    "" : {
+
+    },
+    "" : {
+
+    },
+    "" : {
+
+    },
+    "" : {
+
+    },
+    "" : {
+
+    },
+    "" : {
+
+    },
+    "" : {
+
     }
   },
   "version" : "1.0"
