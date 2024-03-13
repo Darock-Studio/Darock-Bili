@@ -298,6 +298,7 @@ struct OfflineVideoPlayer: View {
     @State var isFullScreen = false
     @State var player: AVPlayer!
     var body: some View {
+        #if os(watchOS)
         TabView(selection: $tabviewChoseTab) {
             VideoPlayer(player: player)
                 .rotationEffect(.degrees(isFullScreen ? 90 : 0))
@@ -330,6 +331,14 @@ struct OfflineVideoPlayer: View {
             let item = AVPlayerItem(asset: asset)
             player = AVPlayer(playerItem: item)
         }
+        #else
+        VideoPlayer(player: player)
+            .onAppear {
+                let asset = AVAsset(url: URL(fileURLWithPath: path == nil ? DownloadsView.willPlayVideoPath : path!))
+                let item = AVPlayerItem(asset: asset)
+                player = AVPlayer(playerItem: item)
+            }
+        #endif
     }
 }
 
