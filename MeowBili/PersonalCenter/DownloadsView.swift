@@ -294,29 +294,51 @@ struct DownloadingListView: View {
 
 struct OfflineVideoPlayer: View {
     var path: String?
-    @State var timeUpdateTimer: Timer?
+    @State var tabviewChoseTab = 1
+    @State var isFullScreen = false
+    @State var player: AVPlayer!
     var body: some View {
-        let asset = AVAsset(url: URL(fileURLWithPath: path == nil ? DownloadsView.willPlayVideoPath : path!))
-        let item = AVPlayerItem(asset: asset)
-        let player = AVPlayer(playerItem: item)
-        VStack {
+        #if os(watchOS)
+        TabView(selection: $tabviewChoseTab) {
             VideoPlayer(player: player)
+                .rotationEffect(.degrees(isFullScreen ? 90 : 0))
+                .frame(width: isFullScreen ? WKInterfaceDevice.current().screenBounds.height : nil, height: isFullScreen ? WKInterfaceDevice.current().screenBounds.width : nil)
+                .offset(y: isFullScreen ? 20 : 0)
                 .ignoresSafeArea()
-        }
-        .navigationBarHidden(true)
-        .onAppear {
-            hideDigitalTime(true)
-            debugPrint(DownloadsView.willPlayVideoPath)
-            
-            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-                timeUpdateTimer = timer
-                debugPrint(player.currentTime().seconds)
+                .tag(1)
+            List {
+                Section {
+                    Button(action: {
+                        isFullScreen.toggle()
+                        tabviewChoseTab = 1
+                    }, label: {
+                        if isFullScreen {
+                            Label("恢复", systemImage: "arrow.down.forward.and.arrow.up.backward")
+                        } else {
+                            Label("全屏", systemImage: "arrow.down.backward.and.arrow.up.forward")
+                        }
+                    })
+                } header: {
+                    Text("画面")
+                }
             }
+            .tag(2)
         }
-        .onDisappear {
-            hideDigitalTime(false)
-            timeUpdateTimer?.invalidate()
+        .tabViewStyle(.page)
+        .ignoresSafeArea()
+        .onAppear {
+            let asset = AVAsset(url: URL(fileURLWithPath: path == nil ? DownloadsView.willPlayVideoPath : path!))
+            let item = AVPlayerItem(asset: asset)
+            player = AVPlayer(playerItem: item)
         }
+        #else
+        VideoPlayer(player: player)
+            .onAppear {
+                let asset = AVAsset(url: URL(fileURLWithPath: path == nil ? DownloadsView.willPlayVideoPath : path!))
+                let item = AVPlayerItem(asset: asset)
+                player = AVPlayer(playerItem: item)
+            }
+        #endif
     }
 }
 
