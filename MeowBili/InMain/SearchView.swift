@@ -60,9 +60,6 @@ struct SearchMainView: View {
                                 UserDefaults.standard.set([searchText] + searchHistory, forKey: "SearchHistory")
                             }
                         }
-                        .onDisappear {
-                            searchText = ""
-                        }
                         .onChange(of: searchText) { value in
                             if value != "" {
                                 let headers: HTTPHeaders = [

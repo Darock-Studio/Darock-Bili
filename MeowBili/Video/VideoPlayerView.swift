@@ -67,7 +67,7 @@ struct VideoPlayerView: View {
     var body: some View {
         Group {
             #if !os(watchOS)
-            AZVideoPlayer(player: player, willBeginFullScreenPresentationWithAnimationCoordinator: willBeginFullScreen, willEndFullScreenPresentationWithAnimationCoordinator: willEndFullScreen)
+            AZVideoPlayer(player: player, willBeginFullScreenPresentationWithAnimationCoordinator: willBeginFullScreen, willEndFullScreenPresentationWithAnimationCoordinator: willEndFullScreen, pausesWhenFullScreenPlaybackEnds: false)
                 .overlay {
                     ZStack {
                         if isDanmakuEnabled {
@@ -394,9 +394,7 @@ struct VideoPlayerView: View {
         willBeginFullScreenPresentation = true
     }
     func willEndFullScreen(_ playerViewController: AVPlayerViewController, _ coordinator: UIViewControllerTransitionCoordinator) {
-        // This is a static helper method provided by AZVideoPlayer to keep
-        // the video playing if it was playing when full screen presentation ended
-        AZVideoPlayer.continuePlayingIfPlaying(player, coordinator)
+        
     }
     
     struct StrokeText: View {
