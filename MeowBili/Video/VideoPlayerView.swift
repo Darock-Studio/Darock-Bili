@@ -38,6 +38,9 @@ struct VideoPlayerView: View {
     @Binding var currentPlayTime: Double
     @Binding var willEnterGoodVideo: Bool
     #endif
+    #if os(watchOS)
+    @Environment(\.dismiss) var dismiss
+    #endif
     @AppStorage("DedeUserID") var dedeUserID = ""
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
@@ -51,8 +54,10 @@ struct VideoPlayerView: View {
     @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
     @AppStorage("IsDanmakuEnabled") var isDanmakuEnabled = true
     @AppStorage("IsVideoPlayerGestureEnabled") var isVideoPlayerGestureEnabled = true
+    @AppStorage("VideoPlayerGestureBehavior") var videoPlayerGestureBehavior = "Play/Pause"
     @State var tabviewChoseTab = 1
     @State var isFullScreen = false
+    @State var videoSpeed: Float = 1.0
     #endif
     @State var currentTime: Double = 0.0
     @State var playerTimer: Timer?
@@ -185,6 +190,30 @@ struct VideoPlayerView: View {
                     } header: {
                         Text("弹幕")
                     }
+                    Section {
+                        Picker("播放倍速", selection: $videoSpeed) {
+                            Text("1x").tag(1.0)
+                            Text("1.5x").tag(1.5)
+                            Text("2x").tag(2.0)
+                            Text("3x").tag(3.0)
+                            Text("5x").tag(5.0)
+                        }
+                        .onChange(of: videoSpeed) { value in
+                            player.rate = value
+                        }
+                        Button(action: {
+                            player.seek(to: CMTime(seconds: currentTime + 10, preferredTimescale: 1))
+                        }, label: {
+                            Label("快进 10 秒", systemImage: "goforward.10")
+                        })
+                        Button(action: {
+                            player.seek(to: CMTime(seconds: currentTime - 10, preferredTimescale: 1))
+                        }, label: {
+                            Label("快退 10 秒", systemImage: "gobackward.10")
+                        })
+                    } header: {
+                        Text("播放")
+                    }
                 }
                 .tag(2)
             }
@@ -193,9 +222,29 @@ struct VideoPlayerView: View {
             .accessibilityQuickAction(style: .prompt) {
                 if isVideoPlayerGestureEnabled {
                     Button(action: {
-                        player?.pause()
+                        switch videoPlayerGestureBehavior {
+                        case "Play/Pause":
+                            if player.timeControlStatus == .playing {
+                                player.pause()
+                            } else if player.timeControlStatus == .paused {
+                                player.play()
+                            }
+                        case "Pause/Exit":
+                            if player.timeControlStatus == .playing {
+                                player.pause()
+                            } else if player.timeControlStatus == .paused {
+                                dismiss()
+                            }
+                        case "Exit":
+                            player.pause()
+                            dismiss()
+                        case "Exit App":
+                            exit(0)
+                        default:
+                            break
+                        }
                     }, label: {
-                        Text("Player.pause")
+                        Text("PlayerGesture")
                     })
                 }
             }
