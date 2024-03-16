@@ -108,7 +108,7 @@ struct BangumiPlayerView: View {
             }
             .ignoresSafeArea()
             #else
-            AZVideoPlayer(player: player, willBeginFullScreenPresentationWithAnimationCoordinator: willBeginFullScreen, willEndFullScreenPresentationWithAnimationCoordinator: willEndFullScreen)
+            AZVideoPlayer(player: player, willBeginFullScreenPresentationWithAnimationCoordinator: willBeginFullScreen, willEndFullScreenPresentationWithAnimationCoordinator: willEndFullScreen, pausesWhenFullScreenPlaybackEnds: false)
             #endif
         }
         .onAppear {
@@ -137,10 +137,7 @@ struct BangumiPlayerView: View {
         willBeginFullScreenPresentation = true
     }
     func willEndFullScreen(_ playerViewController: AVPlayerViewController, _ coordinator: UIViewControllerTransitionCoordinator) {
-        // This is a static helper method provided by AZVideoPlayer to keep
-        // the video playing if it was playing when full screen presentation ended
-        AZVideoPlayer.continuePlayingIfPlaying(player, coordinator)
+        
     }
     #endif
 }
-
