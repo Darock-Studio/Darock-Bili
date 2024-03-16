@@ -775,7 +775,6 @@ struct VideoDetailView: View {
                     debugPrint(respJson)
                     if !CheckBApiError(from: respJson) { return }
                     videoDetails.updateValue(respJson["data"]["title"].string ?? "[加载失败]", forKey: "Title")
-                    videoDetails.updateValue(respJson["data"]["pic"].string ?? "E", forKey: "Pic")
                     videoDetails.updateValue(String(respJson["data"]["stat"]["view"].int ?? 0), forKey: "View")
                     videoDetails.updateValue(String(respJson["data"]["stat"]["danmaku"].int ?? 0), forKey: "Danmaku")
                     
@@ -848,9 +847,7 @@ struct VideoDetailView: View {
             DecodeVideo()
             #else
             if recordHistoryTime == "into" {
-                AF.request("https://api.bilibili.com/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": videoDetails["BV"]!, "mid": dedeUserID, "type": 3, "dt": 2, "play_type": 2, "csrf": biliJct], headers: headers).response { response in
-                    debugPrint(response)
-                }
+                AF.request("https://api.bilibili.com/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": videoDetails["BV"]!, "mid": dedeUserID, "type": 3, "dt": 2, "play_type": 2, "csrf": biliJct], headers: headers).response { _ in }
             }
             #endif
             
