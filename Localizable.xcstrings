@@ -508,6 +508,21 @@
         }
       }
     },
+    "1.5x" : {
+
+    },
+    "1x" : {
+
+    },
+    "2x" : {
+
+    },
+    "3x" : {
+
+    },
+    "5x" : {
+
+    },
     "114" : {
       "localizations" : {
         "en" : {
@@ -2760,24 +2775,24 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Double-tap to Play/Pause Video"
+            "value" : "Double-tap to Take Action"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "ビデオの再生/一時停止には、軽く2回タップしてください。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "轻点两下以播放/暂停视频"
+            "value" : "轻点两下执行操作"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "輕點兩下以播放/暫停視頻"
           }
         }
@@ -2788,24 +2803,24 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Use Double-tap (Apple Watch Series 9 or newer) or Quick Actions (other watches) in video player to play/pause video"
+            "value" : "Use Double-tap Quick Actions (open at system settings->Accessibility) in video player to take action"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "ビデオプレーヤーで、Apple Watch Series 9以上のモデルではダブルタップジェスチャーを使用し、他のモデルではクイックアクションを使用してビデオの再生/一時停止を行います。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在视频播放器中使用互点两下手势(Apple Watch Series 9 及以上)或快速操作(其他机型)播放/暂停视频"
+            "value" : "在视频播放器中使用快速操作(于系统设置->辅助功能中打开)执行操作"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "在視頻播放器中使用雙擊手勢（適用於 Apple Watch Series 9 及以上版本）或快速操作（適用於其他型號）來播放/暂停視頻。"
           }
         }
@@ -4093,6 +4108,7 @@
       }
     },
     "Player.pause" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4231,6 +4247,9 @@
           }
         }
       }
+    },
+    "PlayerGesture" : {
+
     },
     "Screen-time.daily-average" : {
       "localizations" : {
@@ -8654,6 +8673,12 @@
         }
       }
     },
+    "快进 10 秒" : {
+
+    },
+    "快退 10 秒" : {
+
+    },
     "恢复" : {
       "localizations" : {
         "en" : {
@@ -8756,6 +8781,15 @@
       }
     },
     "搜索" : {
+
+    },
+    "播放" : {
+
+    },
+    "播放/暂停" : {
+
+    },
+    "播放倍速" : {
 
     },
     "文件保险箱" : {
@@ -8878,6 +8912,9 @@
           }
         }
       }
+    },
+    "暂停->退出" : {
+
     },
     "来自" : {
 
@@ -9097,6 +9134,9 @@
     "编辑" : {
 
     },
+    "行为" : {
+
+    },
     "要使用动态小尾巴吗?" : {
       "localizations" : {
         "zh-Hant" : {
@@ -9234,6 +9274,12 @@
       }
     },
     "输入错误" : {
+
+    },
+    "退出" : {
+
+    },
+    "退出 App" : {
 
     },
     "选择图片" : {
