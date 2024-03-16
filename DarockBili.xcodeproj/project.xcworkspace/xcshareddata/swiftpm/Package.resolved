@@ -1,13 +1,22 @@
 {
+<<<<<<< HEAD
   "originHash" : "7f12842cf82cea8fd9b4c4763c7dee35ed022c058567b574a804aa466c102fa8",
+=======
+  "originHash" : "322fc8364c187b0a5b1349b7587b8e4846e99669d42067e6fcd5ba29b281e908",
+>>>>>>> 9985b20be (fix: Swift Packages)
   "pins" : [
     {
       "identity" : "alamofire",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire",
       "state" : {
+<<<<<<< HEAD
         "revision" : "3dc6a42c7727c49bf26508e29b0a0b35f9c7e1ad",
         "version" : "5.8.1"
+=======
+        "revision" : "723fa5a6c65812aec4a0d7cc432ee198883b6e00",
+        "version" : "5.9.0"
+>>>>>>> 9985b20be (fix: Swift Packages)
       }
     },
     {
@@ -33,8 +42,13 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/adamzarn/AZVideoPlayer",
       "state" : {
+<<<<<<< HEAD
         "revision" : "e2dde8754ee34706cc69fa640cde85506e239742",
         "version" : "1.0.0"
+=======
+        "revision" : "277226551a519a3dcd8de09c2741a4b61c4c95db",
+        "version" : "1.1.0"
+>>>>>>> 9985b20be (fix: Swift Packages)
       }
     },
     {
@@ -60,7 +74,11 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/EFPrefix/EFQRCode",
       "state" : {
+<<<<<<< HEAD
         "revision" : "3a6c5012f1a0df404a92e55bb01b4b685ff5a2d1",
+=======
+        "revision" : "2991c2f318ad9529d93b2a73a382a3f9c72c64ce",
+>>>>>>> 9985b20be (fix: Swift Packages)
         "version" : "6.2.2"
       }
     },
@@ -88,7 +106,11 @@
       "location" : "https://github.com/mixpanel/mixpanel-swift",
       "state" : {
         "branch" : "master",
+<<<<<<< HEAD
         "revision" : "9438b4a5f76bf2108b09f8fed1abbad8f353e1a2"
+=======
+        "revision" : "4fa0f5d257f2df4b451450564390d827a7053aec"
+>>>>>>> 9985b20be (fix: Swift Packages)
       }
     },
     {
@@ -105,8 +127,13 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
       "state" : {
+<<<<<<< HEAD
         "revision" : "b11493f76481dff17ac8f45274a6b698ba0d3af5",
         "version" : "5.18.11"
+=======
+        "revision" : "73b9397cfbd902f606572964055464903b1d84c6",
+        "version" : "5.19.0"
+>>>>>>> 9985b20be (fix: Swift Packages)
       }
     },
     {
@@ -132,8 +159,13 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImageSwiftUI.git",
       "state" : {
+<<<<<<< HEAD
         "revision" : "261b6cec35686d2dc192b809ab50742b4502a73b",
         "version" : "2.2.6"
+=======
+        "revision" : "53573d6dd017e354c0e7d8f1c86b77ef1383c996",
+        "version" : "2.2.7"
+>>>>>>> 9985b20be (fix: Swift Packages)
       }
     },
     {
@@ -157,10 +189,17 @@
     {
       "identity" : "swift_qrcodejs",
       "kind" : "remoteSourceControl",
+<<<<<<< HEAD
       "location" : "https://github.com/EFPrefix/swift_qrcodejs.git",
       "state" : {
         "revision" : "817ba220a2eba840bae888e7eeb11207bec05f8c",
         "version" : "2.3.0"
+=======
+      "location" : "https://github.com/ApolloZhu/swift_qrcodejs.git",
+      "state" : {
+        "revision" : "374dc7f7b9e76c6aeb393f6a84590c6d387e1ecb",
+        "version" : "2.2.2"
+>>>>>>> 9985b20be (fix: Swift Packages)
       }
     },
     {
