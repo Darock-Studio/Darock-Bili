@@ -950,12 +950,23 @@ struct SoftwareUpdateView: View {
 
 struct GestureSettingsView: View {
     @AppStorage("IsVideoPlayerGestureEnabled") var isVideoPlayerGestureEnabled = true
+    @AppStorage("VideoPlayerGestureBehavior") var videoPlayerGestureBehavior = "Play/Pause"
     var body: some View {
         List {
             Section {
                 Toggle("Gesture.double-tap", isOn: $isVideoPlayerGestureEnabled)
             } footer: {
-                Text("Gesture.double-tap.description") //在视频播放器使用互点两下手势(Apple Watch Series 9 及以上)或快速操作(其他机型)暂停或播放视频
+                Text("Gesture.double-tap.description")
+            }
+            if isVideoPlayerGestureEnabled {
+                Section {
+                    Picker("行为", selection: $videoPlayerGestureBehavior) {
+                        Text("播放/暂停").tag("Play/Pause")
+                        Text("暂停->退出").tag("Pause/Exit")
+                        Text("退出播放").tag("Exit")
+                        Text("退出 App").tag("Exit App")
+                    }
+                }
             }
         }
     }
