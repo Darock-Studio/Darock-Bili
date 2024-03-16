@@ -284,7 +284,7 @@ struct CommentsView: View {
                             commentReplies[calNum].append(["Text": sigReply.1["content"]["message"].string ?? "[加载失败]", "Sender": sigReply.1["member"]["uname"].string ?? "[加载失败]", "SenderPic": sigReply.1["member"]["avatar"].string ?? "E", "SenderID": sigReply.1["member"]["mid"].string ?? "E", "IP": sigReply.1["reply_control"]["location"].string ?? "", "UserAction": String(sigReply.1["action"].int ?? 0), "Rpid": String(sigReply.1["rpid"].int ?? -1), "Like": String(sigReply.1["like"].int ?? -1)])
                         }
                         let text = reply.1["content"]["message"].string ?? "[加载失败]"
-                        comments.append(["Text": text, "Sender": reply.1["member"]["uname"].string ?? "[加载失败]", "SenderPic": reply.1["member"]["avatar"].string ?? "E", "SenderID": reply.1["member"]["mid"].string ?? "E", "IP": reply.1["reply_control"]["location"].string ?? "", "UserAction": String(reply.1["action"].int ?? 0), "Rpid": String(reply.1["rpid"].int ?? -1), "Like": String(reply.1["like"].int ?? -1)])
+                        comments.append(["Text": text, "Sender": reply.1["member"]["uname"].string ?? "[加载失败]", "SenderPic": reply.1["member"]["avatar"].string ?? "E", "SenderID": reply.1["member"]["mid"].string ?? "E", "IP": reply.1["reply_control"]["location"].string ?? "", "UserAction": String(reply.1["action"].int ?? 0), "Rpid": reply.1["rpid_str"].string ?? "-1", "Like": String(reply.1["like"].int ?? -1)])
 //                      sepTexts.append([])
 //                      isEmoted.append(false)
 //                      // 文本中包含表情
@@ -467,13 +467,15 @@ struct CommentsView: View {
                                 "cookie": "SESSDATA=\(sessdata);",
                                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                             ]
+                            debugPrint("https://api.bilibili.com/x/v2/reply/reply?type=\(type)&oid=\(avid)&root=\(rootData["Rpid"]!)")
                             DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v2/reply/reply?type=\(type)&oid=\(avid)&root=\(rootData["Rpid"]!)", headers: headers) { respJson, isSuccess in
                                 if isSuccess {
+                                    debugPrint(respJson)
                                     if !CheckBApiError(from: respJson) { return }
                                     for reply in respJson["data"]["replies"] {
                                         commentOffsets.append(20)
                                         isSenderDetailsPresented.append(false)
-                                        replies.append(["Text": reply.1["content"]["message"].string ?? "[加载失败]", "Sender": reply.1["member"]["uname"].string ?? "[加载失败]", "SenderPic": reply.1["member"]["avatar"].string ?? "E", "SenderID": reply.1["member"]["mid"].string ?? "E", "IP": reply.1["reply_control"]["location"].string ?? "", "UserAction": String(reply.1["action"].int ?? 0), "Rpid": String(reply.1["rpid"].int ?? -1), "Like": String(reply.1["like"].int ?? -1)])
+                                        replies.append(["Text": reply.1["content"]["message"].string ?? "[加载失败]", "Sender": reply.1["member"]["uname"].string ?? "[加载失败]", "SenderPic": reply.1["member"]["avatar"].string ?? "E", "SenderID": reply.1["member"]["mid"].string ?? "E", "IP": reply.1["reply_control"]["location"].string ?? "", "UserAction": String(reply.1["action"].int ?? 0), "Rpid": reply.1["rpid_str"].string ?? "-1", "Like": String(reply.1["like"].int ?? -1)])
                                     }
                                 }
                             }
