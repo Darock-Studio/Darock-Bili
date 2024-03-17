@@ -700,9 +700,11 @@ struct UserDetailView: View {
                     .frame(height: 20)
                 HStack {
                     Spacer()
-                    CachedAsyncImage(url: URL(string: userFaceUrl + "@50w_50h"))
-                        .cornerRadius(100)
-                        .frame(width: 50, height: 50)
+                    if userFaceUrl != "" {
+                        CachedAsyncImage(url: URL(string: userFaceUrl + "@50w_50h"))
+                            .cornerRadius(100)
+                            .frame(width: 50, height: 50)
+                    }
                     Spacer()
                 }
                 HStack {
@@ -977,13 +979,7 @@ struct UserDetailView: View {
                         VStack {
                             if articles.count != 0 {
                                 ForEach(0...articles.count - 1, id: \.self) { i in
-                                    Button(action: {
-                                        let session = ASWebAuthenticationSession(url: URL(string: "https://www.bilibili.com/read/cv\(articles[i]["CV"]!)")!, callbackURLScheme: nil) { _, _ in
-                                            return
-                                        }
-                                        session.prefersEphemeralWebBrowserSession = true
-                                        session.start()
-                                    }, label: {
+                                    NavigationLink(destination: { ArticleView(cvid: articles[i]["CV"]!) }, label: {
                                         VStack {
                                             Text(articles[i]["Title"]!)
                                                 .font(.system(size: 16, weight: .bold))
