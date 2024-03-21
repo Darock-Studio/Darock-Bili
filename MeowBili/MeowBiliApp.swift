@@ -165,6 +165,8 @@ struct DarockBili_Watch_AppApp: App {
     #else
     @State var shouldShowAppName = false
     #endif
+    // Banner
+    @State var isAccountBanned = false
     var body: some SwiftUI.Scene {
         WindowGroup {
             if fileLockerPwd != "" {
@@ -206,7 +208,11 @@ struct DarockBili_Watch_AppApp: App {
                 ZStack {
                     #if !os(visionOS)
                     #if os(watchOS)
-                    ContentView()
+                    if !isAccountBanned {
+                        ContentView()
+                    } else {
+                        BannedTipView()
+                    }
                     VStack {
                         Spacer()
                         if #available(watchOS 10, *) {
@@ -248,28 +254,32 @@ struct DarockBili_Watch_AppApp: App {
                         ZStack {
                             // Hide NavigationLinks behind
                             NavigationLink("", isActive: $isUrlOpenVideoPresented, destination: { VideoDetailView(videoDetails: urlOpenVideoDetails) })
-                            ContentView()
-                                .onOpenURL { url in
-                                    let dec = url.absoluteString.urlDecoded()
-                                    let spd = dec.split(separator: "/").dropFirst()
-                                    debugPrint(spd)
-                                    switch spd[1] {
-                                    case "withvideodetail":
-                                        let kvs = dec.split(separator: "/", maxSplits: 1).dropFirst()[2].split(separator: "&") // e.g.: ["BV=xxx", "Title=xxx"]
-                                        urlOpenVideoDetails.removeAll()
-                                        for kv in kvs {
-                                            let kav = kv.split(separator: "=")
-                                            urlOpenVideoDetails.updateValue(String(kav[1]), forKey: String(kav[0]))
-                                        }
-                                        isUrlOpenVideoPresented = true
-                                    case "openbvid":
-                                        let bvid = spd[2]
-                                        urlOpenVideoDetails = ["Pic": "", "Title": "Loading...", "BV": String(bvid), "UP": "Loading...", "View": "1", "Danmaku": "1"]
-                                        isUrlOpenVideoPresented = true
-                                    default:
-                                        break
-                                    }
-                                }
+                            if !isAccountBanned {
+                                ContentView()
+                            } else {
+                                BannedTipView()
+                            }
+                        }
+                    }
+                    .onOpenURL { url in
+                        let dec = url.absoluteString.urlDecoded()
+                        let spd = dec.split(separator: "/").dropFirst()
+                        debugPrint(spd)
+                        switch spd[1] {
+                        case "withvideodetail":
+                            let kvs = dec.split(separator: "/", maxSplits: 1).dropFirst()[2].split(separator: "&") // e.g.: ["BV=xxx", "Title=xxx"]
+                            urlOpenVideoDetails.removeAll()
+                            for kv in kvs {
+                                let kav = kv.split(separator: "=")
+                                urlOpenVideoDetails.updateValue(String(kav[1]), forKey: String(kav[0]))
+                            }
+                            isUrlOpenVideoPresented = true
+                        case "openbvid":
+                            let bvid = spd[2]
+                            urlOpenVideoDetails = ["Pic": "", "Title": "Loading...", "BV": String(bvid), "UP": "Loading...", "View": "1", "Danmaku": "1"]
+                            isUrlOpenVideoPresented = true
+                        default:
+                            break
                         }
                     }
                     if shouldShowAppName {
@@ -477,6 +487,28 @@ struct DarockBili_Watch_AppApp: App {
                             df.dateFormat = "yyyy-MM-dd"
                             let dateStr = df.string(from: Date.now)
                             UserDefaults.standard.set(UserDefaults.standard.integer(forKey: "ScreenTime\(dateStr)") + 1, forKey: "ScreenTime\(dateStr)")
+                        }
+                    }
+                }
+
+                #if os(watchOS)
+                let banId = WKInterfaceDevice.current().identifierForVendor?.uuidString ?? "__DONOTBANTHISIDELSEALLUSERSWILLBEBANNED123456AABBCCDDEEFFGGDAROCKSTUDIOCOMMUNITY"
+                #else
+                let banId = UIDevice.current.identifierForVendor?.uuidString ?? "__DONOTBANTHISIDELSEALLUSERSWILLBEBANNED123456AABBCCDDEEFFGGDAROCKSTUDIOCOMMUNITY"
+                #endif
+                DarockKit.Network.shared.requestString("https://api.darock.top/banner/check/\(banId)") { respStr, isSuccess in
+                    if isSuccess {
+                        if respStr == "1" {
+                            isAccountBanned = true
+                        }
+                    }
+                }
+                if let uid = UserDefaults.standard.string(forKey: "DedeUserId") {
+                    DarockKit.Network.shared.requestString("https://api.darock.top/banner/check/\(uid)") { respStr, isSuccess in
+                        if isSuccess {
+                            if respStr == "1" {
+                                isAccountBanned = true
+                            }
                         }
                     }
                 }
