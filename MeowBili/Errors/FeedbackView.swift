@@ -328,6 +328,24 @@ struct InAppFeedbackView: View {
     }
 }
 
+struct BannedTipView: View {
+    var body: some View {
+        ScrollView {
+            VStack {
+                Text("您已被 Darock 永久封禁且在设备上施行")
+                #if os(watchOS)
+                let banId = WKInterfaceDevice.current().identifierForVendor?.uuidString ?? "nil"
+                #else
+                let banId = UIDevice.current.identifierForVendor?.uuidString ?? "nil"
+                #endif
+                Text(banId)
+                Text(UserDefaults.standard.string(forKey: "DedeUserId") ?? "Empty")
+                Text("加群248036605查看群公告以申请解封")
+            }
+        }
+    }
+}
+
 struct FeedbackView_Previews: PreviewProvider {
     static var previews: some View {
         FeedbackView()
