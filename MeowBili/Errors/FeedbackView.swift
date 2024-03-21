@@ -128,6 +128,11 @@ struct InAppFeedbackView: View {
                             return
                         }
                         isSending = true
+                        #if os(watchOS)
+                        let banId = WKInterfaceDevice.current().identifierForVendor?.uuidString ?? "nil"
+                        #else
+                        let banId = UIDevice.current.identifierForVendor?.uuidString ?? "nil"
+                        #endif
                         let msgToSend = """
                         \(titleInput)
                         State：0
@@ -136,6 +141,8 @@ struct InAppFeedbackView: View {
                         Version：v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)
                         Time：\(Date.now.timeIntervalSince1970)
                         Sender: User
+                        BanID：\(banId)
+                        BanUID：\(UserDefaults.standard.string(forKey: "DedeUserId") ?? "Empty")
                         """
                         DarockKit.Network.shared.requestString("https://api.darock.top/feedback/submit/anony/喵哩喵哩/\(msgToSend.base64Encoded().replacingOccurrences(of: "/", with: "{slash}"))") { respStr, isSuccess in
                             if isSuccess {
@@ -167,7 +174,7 @@ struct InAppFeedbackView: View {
                     })
                     .disabled(isSending)
                 } footer: {
-                    Text("Darock 会收集必要的诊断信息以便进行改进，信息不会关联到您个人。如果您不愿意被收集信息，请勿发送。")
+                    Text("Darock 会收集必要的诊断信息以便进行改进。如果您不愿意被收集信息，请勿发送。")
                 }
             }
         }
@@ -316,6 +323,24 @@ struct InAppFeedbackView: View {
                             }
                     }
                 }
+            }
+        }
+    }
+}
+
+struct BannedTipView: View {
+    var body: some View {
+        ScrollView {
+            VStack {
+                Text("您已被 Darock 永久封禁且在设备上施行")
+                #if os(watchOS)
+                let banId = WKInterfaceDevice.current().identifierForVendor?.uuidString ?? "nil"
+                #else
+                let banId = UIDevice.current.identifierForVendor?.uuidString ?? "nil"
+                #endif
+                Text(banId)
+                Text(UserDefaults.standard.string(forKey: "DedeUserId") ?? "Empty")
+                Text("加群248036605查看群公告以申请解封")
             }
         }
     }
