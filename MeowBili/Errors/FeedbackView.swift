@@ -142,7 +142,7 @@ struct InAppFeedbackView: View {
                         Time：\(Date.now.timeIntervalSince1970)
                         Sender: User
                         BanID：\(banId)
-                        BanUID：\(UserDefaults.standard.string(forKey: "DedeUserId") ?? "Empty")
+                        BanUID：\(UserDefaults.standard.string(forKey: "DedeUserID") ?? "Empty")
                         """
                         DarockKit.Network.shared.requestString("https://api.darock.top/feedback/submit/anony/喵哩喵哩/\(msgToSend.base64Encoded().replacingOccurrences(of: "/", with: "{slash}"))") { respStr, isSuccess in
                             if isSuccess {
