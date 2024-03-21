@@ -339,8 +339,9 @@ struct BannedTipView: View {
                 let banId = UIDevice.current.identifierForVendor?.uuidString ?? "nil"
                 #endif
                 Text(banId)
-                Text(UserDefaults.standard.string(forKey: "DedeUserId") ?? "Empty")
+                Text(UserDefaults.standard.string(forKey: "DedeUserID") ?? "Empty")
                 Text("加群248036605查看群公告以申请解封")
+                Text("注意！重装 App 并不会移除封禁且可能会导致识别 ID 更改，我们将无法为您解封")
             }
         }
     }
