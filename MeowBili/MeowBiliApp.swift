@@ -492,9 +492,9 @@ struct DarockBili_Watch_AppApp: App {
                 }
 
                 #if os(watchOS)
-                let banId = WKInterfaceDevice.current().identifierForVendor?.uuidString ?? "nil"
+                let banId = WKInterfaceDevice.current().identifierForVendor?.uuidString ?? "__DONOTBANTHISIDELSEALLUSERSWILLBEBANNED123456AABBCCDDEEFFGGDAROCKSTUDIOCOMMUNITY"
                 #else
-                let banId = UIDevice.current.identifierForVendor?.uuidString ?? "nil"
+                let banId = UIDevice.current.identifierForVendor?.uuidString ?? "__DONOTBANTHISIDELSEALLUSERSWILLBEBANNED123456AABBCCDDEEFFGGDAROCKSTUDIOCOMMUNITY"
                 #endif
                 DarockKit.Network.shared.requestString("https://api.darock.top/banner/check/\(banId)") { respStr, isSuccess in
                     if isSuccess {
@@ -503,10 +503,12 @@ struct DarockBili_Watch_AppApp: App {
                         }
                     }
                 }
-                DarockKit.Network.shared.requestString("https://api.darock.top/banner/check/\(UserDefaults.standard.string(forKey: "DedeUserId") ?? "Empty")") { respStr, isSuccess in
-                    if isSuccess {
-                        if respStr == "1" {
-                            isAccountBanned = true
+                if let uid = UserDefaults.standard.string(forKey: "DedeUserId") {
+                    DarockKit.Network.shared.requestString("https://api.darock.top/banner/check/\(uid)") { respStr, isSuccess in
+                        if isSuccess {
+                            if respStr == "1" {
+                                isAccountBanned = true
+                            }
                         }
                     }
                 }
