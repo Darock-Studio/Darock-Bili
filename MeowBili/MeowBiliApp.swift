@@ -503,7 +503,7 @@ struct DarockBili_Watch_AppApp: App {
                         }
                     }
                 }
-                if let uid = UserDefaults.standard.string(forKey: "DedeUserId") {
+                if let uid = UserDefaults.standard.string(forKey: "DedeUserID") {
                     DarockKit.Network.shared.requestString("https://api.darock.top/banner/check/\(uid)") { respStr, isSuccess in
                         if isSuccess {
                             if respStr == "1" {
