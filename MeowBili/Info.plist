@@ -24,7 +24,7 @@
 	<array>
 		<string>ContentSearchIntentIntent</string>
 		<string>INSearchForMediaIntent</string>
-		<string>com.darock.DarockBili.video-play</string>
+		<string>com.linecom.mwbilialt.video-play</string>
 	</array>
 	<key>UIAppFonts</key>
 	<array>
