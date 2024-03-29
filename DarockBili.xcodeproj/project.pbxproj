@@ -1114,7 +1114,7 @@
 		B44689C42B4FC15A002CCEB2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = 1;
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1520;
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
@@ -1953,6 +1953,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				ENABLE_PREVIEWS = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.linecom.mwbilialt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -2037,6 +2038,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				ENABLE_PREVIEWS = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.linecom.mwbilialt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 			};
@@ -2049,6 +2051,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				ENABLE_PREVIEWS = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.linecom.mwbilialt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -2171,7 +2174,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.linecom.mwbilialt.watchkitapp;
 				PRODUCT_NAME = "喵哩喵哩";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -2207,7 +2210,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.linecom.mwbilialt.watchkitapp;
 				PRODUCT_NAME = "喵哩喵哩";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
