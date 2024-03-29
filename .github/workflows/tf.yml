@@ -94,7 +94,8 @@ jobs:
           github_ref: ${{ github.ref }}
         run: |
           IFS='/' read -ra parts <<< "$github_ref"
-          CI_TAG="${parts[-1]}"
+          last_index=$((${#parts[@]} - 1))
+          CI_TAG="${parts[$last_index]}"
           sed -i '' "s|.*|Linecom|" ../CurrentChannel.drkdatac
           sed -i '' "s|.*|${CI_TAG}|" ../SemanticVersion.drkdatas
 
