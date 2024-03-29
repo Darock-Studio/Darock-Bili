@@ -1,14 +1,9 @@
-name: TestFlight Test Deploy
+name: TestFlight Alternative Deploy
 
 on: 
-  workflow_dispatch:
-    inputs:
-      psha:
-        required: true
-      repository:
-        required: true
-      lsha:
-        required: true
+  push:
+    tags:
+      - v*
 
 jobs:
   build:
@@ -22,24 +17,11 @@ jobs:
       checks: write
       statuses: write
     env:
-      ASCAPI_ISSUER_ID: ${{ secrets.ASCAPI_ISSUER_ID }}
-      ASCAPI_KEY_ID: ${{ secrets.ASCAPI_KEY_ID }}
-      ASCAPI_KEY: ${{ secrets.ASCAPI_KEY }}
-      FIN_STATUS: "error"
+      ASCAPI_ISSUER_ID: ${{ secrets.ALT_ISSUER_ID }}
+      ASCAPI_KEY_ID: ${{ secrets.ALT_KEY_ID }}
+      ASCAPI_KEY: ${{ secrets.ALT_KEY }}
       GH_TOKEN: ${{ github.token }}
     steps:
-      - name: Update Check Status
-        run: |
-          gh api \
-            --method POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/${{ github.repository }}/statuses/${{ inputs.lsha }} \
-            -f state='pending' \
-            -f target_url='https://github.com/Darock-Studio/Darock-Bili/actions/runs/${{ github.run_id }}' \
-            -f description='Preparing...' \
-            -f context='TestFlight Internal Deploy' 
-    
       - name: Checkout
         uses: actions/checkout@v3
         with:
@@ -84,9 +66,9 @@ jobs:
 
       - name: Install the Apple certificate and provisioning profile for Xcode
         env:
-          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
-          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
-          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.ALT_CERTIFICATE_BASE64 }}
+          P12_PASSWORD: ${{ secrets.ALT_P12_PASSWORD }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.ALT_PROVISION_PROFILE_BASE64 }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
         run: |
           # create variables
@@ -106,97 +88,25 @@ jobs:
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
-
-      - name: Set Environment Varibles
+          
+      - name: Prepare Abouts
+        env:
+          github_ref: ${{ github.ref }}
         run: |
-          CI=TRUE
-          CI_ARCHIVE_PATH=/Volumes/workspace/build.xcarchive
-          CI_BUNDLE_ID=com.darock.DarockBili
-          CI_PRODUCT=DarockBili
-          CI_PRODUCT_PLATFORM=iOS
-          CI_XCODEBUILD_ACTION=archive
-          CI_XCODE_PROJECT=DarockBili.xcodeproj
-          CI_XCODE_SCHEME=DarockBili
-          TMPDIR=$RUNNER_TEMP
-
-      - name: Restore Caches
-        uses: actions/cache/restore@v3
-        with:
-          key: ${{ runner.os }}-pr-deploy-cache-
-          path: ~/Library/Developer/Xcode/DerivedData
-
-      - name: Update Check Status
-        run: |
-          echo "FIN_STATUS=failure" >> $GITHUB_ENV
-          gh api \
-            --method POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/${{ github.repository }}/statuses/${{ inputs.lsha }} \
-            -f state='pending' \
-            -f target_url='https://github.com/Darock-Studio/Darock-Bili/actions/runs/${{ github.run_id }}' \
-            -f description='Resolving Package Dependencies...' \
-            -f context='TestFlight Internal Deploy' 
+          CI_TAG=${${(s:/:)github_ref}[-1]}
+          sed -i '' "s|.*|Linecom|" ../CurrentChannel.drkdatac
+          sed -i '' "s|.*|${CI_TAG}|" ../SemanticVersion.drkdatas
 
       - name: Resolve Package Dependencies
-        run: xcodebuild -resolvePackageDependencies -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App'
+        run: xcodebuild -resolvePackageDependencies -project ./DarockBili.xcodeproj -scheme MeowBili
 
-      - name: Update Check Status
-        run: |
-          gh api \
-            --method POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/${{ github.repository }}/statuses/${{ inputs.lsha }} \
-            -f state='pending' \
-            -f target_url='https://github.com/Darock-Studio/Darock-Bili/actions/runs/${{ github.run_id }}' \
-            -f description='Archiving...' \
-            -f context='TestFlight Internal Deploy' 
-          
       - name: Archive DarockBili App
-        env:
-          ASCAPI_KEY_ID: ${{ secrets.ASCAPI_KEY_ID }}
-          ASCAPI_ISSUER_ID: ${{ secrets.ASCAPI_ISSUER_ID }}
         run: |
-          xcodebuild archive -project ./DarockBili.xcodeproj -scheme 'DarockBili Watch App' -archivePath ./build.xcarchive -IDEPostProgressNotifications=YES CODE_SIGN_IDENTITY=- AD_HOC_CODE_SIGNING_ALLOWED=YES CODE_SIGN_STYLE=Automatic DEVELOPMENT_TEAM=B57D8PP775 COMPILER_INDEX_STORE_ENABLE=NO
-
-      - name: Get Current Time
-        id: current-time
-        run: echo "time=$(date +"%Y%m%d%H%M%S")" >> $GITHUB_OUTPUT
-
-      - name: Save Caches
-        uses: actions/cache/save@v3
-        with:
-          key: ${{ runner.os }}-pr-deploy-cache-${{ steps.current-time.outputs.time }}
-          path: ~/Library/Developer/Xcode/DerivedData
-
-      - name: Update Check Status
-        run: |
-          gh api \
-            --method POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/${{ github.repository }}/statuses/${{ inputs.lsha }} \
-            -f state='pending' \
-            -f target_url='https://github.com/Darock-Studio/Darock-Bili/actions/runs/${{ github.run_id }}' \
-            -f description='Exporting...' \
-            -f context='TestFlight Internal Deploy' 
+          xcodebuild archive -project ./DarockBili.xcodeproj -scheme 'Alternative Destribution' -archivePath ./build.xcarchive -IDEPostProgressNotifications=YES CODE_SIGN_IDENTITY=- AD_HOC_CODE_SIGNING_ALLOWED=YES CODE_SIGN_STYLE=Automatic DEVELOPMENT_TEAM=B38QUJMY47 COMPILER_INDEX_STORE_ENABLE=NO
 
       - name: Export IPA File
         run: |
           xcodebuild -exportArchive -archivePath ./build.xcarchive -exportPath ./ -exportOptionsPlist ./ExportOptions/app-store.plist -DVTProvisioningIsManaged=YES -DVTSkipCertificateValidityCheck=YES
-
-      - name: Update Check Status
-        run: |
-          gh api \
-            --method POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/${{ github.repository }}/statuses/${{ inputs.lsha }} \
-            -f state='pending' \
-            -f target_url='https://github.com/Darock-Studio/Darock-Bili/actions/runs/${{ github.run_id }}' \
-            -f description='Uploading...' \
-            -f context='TestFlight Internal Deploy' 
       
       - name: Prepare API Key
         run: |
@@ -206,17 +116,3 @@ jobs:
       - name: Upload to App Store Connect
         run: |
           xcrun altool --upload-app -f ./DarockBili.ipa -t ios --apiKey $ASCAPI_KEY_ID --apiIssuer $ASCAPI_ISSUER_ID
-          echo "FIN_STATUS=success" >> $GITHUB_ENV
-
-      - name: Update Check Status
-        if: always()
-        run: |
-          gh api \
-            --method POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/${{ github.repository }}/statuses/${{ inputs.lsha }} \
-            -f state='${{ env.FIN_STATUS }}' \
-            -f target_url='https://github.com/Darock-Studio/Darock-Bili/actions/runs/${{ github.run_id }}' \
-            -f context='TestFlight Internal Deploy' 
-    
