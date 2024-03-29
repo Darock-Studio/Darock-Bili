@@ -879,7 +879,7 @@ struct SoftwareUpdateView: View {
                                 Text("v\(latestVer) Build \(latestBuild)")
                                     .font(.system(size: 14, weight: .medium))
                                 HStack {
-                                    Text("Darock-studio")
+                                    Text("Linecom Software")
                                         .font(.system(size: 13))
                                         .foregroundColor(.gray)
                                     Spacer()
@@ -890,7 +890,7 @@ struct SoftwareUpdateView: View {
                         Text(releaseNote)
                         if (Bundle.main.infoDictionary?["CFBundleIdentifier"] as! String) != "com.darock.DarockBili.watchkitapp" {
                             Button(action: {
-                                let session = ASWebAuthenticationSession(url: URL(string: "https://cd.darock.top:32767/meowbili/install.html")!, callbackURLScheme: "mlhd") { _, _ in
+                                let session = ASWebAuthenticationSession(url: URL(string: "https://testflight.apple.com/join/P5CLgWpk")!, callbackURLScheme: "mlhd") { _, _ in
                                     return
                                 }
                                 session.prefersEphemeralWebBrowserSession = true
@@ -923,7 +923,7 @@ struct SoftwareUpdateView: View {
             }
         }
         .onAppear {
-            DarockKit.Network.shared.requestString("https://api.darock.top/bili/newver") { respStr, isSuccess in
+            DarockKit.Network.shared.requestString("https://api.linecom.net.cn/darock/bili/update/check.php") { respStr, isSuccess in
                 if isSuccess && respStr.apiFixed().contains("|") {
                     latestVer = String(respStr.apiFixed().split(separator: "|")[0])
                     latestBuild = String(respStr.apiFixed().split(separator: "|")[1])

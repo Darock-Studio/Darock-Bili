@@ -1702,6 +1702,7 @@
 
     },
     "Darock-studio" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3213,6 +3214,9 @@
         }
       }
     },
+    "Linecom Software" : {
+
+    },
     "Live" : {
       "localizations" : {
         "en" : {
@@ -4362,7 +4366,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "「画面使用時間」を閉じる"
+            "value" : "「スクリーンタイム」を閉じる"
           }
         },
         "zh-Hans" : {
@@ -4390,7 +4394,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "「画面使用時間」を開始する"
+            "value" : "「スクリーンタイム」を開始する"
           }
         },
         "zh-Hans" : {
@@ -4418,7 +4422,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "「スクリーン使用時間」は、あなたが毎日ミャオリミャオリを使う時間を記録し統計します。"
+            "value" : "「スクリーンタイム」は、あなたが毎日ミャオリミャオリを使う時間を記録し統計します。"
           }
         },
         "zh-Hans" : {
@@ -5078,7 +5082,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "画面使用時間"
+            "value" : "スクリーンタイム"
           }
         },
         "zh-Hans" : {
@@ -8486,7 +8490,14 @@
       }
     },
     "声音与触感" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "サウンドと触覚"
+          }
+        }
+      }
     },
     "复制" : {
       "localizations" : {
@@ -8647,7 +8658,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "「画面使用時間」を開始する"
+            "value" : "「スクリーンタイム」を開始する"
           }
         },
         "zh-Hant" : {
@@ -8766,7 +8777,14 @@
       }
     },
     "扩展的触感反馈" : {
-
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "拡張の触感フィードバック"
+          }
+        }
+      }
     },
     "推荐" : {
       "localizations" : {
