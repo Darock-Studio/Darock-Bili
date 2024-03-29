@@ -70,9 +70,14 @@ struct AboutApp: View {
                 .bold()
                 .font(.title2)
             Group {
-                Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)")
-                    .font(.system(size: 18))
-                Text("\(String(try! String(contentsOf: Bundle.main.url(forResource: "CurrentChannel", withExtension: "drkdatac")!).split(separator: "\n")[0])) 频道")
+                if try! String(contentsOf: Bundle.main.url(forResource: "SemanticVersion", withExtension: "drkdatas")!).split(separator: "\n")[0] != "Unknown" {
+                    Text("\(String(try! String(contentsOf: Bundle.main.url(forResource: "SemanticVersion", withExtension: "drkdatas")!).split(separator: "\n")[0]))(\(Bundle.main.infoDictionary?["CFBundleVersion"] as! String))")
+                        .font(.system(size: 18))
+                } else {
+                    Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)")
+                        .font(.system(size: 18))
+                }
+                Text("\(String(try! String(contentsOf: Bundle.main.url(forResource: "CurrentChannel", withExtension: "drkdatac")!).split(separator: "\n")[0])) 通道")
                     .font(.system(size: 18))
                 Group {
                     if debug {
@@ -189,8 +194,12 @@ struct AboutApp: View {
                 .bold()
                 .font(.title3)
             Group {
-                Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)")
-                Text("\(String(try! String(contentsOf: Bundle.main.url(forResource: "CurrentChannel", withExtension: "drkdatac")!).split(separator: "\n")[0])) 频道")
+                if try! String(contentsOf: Bundle.main.url(forResource: "SemanticVersion", withExtension: "drkdatas")!).split(separator: "\n")[0] != "Unknown" {
+                    Text("\(String(try! String(contentsOf: Bundle.main.url(forResource: "SemanticVersion", withExtension: "drkdatas")!).split(separator: "\n")[0]))(\(Bundle.main.infoDictionary?["CFBundleVersion"] as! String))")
+                } else {
+                    Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)")
+                }
+                Text("\(String(try! String(contentsOf: Bundle.main.url(forResource: "CurrentChannel", withExtension: "drkdatac")!).split(separator: "\n")[0])) 通道")
                 if debug {
                     Text(CodingTime.getCodingTime())
                 } else {

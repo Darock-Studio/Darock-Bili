@@ -32,6 +32,10 @@
 		8C617F502B92334B000A3687 /* popup.css in Resources */ = {isa = PBXBuildFile; fileRef = 8C617F4F2B92334B000A3687 /* popup.css */; };
 		8C617F522B92334B000A3687 /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = 8C617F512B92334B000A3687 /* popup.js */; };
 		8C617F562B92334B000A3687 /* SafariExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8C617F3E2B92334B000A3687 /* SafariExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8C82F7932BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */ = {isa = PBXBuildFile; fileRef = 8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */; };
+		8C82F7942BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */ = {isa = PBXBuildFile; fileRef = 8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */; };
+		8C82F7952BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */ = {isa = PBXBuildFile; fileRef = 8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */; };
+		8C82F7962BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */ = {isa = PBXBuildFile; fileRef = 8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */; };
 		8CA370D42B82690700CE0E9E /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA370D32B82690700CE0E9E /* Mixpanel */; };
 		8CA370D62B82691100CE0E9E /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA370D52B82691100CE0E9E /* Mixpanel */; };
 		8CA370DB2B82724400CE0E9E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */; };
@@ -412,6 +416,7 @@
 		8C617F512B92334B000A3687 /* popup.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = popup.js; sourceTree = "<group>"; };
 		8C617F532B92334B000A3687 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C72E32A2B6605B80087486E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */ = {isa = PBXFileReference; lastKnownFileType = text; path = SemanticVersion.drkdatas; sourceTree = "<group>"; };
 		8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		8CA370E82B83BB4F00CE0E9E /* MeowBili Vision App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MeowBili Vision App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA371332B83BE7D00CE0E9E /* MeowBili Vision App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "MeowBili Vision App.entitlements"; sourceTree = "<group>"; };
@@ -864,6 +869,7 @@
 		B44689C32B4FC15A002CCEB2 = {
 			isa = PBXGroup;
 			children = (
+				8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */,
 				8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */,
 				8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */,
 				E2B720932B67858E00ABB0A6 /* Localizable.xcstrings */,
@@ -1209,6 +1215,7 @@
 				8CC5B6BF2B8652C000BAD89E /* Assets.xcassets in Resources */,
 				8CC5B6C02B86539700BAD89E /* BiliFont.ttf in Resources */,
 				8CC5B6C12B86539700BAD89E /* Localizable.xcstrings in Resources */,
+				8C82F7952BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */,
 				8CB0D0282B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1220,6 +1227,7 @@
 				8CA7CBCA2B77AC4C008E587F /* Preview Assets.xcassets in Resources */,
 				8CA388A22B78B5D800F5F91F /* BiliFont.ttf in Resources */,
 				8CA7CBC72B77AC4C008E587F /* Assets.xcassets in Resources */,
+				8C82F7932BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */,
 				8CB0D0262B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */,
 				8CA370DB2B82724400CE0E9E /* PrivacyInfo.xcprivacy in Resources */,
 				8CA7CCE02B77C3A8008E587F /* Localizable.xcstrings in Resources */,
@@ -1230,6 +1238,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C82F7942BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */,
 				8CB0D0272B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */,
 				8CA388A32B78B5D800F5F91F /* BiliFont.ttf in Resources */,
 				8CA370DC2B82724400CE0E9E /* PrivacyInfo.xcprivacy in Resources */,
@@ -1244,6 +1253,7 @@
 			files = (
 				8CC5B6FA2B873FA000BAD89E /* Assets.xcassets in Resources */,
 				8CB0D0292B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */,
+				8C82F7962BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */,
 				8CB0D02A2B88E5B20057EF1C /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1758,7 +1768,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.linecom.mwbilialt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1795,7 +1805,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.linecom.mwbilialt.watchkitapp;
 				PRODUCT_NAME = "喵哩喵哩";
 				SDKROOT = watchos;
@@ -1833,7 +1843,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = xros;
@@ -1870,7 +1880,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1920,7 +1930,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.4;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
