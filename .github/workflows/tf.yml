@@ -96,8 +96,8 @@ jobs:
           IFS='/' read -ra parts <<< "$github_ref"
           last_index=$((${#parts[@]} - 1))
           CI_TAG="${parts[$last_index]}"
-          sed -i '' "s|.*|Linecom|" ../CurrentChannel.drkdatac
-          sed -i '' "s|.*|${CI_TAG}|" ../SemanticVersion.drkdatas
+          sed -i '' "s|.*|Linecom|" ./CurrentChannel.drkdatac
+          sed -i '' "s|.*|${CI_TAG}|" ./SemanticVersion.drkdatas
 
       - name: Resolve Package Dependencies
         run: xcodebuild -resolvePackageDependencies -project ./DarockBili.xcodeproj -scheme MeowBili
