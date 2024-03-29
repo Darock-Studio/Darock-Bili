@@ -93,7 +93,8 @@ jobs:
         env:
           github_ref: ${{ github.ref }}
         run: |
-          CI_TAG=${${(s:/:)github_ref}[-1]}
+          parts=(${(s:/:)github_ref})
+          CI_TAG=${parts[-1]}
           sed -i '' "s|.*|Linecom|" ../CurrentChannel.drkdatac
           sed -i '' "s|.*|${CI_TAG}|" ../SemanticVersion.drkdatas
 
