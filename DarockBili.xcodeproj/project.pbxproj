@@ -95,7 +95,6 @@
 		8CA371302B83BB9100CE0E9E /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCBC2B77B40B008E587F /* VideoPlayerView.swift */; };
 		8CA371312B83BB9100CE0E9E /* SkinExplorerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC962B77B115008E587F /* SkinExplorerView.swift */; };
 		8CA371322B83BB9100CE0E9E /* LivePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCD72B77B54F008E587F /* LivePlayerView.swift */; };
-		8CA371362B83BF9400CE0E9E /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA371352B83BF9400CE0E9E /* Alamofire */; };
 		8CA371382B83BF9400CE0E9E /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA371372B83BF9400CE0E9E /* Marquee */; };
 		8CA3713A2B83BF9400CE0E9E /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA371392B83BF9400CE0E9E /* SwiftDate */; };
 		8CA3713C2B83BF9400CE0E9E /* SFSymbol in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA3713B2B83BF9400CE0E9E /* SFSymbol */; };
@@ -104,8 +103,6 @@
 		8CA371422B83BF9400CE0E9E /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA371412B83BF9400CE0E9E /* SwiftSoup */; };
 		8CA371442B83BF9400CE0E9E /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA371432B83BF9400CE0E9E /* CachedAsyncImage */; };
 		8CA371462B83BF9400CE0E9E /* Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA371452B83BF9400CE0E9E /* Dynamic */; };
-		8CA371482B83BF9400CE0E9E /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA371472B83BF9400CE0E9E /* SwiftyJSON */; };
-		8CA3714A2B83BF9400CE0E9E /* DarockKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA371492B83BF9400CE0E9E /* DarockKit */; };
 		8CA3714C2B83BF9400CE0E9E /* AZVideoPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA3714B2B83BF9400CE0E9E /* AZVideoPlayer */; };
 		8CA3714E2B83BF9400CE0E9E /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA3714D2B83BF9400CE0E9E /* Mixpanel */; };
 		8CA388992B789A0300F5F91F /* AZVideoPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA388982B789A0300F5F91F /* AZVideoPlayer */; };
@@ -117,35 +114,27 @@
 		8CA7CBC72B77AC4C008E587F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC62B77AC4C008E587F /* Assets.xcassets */; };
 		8CA7CBCA2B77AC4C008E587F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC92B77AC4C008E587F /* Preview Assets.xcassets */; };
 		8CA7CBD02B77AC4C008E587F /* 喵哩喵哩.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 8CA7CBCF2B77AC4C008E587F /* 喵哩喵哩.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		8CA7CBE52B77AC8A008E587F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBE42B77AC8A008E587F /* Alamofire */; };
 		8CA7CBE72B77AC8A008E587F /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBE62B77AC8A008E587F /* Marquee */; };
 		8CA7CBE92B77AC8A008E587F /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBE82B77AC8A008E587F /* SwiftDate */; };
 		8CA7CBEB2B77AC8A008E587F /* SFSymbol in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBEA2B77AC8A008E587F /* SFSymbol */; };
 		8CA7CBED2B77AC8A008E587F /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBEC2B77AC8A008E587F /* ZipArchive */; };
 		8CA7CBEF2B77AC8A008E587F /* EFQRCode in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBEE2B77AC8A008E587F /* EFQRCode */; };
-		8CA7CBF12B77AC8A008E587F /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBF02B77AC8A008E587F /* SDWebImageSwiftUI */; };
 		8CA7CBF32B77AC8A008E587F /* SDWebImageWebPCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBF22B77AC8A008E587F /* SDWebImageWebPCoder */; };
 		8CA7CBF52B77AC8A008E587F /* SDWebImageSVGCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBF42B77AC8A008E587F /* SDWebImageSVGCoder */; };
 		8CA7CBF72B77AC8A008E587F /* SDWebImagePDFCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBF62B77AC8A008E587F /* SDWebImagePDFCoder */; };
 		8CA7CBF92B77AC8A008E587F /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBF82B77AC8A008E587F /* SwiftSoup */; };
 		8CA7CBFB2B77AC8A008E587F /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBFA2B77AC8A008E587F /* CachedAsyncImage */; };
 		8CA7CBFD2B77AC8A008E587F /* Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBFC2B77AC8A008E587F /* Dynamic */; };
-		8CA7CBFF2B77AC8A008E587F /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBFE2B77AC8A008E587F /* SwiftyJSON */; };
-		8CA7CC012B77AC8A008E587F /* DarockKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC002B77AC8A008E587F /* DarockKit */; };
-		8CA7CC072B77AC93008E587F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC062B77AC93008E587F /* Alamofire */; };
 		8CA7CC092B77AC93008E587F /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC082B77AC93008E587F /* Marquee */; };
 		8CA7CC0B2B77AC93008E587F /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC0A2B77AC93008E587F /* SwiftDate */; };
 		8CA7CC0F2B77AC93008E587F /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC0E2B77AC93008E587F /* ZipArchive */; };
 		8CA7CC112B77AC93008E587F /* EFQRCode in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC102B77AC93008E587F /* EFQRCode */; };
-		8CA7CC132B77AC93008E587F /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; platformFilters = (ios, maccatalyst, ); productRef = 8CA7CC122B77AC93008E587F /* SDWebImageSwiftUI */; settings = {ATTRIBUTES = (Required, ); }; };
 		8CA7CC152B77AC93008E587F /* SDWebImageWebPCoder in Frameworks */ = {isa = PBXBuildFile; platformFilters = (ios, maccatalyst, ); productRef = 8CA7CC142B77AC93008E587F /* SDWebImageWebPCoder */; settings = {ATTRIBUTES = (Required, ); }; };
 		8CA7CC172B77AC93008E587F /* SDWebImageSVGCoder in Frameworks */ = {isa = PBXBuildFile; platformFilters = (ios, maccatalyst, ); productRef = 8CA7CC162B77AC93008E587F /* SDWebImageSVGCoder */; settings = {ATTRIBUTES = (Required, ); }; };
 		8CA7CC192B77AC93008E587F /* SDWebImagePDFCoder in Frameworks */ = {isa = PBXBuildFile; platformFilters = (ios, maccatalyst, ); productRef = 8CA7CC182B77AC93008E587F /* SDWebImagePDFCoder */; settings = {ATTRIBUTES = (Required, ); }; };
 		8CA7CC1B2B77AC93008E587F /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC1A2B77AC93008E587F /* SwiftSoup */; };
 		8CA7CC1D2B77AC93008E587F /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC1C2B77AC93008E587F /* CachedAsyncImage */; };
 		8CA7CC1F2B77AC93008E587F /* Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC1E2B77AC93008E587F /* Dynamic */; };
-		8CA7CC212B77AC93008E587F /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC202B77AC93008E587F /* SwiftyJSON */; };
-		8CA7CC232B77AC93008E587F /* DarockKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC222B77AC93008E587F /* DarockKit */; };
 		8CA7CC6A2B77AE62008E587F /* Bangumi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC692B77AE62008E587F /* Bangumi.swift */; };
 		8CA7CC6C2B77AE80008E587F /* DownloadObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC6B2B77AE80008E587F /* DownloadObj.swift */; };
 		8CA7CC6F2B77AEB4008E587F /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC6E2B77AEB4008E587F /* SearchView.swift */; };
@@ -202,6 +191,10 @@
 		8CB0D0282B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */ = {isa = PBXBuildFile; fileRef = 8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */; };
 		8CB0D0292B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */ = {isa = PBXBuildFile; fileRef = 8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */; };
 		8CB0D02A2B88E5B20057EF1C /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E2B720932B67858E00ABB0A6 /* Localizable.xcstrings */; };
+		8CB176A52BB8188700CEC05C /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8CB176A42BB8188700CEC05C /* SDWebImageSwiftUI */; };
+		8CB176A72BB8189300CEC05C /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8CB176A62BB8189300CEC05C /* SDWebImageSwiftUI */; };
+		8CB176AE2BB8420B00CEC05C /* DarockKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8CB176AD2BB8420B00CEC05C /* DarockKit */; };
+		8CB176B02BB8421300CEC05C /* DarockKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8CB176AF2BB8421300CEC05C /* DarockKit */; };
 		8CBFF0B72B85E55F00350E0F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC42B77AC4A008E587F /* ContentView.swift */; };
 		8CBFF0B82B85E55F00350E0F /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCA52B77B314008E587F /* CommentsView.swift */; };
 		8CBFF0B92B85E55F00350E0F /* LinkDetectText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */; };
@@ -322,21 +315,17 @@
 		8CC5B7112B873FA000BAD89E /* SkinExplorerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC962B77B115008E587F /* SkinExplorerView.swift */; };
 		8CC5B7122B873FA000BAD89E /* UserDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCB52B77B3BF008E587F /* UserDetailView.swift */; };
 		8CC5B7132B873FA000BAD89E /* Passthroughs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC9A2B77B13D008E587F /* Passthroughs.swift */; };
-		8CC5B7152B8742D300BAD89E /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7142B8742D300BAD89E /* Alamofire */; };
 		8CC5B7172B8742D300BAD89E /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7162B8742D300BAD89E /* Marquee */; };
 		8CC5B7192B8742D300BAD89E /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7182B8742D300BAD89E /* SwiftDate */; };
 		8CC5B71B2B8742D300BAD89E /* SFSymbol in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B71A2B8742D300BAD89E /* SFSymbol */; };
 		8CC5B71D2B8742D300BAD89E /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B71C2B8742D300BAD89E /* ZipArchive */; };
 		8CC5B71F2B8742D300BAD89E /* EFQRCode in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B71E2B8742D300BAD89E /* EFQRCode */; };
-		8CC5B7212B8742D300BAD89E /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7202B8742D300BAD89E /* SDWebImageSwiftUI */; };
 		8CC5B7232B8742D300BAD89E /* SDWebImageWebPCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7222B8742D300BAD89E /* SDWebImageWebPCoder */; };
 		8CC5B7252B8742D300BAD89E /* SDWebImageSVGCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7242B8742D300BAD89E /* SDWebImageSVGCoder */; };
 		8CC5B7272B8742D300BAD89E /* SDWebImagePDFCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7262B8742D300BAD89E /* SDWebImagePDFCoder */; };
 		8CC5B7292B8742D300BAD89E /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7282B8742D300BAD89E /* SwiftSoup */; };
 		8CC5B72B2B8742D300BAD89E /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B72A2B8742D300BAD89E /* CachedAsyncImage */; };
 		8CC5B72D2B8742D300BAD89E /* Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B72C2B8742D300BAD89E /* Dynamic */; };
-		8CC5B72F2B8742D300BAD89E /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B72E2B8742D300BAD89E /* SwiftyJSON */; };
-		8CC5B7312B8742D300BAD89E /* DarockKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7302B8742D300BAD89E /* DarockKit */; };
 		8CC5B7332B8742D300BAD89E /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7322B8742D300BAD89E /* AlertKit */; };
 		8CC5B7352B8742D300BAD89E /* AZVideoPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7342B8742D300BAD89E /* AZVideoPlayer */; };
 		8CC5B7372B8742D300BAD89E /* ScreenshotableView in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7362B8742D300BAD89E /* ScreenshotableView */; };
@@ -530,12 +519,9 @@
 				8CA371402B83BF9400CE0E9E /* EFQRCode in Frameworks */,
 				8CA3713A2B83BF9400CE0E9E /* SwiftDate in Frameworks */,
 				8CA371382B83BF9400CE0E9E /* Marquee in Frameworks */,
-				8CA371482B83BF9400CE0E9E /* SwiftyJSON in Frameworks */,
-				8CA3714A2B83BF9400CE0E9E /* DarockKit in Frameworks */,
 				8CA371442B83BF9400CE0E9E /* CachedAsyncImage in Frameworks */,
 				8CA3713C2B83BF9400CE0E9E /* SFSymbol in Frameworks */,
 				8CA371422B83BF9400CE0E9E /* SwiftSoup in Frameworks */,
-				8CA371362B83BF9400CE0E9E /* Alamofire in Frameworks */,
 				8CA3713E2B83BF9400CE0E9E /* ZipArchive in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -544,24 +530,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CA7CC132B77AC93008E587F /* SDWebImageSwiftUI in Frameworks */,
+				8CB176A52BB8188700CEC05C /* SDWebImageSwiftUI in Frameworks */,
 				8CA370DF2B827AAD00CE0E9E /* AlertToast in Frameworks */,
 				8CA7CC0F2B77AC93008E587F /* ZipArchive in Frameworks */,
-				8CA7CC072B77AC93008E587F /* Alamofire in Frameworks */,
 				8CA7CCDF2B77BB5A008E587F /* AlertKit in Frameworks */,
 				8CA7CC192B77AC93008E587F /* SDWebImagePDFCoder in Frameworks */,
 				8CA7CC172B77AC93008E587F /* SDWebImageSVGCoder in Frameworks */,
-				8CA7CC232B77AC93008E587F /* DarockKit in Frameworks */,
 				8CC3D5632B7CCE57005636DC /* ScreenshotableView in Frameworks */,
 				8CA370D42B82690700CE0E9E /* Mixpanel in Frameworks */,
 				8CA7CC092B77AC93008E587F /* Marquee in Frameworks */,
 				8C0557DF2B791B84009D9CD0 /* AZVideoPlayer in Frameworks */,
 				8CA7CC0B2B77AC93008E587F /* SwiftDate in Frameworks */,
 				8CA7CC1F2B77AC93008E587F /* Dynamic in Frameworks */,
-				8CA7CC212B77AC93008E587F /* SwiftyJSON in Frameworks */,
 				8CA7CC1B2B77AC93008E587F /* SwiftSoup in Frameworks */,
 				8CA3889F2B78B1E300F5F91F /* AZVideoPlayer in Frameworks */,
 				8CA388992B789A0300F5F91F /* AZVideoPlayer in Frameworks */,
+				8CB176AE2BB8420B00CEC05C /* DarockKit in Frameworks */,
 				8CA7CC1D2B77AC93008E587F /* CachedAsyncImage in Frameworks */,
 				8CA7CC152B77AC93008E587F /* SDWebImageWebPCoder in Frameworks */,
 				8CA7CC112B77AC93008E587F /* EFQRCode in Frameworks */,
@@ -572,20 +556,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CA7CBF12B77AC8A008E587F /* SDWebImageSwiftUI in Frameworks */,
+				8CB176A72BB8189300CEC05C /* SDWebImageSwiftUI in Frameworks */,
 				8CA7CBED2B77AC8A008E587F /* ZipArchive in Frameworks */,
-				8CA7CBE52B77AC8A008E587F /* Alamofire in Frameworks */,
 				8CA7CBF72B77AC8A008E587F /* SDWebImagePDFCoder in Frameworks */,
 				8CA7CBF52B77AC8A008E587F /* SDWebImageSVGCoder in Frameworks */,
-				8CA7CC012B77AC8A008E587F /* DarockKit in Frameworks */,
 				8CA370D62B82691100CE0E9E /* Mixpanel in Frameworks */,
 				8CA7CBE72B77AC8A008E587F /* Marquee in Frameworks */,
 				8CA7CBE92B77AC8A008E587F /* SwiftDate in Frameworks */,
 				8CA7CBFD2B77AC8A008E587F /* Dynamic in Frameworks */,
-				8CA7CBFF2B77AC8A008E587F /* SwiftyJSON in Frameworks */,
 				8CA7CBF92B77AC8A008E587F /* SwiftSoup in Frameworks */,
 				8CA7CBEB2B77AC8A008E587F /* SFSymbol in Frameworks */,
 				8CA7CBFB2B77AC8A008E587F /* CachedAsyncImage in Frameworks */,
+				8CB176B02BB8421300CEC05C /* DarockKit in Frameworks */,
 				8CA7CBF32B77AC8A008E587F /* SDWebImageWebPCoder in Frameworks */,
 				8CA7CBEF2B77AC8A008E587F /* EFQRCode in Frameworks */,
 			);
@@ -595,18 +577,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CC5B7212B8742D300BAD89E /* SDWebImageSwiftUI in Frameworks */,
 				8CC5B71D2B8742D300BAD89E /* ZipArchive in Frameworks */,
-				8CC5B7152B8742D300BAD89E /* Alamofire in Frameworks */,
 				8CC5B7272B8742D300BAD89E /* SDWebImagePDFCoder in Frameworks */,
 				8CC5B7252B8742D300BAD89E /* SDWebImageSVGCoder in Frameworks */,
-				8CC5B7312B8742D300BAD89E /* DarockKit in Frameworks */,
 				8CC5B7172B8742D300BAD89E /* Marquee in Frameworks */,
 				8CC5B7192B8742D300BAD89E /* SwiftDate in Frameworks */,
 				8CC5B7332B8742D300BAD89E /* AlertKit in Frameworks */,
 				8CC5B7372B8742D300BAD89E /* ScreenshotableView in Frameworks */,
 				8CC5B72D2B8742D300BAD89E /* Dynamic in Frameworks */,
-				8CC5B72F2B8742D300BAD89E /* SwiftyJSON in Frameworks */,
 				8CC5B7392B8742D300BAD89E /* Mixpanel in Frameworks */,
 				8CC5B73B2B8742D300BAD89E /* AlertToast in Frameworks */,
 				8CC5B7292B8742D300BAD89E /* SwiftSoup in Frameworks */,
@@ -984,7 +962,6 @@
 			);
 			name = "MeowBili Vision App";
 			packageProductDependencies = (
-				8CA371352B83BF9400CE0E9E /* Alamofire */,
 				8CA371372B83BF9400CE0E9E /* Marquee */,
 				8CA371392B83BF9400CE0E9E /* SwiftDate */,
 				8CA3713B2B83BF9400CE0E9E /* SFSymbol */,
@@ -993,8 +970,6 @@
 				8CA371412B83BF9400CE0E9E /* SwiftSoup */,
 				8CA371432B83BF9400CE0E9E /* CachedAsyncImage */,
 				8CA371452B83BF9400CE0E9E /* Dynamic */,
-				8CA371472B83BF9400CE0E9E /* SwiftyJSON */,
-				8CA371492B83BF9400CE0E9E /* DarockKit */,
 				8CA3714B2B83BF9400CE0E9E /* AZVideoPlayer */,
 				8CA3714D2B83BF9400CE0E9E /* Mixpanel */,
 			);
@@ -1021,20 +996,16 @@
 			);
 			name = MeowBili;
 			packageProductDependencies = (
-				8CA7CC062B77AC93008E587F /* Alamofire */,
 				8CA7CC082B77AC93008E587F /* Marquee */,
 				8CA7CC0A2B77AC93008E587F /* SwiftDate */,
 				8CA7CC0E2B77AC93008E587F /* ZipArchive */,
 				8CA7CC102B77AC93008E587F /* EFQRCode */,
-				8CA7CC122B77AC93008E587F /* SDWebImageSwiftUI */,
 				8CA7CC142B77AC93008E587F /* SDWebImageWebPCoder */,
 				8CA7CC162B77AC93008E587F /* SDWebImageSVGCoder */,
 				8CA7CC182B77AC93008E587F /* SDWebImagePDFCoder */,
 				8CA7CC1A2B77AC93008E587F /* SwiftSoup */,
 				8CA7CC1C2B77AC93008E587F /* CachedAsyncImage */,
 				8CA7CC1E2B77AC93008E587F /* Dynamic */,
-				8CA7CC202B77AC93008E587F /* SwiftyJSON */,
-				8CA7CC222B77AC93008E587F /* DarockKit */,
 				8CA7CCDE2B77BB5A008E587F /* AlertKit */,
 				8CA388982B789A0300F5F91F /* AZVideoPlayer */,
 				8CA3889E2B78B1E300F5F91F /* AZVideoPlayer */,
@@ -1042,6 +1013,8 @@
 				8CC3D5622B7CCE57005636DC /* ScreenshotableView */,
 				8CA370D32B82690700CE0E9E /* Mixpanel */,
 				8CA370DE2B827AAD00CE0E9E /* AlertToast */,
+				8CB176A42BB8188700CEC05C /* SDWebImageSwiftUI */,
+				8CB176AD2BB8420B00CEC05C /* DarockKit */,
 			);
 			productName = MeowBili;
 			productReference = 8CA7CBC02B77AC4A008E587F /* MeowBili.app */;
@@ -1062,22 +1035,20 @@
 			);
 			name = "MeowBili Watch App";
 			packageProductDependencies = (
-				8CA7CBE42B77AC8A008E587F /* Alamofire */,
 				8CA7CBE62B77AC8A008E587F /* Marquee */,
 				8CA7CBE82B77AC8A008E587F /* SwiftDate */,
 				8CA7CBEA2B77AC8A008E587F /* SFSymbol */,
 				8CA7CBEC2B77AC8A008E587F /* ZipArchive */,
 				8CA7CBEE2B77AC8A008E587F /* EFQRCode */,
-				8CA7CBF02B77AC8A008E587F /* SDWebImageSwiftUI */,
 				8CA7CBF22B77AC8A008E587F /* SDWebImageWebPCoder */,
 				8CA7CBF42B77AC8A008E587F /* SDWebImageSVGCoder */,
 				8CA7CBF62B77AC8A008E587F /* SDWebImagePDFCoder */,
 				8CA7CBF82B77AC8A008E587F /* SwiftSoup */,
 				8CA7CBFA2B77AC8A008E587F /* CachedAsyncImage */,
 				8CA7CBFC2B77AC8A008E587F /* Dynamic */,
-				8CA7CBFE2B77AC8A008E587F /* SwiftyJSON */,
-				8CA7CC002B77AC8A008E587F /* DarockKit */,
 				8CA370D52B82691100CE0E9E /* Mixpanel */,
+				8CB176A62BB8189300CEC05C /* SDWebImageSwiftUI */,
+				8CB176AF2BB8421300CEC05C /* DarockKit */,
 			);
 			productName = "MeowBili Watch App";
 			productReference = 8CA7CBCF2B77AC4C008E587F /* 喵哩喵哩.app */;
@@ -1097,21 +1068,17 @@
 			);
 			name = "MeowBili Mac App";
 			packageProductDependencies = (
-				8CC5B7142B8742D300BAD89E /* Alamofire */,
 				8CC5B7162B8742D300BAD89E /* Marquee */,
 				8CC5B7182B8742D300BAD89E /* SwiftDate */,
 				8CC5B71A2B8742D300BAD89E /* SFSymbol */,
 				8CC5B71C2B8742D300BAD89E /* ZipArchive */,
 				8CC5B71E2B8742D300BAD89E /* EFQRCode */,
-				8CC5B7202B8742D300BAD89E /* SDWebImageSwiftUI */,
 				8CC5B7222B8742D300BAD89E /* SDWebImageWebPCoder */,
 				8CC5B7242B8742D300BAD89E /* SDWebImageSVGCoder */,
 				8CC5B7262B8742D300BAD89E /* SDWebImagePDFCoder */,
 				8CC5B7282B8742D300BAD89E /* SwiftSoup */,
 				8CC5B72A2B8742D300BAD89E /* CachedAsyncImage */,
 				8CC5B72C2B8742D300BAD89E /* Dynamic */,
-				8CC5B72E2B8742D300BAD89E /* SwiftyJSON */,
-				8CC5B7302B8742D300BAD89E /* DarockKit */,
 				8CC5B7322B8742D300BAD89E /* AlertKit */,
 				8CC5B7342B8742D300BAD89E /* AZVideoPlayer */,
 				8CC5B7362B8742D300BAD89E /* ScreenshotableView */,
@@ -1188,26 +1155,24 @@
 			);
 			mainGroup = B44689C32B4FC15A002CCEB2;
 			packageReferences = (
-				B4468A6B2B4FC2C8002CCEB2 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				B4468A6E2B4FC5E7002CCEB2 /* XCRemoteSwiftPackageReference "Marquee" */,
 				B4468A712B4FC5F1002CCEB2 /* XCRemoteSwiftPackageReference "SwiftDate" */,
 				B4468A742B4FC602002CCEB2 /* XCRemoteSwiftPackageReference "SFSymbol" */,
 				B4468A792B4FC618002CCEB2 /* XCRemoteSwiftPackageReference "ZipArchive" */,
 				B4468A7E2B4FC675002CCEB2 /* XCRemoteSwiftPackageReference "EFQRCode" */,
-				B4468A7F2B4FC681002CCEB2 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				B4468A802B4FC68C002CCEB2 /* XCRemoteSwiftPackageReference "SDWebImageWebPCoder" */,
 				B4468A812B4FC697002CCEB2 /* XCRemoteSwiftPackageReference "SDWebImageSVGCoder" */,
 				B4468A822B4FC6A1002CCEB2 /* XCRemoteSwiftPackageReference "SDWebImagePDFCoder" */,
 				B4468A832B4FC6B1002CCEB2 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				B4468A842B4FC6BE002CCEB2 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 				B4468A852B4FC6C6002CCEB2 /* XCRemoteSwiftPackageReference "Dynamic" */,
-				B4468A8A2B4FC85A002CCEB2 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
-				B4468A8D2B4FC8AC002CCEB2 /* XCRemoteSwiftPackageReference "DarockKit" */,
 				8CA7CCDD2B77BB5A008E587F /* XCRemoteSwiftPackageReference "AlertKit" */,
 				8C0557DD2B791B84009D9CD0 /* XCRemoteSwiftPackageReference "AZVideoPlayer" */,
 				8CC3D5612B7CCE57005636DC /* XCRemoteSwiftPackageReference "ScreenshotableView" */,
 				8CA370D22B82690700CE0E9E /* XCRemoteSwiftPackageReference "mixpanel-swift" */,
 				8CA370DD2B827AAD00CE0E9E /* XCRemoteSwiftPackageReference "AlertToast" */,
+				8CB176A32BB8188600CEC05C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				8CB176AC2BB8420A00CEC05C /* XCRemoteSwiftPackageReference "DarockKit" */,
 			);
 			productRefGroup = B44689CB2B4FC15A002CCEB2 /* Products */;
 			projectDirPath = "";
@@ -1651,7 +1616,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 915;
+				CURRENT_PROJECT_VERSION = 938;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -1682,7 +1647,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 915;
+				CURRENT_PROJECT_VERSION = 938;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -1778,7 +1743,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBiliAlternative.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 915;
+				CURRENT_PROJECT_VERSION = 938;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				ENABLE_PREVIEWS = YES;
@@ -1822,7 +1787,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 915;
+				CURRENT_PROJECT_VERSION = 938;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				ENABLE_PREVIEWS = YES;
@@ -1861,7 +1826,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 915;
+				CURRENT_PROJECT_VERSION = 938;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1897,7 +1862,7 @@
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 915;
+				CURRENT_PROJECT_VERSION = 938;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1926,7 +1891,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 915;
+				CURRENT_PROJECT_VERSION = 938;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1950,7 +1915,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 915;
+				CURRENT_PROJECT_VERSION = 938;
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -2016,7 +1981,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 915;
+				CURRENT_PROJECT_VERSION = 938;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2051,7 +2016,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 915;
+				CURRENT_PROJECT_VERSION = 938;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2088,7 +2053,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 915;
+				CURRENT_PROJECT_VERSION = 938;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2135,7 +2100,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 915;
+				CURRENT_PROJECT_VERSION = 938;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2179,7 +2144,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 915;
+				CURRENT_PROJECT_VERSION = 938;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2215,7 +2180,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 915;
+				CURRENT_PROJECT_VERSION = 938;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2254,7 +2219,7 @@
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 915;
+				CURRENT_PROJECT_VERSION = 938;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -2287,7 +2252,7 @@
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 915;
+				CURRENT_PROJECT_VERSION = 938;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -2316,7 +2281,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 915;
+				CURRENT_PROJECT_VERSION = 938;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -2339,7 +2304,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 915;
+				CURRENT_PROJECT_VERSION = 938;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -2603,20 +2568,28 @@
 				minimumVersion = 5.1.8;
 			};
 		};
+		8CB176A32BB8188600CEC05C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.7;
+			};
+		};
+		8CB176AC2BB8420A00CEC05C /* XCRemoteSwiftPackageReference "DarockKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Darock-Studio/DarockKit";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		8CC3D5612B7CCE57005636DC /* XCRemoteSwiftPackageReference "ScreenshotableView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RickeyBoy/ScreenshotableView";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
-			};
-		};
-		B4468A6B2B4FC2C8002CCEB2 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.8.1;
 			};
 		};
 		B4468A6E2B4FC5E7002CCEB2 /* XCRemoteSwiftPackageReference "Marquee" */ = {
@@ -2657,14 +2630,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 6.2.2;
-			};
-		};
-		B4468A7F2B4FC681002CCEB2 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.2.6;
 			};
 		};
 		B4468A802B4FC68C002CCEB2 /* XCRemoteSwiftPackageReference "SDWebImageWebPCoder" */ = {
@@ -2715,22 +2680,6 @@
 				minimumVersion = 1.2.0;
 			};
 		};
-		B4468A8A2B4FC85A002CCEB2 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
-			};
-		};
-		B4468A8D2B4FC8AC002CCEB2 /* XCRemoteSwiftPackageReference "DarockKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Darock-Studio/DarockKit";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2753,11 +2702,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8CA370DD2B827AAD00CE0E9E /* XCRemoteSwiftPackageReference "AlertToast" */;
 			productName = AlertToast;
-		};
-		8CA371352B83BF9400CE0E9E /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A6B2B4FC2C8002CCEB2 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
 		};
 		8CA371372B83BF9400CE0E9E /* Marquee */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2799,16 +2743,6 @@
 			package = B4468A852B4FC6C6002CCEB2 /* XCRemoteSwiftPackageReference "Dynamic" */;
 			productName = Dynamic;
 		};
-		8CA371472B83BF9400CE0E9E /* SwiftyJSON */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A8A2B4FC85A002CCEB2 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
-			productName = SwiftyJSON;
-		};
-		8CA371492B83BF9400CE0E9E /* DarockKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A8D2B4FC8AC002CCEB2 /* XCRemoteSwiftPackageReference "DarockKit" */;
-			productName = DarockKit;
-		};
 		8CA3714B2B83BF9400CE0E9E /* AZVideoPlayer */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8C0557DD2B791B84009D9CD0 /* XCRemoteSwiftPackageReference "AZVideoPlayer" */;
@@ -2826,11 +2760,6 @@
 		8CA3889E2B78B1E300F5F91F /* AZVideoPlayer */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AZVideoPlayer;
-		};
-		8CA7CBE42B77AC8A008E587F /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A6B2B4FC2C8002CCEB2 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
 		};
 		8CA7CBE62B77AC8A008E587F /* Marquee */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2856,11 +2785,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B4468A7E2B4FC675002CCEB2 /* XCRemoteSwiftPackageReference "EFQRCode" */;
 			productName = EFQRCode;
-		};
-		8CA7CBF02B77AC8A008E587F /* SDWebImageSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A7F2B4FC681002CCEB2 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
-			productName = SDWebImageSwiftUI;
 		};
 		8CA7CBF22B77AC8A008E587F /* SDWebImageWebPCoder */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2892,21 +2816,6 @@
 			package = B4468A852B4FC6C6002CCEB2 /* XCRemoteSwiftPackageReference "Dynamic" */;
 			productName = Dynamic;
 		};
-		8CA7CBFE2B77AC8A008E587F /* SwiftyJSON */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A8A2B4FC85A002CCEB2 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
-			productName = SwiftyJSON;
-		};
-		8CA7CC002B77AC8A008E587F /* DarockKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A8D2B4FC8AC002CCEB2 /* XCRemoteSwiftPackageReference "DarockKit" */;
-			productName = DarockKit;
-		};
-		8CA7CC062B77AC93008E587F /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A6B2B4FC2C8002CCEB2 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
-		};
 		8CA7CC082B77AC93008E587F /* Marquee */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B4468A6E2B4FC5E7002CCEB2 /* XCRemoteSwiftPackageReference "Marquee" */;
@@ -2926,11 +2835,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B4468A7E2B4FC675002CCEB2 /* XCRemoteSwiftPackageReference "EFQRCode" */;
 			productName = EFQRCode;
-		};
-		8CA7CC122B77AC93008E587F /* SDWebImageSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A7F2B4FC681002CCEB2 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
-			productName = SDWebImageSwiftUI;
 		};
 		8CA7CC142B77AC93008E587F /* SDWebImageWebPCoder */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2962,30 +2866,35 @@
 			package = B4468A852B4FC6C6002CCEB2 /* XCRemoteSwiftPackageReference "Dynamic" */;
 			productName = Dynamic;
 		};
-		8CA7CC202B77AC93008E587F /* SwiftyJSON */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A8A2B4FC85A002CCEB2 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
-			productName = SwiftyJSON;
-		};
-		8CA7CC222B77AC93008E587F /* DarockKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A8D2B4FC8AC002CCEB2 /* XCRemoteSwiftPackageReference "DarockKit" */;
-			productName = DarockKit;
-		};
 		8CA7CCDE2B77BB5A008E587F /* AlertKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8CA7CCDD2B77BB5A008E587F /* XCRemoteSwiftPackageReference "AlertKit" */;
 			productName = AlertKit;
 		};
+		8CB176A42BB8188700CEC05C /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8CB176A32BB8188600CEC05C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+		8CB176A62BB8189300CEC05C /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8CB176A32BB8188600CEC05C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+		8CB176AD2BB8420B00CEC05C /* DarockKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8CB176AC2BB8420A00CEC05C /* XCRemoteSwiftPackageReference "DarockKit" */;
+			productName = DarockKit;
+		};
+		8CB176AF2BB8421300CEC05C /* DarockKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8CB176AC2BB8420A00CEC05C /* XCRemoteSwiftPackageReference "DarockKit" */;
+			productName = DarockKit;
+		};
 		8CC3D5622B7CCE57005636DC /* ScreenshotableView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8CC3D5612B7CCE57005636DC /* XCRemoteSwiftPackageReference "ScreenshotableView" */;
 			productName = ScreenshotableView;
-		};
-		8CC5B7142B8742D300BAD89E /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A6B2B4FC2C8002CCEB2 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
 		};
 		8CC5B7162B8742D300BAD89E /* Marquee */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -3011,11 +2920,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B4468A7E2B4FC675002CCEB2 /* XCRemoteSwiftPackageReference "EFQRCode" */;
 			productName = EFQRCode;
-		};
-		8CC5B7202B8742D300BAD89E /* SDWebImageSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A7F2B4FC681002CCEB2 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
-			productName = SDWebImageSwiftUI;
 		};
 		8CC5B7222B8742D300BAD89E /* SDWebImageWebPCoder */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -3046,16 +2950,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B4468A852B4FC6C6002CCEB2 /* XCRemoteSwiftPackageReference "Dynamic" */;
 			productName = Dynamic;
-		};
-		8CC5B72E2B8742D300BAD89E /* SwiftyJSON */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A8A2B4FC85A002CCEB2 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
-			productName = SwiftyJSON;
-		};
-		8CC5B7302B8742D300BAD89E /* DarockKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A8D2B4FC8AC002CCEB2 /* XCRemoteSwiftPackageReference "DarockKit" */;
-			productName = DarockKit;
 		};
 		8CC5B7322B8742D300BAD89E /* AlertKit */ = {
 			isa = XCSwiftPackageProductDependency;

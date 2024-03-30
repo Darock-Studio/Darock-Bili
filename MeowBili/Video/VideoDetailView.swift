@@ -654,24 +654,14 @@ struct VideoDetailView: View {
                     .containerBackground(for: .navigation) {
                         if !isInLowBatteryMode {
                             ZStack {
-                                CachedAsyncImage(url: URL(string: videoDetails["Pic"]!)) { phase in
-                                    switch phase {
-                                    case .empty:
-                                        Color.black
-                                    case .success(let image):
-                                        image
-                                            .onAppear {
-                                                backgroundPicOpacity = 1.0
-                                            }
-                                    case .failure:
-                                        Color.black
-                                    @unknown default:
-                                        Color.black
+                                WebImage(url: URL(string: videoDetails["Pic"]!))
+                                    .onSuccess { _, _, _ in
+                                        backgroundPicOpacity = 1.0
                                     }
-                                }
-                                .blur(radius: 20)
-                                .opacity(backgroundPicOpacity)
-                                .animation(.easeOut(duration: 1.2), value: backgroundPicOpacity)
+                                    .resizable()
+                                    .blur(radius: 20)
+                                    .opacity(backgroundPicOpacity)
+                                    .animation(.easeOut(duration: 1.2), value: backgroundPicOpacity)
                                 Color.black
                                     .opacity(0.4)
                             }
@@ -699,7 +689,7 @@ struct VideoDetailView: View {
                     CommentsView(oid: String(videoDetails["BV"]!.dropFirst().dropFirst()))
                         .containerBackground(for: .navigation) {
                             ZStack {
-                                CachedAsyncImage(url: URL(string: videoDetails["Pic"]!))
+                                WebImage(url: URL(string: videoDetails["Pic"]!))
                                     .blur(radius: 20)
                                 Color.black
                                     .opacity(0.4)
@@ -1309,20 +1299,14 @@ struct VideoDetailView: View {
                     if owner["ID"] != nil {
                         NavigationLink(destination: { UserDetailView(uid: owner["ID"]!) }, label: {
                             HStack {
-                                CachedAsyncImage(url: URL(string: owner["Face"]! + "@100w")) { phase in
-                                    switch phase {
-                                    case .empty:
-                                        Circle()
-                                            .redacted(reason: .placeholder)
-                                    case .success(let image):
-                                        image.resizable()
-                                    case .failure(let error):
+                                WebImage(url: URL(string: owner["Face"]! + "@100w"))
+                                    .resizable()
+                                    .placeholder {
                                         Circle()
                                             .redacted(reason: .placeholder)
                                     }
-                                }
-                                .frame(width: 40, height: 40)
-                                .clipShape(Circle())
+                                    .frame(width: 40, height: 40)
+                                    .clipShape(Circle())
                                 VStack {
                                     HStack {
                                         Text(owner["Name"]!)

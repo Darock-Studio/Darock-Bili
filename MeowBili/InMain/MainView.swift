@@ -70,7 +70,8 @@ struct MainView: View {
                             mainTabSelection = 2
                         }, label: {
                             if dedeUserID != "" && userFaceUrl != "" {
-                                CachedAsyncImage(url: URL(string: userFaceUrl + "@30w"))
+                                WebImage(url: URL(string: userFaceUrl + "@60w"))
+                                    .resizable()
                                     .frame(width: 30)
                                     .clipShape(Circle())
                                     .matchedGeometryEffect(id: "image", in: imageAnimation)
