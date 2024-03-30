@@ -100,11 +100,11 @@ jobs:
           sed -i '' "s|.*|${CI_TAG}|" ./SemanticVersion.drkdatas
 
       - name: Resolve Package Dependencies
-        run: xcodebuild -resolvePackageDependencies -project ./DarockBili.xcodeproj -scheme MeowBili
+        run: xcodebuild -resolvePackageDependencies -project ./DarockBili.xcodeproj -scheme MeowBili -configuration Alternative
 
       - name: Archive DarockBili App
         run: |
-          xcodebuild archive -project ./DarockBili.xcodeproj -scheme 'Alternative Destribution' -archivePath ./build.xcarchive -IDEPostProgressNotifications=YES CODE_SIGN_IDENTITY=- AD_HOC_CODE_SIGNING_ALLOWED=YES CODE_SIGN_STYLE=Automatic DEVELOPMENT_TEAM=B38QUJMY47 COMPILER_INDEX_STORE_ENABLE=NO
+          xcodebuild archive -project ./DarockBili.xcodeproj -scheme 'Alternative Destribution' -archivePath ./build.xcarchive -IDEPostProgressNotifications=YES CODE_SIGN_IDENTITY=- AD_HOC_CODE_SIGNING_ALLOWED=YES CODE_SIGN_STYLE=Automatic DEVELOPMENT_TEAM=B38QUJMY47 COMPILER_INDEX_STORE_ENABLE=NO -configuration Alternative -quiet
 
       - name: Export IPA File
         run: |
