@@ -4,13 +4,11 @@
 <dict>
 	<key>aps-environment</key>
 	<string>development</string>
-	<key>com.apple.developer.journal.allow</key>
-	<array>
-		<string>suggestions</string>
-	</array>
-	<key>com.apple.developer.kernel.increased-memory-limit</key>
+	<key>com.apple.developer.aps-environment</key>
+	<string>development</string>
+	<key>com.apple.security.app-sandbox</key>
 	<true/>
-	<key>com.apple.developer.siri</key>
+	<key>com.apple.security.network.client</key>
 	<true/>
 </dict>
 </plist>

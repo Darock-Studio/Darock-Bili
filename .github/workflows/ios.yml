@@ -1,13 +1,7 @@
 name: Meowbili iDevice Workflow
 
 on:
-  push:
-    branches: [ "main", "2024" ]
-    paths-ignore:
-      - '.github/workflows/*'
-      - '!.github/workflows/ios.yml'
-      - 'doc/**'
-      - 'Artwork/**'
+  workflow_dispatch
 
 jobs:
   prepare:
