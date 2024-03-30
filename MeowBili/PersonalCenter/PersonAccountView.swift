@@ -178,28 +178,18 @@ struct PersonAccountView: View {
                         NavigationLink(destination: { UserDetailView(uid: dedeUserID) }, label: {
                             HStack {
                                 if userFaceUrl != "" {
-                                    CachedAsyncImage(url: URL(string: userFaceUrl)) { phase in
-                                        switch phase {
-                                        case .empty:
-                                            Circle()
-                                                .redacted(reason: .placeholder)
-                                        case .success(let image):
-                                            image.resizable()
-                                        case .failure:
-                                            Circle()
-                                                .redacted(reason: .placeholder)
-                                        @unknown default:
+                                    WebImage(url: URL(string: userFaceUrl))
+                                        .resizable()
+                                        .placeholder {
                                             Circle()
                                                 .redacted(reason: .placeholder)
                                         }
-                                    }
                                     #if !os(watchOS)
-                                    .frame(width: 60, height: 60)
+                                        .frame(width: 60, height: 60)
                                     #else
-                                    .frame(width: 30, height: 30)
+                                        .frame(width: 30, height: 30)
                                     #endif
-                                    .clipShape(Circle())
-                                    .matchedGeometryEffect(id: "image", in: imageAnimation)
+                                        .clipShape(Circle())
                                 } else {
                                     Image("Placeholder")
                                         .resizable()

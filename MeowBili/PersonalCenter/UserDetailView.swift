@@ -72,17 +72,14 @@ struct UserDetailView: View {
                             .frame(height: 20)
                         HStack {
                             Spacer()
-                            CachedAsyncImage(url: URL(string: userFaceUrl)) { phase in
-                                if let image = phase.image {
-                                    image
-                                        .resizable()
-                                } else {
+                            WebImage(url: URL(string: userFaceUrl))
+                                .resizable()
+                                .placeholder {
                                     Circle()
                                         .redacted(reason: .placeholder)
                                 }
-                            }
-                            .clipShape(Circle())
-                            .frame(width: 150, height: 150)
+                                .clipShape(Circle())
+                                .frame(width: 150, height: 150)
                             Spacer()
                         }
                         HStack {
@@ -701,7 +698,8 @@ struct UserDetailView: View {
                 HStack {
                     Spacer()
                     if userFaceUrl != "" {
-                        CachedAsyncImage(url: URL(string: userFaceUrl + "@50w_50h"))
+                        WebImage(url: URL(string: userFaceUrl + "@100w_100h"))
+                            .resizable()
                             .cornerRadius(100)
                             .frame(width: 50, height: 50)
                     }
