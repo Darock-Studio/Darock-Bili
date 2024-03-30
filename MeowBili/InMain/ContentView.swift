@@ -20,7 +20,7 @@ import SwiftUI
 import DarockKit
 import Alamofire
 import SwiftyJSON
-import CachedAsyncImage
+import SDWebImageSwiftUI
 
 struct ContentView: View {
     public static var nowAppVer = "1.0.0|106"
@@ -51,26 +51,15 @@ struct ContentView: View {
                                 Button(action: {
                                     mainTabSelection = 2
                                 }, label: {
-                                    CachedAsyncImage(url: URL(string: userFaceUrl)) { phase in
-                                        switch phase {
-                                        case .empty:
-                                            Circle()
-                                                .frame(width: 35, height: 35)
-                                                .redacted(reason: .placeholder)
-                                        case .success(let image):
-                                            image.resizable()
-                                        case .failure:
-                                            Circle()
-                                                .frame(width: 35, height: 35)
-                                                .redacted(reason: .placeholder)
-                                        @unknown default:
+                                    WebImage(url: URL(string: userFaceUrl))
+                                        .resizable()
+                                        .placeholder {
                                             Circle()
                                                 .frame(width: 35, height: 35)
                                                 .redacted(reason: .placeholder)
                                         }
-                                    }
-                                    .frame(width: 35, height: 35)
-                                    .clipShape(Circle())
+                                        .frame(width: 35, height: 35)
+                                        .clipShape(Circle())
                                 })
                                 .buttonStyle(.borderless)
                             }

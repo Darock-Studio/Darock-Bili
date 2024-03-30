@@ -23,7 +23,7 @@ import DarockKit
 import Alamofire
 import MediaPlayer
 import AVFoundation
-import CachedAsyncImage
+import SDWebImageSwiftUI
 
 struct AudioPlayerView: View {
     var videoDetails: [String: String]
@@ -123,24 +123,14 @@ struct AudioPlayerView: View {
                 }
                 .containerBackground(for: .navigation) {
                     ZStack {
-                        CachedAsyncImage(url: URL(string: videoDetails["Pic"]!)) { phase in
-                            switch phase {
-                            case .empty:
-                                Color.black
-                            case .success(let image):
-                                image
-                                    .onAppear {
-                                        backgroundPicOpacity = 1.0
-                                    }
-                            case .failure:
-                                Color.black
-                            @unknown default:
-                                Color.black
+                        WebImage(url: URL(string: videoDetails["Pic"]!))
+                            .resizable()
+                            .onSuccess { _, _, _ in
+                                backgroundPicOpacity = 1.0
                             }
-                        }
-                        .blur(radius: 20)
-                        .opacity(backgroundPicOpacity)
-                        .animation(.easeOut(duration: 1.2), value: backgroundPicOpacity)
+                            .blur(radius: 20)
+                            .opacity(backgroundPicOpacity)
+                            .animation(.easeOut(duration: 1.2), value: backgroundPicOpacity)
                         Color.black
                             .opacity(0.4)
                     }

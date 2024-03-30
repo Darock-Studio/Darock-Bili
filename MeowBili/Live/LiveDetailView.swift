@@ -193,26 +193,15 @@ struct LiveDetailView: View {
                         .containerBackground(for: .navigation) {
                             if !isInLowBatteryMode {
                                 ZStack {
-                                    CachedAsyncImage(url: URL(string: liveDetails["Cover"]!)) { phase in
-                                        switch phase {
-                                        case .empty:
-                                            Color.black
-                                        case .success(let image):
-                                            image
-                                                .resizable()
-                                                .scaledToFill()
-                                                .onAppear {
-                                                    backgroundPicOpacity = 1.0
-                                                }
-                                        case .failure:
-                                            Color.black
-                                        @unknown default:
-                                            Color.black
+                                    WebImage(url: URL(string: liveDetails["Cover"]!))
+                                        .resizable()
+                                        .onSuccess { _, _, _ in
+                                            backgroundPicOpacity = 1.0
                                         }
-                                    }
-                                    .blur(radius: 20)
-                                    .opacity(backgroundPicOpacity)
-                                    .animation(.easeOut(duration: 1.2), value: backgroundPicOpacity)
+                                        .scaledToFill()
+                                        .blur(radius: 20)
+                                        .opacity(backgroundPicOpacity)
+                                        .animation(.easeOut(duration: 1.2), value: backgroundPicOpacity)
                                     Color.black
                                         .opacity(0.4)
                                 }
