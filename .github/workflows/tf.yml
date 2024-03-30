@@ -118,4 +118,5 @@ jobs:
           
       - name: Upload to App Store Connect
         run: |
-          xcrun altool --upload-app -f ./DarockBili.ipa -t ios --apiKey $ASCAPI_KEY_ID --apiIssuer $ASCAPI_ISSUER_ID
+          ls
+          xcrun altool --upload-app -f ./MeowBili.ipa -t ios --apiKey $ASCAPI_KEY_ID --apiIssuer $ASCAPI_ISSUER_ID
