@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Build & Deploy
-    runs-on: macos-13
+    runs-on: macos-14
     permissions:
       contents: write
       pull-requests: write
@@ -29,7 +29,7 @@ jobs:
           ref: ${{ inputs.psha }}
         
       - name: Set Xcode Version
-        run: sudo xcode-select -s /Applications/Xcode_15.0.app
+        run: sudo xcode-select -s /Applications/Xcode_15.2.app
 
       - name: Prepare Version Folder
         run: mkdir vers
@@ -100,7 +100,7 @@ jobs:
           sed -i '' "s|.*|${CI_TAG}|" ./SemanticVersion.drkdatas
 
       - name: Resolve Package Dependencies
-        run: xcodebuild -resolvePackageDependencies -project ./DarockBili.xcodeproj -scheme MeowBili -configuration Alternative
+        run: xcodebuild -resolvePackageDependencies -project ./DarockBili.xcodeproj -scheme 'Alternative Destribution' -configuration Alternative
 
       - name: Archive DarockBili App
         run: |
