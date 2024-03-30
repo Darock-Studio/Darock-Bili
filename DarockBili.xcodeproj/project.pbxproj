@@ -417,7 +417,6 @@
 		8C617F532B92334B000A3687 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C72E32A2B6605B80087486E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */ = {isa = PBXFileReference; lastKnownFileType = text; path = SemanticVersion.drkdatas; sourceTree = "<group>"; };
-		8C82F81B2BB6F9EF009AEFD2 /* AlternativeLinecom.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AlternativeLinecom.entitlements; sourceTree = "<group>"; };
 		8C82F8272BB70AA7009AEFD2 /* company-export.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "company-export.yml"; sourceTree = "<group>"; };
 		8C82F8282BB70AA7009AEFD2 /* ios.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = ios.yml; sourceTree = "<group>"; };
 		8C82F8292BB70AA7009AEFD2 /* ssh-debug.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "ssh-debug.yml"; sourceTree = "<group>"; };
@@ -491,6 +490,7 @@
 		8CB0D0232B88CEC40057EF1C /* ci_post_xcodebuild.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_xcodebuild.sh; sourceTree = "<group>"; };
 		8CB0D0242B88D20F0057EF1C /* ci_pre_xcodebuild.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_pre_xcodebuild.sh; sourceTree = "<group>"; };
 		8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */ = {isa = PBXFileReference; lastKnownFileType = text; path = CurrentChannel.drkdatac; sourceTree = "<group>"; };
+		8CB1769F2BB7E41C00CEC05C /* MeowBiliAlternative.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeowBiliAlternative.entitlements; sourceTree = "<group>"; };
 		8CBFF1272B86188D00350E0F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		8CC3D5572B7CA209005636DC /* UserDynamicListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDynamicListView.swift; sourceTree = "<group>"; };
 		8CC3D5592B7CB95D005636DC /* NowPlayingExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NowPlayingExtension.m; sourceTree = "<group>"; };
@@ -678,10 +678,10 @@
 		8CA7CBC12B77AC4A008E587F /* MeowBili */ = {
 			isa = PBXGroup;
 			children = (
+				8CB1769F2BB7E41C00CEC05C /* MeowBiliAlternative.entitlements */,
 				8C0557E02B7A0480009D9CD0 /* MeowBili.entitlements */,
 				8CA371332B83BE7D00CE0E9E /* MeowBili Vision App.entitlements */,
 				8CC5B6DB2B873ED400BAD89E /* MeowBili Mac App.entitlements */,
-				8C82F81B2BB6F9EF009AEFD2 /* AlternativeLinecom.entitlements */,
 				8CA7CC632B77AD5B008E587F /* Info.plist */,
 				8CC5B6DC2B873EF600BAD89E /* MeowBili-Mac-App-Info.plist */,
 				8CA7CC752B77AF4B008E587F /* MeowBili-Bridging-Header.h */,
@@ -1776,7 +1776,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
+				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBiliAlternative.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 914;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
