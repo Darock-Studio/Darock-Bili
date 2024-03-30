@@ -98,6 +98,7 @@ jobs:
           CI_TAG="${parts[$last_index]}"
           sed -i '' "s|.*|Linecom|" ./CurrentChannel.drkdatac
           sed -i '' "s|.*|${CI_TAG}|" ./SemanticVersion.drkdatas
+          rm "/Users/runner/work/Darock-Bili/Darock-Bili/DarockBili.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
 
       - name: Resolve Package Dependencies
         run: xcodebuild -resolvePackageDependencies -project ./DarockBili.xcodeproj -scheme 'Alternative Destribution' -configuration Alternative
