@@ -318,18 +318,20 @@ struct SettingsView: View {
                         Text("Settings.about")
                     }
                 })
-                NavigationLink(destination: { SoftwareUpdateView().navigationTitle("Settings.update") }, label: {
-                    HStack {
-                        ZStack {
-                            Color.gray
-                                .frame(width: 20, height: 20)
-                                .clipShape(Circle())
-                            Image(systemName: "arrow.clockwise")
-                                .font(.system(size: 12))
+                if (Bundle.main.infoDictionary?["CFBundleIdentifier"] as! String) != "com.darock.DarockBili.watchkitapp" {
+                    NavigationLink(destination: { SoftwareUpdateView().navigationTitle("Settings.update") }, label: {
+                        HStack {
+                            ZStack {
+                                Color.gray
+                                    .frame(width: 20, height: 20)
+                                    .clipShape(Circle())
+                                Image(systemName: "arrow.clockwise")
+                                    .font(.system(size: 12))
+                            }
+                            Text("Settings.update")
                         }
-                        Text("Settings.update")
-                    }
-                })
+                    })
+                }
                 if debug {
                     Section {
                         NavigationLink(destination: { DebugMenuView().navigationTitle("Settings.debug") }, label: {
@@ -888,22 +890,15 @@ struct SoftwareUpdateView: View {
                         }
                         Divider()
                         Text(releaseNote)
-                        if (Bundle.main.infoDictionary?["CFBundleIdentifier"] as! String) != "com.darock.DarockBili.watchkitapp" {
-                            Button(action: {
-                                let session = ASWebAuthenticationSession(url: URL(string: "https://cd.darock.top:32767/meowbili/install.html")!, callbackURLScheme: "mlhd") { _, _ in
-                                    return
-                                }
-                                session.prefersEphemeralWebBrowserSession = true
-                                session.start()
-                            }, label: {
-                                Text("Update.download-and-install")
-                            })
-                        } else {
-                            Spacer()
-                                .frame(height: 10)
-                            Text("Update.install-by-testflight")
-                                .bold()
-                        }
+                        Button(action: {
+                            let session = ASWebAuthenticationSession(url: URL(string: "https://cd.darock.top:32767/meowbili/install.html")!, callbackURLScheme: "mlhd") { _, _ in
+                                return
+                            }
+                            session.prefersEphemeralWebBrowserSession = true
+                            session.start()
+                        }, label: {
+                            Text("Update.download-and-install")
+                        })
                     } else if isFailed {
                         Text("Update.error")
                     } else {

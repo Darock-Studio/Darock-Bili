@@ -529,6 +529,96 @@ struct Zoomable: ViewModifier {
                 }
     }
 }
+
+struct SegmentedPicker: View {
+    @Binding var selection: Int
+    private var leftText: (any StringProtocol)?
+    private var rightText: (any StringProtocol)?
+    private var localizedLeftText: LocalizedStringKey?
+    private var localizedRightText: LocalizedStringKey?
+    @State private var selectionOffset: CGFloat = 0
+    
+    init(selection: Binding<Int>, leftText: LocalizedStringKey, rightText: LocalizedStringKey) {
+        self._selection = selection
+        self.localizedLeftText = leftText
+        self.localizedRightText = rightText
+    }
+    init(selection: Binding<Bool>, leftText: LocalizedStringKey, rightText: LocalizedStringKey) {
+        self._selection = Binding(get: { Int(selection.wrappedValue) }, set: { newValue in selection.wrappedValue = Bool(newValue) })
+        self.localizedLeftText = leftText
+        self.localizedRightText = rightText
+    }
+    @_disfavoredOverload
+    init<S>(selection: Binding<Int>, leftText: S, rightText: S) where S: StringProtocol {
+        self._selection = selection
+        self.leftText = leftText
+        self.rightText = rightText
+    }
+    @_disfavoredOverload
+    init<S>(selection: Binding<Bool>, leftText: S, rightText: S) where S: StringProtocol {
+        self._selection = Binding(get: { Int(selection.wrappedValue) }, set: { newValue in selection.wrappedValue = Bool(newValue) })
+        self.leftText = leftText
+        self.rightText = rightText
+    }
+    
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 9.8)
+                .fill(Color(hex: 0x5d5251))
+                .frame(height: 36)
+            HStack {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Color(hex: 0x7d7877))
+                    .frame(width: 75, height: 32)
+                    .offset(x: selectionOffset)
+                Spacer()
+            }
+            .padding(.horizontal, 3)
+            HStack {
+                Group {
+                    if let lt = leftText, let rt = rightText {
+                        Text(lt)
+                            .onTapGesture {
+                                selection = 0
+                                withAnimation(.easeOut(duration: 0.2)) {
+                                    selectionOffset = 0
+                                }
+                            }
+                        Text(rt)
+                            .onTapGesture {
+                                selection = 1
+                                withAnimation(.easeOut(duration: 0.2)) {
+                                    selectionOffset = 72
+                                }
+                            }
+                    } else if let ldlt = localizedLeftText, let ldrt = localizedRightText {
+                        Text(ldlt)
+                            .onTapGesture {
+                                selection = 0
+                                withAnimation(.easeOut(duration: 0.2)) {
+                                    selectionOffset = 0
+                                }
+                            }
+                        Text(ldrt)
+                            .onTapGesture {
+                                selection = 1
+                                withAnimation(.easeOut(duration: 0.2)) {
+                                    selectionOffset = 72
+                                }
+                            }
+                    }
+                }
+                .lineLimit(1)
+                .minimumScaleFactor(0.1)
+                .fontWeight(.semibold)
+                .frame(width: 75, height: 32)
+            }
+        }
+        .onAppear {
+            selectionOffset = selection == 0 ? 0 : 72
+        }
+    }
+}
 #endif
 
 // swiftlint:disable unused_closure_parameter
