@@ -861,8 +861,6 @@ struct SoftwareUpdateView: View {
     @State var latestVer = ""
     @State var latestBuild = ""
     @State var releaseNote = ""
-    @State var updateURL=""
-    
     var body: some View {
         ScrollView {
             VStack {
@@ -890,7 +888,7 @@ struct SoftwareUpdateView: View {
                         }
                         Divider()
                         Text(releaseNote)
-                        if (Bundle.main.infoDictionary?["CFBundleIdentifier"] as! String) != "com.darock.DarockBili.watchkitapp" && (Bundle.main.infoDictionary?["CFBundleIdentifier"] as! String) != "com.linecom.mwbilialt.watchkitapp" {
+                        if (Bundle.main.infoDictionary?["CFBundleIdentifier"] as! String) != "com.darock.DarockBili.watchkitapp" {
                             Button(action: {
                                 let session = ASWebAuthenticationSession(url: URL(string: "https://cd.darock.top:32767/meowbili/install.html")!, callbackURLScheme: "mlhd") { _, _ in
                                     return
@@ -925,12 +923,7 @@ struct SoftwareUpdateView: View {
             }
         }
         .onAppear {
-            if (Bundle.main.infoDictionary?["CFBundleIdentifier"] as! String) == "com.darock.DarockBili.watchkitapp"{
-                updateURL="https://api.darock.top/bili/newver"
-            } else if (Bundle.main.infoDictionary?["CFBundleIdentifier"] as! String) == "com.linecom.mwbilialt.watchkitapp"{
-                updateURL="https://api.linecom.net.cn/darock/bili/update/check.php"
-            }
-            DarockKit.Network.shared.requestString(updateURL) { respStr, isSuccess in
+            DarockKit.Network.shared.requestString("https://api.darock.top/bili/newver") { respStr, isSuccess in
                 if isSuccess && respStr.apiFixed().contains("|") {
                     latestVer = String(respStr.apiFixed().split(separator: "|")[0])
                     latestBuild = String(respStr.apiFixed().split(separator: "|")[1])
