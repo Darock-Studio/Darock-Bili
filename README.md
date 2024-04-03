@@ -48,7 +48,18 @@
 
 ## ⬇️安装
 ### TestFlight
-[此处](https://testflight.apple.com/join/TbuBT6ig)
+[Darock 官方分发(推荐)](https://testflight.apple.com/join/TbuBT6ig)
+
+以下为替代分发通道，测试员满时可使用，来自相同的源代码编译：
+
+- [Linecom Software](https://testflight.apple.com/join/P5CLgWpk)
+
+## 🔨编译
+若要编译最新的提交，可从`main`编译，我们会尽可能确保`main`分支的代码能够直接编译。
+
+使用[最新的 Release](https://github.com/Darock-Studio/Darock-Bili/releases/latest) 编译以获取与官方分发相同的稳定版本。
+
+由于一个未知问题，您可能需要使用 [Xcode 15.2](https://developer.apple.com/download/all/) (而不是最新的 15.3) 来进行编译。
 
 ## 🙌贡献
 欢迎提交Issue和Pull Request帮助我们变得更好！

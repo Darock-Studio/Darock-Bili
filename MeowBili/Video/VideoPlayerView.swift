@@ -172,16 +172,7 @@ struct VideoPlayerView: View {
                 .tag(1)
                 List {
                     Section {
-                        Button(action: {
-                            isFullScreen.toggle()
-                            tabviewChoseTab = 1
-                        }, label: {
-                            if isFullScreen {
-                                Label("恢复", systemImage: "arrow.down.forward.and.arrow.up.backward")
-                            } else {
-                                Label("全屏", systemImage: "arrow.down.backward.and.arrow.up.forward")
-                            }
-                        })
+                        SegmentedPicker(selection: $isFullScreen, leftText: "正常", rightText: "全屏")
                     } header: {
                         Text("画面")
                     }
@@ -358,6 +349,8 @@ struct VideoPlayerView: View {
         #endif
     }
     
+    @_optimize(speed)
+    @inline(__always)
     func UpdateDanmaku() {
         AF.request("https://api.bilibili.com/x/v1/dm/list.so?oid=\(videoCID)").response { response in
             let danmakus = String(data: response.data!, encoding: .utf8)!

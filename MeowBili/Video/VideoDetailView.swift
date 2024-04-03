@@ -219,26 +219,15 @@ struct VideoDetailView: View {
                                 if owner["ID"] != nil {
                                     NavigationLink(destination: { UserDetailView(uid: owner["ID"]!) }, label: {
                                         HStack {
-                                            AsyncImage(url: URL(string: owner["Face"]!)) { phase in
-                                                switch phase {
-                                                case .empty:
-                                                    Circle()
-                                                        .frame(width: 40, height: 40)
-                                                        .redacted(reason: .placeholder)
-                                                case .success(let image):
-                                                    image.resizable()
-                                                case .failure:
-                                                    Circle()
-                                                        .frame(width: 40, height: 40)
-                                                        .redacted(reason: .placeholder)
-                                                @unknown default:
+                                            WebImage(url: URL(string: owner["Face"]!))
+                                                .resizable()
+                                                .placeholder {
                                                     Circle()
                                                         .frame(width: 40, height: 40)
                                                         .redacted(reason: .placeholder)
                                                 }
-                                            }
-                                            .clipShape(Circle())
-                                            .frame(width: 40, height: 40)
+                                                .clipShape(Circle())
+                                                .frame(width: 40, height: 40)
                                             VStack {
                                                 HStack {
                                                     Text(owner["Name"]!)
@@ -690,6 +679,7 @@ struct VideoDetailView: View {
                         .containerBackground(for: .navigation) {
                             ZStack {
                                 WebImage(url: URL(string: videoDetails["Pic"]!))
+                                    .resizable()
                                     .blur(radius: 20)
                                 Color.black
                                     .opacity(0.4)
@@ -1117,20 +1107,19 @@ struct VideoDetailView: View {
                     }
                 Spacer()
                     .frame(height: 20)
-                HStack {
-                    Marquee {
-                        HStack {
-                            Text(videoDetails["Title"]!)
-                                .lineLimit(1)
-                                .font(.system(size: 12, weight: .bold))
-                                .multilineTextAlignment(.center)
-                        }
+                Marquee {
+                    HStack {
+                        Text(videoDetails["Title"]!)
+                            .lineLimit(1)
+                            .font(.system(size: 12, weight: .bold))
+                            .multilineTextAlignment(.center)
                     }
-                    .marqueeWhenNotFit(true)
-                    .marqueeDuration(10)
-                    .frame(height: 20)
-                    .padding(.horizontal, 10)
                 }
+                .marqueeWhenNotFit(true)
+                .marqueeDuration(10)
+                .marqueeIdleAlignment(.center)
+                .frame(height: 20)
+                .padding(.horizontal, 10)
                 Text(videoDetails["UP"]!)
                     .lineLimit(1)
                     .font(.system(size: 12))
