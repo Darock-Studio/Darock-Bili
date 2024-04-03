@@ -1407,9 +1407,6 @@
         }
       }
     },
-    "Alamofire\nLicensed under MIT license" : {
-
-    },
     "Bangumi" : {
       "localizations" : {
         "en" : {
@@ -2043,12 +2040,6 @@
           }
         }
       }
-    },
-    "Dynamic\nLicensed under Apache License 2.0" : {
-
-    },
-    "EFQRCode\nLicensed under MIT license" : {
-
     },
     "Error" : {
       "localizations" : {
@@ -3174,9 +3165,6 @@
       }
     },
     "ID: %@" : {
-
-    },
-    "libwebp\nLicensed under BSD-3-Clause license" : {
 
     },
     "Lightning-Lion" : {
@@ -4457,21 +4445,6 @@
         }
       }
     },
-    "SDWebImage\nLicensed under MIT license" : {
-
-    },
-    "SDWebImagePDFCoder\nLicensed under MIT license" : {
-
-    },
-    "SDWebImageSVGCoder\nLicensed under MIT license" : {
-
-    },
-    "SDWebImageSwiftUI\nLicensed under MIT license" : {
-
-    },
-    "SDWebImageWebPCoder\nLicensed under MIT license" : {
-
-    },
     "Search.%@" : {
       "localizations" : {
         "en" : {
@@ -5188,9 +5161,6 @@
         }
       }
     },
-    "SFSymbol\nLicensed under MIT license" : {
-
-    },
     "Show Debug Controls" : {
       "localizations" : {
         "en" : {
@@ -5520,12 +5490,6 @@
           }
         }
       }
-    },
-    "swift_qrcodejs\nLicensed under MIT license" : {
-
-    },
-    "SwiftyJSON\nLicensed under MIT license" : {
-
     },
     "ThreeManager785" : {
       "localizations" : {
