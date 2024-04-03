@@ -452,6 +452,7 @@ struct UInt128 {
 
 // MARK: Get _uuid cookie
 struct UuidInfoc {
+    @_effects(readonly)
     static func gen() -> String {
         let digitMap: [String] = [
             "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "10"
@@ -680,11 +681,22 @@ extension Int {
 }
 
 extension Bool {
+    @_transparent
     init(_ input: Int) {
         if input == 0 {
             self = false
         } else {
             self = true
+        }
+    }
+}
+extension Int {
+    @_transparent
+    init (_ input: Bool) {
+        if input {
+            self = 1
+        } else {
+            self = 0
         }
     }
 }

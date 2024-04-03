@@ -146,6 +146,11 @@ struct MainView: View {
                             }, label: {
                                 Text("Home.debug")
                             })
+                            #if os(watchOS)
+                            NavigationLink(destination: { WatchUIDebugView() }, label: {
+                                Text("UIDebug")
+                            })
+                            #endif
                         }
                         if notice != "" {
                             NavigationLink(destination: { NoticeView() }, label: {
