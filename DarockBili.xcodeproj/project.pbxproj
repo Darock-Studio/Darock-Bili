@@ -109,6 +109,7 @@
 		8CA3889F2B78B1E300F5F91F /* AZVideoPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA3889E2B78B1E300F5F91F /* AZVideoPlayer */; };
 		8CA388A22B78B5D800F5F91F /* BiliFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8CA388A02B78B5D800F5F91F /* BiliFont.ttf */; };
 		8CA388A32B78B5D800F5F91F /* BiliFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8CA388A02B78B5D800F5F91F /* BiliFont.ttf */; };
+		8CA53B032BB963D700D6D692 /* WatchUIDebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA53B022BB963D700D6D692 /* WatchUIDebugView.swift */; };
 		8CA7CBC32B77AC4A008E587F /* MeowBiliApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC22B77AC4A008E587F /* MeowBiliApp.swift */; };
 		8CA7CBC52B77AC4A008E587F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC42B77AC4A008E587F /* ContentView.swift */; };
 		8CA7CBC72B77AC4C008E587F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC62B77AC4C008E587F /* Assets.xcassets */; };
@@ -417,6 +418,7 @@
 		8CA370E82B83BB4F00CE0E9E /* MeowBili Vision App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MeowBili Vision App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA371332B83BE7D00CE0E9E /* MeowBili Vision App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "MeowBili Vision App.entitlements"; sourceTree = "<group>"; };
 		8CA388A02B78B5D800F5F91F /* BiliFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BiliFont.ttf; sourceTree = "<group>"; };
+		8CA53B022BB963D700D6D692 /* WatchUIDebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchUIDebugView.swift; sourceTree = "<group>"; };
 		8CA7CBC02B77AC4A008E587F /* MeowBili.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeowBili.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA7CBC22B77AC4A008E587F /* MeowBiliApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeowBiliApp.swift; sourceTree = "<group>"; };
 		8CA7CBC42B77AC4A008E587F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -753,6 +755,7 @@
 				8CA7CC9E2B77B166008E587F /* SettingsView.swift */,
 				8CA7CCA02B77B2DC008E587F /* LoginView.swift */,
 				8CA7CCA22B77B2F2008E587F /* NoticeView.swift */,
+				8CA53B022BB963D700D6D692 /* WatchUIDebugView.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -1491,6 +1494,7 @@
 				8CBFF1282B861F7F00350E0F /* backtrace.c in Sources */,
 				8CBFF0EB2B85E55F00350E0F /* FavoriteView.swift in Sources */,
 				8CBFF0E12B85E55F00350E0F /* UserDynamicMainView.swift in Sources */,
+				8CA53B032BB963D700D6D692 /* WatchUIDebugView.swift in Sources */,
 				8CBFF0BA2B85E55F00350E0F /* Passthroughs.swift in Sources */,
 				8CBFF0B92B85E55F00350E0F /* LinkDetectText.swift in Sources */,
 				8CBFF0CB2B85E55F00350E0F /* bMessageSendView.swift in Sources */,
@@ -1616,7 +1620,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 938;
+				CURRENT_PROJECT_VERSION = 967;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -1647,7 +1651,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 938;
+				CURRENT_PROJECT_VERSION = 967;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -1669,6 +1673,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Osize";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1743,7 +1748,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBiliAlternative.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 938;
+				CURRENT_PROJECT_VERSION = 967;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				ENABLE_PREVIEWS = YES;
@@ -1775,6 +1780,7 @@
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "MeowBili/MeowBili-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Osize";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,6";
 				VALIDATE_PRODUCT = YES;
@@ -1787,7 +1793,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 938;
+				CURRENT_PROJECT_VERSION = 967;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				ENABLE_PREVIEWS = YES;
@@ -1809,6 +1815,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "MeowBili/MeowBili-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Osize";
 				SWIFT_VERSION = 5.0;
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "";
 				TARGETED_DEVICE_FAMILY = 4;
@@ -1826,7 +1833,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 938;
+				CURRENT_PROJECT_VERSION = 967;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1862,7 +1869,7 @@
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 938;
+				CURRENT_PROJECT_VERSION = 967;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1891,7 +1898,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 938;
+				CURRENT_PROJECT_VERSION = 967;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1915,7 +1922,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 938;
+				CURRENT_PROJECT_VERSION = 967;
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -1937,6 +1944,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Osize";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1981,7 +1989,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 938;
+				CURRENT_PROJECT_VERSION = 967;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2016,7 +2024,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 938;
+				CURRENT_PROJECT_VERSION = 967;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2053,7 +2061,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 938;
+				CURRENT_PROJECT_VERSION = 967;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2100,7 +2108,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 938;
+				CURRENT_PROJECT_VERSION = 967;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2132,6 +2140,7 @@
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "MeowBili/MeowBili-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Osize";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,6";
 				VALIDATE_PRODUCT = YES;
@@ -2144,7 +2153,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 938;
+				CURRENT_PROJECT_VERSION = 967;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2180,7 +2189,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 938;
+				CURRENT_PROJECT_VERSION = 967;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2202,6 +2211,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "MeowBili/MeowBili-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Osize";
 				SWIFT_VERSION = 5.0;
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "";
 				TARGETED_DEVICE_FAMILY = 4;
@@ -2219,7 +2229,7 @@
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 938;
+				CURRENT_PROJECT_VERSION = 967;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -2252,7 +2262,7 @@
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 938;
+				CURRENT_PROJECT_VERSION = 967;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -2281,7 +2291,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 938;
+				CURRENT_PROJECT_VERSION = 967;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -2304,7 +2314,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 938;
+				CURRENT_PROJECT_VERSION = 967;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
