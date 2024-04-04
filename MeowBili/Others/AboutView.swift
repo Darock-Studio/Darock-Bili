@@ -350,19 +350,43 @@ struct OpenSourceView: View {
             ------------------
     """
     var body: some View {
-        ScrollView {
             #if !os(watchOS)
             HStack {
                 Spacer()
-                Text(openSourceTexts)
+                List{
+                    Text("Alamofire\nLicensed under MIT license")
+                    Text("Dynamic\nLicensed under Apache License 2.0")
+                    Text("EFQRCode\nLicensed under MIT license")
+                    Text("libwebp\nLicensed under BSD-3-Clause license")
+                    Text("SDWebImage\nLicensed under MIT license")
+                    Text("SDWebImagePDFCoder\nLicensed under MIT license")
+                    Text("SDWebImageSVGCoder\nLicensed under MIT license")
+                    Text("SDWebImageSwiftUI\nLicensed under MIT license")
+                    Text("SDWebImageWebPCoder\nLicensed under MIT license")
+                    Text("SFSymbol\nLicensed under MIT license")
+                    Text("swift_qrcodejs\nLicensed under MIT license")
+                    Text("SwiftyJSON\nLicensed under MIT license")
+                }
                 Spacer()
             }
             #else
-            Text(openSourceTexts)
+                List{
+                        Text("Alamofire\nLicensed under MIT license")
+                        Text("Dynamic\nLicensed under Apache License 2.0")
+                        Text("EFQRCode\nLicensed under MIT license")
+                        Text("libwebp\nLicensed under BSD-3-Clause license")
+                        Text("SDWebImage\nLicensed under MIT license")
+                        Text("SDWebImagePDFCoder\nLicensed under MIT license")
+                        Text("SDWebImageSVGCoder\nLicensed under MIT license")
+                        Text("SDWebImageSwiftUI\nLicensed under MIT license")
+                        Text("SDWebImageWebPCoder\nLicensed under MIT license")
+                        Text("SFSymbol\nLicensed under MIT license")
+                        Text("swift_qrcodejs\nLicensed under MIT license")
+                        Text("SwiftyJSON\nLicensed under MIT license")
+                    }
             #endif
         }
     }
-}
 
 struct AboutView_Previews: PreviewProvider {
     static var previews: some View {

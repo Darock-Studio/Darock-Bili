@@ -863,6 +863,7 @@ struct SoftwareUpdateView: View {
     @State var latestVer = ""
     @State var latestBuild = ""
     @State var releaseNote = ""
+    @State var updateURL=""
     var body: some View {
         ScrollView {
             VStack {
@@ -918,7 +919,12 @@ struct SoftwareUpdateView: View {
             }
         }
         .onAppear {
-            DarockKit.Network.shared.requestString("https://api.darock.top/bili/newver") { respStr, isSuccess in
+            if (Bundle.main.infoDictionary?["CFBundleIdentifier"] as! String) == "com.darock.DarockBili.watchkitapp"{
+                updateURL="https://api.darock.top/bili/newver"
+            } else if (Bundle.main.infoDictionary?["CFBundleIdentifier"] as! String) == "com.linecom.mwbilialt.watchkitapp"{
+                updateURL="https://api.linecom.net.cn/darock/bili/update/check.php"
+            }
+            DarockKit.Network.shared.requestString(updateURL) { respStr, isSuccess in
                 if isSuccess && respStr.apiFixed().contains("|") {
                     latestVer = String(respStr.apiFixed().split(separator: "|")[0])
                     latestBuild = String(respStr.apiFixed().split(separator: "|")[1])
