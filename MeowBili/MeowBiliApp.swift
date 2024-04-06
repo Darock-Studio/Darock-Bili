@@ -413,6 +413,14 @@ struct DarockBili_Watch_AppApp: App {
                                             Spacer()
                                         }
                                         .allowsHitTesting(false)
+                                        ScrollView {
+                                            LazyVStack {
+                                                Text(debugControlStdout)
+                                                    .font(.system(size: 5, design: .monospaced))
+                                            }
+                                        }
+                                        .border(Color.gray, width: 1)
+                                        .frame(width: 150, height: 90)
                                     }
                                     .font(.system(size: 10))
                                     
