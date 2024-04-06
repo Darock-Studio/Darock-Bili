@@ -717,3 +717,13 @@ prefix operator &&
 prefix func && <T>(input: inout T) -> UnsafeMutablePointer<T> {
     withUnsafeMutablePointer(to: &input) { $0 }
 }
+
+public func debugPrint(_ items: Any..., separator: String = " ", terminator: String = "\n") {
+    Swift.debugPrint(items, separator: separator, terminator: terminator)
+    if debug {
+        debugControlStdout += items.debugDescription + terminator
+        if debugControlStdout.count > 5000 {
+            debugControlStdout.removeFirst(500)
+        }
+    }
+}
