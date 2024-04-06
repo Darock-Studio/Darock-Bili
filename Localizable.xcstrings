@@ -7126,6 +7126,7 @@
       }
     },
     "Update.install-by-testflight" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "variations" : {
