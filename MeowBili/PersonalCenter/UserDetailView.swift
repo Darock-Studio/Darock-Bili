@@ -327,6 +327,7 @@ struct UserDetailView: View {
                             SecondPageBase(uid: uid, officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign, userLevel: $userLevel, vipLabel: $vipLabel)
                         }
                     })
+                    .tag(1)
                     VideosListBase(uid: uid, username: $username, videos: $videos, articles: $articles, viewSelector: $viewSelector, videoCount: $videoCount, articalCount: $articalCount)
                         .tag(2)
                         .navigationTitle(viewSelector == .video ? "Account.videos.\(videoCount)" : "Account.articals.\(articalCount)")
@@ -336,10 +337,12 @@ struct UserDetailView: View {
                                     if viewSelector == .video {
                                         viewSelector = .article
                                     } else if viewSelector == .article {
+                                        viewSelector = .dynamic
+                                    } else if viewSelector == .dynamic {
                                         viewSelector = .video
                                     }
                                 }, label: {
-                                    Image(systemName: viewSelector == .video ? "play.circle" : "doc.text.image")
+                                    Image(systemName: viewSelector == .video ? "play.circle" : viewSelector == .article ? "doc.text.image" : "doc.richtext")
                                 })
                             }
                         }
@@ -889,6 +892,8 @@ struct UserDetailView: View {
                             if viewSelector == .video {
                                 viewSelector = .article
                             } else if viewSelector == .article {
+                                viewSelector = .dynamic
+                            } else if viewSelector == .dynamic {
                                 viewSelector = .video
                             }
                         }, label: {
@@ -1080,6 +1085,8 @@ struct UserDetailView: View {
                         .onDisappear {
                             articles = [[String: String]]()
                         }
+                    } else if viewSelector == .dynamic {
+                        UserDynamicListView(uid: uid)
                     }
                 }
             }
@@ -1173,6 +1180,7 @@ struct ModifyUserRelation: Codable {
 enum UserDetailViewPubsType {
     case video
     case article
+    case dynamic
 }
 
 struct UserDetailView_Previews: PreviewProvider {
