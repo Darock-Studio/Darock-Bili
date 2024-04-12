@@ -1,9 +1,10 @@
 name: TestFlight Alternative Deploy
 
 on: 
-  push:
-    tags:
-      - v*
+  workflow_dispatch:
+    inputs:
+      buildv:
+        required: true
 
 jobs:
   build:
@@ -43,26 +44,7 @@ jobs:
           path: vers
 
       - name: Change Project Version
-        run: |
-          read MVER < vers/ver.txt
-          MVER=$[MVER+1]
-          rm vers/ver.txt
-          echo $MVER >> vers/ver.txt
-          agvtool new-version -all $MVER
-          
-      - name: Commit Files
-        working-directory: vers
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git commit -a -m "Updated versions"
-          
-      - name: Push Changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: release-vers
-          directory: vers
+        run: sed -i 's/CURRENT_PROJECT_VERSION = [0-9]*;/CURRENT_PROJECT_VERSION = ${{ inputs.lsha }};/g'  ./DarockBili.xcodeproj/project.pbxproj
 
       - name: Install the Apple certificate and provisioning profile for Xcode
         env:

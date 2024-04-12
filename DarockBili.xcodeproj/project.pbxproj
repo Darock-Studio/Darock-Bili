@@ -474,6 +474,7 @@
 		8CA7CCD72B77B54F008E587F /* LivePlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePlayerView.swift; sourceTree = "<group>"; };
 		8CA7CCD92B77B55F008E587F /* LiveDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDetailView.swift; sourceTree = "<group>"; };
 		8CA7CCDB2B77B571008E587F /* LiveMessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveMessagesView.swift; sourceTree = "<group>"; };
+		8CAFCEDD2BC959C900C9A5BF /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
 		8CB0D0232B88CEC40057EF1C /* ci_post_xcodebuild.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_xcodebuild.sh; sourceTree = "<group>"; };
 		8CB0D0242B88D20F0057EF1C /* ci_pre_xcodebuild.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_pre_xcodebuild.sh; sourceTree = "<group>"; };
 		8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */ = {isa = PBXFileReference; lastKnownFileType = text; path = CurrentChannel.drkdatac; sourceTree = "<group>"; };
@@ -856,6 +857,7 @@
 		8CB0D0222B88CE980057EF1C /* ci_scripts */ = {
 			isa = PBXGroup;
 			children = (
+				8CAFCEDD2BC959C900C9A5BF /* ci_post_clone.sh */,
 				8CB0D0232B88CEC40057EF1C /* ci_post_xcodebuild.sh */,
 				8CB0D0242B88D20F0057EF1C /* ci_pre_xcodebuild.sh */,
 			);
