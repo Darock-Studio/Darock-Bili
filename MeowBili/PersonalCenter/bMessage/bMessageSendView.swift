@@ -238,6 +238,6 @@ struct bMessageSendView: View {
 // swiftlint:disable:next type_name
 struct bMessageSendView_Previews: PreviewProvider {
     static var previews: some View {
-        bMessageSendView(uid: 114514, username: "ReX-We")
+        bMessageSendView(uid: 114514, username: "Test")
     }
 }
