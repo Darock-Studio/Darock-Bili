@@ -165,8 +165,6 @@ struct DarockBili_Watch_AppApp: App {
     #else
     @State var shouldShowAppName = false
     #endif
-    // Banner
-    @State var isAccountBanned = false
     var body: some SwiftUI.Scene {
         WindowGroup {
             if fileLockerPwd != "" {
@@ -208,11 +206,7 @@ struct DarockBili_Watch_AppApp: App {
                 ZStack {
                     #if !os(visionOS)
                     #if os(watchOS)
-                    if !isAccountBanned {
-                        ContentView()
-                    } else {
-                        BannedTipView()
-                    }
+                    ContentView()
                     VStack {
                         Spacer()
                         if #available(watchOS 10, *) {
@@ -254,11 +248,7 @@ struct DarockBili_Watch_AppApp: App {
                         ZStack {
                             // Hide NavigationLinks behind
                             NavigationLink("", isActive: $isUrlOpenVideoPresented, destination: { VideoDetailView(videoDetails: urlOpenVideoDetails) })
-                            if !isAccountBanned {
-                                ContentView()
-                            } else {
-                                BannedTipView()
-                            }
+                            ContentView()
                         }
                     }
                     .onOpenURL { url in
@@ -495,28 +485,6 @@ struct DarockBili_Watch_AppApp: App {
                             df.dateFormat = "yyyy-MM-dd"
                             let dateStr = df.string(from: Date.now)
                             UserDefaults.standard.set(UserDefaults.standard.integer(forKey: "ScreenTime\(dateStr)") + 1, forKey: "ScreenTime\(dateStr)")
-                        }
-                    }
-                }
-
-                #if os(watchOS)
-                let banId = WKInterfaceDevice.current().identifierForVendor?.uuidString ?? "__DONOTBANTHISIDELSEALLUSERSWILLBEBANNED123456AABBCCDDEEFFGGDAROCKSTUDIOCOMMUNITY"
-                #else
-                let banId = UIDevice.current.identifierForVendor?.uuidString ?? "__DONOTBANTHISIDELSEALLUSERSWILLBEBANNED123456AABBCCDDEEFFGGDAROCKSTUDIOCOMMUNITY"
-                #endif
-                DarockKit.Network.shared.requestString("https://api.darock.top/banner/check/\(banId)") { respStr, isSuccess in
-                    if isSuccess {
-                        if respStr == "1" {
-                            isAccountBanned = true
-                        }
-                    }
-                }
-                if let uid = UserDefaults.standard.string(forKey: "DedeUserID") {
-                    DarockKit.Network.shared.requestString("https://api.darock.top/banner/check/\(uid)") { respStr, isSuccess in
-                        if isSuccess {
-                            if respStr == "1" {
-                                isAccountBanned = true
-                            }
                         }
                     }
                 }
