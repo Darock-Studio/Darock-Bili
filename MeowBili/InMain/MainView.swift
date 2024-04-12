@@ -125,6 +125,8 @@ struct MainView: View {
         @AppStorage("bili_jct") var biliJct = ""
         @AppStorage("UpdateTipIgnoreVersion") var updateTipIgnoreVersion = ""
         @AppStorage("IsShowNetworkFixing") var isShowNetworkFixing = true
+        @AppStorage("IsShowVideoSuggestionsFromDarock") var isShowVideoSuggestionsFromDarock = true
+        @AppStorage("IsTipDarockSuggestions") var isTipDarockSuggestions = true
         @State var videos = [[String: String]]()
         @State var notice = ""
         @State var isNetworkFixPresented = false
@@ -136,6 +138,7 @@ struct MainView: View {
         @State var isFailedToLoad = false
         @State var showedAvidList = [UInt64]()
         @State var freshCount = 0
+        @State var darockSuggestions = [[String: String]]()
         var body: some View {
             Group {
                 List {
@@ -193,9 +196,29 @@ struct MainView: View {
                         }
                     }
                     #endif
+                    if isShowVideoSuggestionsFromDarock && !darockSuggestions.isEmpty {
+                        Section {
+                            ForEach(0..<darockSuggestions.count, id: \.self) { i in
+                                VideoCard(darockSuggestions[i])
+                            }
+                        } header: {
+                            Text("来自 Darock 的推荐")
+                                .textCase(nil)
+                        } footer: {
+                            if isTipDarockSuggestions {
+                                NavigationLink(destination: { NetworkSettingsView().navigationTitle("互联网") }, label: {
+                                    Text("如不希望显示来自 Darock 的推荐，可前往\(Text("设置").foregroundColor(Color.blue).bold())关闭")
+                                })
+                                .buttonStyle(.plain)
+                                .onDisappear {
+                                    isTipDarockSuggestions = false
+                                }
+                            }
+                        }
+                    }
                     if videos.count != 0 {
                         Section {
-                            ForEach(0...videos.count - 1, id: \.self) { i in
+                            ForEach(0..<videos.count, id: \.self) { i in
                                 VideoCard(videos[i])
                                     .accessibilityIdentifier("SuggestedVideo\(i)")
                                     .onAppear {
@@ -229,16 +252,17 @@ struct MainView: View {
                 LoadNewVideos(clearWhenFinish: true)
             }
             .onAppear {
+                LoadDarockSuggestions()
                 if !isFirstLoaded {
                     LoadNewVideos()
                     isFirstLoaded = true
                 }
-                DarockKit.Network.shared.requestString("https://api.darock.top/bili/notice") { respStr, isSuccess in
+                DarockKit.Network.shared.requestString("https://fapi.darock.top:65535/bili/notice") { respStr, isSuccess in
                     if isSuccess {
                         notice = respStr.apiFixed()
                     }
                 }
-                DarockKit.Network.shared.requestString("https://api.darock.top/bili/newver") { respStr, isSuccess in
+                DarockKit.Network.shared.requestString("https://fapi.darock.top:65535/bili/newver") { respStr, isSuccess in
                     if isSuccess && respStr.apiFixed().contains("|") {
                         newMajorVer = String(respStr.apiFixed().split(separator: "|")[0])
                         newBuildVer = String(respStr.apiFixed().split(separator: "|")[1])
@@ -293,6 +317,33 @@ struct MainView: View {
                     isFailedToLoad = true
                     if isShowNetworkFixing {
                         isNetworkFixPresented = true
+                    }
+                }
+            }
+        }
+        func LoadDarockSuggestions() {
+            DarockKit.Network.shared.requestString("https://fapi.darock.top:65535/bili/sgsfrmdrk") { respStr, isSuccess in
+                if isSuccess {
+                    if !respStr.apiFixed().hasPrefix("BV") { return }
+                    let bvs = respStr.apiFixed().split(separator: "|").map { String($0) }
+                    let headers: HTTPHeaders = [
+                        "cookie": "SESSDATA=\(sessdata)",
+                        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                    ]
+                    darockSuggestions.removeAll()
+                    for bvid in bvs {
+                        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/view?bvid=\(bvid)", headers: headers) { respJson, isSuccess in
+                            if isSuccess {
+                                if !CheckBApiError(from: respJson) { return }
+                                var vd = ["BV": bvid]
+                                vd.updateValue(respJson["data"]["title"].string ?? "[加载失败]", forKey: "Title")
+                                vd.updateValue(String(respJson["data"]["stat"]["view"].int ?? 0), forKey: "View")
+                                vd.updateValue(String(respJson["data"]["stat"]["danmaku"].int ?? 0), forKey: "Danmaku")
+                                vd.updateValue(respJson["data"]["pic"].string ?? "[加载失败]", forKey: "Pic")
+                                vd.updateValue(respJson["data"]["owner"]["name"].string ?? "[加载失败]", forKey: "UP")
+                                darockSuggestions.append(vd)
+                            }
+                        }
                     }
                 }
             }

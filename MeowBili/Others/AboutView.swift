@@ -301,53 +301,90 @@ struct AboutCredits: View {
 
 struct OpenSourceView: View {
     let openSourceTexts = """
-            --- Alamofire ---
-            Licensed under MIT license
-            -----------------
-            
-            --- Dynamic ---
-            Licensed under Apache License 2.0
-            ---------------
-            
-            --- EFQRCode ---
-            Licensed under MIT license
-            ----------------
-            
-            --- libwebp ---
-            Licensed under BSD-3-Clause license
-            ---------------
-            
-            --- SDWebImage ---
-            Licensed under MIT license
-            ------------------
-            
-            --- SDWebImagePDFCoder ---
-            Licensed under MIT license
-            --------------------------
-            
-            --- SDWebImageSVGCoder ---
-            Licensed under MIT license
-            --------------------------
-            
-            --- SDWebImageSwiftUI ---
-            Licensed under MIT license
-            -------------------------
-            
-            --- SDWebImageWebPCoder ---
-            Licensed under MIT license
-            ---------------------------
-            
-            --- SFSymbol ---
-            Licensed under MIT license
-            ----------------
-            
-            --- swift_qrcodejs ---
-            Licensed under MIT license
-            ----------------------
-            
-            --- SwiftyJSON ---
-            Licensed under MIT license
-            ------------------
+    --- Alamofire ---
+    Licensed under MIT license
+    -----------------
+    
+    --- AlertKit ---
+    Licensed under MIT license
+    ----------------
+    
+    --- AlertToast ---
+    Licensed under MIT license
+    ------------------
+    
+    --- AZVideoPlayer ---
+    No license
+    https://github.com/adamzarn/AZVideoPlayer
+    ---------------------
+    
+    --- Dynamic ---
+    Licensed under Apache License 2.0
+    ---------------
+    
+    --- EFQRCode ---
+    Licensed under MIT license
+    ----------------
+    
+    --- libwebp ---
+    Licensed under BSD-3-Clause license
+    ---------------
+    
+    --- Marquee ---
+    Licensed under MIT license
+    ---------------
+    
+    --- Mixpanel ---
+    Licensed under Apache License 2.0
+    ----------------
+    
+    --- ScreenshotableView ---
+    Licensed under MIT license
+    --------------------------
+    
+    --- SDWebImage ---
+    Licensed under MIT license
+    ------------------
+    
+    --- SDWebImagePDFCoder ---
+    Licensed under MIT license
+    --------------------------
+    
+    --- SDWebImageSVGCoder ---
+    Licensed under MIT license
+    --------------------------
+    
+    --- SDWebImageSwiftUI ---
+    Licensed under MIT license
+    -------------------------
+    
+    --- SDWebImageWebPCoder ---
+    Licensed under MIT license
+    ---------------------------
+    
+    --- SFSymbol ---
+    Licensed under MIT license
+    ----------------
+    
+    --- swift_qrcodejs ---
+    Licensed under MIT license
+    ----------------------
+    
+    --- SwiftDate ---
+    Licensed under MIT license
+    -----------------
+    
+    --- SwiftSoup ---
+    Licensed under MIT license
+    -----------------
+    
+    --- SwiftyJSON ---
+    Licensed under MIT license
+    ------------------
+    
+    --- ZipArchive ---
+    Licensed under MIT license
+    ------------------
     """
     var body: some View {
         ScrollView {

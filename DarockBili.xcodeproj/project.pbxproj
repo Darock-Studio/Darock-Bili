@@ -101,7 +101,6 @@
 		8CA3713E2B83BF9400CE0E9E /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA3713D2B83BF9400CE0E9E /* ZipArchive */; };
 		8CA371402B83BF9400CE0E9E /* EFQRCode in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA3713F2B83BF9400CE0E9E /* EFQRCode */; };
 		8CA371422B83BF9400CE0E9E /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA371412B83BF9400CE0E9E /* SwiftSoup */; };
-		8CA371442B83BF9400CE0E9E /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA371432B83BF9400CE0E9E /* CachedAsyncImage */; };
 		8CA371462B83BF9400CE0E9E /* Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA371452B83BF9400CE0E9E /* Dynamic */; };
 		8CA3714C2B83BF9400CE0E9E /* AZVideoPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA3714B2B83BF9400CE0E9E /* AZVideoPlayer */; };
 		8CA3714E2B83BF9400CE0E9E /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA3714D2B83BF9400CE0E9E /* Mixpanel */; };
@@ -124,7 +123,6 @@
 		8CA7CBF52B77AC8A008E587F /* SDWebImageSVGCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBF42B77AC8A008E587F /* SDWebImageSVGCoder */; };
 		8CA7CBF72B77AC8A008E587F /* SDWebImagePDFCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBF62B77AC8A008E587F /* SDWebImagePDFCoder */; };
 		8CA7CBF92B77AC8A008E587F /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBF82B77AC8A008E587F /* SwiftSoup */; };
-		8CA7CBFB2B77AC8A008E587F /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBFA2B77AC8A008E587F /* CachedAsyncImage */; };
 		8CA7CBFD2B77AC8A008E587F /* Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBFC2B77AC8A008E587F /* Dynamic */; };
 		8CA7CC092B77AC93008E587F /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC082B77AC93008E587F /* Marquee */; };
 		8CA7CC0B2B77AC93008E587F /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC0A2B77AC93008E587F /* SwiftDate */; };
@@ -134,7 +132,6 @@
 		8CA7CC172B77AC93008E587F /* SDWebImageSVGCoder in Frameworks */ = {isa = PBXBuildFile; platformFilters = (ios, maccatalyst, ); productRef = 8CA7CC162B77AC93008E587F /* SDWebImageSVGCoder */; settings = {ATTRIBUTES = (Required, ); }; };
 		8CA7CC192B77AC93008E587F /* SDWebImagePDFCoder in Frameworks */ = {isa = PBXBuildFile; platformFilters = (ios, maccatalyst, ); productRef = 8CA7CC182B77AC93008E587F /* SDWebImagePDFCoder */; settings = {ATTRIBUTES = (Required, ); }; };
 		8CA7CC1B2B77AC93008E587F /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC1A2B77AC93008E587F /* SwiftSoup */; };
-		8CA7CC1D2B77AC93008E587F /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC1C2B77AC93008E587F /* CachedAsyncImage */; };
 		8CA7CC1F2B77AC93008E587F /* Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC1E2B77AC93008E587F /* Dynamic */; };
 		8CA7CC6A2B77AE62008E587F /* Bangumi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC692B77AE62008E587F /* Bangumi.swift */; };
 		8CA7CC6C2B77AE80008E587F /* DownloadObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC6B2B77AE80008E587F /* DownloadObj.swift */; };
@@ -325,7 +322,6 @@
 		8CC5B7252B8742D300BAD89E /* SDWebImageSVGCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7242B8742D300BAD89E /* SDWebImageSVGCoder */; };
 		8CC5B7272B8742D300BAD89E /* SDWebImagePDFCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7262B8742D300BAD89E /* SDWebImagePDFCoder */; };
 		8CC5B7292B8742D300BAD89E /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7282B8742D300BAD89E /* SwiftSoup */; };
-		8CC5B72B2B8742D300BAD89E /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B72A2B8742D300BAD89E /* CachedAsyncImage */; };
 		8CC5B72D2B8742D300BAD89E /* Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B72C2B8742D300BAD89E /* Dynamic */; };
 		8CC5B7332B8742D300BAD89E /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7322B8742D300BAD89E /* AlertKit */; };
 		8CC5B7352B8742D300BAD89E /* AZVideoPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7342B8742D300BAD89E /* AZVideoPlayer */; };
@@ -521,7 +517,6 @@
 				8CA371402B83BF9400CE0E9E /* EFQRCode in Frameworks */,
 				8CA3713A2B83BF9400CE0E9E /* SwiftDate in Frameworks */,
 				8CA371382B83BF9400CE0E9E /* Marquee in Frameworks */,
-				8CA371442B83BF9400CE0E9E /* CachedAsyncImage in Frameworks */,
 				8CA3713C2B83BF9400CE0E9E /* SFSymbol in Frameworks */,
 				8CA371422B83BF9400CE0E9E /* SwiftSoup in Frameworks */,
 				8CA3713E2B83BF9400CE0E9E /* ZipArchive in Frameworks */,
@@ -548,7 +543,6 @@
 				8CA3889F2B78B1E300F5F91F /* AZVideoPlayer in Frameworks */,
 				8CA388992B789A0300F5F91F /* AZVideoPlayer in Frameworks */,
 				8CB176AE2BB8420B00CEC05C /* DarockKit in Frameworks */,
-				8CA7CC1D2B77AC93008E587F /* CachedAsyncImage in Frameworks */,
 				8CA7CC152B77AC93008E587F /* SDWebImageWebPCoder in Frameworks */,
 				8CA7CC112B77AC93008E587F /* EFQRCode in Frameworks */,
 			);
@@ -568,7 +562,6 @@
 				8CA7CBFD2B77AC8A008E587F /* Dynamic in Frameworks */,
 				8CA7CBF92B77AC8A008E587F /* SwiftSoup in Frameworks */,
 				8CA7CBEB2B77AC8A008E587F /* SFSymbol in Frameworks */,
-				8CA7CBFB2B77AC8A008E587F /* CachedAsyncImage in Frameworks */,
 				8CB176B02BB8421300CEC05C /* DarockKit in Frameworks */,
 				8CA7CBF32B77AC8A008E587F /* SDWebImageWebPCoder in Frameworks */,
 				8CA7CBEF2B77AC8A008E587F /* EFQRCode in Frameworks */,
@@ -592,7 +585,6 @@
 				8CC5B7292B8742D300BAD89E /* SwiftSoup in Frameworks */,
 				8CC5B7352B8742D300BAD89E /* AZVideoPlayer in Frameworks */,
 				8CC5B71B2B8742D300BAD89E /* SFSymbol in Frameworks */,
-				8CC5B72B2B8742D300BAD89E /* CachedAsyncImage in Frameworks */,
 				8CC5B7232B8742D300BAD89E /* SDWebImageWebPCoder in Frameworks */,
 				8CC5B71F2B8742D300BAD89E /* EFQRCode in Frameworks */,
 			);
@@ -971,7 +963,6 @@
 				8CA3713D2B83BF9400CE0E9E /* ZipArchive */,
 				8CA3713F2B83BF9400CE0E9E /* EFQRCode */,
 				8CA371412B83BF9400CE0E9E /* SwiftSoup */,
-				8CA371432B83BF9400CE0E9E /* CachedAsyncImage */,
 				8CA371452B83BF9400CE0E9E /* Dynamic */,
 				8CA3714B2B83BF9400CE0E9E /* AZVideoPlayer */,
 				8CA3714D2B83BF9400CE0E9E /* Mixpanel */,
@@ -1007,7 +998,6 @@
 				8CA7CC162B77AC93008E587F /* SDWebImageSVGCoder */,
 				8CA7CC182B77AC93008E587F /* SDWebImagePDFCoder */,
 				8CA7CC1A2B77AC93008E587F /* SwiftSoup */,
-				8CA7CC1C2B77AC93008E587F /* CachedAsyncImage */,
 				8CA7CC1E2B77AC93008E587F /* Dynamic */,
 				8CA7CCDE2B77BB5A008E587F /* AlertKit */,
 				8CA388982B789A0300F5F91F /* AZVideoPlayer */,
@@ -1047,7 +1037,6 @@
 				8CA7CBF42B77AC8A008E587F /* SDWebImageSVGCoder */,
 				8CA7CBF62B77AC8A008E587F /* SDWebImagePDFCoder */,
 				8CA7CBF82B77AC8A008E587F /* SwiftSoup */,
-				8CA7CBFA2B77AC8A008E587F /* CachedAsyncImage */,
 				8CA7CBFC2B77AC8A008E587F /* Dynamic */,
 				8CA370D52B82691100CE0E9E /* Mixpanel */,
 				8CB176A62BB8189300CEC05C /* SDWebImageSwiftUI */,
@@ -1080,7 +1069,6 @@
 				8CC5B7242B8742D300BAD89E /* SDWebImageSVGCoder */,
 				8CC5B7262B8742D300BAD89E /* SDWebImagePDFCoder */,
 				8CC5B7282B8742D300BAD89E /* SwiftSoup */,
-				8CC5B72A2B8742D300BAD89E /* CachedAsyncImage */,
 				8CC5B72C2B8742D300BAD89E /* Dynamic */,
 				8CC5B7322B8742D300BAD89E /* AlertKit */,
 				8CC5B7342B8742D300BAD89E /* AZVideoPlayer */,
@@ -1167,7 +1155,6 @@
 				B4468A812B4FC697002CCEB2 /* XCRemoteSwiftPackageReference "SDWebImageSVGCoder" */,
 				B4468A822B4FC6A1002CCEB2 /* XCRemoteSwiftPackageReference "SDWebImagePDFCoder" */,
 				B4468A832B4FC6B1002CCEB2 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
-				B4468A842B4FC6BE002CCEB2 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 				B4468A852B4FC6C6002CCEB2 /* XCRemoteSwiftPackageReference "Dynamic" */,
 				8CA7CCDD2B77BB5A008E587F /* XCRemoteSwiftPackageReference "AlertKit" */,
 				8C0557DD2B791B84009D9CD0 /* XCRemoteSwiftPackageReference "AZVideoPlayer" */,
@@ -1620,7 +1607,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 984;
+				CURRENT_PROJECT_VERSION = 990;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -1651,7 +1638,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 984;
+				CURRENT_PROJECT_VERSION = 990;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -1748,7 +1735,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBiliAlternative.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 984;
+				CURRENT_PROJECT_VERSION = 990;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				ENABLE_PREVIEWS = YES;
@@ -1793,7 +1780,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 984;
+				CURRENT_PROJECT_VERSION = 990;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				ENABLE_PREVIEWS = YES;
@@ -1833,7 +1820,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 984;
+				CURRENT_PROJECT_VERSION = 990;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1869,7 +1856,7 @@
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 984;
+				CURRENT_PROJECT_VERSION = 990;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1898,7 +1885,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 984;
+				CURRENT_PROJECT_VERSION = 990;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1922,7 +1909,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 984;
+				CURRENT_PROJECT_VERSION = 990;
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -1989,7 +1976,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 984;
+				CURRENT_PROJECT_VERSION = 990;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2024,7 +2011,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 984;
+				CURRENT_PROJECT_VERSION = 990;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2061,7 +2048,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 984;
+				CURRENT_PROJECT_VERSION = 990;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2108,7 +2095,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 984;
+				CURRENT_PROJECT_VERSION = 990;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2153,7 +2140,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 984;
+				CURRENT_PROJECT_VERSION = 990;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2189,7 +2176,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 984;
+				CURRENT_PROJECT_VERSION = 990;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2229,7 +2216,7 @@
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 984;
+				CURRENT_PROJECT_VERSION = 990;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -2262,7 +2249,7 @@
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 984;
+				CURRENT_PROJECT_VERSION = 990;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -2291,7 +2278,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 984;
+				CURRENT_PROJECT_VERSION = 990;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -2314,7 +2301,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 984;
+				CURRENT_PROJECT_VERSION = 990;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -2674,14 +2661,6 @@
 				minimumVersion = 2.7.0;
 			};
 		};
-		B4468A842B4FC6BE002CCEB2 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/lorenzofiamingo/swiftui-cached-async-image";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.1.1;
-			};
-		};
 		B4468A852B4FC6C6002CCEB2 /* XCRemoteSwiftPackageReference "Dynamic" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mhdhejazi/Dynamic";
@@ -2742,11 +2721,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B4468A832B4FC6B1002CCEB2 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
-		};
-		8CA371432B83BF9400CE0E9E /* CachedAsyncImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A842B4FC6BE002CCEB2 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
-			productName = CachedAsyncImage;
 		};
 		8CA371452B83BF9400CE0E9E /* Dynamic */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2816,11 +2790,6 @@
 			package = B4468A832B4FC6B1002CCEB2 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
 		};
-		8CA7CBFA2B77AC8A008E587F /* CachedAsyncImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A842B4FC6BE002CCEB2 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
-			productName = CachedAsyncImage;
-		};
 		8CA7CBFC2B77AC8A008E587F /* Dynamic */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B4468A852B4FC6C6002CCEB2 /* XCRemoteSwiftPackageReference "Dynamic" */;
@@ -2865,11 +2834,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B4468A832B4FC6B1002CCEB2 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
-		};
-		8CA7CC1C2B77AC93008E587F /* CachedAsyncImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A842B4FC6BE002CCEB2 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
-			productName = CachedAsyncImage;
 		};
 		8CA7CC1E2B77AC93008E587F /* Dynamic */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2950,11 +2914,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B4468A832B4FC6B1002CCEB2 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
-		};
-		8CC5B72A2B8742D300BAD89E /* CachedAsyncImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A842B4FC6BE002CCEB2 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
-			productName = CachedAsyncImage;
 		};
 		8CC5B72C2B8742D300BAD89E /* Dynamic */ = {
 			isa = XCSwiftPackageProductDependency;
