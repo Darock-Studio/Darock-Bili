@@ -487,6 +487,7 @@ struct DarockBili_Watch_AppApp: App {
                             UserDefaults.standard.set(UserDefaults.standard.integer(forKey: "ScreenTime\(dateStr)") + 1, forKey: "ScreenTime\(dateStr)")
                         }
                     }
+                }
             @unknown default:
                 break
             }
