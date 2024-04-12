@@ -66,7 +66,7 @@ struct SignalErrorView: View {
                     ]
                     AF.upload(multipartFormData: { multipartFormData in
                         multipartFormData.append(("User Description: " + userDesc + "\n\n" + errorText).data(using: .utf8)!, withName: "file", fileName: UserDefaults.standard.string(forKey: "NewSignalError")!)
-                    }, to: "https://api.darock.top/bili/crashfeedback/\(UserDefaults.standard.string(forKey: "NewSignalError")!.base64Encoded())", method: .post, headers: headers).responseString { response in
+                    }, to: "https://fapi.darock.top:65535/bili/crashfeedback/\(UserDefaults.standard.string(forKey: "NewSignalError")!.base64Encoded())", method: .post, headers: headers).responseString { response in
                         debugPrint(response)
                         isSending = false
                         UserDefaults.standard.set("", forKey: "NewSignalError")
