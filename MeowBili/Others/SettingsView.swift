@@ -427,9 +427,13 @@ struct PlayerSettingsView: View {
 }
 
 struct NetworkSettingsView: View {
+    @AppStorage("IsTipDarockSuggestions") var isTipDarockSuggestions = true
     @AppStorage("IsShowNetworkFixing") var isShowNetworkFixing = true
     var body: some View {
         List {
+            Section {
+                Toggle("显示来自 Darock 的推荐", isOn: $isTipDarockSuggestions)
+            }
             Section {
                 NavigationLink(destination: { NetworkFixView() }, label: {
                     Text("Troubleshoot")
@@ -918,7 +922,7 @@ struct SoftwareUpdateView: View {
             }
         }
         .onAppear {
-            DarockKit.Network.shared.requestString("https://api.darock.top/bili/newver") { respStr, isSuccess in
+            DarockKit.Network.shared.requestString("https://fapi.darock.top:65535/bili/newver") { respStr, isSuccess in
                 if isSuccess && respStr.apiFixed().contains("|") {
                     latestVer = String(respStr.apiFixed().split(separator: "|")[0])
                     latestBuild = String(respStr.apiFixed().split(separator: "|")[1])
@@ -927,7 +931,7 @@ struct SoftwareUpdateView: View {
                     if nowMajorVer != latestVer || Int(nowBuildVer)! < Int(latestBuild)! {
                         shouldUpdate = true
                     }
-                    DarockKit.Network.shared.requestString("https://api.darock.top/bili/newver/note") { respStr, isSuccess in
+                    DarockKit.Network.shared.requestString("https://fapi.darock.top:65535/bili/newver/note") { respStr, isSuccess in
                         if isSuccess {
                             releaseNote = respStr.apiFixed()
                             isLoading = false
