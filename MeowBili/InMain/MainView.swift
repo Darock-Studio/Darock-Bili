@@ -205,7 +205,7 @@ struct MainView: View {
                         if newMajorVer != "" && newBuildVer != "" {
                             let nowMajorVer = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
                             let nowBuildVer = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
-                            if (nowMajorVer < newMajorVer || nowBuildVer < newBuildVer) && updateTipIgnoreVersion != "\(newMajorVer)\(newBuildVer)" {
+                            if (nowMajorVer < newMajorVer || Int(nowBuildVer) ?? 1 < Int(newBuildVer) ?? 1) && updateTipIgnoreVersion != "\(newMajorVer)\(newBuildVer)" {
                                 VStack {
                                     Text("Home.update.\(newMajorVer).\(newBuildVer)")
                                     if isShowDisableNewVerTip {
