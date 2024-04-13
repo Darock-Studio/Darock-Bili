@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/sparrowcode/AlertKit",
       "state" : {
-        "revision" : "3d35de60ad26aab58395ebecdd63b533546862ed",
-        "version" : "5.1.8"
+        "revision" : "3b73be8db5a7e7efaf474c6ed919f5a437d843c9",
+        "version" : "5.1.9"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/adamzarn/AZVideoPlayer",
       "state" : {
-        "revision" : "277226551a519a3dcd8de09c2741a4b61c4c95db",
-        "version" : "1.1.0"
+        "revision" : "f37c779bf5c00e85dc31ad25d883b3f2e5242b2a",
+        "version" : "1.2.0"
       }
     },
     {
@@ -42,7 +42,7 @@
       "location" : "https://github.com/Darock-Studio/DarockKit",
       "state" : {
         "branch" : "main",
-        "revision" : "b4d26e8c8c37572708f2aa13eb6377c55f18dabc"
+        "revision" : "0735d98596b3fe5280a3d287264150d4ae202076"
       }
     },
     {
@@ -87,7 +87,7 @@
       "location" : "https://github.com/mixpanel/mixpanel-swift",
       "state" : {
         "branch" : "master",
-        "revision" : "e84dcf73b81490fe16357ec62810aed3d98ceb8f"
+        "revision" : "6522fb2acc9b823cf420c8e2dd1233f689ec505a"
       }
     },
     {

@@ -68,7 +68,6 @@ struct CommentsView: View {
         @State var commentReplies = [[[String: String]]]()
         @State var nowPage = 1
         @State var isSenderDetailsPresented = [Bool]()
-        @State var commentOffsets = [CGFloat]()
         @State var isLoaded = false
         @State var isSendCommentPresented = false
         @State var isNoMore = false
@@ -215,11 +214,6 @@ struct CommentsView: View {
                                 Divider()
                             }
                             .padding(5)
-                            .offset(y: commentOffsets[i])
-                            .animation(.easeOut(duration: 0.4), value: commentOffsets[i])
-                            .onAppear {
-                                commentOffsets[i] = 0
-                            }
                         }
                         if !isNoMore {
                             Button(action: {
@@ -278,7 +272,6 @@ struct CommentsView: View {
                         var calNum = 0
                         for reply in replies {
                             isSenderDetailsPresented.append(false)
-                            commentOffsets.append(20)
                             let repliesInComment = reply.1["replies"]
                             commentReplies.append([])
                             for sigReply in repliesInComment {
@@ -306,7 +299,6 @@ struct CommentsView: View {
             @AppStorage("bili_jct") var biliJct = ""
             @State var replies = [[String: String]]()
             @State var isSenderDetailsPresented = [Bool]()
-            @State var commentOffsets = [CGFloat]()
             @State var currentPresentationDetent = PresentationDetent.medium
             var body: some View {
                 NavigationStack {
@@ -421,11 +413,6 @@ struct CommentsView: View {
                                         }
                                         .id(replies[i]["Rpid"]!)
                                         .padding(5)
-                                        .offset(y: commentOffsets[i])
-                                        .animation(.easeOut(duration: 0.4), value: commentOffsets[i])
-                                        .onAppear {
-                                            commentOffsets[i] = 0
-                                        }
                                     }
                                 } else {
                                     ProgressView()
@@ -443,7 +430,6 @@ struct CommentsView: View {
                                     debugPrint(respJson)
                                     if !CheckBApiError(from: respJson) { return }
                                     for reply in respJson["data"]["replies"] {
-                                        commentOffsets.append(20)
                                         isSenderDetailsPresented.append(false)
                                         replies.append(["Text": reply.1["content"]["message"].string ?? "[加载失败]", "Sender": reply.1["member"]["uname"].string ?? "[加载失败]", "SenderPic": reply.1["member"]["avatar"].string ?? "E", "SenderID": reply.1["member"]["mid"].string ?? "E", "IP": reply.1["reply_control"]["location"].string ?? "", "UserAction": String(reply.1["action"].int ?? 0), "Rpid": reply.1["rpid_str"].string ?? "-1", "Like": String(reply.1["like"].int ?? -1)])
                                     }

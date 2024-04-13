@@ -26,9 +26,6 @@ import SwiftyJSON
 import Foundation
 import AVFoundation
 import CommonCrypto
-#if !os(watchOS)
-import CoreHaptics
-#endif
 
 extension String {
     func shorter() -> String {
@@ -631,92 +628,6 @@ public func getBuvid(url: String, callback: @escaping (String, String, String, S
     }
 }
 // swiftlint:enable colon
-
-#if !os(watchOS)
-public func PlayHaptic(sharpness: Float, intensity: Float) {
-    guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
-    var events = [CHHapticEvent]()
-    let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: intensity)
-    let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: sharpness)
-    let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 0)
-    events.append(event)
-    do {
-        let pattern = try CHHapticPattern(events: events, parameters: [])
-        let player = try globalHapticEngine?.makePlayer(with: pattern)
-        try player?.start(atTime: 0)
-    } catch {
-        print("Failed to play pattern: \(error.localizedDescription).")
-    }
-}
-#endif
-
-postfix operator ++
-postfix operator --
-prefix operator ++
-prefix operator --
-extension Int {
-    @discardableResult
-    static postfix func ++ (num: inout Int) -> Int {
-        num += 1
-        return num - 1
-    }
-    
-    @discardableResult
-    static postfix func -- (num: inout Int) -> Int {
-        num -= 1
-        return num + 1
-    }
-
-    @discardableResult
-    static prefix func ++ (num: inout Int) -> Int {
-        num += 1
-        return num
-    }
-
-    @discardableResult
-    static prefix func -- (num: inout Int) -> Int {
-        num -= 1
-        return num
-    }
-}
-
-extension Bool {
-    @_transparent
-    init(_ input: Int) {
-        if input == 0 {
-            self = false
-        } else {
-            self = true
-        }
-    }
-}
-extension Int {
-    @_transparent
-    init (_ input: Bool) {
-        if input {
-            self = 1
-        } else {
-            self = 0
-        }
-    }
-}
-
-infix operator ~
-extension Float {
-    static func ~ (lhs: Float, rhs: Int) -> String {
-        return String(format: "%.\(rhs)f", lhs)
-    }
-}
-extension Double {
-    static func ~ (lhs: Double, rhs: Int) -> String {
-        return String(format: "%.\(rhs)f", lhs)
-    }
-}
-
-prefix operator &&
-prefix func && <T>(input: inout T) -> UnsafeMutablePointer<T> {
-    withUnsafeMutablePointer(to: &input) { $0 }
-}
 
 public func debugPrint(_ items: Any..., separator: String = " ", terminator: String = "\n") {
     Swift.debugPrint(items, separator: separator, terminator: terminator)
