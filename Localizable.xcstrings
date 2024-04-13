@@ -8515,6 +8515,7 @@
 
     },
     "复制" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9359,6 +9360,7 @@
       }
     },
     "选择文本" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

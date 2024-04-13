@@ -56,10 +56,6 @@ var isInLowBatteryMode = false
 var globalBuvid3 = ""
 var globalBuvid4 = ""
 
-#if !os(watchOS)
-var globalHapticEngine: CHHapticEngine?
-#endif
-
 #if os(visionOS)
 var globalWindowSize = Size3D()
 #endif
@@ -465,14 +461,7 @@ struct DarockBili_Watch_AppApp: App {
                 #if os(watchOS)
                 WKInterfaceDevice.current().isBatteryMonitoringEnabled = true
                 #else
-                if CHHapticEngine.capabilitiesForHardware().supportsHaptics {
-                    do {
-                        globalHapticEngine = try CHHapticEngine()
-                        try globalHapticEngine?.start()
-                    } catch {
-                        print("创建引擎时出现错误： \(error.localizedDescription)")
-                    }
-                }
+                
                 
                 shouldShowAppName = true
                 #endif
