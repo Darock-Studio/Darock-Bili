@@ -62,7 +62,9 @@ struct FollowListView: View {
                                             .foregroundColor(.gray)
                                     }
                                     #if !os(visionOS)
-                                    WebImage(url: URL(string: users[i]["Face"]! + "@28w"), options: [.progressiveLoad])
+                                    WebImage(url: URL(string: users[i]["Face"]! + "@56w"), options: [.progressiveLoad])
+                                        .resizable()
+                                        .frame(width: 28, height: 28)
                                         .clipShape(Circle())
                                     #else
                                     AsyncImage(url: URL(string: users[i]["Face"]! + "@28w"))

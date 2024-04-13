@@ -998,7 +998,7 @@ struct VideoDetailView: View {
                                     "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                 ]
                                 let avid = bv2av(bvid: videoDetails["BV"]!)
-                                AF.request("https://api.bilibili.com/x/v3/fav/resource/deal", method: .post, parameters: ["rid": avid, "type": 2, "\(isFavoriteTargetIn[i] ? "del" : "add")_media_ids": Int(favoriteFolderList[i]["ID"]!)!, "csrf": biliJct], headers: headers).response { response in
+                                AF.request("https://api.bilibili.com/x/v3/fav/resource/deal", method: .post, parameters: ["rid": avid, "type": 2, "\(isFavoriteTargetIn[i] ? "del" : "add")_media_ids": Int64(favoriteFolderList[i]["ID"]!)!, "csrf": biliJct], headers: headers).response { response in
                                     debugPrint(response)
                                     if let rpd = response.data {
                                         if !CheckBApiError(from: try! JSON(data: rpd)) {
@@ -1054,7 +1054,7 @@ struct VideoDetailView: View {
                     if isSuccess {
                         if !CheckBApiError(from: respJson) { return }
                         for folder in respJson["data"]["list"] {
-                            favoriteFolderList.append(["ID": String(folder.1["id"].int ?? 0), "Title": folder.1["title"].string ?? "", "Count": String(folder.1["media_count"].int ?? 0)])
+                            favoriteFolderList.append(["ID": String(folder.1["id"].int64 ?? 0), "Title": folder.1["title"].string ?? "", "Count": String(folder.1["media_count"].int ?? 0)])
                             isFavoriteTargetIn.append((folder.1["fav_state"].int ?? 0) == 0 ? false : true)
                             isItemLoading.append(false)
                         }

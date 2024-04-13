@@ -189,7 +189,7 @@ struct CommentsView: View {
                                                 "cookie": "SESSDATA=\(sessdata)",
                                                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                             ]
-                                            AF.request("https://api.bilibili.com/x/v2/reply/action", method: .post, parameters: BiliCommentLike(type: type, oid: id, rpid: Int(comments[i]["Rpid"]!)!, action: comments[i]["UserAction"]! == "1" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
+                                            AF.request("https://api.bilibili.com/x/v2/reply/action", method: .post, parameters: BiliCommentLike(type: type, oid: id, rpid: Int64(comments[i]["Rpid"]!)!, action: comments[i]["UserAction"]! == "1" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
                                                 debugPrint(response)
                                                 comments[i]["UserAction"]! = comments[i]["UserAction"]! == "1" ? "0" : "1"
                                             }
@@ -204,7 +204,7 @@ struct CommentsView: View {
                                                 "cookie": "SESSDATA=\(sessdata)",
                                                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                             ]
-                                            AF.request("https://api.bilibili.com/x/v2/reply/hate", method: .post, parameters: BiliCommentLike(type: type, oid: id, rpid: Int(comments[i]["Rpid"]!)!, action: comments[i]["UserAction"]! == "2" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
+                                            AF.request("https://api.bilibili.com/x/v2/reply/hate", method: .post, parameters: BiliCommentLike(type: type, oid: id, rpid: Int64(comments[i]["Rpid"]!)!, action: comments[i]["UserAction"]! == "2" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
                                                 debugPrint(response)
                                                 comments[i]["UserAction"]! = comments[i]["UserAction"]! == "2" ? "0" : "2"
                                             }
@@ -387,7 +387,7 @@ struct CommentsView: View {
                                                             "cookie": "SESSDATA=\(sessdata)",
                                                             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                                         ]
-                                                        AF.request("https://api.bilibili.com/x/v2/reply/action", method: .post, parameters: BiliCommentLike(type: type, oid: avid, rpid: Int(replies[i]["Rpid"]!)!, action: replies[i]["UserAction"]! == "1" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
+                                                        AF.request("https://api.bilibili.com/x/v2/reply/action", method: .post, parameters: BiliCommentLike(type: type, oid: avid, rpid: Int64(replies[i]["Rpid"]!)!, action: replies[i]["UserAction"]! == "1" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
                                                             debugPrint(response)
                                                             replies[i]["UserAction"]! = replies[i]["UserAction"]! == "1" ? "0" : "1"
                                                         }
@@ -402,7 +402,7 @@ struct CommentsView: View {
                                                             "cookie": "SESSDATA=\(sessdata)",
                                                             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                                         ]
-                                                        AF.request("https://api.bilibili.com/x/v2/reply/hate", method: .post, parameters: BiliCommentLike(type: type, oid: avid, rpid: Int(replies[i]["Rpid"]!)!, action: replies[i]["UserAction"]! == "2" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
+                                                        AF.request("https://api.bilibili.com/x/v2/reply/hate", method: .post, parameters: BiliCommentLike(type: type, oid: avid, rpid: Int64(replies[i]["Rpid"]!)!, action: replies[i]["UserAction"]! == "2" ? 0 : 1, csrf: biliJct), headers: headers).response { response in
                                                             debugPrint(response)
                                                             replies[i]["UserAction"]! = replies[i]["UserAction"]! == "2" ? "0" : "2"
                                                         }
@@ -502,7 +502,7 @@ struct CommentsView: View {
 struct BiliCommentLike: Codable {
     var type: Int
     let oid: String
-    let rpid: Int
+    let rpid: Int64
     let action: Int
     let csrf: String
 }
