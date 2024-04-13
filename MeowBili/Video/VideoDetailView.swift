@@ -1095,9 +1095,9 @@ struct VideoDetailView: View {
                             .redacted(reason: .placeholder)
                     }
                     .resizable()
+                    .cornerRadius(10)
                     .scaledToFit()
                     .frame(width: 120, height: 80)
-                    .cornerRadius(14)
                     .shadow(color: .black.opacity(0.5), radius: 5, x: 1, y: 2)
                     .offset(y: 8)
                     .sheet(isPresented: $isCoverImageViewPresented, content: { ImageViewerView(url: videoDetails["Pic"]!) })

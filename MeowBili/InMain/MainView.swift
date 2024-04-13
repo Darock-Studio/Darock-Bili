@@ -181,12 +181,12 @@ struct MainView: View {
         @State var freshCount = 0
         @State var darockSuggestions = [[String: String]]()
         var body: some View {
-            Group {
+            ZStack {
                 List {
                     Section {
                         if debug {
                             Button(action: {
-                                
+                                tipWithText("Test", symbol: "hammer.fill")
                             }, label: {
                                 Text("Home.debug")
                             })
@@ -286,6 +286,23 @@ struct MainView: View {
                     }
                 }
                 .scrollIndicators(.never)
+                if debugBuild {
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Spacer()
+                            Text("喵哩喵哩\n调试构建。 Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String).xc_verd.\(Text({ () -> String in let df = DateFormatter(); df.dateFormat = "yyMMdd-hhmm"; return df.string(from: Date(timeIntervalSince1970: TimeInterval(CodingTime.getCodingTimestamp()))) }()))")
+                                .font(.system(size: 7))
+                                .multilineTextAlignment(.trailing)
+                            Spacer()
+                                .frame(width: 10)
+                        }
+                        Spacer()
+                            .frame(height: 10)
+                    }
+                    .allowsHitTesting(false)
+                    .ignoresSafeArea()
+                }
             }
             .navigationTitle("Home")
             .refreshable {

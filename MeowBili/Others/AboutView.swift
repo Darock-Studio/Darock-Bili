@@ -77,13 +77,24 @@ struct AboutApp: View {
                     Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)")
                         .font(.system(size: 18))
                 }
-                Text("\(String(try! String(contentsOf: Bundle.main.url(forResource: "CurrentChannel", withExtension: "drkdatac")!).split(separator: "\n")[0])) 通道")
-                    .font(.system(size: 18))
+                if !debugBuild {
+                    Text("\(String(try! String(contentsOf: Bundle.main.url(forResource: "CurrentChannel", withExtension: "drkdatac")!).split(separator: "\n")[0])) 通道")
+                } else {
+                    Text("调试构建")
+                }
                 Group {
                     if debug {
-                        Text(CodingTime.getCodingTime())
+                        Text({ () -> String in
+                            let df = DateFormatter()
+                            df.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                            return df.string(from: Date(timeIntervalSince1970: TimeInterval(CodingTime.getCodingTimestamp())))
+                        }())
                     } else {
-                        Text("\(CodingTime.getCodingTime().components(separatedBy: " ")[0] + " " + CodingTime.getCodingTime().components(separatedBy: " ")[1] + " " +  CodingTime.getCodingTime().components(separatedBy: " ")[2])")
+                        Text({ () -> String in
+                            let df = DateFormatter()
+                            df.dateFormat = "yyyy-MM-dd HH:mm"
+                            return "构建时间：\(df.string(from: Date(timeIntervalSince1970: TimeInterval(CodingTime.getCodingTimestamp()))))"
+                        }())
                     }
                 }
                 .font(.system(size: 18))
@@ -199,11 +210,25 @@ struct AboutApp: View {
                 } else {
                     Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)")
                 }
-                Text("\(String(try! String(contentsOf: Bundle.main.url(forResource: "CurrentChannel", withExtension: "drkdatac")!).split(separator: "\n")[0])) 通道")
-                if debug {
-                    Text(CodingTime.getCodingTime())
+                if !debugBuild {
+                    Text("\(String(try! String(contentsOf: Bundle.main.url(forResource: "CurrentChannel", withExtension: "drkdatac")!).split(separator: "\n")[0])) 通道")
                 } else {
-                    Text("\(CodingTime.getCodingTime().components(separatedBy: " ")[0] + " " + CodingTime.getCodingTime().components(separatedBy: " ")[1] + " " +  CodingTime.getCodingTime().components(separatedBy: " ")[2])")
+                    Text("调试构建")
+                }
+                if debug {
+                    Text({ () -> String in
+                        let df = DateFormatter()
+                        df.dateFormat = "yy-MM-dd HH:mm:ss"
+                        return df.string(from: Date(timeIntervalSince1970: TimeInterval(CodingTime.getCodingTimestamp())))
+                    }())
+                    .font(.system(size: 10))
+                } else {
+                    Text({ () -> String in
+                        let df = DateFormatter()
+                        df.dateFormat = "yy-MM-dd HH:mm"
+                        return "构建时间：\(df.string(from: Date(timeIntervalSince1970: TimeInterval(CodingTime.getCodingTimestamp()))))"
+                    }())
+                    .font(.system(size: 10))
                 }
             }
             .font(.caption)

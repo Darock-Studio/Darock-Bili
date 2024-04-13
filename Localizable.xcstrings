@@ -8473,6 +8473,26 @@
     "喵哩喵哩" : {
 
     },
+    "喵哩喵哩\n调试构建。 Build %@.xc_verd.%@" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "喵哩喵哩\n调试构建。 Build %1$@.xc_verd.%2$@"
+          }
+        }
+      }
+    },
+    "喵哩喵哩\n调试构建。 Build %@.xc_verd.%lld" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "喵哩喵哩\n调试构建。 Build %1$@.xc_verd.%2$lld"
+          }
+        }
+      }
+    },
     "喵哩喵哩为完整开源项目，欢迎检查代码以确认无隐私问题" : {
 
     },
@@ -9318,6 +9338,9 @@
       }
     },
     "请将恢复密钥保存到安全的位置" : {
+
+    },
+    "调试构建" : {
 
     },
     "超大" : {
