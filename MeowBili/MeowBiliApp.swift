@@ -37,12 +37,19 @@ import CoreHaptics
 
 //!!!: Debug Setting, Set false Before Release
 var debug = false
+var debugBuild: Bool {
+    #if DEBUG
+    true
+    #else
+    false
+    #endif
+}
 
 var debugControlStdout = "stdo\n"
 
 var pShowTipText = ""
 var pShowTipSymbol = ""
-var pTipBoxOffset: CGFloat = 80
+var pIsShowingTip = false
 
 var isShowMemoryInScreen = false
 
@@ -135,7 +142,7 @@ struct DarockBili_Watch_AppApp: App {
     @State var screenTimeCaculateTimer: Timer?
     @State var showTipText = ""
     @State var showTipSymbol = ""
-    @State var tipBoxOffset: CGFloat = 80
+    @State var isShowingTip = false
     @State var isLowBatteryMode = false
     // Debug Controls
     @State var isShowingDebugControls = false
@@ -205,40 +212,50 @@ struct DarockBili_Watch_AppApp: App {
                     ContentView()
                     VStack {
                         Spacer()
-                        if #available(watchOS 10, *) {
-                            HStack {
-                                Image(systemName: showTipSymbol)
-                                Text(showTipText)
+                        if isShowingTip {
+                            Group {
+                                if #available(watchOS 10, *) {
+                                    HStack {
+                                        Image(systemName: showTipSymbol)
+                                        Text(showTipText)
+                                    }
+                                    .font(.system(size: 14, weight: .bold))
+                                    .frame(width: WKInterfaceDevice.current().screenBounds.width - 20, height: 50)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.1)
+                                    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                                } else {
+                                    HStack {
+                                        Image(systemName: showTipSymbol)
+                                        Text(showTipText)
+                                    }
+                                    .font(.system(size: 14, weight: .bold))
+                                    .foregroundColor(.black)
+                                    .frame(width: WKInterfaceDevice.current().screenBounds.width - 20, height: 50)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.1)
+                                    .background {
+                                        Color.white
+                                            .ignoresSafeArea()
+                                            .frame(width: WKInterfaceDevice.current().screenBounds.width - 20, height: 40)
+                                            .cornerRadius(14)
+                                            .foregroundColor(Color(hex: 0xF5F5F5))
+                                            .opacity(0.95)
+                                    }
+                                }
                             }
-                            .font(.system(size: 14, weight: .bold))
-                            .frame(width: 110, height: 40)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.1)
-                            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
-                            .offset(y: tipBoxOffset)
-                            .animation(.easeOut(duration: 0.4), value: tipBoxOffset)
-                        } else {
-                            HStack {
-                                Image(systemName: showTipSymbol)
-                                Text(showTipText)
-                            }
-                            .font(.system(size: 14, weight: .bold))
-                            .foregroundColor(.black)
-                            .frame(width: 110, height: 40)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.1)
-                            .background {
-                                Color.white
-                                    .ignoresSafeArea()
-                                    .frame(width: 120, height: 40)
-                                    .cornerRadius(8)
-                                    .foregroundColor(Color(hex: 0xF5F5F5))
-                                    .opacity(0.95)
-                            }
-                            .offset(y: tipBoxOffset)
-                            .animation(.easeOut(duration: 0.4), value: tipBoxOffset)
+                            .transition(
+                                AnyTransition
+                                    .opacity
+                                    .combined(with: .scale)
+                                    .animation(.bouncy(duration: 0.35))
+                            )
                         }
+                        Spacer()
+                            .frame(height: 15)
                     }
+                    .ignoresSafeArea()
+                    .allowsHitTesting(false)
                     #else
                     NavigationStack {
                         ZStack {
@@ -300,6 +317,7 @@ struct DarockBili_Watch_AppApp: App {
                             }
                     }
                     #endif
+                    
                 }
                 #if os(watchOS)
                 .sheet(isPresented: $isMemoryWarningPresented, content: { MemoryWarningView() })
@@ -313,9 +331,8 @@ struct DarockBili_Watch_AppApp: App {
                         showTipText = pShowTipText
                         showTipSymbol = pShowTipSymbol
                         UserDefaults.standard.set(isLowBatteryMode, forKey: "IsInLowBatteryMode")
-                        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { timer in
-                            tipBoxOffset = pTipBoxOffset
-                            timer.invalidate()
+                        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
+                            isShowingTip = pIsShowingTip
                         }
                     }
                     
@@ -461,7 +478,7 @@ struct DarockBili_Watch_AppApp: App {
                 #if os(watchOS)
                 WKInterfaceDevice.current().isBatteryMonitoringEnabled = true
                 #else
-                
+                InitHapticEngine()
                 
                 shouldShowAppName = true
                 #endif
@@ -484,17 +501,14 @@ struct DarockBili_Watch_AppApp: App {
     }
 }
 
-#if os(watchOS) || os(visionOS)
 public func tipWithText(_ text: String, symbol: String = "", time: Double = 3.0) {
     pShowTipText = text
     pShowTipSymbol = symbol
-    pTipBoxOffset = 7
-    Timer.scheduledTimer(withTimeInterval: time, repeats: false) { timer in
-        pTipBoxOffset = 80
-        timer.invalidate()
+    pIsShowingTip = true
+    Timer.scheduledTimer(withTimeInterval: time, repeats: false) { _ in
+        pIsShowingTip = false
     }
 }
-#endif
 
 #if !os(watchOS)
 class AppDelegate: NSObject, UIApplicationDelegate {

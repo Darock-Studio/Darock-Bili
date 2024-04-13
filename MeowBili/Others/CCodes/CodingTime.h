@@ -24,6 +24,7 @@
 @interface CodingTime : NSObject
 
 + (NSString *) getCodingTime;
++ (long) getCodingTimestamp;
 
 @end
 
