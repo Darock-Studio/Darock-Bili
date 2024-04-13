@@ -46,7 +46,7 @@ jobs:
       - name: Change Project Version
         env:
           TARGET_TAG: ${{ inputs.buildv }}
-        run: sed -i '' "s|CURRENT_PROJECT_VERSION = [0-9]*;|CURRENT_PROJECT_VERSION = ;|g" ./DarockBili.xcodeproj/project.pbxproj
+        run: sed -i '' "s|CURRENT_PROJECT_VERSION = [0-9]*;|CURRENT_PROJECT_VERSION = $TARGET_TAG;|g" ./DarockBili.xcodeproj/project.pbxproj
 
       - name: Install the Apple certificate and provisioning profile for Xcode
         env:
