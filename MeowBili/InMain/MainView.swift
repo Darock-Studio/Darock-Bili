@@ -43,6 +43,7 @@ struct MainView: View {
     @State var userList3: [Any] = []
     @State var userList4: [Any] = []
     @State var isNewUserPresenting = false
+    @State var festivalType = FestivalType.normal
     var body: some View {
         #if !os(watchOS)
         MainViewMain()
@@ -65,21 +66,48 @@ struct MainView: View {
                         .accessibilityIdentifier("SearchButton")
                     }
                     ToolbarItem(placement: .topBarTrailing) {
-                        Button(action: {
-                            mainTabSelection = 2
-                        }, label: {
-                            if dedeUserID != "" && userFaceUrl != "" {
-                                WebImage(url: URL(string: userFaceUrl + "@60w"))
-                                    .resizable()
-                                    .frame(width: 30)
-                                    .clipShape(Circle())
-                                    .matchedGeometryEffect(id: "image", in: imageAnimation)
-                            } else {
-                                Image(systemName: "person")
-                                    .foregroundColor(.accentColor)
-                                    .matchedGeometryEffect(id: "image", in: imageAnimation)
+                        Group {
+                            switch festivalType {
+                            case .normal:
+                                Button(action: {
+                                    mainTabSelection = 2
+                                }, label: {
+                                    if dedeUserID != "" && userFaceUrl != "" {
+                                        WebImage(url: URL(string: userFaceUrl + "@60w"))
+                                            .resizable()
+                                            .frame(width: 30)
+                                            .clipShape(Circle())
+                                    } else {
+                                        Image(systemName: "person")
+                                            .foregroundColor(.accentColor)
+                                    }
+                                })
+                            case .darockc:
+                                NavigationLink(destination: {
+                                    Text("🎉🎉🎉\n今天是 Darock 周年庆\n到我们群 248036605 参加活动吧！")
+                                }, label: {
+                                    Text("🎉")
+                                })
+                            case .fools:
+                                NavigationLink(destination: {
+                                    Text("🤡\n愚人节快乐！")
+                                }, label: {
+                                    Text("🤡")
+                                })
+                            case .newyr:
+                                NavigationLink(destination: {
+                                    Text("Darock 祝您新年快乐！")
+                                }, label: {
+                                    Text("🧨")
+                                })
+                            case .birthday:
+                                NavigationLink(destination: {
+                                    Text("生日快乐，\(username)！")
+                                }, label: {
+                                    Text("🎂")
+                                })
                             }
-                        })
+                        }
                         .buttonStyle(.plain)
                     }
                 }
@@ -100,12 +128,26 @@ struct MainView: View {
                                         username = respJson["data"]["name"].string ?? ""
                                         userSign = respJson["data"]["sign"].string ?? ""
                                         userFaceUrl = respJson["data"]["face"].string ?? "E"
+                                        if let bd = respJson["data"]["birthday"].string, let mo = bd.split(separator: "-")[from: 0], let d = bd.split(separator: "-")[from: 1] {
+                                            if let imo = Int(mo), let id = Int(d), imo == Date.now.month && id == Date.now.day {
+                                                festivalType = .birthday
+                                            }
+                                        }
                                     } else if isShowNetworkFixing {
                                         isNetworkFixPresented = true
                                     }
                                 }
                             }
                         }
+                    }
+                    if Date.now.month == 4 && Date.now.day == 1 {
+                        festivalType = .fools
+                    } else if Date.now.month == 1 && Date.now.day == 24 {
+                        festivalType = .darockc
+                    } else if Date.now.month == 1 && Date.now.day == 1 {
+                        festivalType = .newyr
+                    } else {
+                        festivalType = .normal
                     }
                 }
         } else {
@@ -347,5 +389,13 @@ struct MainView: View {
                 }
             }
         }
+    }
+    
+    enum FestivalType {
+        case normal
+        case darockc
+        case fools
+        case newyr
+        case birthday
     }
 }
