@@ -56,7 +56,7 @@ struct FavoriteView: View {
                         isLoaded = true
                         let datas = respJson["data"]["list"]
                         for data in datas {
-                            favoriteFolders.append(["Title": data.1["title"].string!, "ID": String(data.1["id"].int!), "Count": String(data.1["media_count"].int!)])
+                            favoriteFolders.append(["Title": data.1["title"].string!, "ID": String(data.1["id"].int64!), "Count": String(data.1["media_count"].int!)])
                         }
                     }
                 }
@@ -93,7 +93,7 @@ struct FavoriteDetailView: View {
                                                     "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                                 ]
                                                 let avid = bv2av(bvid: dict["BV"]!)
-                                                AF.request("https://api.bilibili.com/x/v3/fav/resource/deal", method: .post, parameters: ["rid": avid, "type": 2, "add_media_ids": Int(folderDatas["ID"]!)!, "csrf": biliJct], headers: headers).response { _ in }
+                                                AF.request("https://api.bilibili.com/x/v3/fav/resource/deal", method: .post, parameters: ["rid": avid, "type": 2, "add_media_ids": Int64(folderDatas["ID"]!)!, "csrf": biliJct], headers: headers).response { _ in }
                                             }
                                         }
                                     }
