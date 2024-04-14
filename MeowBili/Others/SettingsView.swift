@@ -33,6 +33,7 @@ struct SettingsView: View {
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
     @AppStorage("bili_jct") var biliJct = ""
+    @AppStorage("IsLargeSuggestionStyle") var isLargeSuggestionStyle = false
     @State var isLogoutAlertPresented = false
     var body: some View {
         List {
@@ -219,6 +220,18 @@ struct SettingsView: View {
                                 .font(.system(size: 12))
                         }
                         Text("Settings.player")
+                    }
+                })
+                NavigationLink(destination: { SuggestionViewSettingsView().navigationTitle("推荐视图") }, label: {
+                    HStack {
+                        ZStack {
+                            Color.blue
+                                .frame(width: 20, height: 20)
+                                .clipShape(Circle())
+                            Image(systemName: isLargeSuggestionStyle ? "text.below.photo" : "rectangle.grid.1x2")
+                                .font(.system(size: isLargeSuggestionStyle ? 10 : 12))
+                        }
+                        Text("推荐视图")
                     }
                 })
                 NavigationLink(destination: { NetworkSettingsView().navigationTitle("Settings.internet") }, label: {
@@ -439,6 +452,19 @@ struct PlayerSettingsView: View {
     }
 }
 
+struct SuggestionViewSettingsView: View {
+    @AppStorage("IsLargeSuggestionStyle") var isLargeSuggestionStyle = false
+    var body: some View {
+        List {
+            Picker("推荐视图样式", selection: $isLargeSuggestionStyle) {
+                Label("列表视图", systemImage: "rectangle.grid.1x2").tag(false)
+                Label("大图视图", systemImage: "text.below.photo").tag(true)
+            }
+            .pickerStyle(.inline)
+        }
+    }
+}
+
 struct NetworkSettingsView: View {
     @AppStorage("IsTipDarockSuggestions") var isTipDarockSuggestions = true
     @AppStorage("IsShowNetworkFixing") var isShowNetworkFixing = true
@@ -588,7 +614,6 @@ struct StorageSettingsView: View {
     @State var docSize: UInt64 = 0
     @State var tmpSize: UInt64 = 0
     @State var bundleSize: UInt64 = 0
-    @State var sizeAvailable: UInt64 = 0
     @State var isClearingCache = false
     @State var videoMetadatas = [[String: String]]()
     @State var vRootPath = ""
@@ -599,7 +624,7 @@ struct StorageSettingsView: View {
                     Section {
                         VStack {
                             HStack {
-                                Text("已使用 \(bytesToMegabytes(bytes: docSize + tmpSize + bundleSize) ~ 2) MB/\((bytesToMegabytes(bytes: sizeAvailable + docSize + tmpSize + bundleSize) / 1024) ~ 1) GB")
+                                Text("已使用 \(bytesToMegabytes(bytes: docSize + tmpSize + bundleSize) ~ 2) MB")
                                     .font(.system(size: 13))
                                     .foregroundColor(.gray)
                                 Spacer()
@@ -611,10 +636,8 @@ struct StorageSettingsView: View {
                                     .foregroundStyle(by: .value("", "Purple"))
                                 BarMark(x: .value("", tmpSize))
                                     .foregroundStyle(by: .value("", "Primary"))
-                                BarMark(x: .value("", sizeAvailable))
-                                    .foregroundStyle(by: .value("", "Secondary"))
                             }
-                            .chartForegroundStyleScale(["Gray": .gray, "Purple": .purple, "Primary": .primary, "Secondary": .secondary])
+                            .chartForegroundStyleScale(["Gray": .gray, "Purple": .purple, "Primary": .primary, "Secondary": Color(hex: 0x333333)])
                             .chartXAxis(.hidden)
                             .chartLegend(.hidden)
                             .cornerRadius(2)
@@ -643,7 +666,7 @@ struct StorageSettingsView: View {
                                     Circle()
                                         .fill(Color.primary)
                                         .frame(width: 10, height: 10)
-                                    Text("缓存")
+                                    Text("缓存数据")
                                         .font(.system(size: 14))
                                         .foregroundColor(.gray)
                                     Spacer()
@@ -705,74 +728,6 @@ struct StorageSettingsView: View {
                             List {
                                 Section {
                                     HStack {
-                                        ZStack {
-                                            Color.gray
-                                                .frame(width: 20, height: 20)
-                                                .clipShape(Circle())
-                                            Image(systemName: "ellipsis.circle")
-                                                .font(.system(size: 12))
-                                        }
-                                        Spacer()
-                                            .frame(width: 5)
-                                        VStack {
-                                            HStack {
-                                                Text("缓存")
-                                                Spacer()
-                                            }
-                                            HStack {
-                                                Text("\(bytesToMegabytes(bytes: tmpSize) ~ 2) MB")
-                                                    .font(.system(size: 15))
-                                                    .foregroundColor(.gray)
-                                                Spacer()
-                                            }
-                                        }
-                                    }
-                                }
-                                Section {
-                                    if !isClearingCache {
-                                        Button(action: {
-                                            DispatchQueue(label: "com.darock.DarockBili.storage-clear-cache", qos: .userInitiated).async {
-                                                isClearingCache = true
-                                                try? FileManager.default.removeItem(atPath: NSTemporaryDirectory())
-                                                isClearingCache = false
-                                            }
-                                        }, label: {
-                                            Text("清除缓存")
-                                        })
-                                    } else {
-                                        ProgressView()
-                                    }
-                                }
-                            }
-                        }, label: {
-                            HStack {
-                                ZStack {
-                                    Color.gray
-                                        .frame(width: 20, height: 20)
-                                        .clipShape(Circle())
-                                    Image(systemName: "ellipsis.circle")
-                                        .font(.system(size: 12))
-                                }
-                                Spacer()
-                                    .frame(width: 5)
-                                VStack {
-                                    HStack {
-                                        Text("缓存")
-                                        Spacer()
-                                    }
-                                    HStack {
-                                        Text("\(bytesToMegabytes(bytes: tmpSize) ~ 2) MB")
-                                            .font(.system(size: 15))
-                                            .foregroundColor(.gray)
-                                        Spacer()
-                                    }
-                                }
-                            }
-                        })
-                        NavigationLink(destination: {
-                            List {
-                                Section {
-                                    HStack {
                                         Image("AppIconImage")
                                             .resizable()
                                             .frame(width: 20, height: 20)
@@ -822,6 +777,76 @@ struct StorageSettingsView: View {
                                 }
                             }
                         })
+                        if bytesToMegabytes(bytes: tmpSize) > 0.2 {
+                            NavigationLink(destination: {
+                                List {
+                                    Section {
+                                        HStack {
+                                            ZStack {
+                                                Color.gray
+                                                    .frame(width: 20, height: 20)
+                                                    .clipShape(Circle())
+                                                Image(systemName: "ellipsis.circle")
+                                                    .font(.system(size: 12))
+                                            }
+                                            Spacer()
+                                                .frame(width: 5)
+                                            VStack {
+                                                HStack {
+                                                    Text("缓存数据")
+                                                    Spacer()
+                                                }
+                                                HStack {
+                                                    Text("\(bytesToMegabytes(bytes: tmpSize) ~ 2) MB")
+                                                        .font(.system(size: 15))
+                                                        .foregroundColor(.gray)
+                                                    Spacer()
+                                                }
+                                            }
+                                        }
+                                    }
+                                    Section {
+                                        if !isClearingCache {
+                                            Button(action: {
+                                                DispatchQueue(label: "com.darock.DarockBili.storage-clear-cache", qos: .userInitiated).async {
+                                                    isClearingCache = true
+                                                    try? FileManager.default.removeItem(atPath: NSTemporaryDirectory())
+                                                    isClearingCache = false
+                                                }
+                                            }, label: {
+                                                Text("清除缓存")
+                                            })
+                                        } else {
+                                            ProgressView()
+                                        }
+                                    }
+                                }
+                            }, label: {
+                                HStack {
+                                    ZStack {
+                                        Color.gray
+                                            .frame(width: 20, height: 20)
+                                            .clipShape(Circle())
+                                        Image(systemName: "ellipsis.circle")
+                                            .font(.system(size: 12))
+                                    }
+                                    Spacer()
+                                        .frame(width: 5)
+                                    VStack {
+                                        HStack {
+                                            Text("缓存数据")
+                                            Spacer()
+                                        }
+                                        HStack {
+                                            Text("\(bytesToMegabytes(bytes: tmpSize) ~ 2) MB")
+                                                .font(.system(size: 15))
+                                                .foregroundColor(.gray)
+                                            Spacer()
+                                        }
+                                    }
+                                }
+                            })
+                        }
                     }
                 } else {
                     HStack {
@@ -840,7 +865,6 @@ struct StorageSettingsView: View {
                     docSize = folderSize(atPath: NSHomeDirectory() + "/Documents") ?? 0
                     tmpSize = folderSize(atPath: NSTemporaryDirectory()) ?? 0
                     bundleSize = folderSize(atPath: Bundle.main.bundlePath) ?? 0
-                    sizeAvailable = deviceRemainingFreeSpaceInBytes() ?? 32 * 1024 * 1024 * 1024
                     // Video sizes
                     vRootPath = String(AppFileManager(path: "dlds").GetPath("").path)
                     let files = AppFileManager(path: "dlds").GetRoot() ?? [[String: String]]()
@@ -870,7 +894,7 @@ struct StorageSettingsView: View {
                             }
                         }
                     }
-                    videoMetadatas.sort { Int($0["Size"] ?? "0")! < Int($1["Size"] ?? "0")! }
+                    videoMetadatas.sort { UInt64($0["Size"] ?? "0")! > UInt64($1["Size"] ?? "0")! }
                     
                     isLoading = false
                 }
@@ -903,20 +927,6 @@ struct StorageSettingsView: View {
     func bytesToMegabytes(bytes: UInt64) -> Double {
         let megabytes = Double(bytes) / (1024 * 1024)
         return megabytes
-    }
-    func deviceRemainingFreeSpaceInBytes() -> UInt64? {
-        let fileURL = URL(fileURLWithPath: NSHomeDirectory() as String)
-        do {
-            let values = try fileURL.resourceValues(forKeys: [.volumeAvailableCapacityKey])
-            if let capacity = values.volumeAvailableCapacity {
-                return UInt64(capacity)
-            } else {
-                print("Capacity is unavailable")
-            }
-        } catch {
-            print("Error retrieving capacity: \(error.localizedDescription)")
-        }
-        return nil
     }
 }
 

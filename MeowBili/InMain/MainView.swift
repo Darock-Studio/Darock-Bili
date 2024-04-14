@@ -168,6 +168,7 @@ struct MainView: View {
         @AppStorage("IsShowNetworkFixing") var isShowNetworkFixing = true
         @AppStorage("IsShowVideoSuggestionsFromDarock") var isShowVideoSuggestionsFromDarock = true
         @AppStorage("IsTipDarockSuggestions") var isTipDarockSuggestions = true
+        @AppStorage("IsLargeSuggestionStyle") var isLargeSuggestionStyle = false
         @State var videos = [[String: String]]()
         @State var notice = ""
         @State var isNetworkFixPresented = false
@@ -182,110 +183,122 @@ struct MainView: View {
         @State var darockSuggestions = [[String: String]]()
         var body: some View {
             ZStack {
-                List {
-                    Section {
-                        if debug {
-                            Button(action: {
-                                tipWithText("Test", symbol: "hammer.fill")
-                            }, label: {
-                                Text("Home.debug")
-                            })
-                            #if os(watchOS)
-                            NavigationLink(destination: { WatchUIDebugView() }, label: {
-                                Text("UIDebug")
-                            })
-                            #endif
-                        }
-                        if notice != "" {
-                            NavigationLink(destination: { NoticeView() }, label: {
-                                Text(notice)
-                                    .bold()
-                            })
-                        }
-                        if newMajorVer != "" && newBuildVer != "" {
-                            let nowMajorVer = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
-                            let nowBuildVer = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
-                            if (nowMajorVer < newMajorVer || Int(nowBuildVer) ?? 1 < Int(newBuildVer) ?? 1) && updateTipIgnoreVersion != "\(newMajorVer)\(newBuildVer)" {
-                                VStack {
-                                    Text("Home.update.\(newMajorVer).\(newBuildVer)")
-                                    if isShowDisableNewVerTip {
-                                        Text("Home.update.skip")
-                                            .font(.system(size: 12))
-                                            .foregroundColor(.gray)
-                                    }
-                                }
-                                .onTapGesture {
-                                    if isShowDisableNewVerTip {
-                                        updateTipIgnoreVersion = "\(newMajorVer)\(newBuildVer)"
-                                    } else {
-                                        isShowDisableNewVerTip = true
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    #if os(watchOS)
-                    if isShowSearchButton {
+                LargeFixedForm {
+                    List {
                         Section {
-                            NavigationLink(destination: { SearchMainView() }, label: {
-                                HStack {
-                                    Image(systemName: "magnifyingglass")
-                                    Text("Home.search")
-                                }
-                                .foregroundColor(.gray)
-                            })
-                        }
-                    }
-                    #endif
-                    if isShowVideoSuggestionsFromDarock && !darockSuggestions.isEmpty {
-                        Section {
-                            ForEach(0..<darockSuggestions.count, id: \.self) { i in
-                                VideoCard(darockSuggestions[i])
-                            }
-                        } header: {
-                            Text("来自 Darock 的推荐")
-                                .textCase(nil)
-                        } footer: {
-                            if isTipDarockSuggestions {
-                                NavigationLink(destination: { NetworkSettingsView().navigationTitle("互联网") }, label: {
-                                    Text("如不希望显示来自 Darock 的推荐，可前往\(Text("设置").foregroundColor(Color.blue).bold())关闭")
+                            if debug {
+                                Button(action: {
+                                    tipWithText("Test", symbol: "hammer.fill")
+                                }, label: {
+                                    Text("Home.debug")
                                 })
-                                .buttonStyle(.plain)
-                                .onDisappear {
-                                    isTipDarockSuggestions = false
-                                }
+                                #if os(watchOS)
+                                NavigationLink(destination: { WatchUIDebugView() }, label: {
+                                    Text("UIDebug")
+                                })
+                                #endif
                             }
-                        }
-                    }
-                    if videos.count != 0 {
-                        Section {
-                            ForEach(0..<videos.count, id: \.self) { i in
-                                VideoCard(videos[i])
-                                    .accessibilityIdentifier("SuggestedVideo\(i)")
-                                    .onAppear {
-                                        if i == videos.count - 1 {
-                                            LoadNewVideos()
+                            if notice != "" {
+                                NavigationLink(destination: { NoticeView() }, label: {
+                                    Text(notice)
+                                        .bold()
+                                })
+                            }
+                            if newMajorVer != "" && newBuildVer != "" {
+                                let nowMajorVer = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+                                let nowBuildVer = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
+                                if (nowMajorVer < newMajorVer || Int(nowBuildVer) ?? 1 < Int(newBuildVer) ?? 1) && updateTipIgnoreVersion != "\(newMajorVer)\(newBuildVer)" {
+                                    VStack {
+                                        Text("Home.update.\(newMajorVer).\(newBuildVer)")
+                                        if isShowDisableNewVerTip {
+                                            Text("Home.update.skip")
+                                                .font(.system(size: 12))
+                                                .foregroundColor(.gray)
                                         }
                                     }
+                                    .onTapGesture {
+                                        if isShowDisableNewVerTip {
+                                            updateTipIgnoreVersion = "\(newMajorVer)\(newBuildVer)"
+                                        } else {
+                                            isShowDisableNewVerTip = true
+                                        }
+                                    }
+                                }
                             }
                         }
-                        Section {
-                            if isLoadingNew {
-                                ProgressView()
+                        #if os(watchOS)
+                        if isShowSearchButton {
+                            Section {
+                                NavigationLink(destination: { SearchMainView() }, label: {
+                                    HStack {
+                                        Image(systemName: "magnifyingglass")
+                                        Text("Home.search")
+                                    }
+                                    .foregroundColor(.gray)
+                                })
                             }
                         }
-                    } else if isFailedToLoad {
-                        Button {
-                            LoadNewVideos()
-                        } label: {
-                            Label("Home.more.error", systemImage: "wifi.exclamationmark")
+                        #endif
+                        if isShowVideoSuggestionsFromDarock && !darockSuggestions.isEmpty {
+                            Section {
+                                ForEach(0..<darockSuggestions.count, id: \.self) { i in
+                                    VideoCard(darockSuggestions[i])
+                                }
+                            } header: {
+                                Text("来自 Darock 的推荐")
+                                    .textCase(nil)
+                            } footer: {
+                                if isTipDarockSuggestions {
+                                    NavigationLink(destination: { NetworkSettingsView().navigationTitle("互联网") }, label: {
+                                        Text("如不希望显示来自 Darock 的推荐，可前往\(Text("设置").foregroundColor(Color.blue).bold())关闭")
+                                    })
+                                    .buttonStyle(.plain)
+                                    .onDisappear {
+                                        isTipDarockSuggestions = false
+                                    }
+                                }
+                            }
                         }
-                        Text("Home.no-internet")
-                    } else {
-                        ProgressView()
+                        if videos.count != 0 {
+                            Section {
+                                ForEach(0..<videos.count, id: \.self) { i in
+                                    if !isLargeSuggestionStyle {
+                                        VideoCard(videos[i])
+                                            .accessibilityIdentifier("SuggestedVideo\(i)")
+                                            .onAppear {
+                                                if i == videos.count - 1 {
+                                                    LoadNewVideos()
+                                                }
+                                            }
+                                    } else {
+                                        LargeVideoCard(videos[i])
+                                            .accessibilityIdentifier("SuggestedVideo\(i)")
+                                            .onAppear {
+                                                if i == videos.count - 1 {
+                                                    LoadNewVideos()
+                                                }
+                                            }
+                                    }
+                                }
+                            }
+                            Section {
+                                if isLoadingNew {
+                                    ProgressView()
+                                }
+                            }
+                        } else if isFailedToLoad {
+                            Button {
+                                LoadNewVideos()
+                            } label: {
+                                Label("Home.more.error", systemImage: "wifi.exclamationmark")
+                            }
+                            Text("Home.no-internet")
+                        } else {
+                            ProgressView()
+                        }
                     }
+                    .scrollIndicators(.never)
                 }
-                .scrollIndicators(.never)
                 if debugBuild {
                     VStack {
                         Spacer()
@@ -405,6 +418,22 @@ struct MainView: View {
                     }
                 }
             }
+        }
+        
+        @ViewBuilder
+        func LargeFixedForm(@ViewBuilder _ content: () -> some View) -> some View {
+            #if os(watchOS)
+            if isLargeSuggestionStyle {
+                Form {
+                    content()
+                }
+                .scrollIndicators(.never)
+            } else {
+                content()
+            }
+            #else
+            content()
+            #endif
         }
     }
     
