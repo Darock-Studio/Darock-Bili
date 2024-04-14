@@ -110,7 +110,6 @@ struct DownloadsView: View {
                                 }
                             }
                         })
-                        
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button(role: .destructive, action: {
                                 try! FileManager.default.removeItem(atPath: vRootPath + metadatas[i]["Path"]!)
@@ -181,48 +180,50 @@ struct DownloadingListView: View {
             if downloadingProgressDatas.count != 0 && totalSizes.count != 0 {
                 ForEach(0..<downloadingProgressDatas.count, id: \.self) { i in
                     if !failedDownloadTasks.contains(i) {
-                        if !downloadingProgressDatas[i].isFinished && downloadProgresses[i] != 1.0 {
-                            VStack {
-                                HStack {
-                                    Spacer()
-                                    Text("Download.num.\(i + 1)")
-                                        .bold()
-                                    Spacer()
+                        if !(downloadingProgressDatas[from: i]?.isFinished ?? false) && downloadProgresses[from: i] != 1.0 {
+                            if let downloadProgress = downloadProgresses[from: i], let downloadSize = downloadedSizes[from: i], let totalSize = totalSizes[from: i] {
+                                VStack {
+                                    HStack {
+                                        Spacer()
+                                        Text("Download.num.\(i + 1)")
+                                            .bold()
+                                        Spacer()
+                                    }
+                                    Marquee {
+                                        Text(videoDetails[i]["Title"] ?? "")
+                                    }
+                                    .marqueeDuration(10)
+                                    .marqueeWhenNotFit(true)
+                                    .marqueeIdleAlignment(.center)
+                                    .frame(height: 18)
+                                    ProgressView(value: downloadProgress * 100, total: 100.0)
+                                    HStack {
+                                        Spacer()
+                                        Text("\(String(format: "%.2f", downloadProgress * 100) + " %")")
+                                        Spacer()
+                                    }
+                                    HStack {
+                                        Spacer()
+                                        Text("\(String(format: "%.2f", Double(downloadSize) / 1024 / 1024))MB / \(String(format: "%.2f", Double(totalSize) / 1024 / 1024))MB")
+                                            .font(.system(size: 16, weight: .bold))
+                                            .lineLimit(1)
+                                            .minimumScaleFactor(0.1)
+                                        Spacer()
+                                    }
                                 }
-                                Marquee {
-                                    Text(videoDetails[i]["Title"] ?? "")
+                                .swipeActions {
+                                    Button(role: .destructive, action: {
+                                        videoDownloadRequests[i].cancel()
+                                    }, label: {
+                                        Image(systemName: "xmark.circle.fill")
+                                    })
                                 }
-                                .marqueeDuration(10)
-                                .marqueeWhenNotFit(true)
-                                .marqueeIdleAlignment(.center)
-                                .frame(height: 18)
-                                ProgressView(value: downloadProgresses[i] * 100, total: 100.0)
-                                HStack {
-                                    Spacer()
-                                    Text("\(String(format: "%.2f", downloadProgresses[i] * 100) + " %")")
-                                    Spacer()
+                                .onReceive(downloadingProgressDatas[i].pts) { data in
+                                    downloadProgresses[i] = data.data.progress
+                                    downloadedSizes[i] = data.data.currentSize
+                                    totalSizes[i] = data.data.totalSize
+                                    videoDetails[i] = data.videoDetails
                                 }
-                                HStack {
-                                    Spacer()
-                                    Text("\(String(format: "%.2f", Double(downloadedSizes[i]) / 1024 / 1024))MB / \(String(format: "%.2f", Double(totalSizes[i]) / 1024 / 1024))MB")
-                                        .font(.system(size: 16, weight: .bold))
-                                        .lineLimit(1)
-                                        .minimumScaleFactor(0.1)
-                                    Spacer()
-                                }
-                            }
-                            .swipeActions {
-                                Button(role: .destructive, action: {
-                                    videoDownloadRequests[i].cancel()
-                                }, label: {
-                                    Image(systemName: "xmark.circle.fill")
-                                })
-                            }
-                            .onReceive(downloadingProgressDatas[i].pts) { data in
-                                downloadProgresses[i] = data.data.progress
-                                downloadedSizes[i] = data.data.currentSize
-                                totalSizes[i] = data.data.totalSize
-                                videoDetails[i] = data.videoDetails
                             }
                         } else {
                             VStack {
