@@ -712,35 +712,41 @@ struct UserDetailView: View {
                 .sheet(isPresented: $isAvatorViewPresented, content: { ImageViewerView(url: userFaceUrl) })
                 HStack {
                     Spacer()
-                    VStack {
-                        if followCount != -1 {
-                            Text(String(followCount))
-                                .font(.system(size: 14))
-                        } else {
-                            Text("114")
-                                .font(.system(size: 14))
-                                .redacted(reason: .placeholder)
+                    NavigationLink(destination: { FollowListView(viewUserId: uid) }, label: {
+                        VStack {
+                            if followCount != -1 {
+                                Text(String(followCount))
+                                    .font(.system(size: 14))
+                            } else {
+                                Text("114")
+                                    .font(.system(size: 14))
+                                    .redacted(reason: .placeholder)
+                            }
+                            Text("Account.subscribed")
+                                .font(.system(size: 12))
+                                .opacity(0.6)
+                                .lineLimit(1)
                         }
-                        Text("Account.subscribed")
-                            .font(.system(size: 12))
-                            .opacity(0.6)
-                            .lineLimit(1)
-                    }
+                    })
+                    .buttonStyle(.plain)
                     Spacer()
-                    VStack {
-                        if fansCount != -1 {
-                            Text(String(fansCount).shorter())
-                                .font(.system(size: 14))
-                        } else {
-                            Text("114")
-                                .font(.system(size: 14))
-                                .redacted(reason: .placeholder)
+                    NavigationLink(destination: { FansListView(viewUserId: uid) }, label: {
+                        VStack {
+                            if fansCount != -1 {
+                                Text(String(fansCount).shorter())
+                                    .font(.system(size: 14))
+                            } else {
+                                Text("114")
+                                    .font(.system(size: 14))
+                                    .redacted(reason: .placeholder)
+                            }
+                            Text("Account.followers")
+                                .font(.system(size: 12))
+                                .opacity(0.6)
+                                .lineLimit(1)
                         }
-                        Text("Account.followers")
-                            .font(.system(size: 12))
-                            .opacity(0.6)
-                            .lineLimit(1)
-                    }
+                    })
+                    .buttonStyle(.plain)
                     Spacer()
                 }
                 if #unavailable(watchOS 10) {

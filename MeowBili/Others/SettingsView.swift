@@ -20,6 +20,7 @@ import Charts
 import SwiftUI
 import SwiftDate
 import DarockKit
+import SDWebImageSwiftUI
 import AuthenticationServices
 #if os(watchOS)
 import WatchKit
@@ -256,6 +257,18 @@ struct SettingsView: View {
                         Text("Settings.screen-time")
                     }
                 })
+                NavigationLink(destination: { StorageSettingsView().navigationTitle("储存空间") }, label: {
+                    HStack {
+                        ZStack {
+                            Color.gray
+                                .frame(width: 20, height: 20)
+                                .clipShape(Circle())
+                            Image(systemName: "externaldrive.fill")
+                                .font(.system(size: 12))
+                        }
+                        Text("储存空间")
+                    }
+                })
                 NavigationLink(destination: { BatterySettingsView().navigationTitle("Settings.battery") }, label: {
                     HStack {
                         ZStack {
@@ -275,7 +288,7 @@ struct SettingsView: View {
                                 .frame(width: 20, height: 20)
                                 .clipShape(Circle())
                             Image(systemName: "bed.double.fill")
-                                .font(.system(size: 12))
+                                .font(.system(size: 11))
                         }
                         Text("Settings.sleep")
                     }
@@ -567,6 +580,343 @@ struct ScreenTimeSettingsView: View {
         let name: String
         let time: Int
         var id: String { name }
+    }
+}
+
+struct StorageSettingsView: View {
+    @State var isLoading = true
+    @State var docSize: UInt64 = 0
+    @State var tmpSize: UInt64 = 0
+    @State var bundleSize: UInt64 = 0
+    @State var sizeAvailable: UInt64 = 0
+    @State var isClearingCache = false
+    @State var videoMetadatas = [[String: String]]()
+    @State var vRootPath = ""
+    var body: some View {
+        Form {
+            List {
+                if !isLoading {
+                    Section {
+                        VStack {
+                            HStack {
+                                Text("已使用 \(bytesToMegabytes(bytes: docSize + tmpSize + bundleSize) ~ 2) MB/\((bytesToMegabytes(bytes: sizeAvailable + docSize + tmpSize + bundleSize) / 1024) ~ 1) GB")
+                                    .font(.system(size: 13))
+                                    .foregroundColor(.gray)
+                                Spacer()
+                            }
+                            Chart {
+                                BarMark(x: .value("", bundleSize))
+                                    .foregroundStyle(by: .value("", "Gray"))
+                                BarMark(x: .value("", docSize))
+                                    .foregroundStyle(by: .value("", "Purple"))
+                                BarMark(x: .value("", tmpSize))
+                                    .foregroundStyle(by: .value("", "Primary"))
+                                BarMark(x: .value("", sizeAvailable))
+                                    .foregroundStyle(by: .value("", "Secondary"))
+                            }
+                            .chartForegroundStyleScale(["Gray": .gray, "Purple": .purple, "Primary": .primary, "Secondary": .secondary])
+                            .chartXAxis(.hidden)
+                            .chartLegend(.hidden)
+                            .cornerRadius(2)
+                            .frame(height: 15)
+                            .padding(.vertical, 2)
+                            Group {
+                                HStack {
+                                    Circle()
+                                        .fill(Color.gray)
+                                        .frame(width: 10, height: 10)
+                                    Text("喵哩喵哩")
+                                        .font(.system(size: 14))
+                                        .foregroundColor(.gray)
+                                    Spacer()
+                                }
+                                HStack {
+                                    Circle()
+                                        .fill(Color.purple)
+                                        .frame(width: 10, height: 10)
+                                    Text("媒体")
+                                        .font(.system(size: 14))
+                                        .foregroundColor(.gray)
+                                    Spacer()
+                                }
+                                HStack {
+                                    Circle()
+                                        .fill(Color.primary)
+                                        .frame(width: 10, height: 10)
+                                    Text("缓存")
+                                        .font(.system(size: 14))
+                                        .foregroundColor(.gray)
+                                    Spacer()
+                                }
+                            }
+                            .padding(.vertical, -1)
+                        }
+                    }
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets())
+                    if !videoMetadatas.isEmpty {
+                        Section {
+                            ForEach(0..<videoMetadatas.count, id: \.self) { i in
+                                if videoMetadatas[i]["notGet"] == nil {
+                                    HStack {
+                                        WebImage(url: URL(string: videoMetadatas[i]["Pic"]! + "@100w")!, options: [.progressiveLoad])
+                                            .placeholder {
+                                                RoundedRectangle(cornerRadius: 7)
+                                                    .frame(width: 50, height: 30)
+                                                    .foregroundColor(Color(hex: 0x3D3D3D))
+                                                    .redacted(reason: .placeholder)
+                                            }
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 50)
+                                            .cornerRadius(5)
+                                        Spacer()
+                                            .frame(width: 5)
+                                        VStack {
+                                            HStack {
+                                                Text(videoMetadatas[i]["Title"]!)
+                                                    .font(.system(size: 13, weight: .bold))
+                                                    .lineLimit(2)
+                                                Spacer()
+                                            }
+                                            HStack {
+                                                Text("\(bytesToMegabytes(bytes: UInt64(videoMetadatas[i]["Size"] ?? "0") ?? 0) ~ 2) MB")
+                                                    .font(.system(size: 15))
+                                                    .foregroundColor(.gray)
+                                                Spacer()
+                                            }
+                                        }
+                                    }
+                                    .swipeActions {
+                                        Button(role: .destructive, action: {
+                                            try! FileManager.default.removeItem(atPath: vRootPath + videoMetadatas[i]["Path"]!)
+                                        }, label: {
+                                            Image(systemName: "xmark.bin.fill")
+                                        })
+                                    }
+                                }
+                            }
+                        } header: {
+                            Text("媒体")
+                        }
+                    }
+                    Section {
+                        NavigationLink(destination: {
+                            List {
+                                Section {
+                                    HStack {
+                                        ZStack {
+                                            Color.gray
+                                                .frame(width: 20, height: 20)
+                                                .clipShape(Circle())
+                                            Image(systemName: "ellipsis.circle")
+                                                .font(.system(size: 12))
+                                        }
+                                        Spacer()
+                                            .frame(width: 5)
+                                        VStack {
+                                            HStack {
+                                                Text("缓存")
+                                                Spacer()
+                                            }
+                                            HStack {
+                                                Text("\(bytesToMegabytes(bytes: tmpSize) ~ 2) MB")
+                                                    .font(.system(size: 15))
+                                                    .foregroundColor(.gray)
+                                                Spacer()
+                                            }
+                                        }
+                                    }
+                                }
+                                Section {
+                                    if !isClearingCache {
+                                        Button(action: {
+                                            DispatchQueue(label: "com.darock.DarockBili.storage-clear-cache", qos: .userInitiated).async {
+                                                isClearingCache = true
+                                                try? FileManager.default.removeItem(atPath: NSTemporaryDirectory())
+                                                isClearingCache = false
+                                            }
+                                        }, label: {
+                                            Text("清除缓存")
+                                        })
+                                    } else {
+                                        ProgressView()
+                                    }
+                                }
+                            }
+                        }, label: {
+                            HStack {
+                                ZStack {
+                                    Color.gray
+                                        .frame(width: 20, height: 20)
+                                        .clipShape(Circle())
+                                    Image(systemName: "ellipsis.circle")
+                                        .font(.system(size: 12))
+                                }
+                                Spacer()
+                                    .frame(width: 5)
+                                VStack {
+                                    HStack {
+                                        Text("缓存")
+                                        Spacer()
+                                    }
+                                    HStack {
+                                        Text("\(bytesToMegabytes(bytes: tmpSize) ~ 2) MB")
+                                            .font(.system(size: 15))
+                                            .foregroundColor(.gray)
+                                        Spacer()
+                                    }
+                                }
+                            }
+                        })
+                        NavigationLink(destination: {
+                            List {
+                                Section {
+                                    HStack {
+                                        Image("AppIconImage")
+                                            .resizable()
+                                            .frame(width: 20, height: 20)
+                                            .clipShape(Circle())
+                                        Spacer()
+                                            .frame(width: 5)
+                                        VStack {
+                                            HStack {
+                                                Text("喵哩喵哩 (\(String(try! String(contentsOf: Bundle.main.url(forResource: "SemanticVersion", withExtension: "drkdatas")!).split(separator: "\n")[0])))")
+                                                Spacer()
+                                            }
+                                            HStack {
+                                                Text("\(bytesToMegabytes(bytes: bundleSize) ~ 2) MB")
+                                                    .font(.system(size: 15))
+                                                    .foregroundColor(.gray)
+                                                Spacer()
+                                            }
+                                            HStack {
+                                                Text("Darock Studio")
+                                                    .font(.system(size: 14))
+                                                    .foregroundColor(.gray)
+                                                Spacer()
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }, label: {
+                            HStack {
+                                Image("AppIconImage")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .clipShape(Circle())
+                                Spacer()
+                                    .frame(width: 5)
+                                VStack {
+                                    HStack {
+                                        Text("喵哩喵哩 (\(String(try! String(contentsOf: Bundle.main.url(forResource: "SemanticVersion", withExtension: "drkdatas")!).split(separator: "\n")[0])))")
+                                        Spacer()
+                                    }
+                                    HStack {
+                                        Text("\(bytesToMegabytes(bytes: bundleSize) ~ 2) MB")
+                                            .font(.system(size: 15))
+                                            .foregroundColor(.gray)
+                                        Spacer()
+                                    }
+                                }
+                            }
+                        })
+                    }
+                } else {
+                    HStack {
+                        Text("正在载入")
+                        Spacer()
+                        ProgressView()
+                    }
+                    .listRowBackground(Color.clear)
+                }
+            }
+        }
+        .onAppear {
+            if isLoading {
+                DispatchQueue(label: "com.darock.DarockBili.storage-load", qos: .userInitiated).async {
+                    // Size counting
+                    docSize = folderSize(atPath: NSHomeDirectory() + "/Documents") ?? 0
+                    tmpSize = folderSize(atPath: NSTemporaryDirectory()) ?? 0
+                    bundleSize = folderSize(atPath: Bundle.main.bundlePath) ?? 0
+                    sizeAvailable = deviceRemainingFreeSpaceInBytes() ?? 32 * 1024 * 1024 * 1024
+                    // Video sizes
+                    vRootPath = String(AppFileManager(path: "dlds").GetPath("").path)
+                    let files = AppFileManager(path: "dlds").GetRoot() ?? [[String: String]]()
+                    for file in files {
+                        debugPrint(file)
+                        if !Bool(file["isDirectory"]!)! {
+                            let name = file["name"]!
+                            let nameWithOutSuffix = String(name.split(separator: ".")[0])
+                            if UserDefaults.standard.dictionary(forKey: nameWithOutSuffix) != nil {
+                                var dicV = UserDefaults.standard.dictionary(forKey: nameWithOutSuffix)! as! [String: String]
+                                if let p = dicV["Path"] {
+                                    if p.contains("/") {
+                                        dicV.updateValue(String(p.split(separator: "/").last!), forKey: "Path")
+                                        do {
+                                            let attributes = try FileManager.default.attributesOfItem(atPath: "\(vRootPath)\(String(p.split(separator: "/").last!))")
+                                            if let fileSize = attributes[.size] as? UInt64 {
+                                                dicV.updateValue(String(fileSize), forKey: "Size")
+                                            }
+                                        } catch {
+                                            print("Error: \(error)")
+                                        }
+                                    }
+                                }
+                                videoMetadatas.append(dicV)
+                            } else {
+                                videoMetadatas.append(["notGet": "true"])
+                            }
+                        }
+                    }
+                    videoMetadatas.sort { Int($0["Size"] ?? "0")! < Int($1["Size"] ?? "0")! }
+                    
+                    isLoading = false
+                }
+            }
+        }
+    }
+    
+    func folderSize(atPath path: String) -> UInt64? {
+        let fileManager = FileManager.default
+        guard let files = fileManager.enumerator(atPath: path) else {
+            return nil
+        }
+        
+        var totalSize: UInt64 = 0
+        
+        for case let file as String in files {
+            let filePath = "\(path)/\(file)"
+            do {
+                let attributes = try fileManager.attributesOfItem(atPath: filePath)
+                if let fileSize = attributes[.size] as? UInt64 {
+                    totalSize += fileSize
+                }
+            } catch {
+                print("Error: \(error)")
+            }
+        }
+        
+        return totalSize
+    }
+    func bytesToMegabytes(bytes: UInt64) -> Double {
+        let megabytes = Double(bytes) / (1024 * 1024)
+        return megabytes
+    }
+    func deviceRemainingFreeSpaceInBytes() -> UInt64? {
+        let fileURL = URL(fileURLWithPath: NSHomeDirectory() as String)
+        do {
+            let values = try fileURL.resourceValues(forKeys: [.volumeAvailableCapacityKey])
+            if let capacity = values.volumeAvailableCapacity {
+                return UInt64(capacity)
+            } else {
+                print("Capacity is unavailable")
+            }
+        } catch {
+            print("Error retrieving capacity: \(error.localizedDescription)")
+        }
+        return nil
     }
 }
 
