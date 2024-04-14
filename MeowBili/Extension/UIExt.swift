@@ -541,6 +541,49 @@ struct SegmentedPicker: View {
 }
 #endif
 
+@ViewBuilder
+func LargeVideoCard(_ videoDetails: [String: String]) -> some View {
+    #if os(watchOS)
+    NavigationLink(destination: { VideoDetailView(videoDetails: videoDetails) }, label: {
+        VStack {
+            WebImage(url: URL(string: videoDetails["Pic"]! + "@400w")!, options: [.progressiveLoad, .scaleDownLargeImages])
+                .placeholder {
+                    RoundedRectangle(cornerRadius: 7)
+                        .frame(width: WKInterfaceDevice.current().screenBounds.width - 20, height: 80)
+                        .foregroundColor(Color(hex: 0x3D3D3D))
+                        .redacted(reason: .placeholder)
+                }
+                .resizable()
+                .cornerRadius(7)
+                .scaledToFit()
+                .frame(width: WKInterfaceDevice.current().screenBounds.width - 20)
+            HStack {
+                Text(videoDetails["Title"]!)
+                    .font(.system(size: 14, weight: .bold))
+                    .lineLimit(2)
+                    .multilineTextAlignment(.leading)
+                Spacer()
+            }
+            HStack {
+                Image(systemName: "play.circle")
+                Text(videoDetails["View"]!.shorter())
+                    .offset(x: -3)
+                Image(systemName: "person")
+                Text(videoDetails["UP"]!)
+                    .offset(x: -3)
+                Spacer()
+            }
+            .lineLimit(1)
+            .font(.system(size: 11))
+            .foregroundColor(.gray)
+        }
+    })
+    .buttonBorderShape(.roundedRectangle(radius: 14))
+    #else
+    VideoCard(videoDetails)
+    #endif
+}
+
 // swiftlint:disable unused_closure_parameter
 #if !os(visionOS)
 extension Indicator where T == ProgressView<EmptyView, EmptyView> {
