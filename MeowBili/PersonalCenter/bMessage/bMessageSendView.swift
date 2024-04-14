@@ -192,7 +192,7 @@ struct bMessageSendView: View {
                 if deleteAll {
                     messages.removeAll()
                 }
-                if respJson["data"]["messages"].dictionary != nil {
+                if respJson["data"]["messages"].arrayObject != nil {
                     for message in respJson["data"]["messages"] {
                         messages.insert(["SenderID": String(message.1["sender_uid"].int64 ?? 0), "Text": String((message.1["content"].string ?? "获取失败").split(separator: ":\"")[1].split(separator: "\"}")[0]).replacingOccurrences(of: "\\n", with: "\n"), "Timestamp": String(message.1["timestamp"].int ?? Date.now.timeStamp)], at: 0)
                     }
