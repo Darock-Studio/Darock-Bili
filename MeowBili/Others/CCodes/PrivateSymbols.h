@@ -25,11 +25,6 @@
 @property (nonatomic, class, readonly) NSBundle *private;
 @end
 
-@interface _UIAssetManager : NSObject
-+ (instancetype)assetManagerForBundle:(NSBundle *)bundle;
-- (UIImage *)imageNamed:(NSString *)name;
-@end
-
 @interface UIImage (SFSCoreGlyphsBundle)
 
 - (instancetype)initWithPrivateSystemName:(NSString *)name;
