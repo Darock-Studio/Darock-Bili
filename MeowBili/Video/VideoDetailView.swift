@@ -66,7 +66,6 @@ struct VideoDetailView: View {
     @State var nowPlayingCount = "0"
     @State var publishTime = ""
     @State var videoDesc = ""
-    @State var isAudioPlayerPresented = false
     @State var backgroundPicOpacity = 0.0
     @State var mainVerticalTabViewSelection = 1
     @State var videoPartShouldShowDownloadTip = false
@@ -93,8 +92,8 @@ struct VideoDetailView: View {
     @FocusState var isEditingDanmaku: Bool
     #else
     @State var isVideoPlayerPresented = false
-    @State var isNowPlayingPresented = false
     @State var continueQr: CGImage?
+    @State var isFirstLoaded = false
     #endif
     var body: some View {
         Group {
@@ -521,9 +520,6 @@ struct VideoDetailView: View {
                         Group {
                             TabView(selection: $mainVerticalTabViewSelection) {
                                 VStack {
-                                    NavigationLink("", isActive: $isNowPlayingPresented, destination: { AudioPlayerView(videoDetails: videoDetails, videoLink: $videoLink, videoBvid: $videoBvid, videoCID: $videoCID) })
-                                        .frame(width: 0, height: 0)
-                                    
                                     DetailViewFirstPageBase(videoDetails: $videoDetails, videoPages: $videoPages, honors: $honors, subTitles: $subTitles, isLoading: $isLoading, videoLink: $videoLink, videoBvid: $videoBvid, videoCID: $videoCID)
                                         .offset(y: 16)
                                         .toolbar {
@@ -595,7 +591,7 @@ struct VideoDetailView: View {
                                             ToolbarItemGroup(placement: .bottomBar) {
                                                 Button(action: {
                                                     isLoading = true
-                                                    DecodeVideo()
+                                                    DecodeVideo(isAudio: true)
                                                 }, label: {
                                                     Image(systemName: "waveform")
                                                 })
@@ -709,6 +705,8 @@ struct VideoDetailView: View {
         .onAppear {
             #if !os(watchOS)
             if isDecoded { return } // After user enter a new video then exit, this onAppear method will be re-call
+            #else
+            if isFirstLoaded { return }
             #endif
             
             let headers: HTTPHeaders = [
@@ -828,6 +826,8 @@ struct VideoDetailView: View {
             if recordHistoryTime == "into" {
                 AF.request("https://api.bilibili.com/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": videoDetails["BV"]!, "mid": dedeUserID, "type": 3, "dt": 2, "play_type": 2, "csrf": biliJct], headers: headers).response { _ in }
             }
+            
+            isFirstLoaded = true
             #endif
             
             if isAllowMixpanel {
@@ -835,14 +835,6 @@ struct VideoDetailView: View {
             }
         }
         .onDisappear {
-            #if os(watchOS)
-            goodVideos = [[String: String]]()
-            owner = [String: String]()
-            stat = [String: String]()
-            videoDesc = ""
-            SDImageCache.shared.clearMemory()
-            #endif
-            
             if isAllowMixpanel {
                 Mixpanel.mainInstance().track(event: "Watch Video", properties: videoDetails)
             }
@@ -860,15 +852,6 @@ struct VideoDetailView: View {
         .sheet(isPresented: $isMoreMenuPresented) {
             NavigationStack {
                 List {
-                    Section {
-                        Button(action: {
-                            shouldPausePlayer = true
-                            isAudioPlayerPresented = true
-                            isMoreMenuPresented = false
-                        }, label: {
-                            Label("Video.play-in-audio", systemImage: "waveform")
-                        })
-                    }
                     Section {
                         Button(action: {
                             isDownloadPresented = true
@@ -925,19 +908,19 @@ struct VideoDetailView: View {
             }
             .presentationDetents([.medium, .large])
         }
-        .sheet(isPresented: $isAudioPlayerPresented, content: { AudioPlayerView(videoDetails: videoDetails, videoLink: $videoLink, videoBvid: $videoBvid, videoCID: $videoCID) })
         .userActivity("com.darock.DarockBili.video-play", element: videoDetails) { url, activity in // swiftlint:disable:this unused_closure_parameter
             activity.addUserInfoEntries(from: videoDetails)
         }
         #endif
     }
     
-    func DecodeVideo() {
+    @inline(__always)
+    func DecodeVideo(isAudio: Bool = false) {
         let headers: HTTPHeaders = [
             "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3); buvid4=\(globalBuvid4)",
             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         ]
-        if videoGetterSource == "official" {
+        if videoGetterSource == "official" || isAudio {
             DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
                     if !CheckBApiError(from: respJson) { return }
@@ -951,7 +934,13 @@ struct VideoDetailView: View {
                             #if !os(watchOS)
                             isDecoded = true
                             #else
-                            isVideoPlayerPresented = true
+                            if !isAudio {
+                                isVideoPlayerPresented = true
+                            } else {
+                                audioPlayerPlayItems.append(.init(videoDetails: videoDetails, videoLink: videoLink, videoBvid: videoBvid, videoCID: videoCID))
+                                audioPlayerNowPlayingItemIndex = audioPlayerPlayItems.count - 1
+                                pIsAudioPlayerPresented = true
+                            }
                             isLoading = false
                             #endif
                         }
@@ -1168,45 +1157,6 @@ struct VideoDetailView: View {
                     .sheet(isPresented: $isVideoPlayerPresented, content: {
                         VideoPlayerView(videoDetails: $videoDetails, videoLink: $videoLink, videoBvid: $videoBvid, videoCID: $videoCID)
                             .navigationBarHidden(true)
-                    })
-                    NavigationLink("", isActive: $isNowPlayingPresented, destination: { AudioPlayerView(videoDetails: videoDetails, videoLink: $videoLink, videoBvid: $videoBvid, videoCID: $videoCID) })
-                        .frame(width: 0, height: 0)
-                    Button(action: {
-                        isLoading = true
-                        
-                        if videoGetterSource == "official" {
-                            let headers: HTTPHeaders = [
-                                "cookie": "SESSDATA=\(sessdata)",
-                                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                            ]
-                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
-                                if isSuccess {
-                                    if !CheckBApiError(from: respJson) { return }
-                                    let cid = respJson["data"]["pages"][0]["cid"].int64!
-                                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?bvid=\(videoDetails["BV"]!)&cid=\(cid)&qn=\(sessdata == "" ? 64 : 80)", headers: headers) { respJson, isSuccess in
-                                        if isSuccess {
-                                            if !CheckBApiError(from: respJson) { return }
-                                            videoLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
-                                            videoCID = cid
-                                            videoBvid = videoDetails["BV"]!
-                                            isNowPlayingPresented = true
-                                            isLoading = false
-                                        }
-                                    }
-                                }
-                            }
-                        } else if videoGetterSource == "injahow" {
-                            DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=1&type=video&q=32&format=mp4&otype=url") { respStr, isSuccess in
-                                if isSuccess {
-                                    videoLink = respStr
-                                    videoBvid = videoDetails["BV"]!
-                                    isNowPlayingPresented = true
-                                    isLoading = false
-                                }
-                            }
-                        }
-                    }, label: {
-                        Label("Video.play-in-audio", systemImage: "waveform")
                     })
                     Button(action: {
                         isMoreMenuPresented = true

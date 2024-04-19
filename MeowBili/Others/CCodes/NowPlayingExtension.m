@@ -18,6 +18,9 @@
 
 #import <Foundation/Foundation.h>
 #import <MediaPlayer/MediaPlayer.h>
+#if TARGET_OS_WATCH
+#import <WatchKit/WatchKit.h>
+#endif
 #import "NowPlayingExtension.h"
 
 @implementation NowPlayingExtension: NSObject
@@ -28,6 +31,17 @@
     [session setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionAllowAirPlay error:nil];
     [session setActive:true error:nil];
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    
+    NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
+    [info setValue:title forKey:MPMediaItemPropertyTitle];
+    [info setValue:artist forKey:MPMediaItemPropertyArtist];
+    MPMediaItemArtwork *relArtwork = [[MPMediaItemArtwork alloc] initWithBoundsSize:artwork.size requestHandler:^(CGSize _){ return artwork; }];
+    [info setValue:relArtwork forKey:MPMediaItemPropertyArtwork];
+    MPNowPlayingInfoCenter.defaultCenter.nowPlayingInfo = info;
+    #else
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionDuckOthers error:nil];
+    [session setActive:true error:nil];
     
     NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
     [info setValue:title forKey:MPMediaItemPropertyTitle];

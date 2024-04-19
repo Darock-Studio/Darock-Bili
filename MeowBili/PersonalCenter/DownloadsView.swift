@@ -31,101 +31,91 @@ struct DownloadsView: View {
     @State var metadatas = [[String: String]]()
     @State var isPlayerPresented = false
     @State var vRootPath = ""
+    @State var searchInput = ""
     var body: some View {
         List {
             #if os(watchOS)
             if #unavailable(watchOS 10) {
-                NavigationLink(destination: { DownloadingListView() }, label: {
-                    Label("Download.list", systemImage: "list.bullet.below.rectangle")
-                })
+                Section {
+                    NavigationLink(destination: { DownloadingListView() }, label: {
+                        Label("Download.list", systemImage: "list.bullet.below.rectangle")
+                    })
+                }
             }
             #endif
-            if metadatas.count != 0 {
-                ForEach(0...metadatas.count - 1, id: \.self) { i in
-                    if metadatas[i]["notGet"] == nil {
-//                        NavigationLink(destination: {VideoDetailView(videoDetails: metadatas[i])}, label: {
-//                            HStack {
-//                                AsyncImage(url: URL(string: metadatas[i]["Pic"]! + "@40w_30h"))
-//                                    .cornerRadius(5)
-//                                VStack {
-//                                    Text(metadatas[i]["Title"]!)
-//                                        .font(.system(size: 15, weight: .bold))
-//                                        .lineLimit(3)
-//                                    HStack {
-//                                        Label(metadatas[i]["View"]!, systemImage: "play.circle")
-//                                        Label(metadatas[i]["UP"]!, systemImage: "person")
-//                                    }
-//                                    .font(.system(size: 11))
-//                                    .foregroundColor(.gray)
-//                                    .lineLimit(1)
-//                                }
-//                            }
-//                        })
-                        Button(action: {
-                            DownloadsView.willPlayVideoPath = vRootPath + metadatas[i]["Path"]!
-                            isPlayerPresented = true
-                        }, label: {
-                            HStack {
-                                #if !os(visionOS)
-                                WebImage(url: URL(string: metadatas[i]["Pic"]! + "@100w")!, options: [.progressiveLoad, .scaleDownLargeImages])
-                                    .placeholder {
-                                        RoundedRectangle(cornerRadius: 7)
-                                            .frame(width: 50, height: 30)
-                                            .foregroundColor(Color(hex: 0x3D3D3D))
-                                            .redacted(reason: .placeholder)
+            Section {
+                if metadatas.count != 0 {
+                    ForEach(0...metadatas.count - 1, id: \.self) { i in
+                        if metadatas[i]["notGet"] == nil {
+                            if searchInput.isEmpty || metadatas[i]["Title"]!.contains(searchInput) {
+                                Button(action: {
+                                    DownloadsView.willPlayVideoPath = vRootPath + metadatas[i]["Path"]!
+                                    isPlayerPresented = true
+                                }, label: {
+                                    HStack {
+#if !os(visionOS)
+                                        WebImage(url: URL(string: metadatas[i]["Pic"]! + "@100w")!, options: [.progressiveLoad, .scaleDownLargeImages])
+                                            .placeholder {
+                                                RoundedRectangle(cornerRadius: 7)
+                                                    .frame(width: 50, height: 30)
+                                                    .foregroundColor(Color(hex: 0x3D3D3D))
+                                                    .redacted(reason: .placeholder)
+                                            }
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 50)
+                                            .cornerRadius(7)
+#else
+                                        AsyncImage(url: URL(string: metadatas[i]["Pic"]! + "@100w")!) { phase in
+                                            switch phase {
+                                            case .empty:
+                                                RoundedRectangle(cornerRadius: 7)
+                                                    .frame(width: 50, height: 30)
+                                                    .foregroundColor(Color(hex: 0x3D3D3D))
+                                                    .redacted(reason: .placeholder)
+                                            case .success(let image):
+                                                image.resizable()
+                                            case .failure(let error):
+                                                RoundedRectangle(cornerRadius: 7)
+                                                    .frame(width: 50, height: 30)
+                                                    .foregroundColor(Color(hex: 0x3D3D3D))
+                                                    .redacted(reason: .placeholder)
+                                            }
+                                        }
+                                        .scaledToFit()
+                                        .frame(width: 50)
+                                        .cornerRadius(7)
+#endif
+                                        VStack {
+                                            Text(metadatas[i]["Title"]!)
+                                                .font(.system(size: 14, weight: .bold))
+                                                .lineLimit(3)
+                                            Label(metadatas[i]["UP"]!, systemImage: "person")
+                                                .font(.system(size: 11))
+                                                .foregroundColor(.gray)
+                                                .lineLimit(1)
+                                        }
                                     }
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 50)
-                                    .cornerRadius(7)
-                                #else
-                                AsyncImage(url: URL(string: metadatas[i]["Pic"]! + "@100w")!) { phase in
-                                    switch phase {
-                                    case .empty:
-                                        RoundedRectangle(cornerRadius: 7)
-                                            .frame(width: 50, height: 30)
-                                            .foregroundColor(Color(hex: 0x3D3D3D))
-                                            .redacted(reason: .placeholder)
-                                    case .success(let image):
-                                        image.resizable()
-                                    case .failure(let error):
-                                        RoundedRectangle(cornerRadius: 7)
-                                            .frame(width: 50, height: 30)
-                                            .foregroundColor(Color(hex: 0x3D3D3D))
-                                            .redacted(reason: .placeholder)
-                                    }
-                                }
-                                .scaledToFit()
-                                .frame(width: 50)
-                                .cornerRadius(7)
-                                #endif
-                                VStack {
-                                    Text(metadatas[i]["Title"]!)
-                                        .font(.system(size: 14, weight: .bold))
-                                        .lineLimit(3)
-                                    Label(metadatas[i]["UP"]!, systemImage: "person")
-                                        .font(.system(size: 11))
-                                        .foregroundColor(.gray)
-                                        .lineLimit(1)
+                                })
+                                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                    Button(role: .destructive, action: {
+                                        try! FileManager.default.removeItem(atPath: vRootPath + metadatas[i]["Path"]!)
+                                    }, label: {
+                                        Image(systemName: "xmark.bin.fill")
+                                    })
                                 }
                             }
-                        })
-                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            Button(role: .destructive, action: {
-                                try! FileManager.default.removeItem(atPath: vRootPath + metadatas[i]["Path"]!)
-                            }, label: {
-                                Image(systemName: "xmark.bin.fill")
-                            })
+                        } else {
+                            
                         }
-                    } else {
-                        
                     }
                 }
             }
         }
         .navigationTitle("离线缓存")
-        .navigationBarTitleDisplayMode(.large)
+        .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $isPlayerPresented, content: { OfflineVideoPlayer() })
+        .searchable(text: $searchInput)
         .toolbar {
             #if !os(watchOS)
             ToolbarItem(placement: .topBarTrailing) {
@@ -165,7 +155,7 @@ struct DownloadsView: View {
                     }
                 }
             }
-            metadatas.sort { Int($0["Date"] ?? "0")! < Int($1["Date"] ?? "0")! }
+            metadatas.sort { Double($0["Time"] ?? "0.0")! > Double($1["Time"] ?? "0.0")! }
         }
     }
 }

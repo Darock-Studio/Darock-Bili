@@ -252,8 +252,8 @@ struct SettingsView: View {
                             Color.blue
                                 .frame(width: 20, height: 20)
                                 .clipShape(Circle())
-                            Image(systemName: "hand.wave.fill")
-                                .font(.system(size: 12))
+                            Image(privateSystemName: "hand.side.pinch.fill")
+                                .scaleEffect(0.7)
                         }
                         Text("Settings.gesture")
                     }
@@ -268,6 +268,18 @@ struct SettingsView: View {
                                 .font(.system(size: 12))
                         }
                         Text("Settings.screen-time")
+                    }
+                })
+                NavigationLink(destination: { AccessibilitySettingsView().navigationTitle("辅助功能") }, label: {
+                    HStack {
+                        ZStack {
+                            Color.blue
+                                .frame(width: 20, height: 20)
+                                .clipShape(Circle())
+                            Image(systemName: "accessibility")
+                                .font(.system(size: 18))
+                        }
+                        Text("辅助功能")
                     }
                 })
                 NavigationLink(destination: { StorageSettingsView().navigationTitle("储存空间") }, label: {
@@ -344,7 +356,7 @@ struct SettingsView: View {
                         Text("Settings.about")
                     }
                 })
-                if (Bundle.main.infoDictionary?["CFBundleIdentifier"] as! String) != "com.darock.DarockBili.watchkitapp" {
+                if (Bundle.main.infoDictionary?["CFBundleIdentifier"] as! String) == "com.darock.DarockBili.watchkitapp" {
                     NavigationLink(destination: { SoftwareUpdateView().navigationTitle("Settings.update") }, label: {
                         HStack {
                             ZStack {
@@ -606,6 +618,21 @@ struct ScreenTimeSettingsView: View {
         let name: String
         let time: Int
         var id: String { name }
+    }
+}
+
+struct AccessibilitySettingsView: View {
+    @AppStorage("IsReduceBrightness") var isReduceBrightness = false
+    @AppStorage("ReduceBrightnessPercent") var reduceBrightnessPercent = 0.1
+    var body: some View {
+        List {
+            Section {
+                Toggle("降低亮度", isOn: $isReduceBrightness)
+                if isReduceBrightness {
+                    Slider(value: $reduceBrightnessPercent, in: 0.0...0.8, step: 0.05)
+                }
+            }
+        }
     }
 }
 
@@ -1085,8 +1112,12 @@ struct DebugMenuView: View {
 }
 
 struct PrivacySettingsView: View {
+    @AppStorage("BlurWhenScreenSleep") var blurWhenScreenSleep = false
     var body: some View {
         List {
+            #if os(watchOS)
+            Toggle("垂下手腕时隐藏内容", isOn: $blurWhenScreenSleep)
+            #endif
             Section {
                 NavigationLink(destination: { AnalyzeAImprove() }, label: {
                     Text("分析与改进")

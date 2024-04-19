@@ -86,12 +86,12 @@ struct PersonAccountView: View {
             List {
                     if sessdata == "" {
                         NavigationLink(destination: { LoginView() }, label: {
-                            Label("User.tap-to-login", systemImage: "rectangle.and.pencil.and.ellipsis")
+                            Label("User.tap-to-login", privateSystemImage: "apple.logo.lock.open")
                         })
                         Button(action: { isUserSwitchPresented = true }, label: {
                             HStack {
                                 HStack {
-                                    Image(systemName: "person.2.badge.key.fill")
+                                    Image(privateSystemName: "person.lanyardcard.fill")
                                         .foregroundColor(.accentColor)
                                     Text("User.switch")
                                 }
@@ -237,7 +237,7 @@ struct PersonAccountView: View {
                         Button(action: { isUserSwitchPresented = true }, label: {
                             HStack {
                                 HStack {
-                                    Image(systemName: "person.2.badge.key.fill")
+                                    Image(privateSystemName: "person.lanyardcard.fill")
                                         .foregroundColor(.accentColor)
                                     Text("User.switch")
                                 }
