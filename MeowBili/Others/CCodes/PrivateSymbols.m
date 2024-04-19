@@ -17,14 +17,17 @@
 //===----------------------------------------------------------------------===//
 
 #import <Foundation/Foundation.h>
+#import <dlfcn.h>
 #import "PrivateSymbols.h"
 
 @implementation UIImage (SFCoreGlyphBundle)
 
 - (instancetype)initWithPrivateSystemName:(NSString *)name {
     NSBundle *const bundle = [NSClassFromString(@"SFSCoreGlyphsBundle") private];
-    _UIAssetManager *const assetManager = [_UIAssetManager assetManagerForBundle:bundle];
-    self = [[assetManager imageNamed:name] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    Class UIAssetManager_Class = NSClassFromString(@"_UIAssetManager");
+    NSObject *assetManager = [UIAssetManager_Class performSelector:NSSelectorFromString(@"assetManagerForBundle:") withObject:bundle];
+    UIImage *image = [assetManager performSelector:NSSelectorFromString(@"imageNamed:") withObject:name];
+    self = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     return self;
 }
 
