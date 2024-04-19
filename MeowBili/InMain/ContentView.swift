@@ -27,6 +27,7 @@ struct ContentView: View {
     @AppStorage("IsFirstUsing") var isFirstUsing = true
     @AppStorage("LastUsingVer") var lastUsingVer = ""
     @AppStorage("IsReadTerms") var isReadTerms = false
+    @AppStorage("IsOldSystemTipped") var isOldSystemTipped = false
     @AppStorage("DedeUserID") var dedeUserID = ""
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
@@ -34,6 +35,7 @@ struct ContentView: View {
     @State var mainTabSelection = 1
     @State var isTermsPresented = false
     @State var userFaceUrl = ""
+    @State var isOldSystemTipPresented = false
     @FocusState var isSearchKeyboardFocused: Bool
     var body: some View {
         #if !os(visionOS) && !os(macOS)
@@ -92,10 +94,28 @@ struct ContentView: View {
             .sheet(isPresented: $isTermsPresented, onDismiss: {
                 isReadTerms = true
             }, content: { TermsListView() })
+            .sheet(isPresented: $isOldSystemTipPresented, onDismiss: {
+                isOldSystemTipped = true
+            }, content: {
+                ScrollView {
+                    VStack {
+                        Text("过时的 watchOS")
+                            .font(.title3)
+                        Text("您的 Apple Watch 运行的 watchOS 已过时，喵哩喵哩将在 2024/6/10 之后停止支持")
+                        Text("停止支持后，将不再为此版本系统提供功能性更新")
+                        Text("Darock 建议您保持更新最新版本系统")
+                    }
+                }
+            })
             .onAppear {
                 #if os(watchOS)
                 if !isReadTerms {
                     isTermsPresented = true
+                }
+                if #unavailable(watchOS 10) {
+                    if !isOldSystemTipped {
+                        isOldSystemTipPresented = true
+                    }
                 }
                 #endif
             }

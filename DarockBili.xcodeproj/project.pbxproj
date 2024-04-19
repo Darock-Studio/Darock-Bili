@@ -40,6 +40,14 @@
 		8C82F7942BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */ = {isa = PBXBuildFile; fileRef = 8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */; };
 		8C82F7952BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */ = {isa = PBXBuildFile; fileRef = 8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */; };
 		8C82F7962BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */ = {isa = PBXBuildFile; fileRef = 8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */; };
+		8C9776082BCECBC3006EDB58 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9776072BCECBC3006EDB58 /* Audio.swift */; };
+		8C9776092BCECBC3006EDB58 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9776072BCECBC3006EDB58 /* Audio.swift */; };
+		8C97760A2BCECBC3006EDB58 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9776072BCECBC3006EDB58 /* Audio.swift */; };
+		8C97760B2BCECBC3006EDB58 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9776072BCECBC3006EDB58 /* Audio.swift */; };
+		8CA1BA112BD2AF9E009BCDFB /* PrivateSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1BA102BD2AF9E009BCDFB /* PrivateSymbols.m */; };
+		8CA1BA122BD2AF9E009BCDFB /* PrivateSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1BA102BD2AF9E009BCDFB /* PrivateSymbols.m */; };
+		8CA1BA132BD2AF9E009BCDFB /* PrivateSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1BA102BD2AF9E009BCDFB /* PrivateSymbols.m */; };
+		8CA1BA142BD2AF9E009BCDFB /* PrivateSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1BA102BD2AF9E009BCDFB /* PrivateSymbols.m */; };
 		8CA370D42B82690700CE0E9E /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA370D32B82690700CE0E9E /* Mixpanel */; };
 		8CA370D62B82691100CE0E9E /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA370D52B82691100CE0E9E /* Mixpanel */; };
 		8CA370DB2B82724400CE0E9E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */; };
@@ -415,6 +423,9 @@
 		8C82F82B2BB70AA7009AEFD2 /* statuscheck-runner.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "statuscheck-runner.yml"; sourceTree = "<group>"; };
 		8C82F82C2BB70AA7009AEFD2 /* tf.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = tf.yml; sourceTree = "<group>"; };
 		8C82F82E2BB70AA7009AEFD2 /* CODE_OF_CONDUCT.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CODE_OF_CONDUCT.md; sourceTree = "<group>"; };
+		8C9776072BCECBC3006EDB58 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
+		8CA1BA102BD2AF9E009BCDFB /* PrivateSymbols.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrivateSymbols.m; sourceTree = "<group>"; };
+		8CA1BA152BD2AFAB009BCDFB /* PrivateSymbols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrivateSymbols.h; sourceTree = "<group>"; };
 		8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		8CA370E82B83BB4F00CE0E9E /* MeowBili Vision App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MeowBili Vision App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA371332B83BE7D00CE0E9E /* MeowBili Vision App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "MeowBili Vision App.entitlements"; sourceTree = "<group>"; };
@@ -695,6 +706,7 @@
 			children = (
 				8CA7CC692B77AE62008E587F /* Bangumi.swift */,
 				8CA7CC6B2B77AE80008E587F /* DownloadObj.swift */,
+				8C9776072BCECBC3006EDB58 /* Audio.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -769,6 +781,8 @@
 				8CC3D5592B7CB95D005636DC /* NowPlayingExtension.m */,
 				8CC3D55E2B7CC941005636DC /* OCCodeExt.h */,
 				8CC3D55C2B7CC936005636DC /* OCCodeExt.m */,
+				8CA1BA152BD2AFAB009BCDFB /* PrivateSymbols.h */,
+				8CA1BA102BD2AF9E009BCDFB /* PrivateSymbols.m */,
 			);
 			path = CCodes;
 			sourceTree = "<group>";
@@ -1368,6 +1382,7 @@
 				8CA371062B83BB9100CE0E9E /* SignalErrorView.swift in Sources */,
 				8CA3710E2B83BB9100CE0E9E /* bMessageSendView.swift in Sources */,
 				8CA371022B83BB9100CE0E9E /* FeedbackView.swift in Sources */,
+				8CA1BA132BD2AF9E009BCDFB /* PrivateSymbols.m in Sources */,
 				8CA370FF2B83BB9100CE0E9E /* NoticeView.swift in Sources */,
 				8CA371132B83BB9100CE0E9E /* PersonAccountView.swift in Sources */,
 				8CA3710C2B83BB9100CE0E9E /* backtrace.swift in Sources */,
@@ -1378,6 +1393,7 @@
 				8CA371292B83BB9100CE0E9E /* SearchView.swift in Sources */,
 				8CA3712D2B83BB9100CE0E9E /* LoginView.swift in Sources */,
 				8C81D2B32BCBA58000EC58F4 /* FansListView.swift in Sources */,
+				8C97760A2BCECBC3006EDB58 /* Audio.swift in Sources */,
 				8CA371252B83BB9100CE0E9E /* WatchLaterView.swift in Sources */,
 				8CA3710A2B83BB9100CE0E9E /* Bangumi.swift in Sources */,
 				8CA3712C2B83BB9100CE0E9E /* ErrorGetView.swift in Sources */,
@@ -1431,6 +1447,7 @@
 				8CA7CCCA2B77B4B2008E587F /* UserDynamicMainView.swift in Sources */,
 				8CA7CCAE2B77B36E008E587F /* PersonAccountView.swift in Sources */,
 				8CA7CCD52B77B530008E587F /* BangumiPlayerView.swift in Sources */,
+				8CA1BA112BD2AF9E009BCDFB /* PrivateSymbols.m in Sources */,
 				8CA7CC9B2B77B13D008E587F /* Passthroughs.swift in Sources */,
 				8CA7CCB02B77B383008E587F /* FavoriteView.swift in Sources */,
 				8CA7CC9D2B77B150008E587F /* AboutView.swift in Sources */,
@@ -1441,6 +1458,7 @@
 				8CA7CC8A2B77B061008E587F /* AppFileManager.swift in Sources */,
 				8CA7CCB22B77B398008E587F /* FollowListView.swift in Sources */,
 				8C81D2B12BCBA57F00EC58F4 /* FansListView.swift in Sources */,
+				8C9776082BCECBC3006EDB58 /* Audio.swift in Sources */,
 				8CA7CC7B2B77AF93008E587F /* NetwokFixView.swift in Sources */,
 				8CA7CCD32B77B51A008E587F /* BangumiDownloadView.swift in Sources */,
 				8CA7CC922B77B0D4008E587F /* CodingTime.m in Sources */,
@@ -1459,6 +1477,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CA1BA122BD2AF9E009BCDFB /* PrivateSymbols.m in Sources */,
 				8CBFF0C02B85E55F00350E0F /* SkinDownloadView.swift in Sources */,
 				8CBFF0C82B85E55F00350E0F /* BangumiPlayerView.swift in Sources */,
 				8CBFF0C42B85E55F00350E0F /* backtrace.swift in Sources */,
@@ -1493,6 +1512,7 @@
 				8CBFF0EB2B85E55F00350E0F /* FavoriteView.swift in Sources */,
 				8CBFF0E12B85E55F00350E0F /* UserDynamicMainView.swift in Sources */,
 				8CA53B032BB963D700D6D692 /* WatchUIDebugView.swift in Sources */,
+				8C9776092BCECBC3006EDB58 /* Audio.swift in Sources */,
 				8CBFF0BA2B85E55F00350E0F /* Passthroughs.swift in Sources */,
 				8CBFF0B92B85E55F00350E0F /* LinkDetectText.swift in Sources */,
 				8CBFF0CB2B85E55F00350E0F /* bMessageSendView.swift in Sources */,
@@ -1556,6 +1576,7 @@
 				8CC5B6DF2B873FA000BAD89E /* FeedbackView.swift in Sources */,
 				8CC5B7092B873FA000BAD89E /* AVExtension.m in Sources */,
 				8CC5B6F02B873FA000BAD89E /* ErrorGetView.swift in Sources */,
+				8CA1BA142BD2AF9E009BCDFB /* PrivateSymbols.m in Sources */,
 				8CC5B6E72B873FA000BAD89E /* FavoriteView.swift in Sources */,
 				8CC5B70C2B873FA000BAD89E /* AboutView.swift in Sources */,
 				8CC5B6FE2B873FA000BAD89E /* PersonAccountView.swift in Sources */,
@@ -1571,6 +1592,7 @@
 				8CC5B6E02B873FA000BAD89E /* UserDynamicListView.swift in Sources */,
 				8CC5B7002B873FA000BAD89E /* DynamicDetailView.swift in Sources */,
 				8CC5B6FD2B873FA000BAD89E /* LinkDetectText.swift in Sources */,
+				8C97760B2BCECBC3006EDB58 /* Audio.swift in Sources */,
 				8CC5B6F72B873FA000BAD89E /* AudioPlayerView.swift in Sources */,
 				8CC5B6EA2B873FA000BAD89E /* CodingTime.m in Sources */,
 				8CC5B7102B873FA000BAD89E /* LiveMessagesView.swift in Sources */,
@@ -1619,7 +1641,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1130;
+				CURRENT_PROJECT_VERSION = 1175;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -1650,7 +1672,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1130;
+				CURRENT_PROJECT_VERSION = 1175;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -1747,7 +1769,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBiliAlternative.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1130;
+				CURRENT_PROJECT_VERSION = 1175;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				ENABLE_PREVIEWS = YES;
@@ -1792,7 +1814,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1130;
+				CURRENT_PROJECT_VERSION = 1175;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				ENABLE_PREVIEWS = YES;
@@ -1832,7 +1854,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1130;
+				CURRENT_PROJECT_VERSION = 1175;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1868,7 +1890,7 @@
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1130;
+				CURRENT_PROJECT_VERSION = 1175;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1897,7 +1919,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1130;
+				CURRENT_PROJECT_VERSION = 1175;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1921,7 +1943,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1130;
+				CURRENT_PROJECT_VERSION = 1175;
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -1988,7 +2010,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1130;
+				CURRENT_PROJECT_VERSION = 1175;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2023,7 +2045,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1130;
+				CURRENT_PROJECT_VERSION = 1175;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2060,7 +2082,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1130;
+				CURRENT_PROJECT_VERSION = 1175;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2107,7 +2129,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1130;
+				CURRENT_PROJECT_VERSION = 1175;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2152,7 +2174,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1130;
+				CURRENT_PROJECT_VERSION = 1175;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2188,7 +2210,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1130;
+				CURRENT_PROJECT_VERSION = 1175;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2228,7 +2250,7 @@
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1130;
+				CURRENT_PROJECT_VERSION = 1175;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -2261,7 +2283,7 @@
 				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1130;
+				CURRENT_PROJECT_VERSION = 1175;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -2290,7 +2312,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1130;
+				CURRENT_PROJECT_VERSION = 1175;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -2313,7 +2335,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1130;
+				CURRENT_PROJECT_VERSION = 1175;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;

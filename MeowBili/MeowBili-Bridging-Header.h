@@ -9,5 +9,6 @@
 #import "CodingTime.h"
 #import "AVExtension.h"
 #import "NowPlayingExtension.h"
+#import "PrivateSymbols.h"
 
 #endif /* DarockBili_Bridging_Header_h */
