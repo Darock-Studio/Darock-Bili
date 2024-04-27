@@ -188,7 +188,7 @@ struct MainView: View {
                         Section {
                             if debug {
                                 Button(action: {
-                                    tipWithText("Test", symbol: "hammer.fill")
+                                    PresentVisualPairingView(withCode: "Test")
                                 }, label: {
                                     Text("Home.debug")
                                 })
