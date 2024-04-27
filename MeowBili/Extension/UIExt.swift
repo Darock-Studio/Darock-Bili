@@ -18,6 +18,7 @@
 
 import UIKit
 import SwiftUI
+import Dynamic
 import DarockKit
 import Alamofire
 import Foundation
@@ -629,4 +630,41 @@ func Label(_ titleKey: LocalizedStringKey, privateSystemImage systemName: String
         Image(uiImage: UIImage(privateSystemName: systemName))
         Text(titleKey)
     }
+}
+
+func PresentVisualPairingView(withCode: String) {
+//    let codeSize: CGFloat = 50
+//    
+//    let codeContainer = Dynamic.UIView()
+//    codeContainer.translatesAutoresizingMaskIntoConstraints = false
+//    codeContainer.clipsToBounds = true
+//    
+//    codeContainer.backgroundColor = UIColor.white
+//    codeContainer.layer.cornerRadius = codeSize / 2
+//    codeContainer.layer.borderColor = UIColor(red: 0.00, green: 0.49, blue: 1.00, alpha: 1.00).cgColor
+//    codeContainer.layer.borderWidth = 1
+//    
+//    codeContainer.widthAnchor.constraintEqualToConstant(codeSize).active = true
+//    codeContainer.heightAnchor.constraintEqualToConstant(codeSize).active = true
+////    codeContainer.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = true;
+////    codeContainer.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
+//    Bundle(path: "/System/Library/PrivateFrameworks/VisualPairing.framework")!.load()
+//    let codeView = Dynamic.VPPresenterView().initWithFrame(CGRect(x: 0, y: 0, width: 100, height: 100))
+//    codeView.setFrame(CGRect(x: 0, y: 0, width: 100, height: 100))
+//    codeView.translatesAutoresizingMaskIntoConstraints = false
+//    codeView.setVerificationCode(withCode)
+//    codeView.start()
+//    codeContainer.setFrame(CGRect(x: 0, y: 0, width: 100, height: 100))
+//    let assetData = NSDataAsset(name: "particles")!.data
+//    let caar = NSKeyedUnarchiver.unarchiveObject(with: assetData)! as! NSDictionary
+//    let rootLayer = caar["rootLayer"]
+//    codeContainer.layer.addSublayer(rootLayer)
+//    codeContainer.addSubview(codeView)
+//    codeView.widthAnchor.constraintEqualToAnchor(codeContainer.widthAnchor.asObject!).active = true
+//    codeView.heightAnchor.constraintEqualToAnchor(codeContainer.heightAnchor.asObject!).active = true
+//    codeView.centerXAnchor.constraintEqualToAnchor(codeContainer.centerXAnchor.asObject!).active = true
+//    codeView.centerYAnchor.constraintEqualToAnchor(codeContainer.centerYAnchor.asObject!).active = true
+//    let vc = Dynamic.UIViewController()
+//    vc.view = codeContainer
+//    Dynamic.UIApplication.sharedApplication.keyWindow.rootViewController.presentViewController(vc, animated: true, completion: nil)
 }

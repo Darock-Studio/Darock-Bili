@@ -393,6 +393,17 @@ struct PersonAccountView: View {
                                     })
                                 }
                             }
+                            #if os(watchOS)
+                            Section {
+                                NavigationLink(destination: { InAppFeedbackView() }, label: {
+                                    HStack {
+                                        Image(systemName: "exclamationmark.bubble")
+                                            .font(.system(size: 12))
+                                        Text("反馈助理")
+                                    }
+                                })
+                            }
+                            #endif
                         }
                     }
             }
