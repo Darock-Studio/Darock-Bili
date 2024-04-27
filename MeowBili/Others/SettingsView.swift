@@ -124,19 +124,6 @@ struct SettingsView: View {
                         Text("Settings.sleep")
                     }
                 })
-                NavigationLink(destination: { FeedbackView().navigationTitle("Settings.feedback") }, label: {
-                    HStack {
-                        ZStack {
-                            Color.purple
-                                .frame(width: 26, height: 26)
-                                .clipShape(RoundedRectangle(cornerRadius: 5))
-                            Image(systemName: "exclamationmark")
-                                .font(.system(size: 16))
-                                .foregroundColor(.white)
-                        }
-                        Text("Settings.feedback")
-                    }
-                })
                 NavigationLink(destination: { PrivacySettingsView().navigationTitle("隐私与安全性") }, label: {
                     HStack {
                         ZStack {
@@ -316,18 +303,6 @@ struct SettingsView: View {
                                 .font(.system(size: 11))
                         }
                         Text("Settings.sleep")
-                    }
-                })
-                NavigationLink(destination: { FeedbackView().navigationTitle("Settings.feedback") }, label: {
-                    HStack {
-                        ZStack {
-                            Color.purple
-                                .frame(width: 20, height: 20)
-                                .clipShape(Circle())
-                            Image(systemName: "exclamationmark")
-                                .font(.system(size: 12))
-                        }
-                        Text("Settings.feedback")
                     }
                 })
                 NavigationLink(destination: { PrivacySettingsView().navigationTitle("隐私与安全性") }, label: {
