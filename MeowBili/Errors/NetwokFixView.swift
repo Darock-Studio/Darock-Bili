@@ -310,7 +310,7 @@ struct NetworkFixView: View {
                 }
                 isTroubleshooting = false
             }
-            }
+        }
         .onDisappear {
             progressTimer?.invalidate()
         }

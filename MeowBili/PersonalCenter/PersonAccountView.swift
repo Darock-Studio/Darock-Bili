@@ -398,9 +398,10 @@ struct PersonAccountView: View {
                                 NavigationLink(destination: { InAppFeedbackView() }, label: {
                                     HStack {
                                         Image(systemName: "exclamationmark.bubble")
-                                            .font(.system(size: 12))
+                                            .foregroundColor(.accentColor)
                                         Text("反馈助理")
                                     }
+                                    .font(.system(size: 16))
                                 })
                             }
                             #endif
