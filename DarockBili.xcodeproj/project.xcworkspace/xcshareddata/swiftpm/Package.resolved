@@ -37,6 +37,15 @@
       }
     },
     {
+      "identity" : "cepheus",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/WindowsMEMZ/Cepheus",
+      "state" : {
+        "branch" : "main",
+        "revision" : "73b8735ce8f7e663d3ce73fd58eb5dc41b23f26c"
+      }
+    },
+    {
       "identity" : "darockkit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Darock-Studio/DarockKit",
@@ -87,7 +96,7 @@
       "location" : "https://github.com/mixpanel/mixpanel-swift",
       "state" : {
         "branch" : "master",
-        "revision" : "6522fb2acc9b823cf420c8e2dd1233f689ec505a"
+        "revision" : "1ae92448ec3b0841ae5ceaa151c98ae66776596a"
       }
     },
     {
@@ -140,8 +149,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImageWebPCoder",
       "state" : {
-        "revision" : "8a33fb3ca75a01267f775f891f7d61f675e95072",
-        "version" : "0.14.5"
+        "revision" : "f534cfe830a7807ecc3d0332127a502426cfa067",
+        "version" : "0.14.6"
       }
     },
     {

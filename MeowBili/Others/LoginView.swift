@@ -142,11 +142,11 @@ struct LoginView: View {
                                 .bold()
                             //  .foregroundStyle(currentStep == 1 ? Color.accentColor : Color.primary)
                             HStack {
-                                /* Picker("+\(phoneCode)", selection: $phoneCode) {
-                                 ForEach(callNations.indices) { codeIndex in
-                                 Text(callNations[codeIndex]).tag(callCodes[codeIndex])
-                                 }
-                                 } */
+//                                Picker("+\(phoneCode)", selection: $phoneCode) {
+//                                    ForEach(callNations.indices) { codeIndex in
+//                                        Text(callNations[codeIndex]).tag(callCodes[codeIndex])
+//                                    }
+//                                }
                                 Text("+86")
                                 TextField("Login.step1.phone-number", text: $accountInput)
                                 #if !os(watchOS)

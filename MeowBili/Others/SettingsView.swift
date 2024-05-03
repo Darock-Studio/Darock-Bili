@@ -209,6 +209,18 @@ struct SettingsView: View {
                         Text("Settings.player")
                     }
                 })
+                NavigationLink(destination: { KeyboardSettingsView().navigationTitle("键盘") }, label: {
+                    HStack {
+                        ZStack {
+                            Color.secondary
+                                .frame(width: 20, height: 20)
+                                .clipShape(Circle())
+                            Image(systemName: "keyboard")
+                                .font(.system(size: 12))
+                        }
+                        Text("键盘")
+                    }
+                })
                 NavigationLink(destination: { SuggestionViewSettingsView().navigationTitle("推荐视图") }, label: {
                     HStack {
                         ZStack {
@@ -434,6 +446,19 @@ struct PlayerSettingsView: View {
                 Toggle("显示底部弹幕", isOn: $isShowBottomDanmaku)
             } header: {
                 Text("弹幕")
+            }
+        }
+    }
+}
+
+struct KeyboardSettingsView: View {
+    @AppStorage("IsUseExtKeyboard") var isUseExtKeyboard = false
+    var body: some View {
+        List {
+            Section {
+                Toggle("使用第三方全键盘", isOn: $isUseExtKeyboard)
+            } footer: {
+                Text("不支持全键盘的 Apple Watch 可通过打开此开关以使用第三方的全键盘")
             }
         }
     }

@@ -343,6 +343,11 @@ struct OpenSourceView: View {
     https://github.com/adamzarn/AZVideoPlayer
     ---------------------
     
+    --- CepheusKeyboardKit ---
+    Licensed under Apache License 2.0
+    Code Changes: https://github.com/Serene-Garden/Cepheus/compare/main...WindowsMEMZ:Cepheus:main
+    --------------------------
+    
     --- Dynamic ---
     Licensed under Apache License 2.0
     ---------------

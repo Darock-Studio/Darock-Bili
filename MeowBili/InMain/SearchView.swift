@@ -39,7 +39,8 @@ struct SearchMainView: View {
     @State var searchText = ""
     @State var isSearchPresented = false
     @State var searchHistory = [String]()
-    @State var suggestions = [String]()
+    @State var hotSearches = [String]()
+    @State var isHotSearchFolded = false
     var body: some View {
         List {
             Section {
@@ -60,24 +61,6 @@ struct SearchMainView: View {
                                 UserDefaults.standard.set([searchText] + searchHistory, forKey: "SearchHistory")
                             }
                         }
-                        .onChange(of: searchText) { value in
-                            if value != "" {
-                                let headers: HTTPHeaders = [
-                                    "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3);",
-                                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                                ]
-                                DarockKit.Network.shared.requestJSON("https://s.search.bilibili.com/main/suggest", headers: headers) { respJson, isSuccess in
-                                    if isSuccess {
-                                        suggestions.removeAll()
-                                        for result in respJson["result"]["tag"] {
-                                            if let v = result.1["value"].string {
-                                                suggestions.append(v)
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
                 }
                 if debug {
                     Button(action: {
@@ -94,6 +77,38 @@ struct SearchMainView: View {
                         Text("FocusStateDebug")
                     })
                     #endif
+                }
+            }
+            if !hotSearches.isEmpty {
+                Section {
+                    if !isHotSearchFolded {
+                        ForEach(0..<hotSearches.count, id: \.self) { i in
+                            Button(action: {
+                                searchText = hotSearches[i]
+                                isSearchPresented = true
+                                if searchText != (searchHistory.first ?? "") {
+                                    UserDefaults.standard.set([searchText] + searchHistory, forKey: "SearchHistory")
+                                }
+                            }, label: {
+                                Text(hotSearches[i])
+                            })
+                        }
+                    }
+                } header: {
+                    HStack {
+                        Text("热搜")
+                        Spacer()
+                        Button(action: {
+                            withAnimation {
+                                isHotSearchFolded.toggle()
+                            }
+                        }, label: {
+                            Image(systemName: "chevron.down")
+                                .foregroundStyle(Color.blue)
+                                .rotationEffect(.degrees(isHotSearchFolded ? -90 : 0))
+                        })
+                        .buttonStyle(.plain)
+                    }
                 }
             }
             if searchHistory.count != 0 {
@@ -120,10 +135,17 @@ struct SearchMainView: View {
         .onAppear {
             searchHistory.removeAll()
             searchHistory = UserDefaults.standard.stringArray(forKey: "SearchHistory") ?? [String]()
-        }
-        .searchSuggestions {
-            if suggestions.count != 0 {
-                
+            let headers: HTTPHeaders = [
+                "cookie": "SESSDATA=\(sessdata)",
+                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            ]
+            DarockKit.Network.shared.requestJSON("https://s.search.bilibili.com/main/hotword", headers: headers) { respJson, isSuccess in
+                if isSuccess {
+                    //  🥵
+                    for hot in respJson["list"] {
+                        hotSearches.append(hot.1["keyword"].string ?? "[加载失败]")
+                    }
+                }
             }
         }
     }
