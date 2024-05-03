@@ -29,6 +29,7 @@ import SDWebImageSwiftUI
 #endif
 #if os(watchOS)
 import WatchKit
+import CepheusKeyboardKit
 #else
 import WebKit
 #endif
@@ -632,39 +633,50 @@ func Label(_ titleKey: LocalizedStringKey, privateSystemImage systemName: String
     }
 }
 
-func PresentVisualPairingView(withCode: String) {
-//    let codeSize: CGFloat = 50
-//    
-//    let codeContainer = Dynamic.UIView()
-//    codeContainer.translatesAutoresizingMaskIntoConstraints = false
-//    codeContainer.clipsToBounds = true
-//    
-//    codeContainer.backgroundColor = UIColor.white
-//    codeContainer.layer.cornerRadius = codeSize / 2
-//    codeContainer.layer.borderColor = UIColor(red: 0.00, green: 0.49, blue: 1.00, alpha: 1.00).cgColor
-//    codeContainer.layer.borderWidth = 1
-//    
-//    codeContainer.widthAnchor.constraintEqualToConstant(codeSize).active = true
-//    codeContainer.heightAnchor.constraintEqualToConstant(codeSize).active = true
-////    codeContainer.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = true;
-////    codeContainer.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
-//    Bundle(path: "/System/Library/PrivateFrameworks/VisualPairing.framework")!.load()
-//    let codeView = Dynamic.VPPresenterView().initWithFrame(CGRect(x: 0, y: 0, width: 100, height: 100))
-//    codeView.setFrame(CGRect(x: 0, y: 0, width: 100, height: 100))
-//    codeView.translatesAutoresizingMaskIntoConstraints = false
-//    codeView.setVerificationCode(withCode)
-//    codeView.start()
-//    codeContainer.setFrame(CGRect(x: 0, y: 0, width: 100, height: 100))
-//    let assetData = NSDataAsset(name: "particles")!.data
-//    let caar = NSKeyedUnarchiver.unarchiveObject(with: assetData)! as! NSDictionary
-//    let rootLayer = caar["rootLayer"]
-//    codeContainer.layer.addSublayer(rootLayer)
-//    codeContainer.addSubview(codeView)
-//    codeView.widthAnchor.constraintEqualToAnchor(codeContainer.widthAnchor.asObject!).active = true
-//    codeView.heightAnchor.constraintEqualToAnchor(codeContainer.heightAnchor.asObject!).active = true
-//    codeView.centerXAnchor.constraintEqualToAnchor(codeContainer.centerXAnchor.asObject!).active = true
-//    codeView.centerYAnchor.constraintEqualToAnchor(codeContainer.centerYAnchor.asObject!).active = true
-//    let vc = Dynamic.UIViewController()
-//    vc.view = codeContainer
-//    Dynamic.UIApplication.sharedApplication.keyWindow.rootViewController.presentViewController(vc, animated: true, completion: nil)
+#if os(watchOS)
+// Ext Keyboard
+struct TextField: View {
+    var titleKey: LocalizedStringKey?
+    var titleKeyString: String?
+    var text: Binding<String>
+    @AppStorage("IsUseExtKeyboard") private var _isUseExtKeyboard = false
+    @State var _onSubmit: () -> Void = { }
+    
+    init(_ titleKey: LocalizedStringKey, text: Binding<String>) {
+        self.titleKey = titleKey
+        self.text = text
+    }
+    @_disfavoredOverload
+    init(_ titleKey: String, text: Binding<String>) {
+        self.titleKeyString = titleKey
+        self.text = text
+    }
+    
+    var body: some View {
+        if _isUseExtKeyboard {
+            if let titleKey {
+                CepheusKeyboard(input: text, prompt: titleKey, defaultLanguage: "zh-hans-pinyin", onSubmit: { _onSubmit() })
+            } else if let titleKeyString {
+                CepheusKeyboard(input: text, prompt: titleKeyString, defaultLanguage: "zh-hans-pinyin", onSubmit: { _onSubmit() })
+            }
+        } else {
+            if let titleKey {
+                SwiftUI.TextField(titleKey, text: text)
+            } else if let titleKeyString {
+                SwiftUI.TextField(titleKeyString, text: text)
+            }
+        }
+    }
 }
+extension TextField {
+    @usableFromInline
+    func onSubmit(_ action: @escaping () -> Void) -> some View {
+        if self._isUseExtKeyboard {
+            self._onSubmit = action
+            return self
+        } else {
+            return self.onSubmit(action)
+        }
+    }
+}
+#endif

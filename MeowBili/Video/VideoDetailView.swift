@@ -125,7 +125,7 @@ struct VideoDetailView: View {
                                 var alpha: CGFloat = 0
                                 UIColor(danmakuSendColor).getRed(&red, green: &green, blue: &blue, alpha: &alpha)
                                 return (Int(red * 255) << 16) + (Int(green * 255) << 8) + Int(blue * 255)
-                            }(), "fontsize": danmakuSendFontSize, "pool": 0, "mode": danmakuSendMode, "rnd": Date.now.timeStamp * 1000000, "csrf": biliJct], headers: headers).response { response in
+                            }(), "fontsize": danmakuSendFontSize, "pool": 0, "mode": danmakuSendMode, "rnd": Date.now.timeStamp * 1000000, "csrf": biliJct], headers: headers).response { response in // swiftlint:disable:this collection_alignment
                                 debugPrint(response)
                                 danmakuSendCache = ""
                             }

@@ -111,3 +111,4 @@ struct LinkDetectText: View {
         return markdownString
     }
 }
+// swiftlint:enable trailing_whitespace
