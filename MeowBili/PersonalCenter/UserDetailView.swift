@@ -1134,14 +1134,14 @@ struct UserDetailView: View {
         func RefreshVideos() {
             videos = [[String: String]]()
             let headers: HTTPHeaders = [
-                //"accept": "*/*",
-                //"accept-encoding": "gzip, deflate, br",
-                //"accept-language": "zh-CN,zh;q=0.9",
+                "accept": "*/*",
+                "accept-encoding": "gzip, deflate, br",
+                "accept-language": "zh-CN,zh;q=0.9",
                 //"cookie": "\(sessdata == "" ? "" : "SESSDATA=\(sessdata); ")buvid3=\(globalBuvid3); b_nut=\(Date.now.timeStamp); buvid4=\(globalBuvid4);",
                 "cookie": "SESSDATA=\(sessdata); buvid_fp=e651c1a382430ea93631e09474e0b395; buvid3=\(UuidInfoc.gen()); buvid4=buvid4-failed-1",
-                //"origin": "https://space.bilibili.com",
-                //"referer": "https://space.bilibili.com/\(uid)/video",
-                //"User-Agent": "Mozilla/5.0" // Bypass? rdar://gh/SocialSisterYi/bilibili-API-collect/issues/868#1859065874
+                "origin": "https://space.bilibili.com",
+                "referer": "https://space.bilibili.com/\(uid)/video",
+//                "User-Agent": "Mozilla/5.0" // Bypass? rdar://gh/SocialSisterYi/bilibili-API-collect/issues/868#1859065874
                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             ]
             biliWbiSign(paramEncoded: "mid=\(uid)&ps=50&pn=\(videoNowPage)&dm_img_list=[]&dm_img_str=V2ViR0wgMS4wIChPcGVuR0wgRVMgMi4wIENocm9taXVtKQ&dm_cover_img_str=VjNEIDQuMkJyb2FkY2".base64Encoded()) { signed in
@@ -1149,7 +1149,7 @@ struct UserDetailView: View {
                     debugPrint(signed)
                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/arc/search?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
-                            DispatchQueue(label: "com.darock.DarockBili.Video-Load", qos: .background).async {
+                            DispatchQueue(label: "com.darock.DarockBili.Video-Load", qos: .utility).async {
                                 debugPrint(respJson)
                                 if !CheckBApiError(from: respJson) { return }
                                 let vlist = respJson["data"]["list"]["vlist"]
@@ -1183,7 +1183,7 @@ struct UserDetailView: View {
                     debugPrint(signed)
                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/article?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
-                            DispatchQueue(label: "com.darock.DarockBili.Article-Load", qos: .background).async {
+                            DispatchQueue(label: "com.darock.DarockBili.Article-Load", qos: .utility).async {
                                 debugPrint(respJson)
                                 if !CheckBApiError(from: respJson) { return }
                                 let articlesJson = respJson["data"]["articles"]
