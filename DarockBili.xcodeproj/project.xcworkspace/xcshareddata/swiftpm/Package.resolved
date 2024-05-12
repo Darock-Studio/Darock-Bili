@@ -149,8 +149,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImageWebPCoder",
       "state" : {
-        "revision" : "f534cfe830a7807ecc3d0332127a502426cfa067",
-        "version" : "0.14.6"
+        "revision" : "8a33fb3ca75a01267f775f891f7d61f675e95072",
+        "version" : "0.14.5"
       }
     },
     {
@@ -160,6 +160,15 @@
       "state" : {
         "revision" : "1b127194b976a58ea460a2cbe10f00fa994b1ece",
         "version" : "2.3.0"
+      }
+    },
+    {
+      "identity" : "supportsuicore",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Darock-Studio/SupportsUICore",
+      "state" : {
+        "branch" : "main",
+        "revision" : "2460d64cf0419fd2606b08f24558496d8fe8a360"
       }
     },
     {
