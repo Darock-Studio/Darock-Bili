@@ -36,6 +36,7 @@ struct VideoDownloadView: View {
     @AppStorage("SESSDATA") var sessdata = ""
     @AppStorage("bili_jct") var biliJct = ""
     @State var isLoading = true
+    @State var isInitialized = false
     var body: some View {
         NavigationStack {
             List {
@@ -65,6 +66,10 @@ struct VideoDownloadView: View {
             }
         }
         .onAppear {
+            if isInitialized {
+                return
+            }
+            isInitialized = true
             DispatchQueue(label: "com.darock.DarockBili.VideoDownload", qos: .background).async {
                 let headers: HTTPHeaders = [
                     "cookie": "SESSDATA=\(sessdata)",
