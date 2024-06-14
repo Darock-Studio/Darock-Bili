@@ -27,9 +27,7 @@ import Alamofire
 import SwiftyJSON
 import AVFoundation
 import MobileCoreServices
-#if !os(visionOS)
 import SDWebImageSwiftUI
-#endif
 #if os(watchOS)
 import WatchKit
 #endif
@@ -132,7 +130,6 @@ struct VideoDetailView: View {
                         }
                         .focused($isEditingDanmaku)
                         .toolbar {
-                            #if !os(visionOS)
                             ToolbarItemGroup(placement: .keyboard) {
                                 ColorPicker("颜色", selection: $danmakuSendColor)
                                 Picker("字号", selection: $danmakuSendFontSize) {
@@ -150,7 +147,6 @@ struct VideoDetailView: View {
                                     Text("底部").tag(4)
                                 }
                             }
-                            #endif
                         }
                         .frame(width: isEditingDanmaku ? nil : 90)
                         .animation(.easeOut(duration: 0.2), value: isEditingDanmaku)
@@ -239,11 +235,7 @@ struct VideoDetailView: View {
                                                     Text("\(String(ownerFansCount).shorter()) 粉丝")
                                                         .font(.system(size: 11))
                                                         .lineLimit(1)
-                                                    #if !os(visionOS)
                                                         .foregroundColor(.gray)
-                                                    #else
-                                                        .opacity(0.65)
-                                                    #endif
                                                     Spacer()
                                                 }
                                             }
@@ -251,9 +243,7 @@ struct VideoDetailView: View {
                                         }
                                         .padding(5)
                                         .cornerRadius(12)
-                                        #if !os(visionOS)
                                         .background(Color.gray.opacity(0.35))
-                                        #endif
                                     })
                                     .accessibilityIdentifier("OwnerDetailButton")
                                     .onDrag {
@@ -272,21 +262,17 @@ struct VideoDetailView: View {
                                             ]
                                             AF.request("https://api.bilibili.com/x/web-interface/archive/like", method: .post, parameters: ["bvid": videoDetails["BV"]!, "like": isLiked ? 2 : 1, "eab_x": 2, "ramval": 0, "source": "web_normal", "ga": 1, "csrf": biliJct], headers: headers).response { response in
                                                 debugPrint(response)
-                                                #if !os(visionOS)
                                                 if isLiked {
                                                     AlertKitAPI.present(title: String(localized: "Video.action.canceled"), icon: .done, style: .iOS17AppleMusic, haptic: .success)
                                                 } else {
                                                     AlertKitAPI.present(title: String(localized: "Video.action.liked"), icon: .done, style: .iOS17AppleMusic, haptic: .success)
                                                 }
-                                                #endif
                                                 isLiked.toggle()
                                             }
                                         }, label: {
                                             ZStack {
-                                                #if !os(visionOS)
                                                 RoundedRectangle(cornerRadius: 12)
                                                     .foregroundStyle(isLiked ? Color(hex: 0xfa678e) : Color.gray.opacity(0.35))
-                                                #endif
                                                 VStack {
                                                     Text(isLiked ? "" : "")
                                                         .font(.custom("bilibili", size: 20))
@@ -311,16 +297,12 @@ struct VideoDetailView: View {
                                             if !isCoined {
                                                 isCoinViewPresented = true
                                             } else {
-                                                #if !os(visionOS)
                                                 AlertKitAPI.present(title: "不能取消投币", icon: .done, style: .iOS17AppleMusic, haptic: .success)
-                                                #endif
                                             }
                                         }, label: {
                                             ZStack {
-                                                #if !os(visionOS)
                                                 RoundedRectangle(cornerRadius: 12)
                                                     .foregroundStyle(isCoined ? Color(hex: 0xfa678e) : Color.gray.opacity(0.35))
-                                                #endif
                                                 VStack {
                                                     Text(isCoined ? "" : "")
                                                         .font(.custom("bilibili", size: 20))
@@ -349,10 +331,8 @@ struct VideoDetailView: View {
                                             isFavoriteChoosePresented = true
                                         }, label: {
                                             ZStack {
-                                                #if !os(visionOS)
                                                 RoundedRectangle(cornerRadius: 12)
                                                     .foregroundStyle(isFavoured ? Color(hex: 0xfa678e) : Color.gray.opacity(0.35))
-                                                #endif
                                                 VStack {
                                                     Text(isFavoured ? "" : "")
                                                         .font(.custom("bilibili", size: 20))
@@ -515,175 +495,153 @@ struct VideoDetailView: View {
             }
             #else
             TabView {
-                if #available(watchOS 10, *) {
-                    ZStack {
-                        Group {
-                            TabView(selection: $mainVerticalTabViewSelection) {
-                                VStack {
-                                    DetailViewFirstPageBase(videoDetails: $videoDetails, videoPages: $videoPages, honors: $honors, subTitles: $subTitles, isLoading: $isLoading, videoLink: $videoLink, videoBvid: $videoBvid, videoCID: $videoCID)
-                                        .offset(y: 16)
-                                        .toolbar {
-                                            ToolbarItem(placement: .topBarTrailing) {
-                                                NavigationLink(destination: {
-                                                    List {
-                                                        if videoPages.count <= 1 {
-                                                            NavigationLink(destination: { VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails) }, label: {
-                                                                Label("Video.download", systemImage: "arrow.down.doc")
-                                                            })
-                                                        } else {
-                                                            Button(action: {
-                                                                videoPartShouldShowDownloadTip = true
-                                                                mainVerticalTabViewSelection = 3
-                                                            }, label: {
-                                                                Label("Video.download", systemImage: "arrow.down.doc")
-                                                            })
-                                                        }
-                                                        Button(action: {
-                                                            let headers: HTTPHeaders = [
-                                                                "cookie": "SESSDATA=\(sessdata)",
-                                                                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                                                            ]
-                                                            AF.request("https://api.bilibili.com/x/v2/history/toview/add", method: .post, parameters: ["bvid": videoDetails["BV"]!, "csrf": biliJct], headers: headers).response { response in
-                                                                do {
-                                                                    let json = try JSON(data: response.data ?? Data())
-                                                                    if let code = json["code"].int {
-                                                                        if code == 0 {
-                                                                            tipWithText(String(localized: "Video.added"), symbol: "checkmark.circle.fill")
-                                                                        } else {
-                                                                            tipWithText(json["message"].string ?? String(localized: "Video.unkonwn-error"), symbol: "xmark.circle.fill")
-                                                                        }
-                                                                    } else {
-                                                                        tipWithText(String(localized: "Video.unkonwn-error"), symbol: "xmark.circle.fill")
-                                                                    }
-                                                                } catch {
-                                                                    tipWithText(String(localized: "Video.unkonwn-error"), symbol: "xmark.circle.fill")
-                                                                }
-                                                            }
-                                                        }, label: {
-                                                            Label("Video.watch-later", systemImage: "memories.badge.plus")
+                ZStack {
+                    Group {
+                        TabView(selection: $mainVerticalTabViewSelection) {
+                            VStack {
+                                DetailViewFirstPageBase(videoDetails: $videoDetails, videoPages: $videoPages, honors: $honors, subTitles: $subTitles, isLoading: $isLoading, videoLink: $videoLink, videoBvid: $videoBvid, videoCID: $videoCID)
+                                    .offset(y: 16)
+                                    .toolbar {
+                                        ToolbarItem(placement: .topBarTrailing) {
+                                            NavigationLink(destination: {
+                                                List {
+                                                    if videoPages.count <= 1 {
+                                                        NavigationLink(destination: { VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails) }, label: {
+                                                            Label("Video.download", systemImage: "arrow.down.doc")
                                                         })
-                                                        NavigationLink(destination: {
-                                                            VStack {
-                                                                if let qrImg = continueQr {
-                                                                    Image(uiImage: UIImage(cgImage: qrImg))
-                                                                        .resizable()
-                                                                        .frame(width: 130, height: 130)
-                                                                    Text("使用“相机”App")
-                                                                        .bold()
-                                                                }
-                                                            }
-                                                            .onAppear {
-                                                                var tmpStr = ""
-                                                                for (key, value) in videoDetails {
-                                                                    tmpStr += "\(key)=\(value)&"
-                                                                }
-                                                                tmpStr.removeLast()
-                                                                continueQr = EFQRCode.generate(for: "drkbili://withvideodetail/\(tmpStr)")
-                                                            }
+                                                    } else {
+                                                        Button(action: {
+                                                            videoPartShouldShowDownloadTip = true
+                                                            mainVerticalTabViewSelection = 3
                                                         }, label: {
-                                                            Label("在iPhone上继续", systemImage: "iphone.and.arrow.forward")
+                                                            Label("Video.download", systemImage: "arrow.down.doc")
                                                         })
                                                     }
-                                                }, label: {
-                                                    Image(systemName: "ellipsis")
-                                                })
-                                            }
-                                            ToolbarItemGroup(placement: .bottomBar) {
-                                                Button(action: {
-                                                    isLoading = true
-                                                    DecodeVideo(isAudio: true)
-                                                }, label: {
-                                                    Image(systemName: "waveform")
-                                                })
-                                                if videoPages.count <= 1 {
                                                     Button(action: {
-                                                        isLoading = true
-                                                        debugPrint(videoDetails["BV"]!)
-                                                        DecodeVideo()
+                                                        let headers: HTTPHeaders = [
+                                                            "cookie": "SESSDATA=\(sessdata)",
+                                                            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                                        ]
+                                                        AF.request("https://api.bilibili.com/x/v2/history/toview/add", method: .post, parameters: ["bvid": videoDetails["BV"]!, "csrf": biliJct], headers: headers).response { response in
+                                                            do {
+                                                                let json = try JSON(data: response.data ?? Data())
+                                                                if let code = json["code"].int {
+                                                                    if code == 0 {
+                                                                        tipWithText(String(localized: "Video.added"), symbol: "checkmark.circle.fill")
+                                                                    } else {
+                                                                        tipWithText(json["message"].string ?? String(localized: "Video.unkonwn-error"), symbol: "xmark.circle.fill")
+                                                                    }
+                                                                } else {
+                                                                    tipWithText(String(localized: "Video.unkonwn-error"), symbol: "xmark.circle.fill")
+                                                                }
+                                                            } catch {
+                                                                tipWithText(String(localized: "Video.unkonwn-error"), symbol: "xmark.circle.fill")
+                                                            }
+                                                        }
                                                     }, label: {
-                                                        Image(systemName: "play.fill")
+                                                        Label("Video.watch-later", systemImage: "memories.badge.plus")
                                                     })
-                                                    
-                                                } else {
-                                                    Button(action: {
-                                                        mainVerticalTabViewSelection = 3
+                                                    NavigationLink(destination: {
+                                                        VStack {
+                                                            if let qrImg = continueQr {
+                                                                Image(uiImage: UIImage(cgImage: qrImg))
+                                                                    .resizable()
+                                                                    .frame(width: 130, height: 130)
+                                                                Text("使用“相机”App")
+                                                                    .bold()
+                                                            }
+                                                        }
+                                                        .onAppear {
+                                                            var tmpStr = ""
+                                                            for (key, value) in videoDetails {
+                                                                tmpStr += "\(key)=\(value)&"
+                                                            }
+                                                            tmpStr.removeLast()
+                                                            continueQr = EFQRCode.generate(for: "drkbili://withvideodetail/\(tmpStr)")
+                                                        }
                                                     }, label: {
-                                                        Image(systemName: "rectangle.stack")
+                                                        Label("在iPhone上继续", systemImage: "iphone.and.arrow.forward")
                                                     })
                                                 }
+                                            }, label: {
+                                                Image(systemName: "ellipsis")
+                                            })
+                                        }
+                                        ToolbarItemGroup(placement: .bottomBar) {
+                                            Button(action: {
+                                                isLoading = true
+                                                DecodeVideo(isAudio: true)
+                                            }, label: {
+                                                Image(systemName: "waveform")
+                                            })
+                                            if videoPages.count <= 1 {
+                                                Button(action: {
+                                                    isLoading = true
+                                                    debugPrint(videoDetails["BV"]!)
+                                                    DecodeVideo()
+                                                }, label: {
+                                                    Image(systemName: "play.fill")
+                                                })
+                                                
+                                            } else {
+                                                Button(action: {
+                                                    mainVerticalTabViewSelection = 3
+                                                }, label: {
+                                                    Image(systemName: "rectangle.stack")
+                                                })
                                             }
                                         }
-                                        .tag(1)
-                                }
-                                DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, honors: $honors, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount, publishTime: $publishTime)
-                                    .tag(2)
-                                if videoPages.count > 1 {
-                                    DetailViewVideoPartPageBase(videoDetails: $videoDetails, videoPages: $videoPages, isLoading: $isLoading, videoPartShouldShowDownloadTip: $videoPartShouldShowDownloadTip)
-                                        .tag(3)
-                                }
-                            }
-                            .tabViewStyle(.verticalPage)
-                        }
-                        .blur(radius: isLoading ? 14 : 0)
-                        if isLoading {
-                            Text("Video.analyzing")
-                                .font(.title2)
-                                .bold()
-                        }
-                    }
-                    .sheet(isPresented: $isVideoPlayerPresented, content: {
-                        VideoPlayerView(videoDetails: $videoDetails, videoLink: $videoLink, videoBvid: $videoBvid, videoCID: $videoCID)
-                            .navigationBarHidden(true)
-                    })
-                    .containerBackground(for: .navigation) {
-                        if !isInLowBatteryMode {
-                            ZStack {
-                                WebImage(url: URL(string: videoDetails["Pic"]!))
-                                    .onSuccess { _, _, _ in
-                                        backgroundPicOpacity = 1.0
                                     }
-                                    .resizable()
-                                    .blur(radius: 20)
-                                    .opacity(backgroundPicOpacity)
-                                    .animation(.easeOut(duration: 1.2), value: backgroundPicOpacity)
-                                Color.black
-                                    .opacity(0.4)
+                                    .tag(1)
                             }
+                            DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, honors: $honors, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount, publishTime: $publishTime)
+                                .tag(2)
+                            if videoPages.count > 1 {
+                                DetailViewVideoPartPageBase(videoDetails: $videoDetails, videoPages: $videoPages, isLoading: $isLoading, videoPartShouldShowDownloadTip: $videoPartShouldShowDownloadTip)
+                                    .tag(3)
+                            }
+                        }
+                        .tabViewStyle(.verticalPage)
+                    }
+                    .blur(radius: isLoading ? 14 : 0)
+                    if isLoading {
+                        Text("Video.analyzing")
+                            .font(.title2)
+                            .bold()
+                    }
+                }
+                .sheet(isPresented: $isVideoPlayerPresented, content: {
+                    VideoPlayerView(videoDetails: $videoDetails, videoLink: $videoLink, videoBvid: $videoBvid, videoCID: $videoCID)
+                        .navigationBarHidden(true)
+                })
+                .containerBackground(for: .navigation) {
+                    if !isInLowBatteryMode {
+                        ZStack {
+                            WebImage(url: URL(string: videoDetails["Pic"]!))
+                                .onSuccess { _, _, _ in
+                                    backgroundPicOpacity = 1.0
+                                }
+                                .resizable()
+                                .blur(radius: 20)
+                                .opacity(backgroundPicOpacity)
+                                .animation(.easeOut(duration: 1.2), value: backgroundPicOpacity)
+                            Color.black
+                                .opacity(0.4)
                         }
                     }
-                    .tag(1)
-                } else {
-                    ZStack {
-                        Group {
-                            ScrollView {
-                                DetailViewFirstPageBase(videoDetails: $videoDetails, videoPages: $videoPages, honors: $honors, subTitles: $subTitles, isLoading: $isLoading, videoLink: $videoLink, videoBvid: $videoBvid, videoCID: $videoCID)
-                                DetailViewSecondPageBase(videoDetails: $videoDetails, owner: $owner, stat: $stat, honors: $honors, tags: $tags, videoDesc: $videoDesc, isLiked: $isLiked, isCoined: $isCoined, isFavoured: $isFavoured, isCoinViewPresented: $isCoinViewPresented, ownerFansCount: $ownerFansCount, nowPlayingCount: $nowPlayingCount, publishTime: $publishTime)
-                            }
-                        }
-                        .blur(radius: isLoading ? 14 : 0)
-                        if isLoading {
-                            Text("Video.analyzing")
-                                .font(.title2)
-                                .bold()
+                }
+                .tag(1)
+                CommentsView(oid: String(videoDetails["BV"]!.dropFirst().dropFirst()))
+                    .containerBackground(for: .navigation) {
+                        ZStack {
+                            WebImage(url: URL(string: videoDetails["Pic"]!))
+                                .resizable()
+                                .blur(radius: 20)
+                            Color.black
+                                .opacity(0.4)
                         }
                     }
-                    .tag(1)
-                }
-                if #available(watchOS 10, *) {
-                    CommentsView(oid: String(videoDetails["BV"]!.dropFirst().dropFirst()))
-                        .containerBackground(for: .navigation) {
-                            ZStack {
-                                WebImage(url: URL(string: videoDetails["Pic"]!))
-                                    .resizable()
-                                    .blur(radius: 20)
-                                Color.black
-                                    .opacity(0.4)
-                            }
-                        }
-                        .tag(2)
-                } else {
-                    CommentsView(oid: String(videoDetails["BV"]!.dropFirst().dropFirst()))
-                }
+                    .tag(2)
                 if goodVideos.count != 0 {
                     List {
                         ForEach(0...goodVideos.count - 1, id: \.self) { i in
@@ -699,9 +657,7 @@ struct VideoDetailView: View {
         }
         .navigationTitle("Video")
         .navigationBarTitleDisplayMode(.inline)
-        #if !os(visionOS)
         .scrollDismissesKeyboard(.immediately)
-        #endif
         .onAppear {
             #if !os(watchOS)
             if isDecoded { return } // After user enter a new video then exit, this onAppear method will be re-call
@@ -871,23 +827,15 @@ struct VideoDetailView: View {
                                     let json = try JSON(data: response.data ?? Data())
                                     if let code = json["code"].int {
                                         if code == 0 {
-                                            #if !os(visionOS)
                                             AlertKitAPI.present(title: String(localized: "Video.added"), icon: .done, style: .iOS17AppleMusic, haptic: .success)
-                                            #endif
                                         } else {
-                                            #if !os(visionOS)
                                             AlertKitAPI.present(title: json["message"].string ?? String(localized: "Video.unkonwn-error"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
-                                            #endif
                                         }
                                     } else {
-                                        #if !os(visionOS)
                                         AlertKitAPI.present(title: String(localized: "Video.unkonwn-error"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
-                                        #endif
                                     }
                                 } catch {
-                                    #if !os(visionOS)
                                     AlertKitAPI.present(title: String(localized: "Video.unkonwn-error"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
-                                    #endif
                                 }
                                 isMoreMenuPresented = false
                             }
@@ -1597,7 +1545,7 @@ struct VideoThrowCoinView: View {
                 AF.request("https://api.bilibili.com/x/web-interface/coin/add", method: .post, parameters: BiliVideoCoin(bvid: bvid, multiply: choseCoin, csrf: biliJct), headers: headers).response { response in
                     debugPrint(response)
                     isCoined = true
-                    #if !os(visionOS) && !os(watchOS)
+                    #if !os(watchOS)
                     AlertKitAPI.present(title: "已投币", icon: .done, style: .iOS17AppleMusic, haptic: .success)
                     #else
                     tipWithText("已投币", symbol: "checkmark.circle.fill")

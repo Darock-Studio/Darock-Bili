@@ -21,14 +21,10 @@ import SwiftUI
 import Mixpanel
 import DarockKit
 import SwiftyJSON
-#if !os(visionOS)
 import SDWebImage
 import SDWebImagePDFCoder
 import SDWebImageSVGCoder
 import SDWebImageWebPCoder
-#else
-import RealityKit
-#endif
 #if os(watchOS)
 import WatchKit
 #else
@@ -62,10 +58,6 @@ var isInLowBatteryMode = false
 // BUVID
 var globalBuvid3 = ""
 var globalBuvid4 = ""
-
-#if os(visionOS)
-var globalWindowSize = Size3D()
-#endif
 
 // swiftlint:disable no_c_style_comment
 /*
@@ -216,7 +208,6 @@ struct DarockBili_Watch_AppApp: App {
                 }
             } else {
                 ZStack {
-                    #if !os(visionOS)
                     #if os(watchOS)
                     ContentView()
                     if shouldShowAudioPlayerPresenter {
@@ -250,37 +241,15 @@ struct DarockBili_Watch_AppApp: App {
                     VStack {
                         Spacer()
                         if isShowingTip {
-                            Group {
-                                if #available(watchOS 10, *) {
-                                    HStack {
-                                        Image(systemName: showTipSymbol)
-                                        Text(showTipText)
-                                    }
-                                    .font(.system(size: 14, weight: .bold))
-                                    .frame(width: WKInterfaceDevice.current().screenBounds.width - 20, height: 50)
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.1)
-                                    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
-                                } else {
-                                    HStack {
-                                        Image(systemName: showTipSymbol)
-                                        Text(showTipText)
-                                    }
-                                    .font(.system(size: 14, weight: .bold))
-                                    .foregroundColor(.black)
-                                    .frame(width: WKInterfaceDevice.current().screenBounds.width - 20, height: 50)
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.1)
-                                    .background {
-                                        Color.white
-                                            .ignoresSafeArea()
-                                            .frame(width: WKInterfaceDevice.current().screenBounds.width - 20, height: 40)
-                                            .cornerRadius(14)
-                                            .foregroundColor(Color(hex: 0xF5F5F5))
-                                            .opacity(0.95)
-                                    }
-                                }
+                            HStack {
+                                Image(systemName: showTipSymbol)
+                                Text(showTipText)
                             }
+                            .font(.system(size: 14, weight: .bold))
+                            .frame(width: WKInterfaceDevice.current().screenBounds.width - 20, height: 50)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.1)
+                            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
                             .transition(
                                 AnyTransition
                                     .opacity
@@ -348,20 +317,6 @@ struct DarockBili_Watch_AppApp: App {
                         .ignoresSafeArea()
                     }
                     #endif
-                    #else
-                    GeometryReader3D { proxy3D in
-                        ContentView()
-                            .onAppear {
-                                Task {
-                                    // Delay first - rdar://so?77970699
-                                    // rdar://so?76698516
-                                    try await Task.sleep(nanoseconds: 1_000_000_000)
-                                    globalWindowSize = proxy3D.size
-                                }
-                            }
-                    }
-                    #endif
-                    
                 }
                 .blur(radius: isLuminanceReduced && blurWhenScreenSleep ? 12 : 0)
                 #if os(watchOS)
@@ -411,7 +366,7 @@ struct DarockBili_Watch_AppApp: App {
                     }
                     let sleepTimeCheck = Timer(timeInterval: 60, repeats: true) { _ in
                         if currentHour == notifyHour && currentMinute == notifyMinute && isSleepNotificationOn {
-                            #if !os(visionOS) && !os(watchOS)
+                            #if !os(watchOS)
                             AlertKitAPI.present(title: String(localized: "Sleep.notification"), icon: .heart, style: .iOS17AppleMusic, haptic: .warning)
                             #else
                             tipWithText(String(localized: "Sleep.notification"), symbol: "bed.double.fill")
@@ -514,7 +469,6 @@ struct DarockBili_Watch_AppApp: App {
                 shouldShowAppName = false
                 #endif
             case .active:
-                #if !os(visionOS)
                 SDImageCodersManager.shared.addCoder(SDImageWebPCoder.shared)
                 SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)
                 SDImageCodersManager.shared.addCoder(SDImagePDFCoder.shared)
@@ -522,7 +476,6 @@ struct DarockBili_Watch_AppApp: App {
                 SDImageCache.shared.config.shouldCacheImagesInMemory = false
                 SDImageCache.shared.config.shouldUseWeakMemoryCache = true
                 SDImageCache.shared.clearMemory()
-                #endif
                 
                 updateBuvid()
                 

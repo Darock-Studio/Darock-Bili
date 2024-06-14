@@ -21,10 +21,8 @@ import DarockKit
 import Alamofire
 import SwiftyJSON
 import MobileCoreServices
-#if !os(visionOS)
 import SDWebImageSwiftUI
-#endif
-#if !os(watchOS) && !os(visionOS)
+#if !os(watchOS)
 import AlertToast
 #endif
 
@@ -61,15 +59,10 @@ struct FollowListView: View {
                                         Image(systemName: "pin.fill")
                                             .foregroundColor(.gray)
                                     }
-                                    #if !os(visionOS)
                                     WebImage(url: URL(string: users[i]["Face"]! + "@56w"), options: [.progressiveLoad])
                                         .resizable()
                                         .frame(width: 28, height: 28)
                                         .clipShape(Circle())
-                                    #else
-                                    AsyncImage(url: URL(string: users[i]["Face"]! + "@28w"))
-                                        .clipShape(Circle())
-                                    #endif
                                     VStack {
                                         HStack {
                                             Text(users[i]["Name"]!)
@@ -119,7 +112,7 @@ struct FollowListView: View {
                                                 deletedUserId = Int64(users[i]["UID"]!)!
                                                 isDeleteUndoPresented = true
                                             } else {
-                                                #if !os(visionOS) && !os(watchOS)
+                                                #if !os(watchOS)
                                                 AlertKitAPI.present(title: json["message"].string!, icon: .error, style: .iOS17AppleMusic, haptic: .error)
                                                 #else
                                                 tipWithText(json["message"].string!, symbol: "xmark.circle.fill")
@@ -171,13 +164,8 @@ struct FollowListView: View {
                                         Image(systemName: "pin.fill")
                                             .foregroundColor(.gray)
                                     }
-                                    #if !os(visionOS)
                                     WebImage(url: URL(string: users[i]["Face"]! + "@28w"), options: [.progressiveLoad])
                                         .clipShape(Circle())
-                                    #else
-                                    AsyncImage(url: URL(string: users[i]["Face"]! + "@28w"))
-                                        .clipShape(Circle())
-                                    #endif
                                     VStack {
                                         HStack {
                                             Text(users[i]["Name"]!)
@@ -251,7 +239,7 @@ struct FollowListView: View {
                 isLoadedFollows = true
             }
         }
-        #if !os(visionOS) && !os(watchOS)
+        #if !os(watchOS)
         .toast(isPresenting: $isDeleteUndoPresented, duration: 8.0, tapToDismiss: true) {
             AlertToast(displayMode: .hud, type: .complete(.accentColor), title: "已将“\(deletedUserName)”从关注列表中移除", subTitle: "轻触以撤销", style: .style(titleFont: .system(size: 13, weight: .semibold), subTitleFont: .system(size: 11)))
         } onTap: {
@@ -270,9 +258,7 @@ struct FollowListView: View {
                     users.removeAll()
                     RefreshNew()
                 } else {
-                    #if !os(visionOS)
                     AlertKitAPI.present(title: json["message"].string!, icon: .error, style: .iOS17AppleMusic, haptic: .error)
-                    #endif
                 }
             }
         }

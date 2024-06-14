@@ -21,9 +21,7 @@ import DarockKit
 import Alamofire
 import SwiftyJSON
 import AuthenticationServices
-#if !os(visionOS)
 import SDWebImageSwiftUI
-#endif
 
 struct UserDetailView: View {
     var uid: String
@@ -136,14 +134,10 @@ struct UserDetailView: View {
                                         let json = try! JSON(data: response.data!)
                                         let code = json["code"].int!
                                         if code == 0 {
-                                            #if !os(visionOS)
                                             AlertKitAPI.present(title: isFollowed ? String(localized: "Account.tips.unfollowed") : String(localized: "Account.tips.followed"), icon: .done, style: .iOS17AppleMusic, haptic: .success)
-                                            #endif
                                             isFollowed.toggle()
                                         } else {
-                                            #if !os(visionOS)
                                             AlertKitAPI.present(title: json["message"].string!, icon: .error, style: .iOS17AppleMusic, haptic: .error)
-                                            #endif
                                         }
                                     }
                                 }, label: {
@@ -197,25 +191,9 @@ struct UserDetailView: View {
                         }
                         if !vipLabel.isEmpty {
                             HStack {
-                                #if !os(visionOS)
                                 WebImage(url: URL(string: "https://s1.hdslb.com/bfs/seed/jinkela/short/user-avatar/big-vip.svg"))
                                     .resizable()
                                     .frame(width: 20, height: 20)
-                                #else
-                                AsyncImage(url: URL(string: "https://s1.hdslb.com/bfs/seed/jinkela/short/user-avatar/big-vip.svg")) { phase in
-                                    switch phase {
-                                    case .empty:
-                                        Circle()
-                                            .redacted(reason: .placeholder)
-                                    case .success(let image):
-                                        image.resizable()
-                                    case .failure(let error):
-                                        Circle()
-                                            .redacted(reason: .placeholder)
-                                    }
-                                }
-                                .frame(width: 20, height: 20)
-                                #endif
                                 Text(vipLabel)
                                     .font(.system(size: 15))
                                     .bold()
@@ -260,108 +238,92 @@ struct UserDetailView: View {
                     }
             }
             #else
-            if #available(watchOS 10, *) {
-                TabView {
-                    VStack {
-                        NavigationLink("", isActive: $isSendbMessagePresented, destination: { bMessageSendView(uid: Int64(uid)!, username: username) })
-                            .frame(width: 0, height: 0)
-                        FirstPageBase(uid: uid, userFaceUrl: $userFaceUrl, username: $username, followCount: $followCount, fansCount: $fansCount, coinCount: $coinCount, isFollowed: $isFollowed, isSendbMessagePresented: $isSendbMessagePresented)
-                    }
-                    .toolbar {
-                        ToolbarItemGroup(placement: .bottomBar) {
-                            Button(action: {
-                                let headers: HTTPHeaders = [
-                                    "cookie": "SESSDATA=\(sessdata);"
-                                ]
-                                AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
-                                    debugPrint(response)
-                                    let json = try! JSON(data: response.data!)
-                                    let code = json["code"].int!
-                                    if code == 0 {
-                                        tipWithText(isFollowed ? String(localized: "Account.tips.unfollowed") : String(localized: "Account.tips.followed"), symbol: "checkmark.circle.fill")
-                                        isFollowed.toggle()
+            TabView {
+                VStack {
+                    NavigationLink("", isActive: $isSendbMessagePresented, destination: { bMessageSendView(uid: Int64(uid)!, username: username) })
+                        .frame(width: 0, height: 0)
+                    FirstPageBase(uid: uid, userFaceUrl: $userFaceUrl, username: $username, followCount: $followCount, fansCount: $fansCount, coinCount: $coinCount, isFollowed: $isFollowed, isSendbMessagePresented: $isSendbMessagePresented)
+                }
+                .toolbar {
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        Button(action: {
+                            let headers: HTTPHeaders = [
+                                "cookie": "SESSDATA=\(sessdata);"
+                            ]
+                            AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
+                                debugPrint(response)
+                                let json = try! JSON(data: response.data!)
+                                let code = json["code"].int!
+                                if code == 0 {
+                                    tipWithText(isFollowed ? String(localized: "Account.tips.unfollowed") : String(localized: "Account.tips.followed"), symbol: "checkmark.circle.fill")
+                                    isFollowed.toggle()
+                                } else {
+                                    tipWithText(json["message"].string!, symbol: "xmark.circle.fill")
+                                }
+                            }
+                        }, label: {
+                            Image(systemName: isFollowed ? "person.badge.minus" : "person.badge.plus")
+                        })
+                        VStack {
+                            if dedeUserID == uid {
+                                HStack {
+                                    Image(systemName: "b.circle")
+                                        .font(.system(size: 12))
+                                        .opacity(0.55)
+                                        .offset(y: 1)
+                                    if coinCount != -1 {
+                                        Text(String(coinCount))
+                                            .font(.system(size: 14))
                                     } else {
-                                        tipWithText(json["message"].string!, symbol: "xmark.circle.fill")
+                                        Text("114")
+                                            .font(.system(size: 14))
+                                            .redacted(reason: .placeholder)
                                     }
                                 }
-                            }, label: {
-                                Image(systemName: isFollowed ? "person.badge.minus" : "person.badge.plus")
-                            })
-                            VStack {
-                                if dedeUserID == uid {
-                                    HStack {
-                                        Image(systemName: "b.circle")
-                                            .font(.system(size: 12))
-                                            .opacity(0.55)
-                                            .offset(y: 1)
-                                        if coinCount != -1 {
-                                            Text(String(coinCount))
-                                                .font(.system(size: 14))
-                                        } else {
-                                            Text("114")
-                                                .font(.system(size: 14))
-                                                .redacted(reason: .placeholder)
-                                        }
-                                    }
-                                }
-                                Button(action: {
-                                    isInfoSheetPresented = true
-                                }, label: {
-                                    Text(officialType == -1 ? "Account.info" : "Account.certification")
-                                })
-                                .buttonStyle(.borderless)
-                                .font(.caption)
                             }
                             Button(action: {
-                                isSendbMessagePresented = true
+                                isInfoSheetPresented = true
                             }, label: {
-                                Image(systemName: "ellipsis.bubble")
+                                Text(officialType == -1 ? "Account.info" : "Account.certification")
+                            })
+                            .buttonStyle(.borderless)
+                            .font(.caption)
+                        }
+                        Button(action: {
+                            isSendbMessagePresented = true
+                        }, label: {
+                            Image(systemName: "ellipsis.bubble")
+                        })
+                    }
+                }
+                .navigationTitle(username)
+                .sheet(isPresented: $isInfoSheetPresented, content: {
+                    ScrollView {
+                        SecondPageBase(uid: uid, officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign, userLevel: $userLevel, vipLabel: $vipLabel)
+                    }
+                })
+                .tag(1)
+                VideosListBase(uid: uid, username: $username, videos: $videos, articles: $articles, viewSelector: $viewSelector, videoCount: $videoCount, articalCount: $articalCount)
+                    .tag(2)
+                    .navigationTitle(viewSelector == .video ? "Account.videos.\(videoCount)" : "Account.articals.\(articalCount)")
+                    .toolbar {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Button(action: {
+                                if viewSelector == .video {
+                                    viewSelector = .article
+                                } else if viewSelector == .article {
+                                    viewSelector = .dynamic
+                                } else if viewSelector == .dynamic {
+                                    viewSelector = .video
+                                }
+                            }, label: {
+                                Image(systemName: viewSelector == .video ? "play.circle" : viewSelector == .article ? "doc.text.image" : "doc.richtext")
                             })
                         }
                     }
-                    .navigationTitle(username)
-                    .sheet(isPresented: $isInfoSheetPresented, content: {
-                        ScrollView {
-                            SecondPageBase(uid: uid, officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign, userLevel: $userLevel, vipLabel: $vipLabel)
-                        }
-                    })
-                    .tag(1)
-                    VideosListBase(uid: uid, username: $username, videos: $videos, articles: $articles, viewSelector: $viewSelector, videoCount: $videoCount, articalCount: $articalCount)
-                        .tag(2)
-                        .navigationTitle(viewSelector == .video ? "Account.videos.\(videoCount)" : "Account.articals.\(articalCount)")
-                        .toolbar {
-                            ToolbarItem(placement: .topBarTrailing) {
-                                Button(action: {
-                                    if viewSelector == .video {
-                                        viewSelector = .article
-                                    } else if viewSelector == .article {
-                                        viewSelector = .dynamic
-                                    } else if viewSelector == .dynamic {
-                                        viewSelector = .video
-                                    }
-                                }, label: {
-                                    Image(systemName: viewSelector == .video ? "play.circle" : viewSelector == .article ? "doc.text.image" : "doc.richtext")
-                                })
-                            }
-                        }
-                }
-                .tabViewStyle(.verticalPage)
-                .containerBackground(Color.accentColor.gradient, for: .navigation)
-            } else {
-                TabView {
-                    ScrollView {
-                        FirstPageBase(uid: uid, userFaceUrl: $userFaceUrl, username: $username, followCount: $followCount, fansCount: $fansCount, coinCount: $coinCount, isFollowed: $isFollowed, isSendbMessagePresented: $isSendbMessagePresented)
-                            .offset(y: -10)
-                            .navigationTitle(username)
-                            .tag(1)
-                        SecondPageBase(uid: uid, officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign, userLevel: $userLevel, vipLabel: $vipLabel)
-                            .tag(2)
-                    }
-                    VideosListBase(uid: uid, username: $username, videos: $videos, articles: $articles, viewSelector: $viewSelector, videoCount: $videoCount, articalCount: $articalCount)
-                        .tag(3)
-                        .navigationTitle(viewSelector == .video ? "Account.videos.\(videoCount)" : "Account.articals.\(articalCount)")
-                }
             }
+            .tabViewStyle(.verticalPage)
+            .containerBackground(Color.accentColor.gradient, for: .navigation)
             #endif
         }
         .onAppear {
