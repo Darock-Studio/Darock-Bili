@@ -7869,6 +7869,7 @@
       }
     },
     "Video.details.watching-people.%@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -8273,9 +8274,6 @@
     "列表视图" : {
 
     },
-    "加群248036605查看群公告以申请解封" : {
-
-    },
     "动态" : {
       "localizations" : {
         "en" : {
@@ -8505,16 +8503,6 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "喵哩喵哩\n调试构建。 Build %1$@.xc_verd.%2$@"
-          }
-        }
-      }
-    },
-    "喵哩喵哩\n调试构建。 Build %@.xc_verd.%lld" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "喵哩喵哩\n调试构建。 Build %1$@.xc_verd.%2$lld"
           }
         }
       }
@@ -8839,9 +8827,6 @@
         }
       }
     },
-    "您已被 Darock 永久封禁且在设备上施行" : {
-
-    },
     "您的 Apple Watch 运行的 watchOS 已过时，喵哩喵哩将在 2024/6/10 之后停止支持" : {
 
     },
@@ -8871,6 +8856,7 @@
 
     },
     "手记建议" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -9137,9 +9123,6 @@
 
     },
     "正常" : {
-
-    },
-    "注意！重装 App 并不会移除封禁且可能会导致识别 ID 更改，我们将无法为您解封" : {
 
     },
     "清除历史记录" : {

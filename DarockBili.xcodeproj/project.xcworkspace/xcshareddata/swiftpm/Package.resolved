@@ -1,4 +1,5 @@
 {
+  "originHash" : "2accb5e33655e8b5c031f05292bf69d9d024ab74da5173ee33d14b17f0106813",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -149,8 +150,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImageWebPCoder",
       "state" : {
-        "revision" : "8a33fb3ca75a01267f775f891f7d61f675e95072",
-        "version" : "0.14.5"
+        "revision" : "f534cfe830a7807ecc3d0332127a502426cfa067",
+        "version" : "0.14.6"
       }
     },
     {
@@ -217,5 +218,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
