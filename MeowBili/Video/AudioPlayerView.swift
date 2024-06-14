@@ -44,82 +44,78 @@ struct AudioPlayerView: View {
     var body: some View {
         VStack {
             #if os(watchOS)
-            if #available(watchOS 10, *) {
-                if !isNoMedia {
-                    VStack {
-                        WebImage(url: URL(string: audioPlayerPlayItems[nowPlayingItemIndex].videoDetails["Pic"]! + "@220w_170h"))
+            if !isNoMedia {
+                VStack {
+                    WebImage(url: URL(string: audioPlayerPlayItems[nowPlayingItemIndex].videoDetails["Pic"]! + "@220w_170h"))
+                        .resizable()
+                        .cornerRadius(10)
+                        .scaledToFit()
+                        .frame(width: 110, height: 85)
+                    Text(audioPlayerPlayItems[nowPlayingItemIndex].videoDetails["Title"]!)
+                        .font(.system(size: 14, weight: .bold))
+                        .lineLimit(1)
+                        .padding(.vertical, 7)
+                        .padding(.horizontal, 20)
+                }
+                .containerBackground(for: .navigation) {
+                    ZStack {
+                        WebImage(url: URL(string: audioPlayerPlayItems[nowPlayingItemIndex].videoDetails["Pic"]!))
                             .resizable()
-                            .cornerRadius(10)
-                            .scaledToFit()
-                            .frame(width: 110, height: 85)
-                        Text(audioPlayerPlayItems[nowPlayingItemIndex].videoDetails["Title"]!)
-                            .font(.system(size: 14, weight: .bold))
-                            .lineLimit(1)
-                            .padding(.vertical, 7)
-                            .padding(.horizontal, 20)
+                            .onSuccess { _, _, _ in
+                                backgroundPicOpacity = 1.0
+                            }
+                            .blur(radius: 20)
+                            .opacity(backgroundPicOpacity)
+                            .animation(.easeOut(duration: 1.2), value: backgroundPicOpacity)
+                        Color.black
+                            .opacity(0.4)
                     }
-                    .containerBackground(for: .navigation) {
-                        ZStack {
-                            WebImage(url: URL(string: audioPlayerPlayItems[nowPlayingItemIndex].videoDetails["Pic"]!))
-                                .resizable()
-                                .onSuccess { _, _, _ in
-                                    backgroundPicOpacity = 1.0
-                                }
-                                .blur(radius: 20)
-                                .opacity(backgroundPicOpacity)
-                                .animation(.easeOut(duration: 1.2), value: backgroundPicOpacity)
-                            Color.black
-                                .opacity(0.4)
-                        }
-                    }
-                    .toolbar {
-                        ToolbarItemGroup(placement: .bottomBar) {
-                            Button(action: {
+                }
+                .toolbar {
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        Button(action: {
+                            let behaviorCase = AudioPlayerBehavior(rawValue: audioPlayBehavior)!
+                            switch behaviorCase {
+                            case .singleLoop:
+                                audioPlayBehavior = AudioPlayerBehavior.pauseWhenFinish.rawValue
+                            case .pauseWhenFinish:
+                                audioPlayBehavior = AudioPlayerBehavior.singleLoop.rawValue
+                            case .listLoop:
+                                audioPlayBehavior = AudioPlayerBehavior.singleLoop.rawValue
+                            case .exitWhenFinish:
+                                audioPlayBehavior = AudioPlayerBehavior.singleLoop.rawValue
+                            }
+                            RefreshPlayerBehavior(player: audioPlayerMainPlayer, playerItem: audioPlayerMainCurrentItem)
+                        }, label: {
+                            Image(systemName: { () -> String in
                                 let behaviorCase = AudioPlayerBehavior(rawValue: audioPlayBehavior)!
                                 switch behaviorCase {
                                 case .singleLoop:
-                                    audioPlayBehavior = AudioPlayerBehavior.pauseWhenFinish.rawValue
+                                    return "repeat.1"
                                 case .pauseWhenFinish:
-                                    audioPlayBehavior = AudioPlayerBehavior.singleLoop.rawValue
+                                    return "pause"
                                 case .listLoop:
-                                    audioPlayBehavior = AudioPlayerBehavior.singleLoop.rawValue
+                                    return "repeat"
                                 case .exitWhenFinish:
-                                    audioPlayBehavior = AudioPlayerBehavior.singleLoop.rawValue
+                                    return "rectangle.portrait.and.arrow.forward"
                                 }
-                                RefreshPlayerBehavior(player: audioPlayerMainPlayer, playerItem: audioPlayerMainCurrentItem)
-                            }, label: {
-                                Image(systemName: { () -> String in
-                                    let behaviorCase = AudioPlayerBehavior(rawValue: audioPlayBehavior)!
-                                    switch behaviorCase {
-                                    case .singleLoop:
-                                        return "repeat.1"
-                                    case .pauseWhenFinish:
-                                        return "pause"
-                                    case .listLoop:
-                                        return "repeat"
-                                    case .exitWhenFinish:
-                                        return "rectangle.portrait.and.arrow.forward"
-                                    }
-                                }())
-                            })
-                            Button(action: {
-                                isPlaying.toggle()
-                                if isPlaying {
-                                    audioPlayerMainPlayer.play()
-                                } else {
-                                    audioPlayerMainPlayer.pause()
-                                }
-                            }, label: {
-                                Image(systemName: isPlaying ? "pause.fill" : "play.fill")
-                            })
-                            .controlSize(.large)
-                            VolumeControlView()
-                                .controlSize(.regular)
-                        }
+                            }())
+                        })
+                        Button(action: {
+                            isPlaying.toggle()
+                            if isPlaying {
+                                audioPlayerMainPlayer.play()
+                            } else {
+                                audioPlayerMainPlayer.pause()
+                            }
+                        }, label: {
+                            Image(systemName: isPlaying ? "pause.fill" : "play.fill")
+                        })
+                        .controlSize(.large)
+                        VolumeControlView()
+                            .controlSize(.regular)
                     }
                 }
-            } else {
-                
             }
             #endif
         }

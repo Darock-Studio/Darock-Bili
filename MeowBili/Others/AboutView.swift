@@ -36,22 +36,13 @@ struct AboutView: View {
                     }
             }
             #else
-            if #available(watchOS 10.0, *) {
-                TabView {
-                    AboutApp()
-                        .navigationTitle("About")
-                    AboutCredits()
-                        .navigationTitle("About.credits")
-                }
-                .tabViewStyle(.verticalPage)
-            } else {
-                TabView {
-                    AboutApp()
-                        .navigationTitle("About")
-                    AboutCredits()
-                        .navigationTitle("About.credits")
-                }
+            TabView {
+                AboutApp()
+                    .navigationTitle("About")
+                AboutCredits()
+                    .navigationTitle("About.credits")
             }
+            .tabViewStyle(.verticalPage)
             #endif
         }
     }
@@ -104,13 +95,11 @@ struct AboutApp: View {
             .foregroundStyle(.secondary)
             .onTapGesture(count: 9) {
                 debug.toggle()
-                #if !os(visionOS)
                 if debug {
                     AlertKitAPI.present(title: "Dev On", icon: .done, style: .iOS17AppleMusic, haptic: .success)
                 } else {
                     AlertKitAPI.present(title: "Dev Off", icon: .done, style: .iOS17AppleMusic, haptic: .success)
                 }
-                #endif
             }
         }
     }

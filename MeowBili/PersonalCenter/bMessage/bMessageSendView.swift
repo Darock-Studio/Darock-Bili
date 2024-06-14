@@ -59,14 +59,10 @@ struct bMessageSendView: View {
                                             }
                                         Spacer(minLength: 5)
                                     }
-                                    #if !os(visionOS) && !os(watchOS)
+                                    #if !os(watchOS)
                                     .frame(width: UIScreen.main.bounds.width - 10)
                                     #else
-                                    #if os(visionOS)
-                                    .frame(width: globalWindowSize.width - 10)
-                                    #else
                                     .frame(width: WKInterfaceDevice.current().screenBounds.width - 10)
-                                    #endif
                                     #endif
                                     Spacer()
                                         .frame(width: 15)
@@ -98,14 +94,10 @@ struct bMessageSendView: View {
                                                 }())
                                             }
                                     }
-                                    #if !os(visionOS) && !os(watchOS)
+                                    #if !os(watchOS)
                                     .frame(width: UIScreen.main.bounds.width - 10)
                                     #else
-                                    #if os(visionOS)
-                                    .frame(width: globalWindowSize.width - 10)
-                                    #else
                                     .frame(width: WKInterfaceDevice.current().screenBounds.width - 10)
-                                    #endif
                                     #endif
                                     Spacer()
                                         .frame(width: 15)
@@ -162,7 +154,7 @@ struct bMessageSendView: View {
                                 if json["code"].int! == 0 {
                                     //tipWithText("发送成功", symbol: "checkmark.circle.fill")
                                 } else {
-                                    #if !os(watchOS) && !os(visionOS)
+                                    #if !os(watchOS)
                                     AlertKitAPI.present(title: String(localized: "Direct-message.failed"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
                                     #else
                                     tipWithText(String(localized: "Direct-message.failed"), symbol: "xmark.circle.fill")

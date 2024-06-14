@@ -21,9 +21,7 @@ import DarockKit
 import Alamofire
 import SwiftyJSON
 import AuthenticationServices
-#if !os(visionOS)
 import SDWebImageSwiftUI
-#endif
 #if os(watchOS)
 import WatchKit
 #endif
@@ -129,9 +127,7 @@ struct SearchMainView: View {
                 }
             }
         }
-        #if !os(visionOS)
         .scrollDismissesKeyboard(.immediately)
-        #endif
         .onAppear {
             searchHistory.removeAll()
             searchHistory = UserDefaults.standard.stringArray(forKey: "SearchHistory") ?? [String]()
@@ -141,7 +137,7 @@ struct SearchMainView: View {
             ]
             DarockKit.Network.shared.requestJSON("https://s.search.bilibili.com/main/hotword", headers: headers) { respJson, isSuccess in
                 if isSuccess {
-                    //  🥵
+                    // 🥵
                     for hot in respJson["list"] {
                         hotSearches.append(hot.1["keyword"].string ?? "[加载失败]")
                     }
@@ -198,13 +194,8 @@ struct SearchView: View {
                             ForEach(0..<users.count, id: \.self) { i in
                                 VStack {
                                     HStack {
-                                        #if !os(visionOS)
                                         WebImage(url: URL(string: users[i]["Pic"]! as! String + "@30w"), options: [.progressiveLoad])
                                             .clipShape(Circle())
-                                        #else
-                                        AsyncImage(url: URL(string: users[i]["Pic"]! as! String + "@30w"))
-                                            .clipShape(Circle())
-                                        #endif
                                         VStack {
                                             NavigationLink("", isActive: $isUserDetailPresented[i], destination: { UserDetailView(uid: users[i]["ID"]! as! String) })
                                                 .frame(width: 0, height: 0)
@@ -273,13 +264,8 @@ struct SearchView: View {
                                                         .foregroundColor(.gray)
                                                 }
                                             }
-                                            #if !os(visionOS)
                                             WebImage(url: URL(string: articles[i]["Pic"]! + "@60w"), options: [.progressiveLoad])
                                                 .cornerRadius(5)
-                                            #else
-                                            AsyncImage(url: URL(string: articles[i]["Pic"]! + "@60w"))
-                                                .cornerRadius(5)
-                                            #endif
                                         }
                                     }
                                 })

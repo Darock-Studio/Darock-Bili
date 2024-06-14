@@ -21,9 +21,7 @@ import Dynamic
 import DarockKit
 import Alamofire
 import SwiftyJSON
-#if !os(visionOS)
 import SDWebImageSwiftUI
-#endif
 
 struct MainView: View {
     @Binding var mainTabSelection: Int
@@ -52,114 +50,106 @@ struct MainView: View {
             .sheet(isPresented: $isLoginPresented, content: { LoginView() })
             .sheet(isPresented: $isNewUserPresenting, content: { LoginView() })
         #else
-        if #available(watchOS 10, *) {
-            MainViewMain()
-                .navigationBarTitleDisplayMode(.large)
-                .sheet(isPresented: $isNetworkFixPresented, content: { NetworkFixView() })
-                .sheet(isPresented: $isLoginPresented, content: { LoginView() })
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        NavigationLink(destination: { SearchMainView() }, label: {
-                            Image(systemName: "magnifyingglass")
-                                .foregroundColor(.accentColor)
-                        })
-                        .accessibilityIdentifier("SearchButton")
-                    }
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Group {
-                            switch festivalType {
-                            case .normal:
-                                Button(action: {
-                                    mainTabSelection = 2
-                                }, label: {
-                                    if dedeUserID != "" && userFaceUrl != "" {
-                                        WebImage(url: URL(string: userFaceUrl + "@60w"))
-                                            .resizable()
-                                            .frame(width: 30)
-                                            .clipShape(Circle())
-                                    } else {
-                                        Image(systemName: "person")
-                                            .foregroundColor(.accentColor)
-                                    }
-                                })
-                            case .darockc:
-                                NavigationLink(destination: {
-                                    Text("🎉🎉🎉\n今天是 Darock 周年庆\n到我们群 248036605 参加活动吧！")
-                                }, label: {
-                                    Text("🎉")
-                                })
-                            case .fools:
-                                NavigationLink(destination: {
-                                    Text("🤡\n愚人节快乐！")
-                                }, label: {
-                                    Text("🤡")
-                                })
-                            case .newyr:
-                                NavigationLink(destination: {
-                                    Text("Darock 祝您新年快乐！")
-                                }, label: {
-                                    Text("🧨")
-                                })
-                            case .birthday:
-                                NavigationLink(destination: {
-                                    Text("生日快乐，\(username)！")
-                                }, label: {
-                                    Text("🎂")
-                                })
-                            }
-                        }
-                        .buttonStyle(.plain)
-                    }
+        MainViewMain()
+            .navigationBarTitleDisplayMode(.large)
+            .sheet(isPresented: $isNetworkFixPresented, content: { NetworkFixView() })
+            .sheet(isPresented: $isLoginPresented, content: { LoginView() })
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    NavigationLink(destination: { SearchMainView() }, label: {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.accentColor)
+                    })
+                    .accessibilityIdentifier("SearchButton")
                 }
-                .sheet(isPresented: $isNewUserPresenting, content: { LoginView() })
-                .onAppear {
-                    if username == "" {
-                        let headers: HTTPHeaders = [
-                            "cookie": "SESSDATA=\(sessdata); innersign=0; buvid3=\(globalBuvid3); b_nut=1704873471; i-wanna-go-back=-1; b_ut=7; b_lsid=9910433CB_18CF260AB89; enable_web_push=DISABLE; header_theme_version=undefined; home_feed_column=4; browser_resolution=3440-1440; buvid4=\(globalBuvid4);",
-                            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                        ]
-                        biliWbiSign(paramEncoded: "mid=\(dedeUserID)".base64Encoded()) { signed in
-                            if let signed {
-                                debugPrint(signed)
-                                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
-                                    if isSuccess {
-                                        debugPrint(respJson)
-                                        if !CheckBApiError(from: respJson) { return }
-                                        username = respJson["data"]["name"].string ?? ""
-                                        userSign = respJson["data"]["sign"].string ?? ""
-                                        userFaceUrl = respJson["data"]["face"].string ?? "E"
-                                        if let bd = respJson["data"]["birthday"].string, let mo = bd.split(separator: "-")[from: 0], let d = bd.split(separator: "-")[from: 1] {
-                                            if let imo = Int(mo), let id = Int(d), imo == Date.now.month && id == Date.now.day {
-                                                festivalType = .birthday
-                                            }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Group {
+                        switch festivalType {
+                        case .normal:
+                            Button(action: {
+                                mainTabSelection = 2
+                            }, label: {
+                                if dedeUserID != "" && userFaceUrl != "" {
+                                    WebImage(url: URL(string: userFaceUrl + "@60w"))
+                                        .resizable()
+                                        .frame(width: 30)
+                                        .clipShape(Circle())
+                                } else {
+                                    Image(systemName: "person")
+                                        .foregroundColor(.accentColor)
+                                }
+                            })
+                        case .darockc:
+                            NavigationLink(destination: {
+                                Text("🎉🎉🎉\n今天是 Darock 周年庆\n到我们群 248036605 参加活动吧！")
+                            }, label: {
+                                Text("🎉")
+                            })
+                        case .fools:
+                            NavigationLink(destination: {
+                                Text("🤡\n愚人节快乐！")
+                            }, label: {
+                                Text("🤡")
+                            })
+                        case .newyr:
+                            NavigationLink(destination: {
+                                Text("Darock 祝您新年快乐！")
+                            }, label: {
+                                Text("🧨")
+                            })
+                        case .birthday:
+                            NavigationLink(destination: {
+                                Text("生日快乐，\(username)！")
+                            }, label: {
+                                Text("🎂")
+                            })
+                        }
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .sheet(isPresented: $isNewUserPresenting, content: { LoginView() })
+            .onAppear {
+                if username == "" {
+                    let headers: HTTPHeaders = [
+                        "cookie": "SESSDATA=\(sessdata); innersign=0; buvid3=\(globalBuvid3); b_nut=1704873471; i-wanna-go-back=-1; b_ut=7; b_lsid=9910433CB_18CF260AB89; enable_web_push=DISABLE; header_theme_version=undefined; home_feed_column=4; browser_resolution=3440-1440; buvid4=\(globalBuvid4);",
+                        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                    ]
+                    biliWbiSign(paramEncoded: "mid=\(dedeUserID)".base64Encoded()) { signed in
+                        if let signed {
+                            debugPrint(signed)
+                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
+                                if isSuccess {
+                                    debugPrint(respJson)
+                                    if !CheckBApiError(from: respJson) { return }
+                                    username = respJson["data"]["name"].string ?? ""
+                                    userSign = respJson["data"]["sign"].string ?? ""
+                                    userFaceUrl = respJson["data"]["face"].string ?? "E"
+                                    if let bd = respJson["data"]["birthday"].string, let mo = bd.split(separator: "-")[from: 0], let d = bd.split(separator: "-")[from: 1] {
+                                        if let imo = Int(mo), let id = Int(d), imo == Date.now.month && id == Date.now.day {
+                                            festivalType = .birthday
                                         }
-                                    } else if isShowNetworkFixing {
-                                        isNetworkFixPresented = true
                                     }
+                                } else if isShowNetworkFixing {
+                                    isNetworkFixPresented = true
                                 }
                             }
                         }
                     }
-                    if Date.now.month == 4 && Date.now.day == 1 {
-                        festivalType = .fools
-                    } else if Date.now.month == 1 && Date.now.day == 24 {
-                        festivalType = .darockc
-                    } else if Date.now.month == 1 && Date.now.day == 1 {
-                        festivalType = .newyr
-                    } else {
-                        festivalType = .normal
-                    }
                 }
-        } else {
-            MainViewMain(isShowSearchButton: true)
-                .navigationBarTitleDisplayMode(.inline)
-        }
+                if Date.now.month == 4 && Date.now.day == 1 {
+                    festivalType = .fools
+                } else if Date.now.month == 1 && Date.now.day == 24 {
+                    festivalType = .darockc
+                } else if Date.now.month == 1 && Date.now.day == 1 {
+                    festivalType = .newyr
+                } else {
+                    festivalType = .normal
+                }
+            }
         #endif
     }
     struct MainViewMain: View {
-        #if os(watchOS)
-        var isShowSearchButton: Bool = false
-        #endif
         @AppStorage("DedeUserID") var dedeUserID = ""
         @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
         @AppStorage("SESSDATA") var sessdata = ""
@@ -226,19 +216,6 @@ struct MainView: View {
                                 }
                             }
                         }
-                        #if os(watchOS)
-                        if isShowSearchButton {
-                            Section {
-                                NavigationLink(destination: { SearchMainView() }, label: {
-                                    HStack {
-                                        Image(systemName: "magnifyingglass")
-                                        Text("Home.search")
-                                    }
-                                    .foregroundColor(.gray)
-                                })
-                            }
-                        }
-                        #endif
                         if isShowVideoSuggestionsFromDarock && !darockSuggestions.isEmpty {
                             Section {
                                 ForEach(0..<darockSuggestions.count, id: \.self) { i in
