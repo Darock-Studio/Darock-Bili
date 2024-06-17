@@ -17,9 +17,7 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
-#if !os(visionOS)
 import SDWebImageSwiftUI
-#endif
 
 struct DynamicDetailView: View {
     var dynamicDetails: [String: Any?]
@@ -30,13 +28,8 @@ struct DynamicDetailView: View {
                 VStack {
                     NavigationLink(destination: { UserDetailView(uid: dynamicDetails["SenderID"]! as! String) }, label: {
                         HStack {
-                            #if !os(visionOS)
                             WebImage(url: URL(string: dynamicDetails["SenderPic"]! as! String + "@30w"), options: [.progressiveLoad])
                                 .clipShape(Circle())
-                            #else
-                            AsyncImage(url: URL(string: dynamicDetails["SenderPic"]! as! String + "@30w"))
-                                .clipShape(Circle())
-                            #endif
                             VStack {
                                 HStack {
                                     Text(dynamicDetails["SenderName"]! as! String)
@@ -80,7 +73,6 @@ struct DynamicDetailView: View {
                     }
                     if dynamicDetails["Type"]! as! BiliDynamicType == .draw {
                         if let draws = dynamicDetails["Draws"] as? [[String: String]] {
-                            #if !os(visionOS)
                             #if !os(watchOS)
                             LazyVGrid(columns: [GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3)), GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3)), GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3))]) {
                                 ForEach(0..<draws.count, id: \.self) { j in
@@ -111,30 +103,6 @@ struct DynamicDetailView: View {
                                 }
                             }
                             #endif
-                            #else
-                            LazyVGrid(columns: [GridItem(.fixed((globalWindowSize.width - 50) / 3)), GridItem(.fixed((globalWindowSize.width - 50) / 3)), GridItem(.fixed((globalWindowSize.width - 50) / 3))]) {
-                                ForEach(0..<draws.count, id: \.self) { j in
-                                    VStack {
-                                        NavigationLink(destination: { ImageViewerView(url: draws[j]["Src"]!) }) {
-                                            AsyncImage(url: URL(string: draws[j]["Src"]!)) { phase in
-                                                switch phase {
-                                                case .empty:
-                                                    Color.clear
-                                                        .frame(width: 0, height: 0)
-                                                case .success(let image):
-                                                    image.resizable()
-                                                case .failure(let error):
-                                                    Color.clear
-                                                        .frame(width: 0, height: 0)
-                                                }
-                                            }
-                                            .scaledToFit()
-                                            .cornerRadius(5)
-                                        }
-                                    }
-                                }
-                            }
-                            #endif
                         }
                     } else if dynamicDetails["Type"]! as! BiliDynamicType == .video {
                         if let archive = dynamicDetails["Archive"] as? [String: String] {
@@ -145,7 +113,6 @@ struct DynamicDetailView: View {
                             NavigationLink(destination: { LiveDetailView(liveDetails: liveInfo) }, label: {
                                 VStack {
                                     HStack {
-                                        #if !os(visionOS)
                                         WebImage(url: URL(string: liveInfo["Cover"]! + "@50w")!, options: [.progressiveLoad, .scaleDownLargeImages])
                                             .placeholder {
                                                 RoundedRectangle(cornerRadius: 7)
@@ -154,25 +121,6 @@ struct DynamicDetailView: View {
                                                     .redacted(reason: .placeholder)
                                             }
                                             .cornerRadius(7)
-                                        #else
-                                        AsyncImage(url: URL(string: liveInfo["Cover"]! + "@50w")!) { phase in
-                                            switch phase {
-                                            case .empty:
-                                                RoundedRectangle(cornerRadius: 7)
-                                                    .frame(width: 50)
-                                                    .foregroundColor(Color(hex: 0x3D3D3D))
-                                                    .redacted(reason: .placeholder)
-                                            case .success(let image):
-                                                image
-                                            case .failure(let error):
-                                                RoundedRectangle(cornerRadius: 7)
-                                                    .frame(width: 50)
-                                                    .foregroundColor(Color(hex: 0x3D3D3D))
-                                                    .redacted(reason: .placeholder)
-                                            }
-                                        }
-                                        .cornerRadius(7)
-                                        #endif
                                         Text(liveInfo["Title"]!)
                                             .font(.system(size: 14, weight: .bold))
                                             .lineLimit(2)
@@ -195,13 +143,8 @@ struct DynamicDetailView: View {
                                 NavigationLink(destination: { DynamicDetailView(dynamicDetails: orig) }, label: {
                                     VStack {
                                         HStack {
-                                            #if !os(visionOS)
                                             WebImage(url: URL(string: orig["SenderPic"]! as! String + "@30w"), options: [.progressiveLoad])
                                                 .clipShape(Circle())
-                                            #else
-                                            AsyncImage(url: URL(string: orig["SenderPic"]! as! String + "@30w"))
-                                                .clipShape(Circle())
-                                            #endif
                                             VStack {
                                                 HStack {
                                                     Text(orig["SenderName"]! as! String)
@@ -244,7 +187,6 @@ struct DynamicDetailView: View {
                                         }
                                         if orig["Type"]! as! BiliDynamicType == .draw {
                                             if let draws = orig["Draws"] as? [[String: String]] {
-                                                #if !os(visionOS)
                                                 #if !os(watchOS)
                                                 LazyVGrid(columns: [GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3)), GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3)), GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3))]) {
                                                     ForEach(0..<draws.count, id: \.self) { j in
@@ -275,30 +217,6 @@ struct DynamicDetailView: View {
                                                     }
                                                 }
                                                 #endif
-                                                #else
-                                                LazyVGrid(columns: [GridItem(.fixed((globalWindowSize.width - 50) / 3)), GridItem(.fixed((globalWindowSize.width - 50) / 3)), GridItem(.fixed((globalWindowSize.width - 50) / 3))]) {
-                                                    ForEach(0..<draws.count, id: \.self) { j in
-                                                        VStack {
-                                                            NavigationLink(destination: { ImageViewerView(url: draws[j]["Src"]!) }) {
-                                                                AsyncImage(url: URL(string: draws[j]["Src"]!)) { phase in
-                                                                    switch phase {
-                                                                    case .empty:
-                                                                        Color.clear
-                                                                            .frame(width: 0, height: 0)
-                                                                    case .success(let image):
-                                                                        image.resizable()
-                                                                    case .failure(let error):
-                                                                        Color.clear
-                                                                            .frame(width: 0, height: 0)
-                                                                    }
-                                                                }
-                                                                .scaledToFit()
-                                                                .cornerRadius(5)
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                                #endif
                                             }
                                         } else if orig["Type"]! as! BiliDynamicType == .video {
                                             if let archive = orig["Archive"] as? [String: String] {
@@ -310,7 +228,6 @@ struct DynamicDetailView: View {
                                                 NavigationLink(destination: { LiveDetailView(liveDetails: liveInfo) }, label: {
                                                     VStack {
                                                         HStack {
-                                                            #if !os(visionOS)
                                                             WebImage(url: URL(string: liveInfo["Cover"]! + "@50w")!, options: [.progressiveLoad, .scaleDownLargeImages])
                                                                 .placeholder {
                                                                     RoundedRectangle(cornerRadius: 7)
@@ -319,25 +236,6 @@ struct DynamicDetailView: View {
                                                                         .redacted(reason: .placeholder)
                                                                 }
                                                                 .cornerRadius(7)
-                                                            #else
-                                                            AsyncImage(url: URL(string: liveInfo["Cover"]! + "@50w")!) { phase in
-                                                                switch phase {
-                                                                case .empty:
-                                                                    RoundedRectangle(cornerRadius: 7)
-                                                                        .frame(width: 50)
-                                                                        .foregroundColor(Color(hex: 0x3D3D3D))
-                                                                        .redacted(reason: .placeholder)
-                                                                case .success(let image):
-                                                                    image
-                                                                case .failure(let error):
-                                                                    RoundedRectangle(cornerRadius: 7)
-                                                                        .frame(width: 50)
-                                                                        .foregroundColor(Color(hex: 0x3D3D3D))
-                                                                        .redacted(reason: .placeholder)
-                                                                }
-                                                            }
-                                                            .cornerRadius(7)
-                                                            #endif
                                                             Text(liveInfo["Title"]!)
                                                                 .font(.system(size: 14, weight: .bold))
                                                                 .lineLimit(2)

@@ -21,9 +21,7 @@ import Marquee
 import DarockKit
 import Alamofire
 import SwiftyJSON
-#if !os(visionOS)
 import SDWebImageSwiftUI
-#endif
 
 struct LiveDetailView: View {
     var liveDetails: [String: String]
@@ -159,57 +157,48 @@ struct LiveDetailView: View {
             }
             #else
             ZStack {
-                Group {
-                    if #available(watchOS 10, *) {
-                        TabView {
-                            FirstPageBase(liveDetails: liveDetails, streamerName: $streamerName, isLoading: $isLoading, isLivePlayerPresented: $isLivePlayerPresented)
-                                .tag(1)
-                                .offset(y: 16)
-                                .toolbar {
-                                    ToolbarItemGroup(placement: .bottomBar) {
-                                        Spacer()
-                                        Button(action: {
-                                            isLoading = true
-                                            
-                                            DarockKit.Network.shared.requestJSON("https://api.live.bilibili.com/room/v1/Room/playUrl?cid=\(liveDetails["ID"]!)&qn=150&platform=h5") { respJson, isSuccess in
-                                                if isSuccess {
-                                                    debugPrint(respJson)
-                                                    LiveDetailView.willPlayStreamUrl = respJson["data"]["durl"][0]["url"].string ?? ""
-                                                    debugPrint(LiveDetailView.willPlayStreamUrl)
-                                                    isLivePlayerPresented = true
-                                                    isLoading = false
-                                                }
-                                            }
-                                        }, label: {
-                                            Image(systemName: "play.fill")
-                                        })
-                                    }
-                                }
-                            SecondPageBase(liveDetails: liveDetails, watchingCount: $watchingCount, description: $description, liveStatus: $liveStatus, startTime: $startTime, streamerId: $streamerId, streamerName: $streamerName, streamerFaceUrl: $streamerFaceUrl, streamerFansCount: $streamerFansCount, tagName: $tagName)
-                                .tag(2)
-                        }
-                        .tabViewStyle(.verticalPage)
-                        .containerBackground(for: .navigation) {
-                            if !isInLowBatteryMode {
-                                ZStack {
-                                    WebImage(url: URL(string: liveDetails["Cover"]!))
-                                        .resizable()
-                                        .onSuccess { _, _, _ in
-                                            backgroundPicOpacity = 1.0
+                TabView {
+                    FirstPageBase(liveDetails: liveDetails, streamerName: $streamerName, isLoading: $isLoading, isLivePlayerPresented: $isLivePlayerPresented)
+                        .tag(1)
+                        .offset(y: 16)
+                        .toolbar {
+                            ToolbarItemGroup(placement: .bottomBar) {
+                                Spacer()
+                                Button(action: {
+                                    isLoading = true
+                                    
+                                    DarockKit.Network.shared.requestJSON("https://api.live.bilibili.com/room/v1/Room/playUrl?cid=\(liveDetails["ID"]!)&qn=150&platform=h5") { respJson, isSuccess in
+                                        if isSuccess {
+                                            debugPrint(respJson)
+                                            LiveDetailView.willPlayStreamUrl = respJson["data"]["durl"][0]["url"].string ?? ""
+                                            debugPrint(LiveDetailView.willPlayStreamUrl)
+                                            isLivePlayerPresented = true
+                                            isLoading = false
                                         }
-                                        .scaledToFill()
-                                        .blur(radius: 20)
-                                        .opacity(backgroundPicOpacity)
-                                        .animation(.easeOut(duration: 1.2), value: backgroundPicOpacity)
-                                    Color.black
-                                        .opacity(0.4)
-                                }
+                                    }
+                                }, label: {
+                                    Image(systemName: "play.fill")
+                                })
                             }
                         }
-                    } else {
-                        ScrollView {
-                            FirstPageBase(liveDetails: liveDetails, streamerName: $streamerName, isLoading: $isLoading, isLivePlayerPresented: $isLivePlayerPresented)
-                            SecondPageBase(liveDetails: liveDetails, watchingCount: $watchingCount, description: $description, liveStatus: $liveStatus, startTime: $startTime, streamerId: $streamerId, streamerName: $streamerName, streamerFaceUrl: $streamerFaceUrl, streamerFansCount: $streamerFansCount, tagName: $tagName)
+                    SecondPageBase(liveDetails: liveDetails, watchingCount: $watchingCount, description: $description, liveStatus: $liveStatus, startTime: $startTime, streamerId: $streamerId, streamerName: $streamerName, streamerFaceUrl: $streamerFaceUrl, streamerFansCount: $streamerFansCount, tagName: $tagName)
+                        .tag(2)
+                }
+                .tabViewStyle(.verticalPage)
+                .containerBackground(for: .navigation) {
+                    if !isInLowBatteryMode {
+                        ZStack {
+                            WebImage(url: URL(string: liveDetails["Cover"]!))
+                                .resizable()
+                                .onSuccess { _, _, _ in
+                                    backgroundPicOpacity = 1.0
+                                }
+                                .scaledToFill()
+                                .blur(radius: 20)
+                                .opacity(backgroundPicOpacity)
+                                .animation(.easeOut(duration: 1.2), value: backgroundPicOpacity)
+                            Color.black
+                                .opacity(0.4)
                         }
                     }
                 }

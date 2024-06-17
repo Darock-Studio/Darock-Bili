@@ -21,9 +21,7 @@ import Marquee
 import DarockKit
 import Alamofire
 import SwiftyJSON
-#if !os(visionOS)
 import SDWebImageSwiftUI
-#endif
 
 struct BangumiDetailView: View {
     @State var bangumiData: BangumiData
@@ -148,7 +146,6 @@ struct BangumiDetailView: View {
         var body: some View {
             VStack {
                 Spacer()
-                #if !os(visionOS)
                 WebImage(url: URL(string: bangumiData.cover + "@130w_180h")!, options: [.progressiveLoad, .scaleDownLargeImages])
                     .placeholder {
                         RoundedRectangle(cornerRadius: 13)
@@ -166,34 +163,6 @@ struct BangumiDetailView: View {
                     .onTapGesture {
                         isCoverImageViewPresented = true
                     }
-                #else
-                AsyncImage(url: URL(string: bangumiData.cover + "@130w_180h")!) { phase in
-                    switch phase {
-                    case .empty:
-                        RoundedRectangle(cornerRadius: 13)
-                            .frame(width: 65, height: 90)
-                            .foregroundColor(Color(hex: 0x3D3D3D))
-                            .redacted(reason: .placeholder)
-                    case .success(let image):
-                        image.resizable()
-                    case .failure(let error):
-                        RoundedRectangle(cornerRadius: 13)
-                            .frame(width: 65, height: 90)
-                            .foregroundColor(Color(hex: 0x3D3D3D))
-                            .redacted(reason: .placeholder)
-                    }
-                }
-                .scaledToFit()
-                .frame(width: 65, height: 90)
-                .cornerRadius(13)
-                .shadow(color: .black.opacity(0.5), radius: 5, x: 1, y: 2)
-                .offset(y: 8)
-                .sheet(isPresented: $isCoverImageViewPresented, content: { ImageViewerView(url: bangumiData.cover) })
-                .onTapGesture {
-                    isCoverImageViewPresented = true
-                }
-                #endif
-                
                 Spacer()
                     .frame(height: 20)
                 Marquee {
@@ -266,13 +235,26 @@ struct BangumiDetailView: View {
         @State var playingPageIndex = 0
         var body: some View {
             #if os(watchOS)
-            if #available(watchOS 10, *) {
-                List {
-                    DetailCore(bangumiData: $bangumiData, epDatas: $epDatas, isBangumiPlayerPresented: $isBangumiPlayerPresented, isLoading: $isLoading, bangumiLink: $bangumiLink)
-                }
-            } else {
-                VStack {
-                    DetailCore(bangumiData: $bangumiData, epDatas: $epDatas, isBangumiPlayerPresented: $isBangumiPlayerPresented, isLoading: $isLoading, bangumiLink: $bangumiLink)
+            if epDatas.count != 0 {
+                ForEach(0..<epDatas.count, id: \.self) { i in
+                    Button(action: {
+                        isLoading = true
+                        
+                        let headers: HTTPHeaders = [
+                            "cookie": "SESSDATA=\(sessdata)",
+                            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                        ]
+                        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/pgc/player/web/playurl?ep_id=\(epDatas[i].epid)&qn=16&fnval=1", headers: headers) { respJson, isSuccess in
+                            if isSuccess {
+                                if !CheckBApiError(from: respJson) { return }
+                                bangumiLink = respJson["result"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
+                                isBangumiPlayerPresented = true
+                                isLoading = false
+                            }
+                        }
+                    }, label: {
+                        Text(epDatas[i].longTitle)
+                    })
                 }
             }
             #else
@@ -314,43 +296,6 @@ struct BangumiDetailView: View {
                 .scrollIndicators(.never)
             }
             #endif
-        }
-        
-        // OS 10- support
-        struct DetailCore: View {
-            @Binding var bangumiData: BangumiData
-            @Binding var epDatas: [BangumiEp]
-            @Binding var isBangumiPlayerPresented: Bool
-            @Binding var isLoading: Bool
-            @Binding var bangumiLink: String
-            @AppStorage("DedeUserID") var dedeUserID = ""
-            @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-            @AppStorage("SESSDATA") var sessdata = ""
-            @AppStorage("bili_jct") var biliJct = ""
-            var body: some View {
-                if epDatas.count != 0 {
-                    ForEach(0..<epDatas.count, id: \.self) { i in
-                        Button(action: {
-                            isLoading = true
-                            
-                            let headers: HTTPHeaders = [
-                                "cookie": "SESSDATA=\(sessdata)",
-                                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                            ]
-                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/pgc/player/web/playurl?ep_id=\(epDatas[i].epid)&qn=16&fnval=1", headers: headers) { respJson, isSuccess in
-                                if isSuccess {
-                                    if !CheckBApiError(from: respJson) { return }
-                                    bangumiLink = respJson["result"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
-                                    isBangumiPlayerPresented = true
-                                    isLoading = false
-                                }
-                            }
-                        }, label: {
-                            Text(epDatas[i].longTitle)
-                        })
-                    }
-                }
-            }
         }
     }
 }

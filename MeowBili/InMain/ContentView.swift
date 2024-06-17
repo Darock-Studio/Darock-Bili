@@ -38,7 +38,6 @@ struct ContentView: View {
     @State var isOldSystemTipPresented = false
     @FocusState var isSearchKeyboardFocused: Bool
     var body: some View {
-        #if !os(visionOS) && !os(macOS)
         NavigationStack {
             TabView(selection: $mainTabSelection.onUpdate { oldValue, newValue in
                 if oldValue == newValue && newValue == 4 {
@@ -46,7 +45,7 @@ struct ContentView: View {
                 }
             }) {
                 MainView(mainTabSelection: $mainTabSelection)
-                #if !os(watchOS)
+#if !os(watchOS)
                     .toolbar {
                         ToolbarItem(placement: .topBarLeading) {
                             if dedeUserID != "" {
@@ -67,7 +66,7 @@ struct ContentView: View {
                             }
                         }
                     }
-                #endif
+#endif
                     .tag(1)
                     .tabItem {
                         Label("navbar.suggest", systemImage: "sparkles")
@@ -82,13 +81,13 @@ struct ContentView: View {
                     .tabItem {
                         Label("navbar.dynamic", systemImage: "rectangle.stack.fill")
                     }
-                #if !os(watchOS)
+#if !os(watchOS)
                 SearchMainView(isSearchKeyboardFocused: $isSearchKeyboardFocused)
                     .tag(4)
                     .tabItem {
                         Label("搜索", systemImage: "magnifyingglass")
                     }
-                #endif
+#endif
             }
             .accessibility(identifier: "MainTabView")
             .sheet(isPresented: $isTermsPresented, onDismiss: {
@@ -108,7 +107,7 @@ struct ContentView: View {
                 }
             })
             .onAppear {
-                #if os(watchOS)
+#if os(watchOS)
                 if !isReadTerms {
                     isTermsPresented = true
                 }
@@ -117,7 +116,7 @@ struct ContentView: View {
                         isOldSystemTipPresented = true
                     }
                 }
-                #endif
+#endif
             }
         }
         .onAppear {
@@ -142,42 +141,6 @@ struct ContentView: View {
                 }
             }
         }
-        #else
-        TabView(selection: $mainTabSelection) {
-            NavigationSplitView(sidebar: {
-                MainView(mainTabSelection: $mainTabSelection)
-            }, detail: {
-                
-            })
-            .tag(1)
-            .tabItem {
-                Label("navbar.suggest", systemImage: "sparkles")
-            }
-            NavigationStack {
-                PersonAccountView()
-            }
-            .tag(2)
-            .tabItem {
-                Label("navbar.my", systemImage: "person.fill")
-            }
-            NavigationStack {
-                UserDynamicMainView()
-            }
-            .tag(3)
-            .tabItem {
-                Label("navbar.dynamic", systemImage: "rectangle.stack.fill")
-            }
-            NavigationSplitView(sidebar: {
-                SearchMainView(isSearchKeyboardFocused: $isSearchKeyboardFocused)
-            }, detail: {
-                
-            })
-            .tag(4)
-            .tabItem {
-                Label("搜索", systemImage: "magnifyingglass")
-            }
-        }
-        #endif
     }
 }
 
