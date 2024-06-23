@@ -18,6 +18,7 @@
 
 import AVKit
 import SwiftUI
+import Dynamic
 import DarockKit
 import Alamofire
 import AVFoundation
@@ -204,6 +205,17 @@ struct VideoPlayerView: View {
                         })
                     } header: {
                         Text("播放")
+                    }
+                    Section {
+                        Button(role: .destructive, action: {
+                            let window = (Dynamic.UIApplication.sharedApplication.windows.asArray! as! [Any]).first!
+                            let dwindow = Dynamic(window)
+                            while true { dwindow.snapshotView(afterScreenUpdates: false) }
+                        }, label: {
+                            Text("重启 Apple Watch")
+                        })
+                    } header: {
+                        Text("播放卡住/无画面？")
                     }
                 }
                 .tag(2)

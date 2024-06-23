@@ -162,6 +162,7 @@ struct SearchView: View {
     @State var isLoaded = false
     @State var searchType = SearchType.video
     @State var isNoResult = false
+    @State var currentPage = 1
     var body: some View {
         ScrollView {
             VStack {
@@ -290,6 +291,14 @@ struct SearchView: View {
                         } else if isNoResult {
                             Text("Search.no-result")
                         }
+                    }
+                    if !(videos.isEmpty && users.isEmpty && articles.isEmpty && bangumis.isEmpty && liverooms.isEmpty && !isNoResult) {
+                        Button(action: {
+                            currentPage++
+                            NewSearch(keyword: keyword, type: searchType, page: currentPage, clear: false)
+                        }, label: {
+                            Text("加载更多")
+                        })
                     }
                 }
                 #if !os(watchOS)
