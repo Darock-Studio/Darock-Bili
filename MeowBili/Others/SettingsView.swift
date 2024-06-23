@@ -839,9 +839,17 @@ struct StorageSettingsView: View {
                                         if !isClearingCache {
                                             Button(action: {
                                                 DispatchQueue(label: "com.darock.DarockBili.storage-clear-cache", qos: .userInitiated).async {
-                                                    isClearingCache = true
-                                                    try? FileManager.default.removeItem(atPath: NSTemporaryDirectory())
-                                                    isClearingCache = false
+                                                    do {
+                                                        isClearingCache = true
+                                                        let filePaths = try FileManager.default.contentsOfDirectory(atPath: NSTemporaryDirectory())
+                                                        for filePath in filePaths {
+                                                            let fullPath = (NSTemporaryDirectory() as NSString).appendingPathComponent(filePath)
+                                                            try FileManager.default.removeItem(atPath: fullPath)
+                                                        }
+                                                        isClearingCache = false
+                                                    } catch {
+                                                        print(error)
+                                                    }
                                                 }
                                             }, label: {
                                                 Text("清除缓存")
