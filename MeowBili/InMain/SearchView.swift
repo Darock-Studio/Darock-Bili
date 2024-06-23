@@ -47,18 +47,17 @@ struct SearchMainView: View {
                         .frame(width: 0, height: 0)
                         .hidden()
                         .disabled(true)
-                    TextField("Search.\(Image(systemName: "magnifyingglass"))", text: $searchText)
-                        .submitLabel(.search)
+                    TextField("搜索", text: $searchText) {
+                        isSearchPresented = true
+                        if searchText != (searchHistory.first ?? "") {
+                            UserDefaults.standard.set([searchText] + searchHistory, forKey: "SearchHistory")
+                        }
+                    }
+                    .submitLabel(.search)
                     #if !os(watchOS)
                         .focused(isSearchKeyboardFocused)
                     #endif
                         .accessibilityIdentifier("SearchInput")
-                        .onSubmit {
-                            isSearchPresented = true
-                            if searchText != (searchHistory.first ?? "") {
-                                UserDefaults.standard.set([searchText] + searchHistory, forKey: "SearchHistory")
-                            }
-                        }
                 }
                 if debug {
                     Button(action: {

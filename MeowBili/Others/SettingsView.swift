@@ -458,7 +458,10 @@ struct KeyboardSettingsView: View {
             Section {
                 Toggle("使用第三方全键盘", isOn: $isUseExtKeyboard)
             } footer: {
-                Text("不支持全键盘的 Apple Watch 可通过打开此开关以使用第三方的全键盘")
+                VStack(alignment: .leading) {
+                    Text("不支持全键盘的 Apple Watch 可通过打开此开关以使用第三方的全键盘")
+                    Text("Powered by Cepheus")
+                }
             }
         }
     }

@@ -354,6 +354,14 @@ struct PersonAccountView: View {
         }
         .navigationTitle("About-me")
         .navigationBarTitleDisplayMode(.large)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                NavigationLink(destination: { SettingsView() }, label: {
+                    Image(systemName: "gear")
+                        .foregroundStyle(Color.accentColor)
+                })
+            }
+        }
         .onAppear {
             getAccountInfos()
         }

@@ -180,29 +180,27 @@ struct DarockBili_Watch_AppApp: App {
                             .listRowBackground(Color.clear)
                     }
                     Section {
-                        TextField("密码", text: $fileLockerInput)
-                            .submitLabel(.continue)
-                            .onSubmit {
-                                if fileLockerInput == fileLockerPwd {
-                                    fileLockerPwd = ""
-                                } else {
-                                    fileLockerInput = ""
-                                    fileLockerRetryCount++
-                                }
+                        TextField("密码", text: $fileLockerInput) {
+                            if fileLockerInput == fileLockerPwd {
+                                fileLockerPwd = ""
+                            } else {
+                                fileLockerInput = ""
+                                fileLockerRetryCount++
                             }
+                        }
+                        .submitLabel(.continue)
                     }
                     if fileLockerRetryCount >= 3 {
                         Section {
-                            TextField("使用恢复密钥", text: $recoveryCodeInput)
-                                .submitLabel(.continue)
-                                .onSubmit {
-                                    if recoveryCodeInput == fileLockerRecoverCode {
-                                        fileLockerPwd = ""
-                                    } else {
-                                        recoveryCodeInput = ""
-                                        fileLockerRetryCount++
-                                    }
+                            TextField("使用恢复密钥", text: $recoveryCodeInput) {
+                                if recoveryCodeInput == fileLockerRecoverCode {
+                                    fileLockerPwd = ""
+                                } else {
+                                    recoveryCodeInput = ""
+                                    fileLockerRetryCount++
                                 }
+                            }
+                            .submitLabel(.continue)
                         }
                     }
                 }

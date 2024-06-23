@@ -4298,6 +4298,9 @@
     "PlayerGesture" : {
 
     },
+    "Powered by Cepheus" : {
+
+    },
     "Screen-time.daily-average" : {
       "localizations" : {
         "en" : {
@@ -4479,6 +4482,7 @@
       }
     },
     "Search.%@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
