@@ -100,6 +100,9 @@ struct BangumiDetailView: View {
         }
         .navigationTitle("Bangumi")
         .navigationBarTitleDisplayMode(.inline)
+        #if os(watchOS)
+        .sheet(isPresented: $isBangumiPlayerPresented, content: { BangumiPlayerView(bangumiData: $bangumiData, bangumiLink: $bangumiLink) })
+        #endif
         .onAppear {
             let headers: HTTPHeaders = [
                 "cookie": "SESSDATA=\(sessdata)",
@@ -242,11 +245,15 @@ struct BangumiDetailView: View {
                         
                         let headers: HTTPHeaders = [
                             "cookie": "SESSDATA=\(sessdata)",
+                            "Referer": "https://www.bilibili.com",
                             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                         ]
-                        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/pgc/player/web/playurl?ep_id=\(epDatas[i].epid)&qn=16&fnval=1", headers: headers) { respJson, isSuccess in
+                        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/pgc/player/web/playurl?ep_id=\(epDatas[i].epid)&qn=16&fnval=1&session=5a90f7022988409ff9fa72a3c25cd576", headers: headers) { respJson, isSuccess in
                             if isSuccess {
-                                if !CheckBApiError(from: respJson) { return }
+                                if !CheckBApiError(from: respJson) {
+                                    isLoading = false
+                                    return
+                                }
                                 bangumiLink = respJson["result"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
                                 isBangumiPlayerPresented = true
                                 isLoading = false
