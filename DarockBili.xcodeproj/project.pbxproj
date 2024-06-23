@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		8C03B6DE2C280BAA000770B4 /* Cepheus in Frameworks */ = {isa = PBXBuildFile; productRef = 8C03B6DD2C280BAA000770B4 /* Cepheus */; };
 		8C0557DF2B791B84009D9CD0 /* AZVideoPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8C0557DE2B791B84009D9CD0 /* AZVideoPlayer */; };
 		8C617F412B92334B000A3687 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C617F402B92334B000A3687 /* SafariWebExtensionHandler.swift */; };
 		8C617F442B92334B000A3687 /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = 8C617F432B92334B000A3687 /* _locales */; };
@@ -132,7 +133,6 @@
 		8CB176A72BB8189300CEC05C /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8CB176A62BB8189300CEC05C /* SDWebImageSwiftUI */; };
 		8CB176AE2BB8420B00CEC05C /* DarockKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8CB176AD2BB8420B00CEC05C /* DarockKit */; };
 		8CB176B02BB8421300CEC05C /* DarockKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8CB176AF2BB8421300CEC05C /* DarockKit */; };
-		8CBCBAEF2BE5351100DF017E /* CepheusKeyboardKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8CBCBAEE2BE5351100DF017E /* CepheusKeyboardKit */; };
 		8CBFF0B72B85E55F00350E0F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC42B77AC4A008E587F /* ContentView.swift */; };
 		8CBFF0B82B85E55F00350E0F /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCA52B77B314008E587F /* CommentsView.swift */; };
 		8CBFF0B92B85E55F00350E0F /* LinkDetectText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */; };
@@ -406,11 +406,11 @@
 				8CB176A72BB8189300CEC05C /* SDWebImageSwiftUI in Frameworks */,
 				8CA7CBED2B77AC8A008E587F /* ZipArchive in Frameworks */,
 				8CA7CBF72B77AC8A008E587F /* SDWebImagePDFCoder in Frameworks */,
+				8C03B6DE2C280BAA000770B4 /* Cepheus in Frameworks */,
 				8CA7CBF52B77AC8A008E587F /* SDWebImageSVGCoder in Frameworks */,
 				8CA164852BF12731000065D8 /* SupportsUICore in Frameworks */,
 				8CA370D62B82691100CE0E9E /* Mixpanel in Frameworks */,
 				8CA7CBE72B77AC8A008E587F /* Marquee in Frameworks */,
-				8CBCBAEF2BE5351100DF017E /* CepheusKeyboardKit in Frameworks */,
 				8CA7CBE92B77AC8A008E587F /* SwiftDate in Frameworks */,
 				8CA7CBFD2B77AC8A008E587F /* Dynamic in Frameworks */,
 				8CA7CBF92B77AC8A008E587F /* SwiftSoup in Frameworks */,
@@ -844,8 +844,8 @@
 				8CA370D52B82691100CE0E9E /* Mixpanel */,
 				8CB176A62BB8189300CEC05C /* SDWebImageSwiftUI */,
 				8CB176AF2BB8421300CEC05C /* DarockKit */,
-				8CBCBAEE2BE5351100DF017E /* CepheusKeyboardKit */,
 				8CA164842BF12731000065D8 /* SupportsUICore */,
+				8C03B6DD2C280BAA000770B4 /* Cepheus */,
 			);
 			productName = "MeowBili Watch App";
 			productReference = 8CA7CBCF2B77AC4C008E587F /* 喵哩喵哩.app */;
@@ -928,8 +928,8 @@
 				8CA370DD2B827AAD00CE0E9E /* XCRemoteSwiftPackageReference "AlertToast" */,
 				8CB176A32BB8188600CEC05C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				8CB176AC2BB8420A00CEC05C /* XCRemoteSwiftPackageReference "DarockKit" */,
-				8CBCBAED2BE5351100DF017E /* XCRemoteSwiftPackageReference "Cepheus" */,
 				8CA164812BF1270D000065D8 /* XCRemoteSwiftPackageReference "SupportsUICore" */,
+				8C03B6DC2C280BAA000770B4 /* XCRemoteSwiftPackageReference "Cepheus" */,
 			);
 			productRefGroup = B44689CB2B4FC15A002CCEB2 /* Products */;
 			projectDirPath = "";
@@ -1214,7 +1214,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1247;
+				CURRENT_PROJECT_VERSION = 1252;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -1245,7 +1245,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1247;
+				CURRENT_PROJECT_VERSION = 1252;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -1342,7 +1342,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBiliAlternative.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1247;
+				CURRENT_PROJECT_VERSION = 1252;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				ENABLE_PREVIEWS = YES;
@@ -1387,7 +1387,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1247;
+				CURRENT_PROJECT_VERSION = 1252;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				ENABLE_PREVIEWS = YES;
@@ -1423,7 +1423,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1247;
+				CURRENT_PROJECT_VERSION = 1252;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1447,7 +1447,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1247;
+				CURRENT_PROJECT_VERSION = 1252;
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -1515,7 +1515,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1247;
+				CURRENT_PROJECT_VERSION = 1252;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1562,7 +1562,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1247;
+				CURRENT_PROJECT_VERSION = 1252;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1607,7 +1607,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1247;
+				CURRENT_PROJECT_VERSION = 1252;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1643,7 +1643,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1247;
+				CURRENT_PROJECT_VERSION = 1252;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1679,7 +1679,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1247;
+				CURRENT_PROJECT_VERSION = 1252;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1702,7 +1702,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1247;
+				CURRENT_PROJECT_VERSION = 1252;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1914,6 +1914,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		8C03B6DC2C280BAA000770B4 /* XCRemoteSwiftPackageReference "Cepheus" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Serene-Garden/Cepheus";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.2;
+			};
+		};
 		8C0557DD2B791B84009D9CD0 /* XCRemoteSwiftPackageReference "AZVideoPlayer" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/adamzarn/AZVideoPlayer";
@@ -1965,14 +1973,6 @@
 		8CB176AC2BB8420A00CEC05C /* XCRemoteSwiftPackageReference "DarockKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Darock-Studio/DarockKit";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-		8CBCBAED2BE5351100DF017E /* XCRemoteSwiftPackageReference "Cepheus" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/WindowsMEMZ/Cepheus";
 			requirement = {
 				branch = main;
 				kind = branch;
@@ -2069,6 +2069,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8C03B6DD2C280BAA000770B4 /* Cepheus */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C03B6DC2C280BAA000770B4 /* XCRemoteSwiftPackageReference "Cepheus" */;
+			productName = Cepheus;
+		};
 		8C0557DE2B791B84009D9CD0 /* AZVideoPlayer */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8C0557DD2B791B84009D9CD0 /* XCRemoteSwiftPackageReference "AZVideoPlayer" */;
@@ -2221,11 +2226,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8CB176AC2BB8420A00CEC05C /* XCRemoteSwiftPackageReference "DarockKit" */;
 			productName = DarockKit;
-		};
-		8CBCBAEE2BE5351100DF017E /* CepheusKeyboardKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8CBCBAED2BE5351100DF017E /* XCRemoteSwiftPackageReference "Cepheus" */;
-			productName = CepheusKeyboardKit;
 		};
 		8CC3D5622B7CCE57005636DC /* ScreenshotableView */ = {
 			isa = XCSwiftPackageProductDependency;

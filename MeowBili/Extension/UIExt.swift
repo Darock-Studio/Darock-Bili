@@ -26,8 +26,8 @@ import MobileCoreServices
 import AuthenticationServices
 import SDWebImageSwiftUI
 #if os(watchOS)
+import Cepheus
 import WatchKit
-import CepheusKeyboardKit
 #else
 import WebKit
 #endif
@@ -549,20 +549,22 @@ func Label(_ titleKey: LocalizedStringKey, privateSystemImage systemName: String
 #if os(watchOS)
 // Ext Keyboard
 struct TextField: View {
-    var titleKey: LocalizedStringKey?
+    var titleKey: LocalizedStringResource?
     var titleKeyString: String?
     var text: Binding<String>
+    var _onSubmit: () -> Void
     @AppStorage("IsUseExtKeyboard") private var _isUseExtKeyboard = false
-    @State var _onSubmit: () -> Void = { }
     
-    init(_ titleKey: LocalizedStringKey, text: Binding<String>) {
+    init(_ titleKey: LocalizedStringResource, text: Binding<String>, onSubmit: @escaping () -> Void = {}) {
         self.titleKey = titleKey
         self.text = text
+        self._onSubmit = onSubmit
     }
     @_disfavoredOverload
-    init(_ titleKey: String, text: Binding<String>) {
+    init(_ titleKey: String, text: Binding<String>, onSubmit: @escaping () -> Void = {}) {
         self.titleKeyString = titleKey
         self.text = text
+        self._onSubmit = onSubmit
     }
     
     var body: some View {
@@ -570,25 +572,16 @@ struct TextField: View {
             if let titleKey {
                 CepheusKeyboard(input: text, prompt: titleKey, defaultLanguage: "zh-hans-pinyin", onSubmit: { _onSubmit() })
             } else if let titleKeyString {
-                CepheusKeyboard(input: text, prompt: titleKeyString, defaultLanguage: "zh-hans-pinyin", onSubmit: { _onSubmit() })
+                CepheusKeyboard(input: text, prompt: LocalizedStringResource(stringLiteral: titleKeyString), defaultLanguage: "zh-hans-pinyin", onSubmit: { _onSubmit() })
             }
         } else {
             if let titleKey {
-                SwiftUI.TextField(titleKey, text: text)
+                SwiftUI.TextField(String(localized: titleKey), text: text)
+                    .onSubmit(_onSubmit)
             } else if let titleKeyString {
                 SwiftUI.TextField(titleKeyString, text: text)
+                    .onSubmit(_onSubmit)
             }
-        }
-    }
-}
-extension TextField {
-    @usableFromInline
-    func onSubmit(_ action: @escaping () -> Void) -> some View {
-        if self._isUseExtKeyboard {
-            self._onSubmit = action
-            return self
-        } else {
-            return self.onSubmit(action)
         }
     }
 }

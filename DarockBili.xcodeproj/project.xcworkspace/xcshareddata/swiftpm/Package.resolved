@@ -1,5 +1,5 @@
 {
-  "originHash" : "2accb5e33655e8b5c031f05292bf69d9d024ab74da5173ee33d14b17f0106813",
+  "originHash" : "1311c4492e25a9d03c421bf04b1213b17f7c90b7c5de8ba05d6cd5a960ca059e",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -40,10 +40,10 @@
     {
       "identity" : "cepheus",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/WindowsMEMZ/Cepheus",
+      "location" : "https://github.com/Serene-Garden/Cepheus",
       "state" : {
-        "branch" : "main",
-        "revision" : "73b8735ce8f7e663d3ce73fd58eb5dc41b23f26c"
+        "revision" : "38adeadadc1b52a61db4078a80aac98af3311890",
+        "version" : "2.0.2"
       }
     },
     {
