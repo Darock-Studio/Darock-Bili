@@ -17,11 +17,18 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
+import DarockKit
+import Alamofire
 import SDWebImageSwiftUI
 
 struct DynamicDetailView: View {
     var dynamicDetails: [String: Any?]
+    @AppStorage("DedeUserID") var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") var sessdata = ""
+    @AppStorage("bili_jct") var biliJct = ""
     @State var isDynamicImagePresented = [Bool]()
+    @State var isCommentsAvailable = false
     var body: some View {
         TabView {
             ScrollView {
@@ -269,7 +276,7 @@ struct DynamicDetailView: View {
             .tabItem {
                 Label("内容", systemImage: "shippingbox.fill")
             }
-            if dynamicDetails["Type"]! as! BiliDynamicType == .text || dynamicDetails["Type"]! as! BiliDynamicType == .forward || dynamicDetails["Type"]! as! BiliDynamicType == .draw {
+            if isCommentsAvailable {
                 CommentsView(oid: dynamicDetails["DynamicID"]! as! String, type: (dynamicDetails["Type"]! as! BiliDynamicType) == .draw ? 11 : 17)
                     .navigationTitle("动态评论")
                     .navigationBarTitleDisplayMode(.inline)
@@ -279,9 +286,18 @@ struct DynamicDetailView: View {
                     }
             }
         }
+        .onAppear {
+            let headers: HTTPHeaders = [
+                "cookie": "SESSDATA=\(sessdata);",
+                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            ]
+            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v2/reply?type=\((dynamicDetails["Type"]! as! BiliDynamicType) == .draw ? 11 : 17)&oid=\(dynamicDetails["DynamicID"]! as! String)&sort=1&ps=20&pn=1", headers: headers) { respJson, isSuccess in
+                if isSuccess {
+                    if CheckBApiError(from: respJson, noTip: true) {
+                        isCommentsAvailable = true
+                    }
+                }
+            }
+        }
     }
 }
-
-//#Preview {
-//    DynamicDetailView()
-//}
