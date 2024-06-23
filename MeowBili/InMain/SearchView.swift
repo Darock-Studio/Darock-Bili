@@ -34,7 +34,10 @@ struct SearchMainView: View {
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
     @AppStorage("bili_jct") var biliJct = ""
-    @State var searchText = ""
+    @State var searchText = "小埋"
+    #if !DEBUG
+    #error("Debug string in line 37")
+    #endif
     @State var isSearchPresented = false
     @State var searchHistory = [String]()
     @State var hotSearches = [String]()
