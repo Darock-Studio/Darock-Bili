@@ -481,12 +481,12 @@ struct SuggestionViewSettingsView: View {
 }
 
 struct NetworkSettingsView: View {
-    @AppStorage("IsTipDarockSuggestions") var isTipDarockSuggestions = true
+    @AppStorage("IsShowVideoSuggestionsFromDarock") var isShowVideoSuggestionsFromDarock = true
     @AppStorage("IsShowNetworkFixing") var isShowNetworkFixing = true
     var body: some View {
         List {
             Section {
-                Toggle("显示来自 Darock 的推荐", isOn: $isTipDarockSuggestions)
+                Toggle("显示来自 Darock 的推荐", isOn: $isShowVideoSuggestionsFromDarock)
             }
             Section {
                 NavigationLink(destination: { NetworkFixView() }, label: {

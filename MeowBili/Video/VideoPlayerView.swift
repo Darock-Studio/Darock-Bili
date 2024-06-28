@@ -365,80 +365,81 @@ struct VideoPlayerView: View {
     @inline(__always)
     func UpdateDanmaku() {
         AF.request("https://api.bilibili.com/x/v1/dm/list.so?oid=\(videoCID)").response { response in
-            let danmakus = String(data: response.data!, encoding: .utf8)!
-            if danmakus.contains("<d p=\"") {
-                let danmakuOnly = danmakus.split(separator: "</source>")[1].split(separator: "</i>")[0]
-                let danmakuSpd = danmakuOnly.split(separator: "</d>")
-                for singleDanmaku in danmakuSpd {
-                    let p = singleDanmaku.split(separator: "<d p=\"")[0].split(separator: "\"")[0]
-                    let spdP = p.split(separator: ",")
-                    var stredSpdP = [String]()
-                    for p in spdP {
-                        stredSpdP.append(String(p))
+            if let danmakus = String(data: response.data!, encoding: .utf8) {
+                if danmakus.contains("<d p=\"") {
+                    let danmakuOnly = danmakus.split(separator: "</source>")[1].split(separator: "</i>")[0]
+                    let danmakuSpd = danmakuOnly.split(separator: "</d>")
+                    for singleDanmaku in danmakuSpd {
+                        let p = singleDanmaku.split(separator: "<d p=\"")[0].split(separator: "\"")[0]
+                        let spdP = p.split(separator: ",")
+                        var stredSpdP = [String]()
+                        for p in spdP {
+                            stredSpdP.append(String(p))
+                        }
+                        if singleDanmaku.split(separator: "\">").count < 2 {
+                            return
+                        }
+                        let danmakuText = String(singleDanmaku.split(separator: "\">")[1].split(separator: "</d>")[0])
+                        if stredSpdP[5] == "0" {
+                            showDanmakus.append(["Appear": stredSpdP[0], "Type": stredSpdP[1], "Size": stredSpdP[2], "Color": stredSpdP[3], "Text": danmakuText])
+                        }
                     }
-                    if singleDanmaku.split(separator: "\">").count < 2 {
-                        return
+                    showDanmakus.sort { dict1, dict2 in
+                        if let time1 = dict1["Appear"], let time2 = dict2["Appear"] {
+                            return Double(time1)! < Double(time2)!
+                        }
+                        return false
                     }
-                    let danmakuText = String(singleDanmaku.split(separator: "\">")[1].split(separator: "</d>")[0])
-                    if stredSpdP[5] == "0" {
-                        showDanmakus.append(["Appear": stredSpdP[0], "Type": stredSpdP[1], "Size": stredSpdP[2], "Color": stredSpdP[3], "Text": danmakuText])
+                    var removedCount = 0
+                    for i in 1..<showDanmakus.count {
+                        if showDanmakus.count - removedCount - i <= 0 {
+                            break
+                        }
+                        if (Double(showDanmakus[i]["Appear"]!)! - Double(showDanmakus[i - 1]["Appear"]!)!) < 1 {
+                            showDanmakus.remove(at: i)
+                            removedCount++
+                        }
                     }
-                }
-                showDanmakus.sort { dict1, dict2 in
-                    if let time1 = dict1["Appear"], let time2 = dict2["Appear"] {
-                        return Double(time1)! < Double(time2)!
-                    }
-                    return false
-                }
-                var removedCount = 0
-                for i in 1..<showDanmakus.count {
-                    if showDanmakus.count - removedCount - i <= 0 {
-                        break
-                    }
-                    if (Double(showDanmakus[i]["Appear"]!)! - Double(showDanmakus[i - 1]["Appear"]!)!) < 1 {
-                        showDanmakus.remove(at: i)
-                        removedCount++
-                    }
-                }
-                removedCount = 0
-                var previousTopDanmakuIndex: Int?
-                var previousBottomDanmakuIndex: Int?
-                for i in 1..<showDanmakus.count {
-                    if showDanmakus.count - removedCount - i <= 0 {
-                        break
-                    }
-                    let type = showDanmakus[i]["Type"]!
-                    if type == "5" || type == "4" {
-                        if let preIndex = type == "5" ? previousTopDanmakuIndex : previousBottomDanmakuIndex {
-                            if Double(showDanmakus[i]["Appear"]!)! - Double(showDanmakus[preIndex]["Appear"]!)! < 10 {
-                                showDanmakus.remove(at: i)
-                                removedCount++
-                                continue
+                    removedCount = 0
+                    var previousTopDanmakuIndex: Int?
+                    var previousBottomDanmakuIndex: Int?
+                    for i in 1..<showDanmakus.count {
+                        if showDanmakus.count - removedCount - i <= 0 {
+                            break
+                        }
+                        let type = showDanmakus[i]["Type"]!
+                        if type == "5" || type == "4" {
+                            if let preIndex = type == "5" ? previousTopDanmakuIndex : previousBottomDanmakuIndex {
+                                if Double(showDanmakus[i]["Appear"]!)! - Double(showDanmakus[preIndex]["Appear"]!)! < 10 {
+                                    showDanmakus.remove(at: i)
+                                    removedCount++
+                                    continue
+                                }
                             }
+                            { () -> UnsafeMutablePointer<Int?> in if type == "5" { &&previousTopDanmakuIndex } else { &&previousBottomDanmakuIndex } }().pointee = i
                         }
-                        { () -> UnsafeMutablePointer<Int?> in if type == "5" { &&previousTopDanmakuIndex } else { &&previousBottomDanmakuIndex } }().pointee = i
                     }
-                }
-                #if !os(watchOS)
-                if showDanmakus.count > 500 {
-                    for _ in 1...5000 {
-                        if showDanmakus.count <= 500 {
-                            break
+#if !os(watchOS)
+                    if showDanmakus.count > 500 {
+                        for _ in 1...5000 {
+                            if showDanmakus.count <= 500 {
+                                break
+                            }
+                            showDanmakus.remove(at: Int.random(in: 0..<showDanmakus.count))
                         }
-                        showDanmakus.remove(at: Int.random(in: 0..<showDanmakus.count))
                     }
-                }
-                #else
-                // Less danmakus for watch
-                if showDanmakus.count > 200 {
-                    for _ in 1...5000 {
-                        if showDanmakus.count <= 200 {
-                            break
+#else
+                    // Less danmakus for watch
+                    if showDanmakus.count > 200 {
+                        for _ in 1...5000 {
+                            if showDanmakus.count <= 200 {
+                                break
+                            }
+                            showDanmakus.remove(at: Int.random(in: 0..<showDanmakus.count))
                         }
-                        showDanmakus.remove(at: Int.random(in: 0..<showDanmakus.count))
                     }
+#endif
                 }
-                #endif
             }
         }
     }
