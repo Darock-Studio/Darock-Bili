@@ -86,13 +86,11 @@ struct PersonAccountView: View {
             List {
                     if sessdata == "" {
                         NavigationLink(destination: { LoginView() }, label: {
-                            Label("User.tap-to-login", privateSystemImage: "apple.logo.lock.open")
+                            Text("User.tap-to-login")
                         })
                         Button(action: { isUserSwitchPresented = true }, label: {
                             HStack {
                                 HStack {
-                                    Image(privateSystemName: "person.lanyardcard.fill")
-                                        .foregroundColor(.accentColor)
                                     Text("User.switch")
                                 }
                                 .font(.system(size: 16))

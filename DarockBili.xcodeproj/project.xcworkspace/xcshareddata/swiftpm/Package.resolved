@@ -1,4 +1,5 @@
 {
+  "originHash" : "2accb5e33655e8b5c031f05292bf69d9d024ab74da5173ee33d14b17f0106813",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -42,7 +43,7 @@
       "location" : "https://github.com/WindowsMEMZ/Cepheus",
       "state" : {
         "branch" : "main",
-        "revision" : "73b8735ce8f7e663d3ce73fd58eb5dc41b23f26c"
+        "revision" : "33b5852488f002e566b6343d8d09766a0bffaece"
       }
     },
     {
@@ -217,5 +218,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
