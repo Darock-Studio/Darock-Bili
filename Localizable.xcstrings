@@ -4479,6 +4479,7 @@
       }
     },
     "Search.%@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

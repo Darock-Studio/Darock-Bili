@@ -481,19 +481,18 @@ struct UserDetailView: View {
                                         Text("Account.list.goto")
                                             .font(.system(size: 20, weight: .bold))
                                         HStack {
-                                            TextField("Account.list.destination", text: $videoTargetJumpPageCache)
-                                                .onSubmit {
-                                                    if let cInt = Int(videoTargetJumpPageCache) {
-                                                        if cInt <= 0 {
-                                                            videoTargetJumpPageCache = "1"
-                                                        }
-                                                        if cInt > videoTotalPage {
-                                                            videoTargetJumpPageCache = String(videoTotalPage)
-                                                        }
-                                                    } else {
-                                                        videoTargetJumpPageCache = String(videoNowPage)
+                                            TextField("Account.list.destination", text: $videoTargetJumpPageCache) {
+                                                if let cInt = Int(videoTargetJumpPageCache) {
+                                                    if cInt <= 0 {
+                                                        videoTargetJumpPageCache = "1"
                                                     }
+                                                    if cInt > videoTotalPage {
+                                                        videoTargetJumpPageCache = String(videoTotalPage)
+                                                    }
+                                                } else {
+                                                    videoTargetJumpPageCache = String(videoNowPage)
                                                 }
+                                            }
                                             Text(" / \(videoTotalPage)")
                                         }
                                         Button(action: {
@@ -552,19 +551,18 @@ struct UserDetailView: View {
                                         Text("Account.list.goto")
                                             .font(.system(size: 20, weight: .bold))
                                         HStack {
-                                            TextField("Account.list.destination", text: $articleTargetJumpPageCache)
-                                                .onSubmit {
-                                                    if let cInt = Int(articleTargetJumpPageCache) {
-                                                        if cInt <= 0 {
-                                                            articleTargetJumpPageCache = "1"
-                                                        }
-                                                        if cInt > articleTotalPage {
-                                                            articleTargetJumpPageCache = String(articleTotalPage)
-                                                        }
-                                                    } else {
-                                                        articleTargetJumpPageCache = String(articleNowPage)
+                                            TextField("Account.list.destination", text: $articleTargetJumpPageCache) {
+                                                if let cInt = Int(articleTargetJumpPageCache) {
+                                                    if cInt <= 0 {
+                                                        articleTargetJumpPageCache = "1"
                                                     }
+                                                    if cInt > articleTotalPage {
+                                                        articleTargetJumpPageCache = String(articleTotalPage)
+                                                    }
+                                                } else {
+                                                    articleTargetJumpPageCache = String(articleNowPage)
                                                 }
+                                            }
                                             Text(" / \(articleTotalPage)")
                                         }
                                         Button(action: {
@@ -942,19 +940,18 @@ struct UserDetailView: View {
                                             Text("Account.list.goto")
                                                 .font(.system(size: 20, weight: .bold))
                                             HStack {
-                                                TextField("Account.list.destination", text: $videoTargetJumpPageCache)
-                                                    .onSubmit {
-                                                        if let cInt = Int(videoTargetJumpPageCache) {
-                                                            if cInt <= 0 {
-                                                                videoTargetJumpPageCache = "1"
-                                                            }
-                                                            if cInt > videoTotalPage {
-                                                                videoTargetJumpPageCache = String(videoTotalPage)
-                                                            }
-                                                        } else {
-                                                            videoTargetJumpPageCache = String(videoNowPage)
+                                                TextField("Account.list.destination", text: $videoTargetJumpPageCache) {
+                                                    if let cInt = Int(videoTargetJumpPageCache) {
+                                                        if cInt <= 0 {
+                                                            videoTargetJumpPageCache = "1"
                                                         }
+                                                        if cInt > videoTotalPage {
+                                                            videoTargetJumpPageCache = String(videoTotalPage)
+                                                        }
+                                                    } else {
+                                                        videoTargetJumpPageCache = String(videoNowPage)
                                                     }
+                                                }
                                                 Text(" / \(videoTotalPage)")
                                             }
                                             Button(action: {
@@ -1063,19 +1060,18 @@ struct UserDetailView: View {
                                         Text("Account.list.goto")
                                             .font(.system(size: 20, weight: .bold))
                                         HStack {
-                                            TextField("Account.list.destination", text: $articleTargetJumpPageCache)
-                                                .onSubmit {
-                                                    if let cInt = Int(articleTargetJumpPageCache) {
-                                                        if cInt <= 0 {
-                                                            articleTargetJumpPageCache = "1"
-                                                        }
-                                                        if cInt > articleTotalPage {
-                                                            articleTargetJumpPageCache = String(articleTotalPage)
-                                                        }
-                                                    } else {
-                                                        articleTargetJumpPageCache = String(articleNowPage)
+                                            TextField("Account.list.destination", text: $articleTargetJumpPageCache) {
+                                                if let cInt = Int(articleTargetJumpPageCache) {
+                                                    if cInt <= 0 {
+                                                        articleTargetJumpPageCache = "1"
                                                     }
+                                                    if cInt > articleTotalPage {
+                                                        articleTargetJumpPageCache = String(articleTotalPage)
+                                                    }
+                                                } else {
+                                                    articleTargetJumpPageCache = String(articleNowPage)
                                                 }
+                                            }
                                             Text(" / \(articleTotalPage)")
                                         }
                                         Button(action: {

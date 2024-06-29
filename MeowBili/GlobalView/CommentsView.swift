@@ -460,25 +460,24 @@ struct CommentsView: View {
             NavigationStack {
                 VStack {
                     if !isSendingComment {
-                        TextField("Comment.send", text: $sendCommentCache)
-                        #if !os(watchOS)
-                            .textFieldStyle(.roundedBorder)
-                        #endif
-                            .submitLabel(.send)
-                            .onSubmit {
-                                if sendCommentCache != "" {
-                                    let headers: HTTPHeaders = [
-                                        "cookie": "SESSDATA=\(sessdata)",
-                                        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                                    ]
-                                    AF.request("https://api.bilibili.com/x/v2/reply/add", method: .post, parameters: BiliSubmitComment(type: type, oid: id, message: sendCommentCache, csrf: biliJct), headers: headers).response { response in
-                                        sendCommentCache = ""
-                                        debugPrint(response)
-                                        isSendingComment = false
-                                        dismiss()
-                                    }
+                        TextField("Comment.send", text: $sendCommentCache) {
+                            if sendCommentCache != "" {
+                                let headers: HTTPHeaders = [
+                                    "cookie": "SESSDATA=\(sessdata)",
+                                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                                ]
+                                AF.request("https://api.bilibili.com/x/v2/reply/add", method: .post, parameters: BiliSubmitComment(type: type, oid: id, message: sendCommentCache, csrf: biliJct), headers: headers).response { response in
+                                    sendCommentCache = ""
+                                    debugPrint(response)
+                                    isSendingComment = false
+                                    dismiss()
                                 }
                             }
+                        }
+                        #if !os(watchOS)
+                        .textFieldStyle(.roundedBorder)
+                        #endif
+                        .submitLabel(.send)
                         Spacer()
                     } else {
                         ProgressView()

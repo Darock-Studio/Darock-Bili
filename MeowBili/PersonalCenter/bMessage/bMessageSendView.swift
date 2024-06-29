@@ -133,43 +133,42 @@ struct bMessageSendView: View {
 //                        }
 //                    })
 //                    .frame(width: 50, height: 30)
-                    TextField("Account.direct-message", text: $sendTextCache)
-                        .opacity(0.0100000002421438702673861521) // MARK: You can find the limit here. If opacity lower than this value, this control won't be loaded.
-                        .background {
-                            ZStack {
-                                Capsule()
-                                    .stroke(Color(red: 31/255, green: 31/255, blue: 31/255), lineWidth: 2)
-                                HStack {
-                                    Text("Account.direct-message")
-                                        .foregroundStyle(.secondary)
-                                        .lineLimit(1)
-                                    Spacer()
-                                }
-                                .padding(.leading)
+                    TextField("Account.direct-message", text: $sendTextCache) {
+                        let headers: HTTPHeaders = [
+                            "cookie": "SESSDATA=\(sessdata);"
+                        ]
+                        AF.request("https://api.vc.bilibili.com/web_im/v1/web_im/send_msg", method: .post, parameters: ["msg[sender_uid]": Int64(dedeUserID)!, "msg[receiver_id]": uid, "msg[receiver_type]": 1, "msg[msg_type]": 1, "msg[dev_id]": "372778FD-E359-461D-86A3-EA2BCC6FF52A", "msg[timestamp]": Date.now.timeStamp, "msg[content]": "{\"content\":\"\(sendTextCache)\"}", "csrf": biliJct], headers: headers).response { response in
+                            messages.append(["SenderID": dedeUserID, "Text": sendTextCache, "Timestamp": String(Date.now.timeStamp)])
+                            sendTextCache = ""
+                            debugPrint(response)
+                            let json = try! JSON(data: response.data!)
+                            if json["code"].int! == 0 {
+                                //tipWithText("发送成功", symbol: "checkmark.circle.fill")
+                            } else {
+#if !os(watchOS) && !os(visionOS)
+                                AlertKitAPI.present(title: String(localized: "Direct-message.failed"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
+#else
+                                tipWithText(String(localized: "Direct-message.failed"), symbol: "xmark.circle.fill")
+#endif
                             }
                         }
-                        .textFieldStyle(.plain)
-                        .submitLabel(.send)
-                        .onSubmit {
-                            let headers: HTTPHeaders = [
-                                "cookie": "SESSDATA=\(sessdata);"
-                            ]
-                            AF.request("https://api.vc.bilibili.com/web_im/v1/web_im/send_msg", method: .post, parameters: ["msg[sender_uid]": Int64(dedeUserID)!, "msg[receiver_id]": uid, "msg[receiver_type]": 1, "msg[msg_type]": 1, "msg[dev_id]": "372778FD-E359-461D-86A3-EA2BCC6FF52A", "msg[timestamp]": Date.now.timeStamp, "msg[content]": "{\"content\":\"\(sendTextCache)\"}", "csrf": biliJct], headers: headers).response { response in
-                                messages.append(["SenderID": dedeUserID, "Text": sendTextCache, "Timestamp": String(Date.now.timeStamp)])
-                                sendTextCache = ""
-                                debugPrint(response)
-                                let json = try! JSON(data: response.data!)
-                                if json["code"].int! == 0 {
-                                    //tipWithText("发送成功", symbol: "checkmark.circle.fill")
-                                } else {
-                                    #if !os(watchOS) && !os(visionOS)
-                                    AlertKitAPI.present(title: String(localized: "Direct-message.failed"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
-                                    #else
-                                    tipWithText(String(localized: "Direct-message.failed"), symbol: "xmark.circle.fill")
-                                    #endif
-                                }
+                    }
+                    .opacity(0.0100000002421438702673861521) // MARK: You can find the limit here. If opacity lower than this value, this control won't be loaded.
+                    .background {
+                        ZStack {
+                            Capsule()
+                                .stroke(Color(red: 31/255, green: 31/255, blue: 31/255), lineWidth: 2)
+                            HStack {
+                                Text("Account.direct-message")
+                                    .foregroundStyle(.secondary)
+                                    .lineLimit(1)
+                                Spacer()
                             }
+                            .padding(.leading)
                         }
+                    }
+                    .textFieldStyle(.plain)
+                    .submitLabel(.send)
                 }
             }
         }
