@@ -34,6 +34,7 @@ struct SearchMainView: View {
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
     @AppStorage("bili_jct") var biliJct = ""
+    @AppStorage("IsShowHotsInSearch") var isShowHotsInSearch = true
     @State var searchText = ""
     @State var isSearchPresented = false
     @State var searchHistory = [String]()
@@ -76,7 +77,7 @@ struct SearchMainView: View {
                     #endif
                 }
             }
-            if !hotSearches.isEmpty {
+            if !hotSearches.isEmpty && isShowHotsInSearch {
                 Section {
                     if !isHotSearchFolded {
                         ForEach(0..<hotSearches.count, id: \.self) { i in
