@@ -13,6 +13,7 @@ disabled_rules:
   - syntactic_sugar
   - for_where
   - legacy_constant
+  - non_optional_string_data_conversion
 
 opt_in_rules:
   - attributes

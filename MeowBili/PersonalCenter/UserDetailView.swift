@@ -1077,8 +1077,8 @@ struct UserDetailView: View {
                     RefreshVideos()
                 }
             }
-            .onChange(of: viewSelector) { value in
-                switch value {
+            .onChange(of: viewSelector) { _ in
+                switch viewSelector {
                 case .video:
                     break
                 case .article:
