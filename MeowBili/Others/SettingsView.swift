@@ -482,10 +482,12 @@ struct SuggestionViewSettingsView: View {
 
 struct NetworkSettingsView: View {
     @AppStorage("IsShowVideoSuggestionsFromDarock") var isShowVideoSuggestionsFromDarock = true
+    @AppStorage("IsShowHotsInSearch") var isShowHotsInSearch = true
     @AppStorage("IsShowNetworkFixing") var isShowNetworkFixing = true
     var body: some View {
         List {
             Section {
+                Toggle("在搜索页显示热搜", isOn: $isShowHotsInSearch)
                 Toggle("显示来自 Darock 的推荐", isOn: $isShowVideoSuggestionsFromDarock)
             }
             Section {

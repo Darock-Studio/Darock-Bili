@@ -611,7 +611,7 @@ struct VideoDetailView: View {
                 }
                 .sheet(isPresented: $isVideoPlayerPresented, content: {
                     VideoPlayerView(videoDetails: $videoDetails, videoLink: $videoLink, videoBvid: $videoBvid, videoCID: $videoCID)
-                        .navigationBarHidden(true)
+                        .toolbar(.hidden)
                 })
                 .containerBackground(for: .navigation) {
                     if !isInLowBatteryMode {
@@ -1103,7 +1103,7 @@ struct VideoDetailView: View {
                     })
                     .sheet(isPresented: $isVideoPlayerPresented, content: {
                         VideoPlayerView(videoDetails: $videoDetails, videoLink: $videoLink, videoBvid: $videoBvid, videoCID: $videoCID)
-                            .navigationBarHidden(true)
+                            .toolbar(.hidden)
                     })
                     Button(action: {
                         isMoreMenuPresented = true
@@ -1511,7 +1511,7 @@ struct VideoDetailView: View {
             .sheet(isPresented: $isDownloadPresented, content: { VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails, isPaged: true) })
             .sheet(isPresented: $isVideoPlayerPresented, content: {
                 VideoPlayerView(videoDetails: $videoDetails, videoLink: $videoLink, videoBvid: $videoBvid, videoCID: $videoCID)
-                    .navigationBarHidden(true)
+                    .toolbar(.hidden)
             })
         }
     }

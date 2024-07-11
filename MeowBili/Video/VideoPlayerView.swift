@@ -19,6 +19,7 @@
 import AVKit
 import SwiftUI
 import Dynamic
+import Combine
 import DarockKit
 import Alamofire
 import AVFoundation
@@ -62,9 +63,8 @@ struct VideoPlayerView: View {
     #endif
     @State var currentTime: Double = 0.0
     @State var playerTimer: Timer?
-    @State var danmakuTimer: Timer?
     @State var playProgressTimer: Timer?
-    @State var player: AVPlayer!
+    @State var player: AVPlayer! = AVPlayer()
     @State var isFinishedInit = false
     @State var willBeginFullScreenPresentation = false
     @State var showDanmakus = [[String: String]]()
@@ -163,7 +163,7 @@ struct VideoPlayerView: View {
                                     }
                                     .allowsHitTesting(false)
                                     .offset(x: -danmakuOffset)
-                                    .animation(.smooth, value: danmakuOffset)
+//                                    .animation(.linear, value: danmakuOffset)
                                 }
                             }
                             .rotationEffect(.degrees(isFullScreen ? 90 : 0))
@@ -184,14 +184,14 @@ struct VideoPlayerView: View {
                     }
                     Section {
                         Picker("播放倍速", selection: $videoSpeed) {
-                            Text("1x").tag(1.0)
-                            Text("1.5x").tag(1.5)
-                            Text("2x").tag(2.0)
-                            Text("3x").tag(3.0)
-                            Text("5x").tag(5.0)
+                            Text("1x").tag(Float(1.0))
+                            Text("1.5x").tag(Float(1.5))
+                            Text("2x").tag(Float(2.0))
+                            Text("3x").tag(Float(3.0))
+                            Text("5x").tag(Float(5.0))
                         }
-                        .onChange(of: videoSpeed) { value in
-                            player.rate = value
+                        .onChange(of: videoSpeed) {
+                            player.rate = videoSpeed
                         }
                         Button(action: {
                             player.seek(to: CMTime(seconds: currentTime + 10, preferredTimescale: 1))
@@ -205,17 +205,6 @@ struct VideoPlayerView: View {
                         })
                     } header: {
                         Text("播放")
-                    }
-                    Section {
-                        Button(role: .destructive, action: {
-                            let window = (Dynamic.UIApplication.sharedApplication.windows.asArray! as! [Any]).first!
-                            let dwindow = Dynamic(window)
-                            while true { dwindow.snapshotView(afterScreenUpdates: false) }
-                        }, label: {
-                            Text("重启 Apple Watch")
-                        })
-                    } header: {
-                        Text("播放卡住/无画面？")
                     }
                 }
                 .tag(2)
@@ -264,10 +253,10 @@ struct VideoPlayerView: View {
                 
                 player.seek(to: CMTime(seconds: UserDefaults.standard.double(forKey: "\(videoBvid)\(videoCID)PlayTime"), preferredTimescale: 1))
                 
-                if let coverData = try? Data(contentsOf: URL(string: videoDetails["Pic"] ?? "") ?? URL(string: "http://example.com")!) {
-                    let cover = UIImage(data: coverData) ?? UIImage()
-                    NowPlayingExtension.setPlayingInfoTitle(videoDetails["Title"]!, artist: videoDetails["UP"]!, artwork: cover)
-                }
+//                if let coverData = try? Data(contentsOf: URL(string: videoDetails["Pic"] ?? "") ?? URL(string: "http://example.com")!) {
+//                    let cover = UIImage(data: coverData) ?? UIImage()
+//                    NowPlayingExtension.setPlayingInfoTitle(videoDetails["Title"]!, artist: videoDetails["UP"]!, artwork: cover)
+//                }
                 
                 let headers: HTTPHeaders = [
                     "cookie": "SESSDATA=\(sessdata)"
@@ -299,13 +288,6 @@ struct VideoPlayerView: View {
                 
                 UpdateDanmaku()
                 
-                danmakuTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { _ in
-                    danmakuOffset = player.currentTime().seconds * 50
-                    #if !os(watchOS)
-                    currentPlayTime = player.currentTime().seconds
-                    #endif
-                }
-                
                 playProgressTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in
                     if (player.currentItem?.duration.seconds ?? 0) - player.currentTime().seconds > 10 {
                         UserDefaults.standard.set(player.currentTime().seconds, forKey: "\(videoBvid)\(videoCID)PlayTime")
@@ -329,7 +311,6 @@ struct VideoPlayerView: View {
             }
             #endif
             playerTimer?.invalidate()
-            danmakuTimer?.invalidate()
             playProgressTimer?.invalidate()
             player?.pause()
             if (player.currentItem?.duration.seconds ?? 0) - player.currentTime().seconds > 10 {
@@ -338,8 +319,8 @@ struct VideoPlayerView: View {
                 UserDefaults.standard.removeObject(forKey: "\(videoBvid)\(videoCID)PlayTime")
             }
         }
-        .onChange(of: videoLink) { value in
-            let asset = AVURLAsset(url: URL(string: value)!, options: ["AVURLAssetHTTPHeaderFieldsKey": ["User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15", "Referer": "https://www.bilibili.com"]])
+        .onChange(of: videoLink) {
+            let asset = AVURLAsset(url: URL(string: videoLink)!, options: ["AVURLAssetHTTPHeaderFieldsKey": ["User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15", "Referer": "https://www.bilibili.com"]])
             let item = AVPlayerItem(asset: asset)
             player?.pause()
             player = nil
@@ -351,9 +332,16 @@ struct VideoPlayerView: View {
             danmakuOffset = 0
             UpdateDanmaku()
         }
+        .onReceive(player.periodicTimePublisher()) { time in
+            danmakuOffset = time.seconds * 50
+            #if !os(watchOS)
+            currentPlayTime = time.seconds
+            #endif
+            currentTime = time.seconds
+        }
         #if !os(watchOS)
-        .onChange(of: shouldPause) { value in
-            if value == true {
+        .onChange(of: shouldPause) {
+            if shouldPause {
                 player?.pause()
                 shouldPause = false
             }
@@ -431,10 +419,7 @@ struct VideoPlayerView: View {
 #else
                     // Less danmakus for watch
                     if showDanmakus.count > 200 {
-                        for _ in 1...5000 {
-                            if showDanmakus.count <= 200 {
-                                break
-                            }
+                        while showDanmakus.count > 200 {
                             showDanmakus.remove(at: Int.random(in: 0..<showDanmakus.count))
                         }
                     }
@@ -471,4 +456,58 @@ struct VideoPlayerView: View {
         }
     }
     #endif
+}
+
+// Extensions for periodicTimePublisher
+extension AVPlayer {
+    func periodicTimePublisher(forInterval interval: CMTime = CMTime(seconds: 0.5,
+                                                                     preferredTimescale: CMTimeScale(NSEC_PER_SEC))) -> AnyPublisher<CMTime, Never> {
+        Publisher(self, forInterval: interval)
+            .eraseToAnyPublisher()
+    }
+}
+fileprivate extension AVPlayer {
+    private struct Publisher: Combine.Publisher {
+        typealias Output = CMTime
+        typealias Failure = Never
+        
+        var player: AVPlayer
+        var interval: CMTime
+        
+        init(_ player: AVPlayer, forInterval interval: CMTime) {
+            self.player = player
+            self.interval = interval
+        }
+        
+        func receive<S>(subscriber: S) where S: Subscriber, Publisher.Failure == S.Failure, Publisher.Output == S.Input {
+            let subscription = CMTime.Subscription(subscriber: subscriber, player: player, forInterval: interval)
+            subscriber.receive(subscription: subscription)
+        }
+    }
+}
+fileprivate extension CMTime {
+    final class Subscription<SubscriberType: Subscriber>: Combine.Subscription where SubscriberType.Input == CMTime, SubscriberType.Failure == Never {
+        var player: AVPlayer?
+        var observer: Any?
+        
+        init(subscriber: SubscriberType, player: AVPlayer, forInterval interval: CMTime) {
+            self.player = player
+            observer = player.addPeriodicTimeObserver(forInterval: interval, queue: nil) { time in
+                _ = subscriber.receive(time)
+            }
+        }
+        
+        func request(_ demand: Subscribers.Demand) {
+            // We do nothing here as we only want to send events when they occur.
+            // See, for more info: https://developer.apple.com/documentation/combine/subscribers/demand
+        }
+        
+        func cancel() {
+            if let observer = observer {
+                player?.removeTimeObserver(observer)
+            }
+            observer = nil
+            player = nil
+        }
+    }
 }
