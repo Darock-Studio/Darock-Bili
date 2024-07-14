@@ -8576,6 +8576,9 @@
         }
       }
     },
+    "在搜索页显示热搜" : {
+
+    },
     "垂下手腕时隐藏内容" : {
 
     },
@@ -8863,6 +8866,7 @@
 
     },
     "手记建议" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
