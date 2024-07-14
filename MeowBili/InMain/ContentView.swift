@@ -101,7 +101,7 @@ struct ContentView: View {
                     VStack {
                         Text("过时的 watchOS")
                             .font(.title3)
-                        Text("您的 Apple Watch 运行的 watchOS 已过时，喵哩喵哩将在 2024/6/10 之后停止支持")
+                        Text("您的 Apple Watch 运行的 watchOS 已过时，喵哩喵哩已在 2024/6/10 停止支持")
                         Text("停止支持后，将不再为此版本系统提供功能性更新")
                         Text("Darock 建议您保持更新最新版本系统")
                     }

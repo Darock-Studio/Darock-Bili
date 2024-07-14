@@ -234,12 +234,8 @@ struct PersonAccountView: View {
                         #endif
                         Button(action: { isUserSwitchPresented = true }, label: {
                             HStack {
-                                HStack {
-                                    Image(privateSystemName: "person.lanyardcard.fill")
-                                        .foregroundColor(.accentColor)
-                                    Text("User.switch")
-                                }
-                                .font(.system(size: 16))
+                                Text("User.switch")
+                                    .font(.system(size: 16))
                                 Spacer()
                             }
                         })
