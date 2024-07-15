@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/adamzarn/AZVideoPlayer",
       "state" : {
-        "revision" : "75e9e05b87d2bd60d83be4b8db280eb2859a86bc",
-        "version" : "1.3.0"
+        "revision" : "f37c779bf5c00e85dc31ad25d883b3f2e5242b2a",
+        "version" : "1.2.0"
       }
     },
     {
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Serene-Garden/Cepheus",
       "state" : {
-        "revision" : "0754853c69a39f6cdc04abb8b1d194a3ed3a483e",
-        "version" : "2.3.0"
+        "revision" : "38adeadadc1b52a61db4078a80aac98af3311890",
+        "version" : "2.0.2"
       }
     },
     {
@@ -52,7 +52,7 @@
       "location" : "https://github.com/Darock-Studio/DarockKit",
       "state" : {
         "branch" : "main",
-        "revision" : "4afcdeba8f3c6ca4dbd7ba2886924bdcbadec262"
+        "revision" : "0735d98596b3fe5280a3d287264150d4ae202076"
       }
     },
     {
@@ -97,7 +97,7 @@
       "location" : "https://github.com/mixpanel/mixpanel-swift",
       "state" : {
         "branch" : "master",
-        "revision" : "e7869c433ee01cdc52aa14abf636fe0b412d72f8"
+        "revision" : "1ae92448ec3b0841ae5ceaa151c98ae66776596a"
       }
     },
     {
@@ -105,8 +105,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RickeyBoy/ScreenshotableView",
       "state" : {
-        "revision" : "4dcc274e518756c9bb6eabc153b2edb51a7bd482",
-        "version" : "1.1.0"
+        "revision" : "3c140215fb12c7e8aef78e853006110350455c5b",
+        "version" : "1.0.0"
       }
     },
     {
@@ -114,8 +114,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
       "state" : {
-        "revision" : "be0bcd7823ce56629948491f2eaeaa19979514f7",
-        "version" : "5.19.4"
+        "revision" : "f6afa0132961d593f07970d84e2d8b588c29ea04",
+        "version" : "5.19.1"
       }
     },
     {
