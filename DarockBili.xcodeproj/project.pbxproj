@@ -23,6 +23,8 @@
 /* Begin PBXBuildFile section */
 		03B2F80F2C45AED7007EB850 /* PhoneFormatterExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F80E2C45AED7007EB850 /* PhoneFormatterExt.swift */; };
 		03B2F8102C45AED7007EB850 /* PhoneFormatterExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B2F80E2C45AED7007EB850 /* PhoneFormatterExt.swift */; };
+		03B5D24B2C4691E700BF8322 /* SwitchAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B5D24A2C4691E700BF8322 /* SwitchAccountView.swift */; };
+		03B5D24C2C4691E700BF8322 /* SwitchAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B5D24A2C4691E700BF8322 /* SwitchAccountView.swift */; };
 		8C03B6DE2C280BAA000770B4 /* Cepheus in Frameworks */ = {isa = PBXBuildFile; productRef = 8C03B6DD2C280BAA000770B4 /* Cepheus */; };
 		8C0557DF2B791B84009D9CD0 /* AZVideoPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8C0557DE2B791B84009D9CD0 /* AZVideoPlayer */; };
 		8C617F412B92334B000A3687 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C617F402B92334B000A3687 /* SafariWebExtensionHandler.swift */; };
@@ -258,6 +260,7 @@
 
 /* Begin PBXFileReference section */
 		03B2F80E2C45AED7007EB850 /* PhoneFormatterExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneFormatterExt.swift; sourceTree = "<group>"; };
+		03B5D24A2C4691E700BF8322 /* SwitchAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchAccountView.swift; sourceTree = "<group>"; };
 		8C0557E02B7A0480009D9CD0 /* MeowBili.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeowBili.entitlements; sourceTree = "<group>"; };
 		8C617F3E2B92334B000A3687 /* SafariExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SafariExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C617F402B92334B000A3687 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
@@ -578,6 +581,7 @@
 				B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */,
 				8CA7CC9C2B77B150008E587F /* AboutView.swift */,
 				8CA7CC9E2B77B166008E587F /* SettingsView.swift */,
+				03B5D24A2C4691E700BF8322 /* SwitchAccountView.swift */,
 				8CA7CCA02B77B2DC008E587F /* LoginView.swift */,
 				03B2F80E2C45AED7007EB850 /* PhoneFormatterExt.swift */,
 				8CA7CCA22B77B2F2008E587F /* NoticeView.swift */,
@@ -1077,6 +1081,7 @@
 				8CA7CCB42B77B3AC008E587F /* ArticleView.swift in Sources */,
 				8CA7CC812B77AFDE008E587F /* FeedbackView.swift in Sources */,
 				8CA7CC862B77B015008E587F /* CodeExt.swift in Sources */,
+				03B5D24C2C4691E700BF8322 /* SwitchAccountView.swift in Sources */,
 				8CA7CC9F2B77B166008E587F /* SettingsView.swift in Sources */,
 				8CA7CC7D2B77AFAC008E587F /* SignalErrorView.swift in Sources */,
 				B4DAF0DD2B80725800755F0C /* LinkDetectText.swift in Sources */,
@@ -1162,6 +1167,7 @@
 				8CBFF0CF2B85E55F00350E0F /* LiveMessagesView.swift in Sources */,
 				8CBFF0BE2B85E55F00350E0F /* ArticleView.swift in Sources */,
 				8CBFF0D22B85E55F00350E0F /* VideoPlayerView.swift in Sources */,
+				03B5D24B2C4691E700BF8322 /* SwitchAccountView.swift in Sources */,
 				8CBFF0EC2B85E55F00350E0F /* ErrorGetView.swift in Sources */,
 				8CBFF0C62B85E55F00350E0F /* UserDynamicListView.swift in Sources */,
 				8CBFF0EE2B85E55F00350E0F /* FollowListView.swift in Sources */,
@@ -1220,7 +1226,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1320;
+				CURRENT_PROJECT_VERSION = 1328;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -1251,7 +1257,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1320;
+				CURRENT_PROJECT_VERSION = 1328;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -1348,7 +1354,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBiliAlternative.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1320;
+				CURRENT_PROJECT_VERSION = 1328;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				ENABLE_PREVIEWS = YES;
@@ -1393,7 +1399,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1320;
+				CURRENT_PROJECT_VERSION = 1328;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				ENABLE_PREVIEWS = YES;
@@ -1429,7 +1435,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1320;
+				CURRENT_PROJECT_VERSION = 1328;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1453,7 +1459,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1320;
+				CURRENT_PROJECT_VERSION = 1328;
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -1521,7 +1527,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1320;
+				CURRENT_PROJECT_VERSION = 1328;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1568,7 +1574,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1320;
+				CURRENT_PROJECT_VERSION = 1328;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1613,7 +1619,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1320;
+				CURRENT_PROJECT_VERSION = 1328;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1649,7 +1655,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1320;
+				CURRENT_PROJECT_VERSION = 1328;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -1685,7 +1691,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1320;
+				CURRENT_PROJECT_VERSION = 1328;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1708,7 +1714,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1320;
+				CURRENT_PROJECT_VERSION = 1328;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;

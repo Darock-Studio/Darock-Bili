@@ -169,12 +169,35 @@ struct SettingsView: View {
                         })
                     }
                 }
+            }
+            Section {
                 if !sessdata.isEmpty {
+                    NavigationLink(destination: { SwitchAccountView() }, label: {
+                        HStack {
+                            ZStack {
+                                Color.gray
+                                    .frame(width: 26, height: 26)
+                                    .clipShape(RoundedRectangle(cornerRadius: 5))
+                                Image(systemName: "person.2.fill")
+                                    .font(.system(size: 16))
+                                    .foregroundColor(.white)
+                            }
+                            Text("切换账号")
+                        }
+                    })
                     Button(role: .destructive, action: {
                         isLogoutAlertPresented = true
                     }, label: {
                         HStack {
-                            Text("Settings.log-out")
+                            ZStack {
+                                Color.gray
+                                    .frame(width: 26, height: 26)
+                                    .clipShape(RoundedRectangle(cornerRadius: 5))
+                                Image(systemName: "rectangle.portrait.and.arrow.right.fill")
+                                    .font(.system(size: 16))
+                                    .foregroundColor(.white)
+                            }
+                            Text("退出登录")
                         }
                     })
                     .buttonBorderShape(.roundedRectangle(radius: 13))
