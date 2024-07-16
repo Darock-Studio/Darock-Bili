@@ -169,6 +169,9 @@ struct SettingsView: View {
                         })
                     }
                 }
+                NavigationLink(destination: { SwitchAccountView() }, label: {
+                    Text("切换账号")
+                })
                 if !sessdata.isEmpty {
                     Button(role: .destructive, action: {
                         isLogoutAlertPresented = true
