@@ -74,8 +74,11 @@ struct NetworkFixView: View {
                             }
                         }
                     } else {
-                        Text("Troubleshoot.troubleshooting")
-                            .bold()
+                        HStack {
+                            ProgressView()
+                            Text("Troubleshoot.troubleshooting")
+                                .bold()
+                        }
                     }
                 } footer: {
                     if !(networkState == 3 && darockAPIState == 3 && bilibiliAPIState == 3) {
@@ -91,7 +94,10 @@ struct NetworkFixView: View {
                         if networkState == 0 {
                             Text("Troubleshoot.internet")
                         } else if networkState == 1 {
-                            Text("Troubleshoot.internet.checking")
+                            HStack {
+                                ProgressView()
+                                Text("Troubleshoot.internet.checking")
+                            }
                         } else if networkState == 2 {
                             Text("Troubleshoot.internet.offline")
                         } else if networkState == 3 {
@@ -109,7 +115,10 @@ struct NetworkFixView: View {
                             Text("Troubleshoot.darock-api")
                                 .foregroundStyle(networkState != 3 ? Color.secondary : .primary)
                         } else if darockAPIState == 1 {
-                            Text("Troubleshoot.darock-api.checking")
+                            HStack {
+                                ProgressView()
+                                Text("Troubleshoot.darock-api.checking")
+                            }
                         } else if darockAPIState == 2 {
                             Text("Troubleshoot.darock-api.unavailable")
                         } else if darockAPIState == 3 {
@@ -130,7 +139,10 @@ struct NetworkFixView: View {
                             Text("Troubleshoot.bilibili-api")
                                 .foregroundStyle(networkState != 3 ? Color.secondary : .primary)
                         } else if bilibiliAPIState == 1 {
-                            Text("Troubleshoot.bilibili-api.checking")
+                            HStack {
+                                ProgressView()
+                                Text("Troubleshoot.bilibili-api.checking")
+                            }
                         } else if bilibiliAPIState == 2 {
                             Text("Troubleshoot.bilibili-api.unavailable")
                         } else if bilibiliAPIState == 3 {
