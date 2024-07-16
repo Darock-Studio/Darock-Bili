@@ -27,26 +27,7 @@ import SupportsUICore
 struct FeedbackView: View {
     @State var qrImage: CGImage?
     var body: some View {
-        VStack {
-            if qrImage != nil {
-                Image(uiImage: UIImage(cgImage: qrImage!))
-                    .resizable()
-                    .frame(width: 100, height: 100)
-                Text("Feedback.continue-on-other-device")
-                    .bold()
-                NavigationLink(destination: { InAppFeedbackView() }, label: {
-                    Text("在App内反馈")
-                        .bold()
-                        .foregroundStyle(Color.blue)
-                })
-                .buttonStyle(.plain)
-            }
-        }
-        .onAppear {
-            if let image = EFQRCode.generate(for: "https://github.com/Darock-Studio/Darock-Bili/issues") {
-                qrImage = image
-            }
-        }
+        InAppFeedbackView()
     }
 }
 #else
