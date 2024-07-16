@@ -351,6 +351,16 @@ struct PersonAccountView: View {
 #endif
                 }
             }
+#if !os(watchOS)
+            Section {
+                NavigationLink(destination: { SettingsView() }, label: {
+                    HStack {
+                        Image(systemName: "gear").foregroundStyle(Color.accentColor)
+                        Text("设置")
+                    }
+                })
+            }
+#endif
         }
         .navigationTitle("About-me")
         .navigationBarTitleDisplayMode(.large)
