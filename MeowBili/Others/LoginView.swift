@@ -41,7 +41,6 @@ struct LoginView: View {
     //User Input
     @State var accountInput = ""
     @State var passwdInput = ""
-    @State var phoneCode = "86"
     //---QR Login---
     @State var qrImage: CGImage?
     @State var qrKey = ""
@@ -49,6 +48,10 @@ struct LoginView: View {
     @State var qrTimer: Timer?
     
     @State var smsLoginToken = ""
+    
+    @State var countryCode = "86"
+    @State var PhoneFormat = ""
+    @State var displayCC = ""
     
     @State var userList1: [Any] = []
     @State var userList2: [Any] = []
@@ -141,14 +144,304 @@ struct LoginView: View {
                             Label("Login.step1.title", systemImage: "1.circle")
                                 .bold()
                             //  .foregroundStyle(currentStep == 1 ? Color.accentColor : Color.primary)
+                            if #available(watchOS 9, *) {
+                                Picker("", selection: $countryCode) {
+                                    Text("中国大陆 86").tag("86")
+                                    Text("中国香港特别行政区 852").tag("852")
+                                    Text("中国澳门特别行政区 853").tag("853")
+                                    Text("中国台湾 886").tag("886")
+                                    Text("美国 1").tag("us")
+                                    Text("比利时 32").tag("32")
+                                    Text("澳大利亚 61").tag("61")
+                                    Text("法国 33").tag("33")
+                                    Text("加拿大 1").tag("ca")
+                                    Text("日本 81").tag("81")
+                                    Text("新加坡 65").tag("65")
+                                    Text("韩国 82").tag("82")
+                                    Text("马来西亚 60").tag("60")
+                                    Text("英国 44").tag("44")
+                                    Text("意大利 39").tag("39")
+                                    Text("德国 49").tag("49")
+                                    Text("俄罗斯 7").tag("7")
+                                    Text("新西兰 64").tag("64")
+                                    Text("瓦利斯群岛和富图纳群岛 1681").tag("1681")
+                                    Text("葡萄牙 351").tag("351")
+                                    Text("帕劳 680").tag("680")
+                                    Text("诺福克岛 672").tag("672")
+                                    Text("挪威 47").tag("47")
+                                    Text("纽埃岛 683").tag("683")
+                                    Text("尼日利亚 234").tag("234")
+                                    Text("尼日尔 227").tag("227")
+                                    Text("尼加拉瓜 505").tag("505")
+                                    Text("尼泊尔 977").tag("977")
+                                    Text("瑙鲁 674").tag("674")
+                                    Text("格鲁吉亚 995").tag("995")
+                                    Text("瑞典 46").tag("46")
+                                    Text("沙特阿拉伯 966").tag("966")
+                                    Text("桑给巴尔岛 259").tag("259")
+                                    Text("塞舌尔共和国 248").tag("248")
+                                    Text("塞浦路斯 357").tag("357")
+                                    Text("塞内加尔 221").tag("221")
+                                    Text("塞拉利昂 232").tag("232")
+                                    Text("萨摩亚，东部 684").tag("684")
+                                    Text("萨摩亚，西部 685").tag("685")
+                                    Text("萨尔瓦多 503").tag("503")
+                                    Text("瑞士 41").tag("41")
+                                    Text("圣多美和普林西比 239").tag("239")
+                                    Text("塞尔维亚 381").tag("381")
+                                    Text("南非 27").tag("27")
+                                    Text("毛里塔尼亚 222").tag("222")
+                                    Text("毛里求斯 230").tag("230")
+                                    Text("马歇尔岛 692").tag("692")
+                                    Text("马提尼克岛 596").tag("596")
+                                    Text("马其顿 389").tag("389")
+                                    Text("马里亚纳岛 1670").tag("1670")
+                                    Text("马里 223").tag("223")
+                                    Text("马拉维 265").tag("265")
+                                    Text("马耳他 356").tag("356")
+                                    Text("马尔代夫 960").tag("960")
+                                    Text("蒙古 976").tag("976")
+                                    Text("蒙特塞拉特岛 1664").tag("1664")
+                                    Text("纳米比亚 264").tag("264")
+                                    Text("墨西哥 52").tag("52")
+                                    Text("莫桑比克 258").tag("258")
+                                    Text("摩纳哥 377").tag("377")
+                                    Text("摩洛哥 212").tag("212")
+                                    Text("摩尔多瓦 373").tag("373")
+                                    Text("缅甸 95").tag("95")
+                                    Text("密克罗尼西亚 691").tag("691")
+                                    Text("秘鲁 51").tag("51")
+                                    Text("孟加拉国 880").tag("880")
+                                    Text("马达加斯加 261").tag("261")
+                                    Text("圣卢西亚 1784").tag("1784")
+                                    Text("智利 56").tag("56")
+                                    Text("牙买加 1876").tag("1876")
+                                    Text("叙利亚 963").tag("963")
+                                    Text("匈牙利 36").tag("36")
+                                    Text("科特迪瓦 225").tag("225")
+                                    Text("希腊 30").tag("30")
+                                    Text("西班牙 34").tag("34")
+                                    Text("乌兹别克斯坦 998").tag("998")
+                                    Text("乌拉圭 598").tag("598")
+                                    Text("乌克兰 380").tag("380")
+                                    Text("乌干达 256").tag("256")
+                                    Text("亚美尼亚 374").tag("374")
+                                    Text("也门 967").tag("967")
+                                    Text("直布罗陀 350").tag("350")
+                                    Text("乍得 235").tag("235")
+                                    Text("赞比亚 260").tag("260")
+                                    Text("越南 84").tag("84")
+                                    Text("约旦 962").tag("962")
+                                    Text("印尼 62").tag("62")
+                                    Text("印度 91").tag("91")
+                                    Text("以色列 972").tag("972")
+                                    Text("伊朗 98").tag("98")
+                                    Text("伊拉克 964").tag("964")
+                                    Text("文莱 673").tag("673")
+                                    Text("委内瑞拉 58").tag("58")
+                                    Text("维珍群岛(英属) 1284").tag("1284")
+                                    Text("泰国 66").tag("66")
+                                    Text("索马里 252").tag("252")
+                                    Text("所罗门群岛 677").tag("677")
+                                    Text("苏里南 597").tag("597")
+                                    Text("苏丹 249").tag("249")
+                                    Text("斯威士兰 268").tag("268")
+                                    Text("斯洛文尼亚 386").tag("386")
+                                    Text("斯洛伐克 421").tag("421")
+                                    Text("斯里兰卡 94").tag("94")
+                                    Text("圣皮埃尔和密克隆群岛 508").tag("508")
+                                    Text("坦桑尼亚 255").tag("255")
+                                    Text("汤加 676").tag("676")
+                                    Text("维珍群岛(美属) 1340").tag("1340")
+                                    Text("瓦努阿图 678").tag("678")
+                                    Text("托克劳岛 690").tag("690")
+                                    Text("土库曼斯坦 993").tag("993")
+                                    Text("土耳其 90").tag("90")
+                                    Text("图瓦卢 688").tag("688")
+                                    Text("突尼斯 216").tag("216")
+                                    Text("阿森松岛 247").tag("247")
+                                    Text("特立尼达和多巴哥 1868").tag("1868")
+                                    Text("特克斯和凯科斯 1649").tag("1649")
+                                    Text("圣马力诺 378").tag("378")
+                                    Text("法属圭亚那 594").tag("594")
+                                    Text("不丹 975").tag("975")
+                                    Text("博茨瓦纳 267").tag("267")
+                                    Text("伯利兹 501").tag("501")
+                                    Text("玻利维亚 591").tag("591")
+                                    Text("波兰 48").tag("48")
+                                    Text("波黑 387").tag("387")
+                                    Text("波多黎各 1787").tag("1787")
+                                    Text("冰岛 354").tag("354")
+                                    Text("贝宁 229").tag("229")
+                                    Text("保加利亚 359").tag("359")
+                                    Text("布基纳法索 226").tag("226")
+                                    Text("布隆迪 257").tag("257")
+                                    Text("法属波利尼西亚 689").tag("689")
+                                    Text("法罗岛 298").tag("298")
+                                    Text("厄立特里亚 291").tag("291")
+                                    Text("厄瓜多尔 593").tag("593")
+                                    Text("多米尼加代表 1809").tag("1809")
+                                    Text("多米尼加 1767").tag("1767")
+                                    Text("多哥 228").tag("228")
+                                    Text("迪戈加西亚岛 246").tag("246")
+                                    Text("丹麦 45").tag("45")
+                                    Text("赤道几内亚 240").tag("240")
+                                }.frame(height: 50)
+                            } else {
+                                Picker("", selection: $countryCode) {
+                                    Text("中国大陆 86").tag("86")
+                                    Text("中国香港特别行政区 852").tag("852")
+                                    Text("中国澳门特别行政区 853").tag("853")
+                                    Text("中国台湾 886").tag("886")
+                                    Text("美国 1").tag("us")
+                                    Text("比利时 32").tag("32")
+                                    Text("澳大利亚 61").tag("61")
+                                    Text("法国 33").tag("33")
+                                    Text("加拿大 1").tag("ca")
+                                    Text("日本 81").tag("81")
+                                    Text("新加坡 65").tag("65")
+                                    Text("韩国 82").tag("82")
+                                    Text("马来西亚 60").tag("60")
+                                    Text("英国 44").tag("44")
+                                    Text("意大利 39").tag("39")
+                                    Text("德国 49").tag("49")
+                                    Text("俄罗斯 7").tag("7")
+                                    Text("新西兰 64").tag("64")
+                                    Text("瓦利斯群岛和富图纳群岛 1681").tag("1681")
+                                    Text("葡萄牙 351").tag("351")
+                                    Text("帕劳 680").tag("680")
+                                    Text("诺福克岛 672").tag("672")
+                                    Text("挪威 47").tag("47")
+                                    Text("纽埃岛 683").tag("683")
+                                    Text("尼日利亚 234").tag("234")
+                                    Text("尼日尔 227").tag("227")
+                                    Text("尼加拉瓜 505").tag("505")
+                                    Text("尼泊尔 977").tag("977")
+                                    Text("瑙鲁 674").tag("674")
+                                    Text("格鲁吉亚 995").tag("995")
+                                    Text("瑞典 46").tag("46")
+                                    Text("沙特阿拉伯 966").tag("966")
+                                    Text("桑给巴尔岛 259").tag("259")
+                                    Text("塞舌尔共和国 248").tag("248")
+                                    Text("塞浦路斯 357").tag("357")
+                                    Text("塞内加尔 221").tag("221")
+                                    Text("塞拉利昂 232").tag("232")
+                                    Text("萨摩亚，东部 684").tag("684")
+                                    Text("萨摩亚，西部 685").tag("685")
+                                    Text("萨尔瓦多 503").tag("503")
+                                    Text("瑞士 41").tag("41")
+                                    Text("圣多美和普林西比 239").tag("239")
+                                    Text("塞尔维亚 381").tag("381")
+                                    Text("南非 27").tag("27")
+                                    Text("毛里塔尼亚 222").tag("222")
+                                    Text("毛里求斯 230").tag("230")
+                                    Text("马歇尔岛 692").tag("692")
+                                    Text("马提尼克岛 596").tag("596")
+                                    Text("马其顿 389").tag("389")
+                                    Text("马里亚纳岛 1670").tag("1670")
+                                    Text("马里 223").tag("223")
+                                    Text("马拉维 265").tag("265")
+                                    Text("马耳他 356").tag("356")
+                                    Text("马尔代夫 960").tag("960")
+                                    Text("蒙古 976").tag("976")
+                                    Text("蒙特塞拉特岛 1664").tag("1664")
+                                    Text("纳米比亚 264").tag("264")
+                                    Text("墨西哥 52").tag("52")
+                                    Text("莫桑比克 258").tag("258")
+                                    Text("摩纳哥 377").tag("377")
+                                    Text("摩洛哥 212").tag("212")
+                                    Text("摩尔多瓦 373").tag("373")
+                                    Text("缅甸 95").tag("95")
+                                    Text("密克罗尼西亚 691").tag("691")
+                                    Text("秘鲁 51").tag("51")
+                                    Text("孟加拉国 880").tag("880")
+                                    Text("马达加斯加 261").tag("261")
+                                    Text("圣卢西亚 1784").tag("1784")
+                                    Text("智利 56").tag("56")
+                                    Text("牙买加 1876").tag("1876")
+                                    Text("叙利亚 963").tag("963")
+                                    Text("匈牙利 36").tag("36")
+                                    Text("科特迪瓦 225").tag("225")
+                                    Text("希腊 30").tag("30")
+                                    Text("西班牙 34").tag("34")
+                                    Text("乌兹别克斯坦 998").tag("998")
+                                    Text("乌拉圭 598").tag("598")
+                                    Text("乌克兰 380").tag("380")
+                                    Text("乌干达 256").tag("256")
+                                    Text("亚美尼亚 374").tag("374")
+                                    Text("也门 967").tag("967")
+                                    Text("直布罗陀 350").tag("350")
+                                    Text("乍得 235").tag("235")
+                                    Text("赞比亚 260").tag("260")
+                                    Text("越南 84").tag("84")
+                                    Text("约旦 962").tag("962")
+                                    Text("印尼 62").tag("62")
+                                    Text("印度 91").tag("91")
+                                    Text("以色列 972").tag("972")
+                                    Text("伊朗 98").tag("98")
+                                    Text("伊拉克 964").tag("964")
+                                    Text("文莱 673").tag("673")
+                                    Text("委内瑞拉 58").tag("58")
+                                    Text("维珍群岛(英属) 1284").tag("1284")
+                                    Text("泰国 66").tag("66")
+                                    Text("索马里 252").tag("252")
+                                    Text("所罗门群岛 677").tag("677")
+                                    Text("苏里南 597").tag("597")
+                                    Text("苏丹 249").tag("249")
+                                    Text("斯威士兰 268").tag("268")
+                                    Text("斯洛文尼亚 386").tag("386")
+                                    Text("斯洛伐克 421").tag("421")
+                                    Text("斯里兰卡 94").tag("94")
+                                    Text("圣皮埃尔和密克隆群岛 508").tag("508")
+                                    Text("坦桑尼亚 255").tag("255")
+                                    Text("汤加 676").tag("676")
+                                    Text("维珍群岛(美属) 1340").tag("1340")
+                                    Text("瓦努阿图 678").tag("678")
+                                    Text("托克劳岛 690").tag("690")
+                                    Text("土库曼斯坦 993").tag("993")
+                                    Text("土耳其 90").tag("90")
+                                    Text("图瓦卢 688").tag("688")
+                                    Text("突尼斯 216").tag("216")
+                                    Text("阿森松岛 247").tag("247")
+                                    Text("特立尼达和多巴哥 1868").tag("1868")
+                                    Text("特克斯和凯科斯 1649").tag("1649")
+                                    Text("圣马力诺 378").tag("378")
+                                    Text("法属圭亚那 594").tag("594")
+                                    Text("不丹 975").tag("975")
+                                    Text("博茨瓦纳 267").tag("267")
+                                    Text("伯利兹 501").tag("501")
+                                    Text("玻利维亚 591").tag("591")
+                                    Text("波兰 48").tag("48")
+                                    Text("波黑 387").tag("387")
+                                    Text("波多黎各 1787").tag("1787")
+                                    Text("冰岛 354").tag("354")
+                                    Text("贝宁 229").tag("229")
+                                    Text("保加利亚 359").tag("359")
+                                    Text("布基纳法索 226").tag("226")
+                                    Text("布隆迪 257").tag("257")
+                                    Text("法属波利尼西亚 689").tag("689")
+                                    Text("法罗岛 298").tag("298")
+                                    Text("厄立特里亚 291").tag("291")
+                                    Text("厄瓜多尔 593").tag("593")
+                                    Text("多米尼加代表 1809").tag("1809")
+                                    Text("多米尼加 1767").tag("1767")
+                                    Text("多哥 228").tag("228")
+                                    Text("迪戈加西亚岛 246").tag("246")
+                                    Text("丹麦 45").tag("45")
+                                    Text("赤道几内亚 240").tag("240")
+                                }
+                            }
                             HStack {
-//                                Picker("+\(phoneCode)", selection: $phoneCode) {
+//                                Picker("\(phoneCode)", selection: $phoneCode) {
 //                                    ForEach(callNations.indices) { codeIndex in
 //                                        Text(callNations[codeIndex]).tag(callCodes[codeIndex])
 //                                    }
 //                                }
-                                Text("+86")
-                                TextField("Login.step1.phone-number", text: $accountInput)
+                                //Text("86")
+                                #if !os(watchOS)
+                                TextField("", text: $displayCC).frame(width: 40)
+                                #endif
+                                    TextField("\(PhoneFormat)", text: $accountInput)
                                 #if !os(watchOS)
                                     .keyboardType(.phonePad)
                                 #endif
@@ -159,6 +452,21 @@ struct LoginView: View {
                                             currentStep = 2
                                         } else {
                                             currentStep = 1
+                                        }
+                                    })
+                                    .onChange(of: countryCode, perform: { _ in
+                                        PhoneFormat = phoneFormatter(region: countryCode)
+                                        if countryCode == "us" || countryCode == "ca" {
+                                            displayCC = "1"
+                                        } else {
+                                            displayCC = countryCode
+                                        }
+                                    })
+                                    .onChange(of: displayCC, perform: { _ in
+                                        if displayCC == "1" {
+                                            countryCode = "us"
+                                        } else {
+                                            countryCode = displayCC
                                         }
                                     })
                             }
@@ -186,7 +494,8 @@ struct LoginView: View {
                                         print(currentStep)
                                     })
                                 Button(action: {
-                                    if accountInput.count == 11 && !accountInput.contains(" ") {
+                                    let isValidPhone = validatePhoneNumber(num: accountInput, cc: displayCC)
+                                    if !accountInput.contains(" ") && isValidPhone {
                                         if validate.isEmpty {
                                             #if !os(watchOS)
                                             UIApplication.shared.open(URL(string: "https://darock.top/geetest?gt=\(gt)&challenge=\(challenge)")!)
@@ -214,7 +523,7 @@ struct LoginView: View {
                                                 "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
                                                 "Cookie": "browser_resolution=1580-497; FEED_LIVE_VERSION=V8; buvid4=818BA302-8EAC-0630-67AB-BB978A5797AF60982-023042618-ho21%2BqF6LZokzAShrGptM4EHZm2TE4%2FTXmfZyPpzfCnLuUmUckb8wg%3D%3D; buvid_fp=5a716236853dd1e737d439882c685594; header_theme_version=CLOSE; home_feed_column=5; _uuid=15B5A2103-BBC2-9109A-7458-6410C3CF101028B94909infoc; b_lsid=CCF71993_18991563B31; b_ut=7; i-wanna-go-back=-1; innersign=0; b_nut=1690360493; buvid3=6481EDF5-10C43-9593-251E-89210B4A1C10A193894infoc"
                                             ]
-                                            AF.request("https://passport.bilibili.com/x/passport-login/web/sms/send", method: .post, parameters: BiliSmsCodePost(cid: Int(phoneCode)!, tel: Int(accountInput)!, token: loginToken, challenge: challenge, validate: validate, seccode: seccode), headers: headers).response { response in
+                                            AF.request("https://passport.bilibili.com/x/passport-login/web/sms/send", method: .post, parameters: BiliSmsCodePost(cid: Int(phoneIdList[countryCode]!)!, tel: Int(accountInput)!, token: loginToken, challenge: challenge, validate: validate, seccode: seccode), headers: headers).response { response in
                                                 debugPrint(response)
                                                 let json = try! JSON(data: response.data!)
                                                 smsLoginToken = json["data"]["captcha_key"].string!
@@ -222,7 +531,7 @@ struct LoginView: View {
                                         }
                                     } else {
                                         #if os(iOS)
-                                        AlertKitAPI.present(title: "手机号错误", subtitle: "请输入正确的11位手机号", icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                                        AlertKitAPI.present(title: "手机号错误", subtitle: "请输入正确的手机号", icon: .error, style: .iOS17AppleMusic, haptic: .error)
                                         #else
                                         tipWithText("手机号错误", symbol: "xmark.circle.fill")
                                         #endif
@@ -253,7 +562,7 @@ struct LoginView: View {
                     .disabled(currentStep < 2)
                     .foregroundStyle(currentStep >= 2 ? Color.primary : Color.secondary)
                     Button(action: {
-                        AF.request("https://passport.bilibili.com/x/passport-login/web/login/sms", method: .post, parameters: BiliLoginPost(cid: Int(phoneCode)!, tel: Int(accountInput)!, code: Int(passwdInput)!, captcha_key: smsLoginToken)).response { response in
+                        AF.request("https://passport.bilibili.com/x/passport-login/web/login/sms", method: .post, parameters: BiliLoginPost(cid: Int(phoneIdList[countryCode]!)!, tel: Int(accountInput)!, code: Int(passwdInput)!, captcha_key: smsLoginToken)).response { response in
                             let data = response.data
                             if data != nil {
                                 let json = try! JSON(data: data!)
@@ -318,6 +627,17 @@ struct LoginView: View {
                         loginToken = respJson["data"]["token"].string!
                     }
                 }
+                PhoneFormat = phoneFormatter(region: countryCode)
+                if countryCode == "us" || countryCode == "ca" {
+                    displayCC = "1"
+                } else {
+                    displayCC = countryCode
+                }
+                if displayCC == "1" {
+                    countryCode = "us"
+                } else {
+                    countryCode = displayCC
+                }
             }
         }
     }
@@ -352,388 +672,6 @@ struct LoginView: View {
     }
 }
 
-public let callNations = [
-    "Afghanistan",
-    "Albania",
-    "Algeria",
-    "Andorra",
-    "Angola",
-    "Antigua and Barbuda",
-    "Argentina",
-    "Armenia",
-    "Australia",
-    "Austria",
-    "Azerbaijan",
-    "Bahamas",
-    "Bahrain",
-    "Bangladesh",
-    "Barbados",
-    "Belarus",
-    "Belgium",
-    "Belize",
-    "Benin",
-    "Bhutan",
-    "Bolivia",
-    "Bosnia and Herzegovina",
-    "Botswana",
-    "Brazil",
-    "Brunei",
-    "Bulgaria",
-    "Burkina Faso",
-    "Burundi",
-    "Cabo Verde (Cape Verde)",
-    "Cambodia",
-    "Cameroon",
-    "Canada",
-    "Central African Republic",
-    "Chad",
-    "Chile",
-    "China mainland",
-    "Colombia",
-    "Comoros",
-    "Congo, Democratic Republic of the",
-    "Congo, Republic of the",
-    "Costa Rica",
-    "Croatia",
-    "Cuba",
-    "Cyprus",
-    "Czech Republic",
-    "Denmark",
-    "Djibouti",
-    "Dominica",
-    "Dominican Republic",
-    "East Timor (Timor-Leste)",
-    "Ecuador",
-    "Egypt",
-    "El Salvador",
-    "Equatorial Guinea",
-    "Eritrea",
-    "Estonia",
-    "Eswatini (Swaziland)",
-    "Ethiopia",
-    "Fiji",
-    "Finland",
-    "France",
-    "Gabon",
-    "Gambia",
-    "Georgia",
-    "Germany",
-    "Ghana",
-    "Greece",
-    "Grenada",
-    "Guatemala",
-    "Guinea",
-    "Guinea-Bissau",
-    "Guyana",
-    "Haiti",
-    "Honduras",
-    "Hungary",
-    "Iceland",
-    "India",
-    "Indonesia",
-    "Iran",
-    "Iraq",
-    "Ireland",
-    "Israel",
-    "Italy",
-    "Jamaica",
-    "Japan",
-    "Jordan",
-    "Kazakhstan",
-    "Kenya",
-    "Kiribati",
-    "Korea, North (North Korea)",
-    "Korea, South (South Korea)",
-    "Kosovo",
-    "Kuwait",
-    "Kyrgyzstan",
-    "Laos",
-    "Latvia",
-    "Lebanon",
-    "Lesotho",
-    "Liberia",
-    "Libya",
-    "Liechtenstein",
-    "Lithuania",
-    "Luxembourg",
-    "Madagascar",
-    "Malawi",
-    "Malaysia",
-    "Maldives",
-    "Mali",
-    "Malta",
-    "Marshall Islands",
-    "Mauritania",
-    "Mauritius",
-    "Mexico",
-    "Micronesia",
-    "Moldova",
-    "Monaco",
-    "Mongolia",
-    "Montenegro",
-    "Morocco",
-    "Mozambique",
-    "Myanmar (Burma)",
-    "Namibia",
-    "Nauru",
-    "Nepal",
-    "Netherlands",
-    "New Zealand",
-    "Nicaragua",
-    "Niger",
-    "Nigeria",
-    "North Macedonia (formerly Macedonia)",
-    "Norway",
-    "Oman",
-    "Pakistan",
-    "Palau",
-    "Palestine State",
-    "Panama",
-    "Papua New Guinea",
-    "Paraguay",
-    "Peru",
-    "Philippines",
-    "Poland",
-    "Portugal",
-    "Qatar",
-    "Romania",
-    "Russia",
-    "Rwanda",
-    "Saint Kitts and Nevis",
-    "Saint Lucia",
-    "Saint Vincent and the Grenadines",
-    "Samoa",
-    "San Marino",
-    "Sao Tome and Principe",
-    "Saudi Arabia",
-    "Senegal",
-    "Serbia",
-    "Seychelles",
-    "Sierra Leone",
-    "Singapore",
-    "Slovakia",
-    "Slovenia",
-    "Solomon Islands",
-    "Somalia",
-    "South Africa",
-    "South Sudan",
-    "Spain",
-    "Sri Lanka",
-    "Sudan",
-    "Suriname",
-    "Sweden",
-    "Switzerland",
-    "Syria",
-    "Taiwan",
-    "Tajikistan",
-    "Tanzania",
-    "Thailand",
-    "Togo",
-    "Tonga",
-    "Trinidad and Tobago",
-    "Tunisia",
-    "Turkey",
-    "Turkmenistan",
-    "Tuvalu",
-    "Uganda",
-    "Ukraine",
-    "United Arab Emirates",
-    "United Kingdom",
-    "United States of America",
-    "Uruguay",
-    "Uzbekistan",
-    "Vanuatu",
-    "Vatican City"
-]
-
-public let callCodes = [
-    "93",
-    "355",
-    "213",
-    "376",
-    "244",
-    "1-268",
-    "54",
-    "374",
-    "61",
-    "43",
-    "994",
-    "1-242",
-    "973",
-    "880",
-    "1-246",
-    "375",
-    "32",
-    "501",
-    "229",
-    "975",
-    "591",
-    "387",
-    "267",
-    "55",
-    "673",
-    "359",
-    "226",
-    "257",
-    "238",
-    "855",
-    "237",
-    "1",
-    "236",
-    "235",
-    "56",
-    "86",
-    "57",
-    "269",
-    "243",
-    "242",
-    "506",
-    "385",
-    "53",
-    "357",
-    "420",
-    "45",
-    "253",
-    "1",
-    "670",
-    "593",
-    "20",
-    "503",
-    "240",
-    "291",
-    "372",
-    "268",
-    "251",
-    "679",
-    "358",
-    "33",
-    "241",
-    "220",
-    "995",
-    "49",
-    "233",
-    "30",
-    "1",
-    "502",
-    "224",
-    "245",
-    "592",
-    "509",
-    "504",
-    "36",
-    "354",
-    "91",
-    "62",
-    "98",
-    "964",
-    "353",
-    "972",
-    "39",
-    "81",
-    "962",
-    "7",
-    "254",
-    "686",
-    "850",
-    "82",
-    "383",
-    "965",
-    "996",
-    "856",
-    "371",
-    "961",
-    "266",
-    "231",
-    "218",
-    "423",
-    "370",
-    "352",
-    "261",
-    "265",
-    "60",
-    "960",
-    "223",
-    "356",
-    "692",
-    "222",
-    "230",
-    "52",
-    "691",
-    "373",
-    "377",
-    "976",
-    "382",
-    "212",
-    "258",
-    "95",
-    "264",
-    "674",
-    "977",
-    "31",
-    "64",
-    "505",
-    "227",
-    "234",
-    "389",
-    "47",
-    "968",
-    "92",
-    "680",
-    "970",
-    "507",
-    "675",
-    "595",
-    "51",
-    "63",
-    "48",
-    "351",
-    "974",
-    "40",
-    "7",
-    "250",
-    "378",
-    "239",
-    "966",
-    "221",
-    "381",
-    "248",
-    "232",
-    "65",
-    "421",
-    "386",
-    "677",
-    "252",
-    "27",
-    "211",
-    "34",
-    "94",
-    "249",
-    "597",
-    "46",
-    "41",
-    "963",
-    "886",
-    "992",
-    "255",
-    "66",
-    "228",
-    "676",
-    "1-868",
-    "216",
-    "90",
-    "993",
-    "688",
-    "256",
-    "380",
-    "971",
-    "44",
-    "598",
-    "998",
-    "678",
-    "379",
-    "58",
-    "84",
-    "967",
-    "260",
-    "263"
-]
+#Preview {
+    LoginView()
+}

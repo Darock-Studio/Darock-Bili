@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Serene-Garden/Cepheus",
       "state" : {
-        "revision" : "0754853c69a39f6cdc04abb8b1d194a3ed3a483e",
-        "version" : "2.3.0"
+        "revision" : "5ff00498df1fa89c92af56780d3818c0c4380f6a",
+        "version" : "2.3.1"
       }
     },
     {
@@ -52,7 +52,7 @@
       "location" : "https://github.com/Darock-Studio/DarockKit",
       "state" : {
         "branch" : "main",
-        "revision" : "4afcdeba8f3c6ca4dbd7ba2886924bdcbadec262"
+        "revision" : "9a43584cb32e53ae339532a6f49c19c7bc17aa8a"
       }
     },
     {
