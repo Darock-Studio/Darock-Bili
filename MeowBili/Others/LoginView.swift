@@ -457,7 +457,7 @@ struct LoginView: View {
                                         }
                                     })
                                     .onChange(of: countryCode, perform: { _ in
-                                        PhoneFormat = PhoneFormatter(region: countryCode)
+                                        PhoneFormat = phoneFormatter(region: countryCode)
                                         if countryCode == "us" || countryCode == "ca" {
                                             displayCC = "1"
                                         } else {
@@ -629,7 +629,7 @@ struct LoginView: View {
                         loginToken = respJson["data"]["token"].string!
                     }
                 }
-                PhoneFormat = PhoneFormatter(region: countryCode)
+                PhoneFormat = phoneFormatter(region: countryCode)
                 if countryCode == "us" || countryCode == "ca" {
                     displayCC = "1"
                 } else {

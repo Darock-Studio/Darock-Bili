@@ -18,7 +18,7 @@
 
 import Foundation
 
-func PhoneFormatter(region: String) -> String {
+func phoneFormatter(region: String) -> String {
     switch region {
     case "" :
         return "手机号码"
