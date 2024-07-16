@@ -146,7 +146,6 @@ struct LoginView: View {
                             //  .foregroundStyle(currentStep == 1 ? Color.accentColor : Color.primary)
                             if #available(watchOS 9, *) {
                                 Picker("", selection: $countryCode) {
-                                    Text("").tag("")
                                     Text("中国大陆 86").tag("86")
                                     Text("中国香港特别行政区 852").tag("852")
                                     Text("中国澳门特别行政区 853").tag("853")
@@ -290,7 +289,6 @@ struct LoginView: View {
                                 }.frame(height: 50)
                             } else {
                                 Picker("", selection: $countryCode) {
-                                    Text("").tag("")
                                     Text("中国大陆 86").tag("86")
                                     Text("中国香港特别行政区 852").tag("852")
                                     Text("中国澳门特别行政区 853").tag("853")
