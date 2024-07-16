@@ -2696,6 +2696,7 @@
       }
     },
     "Feedback.continue-on-other-device" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -8643,9 +8644,6 @@
 
     },
     "圣马力诺 378" : {
-
-    },
-    "在App内反馈" : {
 
     },
     "在iPhone上继续" : {
