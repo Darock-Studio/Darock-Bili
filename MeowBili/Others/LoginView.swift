@@ -286,7 +286,9 @@ struct LoginView: View {
                                     Text("🇩🇰 丹麦 45").tag("45")
                                     Text("🇬🇶 赤道几内亚 240").tag("240")
                                 }
-                            }
+#if os(watchOS)
+                                .frame(height: 50)
+#endif
                             HStack {
 //                                Picker("\(phoneCode)", selection: $phoneCode) {
 //                                    ForEach(callNations.indices) { codeIndex in
