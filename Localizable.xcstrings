@@ -415,6 +415,7 @@
       }
     },
     "%lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -521,6 +522,7 @@
       }
     },
     "+86" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2220,6 +2222,7 @@
       }
     },
     "Darock 会收集必要的诊断信息以便进行改进，信息不会关联到您个人。如果您不愿意被收集信息，请勿发送。" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3937,6 +3940,7 @@
       }
     },
     "Login.step1.phone-number" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4695,6 +4699,7 @@
       }
     },
     "Player.pause" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5035,6 +5040,7 @@
       }
     },
     "Search.%@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5443,6 +5449,7 @@
       }
     },
     "Settings.feedback" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6864,6 +6871,9 @@
         }
       }
     },
+    "Troubleshoot.problem.internet.meaning" : {
+
+    },
     "Troubleshoot.problem.internet.plan-b" : {
       "localizations" : {
         "en" : {
@@ -7402,6 +7412,7 @@
       }
     },
     "Update.install-by-testflight" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -8026,6 +8037,7 @@
       }
     },
     "Video.details.danmaku.%lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -8060,6 +8072,7 @@
       }
     },
     "Video.details.publish-time.%@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8082,6 +8095,7 @@
       }
     },
     "Video.details.watches.%lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -8116,6 +8130,7 @@
       }
     },
     "Video.details.watching-people.%@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -8272,6 +8287,7 @@
       }
     },
     "Video.play-in-audio" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8414,6 +8430,7 @@
       }
     },
     "不丹 975" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8434,6 +8451,7 @@
       }
     },
     "中国台湾 886" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8444,6 +8462,7 @@
       }
     },
     "中国大陆 86" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8454,6 +8473,7 @@
       }
     },
     "中国澳门特别行政区 853" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8464,6 +8484,7 @@
       }
     },
     "中国香港特别行政区 852" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8474,6 +8495,7 @@
       }
     },
     "丹麦 45" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8484,6 +8506,7 @@
       }
     },
     "乌克兰 380" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8494,6 +8517,7 @@
       }
     },
     "乌兹别克斯坦 998" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8504,6 +8528,7 @@
       }
     },
     "乌干达 256" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8514,6 +8539,7 @@
       }
     },
     "乌拉圭 598" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8524,6 +8550,7 @@
       }
     },
     "乍得 235" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8534,6 +8561,7 @@
       }
     },
     "也门 967" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8576,6 +8604,7 @@
       }
     },
     "亚美尼亚 374" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8644,6 +8673,7 @@
       }
     },
     "以色列 972" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8654,6 +8684,7 @@
       }
     },
     "伊拉克 964" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8664,6 +8695,7 @@
       }
     },
     "伊朗 98" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8674,6 +8706,7 @@
       }
     },
     "伯利兹 501" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8714,6 +8747,7 @@
       }
     },
     "俄罗斯 7" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8724,6 +8758,7 @@
       }
     },
     "保加利亚 359" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8802,6 +8837,7 @@
       }
     },
     "冰岛 354" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8821,6 +8857,9 @@
         }
       }
     },
+    "切换账号" : {
+
+    },
     "列表视图" : {
       "localizations" : {
         "en" : {
@@ -8832,6 +8871,7 @@
       }
     },
     "加拿大 1" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8934,6 +8974,7 @@
       }
     },
     "匈牙利 36" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8944,6 +8985,7 @@
       }
     },
     "南非 27" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8954,6 +8996,7 @@
       }
     },
     "博茨瓦纳 267" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8964,6 +9007,7 @@
       }
     },
     "印尼 62" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8974,6 +9018,7 @@
       }
     },
     "印度 91" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8984,6 +9029,7 @@
       }
     },
     "厄瓜多尔 593" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8994,6 +9040,7 @@
       }
     },
     "厄立特里亚 291" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9136,6 +9183,7 @@
       }
     },
     "叙利亚 963" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9289,8 +9337,8 @@
         }
       }
     },
-    
     "图瓦卢 688" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9301,6 +9349,7 @@
       }
     },
     "土库曼斯坦 993" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9311,6 +9360,7 @@
       }
     },
     "土耳其 90" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9321,6 +9371,7 @@
       }
     },
     "圣卢西亚 1784" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9331,6 +9382,7 @@
       }
     },
     "圣多美和普林西比 239" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9341,6 +9393,7 @@
       }
     },
     "圣皮埃尔和密克隆群岛 508" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9351,6 +9404,7 @@
       }
     },
     "圣马力诺 378" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9361,6 +9415,7 @@
       }
     },
     "在App内反馈" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9425,6 +9480,7 @@
       }
     },
     "坦桑尼亚 255" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9445,6 +9501,7 @@
       }
     },
     "塞内加尔 221" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9455,6 +9512,7 @@
       }
     },
     "塞尔维亚 381" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9465,6 +9523,7 @@
       }
     },
     "塞拉利昂 232" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9475,6 +9534,7 @@
       }
     },
     "塞浦路斯 357" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9485,6 +9545,7 @@
       }
     },
     "塞舌尔共和国 248" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9505,6 +9566,7 @@
       }
     },
     "复制" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9521,6 +9583,7 @@
       }
     },
     "多哥 228" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9531,6 +9594,7 @@
       }
     },
     "多米尼加 1767" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9541,6 +9605,7 @@
       }
     },
     "多米尼加代表 1809" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9587,6 +9652,7 @@
       }
     },
     "委内瑞拉 58" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9623,6 +9689,7 @@
       }
     },
     "孟加拉国 880" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9643,6 +9710,7 @@
       }
     },
     "密克罗尼西亚 691" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9711,6 +9779,7 @@
       }
     },
     "尼加拉瓜 505" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9721,6 +9790,7 @@
       }
     },
     "尼日利亚 234" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9731,6 +9801,7 @@
       }
     },
     "尼日尔 227" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9741,6 +9812,7 @@
       }
     },
     "尼泊尔 977" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9783,6 +9855,7 @@
       }
     },
     "布基纳法索 226" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9793,6 +9866,7 @@
       }
     },
     "布隆迪 257" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9803,6 +9877,7 @@
       }
     },
     "希腊 30" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9813,6 +9888,7 @@
       }
     },
     "帕劳 680" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9865,6 +9941,7 @@
       }
     },
     "开启“屏幕使用时间”" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9909,6 +9986,7 @@
       }
     },
     "德国 49" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9997,6 +10075,7 @@
       }
     },
     "意大利 39" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10039,6 +10118,7 @@
       }
     },
     "所罗门群岛 677" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10049,6 +10129,7 @@
       }
     },
     "手记建议" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10065,6 +10146,7 @@
       }
     },
     "托克劳岛 690" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10085,6 +10167,7 @@
       }
     },
     "挪威 47" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10147,6 +10230,7 @@
       }
     },
     "摩尔多瓦 373" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10157,6 +10241,7 @@
       }
     },
     "摩洛哥 212" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10167,6 +10252,7 @@
       }
     },
     "摩纳哥 377" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10243,6 +10329,7 @@
       }
     },
     "文本加载失败" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10259,6 +10346,7 @@
       }
     },
     "文莱 673" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10269,6 +10357,7 @@
       }
     },
     "斯威士兰 268" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10279,6 +10368,7 @@
       }
     },
     "斯洛伐克 421" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10289,6 +10379,7 @@
       }
     },
     "斯洛文尼亚 386" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10299,6 +10390,7 @@
       }
     },
     "斯里兰卡 94" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10309,6 +10401,7 @@
       }
     },
     "新加坡 65" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10329,6 +10422,7 @@
       }
     },
     "新西兰 64" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10339,6 +10433,7 @@
       }
     },
     "日本 81" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10451,6 +10546,7 @@
       }
     },
     "智利 56" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10549,6 +10645,7 @@
       }
     },
     "格鲁吉亚 995" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10559,6 +10656,7 @@
       }
     },
     "桑给巴尔岛 259" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10621,6 +10719,7 @@
       }
     },
     "比利时 32" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10631,6 +10730,7 @@
       }
     },
     "毛里塔尼亚 222" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10641,6 +10741,7 @@
       }
     },
     "毛里求斯 230" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10651,6 +10752,7 @@
       }
     },
     "汤加 676" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10661,6 +10763,7 @@
       }
     },
     "沙特阿拉伯 966" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10671,6 +10774,7 @@
       }
     },
     "法国 33" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10681,6 +10785,7 @@
       }
     },
     "法属圭亚那 594" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10691,6 +10796,7 @@
       }
     },
     "法属波利尼西亚 689" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10701,6 +10807,7 @@
       }
     },
     "法罗岛 298" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10711,6 +10818,7 @@
       }
     },
     "波兰 48" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10721,6 +10829,7 @@
       }
     },
     "波多黎各 1787" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10731,6 +10840,7 @@
       }
     },
     "波黑 387" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10741,6 +10851,7 @@
       }
     },
     "泰国 66" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10803,6 +10914,7 @@
       }
     },
     "澳大利亚 61" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10823,6 +10935,7 @@
       }
     },
     "牙买加 1876" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10833,6 +10946,7 @@
       }
     },
     "特克斯和凯科斯 1649" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10843,6 +10957,7 @@
       }
     },
     "特立尼达和多巴哥 1868" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10863,6 +10978,7 @@
       }
     },
     "玻利维亚 591" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10873,6 +10989,7 @@
       }
     },
     "瑙鲁 674" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10883,6 +11000,7 @@
       }
     },
     "瑞典 46" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10893,6 +11011,7 @@
       }
     },
     "瑞士 41" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10903,6 +11022,7 @@
       }
     },
     "瓦利斯群岛和富图纳群岛 1681" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10913,6 +11033,7 @@
       }
     },
     "瓦努阿图 678" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10955,6 +11076,7 @@
       }
     },
     "直布罗陀 350" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10987,6 +11109,7 @@
       }
     },
     "科特迪瓦 225" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10997,6 +11120,7 @@
       }
     },
     "秘鲁 51" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11051,6 +11175,7 @@
       }
     },
     "突尼斯 216" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11091,6 +11216,7 @@
       }
     },
     "索马里 252" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11101,6 +11227,7 @@
       }
     },
     "约旦 962" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11111,6 +11238,7 @@
       }
     },
     "纳米比亚 264" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11121,6 +11249,7 @@
       }
     },
     "纽埃岛 683" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11153,6 +11282,7 @@
       }
     },
     "维珍群岛(美属) 1340" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11163,6 +11293,7 @@
       }
     },
     "维珍群岛(英属) 1284" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11173,6 +11304,7 @@
       }
     },
     "缅甸 95" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11203,6 +11335,7 @@
       }
     },
     "美国 1" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11213,6 +11346,7 @@
       }
     },
     "苏丹 249" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11223,6 +11357,7 @@
       }
     },
     "苏里南 597" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11233,6 +11368,7 @@
       }
     },
     "英国 44" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11243,6 +11379,7 @@
       }
     },
     "莫桑比克 258" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11253,6 +11390,7 @@
       }
     },
     "萨尔瓦多 503" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11263,6 +11401,7 @@
       }
     },
     "萨摩亚，东部 684" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11273,6 +11412,7 @@
       }
     },
     "萨摩亚，西部 685" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11283,6 +11423,7 @@
       }
     },
     "葡萄牙 351" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11293,6 +11434,7 @@
       }
     },
     "蒙古 976" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11303,6 +11445,7 @@
       }
     },
     "蒙特塞拉特岛 1664" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11323,6 +11466,7 @@
       }
     },
     "西班牙 34" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11467,6 +11611,7 @@
       }
     },
     "请求在线支持 (Beta)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11477,6 +11622,7 @@
       }
     },
     "诺福克岛 672" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11497,6 +11643,7 @@
       }
     },
     "贝宁 229" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11507,6 +11654,7 @@
       }
     },
     "赞比亚 260" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11517,6 +11665,7 @@
       }
     },
     "赤道几内亚 240" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11559,6 +11708,7 @@
       }
     },
     "越南 84" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11599,6 +11749,7 @@
       }
     },
     "迪戈加西亚岛 246" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11654,6 +11805,7 @@
       }
     },
     "选择文本" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11728,6 +11880,7 @@
       }
     },
     "阿森松岛 247" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11758,6 +11911,7 @@
       }
     },
     "韩国 82" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11800,6 +11954,7 @@
       }
     },
     "马其顿 389" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11810,6 +11965,7 @@
       }
     },
     "马尔代夫 960" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11820,6 +11976,7 @@
       }
     },
     "马拉维 265" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11830,6 +11987,7 @@
       }
     },
     "马提尼克岛 596" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11840,6 +11998,7 @@
       }
     },
     "马来西亚 60" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11850,6 +12009,7 @@
       }
     },
     "马歇尔岛 692" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11860,6 +12020,7 @@
       }
     },
     "马耳他 356" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11870,6 +12031,7 @@
       }
     },
     "马达加斯加 261" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11880,6 +12042,7 @@
       }
     },
     "马里 223" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11890,6 +12053,7 @@
       }
     },
     "马里亚纳岛 1670" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11900,6 +12064,7 @@
       }
     },
     "墨西哥 52" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
