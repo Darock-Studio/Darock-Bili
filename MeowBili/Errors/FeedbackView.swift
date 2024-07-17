@@ -19,9 +19,6 @@
 import SwiftUI
 import DarockKit
 import EFQRCode
-#if os(watchOS)
-import SupportsUICore
-#endif
 
 #if os(watchOS)
 struct FeedbackView: View {
@@ -52,11 +49,6 @@ struct InAppFeedbackView: View {
                 NavigationLink(destination: { NewFeedbackView() }, label: {
                     Label("新建反馈", systemImage: "exclamationmark.bubble.fill")
                 })
-                #if os(watchOS)
-                NavigationLink(destination: { SUICChatSupportView(projName: "喵哩喵哩") }, label: {
-                    Label("请求在线支持 (Beta)", systemImage: "bubble.left.and.text.bubble.right")
-                })
-                #endif
             }
             if feedbackIds.count != 0 {
                 Section {
