@@ -43,7 +43,6 @@
 		8C82F7942BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */ = {isa = PBXBuildFile; fileRef = 8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */; };
 		8C9776082BCECBC3006EDB58 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9776072BCECBC3006EDB58 /* Audio.swift */; };
 		8C9776092BCECBC3006EDB58 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9776072BCECBC3006EDB58 /* Audio.swift */; };
-		8CA164852BF12731000065D8 /* SupportsUICore in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA164842BF12731000065D8 /* SupportsUICore */; };
 		8CA1BA112BD2AF9E009BCDFB /* PrivateSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1BA102BD2AF9E009BCDFB /* PrivateSymbols.m */; };
 		8CA1BA122BD2AF9E009BCDFB /* PrivateSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1BA102BD2AF9E009BCDFB /* PrivateSymbols.m */; };
 		8CA370D42B82690700CE0E9E /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA370D32B82690700CE0E9E /* Mixpanel */; };
@@ -414,7 +413,6 @@
 				8CA7CBF72B77AC8A008E587F /* SDWebImagePDFCoder in Frameworks */,
 				8C03B6DE2C280BAA000770B4 /* Cepheus in Frameworks */,
 				8CA7CBF52B77AC8A008E587F /* SDWebImageSVGCoder in Frameworks */,
-				8CA164852BF12731000065D8 /* SupportsUICore in Frameworks */,
 				8CA370D62B82691100CE0E9E /* Mixpanel in Frameworks */,
 				8CA7CBE72B77AC8A008E587F /* Marquee in Frameworks */,
 				8CA7CBE92B77AC8A008E587F /* SwiftDate in Frameworks */,
@@ -852,7 +850,6 @@
 				8CA370D52B82691100CE0E9E /* Mixpanel */,
 				8CB176A62BB8189300CEC05C /* SDWebImageSwiftUI */,
 				8CB176AF2BB8421300CEC05C /* DarockKit */,
-				8CA164842BF12731000065D8 /* SupportsUICore */,
 				8C03B6DD2C280BAA000770B4 /* Cepheus */,
 			);
 			productName = "MeowBili Watch App";
@@ -936,7 +933,6 @@
 				8CA370DD2B827AAD00CE0E9E /* XCRemoteSwiftPackageReference "AlertToast" */,
 				8CB176A32BB8188600CEC05C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				8CB176AC2BB8420A00CEC05C /* XCRemoteSwiftPackageReference "DarockKit" */,
-				8CA164812BF1270D000065D8 /* XCRemoteSwiftPackageReference "SupportsUICore" */,
 				8C03B6DC2C280BAA000770B4 /* XCRemoteSwiftPackageReference "Cepheus" */,
 			);
 			productRefGroup = B44689CB2B4FC15A002CCEB2 /* Products */;
@@ -1942,14 +1938,6 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		8CA164812BF1270D000065D8 /* XCRemoteSwiftPackageReference "SupportsUICore" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Darock-Studio/SupportsUICore";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		8CA370D22B82690700CE0E9E /* XCRemoteSwiftPackageReference "mixpanel-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mixpanel/mixpanel-swift";
@@ -2090,11 +2078,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8C0557DD2B791B84009D9CD0 /* XCRemoteSwiftPackageReference "AZVideoPlayer" */;
 			productName = AZVideoPlayer;
-		};
-		8CA164842BF12731000065D8 /* SupportsUICore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8CA164812BF1270D000065D8 /* XCRemoteSwiftPackageReference "SupportsUICore" */;
-			productName = SupportsUICore;
 		};
 		8CA370D32B82690700CE0E9E /* Mixpanel */ = {
 			isa = XCSwiftPackageProductDependency;
