@@ -26,12 +26,30 @@ func phoneFormatter(region: String) -> String {
         return "000 0000 0000"
     case "us","ca" :
         return "000 000 0000"
-    case "886" :
+    case "886","351" :
         return "000 000 000"
-    case "852","853" :
+    case "852","853","65","64" :
         return "0000 0000"
     case "44" :
         return "0000 000000"
+    case "32" :
+        return "000 00 00 00"
+    case "61" :
+        return "0 0000 0000"
+    case "33" :
+        return "0 00 00 00 00"
+    case "81","234" :
+        return "00 0000 0000"
+    case "82" :
+        return "00 0000 000"
+    case "39","7" :
+        return "000 000 0000"
+    case "1681" :
+        return "000 0000"
+    case "47" :
+        return "000 00 000"
+    case "227" :
+        return "00 00 00 00"
     default:
         return "手机号码"
     }

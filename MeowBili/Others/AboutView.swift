@@ -178,6 +178,9 @@ struct AboutCredits: View {
                 })
             }
             .presentationDetents([.medium])
+#if !os(watchOS)
+            .padding()
+#endif
         }
     }
 }

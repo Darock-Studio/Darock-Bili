@@ -33,10 +33,6 @@ struct PersonAccountView: View {
     @AppStorage("SESSDATA") var sessdata = ""
     @AppStorage("bili_jct") var biliJct = ""
     @AppStorage("IsShowNetworkFixing") var isShowNetworkFixing = true
-    @State var userList1: [Any] = []
-    @State var userList2: [Any] = []
-    @State var userList3: [Any] = []
-    @State var userList4: [Any] = []
     @State var username = ""
     @State var userSign = ""
     @State var userFaceUrl = ""
@@ -51,88 +47,6 @@ struct PersonAccountView: View {
                 NavigationLink(destination: { LoginView() }, label: {
                     Label("User.tap-to-login", privateSystemImage: "apple.logo.lock.open")
                 })
-                Button(action: { isUserSwitchPresented = true }, label: {
-                    HStack {
-                        HStack {
-                            Image(privateSystemName: "person.lanyardcard.fill")
-                                .foregroundColor(.accentColor)
-                            Text("User.switch")
-                        }
-                        .font(.system(size: 16))
-                        Spacer()
-                    }
-                })
-                .sheet(isPresented: $isUserSwitchPresented, content: {
-                    List {
-                        if #unavailable(watchOS 10.0) {
-                            Button(action: {
-                                isNewUserPresenting = true
-                            }, label: {
-                                Label("User.switch.add", systemImage: "plus")
-                            })
-                        }
-                        
-                        if userList1.isEmpty {
-                            Text("User.switch.none")
-                                .bold()
-                                .foregroundStyle(.secondary)
-                        } else {
-                            Section(content: {
-                                ForEach(0..<userList1.count, id: \.self) { user in
-                                    Button(action: {
-                                        dedeUserID = userList1[user] as! String
-                                        dedeUserID__ckMd5 = userList2[user] as! String
-                                        sessdata = userList3[user] as! String
-                                        biliJct = userList4[user] as! String
-                                    }, label: {
-                                        Text(userList1[user] as! String)
-                                    })
-                                }
-                                .onDelete(perform: { user in
-                                    userList1.remove(atOffsets: user)
-                                    userList2.remove(atOffsets: user)
-                                    userList3.remove(atOffsets: user)
-                                    userList4.remove(atOffsets: user)
-                                    UserDefaults.standard.set(userList1, forKey: "userList1")
-                                    UserDefaults.standard.set(userList2, forKey: "userList2")
-                                    UserDefaults.standard.set(userList3, forKey: "userList3")
-                                    UserDefaults.standard.set(userList4, forKey: "userList4")
-                                })
-                                .onMove(perform: { users, user  in
-                                    userList1.move(fromOffsets: users, toOffset: user)
-                                    userList2.move(fromOffsets: users, toOffset: user)
-                                    userList3.move(fromOffsets: users, toOffset: user)
-                                    userList4.move(fromOffsets: users, toOffset: user)
-                                    UserDefaults.standard.set(userList1, forKey: "userList1")
-                                    UserDefaults.standard.set(userList2, forKey: "userList2")
-                                    UserDefaults.standard.set(userList3, forKey: "userList3")
-                                    UserDefaults.standard.set(userList4, forKey: "userList4")
-                                })
-                            }, footer: {
-                                Text("User.switch.description")
-                                Text("User.switch.description.1")
-                            })
-                        }
-                    }
-                    .toolbar {
-                        ToolbarItem(placement: .bottomBar) {
-                            HStack {
-                                Spacer()
-                                Button(action: {
-                                    isNewUserPresenting = true
-                                }, label: {
-                                    Image(systemName: "plus")
-                                })
-                            }
-                        }
-                    }
-                })
-                .onAppear {
-                    userList1 = UserDefaults.standard.array(forKey: "userList1") ?? []
-                    userList2 = UserDefaults.standard.array(forKey: "userList2") ?? []
-                    userList3 = UserDefaults.standard.array(forKey: "userList3") ?? []
-                    userList4 = UserDefaults.standard.array(forKey: "userList4") ?? []
-                }
                 .sheet(isPresented: $isNewUserPresenting, content: { LoginView() })
             } else {
                 NavigationLink(destination: { UserDetailView(uid: dedeUserID) }, label: {
@@ -207,71 +121,6 @@ struct PersonAccountView: View {
                     }
                 })
                 .sheet(isPresented: $isNewUserPresenting, content: { LoginView() })
-                .sheet(isPresented: $isUserSwitchPresented, content: {
-                    List {
-                        if #unavailable(watchOS 10.0) {
-                            Button(action: {
-                                isNewUserPresenting = true
-                            }, label: {
-                                Label("User.switch.add", systemImage: "plus")
-                            })
-                        }
-                        
-                        Section(content: {
-                            ForEach(0..<userList1.count, id: \.self) {user in
-                                Button(action: {
-                                    dedeUserID = userList1[user] as! String
-                                    dedeUserID__ckMd5 = userList2[user] as! String
-                                    sessdata = userList3[user] as! String
-                                    biliJct = userList4[user] as! String
-                                }, label: {
-                                    Text(userList1[user] as! String)
-                                })
-                            }
-                            .onDelete(perform: { user in
-                                userList1.remove(atOffsets: user)
-                                userList2.remove(atOffsets: user)
-                                userList3.remove(atOffsets: user)
-                                userList4.remove(atOffsets: user)
-                                UserDefaults.standard.set(userList1, forKey: "userList1")
-                                UserDefaults.standard.set(userList2, forKey: "userList2")
-                                UserDefaults.standard.set(userList3, forKey: "userList3")
-                                UserDefaults.standard.set(userList4, forKey: "userList4")
-                            })
-                            .onMove(perform: { users, user  in
-                                userList1.move(fromOffsets: users, toOffset: user)
-                                userList2.move(fromOffsets: users, toOffset: user)
-                                userList3.move(fromOffsets: users, toOffset: user)
-                                userList4.move(fromOffsets: users, toOffset: user)
-                                UserDefaults.standard.set(userList1, forKey: "userList1")
-                                UserDefaults.standard.set(userList2, forKey: "userList2")
-                                UserDefaults.standard.set(userList3, forKey: "userList3")
-                                UserDefaults.standard.set(userList4, forKey: "userList4")
-                            })
-                        }, footer: {
-                            Text("User.switch.description")
-                            Text("User.switch.description.1")
-                        })
-                    }
-                    .toolbar {
-                        ToolbarItem(placement: .bottomBar) {
-                            HStack {
-                                Spacer()
-                                Button(action: {
-                                    isNewUserPresenting = true
-                                }, label: {
-                                    Image(systemName: "plus")
-                                })
-                            }
-                        }
-                    }
-                })
-                .onAppear {
-                    userList1 = UserDefaults.standard.array(forKey: "userList1") ?? []
-                    userList2 = UserDefaults.standard.array(forKey: "userList2") ?? []
-                    userList3 = UserDefaults.standard.array(forKey: "userList3") ?? []
-                    userList4 = UserDefaults.standard.array(forKey: "userList4") ?? []
-                }
                 Group {
                     Section {
                         NavigationLink(destination: { FollowListView(viewUserId: dedeUserID) }, label: {
@@ -351,6 +200,16 @@ struct PersonAccountView: View {
 #endif
                 }
             }
+#if !os(watchOS)
+            Section {
+                NavigationLink(destination: { SettingsView() }, label: {
+                    HStack {
+                        Image(systemName: "gear").foregroundStyle(Color.accentColor)
+                        Text("设置")
+                    }
+                })
+            }
+#endif
         }
         .navigationTitle("About-me")
         .navigationBarTitleDisplayMode(.large)
