@@ -375,13 +375,16 @@ struct LoginView: View {
                                             #endif
                                         } else {
                                             let headers: HTTPHeaders = [
+                                                "accept": "*/*",
+                                                "accept-encoding": "gzip, deflate, br",
+                                                "accept-language": "zh-CN,zh;q=0.9",
                                                 "Host": "passport.bilibili.com",
                                                 "Origin": "https://www.bilibili.com",
                                                 "Referer": "https://www.bilibili.com/",
                                                 "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
-                                                "Cookie": "browser_resolution=1580-497; FEED_LIVE_VERSION=V8; buvid4=818BA302-8EAC-0630-67AB-BB978A5797AF60982-023042618-ho21%2BqF6LZokzAShrGptM4EHZm2TE4%2FTXmfZyPpzfCnLuUmUckb8wg%3D%3D; buvid_fp=5a716236853dd1e737d439882c685594; header_theme_version=CLOSE; home_feed_column=5; _uuid=15B5A2103-BBC2-9109A-7458-6410C3CF101028B94909infoc; b_lsid=CCF71993_18991563B31; b_ut=7; i-wanna-go-back=-1; innersign=0; b_nut=1690360493; buvid3=6481EDF5-10C43-9593-251E-89210B4A1C10A193894infoc"
+                                                "Cookie": "buvid_fp=e651c1a382430ea93631e09474e0b395; buvid3=\(UuidInfoc.gen()); buvid4=buvid4-failed-1"
                                             ]
-                                            AF.request("https://passport.bilibili.com/x/passport-login/web/sms/send", method: .post, parameters: BiliSmsCodePost(cid: Int(phoneIdList[countryCode]!)!, tel: Int(accountInput)!, token: loginToken, challenge: challenge, validate: validate, seccode: seccode), headers: headers).response { response in
+                                            AF.request("https://passport.bilibili.com/x/passport-login/web/sms/send", method: .post, parameters: BiliSmsCodePost(cid: Int(countryCode)!, tel: Int(accountInput)!, token: loginToken, challenge: challenge, validate: validate, seccode: seccode), headers: headers).response { response in
                                                 debugPrint(response)
                                                 let json = try! JSON(data: response.data!)
                                                 smsLoginToken = json["data"]["captcha_key"].string!
@@ -420,7 +423,7 @@ struct LoginView: View {
                     .disabled(currentStep < 2)
                     .foregroundStyle(currentStep >= 2 ? Color.primary : Color.secondary)
                     Button(action: {
-                        AF.request("https://passport.bilibili.com/x/passport-login/web/login/sms", method: .post, parameters: BiliLoginPost(cid: Int(phoneIdList[countryCode]!)!, tel: Int(accountInput)!, code: Int(passwdInput)!, captcha_key: smsLoginToken)).response { response in
+                        AF.request("https://passport.bilibili.com/x/passport-login/web/login/sms", method: .post, parameters: BiliLoginPost(cid: Int(countryCode)!, tel: Int(accountInput)!, code: Int(passwdInput)!, captcha_key: smsLoginToken)).response { response in
                             let data = response.data
                             if data != nil {
                                 let json = try! JSON(data: data!)
