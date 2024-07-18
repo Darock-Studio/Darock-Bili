@@ -9,4 +9,8 @@ elif [[ "$CI_WORKFLOW" == "Public Release" ]]; then
   TESTFLIGHT_DIR_PATH=../TestFlight
   mkdir $TESTFLIGHT_DIR_PATH
   echo -e "当前语义化版本：$CI_TAG\n\nRelease Notes: https://github.com/Darock-Studio/Darock-Bili/releases/tag/$CI_TAG\n\n若要使用watchOS App，请打开“在Apple Watch上显示App”开关" > $TESTFLIGHT_DIR_PATH/WhatToTest.zh-Hans.txt
+elif [[ "$CI_WORKFLOW" == "TF Deploy" ]]; then
+  TESTFLIGHT_DIR_PATH=../TestFlight
+  mkdir $TESTFLIGHT_DIR_PATH
+  echo -e "喵哩喵哩由Linecom分发\n\n当前语义化版本：$CI_TAG\n\nRelease Notes: https://github.com/Darock-Studio/Darock-Bili/releases/tag/$CI_TAG\n\n若要使用watchOS App，请打开“在Apple Watch上显示App”开关" > $TESTFLIGHT_DIR_PATH/WhatToTest.zh-Hans.txt
 fi
