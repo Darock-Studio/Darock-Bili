@@ -22,12 +22,14 @@ import Alamofire
 import SwiftyJSON
 import SDWebImageSwiftUI
 
+var pIsAudioControllerAvailable = false
+var pShouldPresentAudioController = false
+
 struct ContentView: View {
     public static var nowAppVer = "1.0.0|106"
-    @AppStorage("IsFirstUsing") var isFirstUsing = true
+    @AppStorage("IsNewFeatureTipped1") var isNewFeatureTipped = false
     @AppStorage("LastUsingVer") var lastUsingVer = ""
     @AppStorage("IsReadTerms") var isReadTerms = false
-    @AppStorage("IsOldSystemTipped") var isOldSystemTipped = false
     @AppStorage("DedeUserID") var dedeUserID = ""
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
@@ -35,7 +37,8 @@ struct ContentView: View {
     @State var mainTabSelection = 1
     @State var isTermsPresented = false
     @State var userFaceUrl = ""
-    @State var isOldSystemTipPresented = false
+    @State var isAudioControllerPresented = false
+    @State var isNewFeaturePresented = false
     @FocusState var isSearchKeyboardFocused: Bool
     var body: some View {
         NavigationStack {
@@ -90,30 +93,27 @@ struct ContentView: View {
 #endif
             }
             .accessibility(identifier: "MainTabView")
+            #if os(watchOS)
+            .sheet(isPresented: $isAudioControllerPresented, content: { AudioControllerView() })
+            .sheet(isPresented: $isNewFeaturePresented, onDismiss: {
+                isNewFeatureTipped = true
+            }, content: { NewFeaturesView() })
+            #endif
             .sheet(isPresented: $isTermsPresented, onDismiss: {
                 isReadTerms = true
             }, content: { TermsListView() })
-            .sheet(isPresented: $isOldSystemTipPresented, onDismiss: {
-                isOldSystemTipped = true
-            }, content: {
-                ScrollView {
-                    VStack {
-                        Text("过时的 watchOS")
-                            .font(.title3)
-                        Text("您的 Apple Watch 运行的 watchOS 已过时，喵哩喵哩将在 2024/6/10 之后停止支持")
-                        Text("停止支持后，将不再为此版本系统提供功能性更新")
-                        Text("Darock 建议您保持更新最新版本系统")
-                    }
-                }
-            })
             .onAppear {
 #if os(watchOS)
+                if !isNewFeatureTipped {
+                    isNewFeaturePresented = true
+                }
                 if !isReadTerms {
                     isTermsPresented = true
                 }
-                if #unavailable(watchOS 10) {
-                    if !isOldSystemTipped {
-                        isOldSystemTipPresented = true
+                Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
+                    if pShouldPresentAudioController {
+                        pShouldPresentAudioController = false
+                        isAudioControllerPresented = true
                     }
                 }
 #endif

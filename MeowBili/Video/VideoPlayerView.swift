@@ -59,7 +59,8 @@ struct VideoPlayerView: View {
     @AppStorage("VideoPlayerGestureBehavior") var videoPlayerGestureBehavior = "Play/Pause"
     @State var tabviewChoseTab = 1
     @State var isFullScreen = false
-    @State var videoSpeed: Float = 1.0
+    @State var playbackSpeed = 1.0
+    @State var jumpToInput = ""
     #endif
     @State var currentTime: Double = 0.0
     @State var playerTimer: Timer?
@@ -183,23 +184,40 @@ struct VideoPlayerView: View {
                         Text("弹幕")
                     }
                     Section {
-                        Picker("播放倍速", selection: $videoSpeed) {
-                            Text("1x").tag(Float(1.0))
-                            Text("1.5x").tag(Float(1.5))
-                            Text("2x").tag(Float(2.0))
-                            Text("3x").tag(Float(3.0))
-                            Text("5x").tag(Float(5.0))
+                        HStack {
+                            VolumeControlView()
+                            Text("轻触后滑动数码表冠")
                         }
-                        .onChange(of: videoSpeed) {
-                            player.rate = videoSpeed
+                        .listRowBackground(Color.clear)
+                    } header: {
+                        Text("声音")
+                    }
+                    Section {
+                        Picker("播放倍速", selection: $playbackSpeed) {
+                            Text("0.5x").tag(0.5)
+                            Text("0.75x").tag(0.75)
+                            Text("1x").tag(1.0)
+                            Text("1.5x").tag(1.5)
+                            Text("2x").tag(2.0)
+                            Text("3x").tag(3.0)
+                            Text("5x").tag(5.0)
+                        }
+                        .onChange(of: playbackSpeed) {
+                            player.rate = Float(playbackSpeed)
+                        }
+                        TextField("跳转到...(秒)", text: $jumpToInput) {
+                            if let jt = Double(jumpToInput) {
+                                player.seek(to: CMTime(seconds: jt, preferredTimescale: 1))
+                            }
+                            jumpToInput = ""
                         }
                         Button(action: {
-                            player.seek(to: CMTime(seconds: currentTime + 10, preferredTimescale: 1))
+                            player.seek(to: CMTime(seconds: currentTime + 10, preferredTimescale: 60000))
                         }, label: {
                             Label("快进 10 秒", systemImage: "goforward.10")
                         })
                         Button(action: {
-                            player.seek(to: CMTime(seconds: currentTime - 10, preferredTimescale: 1))
+                            player.seek(to: CMTime(seconds: currentTime - 10, preferredTimescale: 60000))
                         }, label: {
                             Label("快退 10 秒", systemImage: "gobackward.10")
                         })
@@ -210,6 +228,7 @@ struct VideoPlayerView: View {
                 .tag(2)
             }
             .tabViewStyle(.page)
+            .toolbar(.hidden, for: .navigationBar)
             .ignoresSafeArea()
             .accessibilityQuickAction(style: .prompt) {
                 if isVideoPlayerGestureEnabled {

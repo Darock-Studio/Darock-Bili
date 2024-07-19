@@ -171,6 +171,7 @@ struct MainView: View {
         @State var showedAvidList = [UInt64]()
         @State var freshCount = 0
         @State var darockSuggestions = [[String: String]]()
+        @State var isShowingAudioController = false
         var body: some View {
             ZStack {
                 LargeFixedForm {
@@ -216,6 +217,22 @@ struct MainView: View {
                                 }
                             }
                         }
+                        #if os(watchOS)
+                        if isShowingAudioController {
+                            Section {
+                                Button(action: {
+                                    pShouldPresentAudioController = true
+                                }, label: {
+                                    HStack {
+                                        Spacer()
+                                        AudioVisualizerView()
+                                        Text("播放中")
+                                        Spacer()
+                                    }
+                                })
+                            }
+                        }
+                        #endif
                         if isShowVideoSuggestionsFromDarock && !darockSuggestions.isEmpty {
                             Section {
                                 ForEach(0..<darockSuggestions.count, id: \.self) { i in
@@ -303,6 +320,11 @@ struct MainView: View {
                 LoadDarockSuggestions()
                 if !isFirstLoaded {
                     LoadNewVideos()
+                    #if os(watchOS)
+                    Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
+                        isShowingAudioController = pIsAudioControllerAvailable
+                    }
+                    #endif
                     isFirstLoaded = true
                 }
                 DarockKit.Network.shared.requestString("https://fapi.darock.top:65535/bili/notice") { respStr, isSuccess in

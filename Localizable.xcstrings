@@ -145,6 +145,9 @@
         }
       }
     },
+    "“喵哩喵哩”新功能" : {
+
+    },
     "%@" : {
       "localizations" : {
         "en" : {
@@ -1030,6 +1033,12 @@
           }
         }
       }
+    },
+    "0.5x" : {
+
+    },
+    "0.75x" : {
+
     },
     "1.5x" : {
       "shouldTranslate" : false
@@ -2249,6 +2258,7 @@
       }
     },
     "Darock 建议您保持更新最新版本系统" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8769,6 +8779,7 @@
       }
     },
     "停止支持后，将不再为此版本系统提供功能性更新" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9267,6 +9278,9 @@
         }
       }
     },
+    "喵哩喵哩 - 音频播放" : {
+
+    },
     "喵哩喵哩 (%@)" : {
       "localizations" : {
         "en" : {
@@ -9554,6 +9568,9 @@
           }
         }
       }
+    },
+    "声音" : {
+
     },
     "声音与触感" : {
       "localizations" : {
@@ -10065,6 +10082,7 @@
       }
     },
     "您的 Apple Watch 运行的 watchOS 已过时，喵哩喵哩将在 2024/6/10 之后停止支持" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10281,6 +10299,9 @@
           }
         }
       }
+    },
+    "播放中" : {
+
     },
     "播放倍速" : {
       "localizations" : {
@@ -11718,6 +11739,15 @@
         }
       }
     },
+    "跳转到...(秒)" : {
+
+    },
+    "轻触后滑动数码表冠" : {
+
+    },
+    "轻触视频页左下角按钮即可以纯音频播放" : {
+
+    },
     "辅助功能" : {
       "localizations" : {
         "en" : {
@@ -11739,6 +11769,7 @@
       }
     },
     "过时的 watchOS" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11920,6 +11951,9 @@
           }
         }
       }
+    },
+    "音频播放" : {
+
     },
     "顶部" : {
       "localizations" : {
