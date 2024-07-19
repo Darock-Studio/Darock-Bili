@@ -159,11 +159,6 @@ struct DarockBili_Watch_AppApp: App {
     // Navigators
     @State var isUrlOpenVideoPresented = false
     @State var urlOpenVideoDetails = [String: String]()
-    // Audio Player
-    @State var shouldShowAudioPlayerPresenter = false
-    @State var audioPlayerPresenterOffset: CGFloat = 0
-    @State var isAudioPlayerPresented = false // Update from AudioPlayer.swift
-    @State var audioPlayerShouldPlayWhenEnter = true
     #if os(watchOS)
     @State var isMemoryWarningPresented = false
     #else
@@ -208,34 +203,6 @@ struct DarockBili_Watch_AppApp: App {
                 ZStack {
                     #if os(watchOS)
                     ContentView()
-                    if shouldShowAudioPlayerPresenter {
-                        VStack {
-                            Spacer()
-                            HStack {
-                                Spacer()
-                                Image(systemName: "chevron.compact.up")
-                                    .font(.system(size: 20))
-                                Spacer()
-                            }
-                            .gesture(
-                                DragGesture()
-                                    .onChanged { v in
-                                        if v.translation.height > 0 {
-                                            audioPlayerPresenterOffset = v.translation.height
-                                        }
-                                    }
-                                    .onEnded { v in
-                                        audioPlayerPresenterOffset = 0
-                                        if v.translation.height > 30 {
-                                            audioPlayerShouldPlayWhenEnter = false
-                                            isAudioPlayerPresented = true
-                                        }
-                                    }
-                            )
-                        }
-                        .ignoresSafeArea()
-                        .offset(y: audioPlayerPresenterOffset)
-                    }
                     VStack {
                         Spacer()
                         if isShowingTip {
@@ -319,10 +286,6 @@ struct DarockBili_Watch_AppApp: App {
                 .blur(radius: isLuminanceReduced && blurWhenScreenSleep ? 12 : 0)
                 #if os(watchOS)
                 .sheet(isPresented: $isMemoryWarningPresented, content: { MemoryWarningView() })
-                .sheet(isPresented: $isAudioPlayerPresented, onDismiss: {
-                    pIsAudioPlayerPresented = false
-                    isAudioPlayerPresented = false
-                }, content: { AudioPlayerView(shouldPlayWhenEnter: $audioPlayerShouldPlayWhenEnter) })
                 #endif
                 .onAppear {
                     #if os(watchOS)
@@ -332,8 +295,6 @@ struct DarockBili_Watch_AppApp: App {
                     Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
                         showTipText = pShowTipText
                         showTipSymbol = pShowTipSymbol
-                        shouldShowAudioPlayerPresenter = !audioPlayerPlayItems.isEmpty
-                        isAudioPlayerPresented = pIsAudioPlayerPresented ? true : isAudioPlayerPresented
                         UserDefaults.standard.set(isLowBatteryMode, forKey: "IsInLowBatteryMode")
                         Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
                             isShowingTip = pIsShowingTip
@@ -458,8 +419,8 @@ struct DarockBili_Watch_AppApp: App {
                 }
             }
         }
-        .onChange(of: scenePhase) { value in
-            switch value {
+        .onChange(of: scenePhase) {
+            switch scenePhase {
             case .background:
                 break
             case .inactive:
