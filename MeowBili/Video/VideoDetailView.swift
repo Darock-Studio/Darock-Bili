@@ -884,9 +884,7 @@ struct VideoDetailView: View {
                             if !isAudio {
                                 isVideoPlayerPresented = true
                             } else {
-                                audioPlayerPlayItems.append(.init(videoDetails: videoDetails, videoLink: videoLink, videoBvid: videoBvid, videoCID: videoCID))
-                                audioPlayerNowPlayingItemIndex = audioPlayerPlayItems.count - 1
-                                pIsAudioPlayerPresented = true
+                                playAudio(url: videoLink, id: videoDetails["BV"]!)
                             }
                             isLoading = false
                             #endif
