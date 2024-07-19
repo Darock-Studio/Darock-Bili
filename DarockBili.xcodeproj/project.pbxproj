@@ -283,7 +283,6 @@
 		8C82F8292BB70AA7009AEFD2 /* ssh-debug.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "ssh-debug.yml"; sourceTree = "<group>"; };
 		8C82F82A2BB70AA7009AEFD2 /* status-check.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "status-check.yml"; sourceTree = "<group>"; };
 		8C82F82B2BB70AA7009AEFD2 /* statuscheck-runner.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "statuscheck-runner.yml"; sourceTree = "<group>"; };
-		8C82F82C2BB70AA7009AEFD2 /* tf.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = tf.yml; sourceTree = "<group>"; };
 		8C82F82E2BB70AA7009AEFD2 /* CODE_OF_CONDUCT.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CODE_OF_CONDUCT.md; sourceTree = "<group>"; };
 		8C9776072BCECBC3006EDB58 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		8CA1BA102BD2AF9E009BCDFB /* PrivateSymbols.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrivateSymbols.m; sourceTree = "<group>"; };
@@ -471,7 +470,6 @@
 				8C82F8292BB70AA7009AEFD2 /* ssh-debug.yml */,
 				8C82F82A2BB70AA7009AEFD2 /* status-check.yml */,
 				8C82F82B2BB70AA7009AEFD2 /* statuscheck-runner.yml */,
-				8C82F82C2BB70AA7009AEFD2 /* tf.yml */,
 			);
 			path = workflows;
 			sourceTree = "<group>";
