@@ -37,6 +37,7 @@ jobs:
   get-head-sha:
     name: Get Pull Request Head SHA
     needs: checkif
+    if: ${{ needs.checkif.outputs.shouldc == 'true' || needs.checkif.outputs.shouldtun == 'true' || needs.checkif.outputs.shouldtui == 'true' }}
     runs-on: ubuntu-latest
     outputs:
       psha: ${{ steps.getsha.outputs.psha }}
