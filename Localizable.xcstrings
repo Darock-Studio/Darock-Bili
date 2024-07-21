@@ -417,29 +417,6 @@
         }
       }
     },
-    "%lld" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld"
-          }
-        }
-      }
-    },
     "%lld / %lld" : {
       "localizations" : {
         "en" : {
@@ -520,29 +497,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld%%"
-          }
-        }
-      }
-    },
-    "+86" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "+86"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "+86"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "+86"
           }
         }
       }
@@ -2230,40 +2184,12 @@
         }
       }
     },
-    "Darock 会收集必要的诊断信息以便进行改进，信息不会关联到您个人。如果您不愿意被收集信息，请勿发送。" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Darock will collect essential diagnosis infos, which doesn’t relates with your identity, in order to fix the issue. Please do not send if you do not wish datas to be collected."
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Darock將收集必要的診斷信息以便進行改進，信息不會關聯到您個人。如果您不願意被收集信息，請勿發送。"
-          }
-        }
-      }
-    },
     "Darock 会收集必要的诊断信息以便进行改进。如果您不愿意被收集信息，请勿发送。" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Darock will collect essential diagnosis infos in order to fix the issue. Do not send if you do not wish your datas to be collected."
-          }
-        }
-      }
-    },
-    "Darock 建议您保持更新最新版本系统" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Darock recommends you to keep up with the latest system."
           }
         }
       }
@@ -3231,83 +3157,6 @@
         }
       }
     },
-    "Feedback.continue-on-other-device" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "variations" : {
-            "device" : {
-              "applewatch" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Continue on iPhone"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Scan to Continue"
-                }
-              }
-            }
-          }
-        },
-        "ja" : {
-          "variations" : {
-            "device" : {
-              "applewatch" : {
-                "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "iPhone上で続ける"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "iPhone上で続ける"
-                }
-              }
-            }
-          }
-        },
-        "zh-Hans" : {
-          "variations" : {
-            "device" : {
-              "applewatch" : {
-                "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "在iPhone上继续"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "扫描QR码以继续"
-                }
-              }
-            }
-          }
-        },
-        "zh-Hant" : {
-          "variations" : {
-            "device" : {
-              "applewatch" : {
-                "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "在iPhone上繼續"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "在iPhone上繼續"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "FocusStateDebug" : {
       "localizations" : {
         "en" : {
@@ -3945,35 +3794,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "已掃描"
-          }
-        }
-      }
-    },
-    "Login.step1.phone-number" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Telephone Number"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "電話番号"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "电话号码"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "電話號碼"
           }
         }
       }
@@ -4708,35 +4528,6 @@
         }
       }
     },
-    "Player.pause" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "一時停止"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "暂停"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "暫停"
-          }
-        }
-      }
-    },
     "Player.record-history" : {
       "localizations" : {
         "en" : {
@@ -5045,35 +4836,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "\"屏幕使用時間\"會記錄並統計您每天使用喵哩喵哩的時間"
-          }
-        }
-      }
-    },
-    "Search.%@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ Search..."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ 検索中…"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ 搜索…"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ 搜尋…"
           }
         }
       }
@@ -5454,35 +5216,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "開發者"
-          }
-        }
-      }
-    },
-    "Settings.feedback" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Feedback"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "フィードバック"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "反馈"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "回饋"
           }
         }
       }
@@ -7421,65 +7154,6 @@
         }
       }
     },
-    "Update.install-by-testflight" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "variations" : {
-            "device" : {
-              "applewatch" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Update via Testflight on iPhone"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Update via Testflight"
-                }
-              }
-            }
-          }
-        },
-        "ja" : {
-          "variations" : {
-            "device" : {
-              "applewatch" : {
-                "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "iPhoneのTestflightで更新する"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "iPhoneのTestflightで更新する"
-                }
-              }
-            }
-          }
-        },
-        "zh-Hans" : {
-          "variations" : {
-            "device" : {
-              "applewatch" : {
-                "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "通过iPhone的Testflight更新"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "通过Testflight更新"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "Update.latest" : {
       "localizations" : {
         "en" : {
@@ -7616,34 +7290,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "關注帳戶"
-          }
-        }
-      }
-    },
-    "User.switch" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Switch Account"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アカウントを切り替える"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "切换账户"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "切換帳戶"
           }
         }
       }
@@ -8046,111 +7692,6 @@
         }
       }
     },
-    "Video.details.danmaku.%lld" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld danmaku"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld danmakus"
-                }
-              }
-            }
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld条の弾幕"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld条弹幕"
-          }
-        }
-      }
-    },
-    "Video.details.publish-time.%@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@に公開されました"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "发布于%@"
-          }
-        }
-      }
-    },
-    "Video.details.watches.%lld" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld view"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld views"
-                }
-              }
-            }
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld再生"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld播放"
-          }
-        }
-      }
-    },
-    "Video.details.watching-people.%@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Video.details.watching-people.%@"
-          }
-        }
-      },
-      "shouldTranslate" : false
-    },
     "Video.details.watching-people.%lld" : {
       "localizations" : {
         "en" : {
@@ -8296,29 +7837,6 @@
         }
       }
     },
-    "Video.play-in-audio" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Play as Audio"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "オーディオを再生する"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "播放音频"
-          }
-        }
-      }
-    },
     "Video.trending" : {
       "localizations" : {
         "en" : {
@@ -8439,144 +7957,12 @@
         }
       }
     },
-    "不丹 975" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bhutan 975"
-          }
-        }
-      }
-    },
     "不支持全键盘的 Apple Watch 可通过打开此开关以使用第三方的全键盘" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Apple Watch that doesn’t support full-keyboard can toggle this on and use third-party full-keyboard."
-          }
-        }
-      }
-    },
-    "中国台湾 886" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Taiwan, Province of 886"
-          }
-        }
-      }
-    },
-    "中国大陆 86" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "China Mainland"
-          }
-        }
-      }
-    },
-    "中国澳门特别行政区 853" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Macau, SAR 853"
-          }
-        }
-      }
-    },
-    "中国香港特别行政区 852" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hong, SAR 852"
-          }
-        }
-      }
-    },
-    "丹麦 45" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Denmark 45"
-          }
-        }
-      }
-    },
-    "乌克兰 380" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ukraine 380"
-          }
-        }
-      }
-    },
-    "乌兹别克斯坦 998" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uzbekistan 998"
-          }
-        }
-      }
-    },
-    "乌干达 256" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uganda 256"
-          }
-        }
-      }
-    },
-    "乌拉圭 598" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uruguay 598"
-          }
-        }
-      }
-    },
-    "乍得 235" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chad 235"
-          }
-        }
-      }
-    },
-    "也门 967" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yemen 967"
           }
         }
       }
@@ -8609,17 +7995,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Internet"
-          }
-        }
-      }
-    },
-    "亚美尼亚 374" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Armenia 374"
           }
         }
       }
@@ -8682,50 +8057,6 @@
         }
       }
     },
-    "以色列 972" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Israel 972"
-          }
-        }
-      }
-    },
-    "伊拉克 964" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Iraq 964"
-          }
-        }
-      }
-    },
-    "伊朗 98" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Iran 98"
-          }
-        }
-      }
-    },
-    "伯利兹 501" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Belize 501"
-          }
-        }
-      }
-    },
     "使用“相机”App" : {
       "localizations" : {
         "en" : {
@@ -8752,39 +8083,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Use Third-party Full-keyboard"
-          }
-        }
-      }
-    },
-    "俄罗斯 7" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Russia 7"
-          }
-        }
-      }
-    },
-    "保加利亚 359" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bulgaria 359"
-          }
-        }
-      }
-    },
-    "停止支持后，将不再为此版本系统提供功能性更新" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "We’ll not provide any functional update for this system after we stops support"
           }
         }
       }
@@ -8847,17 +8145,6 @@
         }
       }
     },
-    "冰岛 354" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Iceland 354"
-          }
-        }
-      }
-    },
     "分析与改进" : {
       "localizations" : {
         "en" : {
@@ -8877,17 +8164,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "List Data"
-          }
-        }
-      }
-    },
-    "加拿大 1" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Canada 1"
           }
         }
       }
@@ -8980,83 +8256,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "動態詳情"
-          }
-        }
-      }
-    },
-    "匈牙利 36" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hungary 36"
-          }
-        }
-      }
-    },
-    "南非 27" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "South Africa 27"
-          }
-        }
-      }
-    },
-    "博茨瓦纳 267" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Botswana 267"
-          }
-        }
-      }
-    },
-    "印尼 62" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Indonesia 62"
-          }
-        }
-      }
-    },
-    "印度 91" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "India 91"
-          }
-        }
-      }
-    },
-    "厄瓜多尔 593" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ecuador 593"
-          }
-        }
-      }
-    },
-    "厄立特里亚 291" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eritrea 291"
           }
         }
       }
@@ -9156,7 +8355,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Send Danmaku"
+            "value" : "Danmaku"
           }
         },
         "ja" : {
@@ -9189,17 +8388,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Send Comment"
-          }
-        }
-      }
-    },
-    "叙利亚 963" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Syria 963"
           }
         }
       }
@@ -9351,94 +8539,6 @@
         }
       }
     },
-    "图瓦卢 688" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tuvalu 688"
-          }
-        }
-      }
-    },
-    "土库曼斯坦 993" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Turkmenistan 993"
-          }
-        }
-      }
-    },
-    "土耳其 90" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Turkey 90"
-          }
-        }
-      }
-    },
-    "圣卢西亚 1784" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Saint Lucia 1784"
-          }
-        }
-      }
-    },
-    "圣多美和普林西比 239" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sao Tome and Principe 239"
-          }
-        }
-      }
-    },
-    "圣皮埃尔和密克隆群岛 508" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "St. Pierre and Miquelon Islands 508"
-          }
-        }
-      }
-    },
-    "圣马力诺 378" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "San Marino 378"
-          }
-        }
-      }
-    },
-    "在App内反馈" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Feedback in App"
-          }
-        }
-      }
-    },
     "在iPhone上继续" : {
       "localizations" : {
         "en" : {
@@ -9493,78 +8593,12 @@
         }
       }
     },
-    "坦桑尼亚 255" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tanzania 255"
-          }
-        }
-      }
-    },
     "垂下手腕时隐藏内容" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hide content when lowering the wrist."
-          }
-        }
-      }
-    },
-    "塞内加尔 221" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Senegal 221"
-          }
-        }
-      }
-    },
-    "塞尔维亚 381" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Serbia 381"
-          }
-        }
-      }
-    },
-    "塞拉利昂 232" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sierra Leone 232"
-          }
-        }
-      }
-    },
-    "塞浦路斯 357" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cyprus 357"
-          }
-        }
-      }
-    },
-    "塞舌尔共和国 248" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Republic of Seychelles 248"
           }
         }
       }
@@ -9578,56 +8612,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sound & Haptic"
-          }
-        }
-      }
-    },
-    "复制" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "複製"
-          }
-        }
-      }
-    },
-    "多哥 228" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Togo 228"
-          }
-        }
-      }
-    },
-    "多米尼加 1767" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dominica 1767"
-          }
-        }
-      }
-    },
-    "多米尼加代表 1809" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dominican Representative 1809"
           }
         }
       }
@@ -9668,17 +8652,6 @@
         }
       }
     },
-    "委内瑞拉 58" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Venezuela 58"
-          }
-        }
-      }
-    },
     "媒体" : {
       "localizations" : {
         "en" : {
@@ -9705,34 +8678,12 @@
         }
       }
     },
-    "孟加拉国 880" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bangladesh 880"
-          }
-        }
-      }
-    },
     "完成" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Done"
-          }
-        }
-      }
-    },
-    "密克罗尼西亚 691" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Micronesia 691"
           }
         }
       }
@@ -9795,50 +8746,6 @@
         }
       }
     },
-    "尼加拉瓜 505" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nicaragua 505"
-          }
-        }
-      }
-    },
-    "尼日利亚 234" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nigeria 234"
-          }
-        }
-      }
-    },
-    "尼日尔 227" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Niger 227"
-          }
-        }
-      }
-    },
-    "尼泊尔 977" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nepal 977"
-          }
-        }
-      }
-    },
     "已使用 %@ MB" : {
       "localizations" : {
         "en" : {
@@ -9867,50 +8774,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "已選擇的圖片"
-          }
-        }
-      }
-    },
-    "布基纳法索 226" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Burkina Faso 226"
-          }
-        }
-      }
-    },
-    "布隆迪 257" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Burundi 257"
-          }
-        }
-      }
-    },
-    "希腊 30" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Greece 30"
-          }
-        }
-      }
-    },
-    "帕劳 680" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Palau 680"
           }
         }
       }
@@ -9957,29 +8820,6 @@
         }
       }
     },
-    "开启“屏幕使用时间”" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable \"Screen Time\""
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "「画面使用時間」を開始する"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "開啟「螢幕使用時間」"
-          }
-        }
-      }
-    },
     "弹幕" : {
       "localizations" : {
         "en" : {
@@ -9998,17 +8838,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "彈幕"
-          }
-        }
-      }
-    },
-    "德国 49" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Germen 49"
           }
         }
       }
@@ -10081,28 +8910,6 @@
         }
       }
     },
-    "您的 Apple Watch 运行的 watchOS 已过时，喵哩喵哩将在 2024/6/10 之后停止支持" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The watchOS running on your Apple Watch had been out-of-date, and MeowBili will stop support in 2024/6/10"
-          }
-        }
-      }
-    },
-    "意大利 39" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Italy 39"
-          }
-        }
-      }
-    },
     "我的收藏" : {
       "localizations" : {
         "en" : {
@@ -10135,45 +8942,6 @@
         }
       }
     },
-    "所罗门群岛 677" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Solomon Islands 677"
-          }
-        }
-      }
-    },
-    "手记建议" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Journal Recommendations"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "手記建議"
-          }
-        }
-      }
-    },
-    "托克劳岛 690" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tokelau Island 690"
-          }
-        }
-      }
-    },
     "扩展的触感反馈" : {
       "localizations" : {
         "en" : {
@@ -10184,23 +8952,12 @@
         }
       }
     },
-    "挪威 47" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Norway 47"
-          }
-        }
-      }
-    },
     "推荐" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Recommendations"
+            "value" : "Suggestion"
           }
         },
         "ja" : {
@@ -10243,39 +9000,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Search"
-          }
-        }
-      }
-    },
-    "摩尔多瓦 373" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Moldova 373"
-          }
-        }
-      }
-    },
-    "摩洛哥 212" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Morocco 212"
-          }
-        }
-      }
-    },
-    "摩纳哥 377" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Monaco 377"
           }
         }
       }
@@ -10349,117 +9073,12 @@
         }
       }
     },
-    "文本加载失败" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Text Loading Failed"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "文本加載失敗"
-          }
-        }
-      }
-    },
-    "文莱 673" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Brunei 673"
-          }
-        }
-      }
-    },
-    "斯威士兰 268" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Swazland 268"
-          }
-        }
-      }
-    },
-    "斯洛伐克 421" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Slovakia 421"
-          }
-        }
-      }
-    },
-    "斯洛文尼亚 386" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Slovenia 386"
-          }
-        }
-      }
-    },
-    "斯里兰卡 94" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sri Lanka 94"
-          }
-        }
-      }
-    },
-    "新加坡 65" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Singapore"
-          }
-        }
-      }
-    },
     "新建反馈" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "New Feedback"
-          }
-        }
-      }
-    },
-    "新西兰 64" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "New Zealand 64"
-          }
-        }
-      }
-    },
-    "日本 81" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Japan 81"
           }
         }
       }
@@ -10566,17 +9185,6 @@
         }
       }
     },
-    "智利 56" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chile 56"
-          }
-        }
-      }
-    },
     "暂停->退出" : {
       "localizations" : {
         "en" : {
@@ -10665,28 +9273,6 @@
         }
       }
     },
-    "格鲁吉亚 995" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Georgia 995"
-          }
-        }
-      }
-    },
-    "桑给巴尔岛 259" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zanzibar Island 259"
-          }
-        }
-      }
-    },
     "模式" : {
       "localizations" : {
         "en" : {
@@ -10735,149 +9321,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Normal"
-          }
-        }
-      }
-    },
-    "比利时 32" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Belgium 32"
-          }
-        }
-      }
-    },
-    "毛里塔尼亚 222" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mauritania 222"
-          }
-        }
-      }
-    },
-    "毛里求斯 230" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mauritius 230"
-          }
-        }
-      }
-    },
-    "汤加 676" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tonga 676"
-          }
-        }
-      }
-    },
-    "沙特阿拉伯 966" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Saudi Arabia 966"
-          }
-        }
-      }
-    },
-    "法国 33" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "France 33"
-          }
-        }
-      }
-    },
-    "法属圭亚那 594" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "French Guiana 594"
-          }
-        }
-      }
-    },
-    "法属波利尼西亚 689" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "French Polynesia 689"
-          }
-        }
-      }
-    },
-    "法罗岛 298" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Faro Island 298"
-          }
-        }
-      }
-    },
-    "波兰 48" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Poland 48"
-          }
-        }
-      }
-    },
-    "波多黎各 1787" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Puerto Rico 1787"
-          }
-        }
-      }
-    },
-    "波黑 387" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bosnia and Herzegovina 387"
-          }
-        }
-      }
-    },
-    "泰国 66" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Thailand 66"
           }
         }
       }
@@ -10934,17 +9377,6 @@
         }
       }
     },
-    "澳大利亚 61" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Australia 61"
-          }
-        }
-      }
-    },
     "热搜" : {
       "localizations" : {
         "en" : {
@@ -10955,111 +9387,12 @@
         }
       }
     },
-    "牙买加 1876" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Jamaica 1876"
-          }
-        }
-      }
-    },
-    "特克斯和凯科斯 1649" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Turks and Caicos 1649"
-          }
-        }
-      }
-    },
-    "特立尼达和多巴哥 1868" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trinidad and Tobago 1868"
-          }
-        }
-      }
-    },
     "状态" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Status"
-          }
-        }
-      }
-    },
-    "玻利维亚 591" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bolivia 591"
-          }
-        }
-      }
-    },
-    "瑙鲁 674" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nauru 674"
-          }
-        }
-      }
-    },
-    "瑞典 46" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sweden 46"
-          }
-        }
-      }
-    },
-    "瑞士 41" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Switzerland 41"
-          }
-        }
-      }
-    },
-    "瓦利斯群岛和富图纳群岛 1681" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wallis Islands and Futuna Islands 1681"
-          }
-        }
-      }
-    },
-    "瓦努阿图 678" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vanuatu 678"
           }
         }
       }
@@ -11096,17 +9429,6 @@
         }
       }
     },
-    "直布罗陀 350" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gibraltar 350"
-          }
-        }
-      }
-    },
     "离线缓存" : {
       "localizations" : {
         "en" : {
@@ -11125,28 +9447,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "離線緩存"
-          }
-        }
-      }
-    },
-    "科特迪瓦 225" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Côte d'Ivire 225"
-          }
-        }
-      }
-    },
-    "秘鲁 51" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Peru 51"
           }
         }
       }
@@ -11195,17 +9495,6 @@
         }
       }
     },
-    "突尼斯 216" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tunisia 216"
-          }
-        }
-      }
-    },
     "简洁地描述问题" : {
       "localizations" : {
         "en" : {
@@ -11236,50 +9525,6 @@
         }
       }
     },
-    "索马里 252" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Somalia 252"
-          }
-        }
-      }
-    },
-    "约旦 962" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Jordan 962"
-          }
-        }
-      }
-    },
-    "纳米比亚 264" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Namibia 264"
-          }
-        }
-      }
-    },
-    "纽埃岛 683" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Niue Island 683"
-          }
-        }
-      }
-    },
     "经验" : {
       "localizations" : {
         "en" : {
@@ -11298,39 +9543,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "經驗"
-          }
-        }
-      }
-    },
-    "维珍群岛(美属) 1340" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Virgin Islands (US) 1340"
-          }
-        }
-      }
-    },
-    "维珍群岛(英属) 1284" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Virgin Islands (British) 1284"
-          }
-        }
-      }
-    },
-    "缅甸 95" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Myanmar 95"
           }
         }
       }
@@ -11355,144 +9567,12 @@
         }
       }
     },
-    "美国 1" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "United States 1"
-          }
-        }
-      }
-    },
-    "苏丹 249" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sudan 249"
-          }
-        }
-      }
-    },
-    "苏里南 597" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Suriname 597"
-          }
-        }
-      }
-    },
-    "英国 44" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "United Kingdom 44"
-          }
-        }
-      }
-    },
-    "莫桑比克 258" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mozambique 258"
-          }
-        }
-      }
-    },
-    "萨尔瓦多 503" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "El Salvador 503"
-          }
-        }
-      }
-    },
-    "萨摩亚，东部 684" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Samoa, East 684"
-          }
-        }
-      }
-    },
-    "萨摩亚，西部 685" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Samoa, West 685"
-          }
-        }
-      }
-    },
-    "葡萄牙 351" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Portugal 351"
-          }
-        }
-      }
-    },
-    "蒙古 976" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mongolia 976"
-          }
-        }
-      }
-    },
-    "蒙特塞拉特岛 1664" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Montserrat Island 1664"
-          }
-        }
-      }
-    },
     "行为" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Action"
-          }
-        }
-      }
-    },
-    "西班牙 34" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Spain 34"
           }
         }
       }
@@ -11631,67 +9711,12 @@
         }
       }
     },
-    "请求在线支持 (Beta)" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Request Online Support (Beta)"
-          }
-        }
-      }
-    },
-    "诺福克岛 672" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Norfolk Island 672"
-          }
-        }
-      }
-    },
     "调试构建" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Debug"
-          }
-        }
-      }
-    },
-    "贝宁 229" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Benin 229"
-          }
-        }
-      }
-    },
-    "赞比亚 260" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zambia 260"
-          }
-        }
-      }
-    },
-    "赤道几内亚 240" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Equatorial Guinea 240"
           }
         }
       }
@@ -11728,17 +9753,6 @@
         }
       }
     },
-    "越南 84" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vietnam 84"
-          }
-        }
-      }
-    },
     "跳转到...(秒)" : {
 
     },
@@ -11764,28 +9778,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Entered Content Incorrect"
-          }
-        }
-      }
-    },
-    "过时的 watchOS" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Outdated watchOS"
-          }
-        }
-      }
-    },
-    "迪戈加西亚岛 246" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Digo Garcia Island 246"
           }
         }
       }
@@ -11831,29 +9823,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "選擇圖片"
-          }
-        }
-      }
-    },
-    "选择文本" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select Texts"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "テキストを選択"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "選擇文本"
           }
         }
       }
@@ -11910,17 +9879,6 @@
         }
       }
     },
-    "阿森松岛 247" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ascension Island 247"
-          }
-        }
-      }
-    },
     "降低亮度" : {
       "localizations" : {
         "en" : {
@@ -11937,17 +9895,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Privacy & Security"
-          }
-        }
-      }
-    },
-    "韩国 82" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "South Korea 82"
           }
         }
       }
@@ -11983,127 +9930,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "顏色"
-          }
-        }
-      }
-    },
-    "马其顿 389" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Macedonia 389"
-          }
-        }
-      }
-    },
-    "马尔代夫 960" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Maldives 960"
-          }
-        }
-      }
-    },
-    "马拉维 265" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Malawi 265"
-          }
-        }
-      }
-    },
-    "马提尼克岛 596" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Martinique 596"
-          }
-        }
-      }
-    },
-    "马来西亚 60" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Malaysia 60"
-          }
-        }
-      }
-    },
-    "马歇尔岛 692" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Marshall Island 692"
-          }
-        }
-      }
-    },
-    "马耳他 356" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Malta 356"
-          }
-        }
-      }
-    },
-    "马达加斯加 261" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Madagascar 261"
-          }
-        }
-      }
-    },
-    "马里 223" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mali 223"
-          }
-        }
-      }
-    },
-    "马里亚纳岛 1670" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mariana Island 1670"
-          }
-        }
-      }
-    },
-    "墨西哥 52" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mexico 52"
           }
         }
       }

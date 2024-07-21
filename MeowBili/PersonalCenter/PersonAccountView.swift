@@ -109,18 +109,6 @@ struct PersonAccountView: View {
                 })
                 .buttonBorderShape(.roundedRectangle(radius: 13))
 #endif
-                Button(action: { isUserSwitchPresented = true }, label: {
-                    HStack {
-                        HStack {
-                            Image(privateSystemName: "person.lanyardcard.fill")
-                                .foregroundColor(.accentColor)
-                            Text("User.switch")
-                        }
-                        .font(.system(size: 16))
-                        Spacer()
-                    }
-                })
-                .sheet(isPresented: $isNewUserPresenting, content: { LoginView() })
                 Group {
                     Section {
                         NavigationLink(destination: { FollowListView(viewUserId: dedeUserID) }, label: {
