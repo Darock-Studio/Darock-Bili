@@ -112,7 +112,7 @@ struct VideoDownloadView: View {
                                         var detTmp = videoDetails
                                         detTmp.updateValue(filePath, forKey: "Path")
                                         detTmp.updateValue(String(Date.now.timeIntervalSince1970), forKey: "Time")
-                                        UserDefaults.standard.set(detTmp, forKey: bvid)
+                                        UserDefaults.standard.set(detTmp, forKey: "\(bvid)\(isPaged ? String(VideoDownloadView.downloadCID!) : "")")
                                         downloadingProgressDatas[currentDownloadingIndex].isFinished = true
                                     } else {
                                         UserDefaults.standard.set(r.resumeData, forKey: "VideoDownloadResumeData\(currentDownloadingIndex)")
