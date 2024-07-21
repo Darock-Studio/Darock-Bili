@@ -35,11 +35,11 @@ struct SearchMainView: View {
     @AppStorage("SESSDATA") var sessdata = ""
     @AppStorage("bili_jct") var biliJct = ""
     @AppStorage("IsShowHotsInSearch") var isShowHotsInSearch = true
+    @AppStorage("IsHotSearchFolded") var isHotSearchFolded = false
     @State var searchText = ""
     @State var isSearchPresented = false
     @State var searchHistory = [String]()
     @State var hotSearches = [String]()
-    @State var isHotSearchFolded = false
     var body: some View {
         List {
             Section {

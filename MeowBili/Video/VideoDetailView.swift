@@ -241,8 +241,8 @@ struct VideoDetailView: View {
                                             Spacer()
                                         }
                                         .padding(5)
-                                        .cornerRadius(12)
                                         .background(Color.gray.opacity(0.35))
+                                        .cornerRadius(12)
                                     })
                                     .accessibilityIdentifier("OwnerDetailButton")
                                     .onDrag {

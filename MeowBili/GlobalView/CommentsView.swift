@@ -55,7 +55,7 @@ struct CommentsView: View {
                                     .resizable()
                                     .frame(width: 35, height: 35)
                                     .clipShape(Circle())
-                                VStack {
+                                VStack(alignment: .leading) {
                                     NavigationLink("", isActive: $isSenderDetailsPresented[i], destination: { UserDetailView(uid: comments[i]["SenderID"]!) })
                                         .frame(width: 0, height: 0)
                                     HStack {
