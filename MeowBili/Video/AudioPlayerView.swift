@@ -45,7 +45,6 @@ struct AudioControllerView: View {
     @State var playbackBehavior = PlaybackBehavior.pause
     @State var backgroundImageUrl: URL?
     @State var videoName = ""
-    @State var isCoverImageViewPresented = false
     var body: some View {
         NavigationStack {
             ZStack {
@@ -63,13 +62,6 @@ struct AudioControllerView: View {
                         .frame(width: 120, height: 80)
                         .shadow(color: .black.opacity(0.5), radius: 5, x: 1, y: 2)
                         .offset(y: -24)
-                        .sheet(isPresented: $isCoverImageViewPresented, content: {
-                            ImageViewerView(url: backgroundImageUrl.absoluteString)
-                                .toolbar(.visible, for: .navigationBar)
-                        })
-                        .onTapGesture {
-                            isCoverImageViewPresented = true
-                        }
                 } else {
                     RoundedRectangle(cornerRadius: 14)
                         .frame(width: 120, height: 80)
