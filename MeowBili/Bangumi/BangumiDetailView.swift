@@ -247,6 +247,9 @@ struct BangumiDetailView: View {
                         let headers: HTTPHeaders = [
                             "cookie": "SESSDATA=\(sessdata)",
                             "Referer": "https://www.bilibili.com/bangumi/play/ep\(epDatas[i].epid)",
+                            "Origin": "https://www.bilibili.com",
+                            "Accept": "application/json, text/plain, */*",
+                            "Accept-Language": "zh-CN,zh;q=0.9",
                             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                         ]
                         DarockKit.Network.shared.requestJSON("https://api.bilibili.com/pgc/player/web/v2/playurl?ep_id=\(epDatas[i].epid)&qn=32&fnval=1&session=5a90f7022988409ff9fa72a3c25cd576", headers: headers) { respJson, isSuccess in
@@ -276,6 +279,9 @@ struct BangumiDetailView: View {
                                 let headers: HTTPHeaders = [
                                     "cookie": "SESSDATA=\(sessdata)",
                                     "Referer": "https://www.bilibili.com/bangumi/play/ep\(epDatas[i].epid)",
+                                    "Origin": "https://www.bilibili.com",
+                                    "Accept": "application/json, text/plain, */*",
+                                    "Accept-Language": "zh-CN,zh;q=0.9",
                                     "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                 ]
                                 DarockKit.Network.shared.requestJSON("https://api.bilibili.com/pgc/player/web/v2/playurl?ep_id=\(epDatas[i].epid)&qn=64&fnval=1&session=5a90f7022988409ff9fa72a3c25cd576", headers: headers) { respJson, isSuccess in
