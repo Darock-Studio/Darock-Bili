@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -204,6 +204,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		8C2DFCB92C4E6B2C003AEC67 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B44689C42B4FC15A002CCEB2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CA7CBBF2B77AC4A008E587F;
+			remoteInfo = MeowBili;
+		};
 		8C617F542B92334B000A3687 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B44689C42B4FC15A002CCEB2 /* Project object */;
@@ -264,6 +271,7 @@
 		03B5D24A2C4691E700BF8322 /* SwitchAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchAccountView.swift; sourceTree = "<group>"; };
 		8C0557E02B7A0480009D9CD0 /* MeowBili.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeowBili.entitlements; sourceTree = "<group>"; };
 		8C2DFCAE2C4AA15C003AEC67 /* NewFeaturesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeaturesView.swift; sourceTree = "<group>"; };
+		8C2DFCB52C4E6B2B003AEC67 /* MeowBiliTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeowBiliTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C617F3E2B92334B000A3687 /* SafariExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SafariExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C617F402B92334B000A3687 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
 		8C617F432B92334B000A3687 /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; path = _locales; sourceTree = "<group>"; };
@@ -373,7 +381,18 @@
 		E2B720932B67858E00ABB0A6 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		8C2DFCB62C4E6B2C003AEC67 /* MeowBiliTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = MeowBiliTests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		8C2DFCB22C4E6B2B003AEC67 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8C617F3B2B92334B000A3687 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -726,6 +745,7 @@
 				8CB0D0222B88CE980057EF1C /* ci_scripts */,
 				B4468A142B4FC24A002CCEB2 /* JSONReturnExamples */,
 				8CA7CBC12B77AC4A008E587F /* MeowBili */,
+				8C2DFCB62C4E6B2C003AEC67 /* MeowBiliTests */,
 				8CC5B7412B8749BC00BAD89E /* MeowBiliUITests */,
 				8C617F3F2B92334B000A3687 /* SafariExtension */,
 				B44689CB2B4FC15A002CCEB2 /* Products */,
@@ -740,6 +760,7 @@
 				8CA7CBCF2B77AC4C008E587F /* 喵哩喵哩.app */,
 				8CC5B7402B8749BC00BAD89E /* MeowBiliUITests.xctest */,
 				8C617F3E2B92334B000A3687 /* SafariExtension.appex */,
+				8C2DFCB52C4E6B2B003AEC67 /* MeowBiliTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -765,6 +786,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8C2DFCB42C4E6B2B003AEC67 /* MeowBiliTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8C2DFCBE2C4E6B2C003AEC67 /* Build configuration list for PBXNativeTarget "MeowBiliTests" */;
+			buildPhases = (
+				8C2DFCB12C4E6B2B003AEC67 /* Sources */,
+				8C2DFCB22C4E6B2B003AEC67 /* Frameworks */,
+				8C2DFCB32C4E6B2B003AEC67 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8C2DFCBA2C4E6B2C003AEC67 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				8C2DFCB62C4E6B2C003AEC67 /* MeowBiliTests */,
+			);
+			name = MeowBiliTests;
+			packageProductDependencies = (
+			);
+			productName = MeowBiliTests;
+			productReference = 8C2DFCB52C4E6B2B003AEC67 /* MeowBiliTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		8C617F3D2B92334B000A3687 /* SafariExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C617F572B92334B000A3687 /* Build configuration list for PBXNativeTarget "SafariExtension" */;
@@ -883,9 +927,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastSwiftUpdateCheck = 1530;
+				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
+					8C2DFCB42C4E6B2B003AEC67 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = 8CA7CBBF2B77AC4A008E587F;
+					};
 					8C617F3D2B92334B000A3687 = {
 						CreatedOnToolsVersion = 15.2;
 					};
@@ -943,6 +991,7 @@
 			targets = (
 				8CA7CBBF2B77AC4A008E587F /* MeowBili */,
 				8CA7CBCE2B77AC4C008E587F /* MeowBili Watch App */,
+				8C2DFCB42C4E6B2B003AEC67 /* MeowBiliTests */,
 				8CC5B73F2B8749BC00BAD89E /* MeowBiliUITests */,
 				8C617F3D2B92334B000A3687 /* SafariExtension */,
 				8C82F8202BB709E1009AEFD2 /* Alternative Destribution */,
@@ -951,6 +1000,13 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8C2DFCB32C4E6B2B003AEC67 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8C617F3C2B92334B000A3687 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1043,6 +1099,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8C2DFCB12C4E6B2B003AEC67 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8C617F3A2B92334B000A3687 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1199,6 +1262,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		8C2DFCBA2C4E6B2C003AEC67 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8CA7CBBF2B77AC4A008E587F /* MeowBili */;
+			targetProxy = 8C2DFCB92C4E6B2C003AEC67 /* PBXContainerItemProxy */;
+		};
 		8C617F552B92334B000A3687 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8C617F3D2B92334B000A3687 /* SafariExtension */;
@@ -1222,6 +1290,77 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		8C2DFCBB2C4E6B2C003AEC67 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B57D8PP775;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.darock.MeowBiliTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MeowBili.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MeowBili";
+			};
+			name = Debug;
+		};
+		8C2DFCBC2C4E6B2C003AEC67 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B57D8PP775;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.darock.MeowBiliTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MeowBili.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MeowBili";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8C2DFCBD2C4E6B2C003AEC67 /* Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B57D8PP775;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.darock.MeowBiliTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MeowBili.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MeowBili";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Alternative;
+		};
 		8C617F582B92334B000A3687 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1860,6 +1999,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8C2DFCBE2C4E6B2C003AEC67 /* Build configuration list for PBXNativeTarget "MeowBiliTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C2DFCBB2C4E6B2C003AEC67 /* Debug */,
+				8C2DFCBC2C4E6B2C003AEC67 /* Release */,
+				8C2DFCBD2C4E6B2C003AEC67 /* Alternative */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8C617F572B92334B000A3687 /* Build configuration list for PBXNativeTarget "SafariExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
