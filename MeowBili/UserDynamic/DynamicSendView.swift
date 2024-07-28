@@ -146,9 +146,9 @@ struct DynamicSendView: View {
                 }
             }
             .navigationTitle("发送动态")
-            .onChange(of: selectedPhotos) { value in
+            .onChange(of: selectedPhotos) {
                 convertedImages.removeAll()
-                for photo in value {
+                for photo in selectedPhotos {
                     photo.loadTransferable(type: UIImageTransfer.self) { result in
                         switch result {
                         case .success(let success):
