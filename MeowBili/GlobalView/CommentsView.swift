@@ -44,6 +44,7 @@ struct CommentsView: View {
     @State var presentRepliesGoto = ""
     @State var presentRepliesRootData = [String: String]()
     @State var isCommentRepliesPresented = false
+    @State var presentImageItem: String?
     var body: some View {
         ScrollView {
             LazyVStack {
@@ -92,6 +93,19 @@ struct CommentsView: View {
                                     }
 #endif
                                 Spacer()
+                            }
+                            if !comments[i]["Pictures"]!.isEmpty {
+                                let picUrls = comments[i]["Pictures"]!.components(separatedBy: "|")
+                                ForEach(0..<picUrls.count, id: \.self) { i in
+                                    WebImage(url: URL(string: picUrls[i]))
+                                        .resizable()
+                                        .scaledToFit()
+                                        .cornerRadius(10)
+                                        .frame(maxHeight: 150)
+                                        .onTapGesture {
+                                            presentImageItem = picUrls[i]
+                                        }
+                                }
                             }
                             if commentReplies[i].count != 0 {
                                 VStack {
@@ -180,6 +194,9 @@ struct CommentsView: View {
 #endif
             .sheet(isPresented: $isCommentRepliesPresented, content: { CommentRepliesView(avid: id, type: type, goto: $presentRepliesGoto, rootData: $presentRepliesRootData) })
         }
+        .sheet(item: $presentImageItem) { url in
+            ImageViewerView(url: url)
+        }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {
@@ -228,7 +245,11 @@ struct CommentsView: View {
                             commentReplies[calNum].append(["Text": sigReply.1["content"]["message"].string ?? "[加载失败]", "Sender": sigReply.1["member"]["uname"].string ?? "[加载失败]", "SenderPic": sigReply.1["member"]["avatar"].string ?? "E", "SenderID": sigReply.1["member"]["mid"].string ?? "E", "IP": sigReply.1["reply_control"]["location"].string ?? "", "UserAction": String(sigReply.1["action"].int ?? 0), "Rpid": String(sigReply.1["rpid"].int ?? -1), "Like": String(sigReply.1["like"].int ?? -1)])
                         }
                         let text = reply.1["content"]["message"].string ?? "[加载失败]"
-                        comments.append(["Text": text, "Sender": reply.1["member"]["uname"].string ?? "[加载失败]", "SenderPic": reply.1["member"]["avatar"].string ?? "E", "SenderID": reply.1["member"]["mid"].string ?? "E", "IP": reply.1["reply_control"]["location"].string ?? "", "UserAction": String(reply.1["action"].int ?? 0), "Rpid": reply.1["rpid_str"].string ?? "-1", "Like": String(reply.1["like"].int ?? -1)])
+                        var pictures = [String]()
+                        for pic in reply.1["content"]["pictures"].arrayValue {
+                            pictures.append(pic["img_src"].string ?? "[加载失败]")
+                        }
+                        comments.append(["Text": text, "Sender": reply.1["member"]["uname"].string ?? "[加载失败]", "SenderPic": reply.1["member"]["avatar"].string ?? "E", "SenderID": reply.1["member"]["mid"].string ?? "E", "IP": reply.1["reply_control"]["location"].string ?? "", "UserAction": String(reply.1["action"].int ?? 0), "Rpid": reply.1["rpid_str"].string ?? "-1", "Like": String(reply.1["like"].int ?? -1), "Pictures": pictures.joined(separator: "|")])
                         calNum += 1
                     }
                 }
