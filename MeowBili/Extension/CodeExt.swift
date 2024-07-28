@@ -638,3 +638,9 @@ public func debugPrint(_ items: Any..., separator: String = " ", terminator: Str
         }
     }
 }
+
+extension String: @retroactive Identifiable {
+    public var id: Self {
+        self
+    }
+}
