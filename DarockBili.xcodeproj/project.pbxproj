@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -43,6 +43,9 @@
 		8C81D2B22BCBA58000EC58F4 /* FansListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C81D2B02BCBA57F00EC58F4 /* FansListView.swift */; };
 		8C82F7932BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */ = {isa = PBXBuildFile; fileRef = 8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */; };
 		8C82F7942BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */ = {isa = PBXBuildFile; fileRef = 8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */; };
+		8C8578A72C5A18AA00AF93D1 /* MeowBiliTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8578A52C5A18AA00AF93D1 /* MeowBiliTests.swift */; };
+		8C8578B52C5BABF100AF93D1 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8578B42C5BABF100AF93D1 /* MarkdownUI */; };
+		8C8578B72C5BAC0100AF93D1 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8578B62C5BAC0100AF93D1 /* MarkdownUI */; };
 		8C9776082BCECBC3006EDB58 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9776072BCECBC3006EDB58 /* Audio.swift */; };
 		8C9776092BCECBC3006EDB58 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9776072BCECBC3006EDB58 /* Audio.swift */; };
 		8CA1BA112BD2AF9E009BCDFB /* PrivateSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1BA102BD2AF9E009BCDFB /* PrivateSymbols.m */; };
@@ -292,6 +295,7 @@
 		8C82F82A2BB70AA7009AEFD2 /* status-check.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "status-check.yml"; sourceTree = "<group>"; };
 		8C82F82B2BB70AA7009AEFD2 /* statuscheck-runner.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "statuscheck-runner.yml"; sourceTree = "<group>"; };
 		8C82F82E2BB70AA7009AEFD2 /* CODE_OF_CONDUCT.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CODE_OF_CONDUCT.md; sourceTree = "<group>"; };
+		8C8578A52C5A18AA00AF93D1 /* MeowBiliTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeowBiliTests.swift; sourceTree = "<group>"; };
 		8C9776072BCECBC3006EDB58 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		8CA1BA102BD2AF9E009BCDFB /* PrivateSymbols.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrivateSymbols.m; sourceTree = "<group>"; };
 		8CA1BA152BD2AFAB009BCDFB /* PrivateSymbols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrivateSymbols.h; sourceTree = "<group>"; };
@@ -381,10 +385,6 @@
 		E2B720932B67858E00ABB0A6 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		8C2DFCB62C4E6B2C003AEC67 /* MeowBiliTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = MeowBiliTests; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
-
 /* Begin PBXFrameworksBuildPhase section */
 		8C2DFCB22C4E6B2B003AEC67 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -411,6 +411,7 @@
 				8CA7CC192B77AC93008E587F /* SDWebImagePDFCoder in Frameworks */,
 				8CA7CC172B77AC93008E587F /* SDWebImageSVGCoder in Frameworks */,
 				8CC3D5632B7CCE57005636DC /* ScreenshotableView in Frameworks */,
+				8C8578B72C5BAC0100AF93D1 /* MarkdownUI in Frameworks */,
 				8CA370D42B82690700CE0E9E /* Mixpanel in Frameworks */,
 				8CA7CC092B77AC93008E587F /* Marquee in Frameworks */,
 				8C0557DF2B791B84009D9CD0 /* AZVideoPlayer in Frameworks */,
@@ -438,6 +439,7 @@
 				8CA7CBE72B77AC8A008E587F /* Marquee in Frameworks */,
 				8CA7CBE92B77AC8A008E587F /* SwiftDate in Frameworks */,
 				8CA7CBFD2B77AC8A008E587F /* Dynamic in Frameworks */,
+				8C8578B52C5BABF100AF93D1 /* MarkdownUI in Frameworks */,
 				8CA7CBF92B77AC8A008E587F /* SwiftSoup in Frameworks */,
 				8CA7CBEB2B77AC8A008E587F /* SFSymbol in Frameworks */,
 				8CB176B02BB8421300CEC05C /* DarockKit in Frameworks */,
@@ -500,6 +502,14 @@
 				8C82F82E2BB70AA7009AEFD2 /* CODE_OF_CONDUCT.md */,
 			);
 			path = .github;
+			sourceTree = "<group>";
+		};
+		8C8578A62C5A18AA00AF93D1 /* MeowBiliTests */ = {
+			isa = PBXGroup;
+			children = (
+				8C8578A52C5A18AA00AF93D1 /* MeowBiliTests.swift */,
+			);
+			path = MeowBiliTests;
 			sourceTree = "<group>";
 		};
 		8CA7CBC12B77AC4A008E587F /* MeowBili */ = {
@@ -745,7 +755,7 @@
 				8CB0D0222B88CE980057EF1C /* ci_scripts */,
 				B4468A142B4FC24A002CCEB2 /* JSONReturnExamples */,
 				8CA7CBC12B77AC4A008E587F /* MeowBili */,
-				8C2DFCB62C4E6B2C003AEC67 /* MeowBiliTests */,
+				8C8578A62C5A18AA00AF93D1 /* MeowBiliTests */,
 				8CC5B7412B8749BC00BAD89E /* MeowBiliUITests */,
 				8C617F3F2B92334B000A3687 /* SafariExtension */,
 				B44689CB2B4FC15A002CCEB2 /* Products */,
@@ -798,9 +808,6 @@
 			);
 			dependencies = (
 				8C2DFCBA2C4E6B2C003AEC67 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				8C2DFCB62C4E6B2C003AEC67 /* MeowBiliTests */,
 			);
 			name = MeowBiliTests;
 			packageProductDependencies = (
@@ -863,6 +870,7 @@
 				8CA370DE2B827AAD00CE0E9E /* AlertToast */,
 				8CB176A42BB8188700CEC05C /* SDWebImageSwiftUI */,
 				8CB176AD2BB8420B00CEC05C /* DarockKit */,
+				8C8578B62C5BAC0100AF93D1 /* MarkdownUI */,
 			);
 			productName = MeowBili;
 			productReference = 8CA7CBC02B77AC4A008E587F /* MeowBili.app */;
@@ -897,6 +905,7 @@
 				8CB176A62BB8189300CEC05C /* SDWebImageSwiftUI */,
 				8CB176AF2BB8421300CEC05C /* DarockKit */,
 				8C03B6DD2C280BAA000770B4 /* Cepheus */,
+				8C8578B42C5BABF100AF93D1 /* MarkdownUI */,
 			);
 			productName = "MeowBili Watch App";
 			productReference = 8CA7CBCF2B77AC4C008E587F /* 喵哩喵哩.app */;
@@ -984,6 +993,7 @@
 				8CB176A32BB8188600CEC05C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				8CB176AC2BB8420A00CEC05C /* XCRemoteSwiftPackageReference "DarockKit" */,
 				8C03B6DC2C280BAA000770B4 /* XCRemoteSwiftPackageReference "Cepheus" */,
+				8C8578B32C5BABF000AF93D1 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 			);
 			productRefGroup = B44689CB2B4FC15A002CCEB2 /* Products */;
 			projectDirPath = "";
@@ -1103,6 +1113,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C8578A72C5A18AA00AF93D1 /* MeowBiliTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2088,6 +2099,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		8C8578B32C5BABF000AF93D1 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.1;
+			};
+		};
 		8CA370D22B82690700CE0E9E /* XCRemoteSwiftPackageReference "mixpanel-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mixpanel/mixpanel-swift";
@@ -2228,6 +2247,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8C0557DD2B791B84009D9CD0 /* XCRemoteSwiftPackageReference "AZVideoPlayer" */;
 			productName = AZVideoPlayer;
+		};
+		8C8578B42C5BABF100AF93D1 /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C8578B32C5BABF000AF93D1 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
+			productName = MarkdownUI;
+		};
+		8C8578B62C5BAC0100AF93D1 /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C8578B32C5BABF000AF93D1 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
+			productName = MarkdownUI;
 		};
 		8CA370D32B82690700CE0E9E /* Mixpanel */ = {
 			isa = XCSwiftPackageProductDependency;
