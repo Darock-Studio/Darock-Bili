@@ -52,20 +52,18 @@ struct UserDynamicMainView: View {
                         })
                         .buttonStyle(.borderedProminent)
                         #else
-                        if #unavailable(watchOS 10) {
-                            Button(action: {
-                                lastDynamicID = ""
-                                dynamics.removeAll()
-                                ContinueLoadDynamic()
-                            }, label: {
-                                Label("重新载入", systemImage: "arrow.clockwise")
-                            })
-                            NavigationLink(destination: { DynamicSendView() }, label: {
-                                Label("发送动态", systemImage: "square.and.pencil")
-                            })
-                            Spacer()
-                                .frame(height: 10)
-                        }
+                        Button(action: {
+                            lastDynamicID = ""
+                            dynamics.removeAll()
+                            ContinueLoadDynamic()
+                        }, label: {
+                            Label("重新载入", systemImage: "arrow.clockwise")
+                        })
+                        NavigationLink(destination: { DynamicSendView() }, label: {
+                            Label("发送动态", systemImage: "square.and.pencil")
+                        })
+                        Spacer()
+                            .frame(height: 10)
                         #endif
                         ForEach(0..<dynamics.count, id: \.self) { i in
                             VStack {
@@ -446,27 +444,6 @@ struct UserDynamicMainView: View {
                     isLoaded = true
                 }
             }
-            #if os(watchOS)
-            .toolbar {
-                if #available(watchOS 10, *) {
-                    ToolbarItem(placement: .topBarLeading) {
-                        Button(action: {
-                            lastDynamicID = ""
-                            dynamics.removeAll()
-                            ContinueLoadDynamic()
-                        }, label: {
-                            Image(systemName: "arrow.clockwise")
-                                .foregroundColor(.accentColor)
-                        })
-                    }
-                    ToolbarItem(placement: .topBarTrailing) {
-                        NavigationLink(destination: { DynamicSendView() }, label: {
-                            Image(systemName: "square.and.pencil")
-                        })
-                    }
-                }
-            }
-            #endif
         } else {
             Text("Moments.requires-login")
                 .navigationTitle("Moments")

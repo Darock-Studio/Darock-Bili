@@ -88,16 +88,6 @@ struct WatchLaterView: View {
                     Image(systemName: "ellipsis.circle")
                 })
             }
-            #else
-            if #available(watchOS 10, *) {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: {
-                        isMoreMenuPresented = true
-                    }, label: {
-                        Image(systemName: "ellipsis.circle")
-                    })
-                }
-            }
             #endif
         }
         .onAppear {

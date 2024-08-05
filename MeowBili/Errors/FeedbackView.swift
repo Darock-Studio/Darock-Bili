@@ -19,9 +19,6 @@
 import SwiftUI
 import DarockKit
 import EFQRCode
-#if os(watchOS)
-import SupportsUICore
-#endif
 
 #if os(watchOS)
 struct FeedbackView: View {
@@ -71,11 +68,6 @@ struct InAppFeedbackView: View {
                 NavigationLink(destination: { NewFeedbackView() }, label: {
                     Label("新建反馈", systemImage: "exclamationmark.bubble.fill")
                 })
-                #if os(watchOS)
-                NavigationLink(destination: { SUICChatSupportView(projName: "喵哩喵哩") }, label: {
-                    Label("请求在线支持 (Beta)", systemImage: "bubble.left.and.text.bubble.right")
-                })
-                #endif
             }
             if feedbackIds.count != 0 {
                 Section {
@@ -298,57 +290,6 @@ struct InAppFeedbackView: View {
                         }
                     }
                 }
-            }
-            .toolbar {
-                if #available(watchOS 10, *) {
-                    Button(action: {
-                        isSendReplyPresented = true
-                    }, label: {
-                        Image(systemName: "arrowshape.turn.up.left.fill")
-                    })
-                    .sheet(isPresented: $isSendReplyPresented) {
-                        TextField("回复信息", text: $replyInput) {
-                            if replyInput != "" {
-                                let enced = """
-                                    Content：\(replyInput)
-                                    Sender：User
-                                    """.base64Encoded().replacingOccurrences(of: "/", with: "{slash}")
-                                DarockKit.Network.shared.requestString("https://fapi.darock.top:65535/radar/reply/喵哩喵哩/\(id)/\(enced)") { respStr, isSuccess in
-                                    if isSuccess {
-                                        if respStr.apiFixed() == "Success" {
-                                            isSendReplyPresented = false
-                                        } else {
-#if os(watchOS) || os(visionOS)
-                                            tipWithText("未知错误", symbol: "xmark.circle.fill")
-#else
-                                            AlertKitAPI.present(title: "未知错误", subtitle: "可能未发送此回复", icon: .error, style: .iOS17AppleMusic, haptic: .error)
-#endif
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-struct BannedTipView: View {
-    var body: some View {
-        ScrollView {
-            VStack {
-                Text("您已被 Darock 永久封禁且在设备上施行")
-                #if os(watchOS)
-                let banId = WKInterfaceDevice.current().identifierForVendor?.uuidString ?? "nil"
-                #else
-                let banId = UIDevice.current.identifierForVendor?.uuidString ?? "nil"
-                #endif
-                Text(banId)
-                Text(UserDefaults.standard.string(forKey: "DedeUserID") ?? "Empty")
-                Text("加群248036605查看群公告以申请解封")
-                Text("注意！重装 App 并不会移除封禁且可能会导致识别 ID 更改，我们将无法为您解封")
             }
         }
     }

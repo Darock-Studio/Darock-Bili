@@ -248,36 +248,22 @@ struct DarockBili_Watch_AppApp: App {
                     VStack {
                         Spacer()
                         if isShowingTip {
-                            Group {
-                                if #available(watchOS 10, *) {
-                                    HStack {
-                                        Image(systemName: showTipSymbol)
-                                        Text(showTipText)
-                                    }
-                                    .font(.system(size: 14, weight: .bold))
-                                    .frame(width: WKInterfaceDevice.current().screenBounds.width - 20, height: 50)
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.1)
-                                    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
-                                } else {
-                                    HStack {
-                                        Image(systemName: showTipSymbol)
-                                        Text(showTipText)
-                                    }
-                                    .font(.system(size: 14, weight: .bold))
-                                    .foregroundColor(.black)
-                                    .frame(width: WKInterfaceDevice.current().screenBounds.width - 20, height: 50)
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.1)
-                                    .background {
-                                        Color.white
-                                            .ignoresSafeArea()
-                                            .frame(width: WKInterfaceDevice.current().screenBounds.width - 20, height: 40)
-                                            .cornerRadius(14)
-                                            .foregroundColor(Color(hex: 0xF5F5F5))
-                                            .opacity(0.95)
-                                    }
-                                }
+                            HStack {
+                                Image(systemName: showTipSymbol)
+                                Text(showTipText)
+                            }
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundColor(.black)
+                            .frame(width: WKInterfaceDevice.current().screenBounds.width - 20, height: 50)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.1)
+                            .background {
+                                Color.white
+                                    .ignoresSafeArea()
+                                    .frame(width: WKInterfaceDevice.current().screenBounds.width - 20, height: 40)
+                                    .cornerRadius(14)
+                                    .foregroundColor(Color(hex: 0xF5F5F5))
+                                    .opacity(0.95)
                             }
                             .transition(
                                 AnyTransition

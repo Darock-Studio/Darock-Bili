@@ -20,18 +20,7 @@ import SwiftUI
 
 struct SkinExplorerView: View {
     var body: some View {
-        if #available(watchOS 10, *) {
-            MainView()
-                .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        NavigationLink(destination: { SkinChooserView() }, label: {
-                            Image(systemName: "plus")
-                        })
-                    }
-                }
-        } else {
-            MainView()
-        }
+        MainView()
     }
     
     struct MainView: View {
@@ -39,15 +28,13 @@ struct SkinExplorerView: View {
         @State var skinNames = [String]()
         var body: some View {
             List {
-                if #unavailable(watchOS 10) {
-                    NavigationLink(destination: { SkinChooserView() }, label: {
-                        HStack {
-                            Image(systemName: "plus")
-                            Text("Skin.add")
-                        }
-                        .font(.system(size: 16, weight: .bold))
-                    })
-                }
+                NavigationLink(destination: { SkinChooserView() }, label: {
+                    HStack {
+                        Image(systemName: "plus")
+                        Text("Skin.add")
+                    }
+                    .font(.system(size: 16, weight: .bold))
+                })
                 if skinNames.count != 0 {
                     Section {
                         Button(action: {

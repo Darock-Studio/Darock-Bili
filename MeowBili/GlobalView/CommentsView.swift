@@ -35,21 +35,7 @@ struct CommentsView: View {
     @State var isSendCommentPresented = false
     var body: some View {
         VStack {
-            if #available(watchOS 10, *) {
-                CommentMainView(oid: oid, type: type)
-                    .toolbar {
-                        ToolbarItem(placement: .topBarTrailing) {
-                            Button(action: {
-                                isSendCommentPresented = true
-                            }, label: {
-                                Image(systemName: "square.and.pencil")
-                            })
-                            .sheet(isPresented: $isSendCommentPresented, content: { CommentSendView(oid: oid, type: type) })
-                        }
-                    }
-            } else {
-                CommentMainView(oid: oid, type: type)
-            }
+            CommentMainView(oid: oid, type: type)
         }
     }
     
@@ -78,17 +64,15 @@ struct CommentsView: View {
             ScrollView {
                 LazyVStack {
                     #if os(watchOS)
-                    if #unavailable(watchOS 10) {
-                        Button(action: {
-                            isSendCommentPresented = true
-                        }, label: {
-                            HStack {
-                                Image(systemName: "square.and.pencil")
-                                Text("Comment.send")
-                            }
-                        })
-                        .sheet(isPresented: $isSendCommentPresented, content: { CommentSendView(oid: oid, type: type) })
-                    }
+                    Button(action: {
+                        isSendCommentPresented = true
+                    }, label: {
+                        HStack {
+                            Image(systemName: "square.and.pencil")
+                            Text("Comment.send")
+                        }
+                    })
+                    .sheet(isPresented: $isSendCommentPresented, content: { CommentSendView(oid: oid, type: type) })
                     #endif
                     if comments.count != 0 {
                         ForEach(0...comments.count - 1, id: \.self) { i in

@@ -35,89 +35,17 @@
 		8C617F562B92334B000A3687 /* SafariExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8C617F3E2B92334B000A3687 /* SafariExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8C81D2B12BCBA57F00EC58F4 /* FansListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C81D2B02BCBA57F00EC58F4 /* FansListView.swift */; };
 		8C81D2B22BCBA58000EC58F4 /* FansListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C81D2B02BCBA57F00EC58F4 /* FansListView.swift */; };
-		8C81D2B32BCBA58000EC58F4 /* FansListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C81D2B02BCBA57F00EC58F4 /* FansListView.swift */; };
-		8C81D2B42BCBA58000EC58F4 /* FansListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C81D2B02BCBA57F00EC58F4 /* FansListView.swift */; };
 		8C82F7932BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */ = {isa = PBXBuildFile; fileRef = 8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */; };
 		8C82F7942BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */ = {isa = PBXBuildFile; fileRef = 8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */; };
-		8C82F7952BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */ = {isa = PBXBuildFile; fileRef = 8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */; };
-		8C82F7962BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */ = {isa = PBXBuildFile; fileRef = 8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */; };
 		8C9776082BCECBC3006EDB58 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9776072BCECBC3006EDB58 /* Audio.swift */; };
 		8C9776092BCECBC3006EDB58 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9776072BCECBC3006EDB58 /* Audio.swift */; };
-		8C97760A2BCECBC3006EDB58 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9776072BCECBC3006EDB58 /* Audio.swift */; };
-		8C97760B2BCECBC3006EDB58 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9776072BCECBC3006EDB58 /* Audio.swift */; };
-		8CA164852BF12731000065D8 /* SupportsUICore in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA164842BF12731000065D8 /* SupportsUICore */; };
 		8CA1BA112BD2AF9E009BCDFB /* PrivateSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1BA102BD2AF9E009BCDFB /* PrivateSymbols.m */; };
 		8CA1BA122BD2AF9E009BCDFB /* PrivateSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1BA102BD2AF9E009BCDFB /* PrivateSymbols.m */; };
-		8CA1BA132BD2AF9E009BCDFB /* PrivateSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1BA102BD2AF9E009BCDFB /* PrivateSymbols.m */; };
-		8CA1BA142BD2AF9E009BCDFB /* PrivateSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1BA102BD2AF9E009BCDFB /* PrivateSymbols.m */; };
 		8CA370D42B82690700CE0E9E /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA370D32B82690700CE0E9E /* Mixpanel */; };
 		8CA370D62B82691100CE0E9E /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA370D52B82691100CE0E9E /* Mixpanel */; };
 		8CA370DB2B82724400CE0E9E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */; };
 		8CA370DC2B82724400CE0E9E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */; };
 		8CA370DF2B827AAD00CE0E9E /* AlertToast in Frameworks */ = {isa = PBXBuildFile; platformFilters = (ios, maccatalyst, ); productRef = 8CA370DE2B827AAD00CE0E9E /* AlertToast */; settings = {ATTRIBUTES = (Required, ); }; };
-		8CA370FB2B83BB9100CE0E9E /* UserDynamicMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCC92B77B4B2008E587F /* UserDynamicMainView.swift */; };
-		8CA370FC2B83BB9100CE0E9E /* NowPlayingExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3D5592B7CB95D005636DC /* NowPlayingExtension.m */; };
-		8CA370FD2B83BB9100CE0E9E /* BangumiDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCD02B77B504008E587F /* BangumiDetailView.swift */; };
-		8CA370FE2B83BB9100CE0E9E /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCA52B77B314008E587F /* CommentsView.swift */; };
-		8CA370FF2B83BB9100CE0E9E /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCA22B77B2F2008E587F /* NoticeView.swift */; };
-		8CA371002B83BB9100CE0E9E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC42B77AC4A008E587F /* ContentView.swift */; };
-		8CA371012B83BB9100CE0E9E /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCB72B77B3D6008E587F /* HistoryView.swift */; };
-		8CA371022B83BB9100CE0E9E /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC802B77AFDE008E587F /* FeedbackView.swift */; };
-		8CA371032B83BB9100CE0E9E /* SelfQrCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3D5642B7CCF3C005636DC /* SelfQrCardView.swift */; };
-		8CA371052B83BB9100CE0E9E /* BangumiPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCD42B77B530008E587F /* BangumiPlayerView.swift */; };
-		8CA371062B83BB9100CE0E9E /* SignalErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC7C2B77AFAC008E587F /* SignalErrorView.swift */; };
-		8CA371072B83BB9100CE0E9E /* MeowBiliApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC22B77AC4A008E587F /* MeowBiliApp.swift */; };
-		8CA371082B83BB9100CE0E9E /* DynamicSendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCCD2B77B4DF008E587F /* DynamicSendView.swift */; };
-		8CA371092B83BB9100CE0E9E /* VideoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCC22B77B45F008E587F /* VideoDetailView.swift */; };
-		8CA3710A2B83BB9100CE0E9E /* Bangumi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC692B77AE62008E587F /* Bangumi.swift */; };
-		8CA3710B2B83BB9100CE0E9E /* Passthroughs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC9A2B77B13D008E587F /* Passthroughs.swift */; };
-		8CA3710C2B83BB9100CE0E9E /* backtrace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC782B77AF79008E587F /* backtrace.swift */; };
-		8CA3710D2B83BB9100CE0E9E /* UIExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC872B77B039008E587F /* UIExt.swift */; };
-		8CA3710E2B83BB9100CE0E9E /* bMessageSendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCA92B77B340008E587F /* bMessageSendView.swift */; };
-		8CA3710F2B83BB9100CE0E9E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC9E2B77B166008E587F /* SettingsView.swift */; };
-		8CA371102B83BB9100CE0E9E /* NetwokFixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC7A2B77AF93008E587F /* NetwokFixView.swift */; };
-		8CA371112B83BB9100CE0E9E /* AVExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC8D2B77B094008E587F /* AVExtension.m */; };
-		8CA371122B83BB9100CE0E9E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC702B77AEE4008E587F /* MainView.swift */; };
-		8CA371132B83BB9100CE0E9E /* PersonAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCAD2B77B36E008E587F /* PersonAccountView.swift */; };
-		8CA371142B83BB9100CE0E9E /* UserDynamicListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3D5572B7CA209005636DC /* UserDynamicListView.swift */; };
-		8CA371152B83BB9100CE0E9E /* VideoDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCC02B77B44E008E587F /* VideoDownloadView.swift */; };
-		8CA371162B83BB9100CE0E9E /* DownloadObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC6B2B77AE80008E587F /* DownloadObj.swift */; };
-		8CA371172B83BB9100CE0E9E /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCC42B77B47A008E587F /* AudioPlayerView.swift */; };
-		8CA371182B83BB9100CE0E9E /* BangumiDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCD22B77B51A008E587F /* BangumiDownloadView.swift */; };
-		8CA371192B83BB9100CE0E9E /* MemoryWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC7E2B77AFC5008E587F /* MemoryWarningView.swift */; };
-		8CA3711A2B83BB9100CE0E9E /* DownloadsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCAB2B77B354008E587F /* DownloadsView.swift */; };
-		8CA3711B2B83BB9100CE0E9E /* SkinDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC982B77B127008E587F /* SkinDownloadView.swift */; };
-		8CA3711C2B83BB9100CE0E9E /* FollowListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCB12B77B398008E587F /* FollowListView.swift */; };
-		8CA3711D2B83BB9100CE0E9E /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCB32B77B3AC008E587F /* ArticleView.swift */; };
-		8CA3711E2B83BB9100CE0E9E /* CodingTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC912B77B0D4008E587F /* CodingTime.m */; };
-		8CA3711F2B83BB9100CE0E9E /* LiveDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCD92B77B55F008E587F /* LiveDetailView.swift */; };
-		8CA371202B83BB9100CE0E9E /* SkinChooserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC942B77B0FB008E587F /* SkinChooserView.swift */; };
-		8CA371212B83BB9100CE0E9E /* DynamicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCCB2B77B4CA008E587F /* DynamicDetailView.swift */; };
-		8CA371222B83BB9100CE0E9E /* ImageViewerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCC72B77B49D008E587F /* ImageViewerView.swift */; };
-		8CA371232B83BB9100CE0E9E /* CodeExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC852B77B015008E587F /* CodeExt.swift */; };
-		8CA371242B83BB9100CE0E9E /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCAF2B77B383008E587F /* FavoriteView.swift */; };
-		8CA371252B83BB9100CE0E9E /* WatchLaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCB92B77B3EA008E587F /* WatchLaterView.swift */; };
-		8CA371262B83BB9100CE0E9E /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC9C2B77B150008E587F /* AboutView.swift */; };
-		8CA371272B83BB9100CE0E9E /* OCCodeExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3D55C2B7CC936005636DC /* OCCodeExt.m */; };
-		8CA371292B83BB9100CE0E9E /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC6E2B77AEB4008E587F /* SearchView.swift */; };
-		8CA3712A2B83BB9100CE0E9E /* UserDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCB52B77B3BF008E587F /* UserDetailView.swift */; };
-		8CA3712B2B83BB9100CE0E9E /* AppFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC892B77B061008E587F /* AppFileManager.swift */; };
-		8CA3712C2B83BB9100CE0E9E /* ErrorGetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC822B77AFF2008E587F /* ErrorGetView.swift */; };
-		8CA3712D2B83BB9100CE0E9E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCA02B77B2DC008E587F /* LoginView.swift */; };
-		8CA3712E2B83BB9100CE0E9E /* LiveMessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCDB2B77B571008E587F /* LiveMessagesView.swift */; };
-		8CA3712F2B83BB9100CE0E9E /* LinkDetectText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */; };
-		8CA371302B83BB9100CE0E9E /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCBC2B77B40B008E587F /* VideoPlayerView.swift */; };
-		8CA371312B83BB9100CE0E9E /* SkinExplorerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC962B77B115008E587F /* SkinExplorerView.swift */; };
-		8CA371322B83BB9100CE0E9E /* LivePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCD72B77B54F008E587F /* LivePlayerView.swift */; };
-		8CA371382B83BF9400CE0E9E /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA371372B83BF9400CE0E9E /* Marquee */; };
-		8CA3713A2B83BF9400CE0E9E /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA371392B83BF9400CE0E9E /* SwiftDate */; };
-		8CA3713C2B83BF9400CE0E9E /* SFSymbol in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA3713B2B83BF9400CE0E9E /* SFSymbol */; };
-		8CA3713E2B83BF9400CE0E9E /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA3713D2B83BF9400CE0E9E /* ZipArchive */; };
-		8CA371402B83BF9400CE0E9E /* EFQRCode in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA3713F2B83BF9400CE0E9E /* EFQRCode */; };
-		8CA371422B83BF9400CE0E9E /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA371412B83BF9400CE0E9E /* SwiftSoup */; };
-		8CA371462B83BF9400CE0E9E /* Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA371452B83BF9400CE0E9E /* Dynamic */; };
-		8CA3714C2B83BF9400CE0E9E /* AZVideoPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA3714B2B83BF9400CE0E9E /* AZVideoPlayer */; };
-		8CA3714E2B83BF9400CE0E9E /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA3714D2B83BF9400CE0E9E /* Mixpanel */; };
 		8CA388992B789A0300F5F91F /* AZVideoPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA388982B789A0300F5F91F /* AZVideoPlayer */; };
 		8CA3889F2B78B1E300F5F91F /* AZVideoPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA3889E2B78B1E300F5F91F /* AZVideoPlayer */; };
 		8CA388A22B78B5D800F5F91F /* BiliFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8CA388A02B78B5D800F5F91F /* BiliFont.ttf */; };
@@ -200,9 +128,6 @@
 		8CA7CCE12B77C3A9008E587F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E2B720932B67858E00ABB0A6 /* Localizable.xcstrings */; };
 		8CB0D0262B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */ = {isa = PBXBuildFile; fileRef = 8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */; };
 		8CB0D0272B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */ = {isa = PBXBuildFile; fileRef = 8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */; };
-		8CB0D0282B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */ = {isa = PBXBuildFile; fileRef = 8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */; };
-		8CB0D0292B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */ = {isa = PBXBuildFile; fileRef = 8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */; };
-		8CB0D02A2B88E5B20057EF1C /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E2B720932B67858E00ABB0A6 /* Localizable.xcstrings */; };
 		8CB176A52BB8188700CEC05C /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8CB176A42BB8188700CEC05C /* SDWebImageSwiftUI */; };
 		8CB176A72BB8189300CEC05C /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8CB176A62BB8189300CEC05C /* SDWebImageSwiftUI */; };
 		8CB176AE2BB8420B00CEC05C /* DarockKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8CB176AD2BB8420B00CEC05C /* DarockKit */; };
@@ -268,80 +193,6 @@
 		8CC3D55D2B7CC936005636DC /* OCCodeExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3D55C2B7CC936005636DC /* OCCodeExt.m */; };
 		8CC3D5632B7CCE57005636DC /* ScreenshotableView in Frameworks */ = {isa = PBXBuildFile; platformFilters = (ios, maccatalyst, ); productRef = 8CC3D5622B7CCE57005636DC /* ScreenshotableView */; settings = {ATTRIBUTES = (Required, ); }; };
 		8CC3D5652B7CCF3C005636DC /* SelfQrCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3D5642B7CCF3C005636DC /* SelfQrCardView.swift */; };
-		8CC5B6BE2B8652AF00BAD89E /* backtrace.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC762B77AF4C008E587F /* backtrace.c */; };
-		8CC5B6BF2B8652C000BAD89E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC62B77AC4C008E587F /* Assets.xcassets */; };
-		8CC5B6C02B86539700BAD89E /* BiliFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8CA388A02B78B5D800F5F91F /* BiliFont.ttf */; };
-		8CC5B6C12B86539700BAD89E /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E2B720932B67858E00ABB0A6 /* Localizable.xcstrings */; };
-		8CC5B6DD2B873FA000BAD89E /* CodeExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC852B77B015008E587F /* CodeExt.swift */; };
-		8CC5B6DE2B873FA000BAD89E /* backtrace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC782B77AF79008E587F /* backtrace.swift */; };
-		8CC5B6DF2B873FA000BAD89E /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC802B77AFDE008E587F /* FeedbackView.swift */; };
-		8CC5B6E02B873FA000BAD89E /* UserDynamicListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3D5572B7CA209005636DC /* UserDynamicListView.swift */; };
-		8CC5B6E12B873FA000BAD89E /* BangumiDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCD22B77B51A008E587F /* BangumiDownloadView.swift */; };
-		8CC5B6E22B873FA000BAD89E /* LivePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCD72B77B54F008E587F /* LivePlayerView.swift */; };
-		8CC5B6E32B873FA000BAD89E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCA02B77B2DC008E587F /* LoginView.swift */; };
-		8CC5B6E42B873FA000BAD89E /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCB72B77B3D6008E587F /* HistoryView.swift */; };
-		8CC5B6E52B873FA000BAD89E /* UserDynamicMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCC92B77B4B2008E587F /* UserDynamicMainView.swift */; };
-		8CC5B6E62B873FA000BAD89E /* UIExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC872B77B039008E587F /* UIExt.swift */; };
-		8CC5B6E72B873FA000BAD89E /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCAF2B77B383008E587F /* FavoriteView.swift */; };
-		8CC5B6E82B873FA000BAD89E /* Bangumi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC692B77AE62008E587F /* Bangumi.swift */; };
-		8CC5B6E92B873FA000BAD89E /* DownloadsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCAB2B77B354008E587F /* DownloadsView.swift */; };
-		8CC5B6EA2B873FA000BAD89E /* CodingTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC912B77B0D4008E587F /* CodingTime.m */; };
-		8CC5B6EB2B873FA000BAD89E /* MemoryWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC7E2B77AFC5008E587F /* MemoryWarningView.swift */; };
-		8CC5B6EC2B873FA000BAD89E /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCB32B77B3AC008E587F /* ArticleView.swift */; };
-		8CC5B6ED2B873FA000BAD89E /* BangumiPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCD42B77B530008E587F /* BangumiPlayerView.swift */; };
-		8CC5B6EE2B873FA000BAD89E /* backtrace.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC762B77AF4C008E587F /* backtrace.c */; };
-		8CC5B6EF2B873FA000BAD89E /* SignalErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC7C2B77AFAC008E587F /* SignalErrorView.swift */; };
-		8CC5B6F02B873FA000BAD89E /* ErrorGetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC822B77AFF2008E587F /* ErrorGetView.swift */; };
-		8CC5B6F12B873FA000BAD89E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC42B77AC4A008E587F /* ContentView.swift */; };
-		8CC5B6F22B873FA000BAD89E /* LiveDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCD92B77B55F008E587F /* LiveDetailView.swift */; };
-		8CC5B6F32B873FA000BAD89E /* FollowListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCB12B77B398008E587F /* FollowListView.swift */; };
-		8CC5B6F42B873FA000BAD89E /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC6E2B77AEB4008E587F /* SearchView.swift */; };
-		8CC5B6F52B873FA000BAD89E /* BangumiDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCD02B77B504008E587F /* BangumiDetailView.swift */; };
-		8CC5B6F62B873FA000BAD89E /* SelfQrCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3D5642B7CCF3C005636DC /* SelfQrCardView.swift */; };
-		8CC5B6F72B873FA000BAD89E /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCC42B77B47A008E587F /* AudioPlayerView.swift */; };
-		8CC5B6F82B873FA000BAD89E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC9E2B77B166008E587F /* SettingsView.swift */; };
-		8CC5B6F92B873FA000BAD89E /* WatchLaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCB92B77B3EA008E587F /* WatchLaterView.swift */; };
-		8CC5B6FA2B873FA000BAD89E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC62B77AC4C008E587F /* Assets.xcassets */; };
-		8CC5B6FB2B873FA000BAD89E /* DynamicSendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCCD2B77B4DF008E587F /* DynamicSendView.swift */; };
-		8CC5B6FC2B873FA000BAD89E /* NowPlayingExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3D5592B7CB95D005636DC /* NowPlayingExtension.m */; };
-		8CC5B6FD2B873FA000BAD89E /* LinkDetectText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */; };
-		8CC5B6FE2B873FA000BAD89E /* PersonAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCAD2B77B36E008E587F /* PersonAccountView.swift */; };
-		8CC5B6FF2B873FA000BAD89E /* AppFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC892B77B061008E587F /* AppFileManager.swift */; };
-		8CC5B7002B873FA000BAD89E /* DynamicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCCB2B77B4CA008E587F /* DynamicDetailView.swift */; };
-		8CC5B7012B873FA000BAD89E /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCBC2B77B40B008E587F /* VideoPlayerView.swift */; };
-		8CC5B7022B873FA000BAD89E /* OCCodeExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3D55C2B7CC936005636DC /* OCCodeExt.m */; };
-		8CC5B7032B873FA000BAD89E /* SkinDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC982B77B127008E587F /* SkinDownloadView.swift */; };
-		8CC5B7042B873FA000BAD89E /* VideoDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCC02B77B44E008E587F /* VideoDownloadView.swift */; };
-		8CC5B7052B873FA000BAD89E /* DownloadObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC6B2B77AE80008E587F /* DownloadObj.swift */; };
-		8CC5B7062B873FA000BAD89E /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCA52B77B314008E587F /* CommentsView.swift */; };
-		8CC5B7072B873FA000BAD89E /* SkinChooserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC942B77B0FB008E587F /* SkinChooserView.swift */; };
-		8CC5B7082B873FA000BAD89E /* NetwokFixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC7A2B77AF93008E587F /* NetwokFixView.swift */; };
-		8CC5B7092B873FA000BAD89E /* AVExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC8D2B77B094008E587F /* AVExtension.m */; };
-		8CC5B70A2B873FA000BAD89E /* VideoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCC22B77B45F008E587F /* VideoDetailView.swift */; };
-		8CC5B70B2B873FA000BAD89E /* ImageViewerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCC72B77B49D008E587F /* ImageViewerView.swift */; };
-		8CC5B70C2B873FA000BAD89E /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC9C2B77B150008E587F /* AboutView.swift */; };
-		8CC5B70D2B873FA000BAD89E /* MeowBiliApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC22B77AC4A008E587F /* MeowBiliApp.swift */; };
-		8CC5B70E2B873FA000BAD89E /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCA22B77B2F2008E587F /* NoticeView.swift */; };
-		8CC5B70F2B873FA000BAD89E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC702B77AEE4008E587F /* MainView.swift */; };
-		8CC5B7102B873FA000BAD89E /* LiveMessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCDB2B77B571008E587F /* LiveMessagesView.swift */; };
-		8CC5B7112B873FA000BAD89E /* SkinExplorerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC962B77B115008E587F /* SkinExplorerView.swift */; };
-		8CC5B7122B873FA000BAD89E /* UserDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCB52B77B3BF008E587F /* UserDetailView.swift */; };
-		8CC5B7132B873FA000BAD89E /* Passthroughs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC9A2B77B13D008E587F /* Passthroughs.swift */; };
-		8CC5B7172B8742D300BAD89E /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7162B8742D300BAD89E /* Marquee */; };
-		8CC5B7192B8742D300BAD89E /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7182B8742D300BAD89E /* SwiftDate */; };
-		8CC5B71B2B8742D300BAD89E /* SFSymbol in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B71A2B8742D300BAD89E /* SFSymbol */; };
-		8CC5B71D2B8742D300BAD89E /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B71C2B8742D300BAD89E /* ZipArchive */; };
-		8CC5B71F2B8742D300BAD89E /* EFQRCode in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B71E2B8742D300BAD89E /* EFQRCode */; };
-		8CC5B7232B8742D300BAD89E /* SDWebImageWebPCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7222B8742D300BAD89E /* SDWebImageWebPCoder */; };
-		8CC5B7252B8742D300BAD89E /* SDWebImageSVGCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7242B8742D300BAD89E /* SDWebImageSVGCoder */; };
-		8CC5B7272B8742D300BAD89E /* SDWebImagePDFCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7262B8742D300BAD89E /* SDWebImagePDFCoder */; };
-		8CC5B7292B8742D300BAD89E /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7282B8742D300BAD89E /* SwiftSoup */; };
-		8CC5B72D2B8742D300BAD89E /* Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B72C2B8742D300BAD89E /* Dynamic */; };
-		8CC5B7332B8742D300BAD89E /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7322B8742D300BAD89E /* AlertKit */; };
-		8CC5B7352B8742D300BAD89E /* AZVideoPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7342B8742D300BAD89E /* AZVideoPlayer */; };
-		8CC5B7372B8742D300BAD89E /* ScreenshotableView in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7362B8742D300BAD89E /* ScreenshotableView */; };
-		8CC5B7392B8742D300BAD89E /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B7382B8742D300BAD89E /* Mixpanel */; };
-		8CC5B73B2B8742D300BAD89E /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC5B73A2B8742D300BAD89E /* AlertToast */; };
 		8CC5B7432B8749BC00BAD89E /* MeowBiliUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC5B7422B8749BC00BAD89E /* MeowBiliUITests.swift */; };
 		B4DAF0DD2B80725800755F0C /* LinkDetectText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */; };
 /* End PBXBuildFile section */
@@ -429,7 +280,6 @@
 		8CA1BA102BD2AF9E009BCDFB /* PrivateSymbols.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrivateSymbols.m; sourceTree = "<group>"; };
 		8CA1BA152BD2AFAB009BCDFB /* PrivateSymbols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrivateSymbols.h; sourceTree = "<group>"; };
 		8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		8CA370E82B83BB4F00CE0E9E /* MeowBili Vision App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MeowBili Vision App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA371332B83BE7D00CE0E9E /* MeowBili Vision App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "MeowBili Vision App.entitlements"; sourceTree = "<group>"; };
 		8CA388A02B78B5D800F5F91F /* BiliFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BiliFont.ttf; sourceTree = "<group>"; };
 		8CA53B022BB963D700D6D692 /* WatchUIDebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchUIDebugView.swift; sourceTree = "<group>"; };
@@ -505,7 +355,6 @@
 		8CC3D55E2B7CC941005636DC /* OCCodeExt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCCodeExt.h; sourceTree = "<group>"; };
 		8CC3D5642B7CCF3C005636DC /* SelfQrCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfQrCardView.swift; sourceTree = "<group>"; };
 		8CC3D5662B7CDCE1005636DC /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
-		8CC5B6CC2B873E7500BAD89E /* MeowBili Mac App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MeowBili Mac App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CC5B6DB2B873ED400BAD89E /* MeowBili Mac App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "MeowBili Mac App.entitlements"; sourceTree = "<group>"; };
 		8CC5B6DC2B873EF600BAD89E /* MeowBili-Mac-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MeowBili-Mac-App-Info.plist"; sourceTree = "<group>"; };
 		8CC5B7402B8749BC00BAD89E /* MeowBiliUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeowBiliUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -523,22 +372,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8CA370E52B83BB4F00CE0E9E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8CA3714C2B83BF9400CE0E9E /* AZVideoPlayer in Frameworks */,
-				8CA371462B83BF9400CE0E9E /* Dynamic in Frameworks */,
-				8CA3714E2B83BF9400CE0E9E /* Mixpanel in Frameworks */,
-				8CA371402B83BF9400CE0E9E /* EFQRCode in Frameworks */,
-				8CA3713A2B83BF9400CE0E9E /* SwiftDate in Frameworks */,
-				8CA371382B83BF9400CE0E9E /* Marquee in Frameworks */,
-				8CA3713C2B83BF9400CE0E9E /* SFSymbol in Frameworks */,
-				8CA371422B83BF9400CE0E9E /* SwiftSoup in Frameworks */,
-				8CA3713E2B83BF9400CE0E9E /* ZipArchive in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,7 +409,6 @@
 				8CA7CBF72B77AC8A008E587F /* SDWebImagePDFCoder in Frameworks */,
 				8C5869C62C3018A900A18923 /* Cepheus in Frameworks */,
 				8CA7CBF52B77AC8A008E587F /* SDWebImageSVGCoder in Frameworks */,
-				8CA164852BF12731000065D8 /* SupportsUICore in Frameworks */,
 				8CA370D62B82691100CE0E9E /* Mixpanel in Frameworks */,
 				8CA7CBE72B77AC8A008E587F /* Marquee in Frameworks */,
 				8CA7CBE92B77AC8A008E587F /* SwiftDate in Frameworks */,
@@ -586,28 +418,6 @@
 				8CB176B02BB8421300CEC05C /* DarockKit in Frameworks */,
 				8CA7CBF32B77AC8A008E587F /* SDWebImageWebPCoder in Frameworks */,
 				8CA7CBEF2B77AC8A008E587F /* EFQRCode in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8CC5B6C92B873E7500BAD89E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8CC5B71D2B8742D300BAD89E /* ZipArchive in Frameworks */,
-				8CC5B7272B8742D300BAD89E /* SDWebImagePDFCoder in Frameworks */,
-				8CC5B7252B8742D300BAD89E /* SDWebImageSVGCoder in Frameworks */,
-				8CC5B7172B8742D300BAD89E /* Marquee in Frameworks */,
-				8CC5B7192B8742D300BAD89E /* SwiftDate in Frameworks */,
-				8CC5B7332B8742D300BAD89E /* AlertKit in Frameworks */,
-				8CC5B7372B8742D300BAD89E /* ScreenshotableView in Frameworks */,
-				8CC5B72D2B8742D300BAD89E /* Dynamic in Frameworks */,
-				8CC5B7392B8742D300BAD89E /* Mixpanel in Frameworks */,
-				8CC5B73B2B8742D300BAD89E /* AlertToast in Frameworks */,
-				8CC5B7292B8742D300BAD89E /* SwiftSoup in Frameworks */,
-				8CC5B7352B8742D300BAD89E /* AZVideoPlayer in Frameworks */,
-				8CC5B71B2B8742D300BAD89E /* SFSymbol in Frameworks */,
-				8CC5B7232B8742D300BAD89E /* SDWebImageWebPCoder in Frameworks */,
-				8CC5B71F2B8742D300BAD89E /* EFQRCode in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -922,8 +732,6 @@
 			children = (
 				8CA7CBC02B77AC4A008E587F /* MeowBili.app */,
 				8CA7CBCF2B77AC4C008E587F /* 喵哩喵哩.app */,
-				8CA370E82B83BB4F00CE0E9E /* MeowBili Vision App.app */,
-				8CC5B6CC2B873E7500BAD89E /* MeowBili Mac App.app */,
 				8CC5B7402B8749BC00BAD89E /* MeowBiliUITests.xctest */,
 				8C617F3E2B92334B000A3687 /* SafariExtension.appex */,
 			);
@@ -967,35 +775,6 @@
 			productName = SafariExtension;
 			productReference = 8C617F3E2B92334B000A3687 /* SafariExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
-		};
-		8CA370E72B83BB4F00CE0E9E /* MeowBili Vision App */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8CA370F82B83BB5300CE0E9E /* Build configuration list for PBXNativeTarget "MeowBili Vision App" */;
-			buildPhases = (
-				8CA370E42B83BB4F00CE0E9E /* Sources */,
-				8CC5B6C32B86583000BAD89E /* ShellScript */,
-				8CA370E52B83BB4F00CE0E9E /* Frameworks */,
-				8CA370E62B83BB4F00CE0E9E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "MeowBili Vision App";
-			packageProductDependencies = (
-				8CA371372B83BF9400CE0E9E /* Marquee */,
-				8CA371392B83BF9400CE0E9E /* SwiftDate */,
-				8CA3713B2B83BF9400CE0E9E /* SFSymbol */,
-				8CA3713D2B83BF9400CE0E9E /* ZipArchive */,
-				8CA3713F2B83BF9400CE0E9E /* EFQRCode */,
-				8CA371412B83BF9400CE0E9E /* SwiftSoup */,
-				8CA371452B83BF9400CE0E9E /* Dynamic */,
-				8CA3714B2B83BF9400CE0E9E /* AZVideoPlayer */,
-				8CA3714D2B83BF9400CE0E9E /* Mixpanel */,
-			);
-			productName = "MeowBili Vision App";
-			productReference = 8CA370E82B83BB4F00CE0E9E /* MeowBili Vision App.app */;
-			productType = "com.apple.product-type.application";
 		};
 		8CA7CBBF2B77AC4A008E587F /* MeowBili */ = {
 			isa = PBXNativeTarget;
@@ -1067,45 +846,10 @@
 				8CA370D52B82691100CE0E9E /* Mixpanel */,
 				8CB176A62BB8189300CEC05C /* SDWebImageSwiftUI */,
 				8CB176AF2BB8421300CEC05C /* DarockKit */,
-				8CA164842BF12731000065D8 /* SupportsUICore */,
 				8C5869C52C3018A900A18923 /* Cepheus */,
 			);
 			productName = "MeowBili Watch App";
 			productReference = 8CA7CBCF2B77AC4C008E587F /* 喵哩喵哩.app */;
-			productType = "com.apple.product-type.application";
-		};
-		8CC5B6CB2B873E7500BAD89E /* MeowBili Mac App */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8CC5B6D82B873E7800BAD89E /* Build configuration list for PBXNativeTarget "MeowBili Mac App" */;
-			buildPhases = (
-				8CC5B6C82B873E7500BAD89E /* Sources */,
-				8CC5B6C92B873E7500BAD89E /* Frameworks */,
-				8CC5B6CA2B873E7500BAD89E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "MeowBili Mac App";
-			packageProductDependencies = (
-				8CC5B7162B8742D300BAD89E /* Marquee */,
-				8CC5B7182B8742D300BAD89E /* SwiftDate */,
-				8CC5B71A2B8742D300BAD89E /* SFSymbol */,
-				8CC5B71C2B8742D300BAD89E /* ZipArchive */,
-				8CC5B71E2B8742D300BAD89E /* EFQRCode */,
-				8CC5B7222B8742D300BAD89E /* SDWebImageWebPCoder */,
-				8CC5B7242B8742D300BAD89E /* SDWebImageSVGCoder */,
-				8CC5B7262B8742D300BAD89E /* SDWebImagePDFCoder */,
-				8CC5B7282B8742D300BAD89E /* SwiftSoup */,
-				8CC5B72C2B8742D300BAD89E /* Dynamic */,
-				8CC5B7322B8742D300BAD89E /* AlertKit */,
-				8CC5B7342B8742D300BAD89E /* AZVideoPlayer */,
-				8CC5B7362B8742D300BAD89E /* ScreenshotableView */,
-				8CC5B7382B8742D300BAD89E /* Mixpanel */,
-				8CC5B73A2B8742D300BAD89E /* AlertToast */,
-			);
-			productName = "MeowBili Mac App";
-			productReference = 8CC5B6CC2B873E7500BAD89E /* MeowBili Mac App.app */;
 			productType = "com.apple.product-type.application";
 		};
 		8CC5B73F2B8749BC00BAD89E /* MeowBiliUITests */ = {
@@ -1142,17 +886,11 @@
 					8C82F8202BB709E1009AEFD2 = {
 						CreatedOnToolsVersion = 15.3;
 					};
-					8CA370E72B83BB4F00CE0E9E = {
-						CreatedOnToolsVersion = 15.2;
-					};
 					8CA7CBBF2B77AC4A008E587F = {
 						CreatedOnToolsVersion = 15.2;
 						LastSwiftMigration = 1520;
 					};
 					8CA7CBCE2B77AC4C008E587F = {
-						CreatedOnToolsVersion = 15.2;
-					};
-					8CC5B6CB2B873E7500BAD89E = {
 						CreatedOnToolsVersion = 15.2;
 					};
 					8CC5B73F2B8749BC00BAD89E = {
@@ -1191,7 +929,6 @@
 				8CA370DD2B827AAD00CE0E9E /* XCRemoteSwiftPackageReference "AlertToast" */,
 				8CB176A32BB8188600CEC05C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				8CB176AC2BB8420A00CEC05C /* XCRemoteSwiftPackageReference "DarockKit" */,
-				8CA164812BF1270D000065D8 /* XCRemoteSwiftPackageReference "SupportsUICore" */,
 				8C5869C42C3018A800A18923 /* XCRemoteSwiftPackageReference "Cepheus" */,
 			);
 			productRefGroup = B44689CB2B4FC15A002CCEB2 /* Products */;
@@ -1200,8 +937,6 @@
 			targets = (
 				8CA7CBBF2B77AC4A008E587F /* MeowBili */,
 				8CA7CBCE2B77AC4C008E587F /* MeowBili Watch App */,
-				8CA370E72B83BB4F00CE0E9E /* MeowBili Vision App */,
-				8CC5B6CB2B873E7500BAD89E /* MeowBili Mac App */,
 				8CC5B73F2B8749BC00BAD89E /* MeowBiliUITests */,
 				8C617F3D2B92334B000A3687 /* SafariExtension */,
 				8C82F8202BB709E1009AEFD2 /* Alternative Destribution */,
@@ -1222,18 +957,6 @@
 				8C617F442B92334B000A3687 /* _locales in Resources */,
 				8C617F4C2B92334B000A3687 /* content.js in Resources */,
 				8C617F522B92334B000A3687 /* popup.js in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8CA370E62B83BB4F00CE0E9E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8CC5B6BF2B8652C000BAD89E /* Assets.xcassets in Resources */,
-				8CC5B6C02B86539700BAD89E /* BiliFont.ttf in Resources */,
-				8CC5B6C12B86539700BAD89E /* Localizable.xcstrings in Resources */,
-				8C82F7952BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */,
-				8CB0D0282B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1261,17 +984,6 @@
 				8CA370DC2B82724400CE0E9E /* PrivacyInfo.xcprivacy in Resources */,
 				8CA7CCE12B77C3A9008E587F /* Localizable.xcstrings in Resources */,
 				8CBFF0D32B85E55F00350E0F /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8CC5B6CA2B873E7500BAD89E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8CC5B6FA2B873FA000BAD89E /* Assets.xcassets in Resources */,
-				8CB0D0292B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */,
-				8C82F7962BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */,
-				8CB0D02A2B88E5B20057EF1C /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1322,24 +1034,6 @@
 			shellPath = /bin/sh;
 			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n  echo \"warning: To edit codes for MeowBili project, you need SwiftLint to keep our coding style\"\nfi\n";
 		};
-		8CC5B6C32B86583000BAD89E /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n  echo \"warning: To edit codes for MeowBili project, you need SwiftLint to keep our coding style\"\nfi\n";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1348,71 +1042,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C617F412B92334B000A3687 /* SafariWebExtensionHandler.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8CA370E42B83BB4F00CE0E9E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8CA3711A2B83BB9100CE0E9E /* DownloadsView.swift in Sources */,
-				8CA3711F2B83BB9100CE0E9E /* LiveDetailView.swift in Sources */,
-				8CA371162B83BB9100CE0E9E /* DownloadObj.swift in Sources */,
-				8CA3712F2B83BB9100CE0E9E /* LinkDetectText.swift in Sources */,
-				8CA3712A2B83BB9100CE0E9E /* UserDetailView.swift in Sources */,
-				8CA371102B83BB9100CE0E9E /* NetwokFixView.swift in Sources */,
-				8CA371232B83BB9100CE0E9E /* CodeExt.swift in Sources */,
-				8CA371012B83BB9100CE0E9E /* HistoryView.swift in Sources */,
-				8CA371112B83BB9100CE0E9E /* AVExtension.m in Sources */,
-				8CA371222B83BB9100CE0E9E /* ImageViewerView.swift in Sources */,
-				8CA3711D2B83BB9100CE0E9E /* ArticleView.swift in Sources */,
-				8CA370FD2B83BB9100CE0E9E /* BangumiDetailView.swift in Sources */,
-				8CA370FB2B83BB9100CE0E9E /* UserDynamicMainView.swift in Sources */,
-				8CA3710D2B83BB9100CE0E9E /* UIExt.swift in Sources */,
-				8CA371242B83BB9100CE0E9E /* FavoriteView.swift in Sources */,
-				8CA371002B83BB9100CE0E9E /* ContentView.swift in Sources */,
-				8CA371312B83BB9100CE0E9E /* SkinExplorerView.swift in Sources */,
-				8CA371302B83BB9100CE0E9E /* VideoPlayerView.swift in Sources */,
-				8CA3710F2B83BB9100CE0E9E /* SettingsView.swift in Sources */,
-				8CA3711C2B83BB9100CE0E9E /* FollowListView.swift in Sources */,
-				8CA371272B83BB9100CE0E9E /* OCCodeExt.m in Sources */,
-				8CA371032B83BB9100CE0E9E /* SelfQrCardView.swift in Sources */,
-				8CA371082B83BB9100CE0E9E /* DynamicSendView.swift in Sources */,
-				8CA371322B83BB9100CE0E9E /* LivePlayerView.swift in Sources */,
-				8CA371212B83BB9100CE0E9E /* DynamicDetailView.swift in Sources */,
-				8CA371202B83BB9100CE0E9E /* SkinChooserView.swift in Sources */,
-				8CA370FE2B83BB9100CE0E9E /* CommentsView.swift in Sources */,
-				8CA371142B83BB9100CE0E9E /* UserDynamicListView.swift in Sources */,
-				8CA371092B83BB9100CE0E9E /* VideoDetailView.swift in Sources */,
-				8CC5B6BE2B8652AF00BAD89E /* backtrace.c in Sources */,
-				8CA371172B83BB9100CE0E9E /* AudioPlayerView.swift in Sources */,
-				8CA3710B2B83BB9100CE0E9E /* Passthroughs.swift in Sources */,
-				8CA371062B83BB9100CE0E9E /* SignalErrorView.swift in Sources */,
-				8CA3710E2B83BB9100CE0E9E /* bMessageSendView.swift in Sources */,
-				8CA371022B83BB9100CE0E9E /* FeedbackView.swift in Sources */,
-				8CA1BA132BD2AF9E009BCDFB /* PrivateSymbols.m in Sources */,
-				8CA370FF2B83BB9100CE0E9E /* NoticeView.swift in Sources */,
-				8CA371132B83BB9100CE0E9E /* PersonAccountView.swift in Sources */,
-				8CA3710C2B83BB9100CE0E9E /* backtrace.swift in Sources */,
-				8CA371072B83BB9100CE0E9E /* MeowBiliApp.swift in Sources */,
-				8CA371122B83BB9100CE0E9E /* MainView.swift in Sources */,
-				8CA3711B2B83BB9100CE0E9E /* SkinDownloadView.swift in Sources */,
-				8CA371152B83BB9100CE0E9E /* VideoDownloadView.swift in Sources */,
-				8CA371292B83BB9100CE0E9E /* SearchView.swift in Sources */,
-				8CA3712D2B83BB9100CE0E9E /* LoginView.swift in Sources */,
-				8C81D2B32BCBA58000EC58F4 /* FansListView.swift in Sources */,
-				8C97760A2BCECBC3006EDB58 /* Audio.swift in Sources */,
-				8CA371252B83BB9100CE0E9E /* WatchLaterView.swift in Sources */,
-				8CA3710A2B83BB9100CE0E9E /* Bangumi.swift in Sources */,
-				8CA3712C2B83BB9100CE0E9E /* ErrorGetView.swift in Sources */,
-				8CA371262B83BB9100CE0E9E /* AboutView.swift in Sources */,
-				8CA370FC2B83BB9100CE0E9E /* NowPlayingExtension.m in Sources */,
-				8CA371052B83BB9100CE0E9E /* BangumiPlayerView.swift in Sources */,
-				8CA3712B2B83BB9100CE0E9E /* AppFileManager.swift in Sources */,
-				8CA3712E2B83BB9100CE0E9E /* LiveMessagesView.swift in Sources */,
-				8CA371192B83BB9100CE0E9E /* MemoryWarningView.swift in Sources */,
-				8CA3711E2B83BB9100CE0E9E /* CodingTime.m in Sources */,
-				8CA371182B83BB9100CE0E9E /* BangumiDownloadView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1547,70 +1176,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8CC5B6C82B873E7500BAD89E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8CC5B6EE2B873FA000BAD89E /* backtrace.c in Sources */,
-				8C81D2B42BCBA58000EC58F4 /* FansListView.swift in Sources */,
-				8CC5B7082B873FA000BAD89E /* NetwokFixView.swift in Sources */,
-				8CC5B7062B873FA000BAD89E /* CommentsView.swift in Sources */,
-				8CC5B6ED2B873FA000BAD89E /* BangumiPlayerView.swift in Sources */,
-				8CC5B70A2B873FA000BAD89E /* VideoDetailView.swift in Sources */,
-				8CC5B6F12B873FA000BAD89E /* ContentView.swift in Sources */,
-				8CC5B6FC2B873FA000BAD89E /* NowPlayingExtension.m in Sources */,
-				8CC5B7022B873FA000BAD89E /* OCCodeExt.m in Sources */,
-				8CC5B6F62B873FA000BAD89E /* SelfQrCardView.swift in Sources */,
-				8CC5B6DE2B873FA000BAD89E /* backtrace.swift in Sources */,
-				8CC5B7052B873FA000BAD89E /* DownloadObj.swift in Sources */,
-				8CC5B6F42B873FA000BAD89E /* SearchView.swift in Sources */,
-				8CC5B6FF2B873FA000BAD89E /* AppFileManager.swift in Sources */,
-				8CC5B7122B873FA000BAD89E /* UserDetailView.swift in Sources */,
-				8CC5B70F2B873FA000BAD89E /* MainView.swift in Sources */,
-				8CC5B7112B873FA000BAD89E /* SkinExplorerView.swift in Sources */,
-				8CC5B6F52B873FA000BAD89E /* BangumiDetailView.swift in Sources */,
-				8CC5B6F92B873FA000BAD89E /* WatchLaterView.swift in Sources */,
-				8CC5B7072B873FA000BAD89E /* SkinChooserView.swift in Sources */,
-				8CC5B6E92B873FA000BAD89E /* DownloadsView.swift in Sources */,
-				8CC5B7132B873FA000BAD89E /* Passthroughs.swift in Sources */,
-				8CC5B6E42B873FA000BAD89E /* HistoryView.swift in Sources */,
-				8CC5B6E32B873FA000BAD89E /* LoginView.swift in Sources */,
-				8CC5B6E82B873FA000BAD89E /* Bangumi.swift in Sources */,
-				8CC5B6DD2B873FA000BAD89E /* CodeExt.swift in Sources */,
-				8CC5B70D2B873FA000BAD89E /* MeowBiliApp.swift in Sources */,
-				8CC5B6F22B873FA000BAD89E /* LiveDetailView.swift in Sources */,
-				8CC5B6EF2B873FA000BAD89E /* SignalErrorView.swift in Sources */,
-				8CC5B6F32B873FA000BAD89E /* FollowListView.swift in Sources */,
-				8CC5B6DF2B873FA000BAD89E /* FeedbackView.swift in Sources */,
-				8CC5B7092B873FA000BAD89E /* AVExtension.m in Sources */,
-				8CC5B6F02B873FA000BAD89E /* ErrorGetView.swift in Sources */,
-				8CA1BA142BD2AF9E009BCDFB /* PrivateSymbols.m in Sources */,
-				8CC5B6E72B873FA000BAD89E /* FavoriteView.swift in Sources */,
-				8CC5B70C2B873FA000BAD89E /* AboutView.swift in Sources */,
-				8CC5B6FE2B873FA000BAD89E /* PersonAccountView.swift in Sources */,
-				8CC5B6E22B873FA000BAD89E /* LivePlayerView.swift in Sources */,
-				8CC5B7012B873FA000BAD89E /* VideoPlayerView.swift in Sources */,
-				8CC5B6FB2B873FA000BAD89E /* DynamicSendView.swift in Sources */,
-				8CC5B70E2B873FA000BAD89E /* NoticeView.swift in Sources */,
-				8CC5B70B2B873FA000BAD89E /* ImageViewerView.swift in Sources */,
-				8CC5B6E12B873FA000BAD89E /* BangumiDownloadView.swift in Sources */,
-				8CC5B6E52B873FA000BAD89E /* UserDynamicMainView.swift in Sources */,
-				8CC5B6F82B873FA000BAD89E /* SettingsView.swift in Sources */,
-				8CC5B6EC2B873FA000BAD89E /* ArticleView.swift in Sources */,
-				8CC5B6E02B873FA000BAD89E /* UserDynamicListView.swift in Sources */,
-				8CC5B7002B873FA000BAD89E /* DynamicDetailView.swift in Sources */,
-				8CC5B6FD2B873FA000BAD89E /* LinkDetectText.swift in Sources */,
-				8C97760B2BCECBC3006EDB58 /* Audio.swift in Sources */,
-				8CC5B6F72B873FA000BAD89E /* AudioPlayerView.swift in Sources */,
-				8CC5B6EA2B873FA000BAD89E /* CodingTime.m in Sources */,
-				8CC5B7102B873FA000BAD89E /* LiveMessagesView.swift in Sources */,
-				8CC5B7042B873FA000BAD89E /* VideoDownloadView.swift in Sources */,
-				8CC5B6EB2B873FA000BAD89E /* MemoryWarningView.swift in Sources */,
-				8CC5B6E62B873FA000BAD89E /* UIExt.swift in Sources */,
-				8CC5B7032B873FA000BAD89E /* SkinDownloadView.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8CC5B73C2B8749BC00BAD89E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1649,7 +1214,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1244;
+				CURRENT_PROJECT_VERSION = 1245;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -1680,7 +1245,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1244;
+				CURRENT_PROJECT_VERSION = 1245;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -1777,7 +1342,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBiliAlternative.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1244;
+				CURRENT_PROJECT_VERSION = 1245;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				ENABLE_PREVIEWS = YES;
@@ -1822,7 +1387,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1244;
+				CURRENT_PROJECT_VERSION = 1245;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				ENABLE_PREVIEWS = YES;
@@ -1854,80 +1419,11 @@
 			};
 			name = Alternative;
 		};
-		8C82F7822BB6DF2D009AEFD2 /* Alternative */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconVision;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1244;
-				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
-				DEVELOPMENT_TEAM = B57D8PP775;
-				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MeowBili/Info_Vision.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "喵哩喵哩使用相册保存权限以保存二维码名片至本地";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.1.4;
-				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = xros;
-				SUPPORTED_PLATFORMS = "xros xrsimulator";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "MeowBili/MeowBili-Bridging-Header.h";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 7;
-				VALIDATE_PRODUCT = YES;
-				XROS_DEPLOYMENT_TARGET = 1.0;
-			};
-			name = Alternative;
-		};
-		8C82F7832BB6DF2D009AEFD2 /* Alternative */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconMac;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1244;
-				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
-				DEVELOPMENT_TEAM = B57D8PP775;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "MeowBili/MeowBili-Mac-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.1.4;
-				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "MeowBili/MeowBili-Bridging-Header.h";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Alternative;
-		};
 		8C82F7842BB6DF2D009AEFD2 /* Alternative */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1244;
+				CURRENT_PROJECT_VERSION = 1245;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1951,7 +1447,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1244;
+				CURRENT_PROJECT_VERSION = 1245;
 				DEVELOPMENT_TEAM = B38QUJMY47;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
@@ -2010,77 +1506,6 @@
 			};
 			name = Alternative;
 		};
-		8CA370F92B83BB5300CE0E9E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconVision;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1244;
-				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
-				DEVELOPMENT_TEAM = B57D8PP775;
-				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MeowBili/Info_Vision.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "喵哩喵哩使用相册保存权限以保存二维码名片至本地";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = xros;
-				SUPPORTED_PLATFORMS = "xros xrsimulator";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "MeowBili/MeowBili-Bridging-Header.h";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 7;
-				XROS_DEPLOYMENT_TARGET = 1.0;
-			};
-			name = Debug;
-		};
-		8CA370FA2B83BB5300CE0E9E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconVision;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Vision App.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1244;
-				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
-				DEVELOPMENT_TEAM = B57D8PP775;
-				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MeowBili/Info_Vision.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "喵哩喵哩使用相册保存权限以保存二维码名片至本地";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = xros;
-				SUPPORTED_PLATFORMS = "xros xrsimulator";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "MeowBili/MeowBili-Bridging-Header.h";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 7;
-				VALIDATE_PRODUCT = YES;
-				XROS_DEPLOYMENT_TARGET = 1.0;
-			};
-			name = Release;
-		};
 		8CA7CBDD2B77AC4D008E587F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2090,7 +1515,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1244;
+				CURRENT_PROJECT_VERSION = 1245;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2137,7 +1562,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MeowBili/MeowBili.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1244;
+				CURRENT_PROJECT_VERSION = 1245;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2182,7 +1607,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1244;
+				CURRENT_PROJECT_VERSION = 1245;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2218,7 +1643,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1244;
+				CURRENT_PROJECT_VERSION = 1245;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
 				DEVELOPMENT_TEAM = B57D8PP775;
 				ENABLE_PREVIEWS = YES;
@@ -2250,77 +1675,11 @@
 			};
 			name = Release;
 		};
-		8CC5B6D92B873E7800BAD89E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconMac;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1244;
-				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
-				DEVELOPMENT_TEAM = B57D8PP775;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "MeowBili/MeowBili-Mac-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "MeowBili/MeowBili-Bridging-Header.h";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		8CC5B6DA2B873E7800BAD89E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconMac;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "MeowBili/MeowBili Mac App.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1244;
-				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
-				DEVELOPMENT_TEAM = B57D8PP775;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "MeowBili/MeowBili-Mac-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "MeowBili/MeowBili-Bridging-Header.h";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
 		8CC5B7482B8749BC00BAD89E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1244;
+				CURRENT_PROJECT_VERSION = 1245;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -2343,7 +1702,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1244;
+				CURRENT_PROJECT_VERSION = 1245;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -2512,16 +1871,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8CA370F82B83BB5300CE0E9E /* Build configuration list for PBXNativeTarget "MeowBili Vision App" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8CA370F92B83BB5300CE0E9E /* Debug */,
-				8CA370FA2B83BB5300CE0E9E /* Release */,
-				8C82F7822BB6DF2D009AEFD2 /* Alternative */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		8CA7CBE22B77AC4D008E587F /* Build configuration list for PBXNativeTarget "MeowBili Watch App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2538,16 +1887,6 @@
 				8CA7CBDD2B77AC4D008E587F /* Debug */,
 				8CA7CBDE2B77AC4D008E587F /* Release */,
 				8C82F7802BB6DF2D009AEFD2 /* Alternative */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8CC5B6D82B873E7800BAD89E /* Build configuration list for PBXNativeTarget "MeowBili Mac App" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8CC5B6D92B873E7800BAD89E /* Debug */,
-				8CC5B6DA2B873E7800BAD89E /* Release */,
-				8C82F7832BB6DF2D009AEFD2 /* Alternative */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2589,14 +1928,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.0.1;
-			};
-		};
-		8CA164812BF1270D000065D8 /* XCRemoteSwiftPackageReference "SupportsUICore" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Darock-Studio/SupportsUICore";
-			requirement = {
-				branch = main;
-				kind = branch;
 			};
 		};
 		8CA370D22B82690700CE0E9E /* XCRemoteSwiftPackageReference "mixpanel-swift" */ = {
@@ -2740,11 +2071,6 @@
 			package = 8C5869C42C3018A800A18923 /* XCRemoteSwiftPackageReference "Cepheus" */;
 			productName = Cepheus;
 		};
-		8CA164842BF12731000065D8 /* SupportsUICore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8CA164812BF1270D000065D8 /* XCRemoteSwiftPackageReference "SupportsUICore" */;
-			productName = SupportsUICore;
-		};
 		8CA370D32B82690700CE0E9E /* Mixpanel */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8CA370D22B82690700CE0E9E /* XCRemoteSwiftPackageReference "mixpanel-swift" */;
@@ -2759,51 +2085,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8CA370DD2B827AAD00CE0E9E /* XCRemoteSwiftPackageReference "AlertToast" */;
 			productName = AlertToast;
-		};
-		8CA371372B83BF9400CE0E9E /* Marquee */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A6E2B4FC5E7002CCEB2 /* XCRemoteSwiftPackageReference "Marquee" */;
-			productName = Marquee;
-		};
-		8CA371392B83BF9400CE0E9E /* SwiftDate */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A712B4FC5F1002CCEB2 /* XCRemoteSwiftPackageReference "SwiftDate" */;
-			productName = SwiftDate;
-		};
-		8CA3713B2B83BF9400CE0E9E /* SFSymbol */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A742B4FC602002CCEB2 /* XCRemoteSwiftPackageReference "SFSymbol" */;
-			productName = SFSymbol;
-		};
-		8CA3713D2B83BF9400CE0E9E /* ZipArchive */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A792B4FC618002CCEB2 /* XCRemoteSwiftPackageReference "ZipArchive" */;
-			productName = ZipArchive;
-		};
-		8CA3713F2B83BF9400CE0E9E /* EFQRCode */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A7E2B4FC675002CCEB2 /* XCRemoteSwiftPackageReference "EFQRCode" */;
-			productName = EFQRCode;
-		};
-		8CA371412B83BF9400CE0E9E /* SwiftSoup */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A832B4FC6B1002CCEB2 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
-			productName = SwiftSoup;
-		};
-		8CA371452B83BF9400CE0E9E /* Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A852B4FC6C6002CCEB2 /* XCRemoteSwiftPackageReference "Dynamic" */;
-			productName = Dynamic;
-		};
-		8CA3714B2B83BF9400CE0E9E /* AZVideoPlayer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8C0557DD2B791B84009D9CD0 /* XCRemoteSwiftPackageReference "AZVideoPlayer" */;
-			productName = AZVideoPlayer;
-		};
-		8CA3714D2B83BF9400CE0E9E /* Mixpanel */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8CA370D22B82690700CE0E9E /* XCRemoteSwiftPackageReference "mixpanel-swift" */;
-			productName = Mixpanel;
 		};
 		8CA388982B789A0300F5F91F /* AZVideoPlayer */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2937,81 +2218,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8CC3D5612B7CCE57005636DC /* XCRemoteSwiftPackageReference "ScreenshotableView" */;
 			productName = ScreenshotableView;
-		};
-		8CC5B7162B8742D300BAD89E /* Marquee */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A6E2B4FC5E7002CCEB2 /* XCRemoteSwiftPackageReference "Marquee" */;
-			productName = Marquee;
-		};
-		8CC5B7182B8742D300BAD89E /* SwiftDate */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A712B4FC5F1002CCEB2 /* XCRemoteSwiftPackageReference "SwiftDate" */;
-			productName = SwiftDate;
-		};
-		8CC5B71A2B8742D300BAD89E /* SFSymbol */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A742B4FC602002CCEB2 /* XCRemoteSwiftPackageReference "SFSymbol" */;
-			productName = SFSymbol;
-		};
-		8CC5B71C2B8742D300BAD89E /* ZipArchive */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A792B4FC618002CCEB2 /* XCRemoteSwiftPackageReference "ZipArchive" */;
-			productName = ZipArchive;
-		};
-		8CC5B71E2B8742D300BAD89E /* EFQRCode */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A7E2B4FC675002CCEB2 /* XCRemoteSwiftPackageReference "EFQRCode" */;
-			productName = EFQRCode;
-		};
-		8CC5B7222B8742D300BAD89E /* SDWebImageWebPCoder */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A802B4FC68C002CCEB2 /* XCRemoteSwiftPackageReference "SDWebImageWebPCoder" */;
-			productName = SDWebImageWebPCoder;
-		};
-		8CC5B7242B8742D300BAD89E /* SDWebImageSVGCoder */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A812B4FC697002CCEB2 /* XCRemoteSwiftPackageReference "SDWebImageSVGCoder" */;
-			productName = SDWebImageSVGCoder;
-		};
-		8CC5B7262B8742D300BAD89E /* SDWebImagePDFCoder */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A822B4FC6A1002CCEB2 /* XCRemoteSwiftPackageReference "SDWebImagePDFCoder" */;
-			productName = SDWebImagePDFCoder;
-		};
-		8CC5B7282B8742D300BAD89E /* SwiftSoup */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A832B4FC6B1002CCEB2 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
-			productName = SwiftSoup;
-		};
-		8CC5B72C2B8742D300BAD89E /* Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A852B4FC6C6002CCEB2 /* XCRemoteSwiftPackageReference "Dynamic" */;
-			productName = Dynamic;
-		};
-		8CC5B7322B8742D300BAD89E /* AlertKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8CA7CCDD2B77BB5A008E587F /* XCRemoteSwiftPackageReference "AlertKit" */;
-			productName = AlertKit;
-		};
-		8CC5B7342B8742D300BAD89E /* AZVideoPlayer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8C0557DD2B791B84009D9CD0 /* XCRemoteSwiftPackageReference "AZVideoPlayer" */;
-			productName = AZVideoPlayer;
-		};
-		8CC5B7362B8742D300BAD89E /* ScreenshotableView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8CC3D5612B7CCE57005636DC /* XCRemoteSwiftPackageReference "ScreenshotableView" */;
-			productName = ScreenshotableView;
-		};
-		8CC5B7382B8742D300BAD89E /* Mixpanel */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8CA370D22B82690700CE0E9E /* XCRemoteSwiftPackageReference "mixpanel-swift" */;
-			productName = Mixpanel;
-		};
-		8CC5B73A2B8742D300BAD89E /* AlertToast */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8CA370DD2B827AAD00CE0E9E /* XCRemoteSwiftPackageReference "AlertToast" */;
-			productName = AlertToast;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

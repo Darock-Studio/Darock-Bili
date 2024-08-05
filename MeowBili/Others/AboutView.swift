@@ -36,21 +36,11 @@ struct AboutView: View {
                     }
             }
             #else
-            if #available(watchOS 10.0, *) {
-                TabView {
-                    AboutApp()
-                        .navigationTitle("About")
-                    AboutCredits()
-                        .navigationTitle("About.credits")
-                }
-                .tabViewStyle(.verticalPage)
-            } else {
-                TabView {
-                    AboutApp()
-                        .navigationTitle("About")
-                    AboutCredits()
-                        .navigationTitle("About.credits")
-                }
+            TabView {
+                AboutApp()
+                    .navigationTitle("About")
+                AboutCredits()
+                    .navigationTitle("About.credits")
             }
             #endif
         }

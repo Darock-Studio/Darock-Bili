@@ -35,12 +35,10 @@ struct DownloadsView: View {
     var body: some View {
         List {
             #if os(watchOS)
-            if #unavailable(watchOS 10) {
-                Section {
-                    NavigationLink(destination: { DownloadingListView() }, label: {
-                        Label("Download.list", systemImage: "list.bullet.below.rectangle")
-                    })
-                }
+            Section {
+                NavigationLink(destination: { DownloadingListView() }, label: {
+                    Label("Download.list", systemImage: "list.bullet.below.rectangle")
+                })
             }
             #endif
             Section {
@@ -122,14 +120,6 @@ struct DownloadsView: View {
                 NavigationLink(destination: { DownloadingListView() }, label: {
                     Image(systemName: "list.bullet.below.rectangle")
                 })
-            }
-            #else
-            if #available(watchOS 10, *) {
-                ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink(destination: { DownloadingListView() }, label: {
-                        Image(systemName: "list.bullet.below.rectangle")
-                    })
-                }
             }
             #endif
         }

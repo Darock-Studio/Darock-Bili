@@ -266,14 +266,8 @@ struct BangumiDetailView: View {
         @State var playingPageIndex = 0
         var body: some View {
             #if os(watchOS)
-            if #available(watchOS 10, *) {
-                List {
-                    DetailCore(bangumiData: $bangumiData, epDatas: $epDatas, isBangumiPlayerPresented: $isBangumiPlayerPresented, isLoading: $isLoading, bangumiLink: $bangumiLink)
-                }
-            } else {
-                VStack {
-                    DetailCore(bangumiData: $bangumiData, epDatas: $epDatas, isBangumiPlayerPresented: $isBangumiPlayerPresented, isLoading: $isLoading, bangumiLink: $bangumiLink)
-                }
+            VStack {
+                DetailCore(bangumiData: $bangumiData, epDatas: $epDatas, isBangumiPlayerPresented: $isBangumiPlayerPresented, isLoading: $isLoading, bangumiLink: $bangumiLink)
             }
             #else
             if epDatas.count != 0 {

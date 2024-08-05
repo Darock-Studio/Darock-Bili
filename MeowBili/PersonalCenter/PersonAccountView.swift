@@ -32,30 +32,7 @@ struct PersonAccountView: View {
     var body: some View {
         NavigationStack {
             #if os(watchOS)
-            if #available(watchOS 10, *) {
-                MainView()
-                    .toolbar {
-                        if isSettingsButtonTrailing {
-                            ToolbarItem(placement: .topBarTrailing) {
-                                NavigationLink(destination: { SettingsView() }, label: {
-                                    Image(systemName: "gear")
-                                        .foregroundColor(.accentColor)
-                                })
-                                .accessibility(identifier: "AppSettingsButton")
-                            }
-                        } else {
-                            ToolbarItem(placement: .topBarLeading) {
-                                NavigationLink(destination: { SettingsView() }, label: {
-                                    Image(systemName: "gear")
-                                        .foregroundColor(.accentColor)
-                                })
-                                .accessibility(identifier: "AppSettingsButton")
-                            }
-                        }
-                    }
-            } else {
-                MainView(isShowSettingsButton: true)
-            }
+            MainView(isShowSettingsButton: true)
             #else
             MainView(isShowSettingsButton: true)
             #endif
@@ -99,14 +76,11 @@ struct PersonAccountView: View {
                         })
                         .sheet(isPresented: $isUserSwitchPresented, content: {
                             List {
-                                if #unavailable(watchOS 10.0) {
-                                    Button(action: {
-                                        isNewUserPresenting = true
-                                    }, label: {
-                                        Label("User.switch.add", systemImage: "plus")
-                                    })
-                                }
-                                
+                                Button(action: {
+                                    isNewUserPresenting = true
+                                }, label: {
+                                    Label("User.switch.add", systemImage: "plus")
+                                })
                                 if userList1.isEmpty {
                                     Text("User.switch.none")
                                         .bold()
@@ -147,20 +121,6 @@ struct PersonAccountView: View {
                                         Text("User.switch.description")
                                         Text("User.switch.description.1")
                                     })
-                                }
-                            }
-                            .toolbar {
-                                if #available(watchOS 10.0, *) {
-                                    ToolbarItem(placement: .bottomBar) {
-                                        HStack {
-                                            Spacer()
-                                            Button(action: {
-                                                isNewUserPresenting = true
-                                            }, label: {
-                                                Image(systemName: "plus")
-                                            })
-                                        }
-                                    }
                                 }
                             }
                         })
@@ -242,14 +202,11 @@ struct PersonAccountView: View {
                         .sheet(isPresented: $isNewUserPresenting, content: { LoginView() })
                         .sheet(isPresented: $isUserSwitchPresented, content: {
                             List {
-                                if #unavailable(watchOS 10.0) {
-                                    Button(action: {
-                                        isNewUserPresenting = true
-                                    }, label: {
-                                        Label("User.switch.add", systemImage: "plus")
-                                    })
-                                }
-                                
+                                Button(action: {
+                                    isNewUserPresenting = true
+                                }, label: {
+                                    Label("User.switch.add", systemImage: "plus")
+                                })
                                 Section(content: {
                                     ForEach(0..<userList1.count, id: \.self) {user in
                                         Button(action: {
@@ -285,20 +242,6 @@ struct PersonAccountView: View {
                                     Text("User.switch.description")
                                     Text("User.switch.description.1")
                                 })
-                            }
-                            .toolbar {
-                                if #available(watchOS 10.0, *) {
-                                    ToolbarItem(placement: .bottomBar) {
-                                        HStack {
-                                            Spacer()
-                                            Button(action: {
-                                                isNewUserPresenting = true
-                                            }, label: {
-                                                Image(systemName: "plus")
-                                            })
-                                        }
-                                    }
-                                }
                             }
                         })
                         .onAppear {
