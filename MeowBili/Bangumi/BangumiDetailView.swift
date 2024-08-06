@@ -102,6 +102,9 @@ struct BangumiDetailView: View {
         }
         .navigationTitle("Bangumi")
         .navigationBarTitleDisplayMode(.inline)
+#if os(watchOS)
+        .sheet(isPresented: $isBangumiPlayerPresented, content: { BangumiPlayerView(bangumiData: $bangumiData, bangumiLink: $bangumiLink) })
+#endif
         .onAppear {
             let headers: HTTPHeaders = [
                 "cookie": "SESSDATA=\(sessdata)",
@@ -119,6 +122,7 @@ struct BangumiDetailView: View {
             }
             DarockKit.Network.shared.requestJSON("https://api.bilibili.com/pgc/web/season/section?season_id=\(bangumiData.seasonId)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
+                    epDatas.removeAll()
                     for ep in respJson["result"]["main_section"]["episodes"] {
                         epDatas.append(BangumiEp(aid: ep.1["aid"].int64 ?? 0, epid: ep.1["id"].int64 ?? 0, cid: ep.1["cid"].int64 ?? 0, cover: ep.1["cover"].string ?? "E", title: ep.1["title"].string ?? "[加载失败]", longTitle: ep.1["long_title"].string ?? "[加载失败]"))
                     }
@@ -267,7 +271,28 @@ struct BangumiDetailView: View {
         var body: some View {
             #if os(watchOS)
             VStack {
-                DetailCore(bangumiData: $bangumiData, epDatas: $epDatas, isBangumiPlayerPresented: $isBangumiPlayerPresented, isLoading: $isLoading, bangumiLink: $bangumiLink)
+                if epDatas.count != 0 {
+                    ForEach(0..<epDatas.count, id: \.self) { i in
+                        Button(action: {
+                            isLoading = true
+                            
+                            let headers: HTTPHeaders = [
+                                "cookie": "SESSDATA=\(sessdata)",
+                                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                            ]
+                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/pgc/player/web/playurl?ep_id=\(epDatas[i].epid)&qn=16&fnval=1", headers: headers) { respJson, isSuccess in
+                                if isSuccess {
+                                    if !CheckBApiError(from: respJson) { return }
+                                    bangumiLink = respJson["result"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
+                                    isBangumiPlayerPresented = true
+                                    isLoading = false
+                                }
+                            }
+                        }, label: {
+                            Text(epDatas[i].longTitle)
+                        })
+                    }
+                }
             }
             #else
             if epDatas.count != 0 {
@@ -308,43 +333,6 @@ struct BangumiDetailView: View {
                 .scrollIndicators(.never)
             }
             #endif
-        }
-        
-        // OS 10- support
-        struct DetailCore: View {
-            @Binding var bangumiData: BangumiData
-            @Binding var epDatas: [BangumiEp]
-            @Binding var isBangumiPlayerPresented: Bool
-            @Binding var isLoading: Bool
-            @Binding var bangumiLink: String
-            @AppStorage("DedeUserID") var dedeUserID = ""
-            @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-            @AppStorage("SESSDATA") var sessdata = ""
-            @AppStorage("bili_jct") var biliJct = ""
-            var body: some View {
-                if epDatas.count != 0 {
-                    ForEach(0..<epDatas.count, id: \.self) { i in
-                        Button(action: {
-                            isLoading = true
-                            
-                            let headers: HTTPHeaders = [
-                                "cookie": "SESSDATA=\(sessdata)",
-                                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                            ]
-                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/pgc/player/web/playurl?ep_id=\(epDatas[i].epid)&qn=16&fnval=1", headers: headers) { respJson, isSuccess in
-                                if isSuccess {
-                                    if !CheckBApiError(from: respJson) { return }
-                                    bangumiLink = respJson["result"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
-                                    isBangumiPlayerPresented = true
-                                    isLoading = false
-                                }
-                            }
-                        }, label: {
-                            Text(epDatas[i].longTitle)
-                        })
-                    }
-                }
-            }
         }
     }
 }
