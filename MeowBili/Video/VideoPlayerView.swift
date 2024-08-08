@@ -61,6 +61,11 @@ struct VideoPlayerView: View {
     @State var isFullScreen = false
     @State var playbackSpeed = 1.0
     @State var jumpToInput = ""
+    @State var playerScale: CGFloat = 1.0
+    @State var __playerScale = 1.0
+    @State var playerScaledOffset = CGSizeZero
+    @State var playerScaledLastOffset = CGSizeZero
+    @State var cachedPlayerTimeControlStatus = AVPlayer.TimeControlStatus.paused
     #endif
     @State var currentTime: Double = 0.0
     @State var playerTimer: Timer?
@@ -170,11 +175,52 @@ struct VideoPlayerView: View {
                             .rotationEffect(.degrees(isFullScreen ? 90 : 0))
                             .frame(width: isFullScreen ? WKInterfaceDevice.current().screenBounds.height : nil, height: isFullScreen ? WKInterfaceDevice.current().screenBounds.width : nil)
                         }
+                    if cachedPlayerTimeControlStatus == .paused {
+                        VStack {
+                            ZStack {
+                                Color.accentColor // For tap gesture
+                                    .frame(width: 60, height: 40)
+                                    .opacity(0.0100000002421438702673861521)
+                                HStack(spacing: 2) {
+                                    Image(systemName: "rectangle.portrait.arrowtriangle.2.outward")
+                                        .shadow(color: .accentColor, radius: 1)
+                                    Text(String(__playerScale))
+                                        .shadow(color: .accentColor, radius: 1)
+                                }
+                                .font(.system(size: 14))
+                            }
+                            .onTapGesture {
+                                if __playerScale < 10.0 {
+                                    __playerScale += 1.0
+                                    playerScale += 1.0
+                                } else {
+                                    __playerScale = 1.0
+                                    playerScale = 1.0
+                                    playerScaledOffset = CGSizeZero
+                                    playerScaledLastOffset = CGSizeZero
+                                }
+                            }
+                            Spacer()
+                        }
+                        .ignoresSafeArea()
+                    }
                 }
+                .animation(.smooth, value: cachedPlayerTimeControlStatus)
+                .animation(.smooth, value: playerScale)
+                .animation(.smooth, value: __playerScale)
+                .scrollIndicators(.never)
                 .tag(1)
                 List {
                     Section {
-                        SegmentedPicker(selection: $isFullScreen, leftText: "正常", rightText: "全屏")
+                        Button(action: {
+                            isFullScreen.toggle()
+                            tabviewChoseTab = 1
+                        }, label: {
+                            Label(
+                                isFullScreen ? "恢复" : "全屏",
+                                systemImage: isFullScreen ? "arrow.down.right.and.arrow.up.left" : "arrow.down.left.and.arrow.up.right"
+                            )
+                        })
                     } header: {
                         Text("画面")
                     }
@@ -257,6 +303,14 @@ struct VideoPlayerView: View {
                     }, label: {
                         Text("PlayerGesture")
                     })
+                }
+            }
+            .onReceive(player.publisher(for: \.timeControlStatus)) { status in
+                if _slowPath(status != cachedPlayerTimeControlStatus) {
+                    if status == .playing {
+                        player.rate = Float(playbackSpeed)
+                    }
+                    cachedPlayerTimeControlStatus = status
                 }
             }
             #endif
@@ -372,7 +426,7 @@ struct VideoPlayerView: View {
     @inline(__always)
     func UpdateDanmaku() {
         AF.request("https://api.bilibili.com/x/v1/dm/list.so?oid=\(videoCID)").response { response in
-            if let danmakus = String(data: response.data!, encoding: .utf8) {
+            if let respData = response.data, let danmakus = String(data: respData, encoding: .utf8) {
                 if danmakus.contains("<d p=\"") {
                     let danmakuOnly = danmakus.split(separator: "</source>")[1].split(separator: "</i>")[0]
                     let danmakuSpd = danmakuOnly.split(separator: "</d>")
