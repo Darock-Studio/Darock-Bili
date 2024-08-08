@@ -386,8 +386,15 @@ struct LoginView: View {
                                             ]
                                             AF.request("https://passport.bilibili.com/x/passport-login/web/sms/send", method: .post, parameters: BiliSmsCodePost(cid: Int(displayCC)!, tel: Int(accountInput)!, token: loginToken, challenge: challenge, validate: validate, seccode: seccode), headers: headers).response { response in
                                                 debugPrint(response)
-                                                let json = try! JSON(data: response.data!)
-                                                smsLoginToken = json["data"]["captcha_key"].string!
+                                                if let json = try? JSON(data: response.data!), let token = json["data"]["captcha_key"].string {
+                                                    smsLoginToken = token
+                                                } else {
+#if os(iOS)
+                                                    AlertKitAPI.present(title: "获取出错", subtitle: "请稍后重试", icon: .error, style: .iOS17AppleMusic, haptic: .error)
+#else
+                                                    tipWithText("获取出错", symbol: "xmark.circle.fill")
+#endif
+                                                }
                                             }
                                         }
                                     } else {

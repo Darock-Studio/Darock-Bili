@@ -167,35 +167,37 @@ struct DarockBili_Watch_AppApp: App {
     var body: some SwiftUI.Scene {
         WindowGroup {
             if fileLockerPwd != "" {
-                List {
-                    Section {
-                        Text(fileLockerRetryCount == 0 ? "文件保险箱已启用" : "输入错误")
-                            .font(.title3)
-                            .bold()
-                            .listRowBackground(Color.clear)
-                    }
-                    Section {
-                        TextField("密码", text: $fileLockerInput) {
-                            if fileLockerInput == fileLockerPwd {
-                                fileLockerPwd = ""
-                            } else {
-                                fileLockerInput = ""
-                                fileLockerRetryCount++
-                            }
-                        }
-                        .submitLabel(.continue)
-                    }
-                    if fileLockerRetryCount >= 3 {
+                NavigationStack {
+                    List {
                         Section {
-                            TextField("使用恢复密钥", text: $recoveryCodeInput) {
-                                if recoveryCodeInput == fileLockerRecoverCode {
+                            Text(fileLockerRetryCount == 0 ? "文件保险箱已启用" : "输入错误")
+                                .font(.title3)
+                                .bold()
+                                .listRowBackground(Color.clear)
+                        }
+                        Section {
+                            TextField("密码", text: $fileLockerInput) {
+                                if fileLockerInput == fileLockerPwd {
                                     fileLockerPwd = ""
                                 } else {
-                                    recoveryCodeInput = ""
+                                    fileLockerInput = ""
                                     fileLockerRetryCount++
                                 }
                             }
                             .submitLabel(.continue)
+                        }
+                        if fileLockerRetryCount >= 3 {
+                            Section {
+                                TextField("使用恢复密钥", text: $recoveryCodeInput) {
+                                    if recoveryCodeInput == fileLockerRecoverCode {
+                                        fileLockerPwd = ""
+                                    } else {
+                                        recoveryCodeInput = ""
+                                        fileLockerRetryCount++
+                                    }
+                                }
+                                .submitLabel(.continue)
+                            }
                         }
                     }
                 }
