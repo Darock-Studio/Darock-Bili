@@ -2285,9 +2285,6 @@
         }
       }
     },
-    "DebugVPLD" : {
-      "shouldTranslate" : false
-    },
     "Dignite" : {
       "localizations" : {
         "en" : {
@@ -5943,12 +5940,6 @@
         }
       }
     },
-    "TLeft" : {
-      "shouldTranslate" : false
-    },
-    "TRight" : {
-      "shouldTranslate" : false
-    },
     "Troubleshoot" : {
       "localizations" : {
         "en" : {
@@ -7141,9 +7132,6 @@
           }
         }
       }
-    },
-    "UIDebug" : {
-      "shouldTranslate" : false
     },
     "Update.checking" : {
       "localizations" : {
@@ -9097,9 +9085,6 @@
 
     },
     "提交反馈" : {
-
-    },
-    "提交反馈前，请先检查常见问题" : {
 
     },
     "搜索" : {
