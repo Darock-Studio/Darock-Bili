@@ -419,6 +419,12 @@ struct DarockBili_Watch_AppApp: App {
                         shouldPushVideoView = true
                     }
                 }
+                .onContinueUserActivity(NSUserActivityTypeBrowsingWeb) { activity in
+                    if let url = activity.webpageURL, let bvid = url.absoluteString.split(separator: "darock.top/meowbili/video/", maxSplits: 1)[from: 1] {
+                        urlOpenVideoDetails = ["Pic": "", "Title": "Loading...", "BV": String(bvid), "UP": "Loading...", "View": "1", "Danmaku": "1"]
+                        isUrlOpenVideoPresented = true
+                    }
+                }
             }
         }
         .onChange(of: scenePhase) {
@@ -433,7 +439,6 @@ struct DarockBili_Watch_AppApp: App {
                 SDImageCodersManager.shared.addCoder(SDImageWebPCoder.shared)
                 SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)
                 SDImageCodersManager.shared.addCoder(SDImagePDFCoder.shared)
-                SDImageCache.shared.config.maxMemoryCost = 1024 * 1024 * 10
                 SDImageCache.shared.config.shouldCacheImagesInMemory = false
                 SDImageCache.shared.config.shouldUseWeakMemoryCache = true
                 SDImageCache.shared.clearMemory()
@@ -459,6 +464,8 @@ struct DarockBili_Watch_AppApp: App {
                         }
                     }
                 }
+                
+                UserDefaults(suiteName: "group.darockst")?.set(true, forKey: "DCIsMeowBiliInstalled")
             @unknown default:
                 break
             }
