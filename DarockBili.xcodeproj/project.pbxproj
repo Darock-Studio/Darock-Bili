@@ -50,8 +50,6 @@
 		8C9776092BCECBC3006EDB58 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9776072BCECBC3006EDB58 /* Audio.swift */; };
 		8CA1BA112BD2AF9E009BCDFB /* PrivateSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1BA102BD2AF9E009BCDFB /* PrivateSymbols.m */; };
 		8CA1BA122BD2AF9E009BCDFB /* PrivateSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1BA102BD2AF9E009BCDFB /* PrivateSymbols.m */; };
-		8CA370D42B82690700CE0E9E /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA370D32B82690700CE0E9E /* Mixpanel */; };
-		8CA370D62B82691100CE0E9E /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA370D52B82691100CE0E9E /* Mixpanel */; };
 		8CA370DB2B82724400CE0E9E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */; };
 		8CA370DC2B82724400CE0E9E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */; };
 		8CA370DF2B827AAD00CE0E9E /* AlertToast in Frameworks */ = {isa = PBXBuildFile; platformFilters = (ios, maccatalyst, ); productRef = 8CA370DE2B827AAD00CE0E9E /* AlertToast */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -412,7 +410,6 @@
 				8CA7CC172B77AC93008E587F /* SDWebImageSVGCoder in Frameworks */,
 				8CC3D5632B7CCE57005636DC /* ScreenshotableView in Frameworks */,
 				8C8578B72C5BAC0100AF93D1 /* MarkdownUI in Frameworks */,
-				8CA370D42B82690700CE0E9E /* Mixpanel in Frameworks */,
 				8CA7CC092B77AC93008E587F /* Marquee in Frameworks */,
 				8C0557DF2B791B84009D9CD0 /* AZVideoPlayer in Frameworks */,
 				8CA7CC0B2B77AC93008E587F /* SwiftDate in Frameworks */,
@@ -435,7 +432,6 @@
 				8CA7CBF72B77AC8A008E587F /* SDWebImagePDFCoder in Frameworks */,
 				8C03B6DE2C280BAA000770B4 /* Cepheus in Frameworks */,
 				8CA7CBF52B77AC8A008E587F /* SDWebImageSVGCoder in Frameworks */,
-				8CA370D62B82691100CE0E9E /* Mixpanel in Frameworks */,
 				8CA7CBE72B77AC8A008E587F /* Marquee in Frameworks */,
 				8CA7CBE92B77AC8A008E587F /* SwiftDate in Frameworks */,
 				8CA7CBFD2B77AC8A008E587F /* Dynamic in Frameworks */,
@@ -875,7 +871,6 @@
 				8CA3889E2B78B1E300F5F91F /* AZVideoPlayer */,
 				8C0557DE2B791B84009D9CD0 /* AZVideoPlayer */,
 				8CC3D5622B7CCE57005636DC /* ScreenshotableView */,
-				8CA370D32B82690700CE0E9E /* Mixpanel */,
 				8CA370DE2B827AAD00CE0E9E /* AlertToast */,
 				8CB176A42BB8188700CEC05C /* SDWebImageSwiftUI */,
 				8CB176AD2BB8420B00CEC05C /* DarockKit */,
@@ -910,7 +905,6 @@
 				8CA7CBF62B77AC8A008E587F /* SDWebImagePDFCoder */,
 				8CA7CBF82B77AC8A008E587F /* SwiftSoup */,
 				8CA7CBFC2B77AC8A008E587F /* Dynamic */,
-				8CA370D52B82691100CE0E9E /* Mixpanel */,
 				8CB176A62BB8189300CEC05C /* SDWebImageSwiftUI */,
 				8CB176AF2BB8421300CEC05C /* DarockKit */,
 				8C03B6DD2C280BAA000770B4 /* Cepheus */,
@@ -997,7 +991,6 @@
 				8CA7CCDD2B77BB5A008E587F /* XCRemoteSwiftPackageReference "AlertKit" */,
 				8C0557DD2B791B84009D9CD0 /* XCRemoteSwiftPackageReference "AZVideoPlayer" */,
 				8CC3D5612B7CCE57005636DC /* XCRemoteSwiftPackageReference "ScreenshotableView" */,
-				8CA370D22B82690700CE0E9E /* XCRemoteSwiftPackageReference "mixpanel-swift" */,
 				8CA370DD2B827AAD00CE0E9E /* XCRemoteSwiftPackageReference "AlertToast" */,
 				8CB176A32BB8188600CEC05C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				8CB176AC2BB8420A00CEC05C /* XCRemoteSwiftPackageReference "DarockKit" */,
@@ -2124,14 +2117,6 @@
 				minimumVersion = 2.3.1;
 			};
 		};
-		8CA370D22B82690700CE0E9E /* XCRemoteSwiftPackageReference "mixpanel-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mixpanel/mixpanel-swift";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		8CA370DD2B827AAD00CE0E9E /* XCRemoteSwiftPackageReference "AlertToast" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/elai950/AlertToast";
@@ -2274,16 +2259,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8C8578B32C5BABF000AF93D1 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
 			productName = MarkdownUI;
-		};
-		8CA370D32B82690700CE0E9E /* Mixpanel */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8CA370D22B82690700CE0E9E /* XCRemoteSwiftPackageReference "mixpanel-swift" */;
-			productName = Mixpanel;
-		};
-		8CA370D52B82691100CE0E9E /* Mixpanel */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8CA370D22B82690700CE0E9E /* XCRemoteSwiftPackageReference "mixpanel-swift" */;
-			productName = Mixpanel;
 		};
 		8CA370DE2B827AAD00CE0E9E /* AlertToast */ = {
 			isa = XCSwiftPackageProductDependency;

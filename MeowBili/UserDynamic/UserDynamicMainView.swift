@@ -487,8 +487,10 @@ struct UserDynamicMainView: View {
                     ])
                     itemForCount += 1
                 }
-                lastDynamicID = dynamics.last?["DynamicID"] as! String
-                nextLoadPage += 1
+                if let dynamicLast = dynamics.last {
+                    lastDynamicID = dynamicLast["DynamicID"] as! String
+                    nextLoadPage += 1
+                }
                 isLoadingNew = false
             }
         }
