@@ -20,7 +20,6 @@ import UIKit
 import AVKit
 import SwiftUI
 import Marquee
-import Mixpanel
 import EFQRCode
 import DarockKit
 import Alamofire
@@ -41,7 +40,6 @@ struct VideoDetailView: View {
     @AppStorage("bili_jct") var biliJct = ""
     @AppStorage("VideoGetterSource") var videoGetterSource = "official"
     @AppStorage("IsDanmakuEnabled") var isDanmakuEnabled = true
-    @AppStorage("IsAllowMixpanel") var isAllowMixpanel = true
     @AppStorage("IsUseExtHaptic") var isUseExtHaptic = true
     #if os(watchOS)
     @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
@@ -784,15 +782,6 @@ struct VideoDetailView: View {
             
             isFirstLoaded = true
             #endif
-            
-            if isAllowMixpanel {
-                Mixpanel.mainInstance().time(event: "Watch Video")
-            }
-        }
-        .onDisappear {
-            if isAllowMixpanel {
-                Mixpanel.mainInstance().track(event: "Watch Video", properties: videoDetails)
-            }
         }
         #if !os(watchOS)
         .toolbar {

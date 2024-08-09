@@ -18,7 +18,6 @@
 
 import Darwin
 import SwiftUI
-import Mixpanel
 import DarockKit
 import SwiftyJSON
 import SDWebImage
@@ -485,17 +484,6 @@ public func tipWithText(_ text: String, symbol: String = "", time: Double = 3.0)
 #if !os(watchOS)
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        Mixpanel.initialize(token: "37d4aaecc64cae16353c2fe7dbb0513c", trackAutomaticEvents: false)
-        //                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        //  Wow you see a token there, I'm not forget to hide it because you are no able to
-        //  do anything important by this token >_-
-        if (UserDefaults.standard.object(forKey: "IsAllowMixpanel") as? Bool) ?? true {
-            Mixpanel.mainInstance().track(event: "Open App")
-            if let uid = UserDefaults.standard.string(forKey: "DedeUserId") {
-                Mixpanel.mainInstance().registerSuperPropertiesOnce(["DedeUserId": uid])
-            }
-        }
-            
         return true
     }
     
@@ -548,21 +536,9 @@ func signalErrorRecord(_ errorNum: Int32, _ errorSignal: String) {
 #else
 class AppDelegate: NSObject, WKApplicationDelegate {
     func applicationDidFinishLaunching() {
-        Mixpanel.initialize(token: "37d4aaecc64cae16353c2fe7dbb0513c")
-        //                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        //  Wow you see a token there, I'm not forget to hide it because you are no able to
-        //  do anything important by this token >_-
-        if (UserDefaults.standard.object(forKey: "IsAllowMixpanel") as? Bool) ?? true {
-            Mixpanel.mainInstance().track(event: "Open App")
-            if let uid = UserDefaults.standard.string(forKey: "DedeUserId") {
-                Mixpanel.mainInstance().registerSuperPropertiesOnce(["DedeUserId": uid])
-            }
-        }
-        
         SDImageCodersManager.shared.addCoder(SDImageWebPCoder.shared)
         SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)
         SDImageCodersManager.shared.addCoder(SDImagePDFCoder.shared)
-        SDImageCache.shared.config.maxMemoryCost = 1024 * 1024 * 10
         SDImageCache.shared.config.shouldCacheImagesInMemory = false
         SDImageCache.shared.config.shouldUseWeakMemoryCache = true
         SDImageCache.shared.clearMemory()

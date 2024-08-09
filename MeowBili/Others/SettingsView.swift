@@ -1155,11 +1155,6 @@ struct PrivacySettingsView: View {
             Toggle("垂下手腕时隐藏内容", isOn: $blurWhenScreenSleep)
             #endif
             Section {
-                NavigationLink(destination: { AnalyzeAImprove() }, label: {
-                    Text("分析与改进")
-                })
-            }
-            Section {
                 NavigationLink(destination: { FileLocker() }, label: {
                     Text("文件保险箱")
                 })
@@ -1167,24 +1162,6 @@ struct PrivacySettingsView: View {
         }
     }
     
-    struct AnalyzeAImprove: View {
-        @AppStorage("IsAllowMixpanel") var isAllowMixpanel = true
-        var body: some View {
-            List {
-                Section {
-                    Toggle("允许收集使用信息", isOn: $isAllowMixpanel)
-                } footer: {
-                    Text("喵哩喵哩收集使用信息仅用以帮助改进质量，不会用于广告、个人画像之类，收集的信息不会关联到个人。此更改立即生效，不会影响哔哩哔哩官方对您的数据收集。")
-                }
-                Section {
-                    Link("喵哩喵哩开源页", destination: URL(string: "https://github.com/Darock-Studio/Darock-Bili")!)
-                } footer: {
-                    Text("喵哩喵哩为完整开源项目，欢迎检查代码以确认无隐私问题")
-                }
-            }
-            .navigationTitle("分析与改进")
-        }
-    }
     struct FileLocker: View {
         @State var isFileLockerEnabled = false
         @State var isSetPasswdPresented = false
