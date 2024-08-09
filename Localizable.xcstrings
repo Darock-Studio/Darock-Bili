@@ -8158,6 +8158,7 @@
       }
     },
     "允许收集使用信息" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8209,6 +8210,7 @@
       }
     },
     "分析与改进" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8550,6 +8552,7 @@
       }
     },
     "喵哩喵哩为完整开源项目，欢迎检查代码以确认无隐私问题" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8560,6 +8563,7 @@
       }
     },
     "喵哩喵哩开源页" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8570,6 +8574,7 @@
       }
     },
     "喵哩喵哩收集使用信息仅用以帮助改进质量，不会用于广告、个人画像之类，收集的信息不会关联到个人。此更改立即生效，不会影响哔哩哔哩官方对您的数据收集。" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
