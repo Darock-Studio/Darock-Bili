@@ -32,15 +32,6 @@ struct DownloadsView: View {
     @State var searchInput = ""
     var body: some View {
         List {
-            #if os(watchOS)
-            if #unavailable(watchOS 10) {
-                Section {
-                    NavigationLink(destination: { DownloadingListView() }, label: {
-                        Label("Download.list", systemImage: "list.bullet.below.rectangle")
-                    })
-                }
-            }
-            #endif
             Section {
                 if metadatas.count != 0 {
                     ForEach(0...metadatas.count - 1, id: \.self) { i in
@@ -79,6 +70,13 @@ struct DownloadsView: View {
                                     }, label: {
                                         Image(systemName: "xmark.bin.fill")
                                     })
+                                    #if os(watchOS)
+                                    Button(action: {
+                                        playAudio(url: URL(filePath: vRootPath + metadatas[i]["Path"]!).absoluteString)
+                                    }, label: {
+                                        Image(systemName: "music.note")
+                                    })
+                                    #endif
                                 }
                             }
                         } else {
