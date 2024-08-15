@@ -59,8 +59,6 @@
 
 使用[最新的 Release](https://github.com/Darock-Studio/Darock-Bili/releases/latest) 编译以获取与官方分发相同的稳定版本。
 
-由于一个未知问题，您可能需要使用 [Xcode 15.2](https://developer.apple.com/download/all/) (而不是最新的 15.3) 来进行编译。
-
 ## 🙌贡献
 欢迎提交Issue和Pull Request帮助我们变得更好！
 
