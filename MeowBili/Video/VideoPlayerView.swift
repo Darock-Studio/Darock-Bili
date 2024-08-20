@@ -209,6 +209,7 @@ struct VideoPlayerView: View {
                 .animation(.smooth, value: playerScale)
                 .animation(.smooth, value: __playerScale)
                 .scrollIndicators(.never)
+                ._statusBarHidden(true)
                 .tag(1)
                 List {
                     Section {

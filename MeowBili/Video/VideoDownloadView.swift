@@ -17,6 +17,7 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
+import Dynamic
 import DarockKit
 import Alamofire
 
@@ -126,6 +127,9 @@ struct VideoDownloadView: View {
                     }
                 }
             }
+            #if os(watchOS)
+            Dynamic.PUICApplication.sharedPUICApplication().setExtendedIdleTime(3600, disablesSleepGesture: true, wantsAutorotation: false)
+            #endif
         }
     }
 }

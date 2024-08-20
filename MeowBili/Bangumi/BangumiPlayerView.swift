@@ -73,6 +73,7 @@ struct BangumiPlayerView: View {
                         .ignoresSafeArea()
                         .navigationBarHidden(true)
                         .tag(1)
+                        ._statusBarHidden(true)
                         .onAppear {
                             hideDigitalTime(true)
                             Timer.scheduledTimer(withTimeInterval: 15, repeats: true) { timer in
