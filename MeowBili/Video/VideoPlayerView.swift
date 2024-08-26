@@ -143,8 +143,10 @@ struct VideoPlayerView: View {
                     VideoPlayer(player: player)
                         .rotationEffect(.degrees(isFullScreen ? 90 : 0))
                         .frame(width: isFullScreen ? WKInterfaceDevice.current().screenBounds.height : nil, height: isFullScreen ? WKInterfaceDevice.current().screenBounds.width : nil)
+                        .scaleEffect(playerScale)
                         .offset(y: isFullScreen ? 20 : 0)
                         .ignoresSafeArea()
+                        .dragGestureByPlayerScale($playerScale, offset: $playerScaledOffset, lastOffset: $playerScaledLastOffset)
                         .overlay {
                             ZStack {
                                 if isDanmakuEnabled {
@@ -175,6 +177,8 @@ struct VideoPlayerView: View {
                             .rotationEffect(.degrees(isFullScreen ? 90 : 0))
                             .frame(width: isFullScreen ? WKInterfaceDevice.current().screenBounds.height : nil, height: isFullScreen ? WKInterfaceDevice.current().screenBounds.width : nil)
                         }
+                        .animation(.smooth, value: playerScale)
+                        .animation(.smooth, value: __playerScale)
                     if cachedPlayerTimeControlStatus == .paused {
                         VStack {
                             ZStack {
@@ -206,8 +210,6 @@ struct VideoPlayerView: View {
                     }
                 }
                 .animation(.smooth, value: cachedPlayerTimeControlStatus)
-                .animation(.smooth, value: playerScale)
-                .animation(.smooth, value: __playerScale)
                 .scrollIndicators(.never)
                 ._statusBarHidden(true)
                 .tag(1)
@@ -531,6 +533,30 @@ struct VideoPlayerView: View {
     }
     #endif
 }
+
+#if os(watchOS)
+private extension View {
+    @ViewBuilder
+    func dragGestureByPlayerScale(_ scale: Binding<CGFloat>, offset: Binding<CGSize>, lastOffset: Binding<CGSize>) -> some View {
+        if scale.wrappedValue != 1.0 {
+            self.gesture(
+                DragGesture()
+                    .onChanged { gesture in
+                        offset.wrappedValue = CGSize(
+                            width: gesture.translation.width + lastOffset.wrappedValue.width,
+                            height: gesture.translation.height + lastOffset.wrappedValue.height
+                        )
+                    }
+                    .onEnded { _ in
+                        lastOffset.wrappedValue = offset.wrappedValue
+                    }
+            )
+        } else {
+            self
+        }
+    }
+}
+#endif
 
 // Extensions for periodicTimePublisher
 extension AVPlayer {
