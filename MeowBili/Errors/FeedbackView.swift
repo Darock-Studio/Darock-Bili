@@ -81,6 +81,8 @@ struct InAppFeedbackView: View {
                     }
                 } header: {
                     Text("发送的反馈")
+                } footer: {
+                    Text("虽然我们无法一一以文字回复提交的每一份反馈，但我们会查看每一份反馈并监控提交的反馈数量，以便更好地了解问题的范围。")
                 }
             }
         }
