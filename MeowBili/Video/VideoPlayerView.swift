@@ -322,6 +322,21 @@ struct VideoPlayerView: View {
             if !isFinishedInit {
                 isFinishedInit = true
                 
+                #if !os(watchOS)
+                // 根据 ExternalSound 设置配置 AVAudioSession
+                let audioSession = AVAudioSession.sharedInstance()
+                do {
+                    if externalSound {
+                        try audioSession.setCategory(.playback, mode: .default, options: [])
+                    } else {
+                        try audioSession.setCategory(.playAndRecord, mode: .default, options: [])
+                    }
+                    try audioSession.setActive(true)
+                } catch {
+                    print("Failed to configure AVAudioSession: \(error)")
+                }
+                #endif
+                
                 let asset = AVURLAsset(url: URL(string: videoLink)!, options: ["AVURLAssetHTTPHeaderFieldsKey": ["User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15", "Referer": "https://www.bilibili.com"]])
                 let item = AVPlayerItem(asset: asset)
                 player = AVPlayer(playerItem: item)
