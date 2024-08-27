@@ -57,6 +57,7 @@ struct VideoPlayerView: View {
     @AppStorage("IsDanmakuEnabled") var isDanmakuEnabled = true
     @AppStorage("IsVideoPlayerGestureEnabled") var isVideoPlayerGestureEnabled = true
     @AppStorage("VideoPlayerGestureBehavior") var videoPlayerGestureBehavior = "Play/Pause"
+    @AppStorage("externalSound") var externalSound: Bool = false
     @State var tabviewChoseTab = 1
     @State var isFullScreen = false
     @State var playbackSpeed = 1.0
@@ -323,7 +324,7 @@ struct VideoPlayerView: View {
                 isFinishedInit = true
                 
                 #if os(watchOS)
-                // 根据 ExternalSound 设置配置 AVAudioSession
+                // 根据 externalSound 设置配置 AVAudioSession
                 let audioSession = AVAudioSession.sharedInstance()
                 do {
                     if externalSound {
