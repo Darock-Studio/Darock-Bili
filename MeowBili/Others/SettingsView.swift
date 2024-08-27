@@ -34,7 +34,7 @@ struct SettingsView: View {
     @AppStorage("SESSDATA") var sessdata = ""
     @AppStorage("bili_jct") var biliJct = ""
     @AppStorage("IsLargeSuggestionStyle") var isLargeSuggestionStyle = false
-    @AppStorage("ExternalSound") var ExternalSound = false
+    @AppStorage("externalSound") var externalSound = false
     @State var isLogoutAlertPresented = false
     var body: some View {
         List {
@@ -473,7 +473,7 @@ struct PlayerSettingsView: View {
             }
             #if os(watchOS)
             Section {
-                Toggle("声音外放", isOn: $ExternalSound)
+                Toggle("声音外放", isOn: $externalSound)
             } header: {
                 Text("声音")
             }

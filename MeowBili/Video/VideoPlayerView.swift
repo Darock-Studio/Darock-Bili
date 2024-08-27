@@ -326,7 +326,7 @@ struct VideoPlayerView: View {
                 // 根据 ExternalSound 设置配置 AVAudioSession
                 let audioSession = AVAudioSession.sharedInstance()
                 do {
-                    if ExternalSound {
+                    if externalSound {
                         try audioSession.setCategory(.playback, mode: .default, options: [])
                     } else {
                         try audioSession.setCategory(.playAndRecord, mode: .default, options: [])
