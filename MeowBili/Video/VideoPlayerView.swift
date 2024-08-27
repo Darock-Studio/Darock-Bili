@@ -322,11 +322,11 @@ struct VideoPlayerView: View {
             if !isFinishedInit {
                 isFinishedInit = true
                 
-                #if !os(watchOS)
+                #if os(watchOS)
                 // 根据 ExternalSound 设置配置 AVAudioSession
                 let audioSession = AVAudioSession.sharedInstance()
                 do {
-                    if externalSound {
+                    if ExternalSound {
                         try audioSession.setCategory(.playback, mode: .default, options: [])
                     } else {
                         try audioSession.setCategory(.playAndRecord, mode: .default, options: [])

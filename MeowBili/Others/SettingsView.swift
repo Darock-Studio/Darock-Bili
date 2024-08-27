@@ -34,6 +34,7 @@ struct SettingsView: View {
     @AppStorage("SESSDATA") var sessdata = ""
     @AppStorage("bili_jct") var biliJct = ""
     @AppStorage("IsLargeSuggestionStyle") var isLargeSuggestionStyle = false
+    @AppStorage("ExternalSound") var ExternalSound = false
     @State var isLogoutAlertPresented = false
     var body: some View {
         List {
@@ -441,7 +442,6 @@ struct PlayerSettingsView: View {
     @AppStorage("IsShowBottomDanmaku") var isShowBottomDanmaku = true
     #if os(watchOS)
     @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
-    @AppStorage("ExternalSound") var ExternalSound = false
     #else
     @AppStorage("IsRecordHistory") var isRecordHistory = true
     #endif
@@ -471,7 +471,7 @@ struct PlayerSettingsView: View {
             } header: {
                 Text("弹幕")
             }
-            #if !os(watchOS)
+            #if os(watchOS)
             Section {
                 Toggle("声音外放", isOn: $ExternalSound)
             } header: {
