@@ -164,7 +164,7 @@ struct MainView: View {
         @State var isNetworkFixPresented = false
         @State var isFirstLoaded = false
         @State var newMajorVer = ""
-        @State var newBuildVer = ""
+        @State var isNewVerAvailable = false
         @State var isShowDisableNewVerTip = false
         @State var isLoadingNew = false
         @State var isFailedToLoad = false
@@ -190,24 +190,20 @@ struct MainView: View {
                                         .bold()
                                 })
                             }
-                            if newMajorVer != "" && newBuildVer != "" {
-                                let nowMajorVer = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
-                                let nowBuildVer = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
-                                if (nowMajorVer < newMajorVer || Int(nowBuildVer) ?? 1 < Int(newBuildVer) ?? 1) && updateTipIgnoreVersion != "\(newMajorVer)\(newBuildVer)" {
-                                    VStack {
-                                        Text("Home.update.\(newMajorVer).\(newBuildVer)")
-                                        if isShowDisableNewVerTip {
-                                            Text("Home.update.skip")
-                                                .font(.system(size: 12))
-                                                .foregroundColor(.gray)
-                                        }
+                            if newMajorVer != "" && isNewVerAvailable && updateTipIgnoreVersion != newMajorVer {
+                                VStack {
+                                    Text("版本 \(newMajorVer) 现已可用")
+                                    if isShowDisableNewVerTip {
+                                        Text("Home.update.skip")
+                                            .font(.system(size: 12))
+                                            .foregroundColor(.gray)
                                     }
-                                    .onTapGesture {
-                                        if isShowDisableNewVerTip {
-                                            updateTipIgnoreVersion = "\(newMajorVer)\(newBuildVer)"
-                                        } else {
-                                            isShowDisableNewVerTip = true
-                                        }
+                                }
+                                .onTapGesture {
+                                    if isShowDisableNewVerTip {
+                                        updateTipIgnoreVersion = newMajorVer
+                                    } else {
+                                        isShowDisableNewVerTip = true
                                     }
                                 }
                             }
@@ -328,9 +324,26 @@ struct MainView: View {
                     }
                 }
                 DarockKit.Network.shared.requestString("https://fapi.darock.top:65535/bili/newver") { respStr, isSuccess in
-                    if isSuccess && respStr.apiFixed().contains("|") {
-                        newMajorVer = String(respStr.apiFixed().split(separator: "|")[0])
-                        newBuildVer = String(respStr.apiFixed().split(separator: "|")[1])
+                    if isSuccess {
+                        let spdVer = respStr.apiFixed().split(separator: ".")
+                        if 3...4 ~= spdVer.count {
+                            newMajorVer = respStr.apiFixed()
+                            if let x = Int(spdVer[0]), let y = Int(spdVer[1]), let z = Int(spdVer[2]) {
+                                if let _url = Bundle.main.url(forResource: "SemanticVersion", withExtension: "drkdatas"),
+                                   let currVerSpd = (try? String(contentsOf: _url))?.split(separator: "\n")[0].split(separator: "."),
+                                   3...4 ~= currVerSpd.count {
+                                    if let cx = Int(currVerSpd[0]), let cy = Int(currVerSpd[1]), let cz = Int(currVerSpd[2]) {
+                                        if x > cx {
+                                            isNewVerAvailable = true
+                                        } else if x == cx && y > cy {
+                                            isNewVerAvailable = true
+                                        } else if x == cx && y == cy && z > cz {
+                                            isNewVerAvailable = true
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
