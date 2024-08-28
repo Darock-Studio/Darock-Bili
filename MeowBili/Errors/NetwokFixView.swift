@@ -164,41 +164,33 @@ struct NetworkFixView: View {
                                 networkState = 1
                                 DarockKit.Network.shared.requestString("https://apple.com.cn") { _, isSuccess in
                                     if isSuccess {
-                                        checkDarock()
+                                        darockAPIState = 1
+                                        DarockKit.Network.shared.requestString("https://api.darock.top") { respStr, isSuccess in
+                                            if isSuccess {
+                                                if respStr.apiFixed() == "OK" {
+                                                    darockAPIState = 3
+                                                } else {
+                                                    darockAPIState = 4
+                                                }
+                                            } else {
+                                                darockAPIState = 1
+                                            }
+                                            bilibiliAPIState = 2
+                                            DarockKit.Network.shared.requestString("https://api.bilibili.com/") { _, isSuccess in
+                                                if isSuccess {
+                                                    bilibiliAPIState = 3
+                                                } else {
+                                                    bilibiliAPIState = 2
+                                                }
+                                            }
+                                            isTroubleshooting = false
+                                        }
                                         networkState = 3
                                     } else {
                                         networkState = 2
                                         isTroubleshooting = false
                                     }
                                 }
-                            }
-                            
-                            func checkDarock() {
-                                darockAPIState = 1
-                                DarockKit.Network.shared.requestString("https://api.darock.top") { respStr, isSuccess in
-                                    if isSuccess {
-                                        if respStr.apiFixed() == "OK" {
-                                            darockAPIState = 3
-                                        } else {
-                                            darockAPIState = 4
-                                        }
-                                    } else {
-                                        darockAPIState = 1
-                                    }
-                                    checkBilibili()
-                                }
-                            }
-                            
-                            func checkBilibili() {
-                                bilibiliAPIState = 2
-                                DarockKit.Network.shared.requestString("https://api.bilibili.com/") { _, isSuccess in
-                                    if isSuccess {
-                                        bilibiliAPIState = 3
-                                    } else {
-                                        bilibiliAPIState = 2
-                                    }
-                                }
-                                isTroubleshooting = false
                             }
                         }
                     }, label: {
@@ -264,7 +256,32 @@ struct NetworkFixView: View {
                     networkState = 1
                     DarockKit.Network.shared.requestString("https://baidu.com") { _, isSuccess in
                         if isSuccess {
-                            checkDarock()
+                            darockAPIState = 1
+                            DarockKit.Network.shared.requestString("https://api.darock.top") { respStr, isSuccess in
+                                Timer.scheduledTimer(withTimeInterval: 2.5, repeats: false) { timer in
+                                    if isSuccess {
+                                        if respStr.apiFixed() == "OK" {
+                                            darockAPIState = 3
+                                        } else {
+                                            darockAPIState = 4
+                                            isTroubleshooting = false
+                                        }
+                                    } else {
+                                        darockAPIState = 4
+                                        isTroubleshooting = false
+                                    }
+                                    timer.invalidate()
+                                }
+                                bilibiliAPIState = 2
+                                DarockKit.Network.shared.requestString("https://api.bilibili.com/") { _, isSuccess in
+                                    if isSuccess {
+                                        bilibiliAPIState = 3
+                                    } else {
+                                        bilibiliAPIState = 2
+                                    }
+                                }
+                                isTroubleshooting = false
+                            }
                             networkState = 3
                         } else {
                             networkState = 2
@@ -272,55 +289,6 @@ struct NetworkFixView: View {
                         }
                     }
                 }
-            }
-            
-            /* func checkDarockTest() {
-                Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { timer in
-                    timer.invalidate()
-                    darockAPIState = 1
-                    DarockKit.Network.shared.requestString("https://baidu.com") { _, isSuccess in
-                        if isSuccess {
-                            darockAPIState = 3
-                        } else {
-                            darockAPIState = 2
-                            isTroubleshooting = false
-                        }
-                    }
-                }
-            } */
-            
-            func checkDarock() {
-                darockAPIState = 1
-                DarockKit.Network.shared.requestString("https://api.darock.top") { respStr, isSuccess in
-                    Timer.scheduledTimer(withTimeInterval: 2.5, repeats: false) { timer in
-                        if isSuccess {
-                            if respStr.apiFixed() == "OK" {
-                                darockAPIState = 3
-                            } else {
-                                darockAPIState = 4
-                                isTroubleshooting = false
-                            }
-                        } else {
-                            darockAPIState = 4
-                            isTroubleshooting = false
-                        }
-                        timer.invalidate()
-                    }
-                    checkBilibili()
-                }
-                
-            }
-                
-            func checkBilibili() {
-                bilibiliAPIState = 2
-                DarockKit.Network.shared.requestString("https://api.bilibili.com/") { _, isSuccess in
-                    if isSuccess {
-                        bilibiliAPIState = 3
-                    } else {
-                        bilibiliAPIState = 2
-                    }
-                }
-                isTroubleshooting = false
             }
         }
         .onDisappear {

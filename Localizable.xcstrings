@@ -3591,6 +3591,7 @@
       }
     },
     "Home.update.%@.%@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8690,6 +8691,9 @@
         }
       }
     },
+    "声音外放" : {
+
+    },
     "大" : {
       "localizations" : {
         "en" : {
@@ -9491,6 +9495,9 @@
           }
         }
       }
+    },
+    "版本 %@ 现已可用" : {
+
     },
     "状态" : {
       "localizations" : {
