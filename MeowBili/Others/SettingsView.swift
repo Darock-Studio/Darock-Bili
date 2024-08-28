@@ -439,7 +439,7 @@ struct PlayerSettingsView: View {
     @AppStorage("IsShowNormalDanmaku") var isShowNormalDanmaku = true
     @AppStorage("IsShowTopDanmaku") var isShowTopDanmaku = true
     @AppStorage("IsShowBottomDanmaku") var isShowBottomDanmaku = true
-    @AppStorage("externalSound") var externalSound: Bool = false
+    @AppStorage("ExternalSound") var externalSound = false
     #if os(watchOS)
     @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
     #else
@@ -473,9 +473,11 @@ struct PlayerSettingsView: View {
             }
             #if os(watchOS)
             Section {
-                Toggle("声音外放", isOn: $externalSound)
+                Toggle("允许后台播放", isOn: $externalSound)
             } header: {
                 Text("声音")
+            } footer: {
+                Text("若要在后台播放，你需要在播放前连接蓝牙音频设备。")
             }
             #endif
         }
