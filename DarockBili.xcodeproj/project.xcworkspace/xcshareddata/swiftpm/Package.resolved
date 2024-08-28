@@ -1,5 +1,4 @@
 {
-  "originHash" : "6dafa41a67c3277a909bef0c6c2644adb4ba78f5af49155074ffdd3bc494af0d",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -33,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/adamzarn/AZVideoPlayer",
       "state" : {
-        "revision" : "75e9e05b87d2bd60d83be4b8db280eb2859a86bc",
-        "version" : "1.3.0"
+        "revision" : "a5b2403a35d5768ee4af6c2d27ad9f9a6fb2a789",
+        "version" : "1.4.0"
       }
     },
     {
@@ -42,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Serene-Garden/Cepheus",
       "state" : {
-        "revision" : "5ff00498df1fa89c92af56780d3818c0c4380f6a",
-        "version" : "2.3.1"
+        "revision" : "271eba038a2c74c47dc5067d62dd68fc346f6481",
+        "version" : "2.3.3"
       }
     },
     {
@@ -52,7 +51,7 @@
       "location" : "https://github.com/Darock-Studio/DarockKit",
       "state" : {
         "branch" : "main",
-        "revision" : "9a43584cb32e53ae339532a6f49c19c7bc17aa8a"
+        "revision" : "c36f40dc6174d729836a9fe1cb45bd18573589e5"
       }
     },
     {
@@ -114,8 +113,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
       "state" : {
-        "revision" : "be0bcd7823ce56629948491f2eaeaa19979514f7",
-        "version" : "5.19.4"
+        "revision" : "8a1be70a625683bc04d6903e2935bf23f3c6d609",
+        "version" : "5.19.7"
       }
     },
     {
@@ -168,8 +167,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/gonzalezreal/swift-markdown-ui",
       "state" : {
-        "revision" : "9a8119b37e09a770367eeb26e05267c75d854053",
-        "version" : "2.3.1"
+        "revision" : "55441810c0f678c78ed7e2ebd46dde89228e02fc",
+        "version" : "2.4.0"
       }
     },
     {
@@ -195,8 +194,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/scinfu/SwiftSoup",
       "state" : {
-        "revision" : "028487d4a8a291b2fe1b4392b5425b6172056148",
-        "version" : "2.7.2"
+        "revision" : "3c2c7e1e72b8abd96eafbae80323c5c1e5317437",
+        "version" : "2.7.5"
       }
     },
     {
@@ -218,5 +217,5 @@
       }
     }
   ],
-  "version" : 3
+  "version" : 2
 }

@@ -439,6 +439,7 @@ struct PlayerSettingsView: View {
     @AppStorage("IsShowNormalDanmaku") var isShowNormalDanmaku = true
     @AppStorage("IsShowTopDanmaku") var isShowTopDanmaku = true
     @AppStorage("IsShowBottomDanmaku") var isShowBottomDanmaku = true
+    @AppStorage("externalSound") var externalSound: Bool = false
     #if os(watchOS)
     @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
     #else
@@ -470,6 +471,13 @@ struct PlayerSettingsView: View {
             } header: {
                 Text("弹幕")
             }
+            #if os(watchOS)
+            Section {
+                Toggle("声音外放", isOn: $externalSound)
+            } header: {
+                Text("声音")
+            }
+            #endif
         }
     }
 }
