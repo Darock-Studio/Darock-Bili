@@ -34,7 +34,7 @@ struct SettingsView: View {
     @AppStorage("SESSDATA") var sessdata = ""
     @AppStorage("bili_jct") var biliJct = ""
     @AppStorage("IsLargeSuggestionStyle") var isLargeSuggestionStyle = false
-    @AppStorage("externalSound") var externalSound = false
+    @AppStorage("externalSound") var externalSound: Bool = false
     @State var isLogoutAlertPresented = false
     var body: some View {
         List {
