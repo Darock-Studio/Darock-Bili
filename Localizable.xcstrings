@@ -146,7 +146,14 @@
       }
     },
     "“喵哩喵哩”新功能" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New features in MeowBili"
+          }
+        }
+      }
     },
     "%@" : {
       "localizations" : {
@@ -370,6 +377,12 @@
     },
     "%@：反馈暂未被阅读，或是正在验证问题。\n\n%@：报告中描述的是预期中的表现。\n\n%@：报告中的问题无法被修复，或是不具有可行性。\n\n%@：在你提交此报告前，已有另一人提出了相同的问题，你仍会在第一个报告得到修复后收到“已修复”的状态更新。\n        你的报告可能会与那些初看似乎具有相同根源的类似报告分到一组。但是，类似的报告也可能包含多种原因。如果你发现该修复方案解决了类似报告中的问题，但无法完全解决你报告的问题，请提交新报告。\n\n%@：短时间内可能无法解决此问题。\n\n%@：Darock 正在为此问题提供修复方案。\n\n%@：修复工作已完成，但还未提交更新或是更新正在等待发布。\n\n%@：修复工作已完成，可更新至最新版本验证修复。\n\n%@：报告与 App 本身无关，或是问题并非由 App 本身引起。\n\n%@：未能通过报告中的问题复现问题，需要提供更多信息。\n\n%@：提供的信息不足以让我们确定问题，你需要补充更多信息。" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@: The feedback has not been read yet, or the problem is being verified.\n\n%2$@: The report describes the expected performance.\n\n%3$@: The problem in the report cannot be fixed or is not feasible to operate.\n\n%4$@: Someone has reported the same question before you submit this report, however, you will still receive a \"fixed\" status update after the first report is repaired. Your report may be divided into groups with similar reports that seem to have the same roots at first time. However, similar reports may also contain multiple reasons. If you find that the repair solution solves the problem similar to the report, but cannot completely solve the problem you reported, please submit a new report.\n\n%5$@: This problem may not be solved in a short time.\n\n%6$@: Darock is fixing this problem.\n\n%7$@: The fix work has been completed, but the update has not been submitted or the update is waiting for release.\n\n%8$@: The fix work has been completed and can be updated to the latest version to verify.\n\n%9$@: The report has nothing to do with the this App, or the problem is not caused by this App.\n\n%10$@: Failed to reproduce the problem in your report and more information needs to be provided.\n\n%11$@: The information provided is not enough for us to determine the problem. You need to provide more information."
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "new",
@@ -418,28 +431,84 @@
       }
     },
     "%@已修复" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@Fixed"
+          }
+        }
+      }
     },
     "%@已在未来版本修复" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@Fixed in future updates"
+          }
+        }
+      }
     },
     "%@按预期工作" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@Work as expected"
+          }
+        }
+      }
     },
     "%@搁置" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@Put on hold"
+          }
+        }
+      }
     },
     "%@无法修复" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@Unable to fix"
+          }
+        }
+      }
     },
     "%@未标记" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@Unmarked"
+          }
+        }
+      }
     },
     "%@未能复现" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@Unable to reproduce"
+          }
+        }
+      }
     },
     "%@正在修复" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@Fixing"
+          }
+        }
+      }
     },
     "%@粉丝" : {
       "localizations" : {
@@ -452,13 +521,34 @@
       }
     },
     "%@问题并不与 App 相关" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@The problem is not related to this App"
+          }
+        }
+      }
     },
     "%@问题重复" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@Repeated"
+          }
+        }
+      }
     },
     "%@需要更多细节" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@More details are needed"
+          }
+        }
+      }
     },
     "%lld / %lld" : {
       "localizations" : {
@@ -545,370 +635,1223 @@
       }
     },
     "🇦🇨 阿森松岛 247" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇦🇨 Ascension 247"
+          }
+        }
+      }
     },
     "🇦🇲 亚美尼亚 374" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇦🇲 Armenia 374"
+          }
+        }
+      }
     },
     "🇦🇺 澳大利亚 61" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇦🇺 Australia 61"
+          }
+        }
+      }
     },
     "🇧🇦 波黑 387" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇧🇦 BiH 387"
+          }
+        }
+      }
     },
     "🇧🇩 孟加拉国 880" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇧🇩 Bangladesh 880"
+          }
+        }
+      }
     },
     "🇧🇪 比利时 32" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇧🇪 Belgium 32"
+          }
+        }
+      }
     },
     "🇧🇫 布基纳法索 226" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇧🇫 Burkina Faso 226"
+          }
+        }
+      }
     },
     "🇧🇬 保加利亚 359" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇧🇬 Bulgaria 359"
+          }
+        }
+      }
     },
     "🇧🇮 布隆迪 257" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇧🇮 Burundi 257"
+          }
+        }
+      }
     },
     "🇧🇯 贝宁 229" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇧🇯 Bénin 229"
+          }
+        }
+      }
     },
     "🇧🇳 文莱 673" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇧🇳 Brunei 673"
+          }
+        }
+      }
     },
     "🇧🇴 玻利维亚 591" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇧🇴 Bolivia 591"
+          }
+        }
+      }
     },
     "🇧🇹 不丹 975" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇧🇹 Bhutan 975"
+          }
+        }
+      }
     },
     "🇧🇼 博茨瓦纳 267" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇧🇼 Botswana 267"
+          }
+        }
+      }
     },
     "🇧🇿 伯利兹 501" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇧🇿 Belize 501"
+          }
+        }
+      }
     },
     "🇨🇦 加拿大 1" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇨🇦 Canada 1"
+          }
+        }
+      }
     },
     "🇨🇭 瑞士 41" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇨🇭 Switzerland 41"
+          }
+        }
+      }
     },
     "🇨🇮 科特迪瓦 225" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇨🇮 Côte d'Ivoire 225"
+          }
+        }
+      }
     },
     "🇨🇱 智利 56" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇨🇱 Chile 56"
+          }
+        }
+      }
     },
     "🇨🇳 中国大陆 86" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇨🇳 China Mainland 86"
+          }
+        }
+      }
     },
     "🇨🇾 塞浦路斯 357" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇨🇾 Cyprus 357"
+          }
+        }
+      }
     },
     "🇩🇪 德国 49" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇩🇪 Germany 49"
+          }
+        }
+      }
     },
     "🇩🇬 迪戈加西亚岛 246" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇩🇬 Digo Garcia 246"
+          }
+        }
+      }
     },
     "🇩🇰 丹麦 45" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇩🇰 Denmark 45"
+          }
+        }
+      }
     },
     "🇩🇲 多米尼加 1767" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇩🇲 Dominica 1767"
+          }
+        }
+      }
     },
     "🇩🇲 多米尼加代表 1809" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "🇩🇲 Dominicana 1809"
+          }
+        }
+      }
     },
     "🇪🇨 厄瓜多尔 593" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇪🇨 Ecuador 593"
+          }
+        }
+      }
     },
     "🇪🇷 厄立特里亚 291" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇪🇷 Eritrea 291"
+          }
+        }
+      }
     },
     "🇪🇸 西班牙 34" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇪🇸 Spain 34"
+          }
+        }
+      }
     },
     "🇫🇲 密克罗尼西亚 691" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇫🇲 Micronesia 691"
+          }
+        }
+      }
     },
     "🇫🇴 法罗岛 298" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇫🇴 Faro 298"
+          }
+        }
+      }
     },
     "🇫🇷 法国 33" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇫🇷 France 33"
+          }
+        }
+      }
     },
     "🇬🇧 英国 44" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇬🇧 Great Britain 44"
+          }
+        }
+      }
     },
     "🇬🇪 格鲁吉亚 995" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇬🇪 Georgia 995"
+          }
+        }
+      }
     },
     "🇬🇫 法属圭亚那 594" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇬🇫 Guiana 594"
+          }
+        }
+      }
     },
     "🇬🇮 直布罗陀 350" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇬🇮 Gibraltar 350"
+          }
+        }
+      }
     },
     "🇬🇶 赤道几内亚 240" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇬🇶 Guinea 240"
+          }
+        }
+      }
     },
     "🇬🇷 希腊 30" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇬🇷 Greece 30"
+          }
+        }
+      }
     },
     "🇭🇰 中国香港 852" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇭🇰 Hong Kong 852"
+          }
+        }
+      }
     },
     "🇭🇺 匈牙利 36" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇭🇺 Hungary 36"
+          }
+        }
+      }
     },
     "🇮🇩 印尼 62" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇮🇩 Indonesia 62"
+          }
+        }
+      }
     },
     "🇮🇱 以色列 972" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇮🇱 Israel 972"
+          }
+        }
+      }
     },
     "🇮🇳 印度 91" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇮🇳 India 91"
+          }
+        }
+      }
     },
     "🇮🇶 伊拉克 964" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇮🇶 Iraq 964"
+          }
+        }
+      }
     },
     "🇮🇷 伊朗 98" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇮🇷 Iran 98"
+          }
+        }
+      }
     },
     "🇮🇸 冰岛 354" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇮🇸 Iceland 354"
+          }
+        }
+      }
     },
     "🇮🇹 意大利 39" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇮🇹 Italy 39"
+          }
+        }
+      }
     },
     "🇯🇲 牙买加 1876" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇯🇲 Jamaica 1876"
+          }
+        }
+      }
     },
     "🇯🇴 约旦 962" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇯🇴 Jordan 962"
+          }
+        }
+      }
     },
     "🇯🇵 日本 81" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇯🇵 Japan 81"
+          }
+        }
+      }
     },
     "🇰🇷 韩国 82" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇰🇷 Korea 82"
+          }
+        }
+      }
     },
     "🇱🇨 圣卢西亚 1784" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇱🇨 Saint Lucia 1784"
+          }
+        }
+      }
     },
     "🇱🇰 斯里兰卡 94" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇱🇰 Sri Lanka 94"
+          }
+        }
+      }
     },
     "🇲🇦 摩洛哥 212" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇲🇦 Morocco 212"
+          }
+        }
+      }
     },
     "🇲🇨 摩纳哥 377" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇲🇨 Monaco 377"
+          }
+        }
+      }
     },
     "🇲🇩 摩尔多瓦 373" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇲🇩 Moldova 373"
+          }
+        }
+      }
     },
     "🇲🇬 马达加斯加 261" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇲🇬 Madagascar 261"
+          }
+        }
+      }
     },
     "🇲🇭 马歇尔岛 692" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇲🇭 Marshall 692"
+          }
+        }
+      }
     },
     "🇲🇰 马其顿 389" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇲🇰 Macedonia 389"
+          }
+        }
+      }
     },
     "🇲🇱 马里 223" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇲🇱 Mali 223"
+          }
+        }
+      }
     },
     "🇲🇲 缅甸 95" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇲🇲 Myanmar 95"
+          }
+        }
+      }
     },
     "🇲🇳 蒙古 976" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇲🇳 Mongolia 976"
+          }
+        }
+      }
     },
     "🇲🇴 中国澳门 853" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇲🇴 Macao 853"
+          }
+        }
+      }
     },
     "🇲🇵 马里亚纳岛 1670" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇲🇵 Mariana 1670"
+          }
+        }
+      }
     },
     "🇲🇶 马提尼克岛 596" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇲🇶 Martinique 596"
+          }
+        }
+      }
     },
     "🇲🇷 毛里塔尼亚 222" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇲🇷 Mauritania 222"
+          }
+        }
+      }
     },
     "🇲🇸 蒙特塞拉特岛 1664" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇲🇸 Montserrat 1664"
+          }
+        }
+      }
     },
     "🇲🇹 马耳他 356" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇲🇹 Malta 356"
+          }
+        }
+      }
     },
     "🇲🇺 毛里求斯 230" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇲🇺 Mauritius 230"
+          }
+        }
+      }
     },
     "🇲🇻 马尔代夫 960" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇲🇻 Maldives 960"
+          }
+        }
+      }
     },
     "🇲🇼 马拉维 265" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇲🇼 Malawi 265"
+          }
+        }
+      }
     },
     "🇲🇽 墨西哥 52" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇲🇽 Mexico 52"
+          }
+        }
+      }
     },
     "🇲🇾 马来西亚 60" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇲🇾 Malaysia 60"
+          }
+        }
+      }
     },
     "🇲🇿 莫桑比克 258" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇲🇿 Mozambique 258"
+          }
+        }
+      }
     },
     "🇳🇦 纳米比亚 264" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇳🇦 Namibia 264"
+          }
+        }
+      }
     },
     "🇳🇪 尼日尔 227" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇳🇪 Niger 227"
+          }
+        }
+      }
     },
     "🇳🇫 诺福克岛 672" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇳🇫 Norfolk 672"
+          }
+        }
+      }
     },
     "🇳🇬 尼日利亚 234" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇳🇬 Nigeria 234"
+          }
+        }
+      }
     },
     "🇳🇮 尼加拉瓜 505" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇳🇮 Nicaragua 505"
+          }
+        }
+      }
     },
     "🇳🇴 挪威 47" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇳🇴 Norway 47"
+          }
+        }
+      }
     },
     "🇳🇵 尼泊尔 977" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇳🇵 Nepal 977"
+          }
+        }
+      }
     },
     "🇳🇷 瑙鲁 674" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇳🇷 Nauru 674"
+          }
+        }
+      }
     },
     "🇳🇺 纽埃岛 683" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇳🇺 Niue 683"
+          }
+        }
+      }
     },
     "🇳🇿 新西兰 64" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇳🇿 New Zealand 64"
+          }
+        }
+      }
     },
     "🇵🇪 秘鲁 51" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇵🇪 Peru 51"
+          }
+        }
+      }
     },
     "🇵🇫 法属波利尼西亚 689" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇵🇫 Polynesia 689"
+          }
+        }
+      }
     },
     "🇵🇱 波兰 48" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇵🇱 Poland 48"
+          }
+        }
+      }
     },
     "🇵🇲 圣皮埃尔和密克隆群岛 508" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇵🇲 Saint Pierre 508"
+          }
+        }
+      }
     },
     "🇵🇷 波多黎各 1787" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇵🇷 Puerto Rico 1787"
+          }
+        }
+      }
     },
     "🇵🇹 葡萄牙 351" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇵🇹 Portugal 351"
+          }
+        }
+      }
     },
     "🇵🇼 帕劳 680" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇵🇼 Palau 680"
+          }
+        }
+      }
     },
     "🇷🇸 塞尔维亚 381" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇷🇸 Serbia 381"
+          }
+        }
+      }
     },
     "🇷🇺 俄罗斯 7" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇷🇺 Russia 7"
+          }
+        }
+      }
     },
     "🇸🇦 沙特阿拉伯 966" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇸🇦 Saudi Arabia 966"
+          }
+        }
+      }
     },
     "🇸🇧 所罗门群岛 677" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇸🇧 Solomon 677"
+          }
+        }
+      }
     },
     "🇸🇨 塞舌尔共和国 248" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇸🇨 Seychellois 248"
+          }
+        }
+      }
     },
     "🇸🇩 苏丹 249" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇸🇩 Sultan 249"
+          }
+        }
+      }
     },
     "🇸🇪 瑞典 46" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇸🇪 Sweden 46"
+          }
+        }
+      }
     },
     "🇸🇬 新加坡 65" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇸🇬 Singapore 65"
+          }
+        }
+      }
     },
     "🇸🇮 斯洛文尼亚 386" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇸🇮 Slovenia 386"
+          }
+        }
+      }
     },
     "🇸🇰 斯洛伐克 421" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇸🇰 Slovakia 421"
+          }
+        }
+      }
     },
     "🇸🇱 塞拉利昂 232" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇸🇱 Sierra Leone 232"
+          }
+        }
+      }
     },
     "🇸🇲 圣马力诺 378" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇸🇲 San Marino 378"
+          }
+        }
+      }
     },
     "🇸🇳 塞内加尔 221" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇸🇳 Senegal 221"
+          }
+        }
+      }
     },
     "🇸🇴 索马里 252" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇸🇴 Somalia 252"
+          }
+        }
+      }
     },
     "🇸🇷 苏里南 597" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇸🇷 Surinam 597"
+          }
+        }
+      }
     },
     "🇸🇹 圣多美和普林西比 239" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇸🇹 São Tomé and Príncipe 239"
+          }
+        }
+      }
     },
     "🇸🇻 萨尔瓦多 503" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇸🇻 Salvador 503"
+          }
+        }
+      }
     },
     "🇸🇾 叙利亚 963" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇸🇾 Syria 963"
+          }
+        }
+      }
     },
     "🇸🇿 斯威士兰 268" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇸🇿 Swaziland 268"
+          }
+        }
+      }
     },
     "🇹🇨 特克斯和凯科斯 1649" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇹🇨 Turks and Caicos 1649"
+          }
+        }
+      }
     },
     "🇹🇩 乍得 235" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇹🇩 Tchad 235"
+          }
+        }
+      }
     },
     "🇹🇬 多哥 228" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇹🇬 Togo 228"
+          }
+        }
+      }
     },
     "🇹🇭 泰国 66" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇹🇭 Thailand 66"
+          }
+        }
+      }
     },
     "🇹🇰 托克劳岛 690" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇹🇰 Tokelau Island 690"
+          }
+        }
+      }
     },
     "🇹🇲 土库曼斯坦 993" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇹🇲 Turkmenistan 993"
+          }
+        }
+      }
     },
     "🇹🇳 突尼斯 216" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇹🇳 Tunisia 216"
+          }
+        }
+      }
     },
     "🇹🇴 汤加 676" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇹🇴 Tonga 676"
+          }
+        }
+      }
     },
     "🇹🇷 土耳其 90" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇹🇷 Turkey 90"
+          }
+        }
+      }
     },
     "🇹🇹 特立尼达和多巴哥 1868" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇹🇹 Trinidad and Tobago 1868"
+          }
+        }
+      }
     },
     "🇹🇻 图瓦卢 688" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇹🇻 Tuvalu 688"
+          }
+        }
+      }
     },
     "🇹🇼 中国台湾 886" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇹🇼 Chinese Taiwan 886"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -918,58 +1861,184 @@
       }
     },
     "🇹🇿 坦桑尼亚 255" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇹🇿 Tanzania 255"
+          }
+        }
+      }
     },
     "🇹🇿 桑给巴尔岛 259" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇹🇿 Zanzibar 259"
+          }
+        }
+      }
     },
     "🇺🇦 乌克兰 380" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇺🇦 Ukraine 380"
+          }
+        }
+      }
     },
     "🇺🇬 乌干达 256" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇺🇬 Uganda 256"
+          }
+        }
+      }
     },
     "🇺🇸 美国 1" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇺🇸 United States 1"
+          }
+        }
+      }
     },
     "🇺🇾 乌拉圭 598" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇺🇾 Uruguay 598"
+          }
+        }
+      }
     },
     "🇺🇿 乌兹别克斯坦 998" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇺🇿 Uzbekistan 998"
+          }
+        }
+      }
     },
     "🇻🇪 委内瑞拉 58" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇻🇪 Venezuela 58"
+          }
+        }
+      }
     },
     "🇻🇬 维珍群岛(英属) 1284" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇻🇬 British Virgin Islands 1284"
+          }
+        }
+      }
     },
     "🇻🇮 维珍群岛(美属) 1340" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇻🇮 United States Virgin Islands 1340"
+          }
+        }
+      }
     },
     "🇻🇳 越南 84" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇻🇳 Vietnam 84"
+          }
+        }
+      }
     },
     "🇻🇺 瓦努阿图 678" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇻🇺 Vanuatu 678"
+          }
+        }
+      }
     },
     "🇼🇫 瓦利斯群岛和富图纳群岛 1681" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇼🇫 Wallis et Futuna 1681"
+          }
+        }
+      }
     },
     "🇼🇸 萨摩亚，东部 684" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇼🇸 Eastern Samoa 684"
+          }
+        }
+      }
     },
     "🇼🇸 萨摩亚，西部 685" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇼🇸 Western Samoa 684"
+          }
+        }
+      }
     },
     "🇾🇪 也门 967" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇾🇪 Yemen 967"
+          }
+        }
+      }
     },
     "🇿🇦 南非 27" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇿🇦 South Africa 27"
+          }
+        }
+      }
     },
     "🇿🇲 赞比亚 260" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇿🇲 Zambia 260"
+          }
+        }
+      }
     },
     "🎂" : {
       "localizations" : {
@@ -1032,24 +2101,78 @@
       }
     },
     "0.5x" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "0.5x"
+          }
+        }
+      }
     },
     "0.75x" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "0.75x"
+          }
+        }
+      }
     },
     "1.5x" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1.5x"
+          }
+        }
+      },
       "shouldTranslate" : false
     },
     "1x" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1x"
+          }
+        }
+      },
       "shouldTranslate" : false
     },
     "2x" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2x"
+          }
+        }
+      },
       "shouldTranslate" : false
     },
     "3x" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3x"
+          }
+        }
+      },
       "shouldTranslate" : false
     },
     "5x" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5x"
+          }
+        }
+      },
       "shouldTranslate" : false
     },
     "114" : {
@@ -1928,7 +3051,14 @@
       }
     },
     "App 版本" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version"
+          }
+        }
+      }
     },
     "Bangumi" : {
       "localizations" : {
@@ -3591,7 +4721,6 @@
       }
     },
     "Home.update.%@.%@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8014,10 +9143,24 @@
       }
     },
     "与此反馈重复" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Repeat with this feedback"
+          }
+        }
+      }
     },
     "了解反馈状态" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get to know the feedback status"
+          }
+        }
+      }
     },
     "二维码名片" : {
       "localizations" : {
@@ -8110,7 +9253,14 @@
       }
     },
     "你要存储当前的草稿吗？" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you want to save your current draft?"
+          }
+        }
+      }
     },
     "使用“相机”App" : {
       "localizations" : {
@@ -8152,9 +9302,6 @@
         }
       }
     },
-    "允许后台播放" : {
-
-    },
     "允许收集使用信息" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -8189,7 +9336,14 @@
       }
     },
     "关联反馈" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Associate Feedbacks"
+          }
+        }
+      }
     },
     "内容" : {
       "localizations" : {
@@ -8219,7 +9373,14 @@
       }
     },
     "切换账号" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Switch the account"
+          }
+        }
+      }
     },
     "列表视图" : {
       "localizations" : {
@@ -8232,7 +9393,14 @@
       }
     },
     "删除草稿" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete the Draft"
+          }
+        }
+      }
     },
     "加载更多" : {
       "localizations" : {
@@ -8359,7 +9527,14 @@
       }
     },
     "反馈状态" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feedback Status"
+          }
+        }
+      }
     },
     "反馈类型" : {
       "localizations" : {
@@ -8537,7 +9712,14 @@
       }
     },
     "喵哩喵哩 - 音频播放" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MeowBili - Audio Playback"
+          }
+        }
+      }
     },
     "喵哩喵哩 (%@)" : {
       "localizations" : {
@@ -8583,7 +9765,14 @@
       }
     },
     "回复" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reply"
+          }
+        }
+      }
     },
     "回复 %lld" : {
       "extractionState" : "stale",
@@ -8682,7 +9871,14 @@
       }
     },
     "声音" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sound"
+          }
+        }
+      }
     },
     "声音与触感" : {
       "localizations" : {
@@ -8757,7 +9953,14 @@
       }
     },
     "存储草稿" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save the draft"
+          }
+        }
+      }
     },
     "完成" : {
       "localizations" : {
@@ -9023,9 +10226,6 @@
         }
       }
     },
-    "手记建议" : {
-
-    },
     "扩展的触感反馈" : {
       "localizations" : {
         "en" : {
@@ -9037,7 +10237,14 @@
       }
     },
     "换行" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Linefeed"
+          }
+        }
+      }
     },
     "推荐" : {
       "localizations" : {
@@ -9082,16 +10289,44 @@
       }
     },
     "描述" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description"
+          }
+        }
+      }
     },
     "描述行%lld" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description Line %lld"
+          }
+        }
+      }
     },
     "提交" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Submit"
+          }
+        }
+      }
     },
     "提交反馈" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Submit Feedback"
+          }
+        }
+      }
     },
     "搜索" : {
       "localizations" : {
@@ -9124,7 +10359,14 @@
       }
     },
     "播放中" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Now Playing"
+          }
+        }
+      }
     },
     "播放倍速" : {
       "localizations" : {
@@ -9298,7 +10540,14 @@
 
     },
     "未完成的编辑" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unfinished Editing"
+          }
+        }
+      }
     },
     "来自" : {
       "extractionState" : "stale",
@@ -9435,7 +10684,14 @@
       }
     },
     "此反馈已关闭，若要重新进行反馈，请创建一个新的反馈" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This feedback is closed. If you want to re-feedback, please create a new feedback."
+          }
+        }
+      }
     },
     "清除历史记录" : {
       "localizations" : {
@@ -9499,9 +10755,6 @@
         }
       }
     },
-    "版本 %@ 现已可用" : {
-
-    },
     "状态" : {
       "localizations" : {
         "en" : {
@@ -9545,7 +10798,14 @@
       }
     },
     "示例：评论区缺少最新的回复" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Example: The latest reply is missing in the comment section"
+          }
+        }
+      }
     },
     "离线缓存" : {
       "localizations" : {
@@ -9645,7 +10905,14 @@
       }
     },
     "系统版本" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System Version"
+          }
+        }
+      }
     },
     "经验" : {
       "localizations" : {
@@ -9689,11 +10956,15 @@
         }
       }
     },
-    "若要在后台播放，你需要在播放前连接蓝牙音频设备。" : {
-
-    },
     "虽然我们无法一一以文字回复提交的每一份反馈，但我们会查看每一份反馈并监控提交的反馈数量，以便更好地了解问题的范围。" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Although we cannot reply to every feedback submitted in text one by one, we will review each feedback and monitor the number of feedback submitted in order to better understand the scope of the problem."
+          }
+        }
+      }
     },
     "行为" : {
       "localizations" : {
@@ -9830,10 +11101,24 @@
       }
     },
     "请为你的反馈提供描述性的标题：" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please provide a descriptive title for your feedback:"
+          }
+        }
+      }
     },
     "请包括：\n- 问题的清晰描述\n- 逐步说明重现问题的详细步骤（如果可能）\n- 期望的结果\n- 当前所示结果" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please include:\n- A clear description of the problem\n- Step by step to explain the detailed steps to reproduce the problem (if possible)\n- Expected results\n- The current results"
+          }
+        }
+      }
     },
     "请将恢复密钥保存到安全的位置" : {
       "localizations" : {
@@ -9846,7 +11131,14 @@
       }
     },
     "请描述该问题以及重现问题的步骤：" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please describe the problem and the steps to reproduce them:"
+          }
+        }
+      }
     },
     "调试构建" : {
       "localizations" : {
@@ -9891,13 +11183,34 @@
       }
     },
     "跳转到...(秒)" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jump to...(Sec)"
+          }
+        }
+      }
     },
     "轻触后滑动数码表冠" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Slide the digital crown after touch"
+          }
+        }
+      }
     },
     "轻触视频页左下角按钮即可以纯音频播放" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap the button in the lower left corner of the video page to play pure audio."
+          }
+        }
+      }
     },
     "辅助功能" : {
       "localizations" : {
@@ -9940,7 +11253,14 @@
       }
     },
     "退出登录" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Log Out"
+          }
+        }
+      }
     },
     "选择图片" : {
       "localizations" : {
@@ -10037,7 +11357,14 @@
       }
     },
     "音频播放" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Audio Playback"
+          }
+        }
+      }
     },
     "顶部" : {
       "localizations" : {
