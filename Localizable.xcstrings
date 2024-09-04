@@ -535,7 +535,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@Repeated"
+            "value" : "%@Duplicated"
           }
         }
       }
@@ -9147,7 +9147,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Repeated with this feedback"
+            "value" : "Duplicated with this Feedback"
           }
         }
       }
