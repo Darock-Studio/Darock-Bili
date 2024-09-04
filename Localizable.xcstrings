@@ -545,7 +545,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@More details are needed"
+            "value" : "%@More details are required"
           }
         }
       }
@@ -829,7 +829,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🇨🇳 China Mainland 86"
+            "value" : "🇨🇳 China 86"
           }
         }
       }
@@ -959,7 +959,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🇬🇧 Great Britain 44"
+            "value" : "🇬🇧 Britain 44"
           }
         }
       }
@@ -1019,7 +1019,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🇭🇰 Hong Kong 852"
+            "value" : "🇭🇰 China Hong Kong 852"
           }
         }
       }
@@ -1259,7 +1259,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🇲🇴 Macao 853"
+            "value" : "🇲🇴China Macao 853"
           }
         }
       }
@@ -1905,7 +1905,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🇺🇸 United States 1"
+            "value" : "🇺🇸 America 1"
           }
         }
       }
@@ -3055,7 +3055,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Version"
+            "value" : "App Version"
           }
         }
       }
@@ -9147,7 +9147,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Repeat with this feedback"
+            "value" : "Repeated with this feedback"
           }
         }
       }
@@ -9157,7 +9157,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Get to know the feedback status"
+            "value" : "Learn more about Feedback Status"
           }
         }
       }
@@ -10241,7 +10241,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Linefeed"
+            "value" : "Enter"
           }
         }
       }
@@ -10544,7 +10544,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Unfinished Editing"
+            "value" : "Draft"
           }
         }
       }
