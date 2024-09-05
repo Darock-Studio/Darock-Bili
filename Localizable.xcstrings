@@ -393,6 +393,12 @@
     },
     "%@(%@)" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@(%2$@)"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "new",
@@ -888,7 +894,7 @@
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "🇩🇲 Dominicana 1809"
           }
         }
@@ -1259,7 +1265,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🇲🇴China Macao 853"
+            "value" : "🇲🇴 China Macao 853"
           }
         }
       }
@@ -1905,7 +1911,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🇺🇸 America 1"
+            "value" : "🇺🇸 United States 1"
           }
         }
       }
@@ -4333,6 +4339,12 @@
     },
     "FB%@%@" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feedback%1$@%2$@"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "new",
@@ -7793,7 +7805,14 @@
       }
     },
     "Troubleshoot.problem.internet.meaning" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "Troubleshoot.problem.internet.plan-b" : {
       "localizations" : {
@@ -8925,6 +8944,12 @@
     },
     "Video.fans.%@" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video.fans.%@"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10537,7 +10562,14 @@
       }
     },
     "更新标签" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update tags"
+          }
+        }
+      }
     },
     "未完成的编辑" : {
       "localizations" : {
@@ -10619,7 +10651,14 @@
       }
     },
     "标签不会被本地化，因为它们是动态添加的。" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tags will not be localized because they are dynamic."
+          }
+        }
+      }
     },
     "标题" : {
       "localizations" : {
@@ -11399,27 +11438,91 @@
       }
     },
     "" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      },
       "shouldTranslate" : false
     },
     "" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      },
       "shouldTranslate" : false
     },
     "" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      },
       "shouldTranslate" : false
     },
     "" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      },
       "shouldTranslate" : false
     },
     "" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      },
       "shouldTranslate" : false
     },
     "" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      },
       "shouldTranslate" : false
     },
     "" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      },
       "shouldTranslate" : false
     },
     "" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      },
       "shouldTranslate" : false
     }
   },
