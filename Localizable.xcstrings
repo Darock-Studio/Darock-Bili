@@ -1025,7 +1025,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🇭🇰 China Hong Kong 852"
+            "value" : "🇭🇰 Hong Kong 852"
           }
         }
       }
@@ -1265,7 +1265,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🇲🇴 China Macao 853"
+            "value" : "🇲🇴 Macao 853"
           }
         }
       }
@@ -3372,7 +3372,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Darock will collect essential diagnosis infos in order to fix the issue. Do not send if you do not wish your datas to be collected."
+            "value" : "Darock will collect essential diagnosis info in order to fix the issue. Do not send if you do not wish your datas to be collected."
           }
         }
       }
@@ -4034,7 +4034,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Recommend run Network Troubleshooting"
+            "value" : "Recommend to run the Network Troubleshooting"
           }
         },
         "ja" : {
@@ -4230,7 +4230,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sending error infos to Darock can help us fix the issue and  provide better experience."
+            "value" : "Sending error info to Darock can help us fix the issue and  provide better experience."
           }
         },
         "ja" : {
@@ -4441,7 +4441,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Use Double-tap Quick Actions (open at system settings->Accessibility) in video player to take action"
+            "value" : "Use Double-tap Quick Actions (open at System Settings->Accessibility) in video player to take action"
           }
         },
         "ja" : {
@@ -5561,7 +5561,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Me"
+            "value" : "My"
           }
         },
         "ja" : {
@@ -6091,7 +6091,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Results"
+            "value" : "No Matching Results"
           }
         },
         "ja" : {
@@ -9162,7 +9162,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apple Watch that doesn’t support full-keyboard can toggle this on and use third-party full-keyboard."
+            "value" : "Apple Watch that doesn’t support full-keyboard can toggle this on and use the thrid-party Cepheus Keyboard."
           }
         }
       }
@@ -9725,7 +9725,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "MeowBili\nBuild Beta。 Build %1$@.xc_verd.%2$@"
+            "value" : "MeowBili\nBuild Beta. Build %1$@.xc_verd.%2$@"
           }
         },
         "zh-Hans" : {
@@ -10727,7 +10727,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "This feedback is closed. If you want to re-feedback, please create a new feedback."
+            "value" : "This feedback is closed. If you want to re-feedback, please create a new one."
           }
         }
       }
