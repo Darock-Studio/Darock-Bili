@@ -20,8 +20,9 @@ import SwiftUI
 import DarockKit
 import Alamofire
 import SwiftyJSON
-import AuthenticationServices
 import SDWebImageSwiftUI
+import AuthenticationServices
+
 #if os(watchOS)
 import WatchKit
 #endif
@@ -44,7 +45,7 @@ struct SearchMainView: View {
         List {
             Section {
                 ZStack {
-                    NavigationLink("", destination: SearchView(keyword: searchText), isActive: $isSearchPresented)
+                    NavigationLink("", destination: SearchView(keyword: $searchText), isActive: $isSearchPresented)
                         .frame(width: 0, height: 0)
                         .hidden()
                         .disabled(true)
@@ -112,7 +113,7 @@ struct SearchMainView: View {
             if searchHistory.count != 0 {
                 Section(header: Text("Search.history")) {
                     ForEach(0...searchHistory.count - 1, id: \.self) { i in
-                        NavigationLink(destination: { SearchView(keyword: searchHistory[i]) }, label: {
+                        NavigationLink(destination: { SearchView(keyword: .constant(searchHistory[i])) }, label: {
                             Text(searchHistory[i])
                         })
                         .swipeActions {
@@ -137,6 +138,7 @@ struct SearchMainView: View {
             ]
             DarockKit.Network.shared.requestJSON("https://s.search.bilibili.com/main/hotword", headers: headers) { respJson, isSuccess in
                 if isSuccess {
+                    hotSearches.removeAll()
                     // 🥵
                     for hot in respJson["list"] {
                         hotSearches.append(hot.1["keyword"].string ?? "[加载失败]")
@@ -148,7 +150,7 @@ struct SearchMainView: View {
 }
 
 struct SearchView: View {
-    var keyword: String
+    @Binding var keyword: String
     @AppStorage("DedeUserID") var dedeUserID = ""
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
@@ -158,14 +160,13 @@ struct SearchView: View {
     @State var articles = [[String: String]]()
     @State var bangumis = [BangumiData]()
     @State var liverooms = [[String: String]]()
-    @State var isUserDetailPresented = [Bool]()
     @State var isLoaded = false
     @State var searchType = SearchType.video
     @State var isNoResult = false
     @State var currentPage = 1
     var body: some View {
-        ScrollView {
-            VStack {
+        List {
+            Section {
                 Picker("Search.type", selection: $searchType) {
                     Text("Search.type.video").tag(SearchType.video)
                     Text("Search.type.user").tag(SearchType.user)
@@ -173,142 +174,146 @@ struct SearchView: View {
                     Text("Search.type.bangumi").tag(SearchType.bangumi)
                     Text("Search.type.live").tag(SearchType.liveRoom)
                 }
-                #if os(watchOS)
+#if os(watchOS)
                 .pickerStyle(.navigationLink)
                 .buttonBorderShape(.roundedRectangle(radius: 16))
-                #endif
-                .onChange(of: searchType) { value in
-                    NewSearch(keyword: keyword, type: value, clear: true)
-                }
-                Divider()
-                Group {
-                    if searchType == .video {
-                        if videos.count != 0 {
-                            ForEach(0...videos.count - 1, id: \.self) { i in
-                                VideoCard(videos[i])
-                            }
-                        } else if isNoResult {
-                            Text("Search.no-result")
-                        }
-                    } else if searchType == .user {
-                        if users.count != 0 {
-                            ForEach(0..<users.count, id: \.self) { i in
-                                VStack {
-                                    HStack {
-                                        WebImage(url: URL(string: users[i]["Pic"]! as! String + "@30w"), options: [.progressiveLoad])
-                                            .clipShape(Circle())
-                                        VStack {
-                                            NavigationLink("", isActive: $isUserDetailPresented[i], destination: { UserDetailView(uid: users[i]["ID"]! as! String) })
-                                                .frame(width: 0, height: 0)
-                                            HStack {
-                                                Text(users[i]["Name"]! as! String)
-                                                    .font(.system(size: 14, weight: .bold))
-                                                    .lineLimit(1)
-                                            }
-                                            Text("Account.videos.\(Int(users[i]["VideoCount"]! as! String) ?? 0)")
-                                                .font(.system(size: 12))
-                                                .foregroundColor(.gray)
-                                                .lineLimit(1)
-                                        }
-                                        Spacer()
-                                    }
-                                    .padding(.horizontal, 5)
-                                    .onTapGesture {
-                                        isUserDetailPresented[i] = true
-                                    }
-                                    if (users[i]["Videos"]! as! Array<Dictionary<String, String>>).count != 0 {
-                                        ForEach(0..<(users[i]["Videos"]! as! Array<Dictionary<String, String>>).count, id: \.self) { j in
-                                            VideoCard((users[i]["Videos"]! as! Array<Dictionary<String, String>>)[j])
-                                                .padding(.horizontal, 5)
-                                        }
-                                        Divider()
-                                        Spacer()
-                                            .frame(height: 20)
-                                    }
-                                }
-                            }
-                        } else if isNoResult {
-                            Text("Search.no-result")
-                        }
-                    } else if searchType == .article {
-                        if articles.count != 0 {
-                            ForEach(0..<articles.count, id: \.self) { i in
-                                Button(action: {
-                                    let session = ASWebAuthenticationSession(url: URL(string: "https://www.bilibili.com/read/cv\(articles[i]["CV"]!)")!, callbackURLScheme: nil) { _, _ in
-                                        return
-                                    }
-                                    session.prefersEphemeralWebBrowserSession = true
-                                    session.start()
-                                }, label: {
-                                    VStack {
-                                        Text(articles[i]["Title"]!)
-                                            .font(.system(size: 16, weight: .bold))
-                                            .lineLimit(3)
-                                        HStack {
-                                            VStack {
-                                                Text(articles[i]["Summary"]!)
-                                                    .font(.system(size: 10, weight: .bold))
-                                                    .lineLimit(3)
-                                                    .foregroundColor(.gray)
-                                                HStack {
-                                                    Text(articles[i]["Type"]!)
-                                                        .font(.system(size: 10))
-                                                        .lineLimit(1)
-                                                        .foregroundColor(.gray)
-                                                    Label(articles[i]["View"]!, systemImage: "eye.fill")
-                                                        .font(.system(size: 10))
-                                                        .lineLimit(1)
-                                                        .foregroundColor(.gray)
-                                                    Label(articles[i]["Like"]!, systemImage: "hand.thumbsup.fill")
-                                                        .font(.system(size: 10))
-                                                        .lineLimit(1)
-                                                        .foregroundColor(.gray)
-                                                }
-                                            }
-                                            WebImage(url: URL(string: articles[i]["Pic"]! + "@60w"), options: [.progressiveLoad])
-                                                .cornerRadius(5)
-                                        }
-                                    }
-                                })
-                                .buttonBorderShape(.roundedRectangle(radius: 14))
-                            }
-                        } else if isNoResult {
-                            Text("Search.no-result")
-                        }
-                    } else if searchType == .bangumi {
-                        if bangumis.count != 0 {
-                            ForEach(0..<bangumis.count, id: \.self) { i in
-                                BangumiCard(bangumis[i])
-                            }
-                        } else if isNoResult {
-                            Text("Search.no-result")
-                        }
-                    } else if searchType == .liveRoom {
-                        if liverooms.count != 0 {
-                            ForEach(0..<liverooms.count, id: \.self) { i in
-                                LiveCard(liverooms[i])
-                            }
-                        } else if isNoResult {
-                            Text("Search.no-result")
-                        }
-                    }
-                    if !(videos.isEmpty && users.isEmpty && articles.isEmpty && bangumis.isEmpty && liverooms.isEmpty && !isNoResult) {
-                        Button(action: {
-                            currentPage++
-                            NewSearch(keyword: keyword, type: searchType, page: currentPage, clear: false)
-                        }, label: {
-                            Text("加载更多")
-                        })
-                    }
-                }
-                #if !os(watchOS)
-                .padding(.horizontal)
-                #endif
-                if videos.isEmpty && users.isEmpty && articles.isEmpty && bangumis.isEmpty && liverooms.isEmpty && !isNoResult {
-                    ProgressView()
+#endif
+                .onChange(of: searchType) {
+                    NewSearch(keyword: keyword, type: searchType, clear: true)
                 }
             }
+            Section {
+                if searchType == .video {
+                    if videos.count != 0 {
+                        ForEach(0...videos.count - 1, id: \.self) { i in
+                            VideoCard(videos[i])
+                                .onAppear {
+                                    if i == videos.count - 1 {
+                                        currentPage++
+                                        NewSearch(keyword: keyword, type: searchType, page: currentPage, clear: false)
+                                    }
+                                }
+                        }
+                    } else if isNoResult {
+                        Text("Search.no-result")
+                    }
+                } else if searchType == .user {
+                    if users.count != 0 {
+                        ForEach(0..<users.count, id: \.self) { i in
+                            NavigationLink(destination: { UserDetailView(uid: users[i]["ID"]! as! String) }, label: {
+                                HStack {
+                                    WebImage(url: URL(string: users[i]["Pic"]! as! String + "@30w"), options: [.progressiveLoad])
+                                        .clipShape(Circle())
+                                    VStack(alignment: .leading) {
+                                        HStack {
+                                            Text(users[i]["Name"]! as! String)
+                                                .font(.system(size: 14, weight: .bold))
+                                                .lineLimit(1)
+                                        }
+                                        Text("Account.videos.\(Int(users[i]["VideoCount"]! as! String) ?? 0)")
+                                            .font(.system(size: 12))
+                                            .foregroundColor(.gray)
+                                            .lineLimit(1)
+                                    }
+                                    Spacer()
+                                }
+                            })
+                            .onAppear {
+                                if i == users.count - 1 {
+                                    currentPage++
+                                    NewSearch(keyword: keyword, type: searchType, page: currentPage, clear: false)
+                                }
+                            }
+                        }
+                    } else if isNoResult {
+                        Text("Search.no-result")
+                    }
+                } else if searchType == .article {
+                    if articles.count != 0 {
+                        ForEach(0..<articles.count, id: \.self) { i in
+                            Button(action: {
+                                let session = ASWebAuthenticationSession(url: URL(string: "https://www.bilibili.com/read/cv\(articles[i]["CV"]!)")!, callbackURLScheme: nil) { _, _ in
+                                    return
+                                }
+                                session.prefersEphemeralWebBrowserSession = true
+                                session.start()
+                            }, label: {
+                                VStack {
+                                    Text(articles[i]["Title"]!)
+                                        .font(.system(size: 16, weight: .bold))
+                                        .lineLimit(3)
+                                    HStack {
+                                        VStack {
+                                            Text(articles[i]["Summary"]!)
+                                                .font(.system(size: 10, weight: .bold))
+                                                .lineLimit(3)
+                                                .foregroundColor(.gray)
+                                            HStack {
+                                                Text(articles[i]["Type"]!)
+                                                    .font(.system(size: 10))
+                                                    .lineLimit(1)
+                                                    .foregroundColor(.gray)
+                                                Label(articles[i]["View"]!, systemImage: "eye.fill")
+                                                    .font(.system(size: 10))
+                                                    .lineLimit(1)
+                                                    .foregroundColor(.gray)
+                                                Label(articles[i]["Like"]!, systemImage: "hand.thumbsup.fill")
+                                                    .font(.system(size: 10))
+                                                    .lineLimit(1)
+                                                    .foregroundColor(.gray)
+                                            }
+                                        }
+                                        WebImage(url: URL(string: articles[i]["Pic"]! + "@60w"), options: [.progressiveLoad])
+                                            .cornerRadius(5)
+                                    }
+                                }
+                            })
+                            .onAppear {
+                                if i == articles.count - 1 {
+                                    currentPage++
+                                    NewSearch(keyword: keyword, type: searchType, page: currentPage, clear: false)
+                                }
+                            }
+                        }
+                    } else if isNoResult {
+                        Text("Search.no-result")
+                    }
+                } else if searchType == .bangumi {
+                    if bangumis.count != 0 {
+                        ForEach(0..<bangumis.count, id: \.self) { i in
+                            BangumiCard(bangumis[i])
+                                .onAppear {
+                                    if i == bangumis.count - 1 {
+                                        currentPage++
+                                        NewSearch(keyword: keyword, type: searchType, page: currentPage, clear: false)
+                                    }
+                                }
+                        }
+                    } else if isNoResult {
+                        Text("Search.no-result")
+                    }
+                } else if searchType == .liveRoom {
+                    if liverooms.count != 0 {
+                        ForEach(0..<liverooms.count, id: \.self) { i in
+                            LiveCard(liverooms[i])
+                                .onAppear {
+                                    if i == liverooms.count - 1 {
+                                        currentPage++
+                                        NewSearch(keyword: keyword, type: searchType, page: currentPage, clear: false)
+                                    }
+                                }
+                        }
+                    } else if isNoResult {
+                        Text("Search.no-result")
+                    }
+                }
+            }
+            if videos.isEmpty && users.isEmpty && articles.isEmpty && bangumis.isEmpty && liverooms.isEmpty && !isNoResult {
+                ProgressView()
+            }
         }
+        .navigationTitle("搜索 - \(keyword)")
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             if !isLoaded {
                 NewSearch(keyword: keyword, type: searchType)
@@ -359,7 +364,6 @@ struct SearchView: View {
                                 }
                             case .user:
                                 for user in result {
-                                    isUserDetailPresented.append(false)
                                     users.append(["Name": user.1["uname"].string ?? "[加载失败]", "Pic": "https:" + (user.1["upic"].string ?? "E"), "ID": String(user.1["mid"].int ?? -1), "Fans": String(user.1["fans"].int ?? -1), "VideoCount": String(user.1["videos"].int ?? -1), "Videos": { () -> [[String: String]] in
                                         var tVideos = [[String: String]]()
                                         for video in user.1["res"] {
