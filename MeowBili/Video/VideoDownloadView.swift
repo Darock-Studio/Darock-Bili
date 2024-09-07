@@ -116,7 +116,10 @@ struct VideoDownloadView: View {
                                         UserDefaults.standard.set(detTmp, forKey: "\(bvid)\(isPaged ? String(VideoDownloadView.downloadCID!) : "")")
                                         downloadingProgressDatas[currentDownloadingIndex].isFinished = true
                                     } else {
-                                        UserDefaults.standard.set(r.resumeData, forKey: "VideoDownloadResumeData\(currentDownloadingIndex)")
+                                        if FileManager.default.fileExists(atPath: NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(currentDownloadingIndex).drkdatav") {
+                                            try? FileManager.default.removeItem(atPath: NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(currentDownloadingIndex).drkdatav")
+                                        }
+                                        try? r.resumeData?.write(to: URL(filePath: NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(currentDownloadingIndex).drkdatav"))
                                         downloadResumeDatas.updateValue(videoDetails, forKey: currentDownloadingIndex)
                                         failedDownloadTasks.append(currentDownloadingIndex)
                                         debugPrint(r.error as Any)
@@ -127,9 +130,6 @@ struct VideoDownloadView: View {
                     }
                 }
             }
-            #if os(watchOS)
-            Dynamic.PUICApplication.sharedPUICApplication().setExtendedIdleTime(3600, disablesSleepGesture: true, wantsAutorotation: false)
-            #endif
         }
     }
 }

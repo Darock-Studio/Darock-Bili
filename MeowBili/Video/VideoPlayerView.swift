@@ -146,6 +146,7 @@ struct VideoPlayerView: View {
                         .frame(width: isFullScreen ? WKInterfaceDevice.current().screenBounds.height : nil, height: isFullScreen ? WKInterfaceDevice.current().screenBounds.width : nil)
                         .scaleEffect(playerScale)
                         .offset(y: isFullScreen ? 20 : 0)
+                        .offset(playerScaledOffset)
                         .ignoresSafeArea()
                         .dragGestureByPlayerScale($playerScale, offset: $playerScaledOffset, lastOffset: $playerScaledLastOffset)
                         .overlay {
@@ -172,7 +173,7 @@ struct VideoPlayerView: View {
                                     }
                                     .allowsHitTesting(false)
                                     .offset(x: -danmakuOffset)
-//                                    .animation(.linear, value: danmakuOffset)
+                                    .animation(.smooth, value: danmakuOffset)
                                 }
                             }
                             .rotationEffect(.degrees(isFullScreen ? 90 : 0))
