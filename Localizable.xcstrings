@@ -8995,6 +8995,7 @@
       }
     },
     "Video.more" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

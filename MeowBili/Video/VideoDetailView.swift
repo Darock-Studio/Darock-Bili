@@ -557,7 +557,7 @@ struct VideoDetailView: View {
                                         ToolbarItemGroup(placement: .bottomBar) {
                                             Button(action: {
                                                 isLoading = true
-                                                DecodeVideo(isAudio: true)
+                                                decodeVideo(isAudio: true)
                                             }, label: {
                                                 Image(systemName: "waveform")
                                             })
@@ -565,7 +565,7 @@ struct VideoDetailView: View {
                                                 Button(action: {
                                                     isLoading = true
                                                     debugPrint(videoDetails["BV"]!)
-                                                    DecodeVideo()
+                                                    decodeVideo()
                                                 }, label: {
                                                     Image(systemName: "play.fill")
                                                 })
@@ -767,7 +767,7 @@ struct VideoDetailView: View {
             }
             
             #if !os(watchOS)
-            DecodeVideo()
+            decodeVideo()
             #else
             if recordHistoryTime == "into" {
                 AF.request("https://api.bilibili.com/x/click-interface/web/heartbeat", method: .post, parameters: ["bvid": videoDetails["BV"]!, "mid": dedeUserID, "type": 3, "dt": 2, "play_type": 2, "csrf": biliJct], headers: headers).response { _ in }
@@ -844,7 +844,7 @@ struct VideoDetailView: View {
     }
     
     @inline(__always)
-    func DecodeVideo(isAudio: Bool = false) {
+    func decodeVideo(isAudio: Bool = false) {
         let headers: HTTPHeaders = [
             "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3); buvid4=\(globalBuvid4)",
             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
@@ -1032,88 +1032,6 @@ struct VideoDetailView: View {
                     .opacity(0.65)
                 Spacer()
                     .frame(height: 20)
-                if #unavailable(watchOS 10) {
-                    Button(action: {
-                        isLoading = true
-                        
-                        let headers: HTTPHeaders = [
-                            "cookie": "SESSDATA=\(sessdata)",
-                            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                        ]
-                        if videoGetterSource == "official" {
-                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
-                                if isSuccess {
-                                    if !CheckBApiError(from: respJson) { return }
-                                    let cid = respJson["data"]["pages"][0]["cid"].int64!
-                                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?bvid=\(videoDetails["BV"]!)&cid=\(cid)&qn=\(sessdata == "" ? 64 : 80)", headers: headers) { respJson, isSuccess in
-                                        if isSuccess {
-                                            if !CheckBApiError(from: respJson) { return }
-                                            videoLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
-                                            videoCID = cid
-                                            videoBvid = videoDetails["BV"]!
-                                            isVideoPlayerPresented = true
-                                            isLoading = false
-                                        }
-                                    }
-                                }
-                            }
-                        } else if videoGetterSource == "injahow" {
-                            DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=1&type=video&q=80&format=mp4&otype=url") { respStr, isSuccess in
-                                if isSuccess {
-                                    videoLink = respStr
-                                    videoBvid = videoDetails["BV"]!
-                                    isVideoPlayerPresented = true
-                                    isLoading = false
-                                }
-                            }
-                        }
-                    }, label: {
-                        Label("Video.play", systemImage: "play.fill")
-                    })
-                    .sheet(isPresented: $isVideoPlayerPresented, content: {
-                        VideoPlayerView(videoDetails: $videoDetails, videoLink: $videoLink, videoBvid: $videoBvid, videoCID: $videoCID)
-                            .toolbar(.hidden)
-                    })
-                    Button(action: {
-                        isMoreMenuPresented = true
-                    }, label: {
-                        Label("Video.more", systemImage: "ellipsis")
-                    })
-                    .sheet(isPresented: $isMoreMenuPresented, content: {
-                        List {
-                            Button(action: {
-                                isDownloadPresented = true
-                            }, label: {
-                                Label("Video.download", image: "arrow.down.doc")
-                            })
-                            .sheet(isPresented: $isDownloadPresented, content: { VideoDownloadView(bvid: videoDetails["BV"]!, videoDetails: videoDetails) })
-                            Button(action: {
-                                let headers: HTTPHeaders = [
-                                    "cookie": "SESSDATA=\(sessdata)",
-                                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                                ]
-                                AF.request("https://api.bilibili.com/x/v2/history/toview/add", method: .post, parameters: ["bvid": videoDetails["BV"]!, "csrf": biliJct], headers: headers).response { response in
-                                    do {
-                                        let json = try JSON(data: response.data ?? Data())
-                                        if let code = json["code"].int {
-                                            if code == 0 {
-                                                tipWithText(String(localized: "Video.added"), symbol: "checkmark.circle.fill")
-                                            } else {
-                                                tipWithText(json["message"].string ?? String(localized: "Video.unkonwn-error"), symbol: "xmark.circle.fill")
-                                            }
-                                        } else {
-                                            tipWithText(String(localized: "Video.unkonwn-error"), symbol: "xmark.circle.fill")
-                                        }
-                                    } catch {
-                                        tipWithText(String(localized: "Video.unkonwn-error"), symbol: "xmark.circle.fill")
-                                    }
-                                }
-                            }, label: {
-                                Label("Video.watch-later", systemImage: "memories.badge.plus")
-                            })
-                        }
-                    })
-                }
             }
         }
     }
@@ -1398,33 +1316,7 @@ struct VideoDetailView: View {
                     ForEach(0..<videoPages.count, id: \.self) { i in
                         Button(action: {
                             isLoading = true
-                            
-                            if videoGetterSource == "official" {
-                                let headers: HTTPHeaders = [
-                                    "cookie": "SESSDATA=\(sessdata)",
-                                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                                ]
-                                let cid = videoPages[i]["CID"]!
-                                videoCID = Int64(cid)!
-                                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(videoDetails["BV"]!)&cid=\(cid)", headers: headers) { respJson, isSuccess in
-                                    if isSuccess {
-                                        if !CheckBApiError(from: respJson) { return }
-                                        videoLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
-                                        videoBvid = videoDetails["BV"]!
-                                        isVideoPlayerPresented = true
-                                        isLoading = false
-                                    }
-                                }
-                            } else if videoGetterSource == "injahow" {
-                                DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=\(i + 1)&type=video&q=32&format=mp4&otype=url") { respStr, isSuccess in
-                                    if isSuccess {
-                                        videoLink = respStr
-                                        videoBvid = videoDetails["BV"]!
-                                        isVideoPlayerPresented = true
-                                        isLoading = false
-                                    }
-                                }
-                            }
+                            decodeVideo(forPageIndex: i)
                         }, label: {
                             ZStack {
                                 HStack {
@@ -1482,6 +1374,41 @@ struct VideoDetailView: View {
                 VideoPlayerView(videoDetails: $videoDetails, videoLink: $videoLink, videoBvid: $videoBvid, videoCID: $videoCID)
                     .toolbar(.hidden)
             })
+        }
+        
+        @inline(__always)
+        func decodeVideo(forPageIndex pageIndex: Int? = nil) {
+            let headers: HTTPHeaders = [
+                "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3); buvid4=\(globalBuvid4)",
+                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            ]
+            if videoGetterSource == "official" {
+                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
+                    if isSuccess {
+                        if !CheckBApiError(from: respJson) { return }
+                        let cid = respJson["data"]["pages"][pageIndex ?? 0]["cid"].int64!
+                        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?bvid=\(videoDetails["BV"]!)&cid=\(cid)&qn=\(sessdata == "" ? 64 : 80)", headers: headers) { respJson, isSuccess in
+                            if isSuccess {
+                                if !CheckBApiError(from: respJson) { return }
+                                videoLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
+                                videoCID = cid
+                                videoBvid = videoDetails["BV"]!
+                                isVideoPlayerPresented = true
+                                isLoading = false
+                            }
+                        }
+                    }
+                }
+            } else if videoGetterSource == "injahow" {
+                DarockKit.Network.shared.requestString("https://api.injahow.cn/bparse/?bv=\(videoDetails["BV"]!.dropFirst().dropFirst())&p=\((pageIndex ?? 0) + 1)&type=video&q=80&format=mp4&otype=url") { respStr, isSuccess in
+                    if isSuccess {
+                        videoLink = respStr
+                        videoBvid = videoDetails["BV"]!
+                        isVideoPlayerPresented = true
+                        isLoading = false
+                    }
+                }
+            }
         }
     }
     #endif
