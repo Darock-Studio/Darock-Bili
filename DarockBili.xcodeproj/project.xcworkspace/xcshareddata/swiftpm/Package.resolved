@@ -1,4 +1,5 @@
 {
+  "originHash" : "8c2c877bde34ef404029556772999ba0d07e63e1ddebb393eb9aacd889b58866",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -41,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Serene-Garden/Cepheus",
       "state" : {
-        "revision" : "271eba038a2c74c47dc5067d62dd68fc346f6481",
-        "version" : "2.3.3"
+        "revision" : "9ba67002a9ac27ba93fc91377798fc2d2e113e69",
+        "version" : "2.4.1"
       }
     },
     {
@@ -82,12 +83,12 @@
       }
     },
     {
-      "identity" : "marquee",
+      "identity" : "marqueetext",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SwiftUIKit/Marquee",
+      "location" : "https://github.com/joekndy/MarqueeText",
       "state" : {
-        "revision" : "69d7b7c6c34ed41d9299cfa8406f91f529c4fef3",
-        "version" : "0.3.0"
+        "branch" : "master",
+        "revision" : "e18d514455563ad00581e0d825146c6f15b1c6c4"
       }
     },
     {
@@ -217,5 +218,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

@@ -17,10 +17,10 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
-import Marquee
 import DarockKit
 import Alamofire
 import SwiftyJSON
+import MarqueeText
 import SDWebImageSwiftUI
 
 struct BangumiDetailView: View {
@@ -169,16 +169,8 @@ struct BangumiDetailView: View {
                     }
                 Spacer()
                     .frame(height: 20)
-                Marquee {
-                    Text(bangumiData.title)
-                        .lineLimit(1)
-                        .font(.system(size: 12, weight: .bold))
-                        .multilineTextAlignment(.center)
-                }
-                .marqueeWhenNotFit(true)
-                .marqueeDuration(10)
-                .frame(height: 20)
-                .padding(.horizontal, 10)
+                MarqueeText(text: bangumiData.title, font: .systemFont(ofSize: 12, weight: .bold), leftFade: 5, rightFade: 5, startDelay: 1.5)
+                    .padding(.horizontal, 10)
                 
                 Text(bangumiData.style ?? "")
                     .lineLimit(1)

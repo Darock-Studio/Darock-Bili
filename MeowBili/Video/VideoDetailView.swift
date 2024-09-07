@@ -19,11 +19,11 @@
 import UIKit
 import AVKit
 import SwiftUI
-import Marquee
 import EFQRCode
 import DarockKit
 import Alamofire
 import SwiftyJSON
+import MarqueeText
 import AVFoundation
 import MobileCoreServices
 import SDWebImageSwiftUI
@@ -192,18 +192,8 @@ struct VideoDetailView: View {
                                             }
                                         }
                                     }
-                                    Marquee {
-                                        HStack {
-                                            Text(videoDetails["Title"]!)
-                                                .lineLimit(1)
-                                                .font(.system(size: 18, weight: .bold))
-                                                .multilineTextAlignment(.center)
-                                        }
-                                    }
-                                    .marqueeWhenNotFit(true)
-                                    .marqueeDuration(10)
-                                    .frame(height: 20)
-                                    .padding(.horizontal, 10)
+                                    MarqueeText(text: videoDetails["Title"]!, font: .systemFont(ofSize: 18, weight: .bold), leftFade: 5, rightFade: 5, startDelay: 1.5)
+                                        .padding(.horizontal, 10)
                                 }
                                 Spacer()
                                     .frame(height: 20)
@@ -1032,19 +1022,8 @@ struct VideoDetailView: View {
                     }
                 Spacer()
                     .frame(height: 20)
-                Marquee {
-                    HStack {
-                        Text(videoDetails["Title"]!)
-                            .lineLimit(1)
-                            .font(.system(size: 12, weight: .bold))
-                            .multilineTextAlignment(.center)
-                    }
-                }
-                .marqueeWhenNotFit(true)
-                .marqueeDuration(10)
-                .marqueeIdleAlignment(.center)
-                .frame(height: 20)
-                .padding(.horizontal, 10)
+                MarqueeText(text: videoDetails["Title"]!, font: .systemFont(ofSize: 12, weight: .bold), leftFade: 5, rightFade: 5, startDelay: 1.5)
+                    .padding(.horizontal, 10)
                 Text(videoDetails["UP"]!)
                     .lineLimit(1)
                     .font(.system(size: 12))

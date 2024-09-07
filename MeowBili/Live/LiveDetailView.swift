@@ -17,10 +17,10 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
-import Marquee
 import DarockKit
 import Alamofire
 import SwiftyJSON
+import MarqueeText
 import SDWebImageSwiftUI
 
 struct LiveDetailView: View {
@@ -61,19 +61,8 @@ struct LiveDetailView: View {
                 ScrollView {
                     VStack {
                         Spacer()
-                        Marquee {
-                            HStack {
-                                Text(liveDetails["Title"]!)
-                                    .lineLimit(1)
-                                    .font(.system(size: 18, weight: .bold))
-                                    .multilineTextAlignment(.center)
-                            }
-                        }
-                        .marqueeWhenNotFit(true)
-                        .marqueeDuration(10)
-                        .marqueeIdleAlignment(.center)
-                        .frame(height: 20)
-                        .padding(.horizontal, 10)
+                        MarqueeText(text: liveDetails["Title"]!, font: .systemFont(ofSize: 18, weight: .bold), leftFade: 5, rightFade: 5, startDelay: 1.5)
+                            .padding(.horizontal, 10)
                         Spacer()
                             .frame(height: 20)
                         if streamerId != 0 {
@@ -291,19 +280,8 @@ struct LiveDetailView: View {
                     }
                 Spacer()
                     .frame(height: 20)
-                Marquee {
-                    HStack {
-                        Text(liveDetails["Title"]!)
-                            .lineLimit(1)
-                            .font(.system(size: 12, weight: .bold))
-                            .multilineTextAlignment(.center)
-                    }
-                }
-                .marqueeWhenNotFit(true)
-                .marqueeDuration(10)
-                .marqueeIdleAlignment(.center)
-                .frame(height: 20)
-                .padding(.horizontal, 10)
+                MarqueeText(text: liveDetails["Title"]!, font: .systemFont(ofSize: 12, weight: .bold), leftFade: 5, rightFade: 5, startDelay: 1.5)
+                    .padding(.horizontal, 10)
                 Text(streamerName)
                     .lineLimit(1)
                     .font(.system(size: 12))

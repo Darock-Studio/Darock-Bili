@@ -352,7 +352,7 @@ struct OpenSourceView: View {
     Licensed under BSD-3-Clause license
     ---------------
     
-    --- Marquee ---
+    --- MarqueeText ---
     Licensed under MIT license
     ---------------
     

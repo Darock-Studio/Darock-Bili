@@ -19,8 +19,9 @@
 import AVKit
 import Combine
 import SwiftUI
-import Marquee
+import Dynamic
 import Alamofire
+import MarqueeText
 import AVFoundation
 import SDWebImageSwiftUI
 
@@ -129,11 +130,13 @@ struct DownloadingListView: View {
     @State var downloadedSizes = [Int64]()
     @State var totalSizes = [Int64]()
     @State var videoDetails = [[String: String]]()
+    @State var localFailedDownloadTasks = [Int]()
+    @State var localVariableUpdateTimer: Timer?
     var body: some View {
         List {
             if downloadingProgressDatas.count != 0 && totalSizes.count != 0 {
                 ForEach(0..<downloadingProgressDatas.count, id: \.self) { i in
-                    if !failedDownloadTasks.contains(i) {
+                    if !localFailedDownloadTasks.contains(i) {
                         if !(downloadingProgressDatas[from: i]?.isFinished ?? false) && downloadProgresses[from: i] != 1.0 {
                             if let downloadProgress = downloadProgresses[from: i], let downloadSize = downloadedSizes[from: i], let totalSize = totalSizes[from: i] {
                                 VStack {
@@ -143,13 +146,7 @@ struct DownloadingListView: View {
                                             .bold()
                                         Spacer()
                                     }
-                                    Marquee {
-                                        Text(videoDetails[i]["Title"] ?? "")
-                                    }
-                                    .marqueeDuration(10)
-                                    .marqueeWhenNotFit(true)
-                                    .marqueeIdleAlignment(.center)
-                                    .frame(height: 18)
+                                    MarqueeText(text: videoDetails[i]["Title"] ?? "", font: .systemFont(ofSize: 17), leftFade: 5, rightFade: 5, startDelay: 1.5)
                                     ProgressView(value: downloadProgress * 100, total: 100.0)
                                     HStack {
                                         Spacer()
@@ -194,25 +191,31 @@ struct DownloadingListView: View {
                     } else {
                         Button(action: {
                             DispatchQueue(label: "com.darock.DarockBili.VideoDownload", qos: .background).async {
-                                AF.download(resumingWith: UserDefaults.standard.data(forKey: "VideoDownloadResumeData\(i)") ?? Data())
-                                    .downloadProgress { p in
-                                        downloadingProgressDatas[i].pts.send(.init(data: .init(progress: p.fractionCompleted, currentSize: p.completedUnitCount, totalSize: p.totalUnitCount), videoDetails: downloadResumeDatas[i]!))
-                                    }
-                                    .response { r in
-                                        if r.error == nil, let filePath = r.fileURL?.path {
-                                            debugPrint(filePath)
-                                            debugPrint(downloadResumeDatas[i]!["BV"] ?? "")
-                                            var detTmp = downloadResumeDatas[i] ?? [:]
-                                            detTmp.updateValue(filePath, forKey: "Path")
-                                            detTmp.updateValue(String(Date.now.timeIntervalSince1970), forKey: "Time")
-                                            UserDefaults.standard.set(detTmp, forKey: downloadResumeDatas[i]!["BV"]!)
-                                            downloadingProgressDatas[i].isFinished = true
-                                        } else {
-                                            UserDefaults.standard.set(r.resumeData, forKey: "VideoDownloadResumeData\(i)")
-                                            failedDownloadTasks.append(i)
-                                            debugPrint(r.error as Any)
+                                if let resumeData = try? Data(contentsOf: URL(filePath: NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(i).drkdatav")) {
+                                    failedDownloadTasks.remove(at: i)
+                                    AF.download(resumingWith: resumeData)
+                                        .downloadProgress { p in
+                                            downloadingProgressDatas[i].pts.send(.init(data: .init(progress: p.fractionCompleted, currentSize: p.completedUnitCount, totalSize: p.totalUnitCount), videoDetails: downloadResumeDatas[i]!))
                                         }
-                                    }
+                                        .response { r in
+                                            if r.error == nil, let filePath = r.fileURL?.path {
+                                                debugPrint(filePath)
+                                                debugPrint(downloadResumeDatas[i]!["BV"] ?? "")
+                                                var detTmp = downloadResumeDatas[i] ?? [:]
+                                                detTmp.updateValue(filePath, forKey: "Path")
+                                                detTmp.updateValue(String(Date.now.timeIntervalSince1970), forKey: "Time")
+                                                UserDefaults.standard.set(detTmp, forKey: downloadResumeDatas[i]!["BV"]!)
+                                                downloadingProgressDatas[i].isFinished = true
+                                            } else {
+                                                if FileManager.default.fileExists(atPath: NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(i).drkdatav") {
+                                                    try? FileManager.default.removeItem(atPath: NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(i).drkdatav")
+                                                }
+                                                try? r.resumeData?.write(to: URL(filePath: NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(i).drkdatav"))
+                                                failedDownloadTasks.append(i)
+                                                debugPrint(r.error as Any)
+                                            }
+                                        }
+                                }
                             }
                         }, label: {
                             VStack {
@@ -243,6 +246,19 @@ struct DownloadingListView: View {
             downloadedSizes = Array(repeating: 0, count: downloadingProgressDatas.count)
             totalSizes = Array(repeating: 0, count: downloadingProgressDatas.count)
             videoDetails = Array(repeating: [:], count: downloadingProgressDatas.count)
+#if os(watchOS)
+            Dynamic.PUICApplication.sharedPUICApplication().setExtendedIdleTime(3600, disablesSleepGesture: true, wantsAutorotation: false)
+#endif
+            localVariableUpdateTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
+                localFailedDownloadTasks = failedDownloadTasks
+            }
+        }
+        .onDisappear {
+#if os(watchOS)
+            Dynamic.PUICApplication.sharedPUICApplication().extendedIdleTime = 0.0
+            Dynamic.PUICApplication.sharedPUICApplication().disablesSleepGesture = false
+#endif
+            localVariableUpdateTimer?.invalidate()
         }
     }
 }
@@ -260,6 +276,7 @@ struct OfflineVideoPlayer: View {
                 .frame(width: isFullScreen ? WKInterfaceDevice.current().screenBounds.height : nil, height: isFullScreen ? WKInterfaceDevice.current().screenBounds.width : nil)
                 .offset(y: isFullScreen ? 20 : 0)
                 .ignoresSafeArea()
+                ._statusBarHidden(true)
                 .tag(1)
             List {
                 Section {
@@ -281,6 +298,7 @@ struct OfflineVideoPlayer: View {
         }
         .tabViewStyle(.page)
         .ignoresSafeArea()
+        .toolbar(.hidden, for: .navigationBar)
         .onAppear {
             let asset = AVAsset(url: URL(fileURLWithPath: path == nil ? DownloadsView.willPlayVideoPath : path!))
             let item = AVPlayerItem(asset: asset)

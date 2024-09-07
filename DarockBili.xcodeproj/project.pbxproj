@@ -62,7 +62,6 @@
 		8CA7CBC72B77AC4C008E587F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC62B77AC4C008E587F /* Assets.xcassets */; };
 		8CA7CBCA2B77AC4C008E587F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC92B77AC4C008E587F /* Preview Assets.xcassets */; };
 		8CA7CBD02B77AC4C008E587F /* 喵哩喵哩.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 8CA7CBCF2B77AC4C008E587F /* 喵哩喵哩.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		8CA7CBE72B77AC8A008E587F /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBE62B77AC8A008E587F /* Marquee */; };
 		8CA7CBE92B77AC8A008E587F /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBE82B77AC8A008E587F /* SwiftDate */; };
 		8CA7CBEB2B77AC8A008E587F /* SFSymbol in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBEA2B77AC8A008E587F /* SFSymbol */; };
 		8CA7CBED2B77AC8A008E587F /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBEC2B77AC8A008E587F /* ZipArchive */; };
@@ -72,7 +71,6 @@
 		8CA7CBF72B77AC8A008E587F /* SDWebImagePDFCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBF62B77AC8A008E587F /* SDWebImagePDFCoder */; };
 		8CA7CBF92B77AC8A008E587F /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBF82B77AC8A008E587F /* SwiftSoup */; };
 		8CA7CBFD2B77AC8A008E587F /* Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CBFC2B77AC8A008E587F /* Dynamic */; };
-		8CA7CC092B77AC93008E587F /* Marquee in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC082B77AC93008E587F /* Marquee */; };
 		8CA7CC0B2B77AC93008E587F /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC0A2B77AC93008E587F /* SwiftDate */; };
 		8CA7CC0F2B77AC93008E587F /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC0E2B77AC93008E587F /* ZipArchive */; };
 		8CA7CC112B77AC93008E587F /* EFQRCode in Frameworks */ = {isa = PBXBuildFile; productRef = 8CA7CC102B77AC93008E587F /* EFQRCode */; };
@@ -200,6 +198,8 @@
 		8CC3D5632B7CCE57005636DC /* ScreenshotableView in Frameworks */ = {isa = PBXBuildFile; platformFilters = (ios, maccatalyst, ); productRef = 8CC3D5622B7CCE57005636DC /* ScreenshotableView */; settings = {ATTRIBUTES = (Required, ); }; };
 		8CC3D5652B7CCF3C005636DC /* SelfQrCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3D5642B7CCF3C005636DC /* SelfQrCardView.swift */; };
 		8CC5B7432B8749BC00BAD89E /* MeowBiliUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC5B7422B8749BC00BAD89E /* MeowBiliUITests.swift */; };
+		8CD3D0402C8C715300E9C37C /* MarqueeText in Frameworks */ = {isa = PBXBuildFile; productRef = 8CD3D03F2C8C715300E9C37C /* MarqueeText */; };
+		8CD3D0422C8C715B00E9C37C /* MarqueeText in Frameworks */ = {isa = PBXBuildFile; productRef = 8CD3D0412C8C715B00E9C37C /* MarqueeText */; };
 		B4DAF0DD2B80725800755F0C /* LinkDetectText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */; };
 /* End PBXBuildFile section */
 
@@ -409,8 +409,8 @@
 				8CA7CC192B77AC93008E587F /* SDWebImagePDFCoder in Frameworks */,
 				8CA7CC172B77AC93008E587F /* SDWebImageSVGCoder in Frameworks */,
 				8CC3D5632B7CCE57005636DC /* ScreenshotableView in Frameworks */,
+				8CD3D0422C8C715B00E9C37C /* MarqueeText in Frameworks */,
 				8C8578B72C5BAC0100AF93D1 /* MarkdownUI in Frameworks */,
-				8CA7CC092B77AC93008E587F /* Marquee in Frameworks */,
 				8C0557DF2B791B84009D9CD0 /* AZVideoPlayer in Frameworks */,
 				8CA7CC0B2B77AC93008E587F /* SwiftDate in Frameworks */,
 				8CA7CC1F2B77AC93008E587F /* Dynamic in Frameworks */,
@@ -432,10 +432,10 @@
 				8CA7CBF72B77AC8A008E587F /* SDWebImagePDFCoder in Frameworks */,
 				8C03B6DE2C280BAA000770B4 /* Cepheus in Frameworks */,
 				8CA7CBF52B77AC8A008E587F /* SDWebImageSVGCoder in Frameworks */,
-				8CA7CBE72B77AC8A008E587F /* Marquee in Frameworks */,
 				8CA7CBE92B77AC8A008E587F /* SwiftDate in Frameworks */,
 				8CA7CBFD2B77AC8A008E587F /* Dynamic in Frameworks */,
 				8C8578B52C5BABF100AF93D1 /* MarkdownUI in Frameworks */,
+				8CD3D0402C8C715300E9C37C /* MarqueeText in Frameworks */,
 				8CA7CBF92B77AC8A008E587F /* SwiftSoup in Frameworks */,
 				8CA7CBEB2B77AC8A008E587F /* SFSymbol in Frameworks */,
 				8CB176B02BB8421300CEC05C /* DarockKit in Frameworks */,
@@ -857,7 +857,6 @@
 			);
 			name = MeowBili;
 			packageProductDependencies = (
-				8CA7CC082B77AC93008E587F /* Marquee */,
 				8CA7CC0A2B77AC93008E587F /* SwiftDate */,
 				8CA7CC0E2B77AC93008E587F /* ZipArchive */,
 				8CA7CC102B77AC93008E587F /* EFQRCode */,
@@ -875,6 +874,7 @@
 				8CB176A42BB8188700CEC05C /* SDWebImageSwiftUI */,
 				8CB176AD2BB8420B00CEC05C /* DarockKit */,
 				8C8578B62C5BAC0100AF93D1 /* MarkdownUI */,
+				8CD3D0412C8C715B00E9C37C /* MarqueeText */,
 			);
 			productName = MeowBili;
 			productReference = 8CA7CBC02B77AC4A008E587F /* MeowBili.app */;
@@ -895,7 +895,6 @@
 			);
 			name = "MeowBili Watch App";
 			packageProductDependencies = (
-				8CA7CBE62B77AC8A008E587F /* Marquee */,
 				8CA7CBE82B77AC8A008E587F /* SwiftDate */,
 				8CA7CBEA2B77AC8A008E587F /* SFSymbol */,
 				8CA7CBEC2B77AC8A008E587F /* ZipArchive */,
@@ -909,6 +908,7 @@
 				8CB176AF2BB8421300CEC05C /* DarockKit */,
 				8C03B6DD2C280BAA000770B4 /* Cepheus */,
 				8C8578B42C5BABF100AF93D1 /* MarkdownUI */,
+				8CD3D03F2C8C715300E9C37C /* MarqueeText */,
 			);
 			productName = "MeowBili Watch App";
 			productReference = 8CA7CBCF2B77AC4C008E587F /* 喵哩喵哩.app */;
@@ -978,7 +978,6 @@
 			);
 			mainGroup = B44689C32B4FC15A002CCEB2;
 			packageReferences = (
-				B4468A6E2B4FC5E7002CCEB2 /* XCRemoteSwiftPackageReference "Marquee" */,
 				B4468A712B4FC5F1002CCEB2 /* XCRemoteSwiftPackageReference "SwiftDate" */,
 				B4468A742B4FC602002CCEB2 /* XCRemoteSwiftPackageReference "SFSymbol" */,
 				B4468A792B4FC618002CCEB2 /* XCRemoteSwiftPackageReference "ZipArchive" */,
@@ -996,6 +995,7 @@
 				8CB176AC2BB8420A00CEC05C /* XCRemoteSwiftPackageReference "DarockKit" */,
 				8C03B6DC2C280BAA000770B4 /* XCRemoteSwiftPackageReference "Cepheus" */,
 				8C8578B32C5BABF000AF93D1 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
+				8CD3D03E2C8C6EB300E9C37C /* XCRemoteSwiftPackageReference "MarqueeText" */,
 			);
 			productRefGroup = B44689CB2B4FC15A002CCEB2 /* Products */;
 			projectDirPath = "";
@@ -2145,12 +2145,12 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		B4468A6E2B4FC5E7002CCEB2 /* XCRemoteSwiftPackageReference "Marquee" */ = {
+		8CD3D03E2C8C6EB300E9C37C /* XCRemoteSwiftPackageReference "MarqueeText" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftUIKit/Marquee";
+			repositoryURL = "https://github.com/joekndy/MarqueeText";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.3.0;
+				branch = master;
+				kind = branch;
 			};
 		};
 		B4468A712B4FC5F1002CCEB2 /* XCRemoteSwiftPackageReference "SwiftDate" */ = {
@@ -2261,11 +2261,6 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = AZVideoPlayer;
 		};
-		8CA7CBE62B77AC8A008E587F /* Marquee */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A6E2B4FC5E7002CCEB2 /* XCRemoteSwiftPackageReference "Marquee" */;
-			productName = Marquee;
-		};
 		8CA7CBE82B77AC8A008E587F /* SwiftDate */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B4468A712B4FC5F1002CCEB2 /* XCRemoteSwiftPackageReference "SwiftDate" */;
@@ -2310,11 +2305,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B4468A852B4FC6C6002CCEB2 /* XCRemoteSwiftPackageReference "Dynamic" */;
 			productName = Dynamic;
-		};
-		8CA7CC082B77AC93008E587F /* Marquee */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4468A6E2B4FC5E7002CCEB2 /* XCRemoteSwiftPackageReference "Marquee" */;
-			productName = Marquee;
 		};
 		8CA7CC0A2B77AC93008E587F /* SwiftDate */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2385,6 +2375,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8CC3D5612B7CCE57005636DC /* XCRemoteSwiftPackageReference "ScreenshotableView" */;
 			productName = ScreenshotableView;
+		};
+		8CD3D03F2C8C715300E9C37C /* MarqueeText */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8CD3D03E2C8C6EB300E9C37C /* XCRemoteSwiftPackageReference "MarqueeText" */;
+			productName = MarqueeText;
+		};
+		8CD3D0412C8C715B00E9C37C /* MarqueeText */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8CD3D03E2C8C6EB300E9C37C /* XCRemoteSwiftPackageReference "MarqueeText" */;
+			productName = MarqueeText;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
