@@ -174,7 +174,7 @@ struct AudioControllerView: View {
             playbackBehavior = .init(rawValue: UserDefaults.standard.string(forKey: "MPPlaybackBehavior") ?? "pause") ?? .pause
             resetGlobalAudioLooper()
             pIsAudioControllerAvailable = true
-            Dynamic.PUICApplication.sharedPUICApplication().setExtendedIdleTime(1600, disablesSleepGesture: true, wantsAutorotation: false)
+            Dynamic.PUICApplication.sharedPUICApplication().setExtendedIdleTime(1600.0, disablesSleepGesture: true, wantsAutorotation: false)
         }
         .onDisappear {
             Dynamic.PUICApplication.sharedPUICApplication().extendedIdleTime = 0.0
