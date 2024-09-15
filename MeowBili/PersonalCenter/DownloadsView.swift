@@ -204,7 +204,9 @@ struct DownloadingListView: View {
                                                 var detTmp = downloadResumeDatas[i] ?? [:]
                                                 detTmp.updateValue(filePath, forKey: "Path")
                                                 detTmp.updateValue(String(Date.now.timeIntervalSince1970), forKey: "Time")
-                                                UserDefaults.standard.set(detTmp, forKey: downloadResumeDatas[i]!["BV"]!)
+                                                let setKey = detTmp["SetKey"] ?? downloadResumeDatas[i]!["BV"]!
+                                                detTmp.removeValue(forKey: "SetKey")
+                                                UserDefaults.standard.set(detTmp, forKey: setKey)
                                                 downloadingProgressDatas[i].isFinished = true
                                             } else {
                                                 if FileManager.default.fileExists(atPath: NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(i).drkdatav") {
@@ -247,7 +249,7 @@ struct DownloadingListView: View {
             totalSizes = Array(repeating: 0, count: downloadingProgressDatas.count)
             videoDetails = Array(repeating: [:], count: downloadingProgressDatas.count)
 #if os(watchOS)
-            Dynamic.PUICApplication.sharedPUICApplication().setExtendedIdleTime(3600, disablesSleepGesture: true, wantsAutorotation: false)
+            Dynamic.PUICApplication.sharedPUICApplication().setExtendedIdleTime(3600.0, disablesSleepGesture: true, wantsAutorotation: false)
 #endif
             localVariableUpdateTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
                 localFailedDownloadTasks = failedDownloadTasks

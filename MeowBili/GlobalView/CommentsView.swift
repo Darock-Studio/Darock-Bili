@@ -47,7 +47,7 @@ struct CommentsView: View {
     @State var presentImageItem: String?
     var body: some View {
         ScrollView {
-            LazyVStack {
+            VStack {
                 if comments.count != 0 {
                     ForEach(0...comments.count - 1, id: \.self) { i in
                         VStack {
