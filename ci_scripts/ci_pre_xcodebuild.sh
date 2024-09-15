@@ -2,8 +2,8 @@
 
 if [ "$CI_WORKFLOW" = "Public Release" ]; then
     NEW_TEXT="Darock"
-elif [ "$CI_WORKFLOW" = "TF Deploy" ]; then
-    NEW_TEXT="Linecom"
+elif [ "$CI_WORKFLOW" = "Alternative" ]; then
+    NEW_TEXT="785"
 else
     # 默认值，如果 CI_WORKFLOW 不匹配上述条件
     NEW_TEXT="Unknown"
