@@ -120,7 +120,9 @@ struct VideoDownloadView: View {
                                             try? FileManager.default.removeItem(atPath: NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(currentDownloadingIndex).drkdatav")
                                         }
                                         try? r.resumeData?.write(to: URL(filePath: NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(currentDownloadingIndex).drkdatav"))
-                                        downloadResumeDatas.updateValue(videoDetails, forKey: currentDownloadingIndex)
+                                        var detTmp = videoDetails
+                                        detTmp.updateValue("\(bvid)\(isPaged ? String(VideoDownloadView.downloadCID!) : "")", forKey: "SetKey")
+                                        downloadResumeDatas.updateValue(detTmp, forKey: currentDownloadingIndex)
                                         failedDownloadTasks.append(currentDownloadingIndex)
                                         debugPrint(r.error as Any)
                                     }
