@@ -893,7 +893,7 @@ struct VideoDetailView: View {
     struct VideoFavoriteAddView: View {
         @Binding var videoDetails: [String: String]
         @Binding var isFavoured: Bool
-        @Environment(\.dismiss) var dismiss
+        @Environment(\.presentationMode) var presentationMode
         @AppStorage("DedeUserID") var dedeUserID = ""
         @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
         @AppStorage("SESSDATA") var sessdata = ""
@@ -1417,7 +1417,7 @@ struct VideoDetailView: View {
 struct VideoThrowCoinView: View {
     var bvid: String
     @Binding var isCoined: Bool
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.presentationMode) var presentationMode
     @AppStorage("DedeUserID") var dedeUserID = ""
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
@@ -1445,7 +1445,7 @@ struct VideoThrowCoinView: View {
                     #else
                     tipWithText("已投币", symbol: "checkmark.circle.fill")
                     #endif
-                    dismiss()
+                    presentationMode.wrappedValue.dismiss()
                 }
             }, label: {
                 Text("Video.coin.throw")

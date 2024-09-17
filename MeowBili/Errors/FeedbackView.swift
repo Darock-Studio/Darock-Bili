@@ -105,7 +105,7 @@ struct InAppFeedbackView: View {
     }
     
     struct NewFeedbackView: View {
-        @Environment(\.dismiss) var dismiss
+        @Environment(\.presentationMode) var presentationMode
         @State var titleInput = ""
         @State var contentInputs = [""]
         @State var feedbackType = 0
@@ -182,7 +182,7 @@ struct InAppFeedbackView: View {
                                             arr.insert(respStr, at: 0)
                                             UserDefaults.standard.set(arr, forKey: "RadarFBIDs")
                                             tipWithText("已发送", symbol: "paperplane.fill")
-                                            dismiss()
+                                            presentationMode.wrappedValue.dismiss()
                                         } else {
                                             tipWithText("服务器错误", symbol: "xmark.circle.fill")
                                         }
@@ -207,7 +207,7 @@ struct InAppFeedbackView: View {
                         if !isSending && !titleInput.isEmpty || contentInputs != [""] {
                             isDraftAlertPresented = true
                         } else {
-                            dismiss()
+                            presentationMode.wrappedValue.dismiss()
                         }
                     }, label: {
                         Image(systemName: "chevron.backward")
@@ -225,14 +225,14 @@ struct InAppFeedbackView: View {
                 Button(role: .destructive, action: {
                     UserDefaults.standard.removeObject(forKey: "FeedbackNewDraftTitle")
                     UserDefaults.standard.removeObject(forKey: "FeedbackNewDraftContent")
-                    dismiss()
+                    presentationMode.wrappedValue.dismiss()
                 }, label: {
                     Text("删除草稿")
                 })
                 Button(role: .cancel, action: {
                     UserDefaults.standard.set(titleInput, forKey: "FeedbackNewDraftTitle")
                     UserDefaults.standard.set(contentInputs, forKey: "FeedbackNewDraftContent")
-                    dismiss()
+                    presentationMode.wrappedValue.dismiss()
                 }, label: {
                     Text("存储草稿")
                 })
@@ -244,7 +244,7 @@ struct InAppFeedbackView: View {
     struct FeedbackDetailView: View {
         var id: String
         private let projName = "喵哩喵哩"
-        @Environment(\.dismiss) var dismiss
+        @Environment(\.presentationMode) var presentationMode
         @State var feedbackText = ""
         @State var formattedTexts = [String]()
         @State var replies = [[String]]()

@@ -401,7 +401,7 @@ struct CommentsView: View {
     struct CommentSendView: View {
         var oid: String
         var type: Int
-        @Environment(\.dismiss) var dismiss
+        @Environment(\.presentationMode) var presentationMode
         @AppStorage("DedeUserID") var dedeUserID = ""
         @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
         @AppStorage("SESSDATA") var sessdata = ""
@@ -423,7 +423,7 @@ struct CommentsView: View {
                                     sendCommentCache = ""
                                     debugPrint(response)
                                     isSendingComment = false
-                                    dismiss()
+                                    presentationMode.wrappedValue.dismiss()
                                 }
                             }
                         }

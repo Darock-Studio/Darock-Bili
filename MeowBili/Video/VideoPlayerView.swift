@@ -41,7 +41,7 @@ struct VideoPlayerView: View {
     @Binding var willEnterGoodVideo: Bool
     #endif
     #if os(watchOS)
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.presentationMode) var presentationMode
     #endif
     @AppStorage("DedeUserID") var dedeUserID = ""
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
@@ -295,11 +295,11 @@ struct VideoPlayerView: View {
                             if player.timeControlStatus == .playing {
                                 player.pause()
                             } else if player.timeControlStatus == .paused {
-                                dismiss()
+                                presentationMode.wrappedValue.dismiss()
                             }
                         case "Exit":
                             player.pause()
-                            dismiss()
+                            presentationMode.wrappedValue.dismiss()
                         case "Exit App":
                             exit(0)
                         default:

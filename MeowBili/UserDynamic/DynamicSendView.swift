@@ -26,7 +26,7 @@ import JournalingSuggestions
 #endif
 
 struct DynamicSendView: View {
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.presentationMode) var presentationMode
     @AppStorage("DynamicTailSetting") var dynamicTailSetting = "NotSet"
     @AppStorage("DedeUserID") var dedeUserID = ""
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
@@ -106,7 +106,7 @@ struct DynamicSendView: View {
                                         #else
                                         tipWithText("发送成功", symbol: "checkmark.circle.fill")
                                         #endif
-                                        dismiss()
+                                        presentationMode.wrappedValue.dismiss()
                                     } else {
                                         #if !os(watchOS)
                                         AlertKitAPI.present(title: "发送失败,未知错误", icon: .error, style: .iOS17AppleMusic, haptic: .error)
@@ -244,7 +244,7 @@ struct DynamicSendView: View {
     }
     
     struct DynamicTailSetView: View {
-        @Environment(\.dismiss) var dismiss
+        @Environment(\.presentationMode) var presentationMode
         @AppStorage("DynamicTailSetting") var dynamicTailSetting = "NotSet"
         @State var tailContent = "———— 来自 watchOS 喵哩喵哩客户端"
         var body: some View {
@@ -264,7 +264,7 @@ struct DynamicSendView: View {
                 Section {
                     Button(action: {
                         dynamicTailSetting = tailContent
-                        dismiss()
+                        presentationMode.wrappedValue.dismiss()
                     }, label: {
                         Text("应用")
                     })

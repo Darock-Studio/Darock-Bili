@@ -21,7 +21,7 @@ import DarockKit
 
 struct ErrorGetView: View {
     var error: GetableError
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.presentationMode) var presentationMode
     @State var doing = ""
     @State var isClosePresented = false
     @State var isSendPresented = false
@@ -86,7 +86,7 @@ struct ErrorGetView: View {
                                     .font(.system(size: 18, weight: .bold))
                                 if error.ignoreable {
                                     Button(action: {
-                                        dismiss()
+                                        presentationMode.wrappedValue.dismiss()
                                     }, label: {
                                         Text("Error.leave")
                                             .bold()
@@ -112,7 +112,7 @@ struct ErrorGetView: View {
                     })
                     Button(action: {
                         if error.ignoreable {
-                            dismiss()
+                            presentationMode.wrappedValue.dismiss()
                         } else {
                             isClosePresented = true
                         }
