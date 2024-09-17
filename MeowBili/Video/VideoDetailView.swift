@@ -618,7 +618,10 @@ struct VideoDetailView: View {
                         honors.append("")
                     }
                     for honor in respJson["data"]["honor_reply"]["honor"] {
-                        honors[honor.1["type"].int! - 1] = honor.1["desc"].string ?? "[加载失败]"
+                        let typeIndex = honor.1["type"].int! - 1
+                        if typeIndex <= honors.endIndex && typeIndex >= 0 {
+                            honors[typeIndex] = honor.1["desc"].string ?? "[加载失败]"
+                        }
                     }
                     for page in respJson["data"]["pages"] {
                         videoPages.append(["CID": String(page.1["cid"].int ?? 0), "Index": String(page.1["page"].int ?? 0), "Title": page.1["part"].string ?? "[加载失败]"])
