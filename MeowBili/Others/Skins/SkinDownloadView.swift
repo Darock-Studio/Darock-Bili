@@ -21,7 +21,7 @@ import Alamofire
 import ZipArchive
 
 struct SkinDownloadView: View {
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.presentationMode) var presentationMode
     var name: String
     var link: String
     @State var downloadProgress = 0.0
@@ -49,7 +49,7 @@ struct SkinDownloadView: View {
                         try! SSZipArchive.unzipFile(atPath: filePath, toDestination: filePath.replacingOccurrences(of: "package.zip", with: "") + name, overwrite: true, password: nil)
                         isUnzipping = false
                         debugPrint(AppFileManager(path: "skin").GetRoot() ?? [[:]])
-                        dismiss()
+                        presentationMode.wrappedValue.dismiss()
                     } else {
                         debugPrint(r.error as Any)
                     }

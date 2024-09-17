@@ -31,7 +31,7 @@ struct VideoDownloadView: View {
     var isPaged = false
     public static var downloadLink: String?
     public static var downloadCID: Int64?
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.presentationMode) var presentationMode
     @AppStorage("DedeUserID") var dedeUserID = ""
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
@@ -92,9 +92,10 @@ struct VideoDownloadView: View {
                             "upgrade-insecure-requests": "1",
                             "referer": "https://www.bilibili.com/"
                         ]
+                        let downloadCID = String(VideoDownloadView.downloadCID!)
                         let destination: DownloadRequest.Destination = { _, _ in
                             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-                            let fileURL = documentsURL.appendingPathComponent("dlds/\(bvid)\(isPaged ? String(VideoDownloadView.downloadCID!) : "").mp4")
+                            let fileURL = documentsURL.appendingPathComponent("dlds/\(bvid)\(isPaged ? downloadCID : "").mp4")
                             
                             return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
                         }
@@ -113,7 +114,7 @@ struct VideoDownloadView: View {
                                         var detTmp = videoDetails
                                         detTmp.updateValue(filePath, forKey: "Path")
                                         detTmp.updateValue(String(Date.now.timeIntervalSince1970), forKey: "Time")
-                                        UserDefaults.standard.set(detTmp, forKey: "\(bvid)\(isPaged ? String(VideoDownloadView.downloadCID!) : "")")
+                                        UserDefaults.standard.set(detTmp, forKey: "\(bvid)\(isPaged ? downloadCID : "")")
                                         downloadingProgressDatas[currentDownloadingIndex].isFinished = true
                                     } else {
                                         if FileManager.default.fileExists(atPath: NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(currentDownloadingIndex).drkdatav") {

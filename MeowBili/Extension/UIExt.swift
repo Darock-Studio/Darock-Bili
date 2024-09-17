@@ -533,17 +533,13 @@ struct UIImageTransfer: Transferable {
   }
 }
 
-extension Image {
-    init(privateSystemName systemName: String) {
-        self.init(uiImage: UIImage(privateSystemName: systemName))
-    }
-}
 @ViewBuilder
 func Label(_ titleKey: LocalizedStringKey, privateSystemImage systemName: String) -> some View {
-    HStack {
-        Image(uiImage: UIImage(privateSystemName: systemName))
+    Label(title: {
         Text(titleKey)
-    }
+    }, icon: {
+        Image(_internalSystemName: systemName)
+    })
 }
 
 #if os(watchOS)

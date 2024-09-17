@@ -114,6 +114,11 @@ struct DownloadsView: View {
                                 dicV.updateValue(String(p.split(separator: "/").last!), forKey: "Path")
                             }
                         }
+                        if nameWithOutSuffix.count > 12 {
+                            dicV.updateValue("true", forKey: "IsParted")
+                        } else {
+                            dicV.updateValue("false", forKey: "IsParted")
+                        }
                         metadatas.append(dicV)
                     } else {
                         metadatas.append(["notGet": "true"])

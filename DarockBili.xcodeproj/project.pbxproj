@@ -48,8 +48,6 @@
 		8C8578B72C5BAC0100AF93D1 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8578B62C5BAC0100AF93D1 /* MarkdownUI */; };
 		8C9776082BCECBC3006EDB58 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9776072BCECBC3006EDB58 /* Audio.swift */; };
 		8C9776092BCECBC3006EDB58 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9776072BCECBC3006EDB58 /* Audio.swift */; };
-		8CA1BA112BD2AF9E009BCDFB /* PrivateSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1BA102BD2AF9E009BCDFB /* PrivateSymbols.m */; };
-		8CA1BA122BD2AF9E009BCDFB /* PrivateSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA1BA102BD2AF9E009BCDFB /* PrivateSymbols.m */; };
 		8CA370DB2B82724400CE0E9E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */; };
 		8CA370DC2B82724400CE0E9E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */; };
 		8CA370DF2B827AAD00CE0E9E /* AlertToast in Frameworks */ = {isa = PBXBuildFile; platformFilters = (ios, maccatalyst, ); productRef = 8CA370DE2B827AAD00CE0E9E /* AlertToast */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -83,8 +81,6 @@
 		8CA7CC6C2B77AE80008E587F /* DownloadObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC6B2B77AE80008E587F /* DownloadObj.swift */; };
 		8CA7CC6F2B77AEB4008E587F /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC6E2B77AEB4008E587F /* SearchView.swift */; };
 		8CA7CC712B77AEE4008E587F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC702B77AEE4008E587F /* MainView.swift */; };
-		8CA7CC772B77AF4C008E587F /* backtrace.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC762B77AF4C008E587F /* backtrace.c */; };
-		8CA7CC792B77AF79008E587F /* backtrace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC782B77AF79008E587F /* backtrace.swift */; };
 		8CA7CC7B2B77AF93008E587F /* NetwokFixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC7A2B77AF93008E587F /* NetwokFixView.swift */; };
 		8CA7CC7D2B77AFAC008E587F /* SignalErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC7C2B77AFAC008E587F /* SignalErrorView.swift */; };
 		8CA7CC7F2B77AFC5008E587F /* MemoryWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC7E2B77AFC5008E587F /* MemoryWarningView.swift */; };
@@ -149,7 +145,6 @@
 		8CBFF0C12B85E55F00350E0F /* CodeExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC852B77B015008E587F /* CodeExt.swift */; };
 		8CBFF0C22B85E55F00350E0F /* WatchLaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCB92B77B3EA008E587F /* WatchLaterView.swift */; };
 		8CBFF0C32B85E55F00350E0F /* MeowBiliApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC22B77AC4A008E587F /* MeowBiliApp.swift */; };
-		8CBFF0C42B85E55F00350E0F /* backtrace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC782B77AF79008E587F /* backtrace.swift */; };
 		8CBFF0C52B85E55F00350E0F /* SkinExplorerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC962B77B115008E587F /* SkinExplorerView.swift */; };
 		8CBFF0C62B85E55F00350E0F /* UserDynamicListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3D5572B7CA209005636DC /* UserDynamicListView.swift */; };
 		8CBFF0C72B85E55F00350E0F /* VideoDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCC02B77B44E008E587F /* VideoDownloadView.swift */; };
@@ -191,7 +186,6 @@
 		8CBFF0EC2B85E55F00350E0F /* ErrorGetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC822B77AFF2008E587F /* ErrorGetView.swift */; };
 		8CBFF0ED2B85E55F00350E0F /* NetwokFixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC7A2B77AF93008E587F /* NetwokFixView.swift */; };
 		8CBFF0EE2B85E55F00350E0F /* FollowListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCB12B77B398008E587F /* FollowListView.swift */; };
-		8CBFF1282B861F7F00350E0F /* backtrace.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC762B77AF4C008E587F /* backtrace.c */; };
 		8CC3D5582B7CA209005636DC /* UserDynamicListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3D5572B7CA209005636DC /* UserDynamicListView.swift */; };
 		8CC3D55A2B7CB95D005636DC /* NowPlayingExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3D5592B7CB95D005636DC /* NowPlayingExtension.m */; };
 		8CC3D55D2B7CC936005636DC /* OCCodeExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3D55C2B7CC936005636DC /* OCCodeExt.m */; };
@@ -294,8 +288,6 @@
 		8C82F82E2BB70AA7009AEFD2 /* CODE_OF_CONDUCT.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CODE_OF_CONDUCT.md; sourceTree = "<group>"; };
 		8C8578A52C5A18AA00AF93D1 /* MeowBiliTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeowBiliTests.swift; sourceTree = "<group>"; };
 		8C9776072BCECBC3006EDB58 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
-		8CA1BA102BD2AF9E009BCDFB /* PrivateSymbols.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrivateSymbols.m; sourceTree = "<group>"; };
-		8CA1BA152BD2AFAB009BCDFB /* PrivateSymbols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrivateSymbols.h; sourceTree = "<group>"; };
 		8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		8CA388A02B78B5D800F5F91F /* BiliFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BiliFont.ttf; sourceTree = "<group>"; };
 		8CA7CBC02B77AC4A008E587F /* MeowBili.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeowBili.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -309,10 +301,7 @@
 		8CA7CC6B2B77AE80008E587F /* DownloadObj.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadObj.swift; sourceTree = "<group>"; };
 		8CA7CC6E2B77AEB4008E587F /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		8CA7CC702B77AEE4008E587F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		8CA7CC742B77AF2E008E587F /* backtrace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = backtrace.h; sourceTree = "<group>"; };
 		8CA7CC752B77AF4B008E587F /* MeowBili-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MeowBili-Bridging-Header.h"; sourceTree = "<group>"; };
-		8CA7CC762B77AF4C008E587F /* backtrace.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = backtrace.c; sourceTree = "<group>"; };
-		8CA7CC782B77AF79008E587F /* backtrace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = backtrace.swift; sourceTree = "<group>"; };
 		8CA7CC7A2B77AF93008E587F /* NetwokFixView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetwokFixView.swift; sourceTree = "<group>"; };
 		8CA7CC7C2B77AFAC008E587F /* SignalErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalErrorView.swift; sourceTree = "<group>"; };
 		8CA7CC7E2B77AFC5008E587F /* MemoryWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryWarningView.swift; sourceTree = "<group>"; };
@@ -565,7 +554,6 @@
 		8CA7CC722B77AEFB008E587F /* Errors */ = {
 			isa = PBXGroup;
 			children = (
-				8CA7CC732B77AF1B008E587F /* Backtrace */,
 				8CA7CC7A2B77AF93008E587F /* NetwokFixView.swift */,
 				8CA7CC7C2B77AFAC008E587F /* SignalErrorView.swift */,
 				8CA7CC7E2B77AFC5008E587F /* MemoryWarningView.swift */,
@@ -573,16 +561,6 @@
 				8CA7CC822B77AFF2008E587F /* ErrorGetView.swift */,
 			);
 			path = Errors;
-			sourceTree = "<group>";
-		};
-		8CA7CC732B77AF1B008E587F /* Backtrace */ = {
-			isa = PBXGroup;
-			children = (
-				8CA7CC742B77AF2E008E587F /* backtrace.h */,
-				8CA7CC762B77AF4C008E587F /* backtrace.c */,
-				8CA7CC782B77AF79008E587F /* backtrace.swift */,
-			);
-			path = Backtrace;
 			sourceTree = "<group>";
 		};
 		8CA7CC842B77B003008E587F /* Extension */ = {
@@ -623,8 +601,6 @@
 				8CC3D5592B7CB95D005636DC /* NowPlayingExtension.m */,
 				8CC3D55E2B7CC941005636DC /* OCCodeExt.h */,
 				8CC3D55C2B7CC936005636DC /* OCCodeExt.m */,
-				8CA1BA152BD2AFAB009BCDFB /* PrivateSymbols.h */,
-				8CA1BA102BD2AF9E009BCDFB /* PrivateSymbols.m */,
 			);
 			path = CCodes;
 			sourceTree = "<group>";
@@ -1148,7 +1124,6 @@
 				8CC3D5652B7CCF3C005636DC /* SelfQrCardView.swift in Sources */,
 				8CA7CCB82B77B3D6008E587F /* HistoryView.swift in Sources */,
 				8CA7CCDC2B77B571008E587F /* LiveMessagesView.swift in Sources */,
-				8CA7CC792B77AF79008E587F /* backtrace.swift in Sources */,
 				8CC3D55A2B7CB95D005636DC /* NowPlayingExtension.m in Sources */,
 				8CA7CC6A2B77AE62008E587F /* Bangumi.swift in Sources */,
 				8CA7CBC52B77AC4A008E587F /* ContentView.swift in Sources */,
@@ -1168,12 +1143,10 @@
 				8CA7CCCA2B77B4B2008E587F /* UserDynamicMainView.swift in Sources */,
 				8CA7CCAE2B77B36E008E587F /* PersonAccountView.swift in Sources */,
 				8CA7CCD52B77B530008E587F /* BangumiPlayerView.swift in Sources */,
-				8CA1BA112BD2AF9E009BCDFB /* PrivateSymbols.m in Sources */,
 				8CA7CC9B2B77B13D008E587F /* Passthroughs.swift in Sources */,
 				8CA7CCB02B77B383008E587F /* FavoriteView.swift in Sources */,
 				8CA7CC9D2B77B150008E587F /* AboutView.swift in Sources */,
 				8CA7CC882B77B039008E587F /* UIExt.swift in Sources */,
-				8CA7CC772B77AF4C008E587F /* backtrace.c in Sources */,
 				8CA7CCC32B77B45F008E587F /* VideoDetailView.swift in Sources */,
 				8CA7CCAC2B77B354008E587F /* DownloadsView.swift in Sources */,
 				8CA7CC8A2B77B061008E587F /* AppFileManager.swift in Sources */,
@@ -1199,10 +1172,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CA1BA122BD2AF9E009BCDFB /* PrivateSymbols.m in Sources */,
 				8CBFF0C02B85E55F00350E0F /* SkinDownloadView.swift in Sources */,
 				8CBFF0C82B85E55F00350E0F /* BangumiPlayerView.swift in Sources */,
-				8CBFF0C42B85E55F00350E0F /* backtrace.swift in Sources */,
 				8CBFF0C72B85E55F00350E0F /* VideoDownloadView.swift in Sources */,
 				03B2F8102C45AED7007EB850 /* PhoneFormatterExt.swift in Sources */,
 				8CBFF0E32B85E55F00350E0F /* AboutView.swift in Sources */,
@@ -1231,7 +1202,6 @@
 				8CBFF0B82B85E55F00350E0F /* CommentsView.swift in Sources */,
 				8CBFF0C32B85E55F00350E0F /* MeowBiliApp.swift in Sources */,
 				8CBFF0CC2B85E55F00350E0F /* AudioPlayerView.swift in Sources */,
-				8CBFF1282B861F7F00350E0F /* backtrace.c in Sources */,
 				8CBFF0EB2B85E55F00350E0F /* FavoriteView.swift in Sources */,
 				8CBFF0E12B85E55F00350E0F /* UserDynamicMainView.swift in Sources */,
 				8C9776092BCECBC3006EDB58 /* Audio.swift in Sources */,
