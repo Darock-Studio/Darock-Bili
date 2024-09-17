@@ -274,8 +274,8 @@ struct SettingsView: View {
                             Color.blue
                                 .frame(width: 20, height: 20)
                                 .clipShape(Circle())
-                            Image(privateSystemName: "hand.side.pinch.fill")
-                                .scaleEffect(0.7)
+                            Image(_internalSystemName: "hand.side.pinch.fill")
+                                .font(.system(size: 12))
                         }
                         Text("Settings.gesture")
                     }

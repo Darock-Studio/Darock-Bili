@@ -145,7 +145,7 @@ struct ContentView: View {
 }
 
 struct TermsListView: View {
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.presentationMode) var presentationMode
     @AppStorage("IsReadTerms") var isReadTerms = false
     var body: some View {
         ScrollView {
@@ -161,7 +161,7 @@ struct TermsListView: View {
                     """)
                 Button(action: {
                     isReadTerms = true
-                    dismiss()
+                    presentationMode.wrappedValue.dismiss()
                 }, label: {
                     Text("Home.understand")
                 })

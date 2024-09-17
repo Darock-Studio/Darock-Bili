@@ -158,9 +158,7 @@ struct DarockBili_Watch_AppApp: App {
     // Navigators
     @State var isUrlOpenVideoPresented = false
     @State var urlOpenVideoDetails = [String: String]()
-    #if os(watchOS)
-    @State var isMemoryWarningPresented = false
-    #else
+    #if !os(watchOS)
     @State var shouldShowAppName = false
     #endif
     var body: some SwiftUI.Scene {
@@ -285,9 +283,6 @@ struct DarockBili_Watch_AppApp: App {
                     #endif
                 }
                 .blur(radius: isLuminanceReduced && blurWhenScreenSleep ? 12 : 0)
-                #if os(watchOS)
-                .sheet(isPresented: $isMemoryWarningPresented, content: { MemoryWarningView() })
-                #endif
                 .onAppear {
                     #if os(watchOS)
                     isInLowBatteryMode = UserDefaults.standard.bool(forKey: "IsInLowBatteryMode")
@@ -301,15 +296,6 @@ struct DarockBili_Watch_AppApp: App {
                             isShowingTip = pIsShowingTip
                         }
                     }
-                    
-                    #if os(watchOS)
-                    Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { timer in
-                        if getMemory() > 240.0 {
-                            isMemoryWarningPresented = true
-                            timer.invalidate()
-                        }
-                    }
-                    #endif
                     
                     Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
                         if isShowMemoryInScreen {
@@ -490,48 +476,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
         //AlertKitAPI.present(title: "低内存警告", subtitle: "喵哩喵哩收到了低内存警告", icon: .error, style: .iOS17AppleMusic, haptic: .warning)
     }
-}
-
-func signalErrorRecord(_ errorNum: Int32, _ errorSignal: String) {
-    var symbols = ""
-    for symbol in Thread.callStackSymbols {
-        symbols += symbol + "\n"
-    }
-    let dateN = Date.now
-    let df = DateFormatter()
-    df.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSS Z"
-    let dateStr = df.string(from: dateN)
-    let fullString = """
-    -------------------------------------
-    Translated Report (Full Report Below)
-    -------------------------------------
-    
-    Date/Time:  \(dateStr)
-    Version:  \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)
-    OS Version:  \(UIDevice.current.systemName) \(UIDevice.current.systemVersion)
-    
-    Exception Type:  \(errorSignal)
-    Termination Reason:  \(errorSignal) \(errorNum)
-    
-    Main Symbols
-    
-    \(backtraceMainThread())
-    
-    
-    Current Thread Symbols:
-    
-    \(backtraceCurrentThread())
-    
-    Swift Thread Symbols:
-    
-    \(symbols)
-    
-    EOF
-    """
-    let manager = FileManager.default
-    let urlForDocument = manager.urls(for: .documentDirectory, in: .userDomainMask)
-    try! fullString.write(to: URL(string: (urlForDocument[0] as URL).absoluteString + "\(dateStr.replacingOccurrences(of: " ", with: "_").replacingOccurrences(of: "/", with: "-").replacingOccurrences(of: ":", with: "__")).ddf")!, atomically: true, encoding: .utf8)
-    UserDefaults.standard.set("\(dateStr).ddf", forKey: "NewSignalError")
 }
 #else
 class AppDelegate: NSObject, WKApplicationDelegate {
