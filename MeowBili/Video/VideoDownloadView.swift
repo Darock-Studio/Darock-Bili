@@ -92,7 +92,7 @@ struct VideoDownloadView: View {
                             "upgrade-insecure-requests": "1",
                             "referer": "https://www.bilibili.com/"
                         ]
-                        let downloadCID = String(VideoDownloadView.downloadCID!)
+                        let downloadCID = String(VideoDownloadView.downloadCID ?? 0)
                         let destination: DownloadRequest.Destination = { _, _ in
                             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
                             let fileURL = documentsURL.appendingPathComponent("dlds/\(bvid)\(isPaged ? downloadCID : "").mp4")
