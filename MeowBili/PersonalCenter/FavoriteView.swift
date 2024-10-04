@@ -104,46 +104,58 @@ struct FavoriteDetailView: View {
                     }
                 }
                 Section {
-                    if nowPage != 1 {
-                        Button(action: {
-                            nowPage -= 1
-                            RefreshDetailData()
-                        }, label: {
-                            Text("Account.list.last-page")
-                                .bold()
-                        })
+                    HStack {
+                        if nowPage != 1 {
+                            Button(action: {
+                                nowPage -= 1
+                                refreshDetailData()
+                            }, label: {
+                                Image(systemName: "chevron.left")
+                                    .bold()
+                            })
+                            // rdar://so?56576298
+                            .buttonStyle(.bordered)
+                            .buttonBorderShape(.roundedRectangle(radius: 0))
+                            .frame(width: 30)
+                        }
+                        Spacer()
+                        Text("\(nowPage) / \(totalPage)")
+                            .font(.system(size: 18, weight: .bold))
+                        Spacer()
+                        if nowPage != totalPage {
+                            Button(action: {
+                                nowPage += 1
+                                refreshDetailData()
+                            }, label: {
+                                Image(systemName: "chevron.right")
+                                    .bold()
+                            })
+                            .buttonStyle(.bordered)
+                            .buttonBorderShape(.roundedRectangle(radius: 0))
+                            .frame(width: 30)
+                        }
                     }
-                    Text("\(nowPage) / \(totalPage)")
-                        .bold()
-                    if nowPage != totalPage {
-                        Button(action: {
-                            nowPage += 1
-                            RefreshDetailData()
-                        }, label: {
-                            Text("Account.list.next-page")
-                                .bold()
-                        })
-                    }
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
+                .listRowBackground(Color.clear)
             }
         }
         .navigationTitle(folderDatas["Title"]!)
         .navigationBarTitleDisplayMode(.large)
         .onAppear {
-            RefreshDetailData()
+            refreshDetailData()
             totalPage = Int(Int(folderDatas["Count"]!)! / 20) + 1
         }
     }
     
-    func RefreshDetailData() {
-        details.removeAll()
+    func refreshDetailData() {
         let headers: HTTPHeaders = [
             "cookie": "SESSDATA=\(sessdata);",
             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         ]
         DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v3/fav/resource/list?media_id=\(folderDatas["ID"]!)&ps=20&pn=\(nowPage)", headers: headers) { respJson, isSuccess in
             if isSuccess {
-                debugPrint(respJson)
+                details.removeAll()
                 if !CheckBApiError(from: respJson) { return }
                 let datas = respJson["data"]["medias"]
                 for data in datas {

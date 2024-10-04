@@ -884,7 +884,7 @@ struct UserDetailView: View {
                                 if videoNowPage != 1 {
                                     Button(action: {
                                         videoNowPage -= 1
-                                        RefreshVideos()
+                                        refreshVideos()
                                     }, label: {
                                         Image(systemName: "chevron.left")
                                             .bold()
@@ -919,7 +919,7 @@ struct UserDetailView: View {
                                             Button(action: {
                                                 if let cInt = Int(videoTargetJumpPageCache) {
                                                     videoNowPage = cInt
-                                                    RefreshVideos()
+                                                    refreshVideos()
                                                 }
                                                 isVideoPageJumpPresented = false
                                             }, label: {
@@ -935,7 +935,7 @@ struct UserDetailView: View {
                                 if videoNowPage != videoTotalPage {
                                     Button(action: {
                                         videoNowPage += 1
-                                        RefreshVideos()
+                                        refreshVideos()
                                     }, label: {
                                         Image(systemName: "chevron.right")
                                             .bold()
@@ -1074,10 +1074,10 @@ struct UserDetailView: View {
             }
             .onAppear {
                 if !isVideosLoaded {
-                    RefreshVideos()
+                    refreshVideos()
                 }
             }
-            .onChange(of: viewSelector) { _ in
+            .onChange(of: viewSelector) {
                 switch viewSelector {
                 case .video:
                     break
@@ -1089,7 +1089,7 @@ struct UserDetailView: View {
             }
         }
         
-        func RefreshVideos() {
+        func refreshVideos() {
             videos = [[String: String]]()
             let headers: HTTPHeaders = [
                 "accept": "*/*",
