@@ -63,7 +63,6 @@ struct VideoPlayerView: View {
     @State var playbackSpeed = 1.0
     @State var jumpToInput = ""
     @State var playerScale: CGFloat = 1.0
-    @State var __playerScale = 1.0
     @State var playerScaledOffset = CGSizeZero
     @State var playerScaledLastOffset = CGSizeZero
     @State var cachedPlayerTimeControlStatus = AVPlayer.TimeControlStatus.paused
@@ -142,83 +141,65 @@ struct VideoPlayerView: View {
                 }
             #else
             TabView(selection: $tabviewChoseTab) {
-                ZStack {
-                    VideoPlayer(player: player)
-                        .rotationEffect(.degrees(isFullScreen ? 90 : 0))
-                        .frame(width: isFullScreen ? WKInterfaceDevice.current().screenBounds.height : nil, height: isFullScreen ? WKInterfaceDevice.current().screenBounds.width : nil)
-                        .scaleEffect(playerScale)
-                        .offset(y: isFullScreen ? 20 : 0)
-                        .offset(playerScaledOffset)
-                        .ignoresSafeArea()
-                        .dragGestureByPlayerScale($playerScale, offset: $playerScaledOffset, lastOffset: $playerScaledLastOffset)
-                        .overlay {
-                            ZStack {
-                                if isDanmakuEnabled {
-                                    VStack {
-                                        ForEach(0...3, id: \.self) { i in
-                                            ZStack {
-                                                ForEach(0..<showDanmakus.count, id: \.self) { j in
-                                                    if j % 4 == i {
-                                                        if showDanmakus[j]["Type"]! == "1" || showDanmakus[j]["Type"]! == "2" || showDanmakus[j]["Type"]! == "3" {
-                                                            if Double(showDanmakus[j]["Appear"]!)! < player.currentTime().seconds + 10 && Double(showDanmakus[j]["Appear"]!)! + 10 > player.currentTime().seconds {
-                                                                Text(showDanmakus[j]["Text"]!)
-                                                                    .font(.system(size: 12))
-                                                                    .foregroundColor(Color(hex: Int(showDanmakus[j]["Color"]!)!))
-                                                                    .frame(maxWidth: .infinity)
-                                                                    .offset(x: Double(showDanmakus[j]["Appear"]!)! * 50)
-                                                            }
+                VideoPlayer(player: player)
+                    .ignoresSafeArea()
+                    .withTouchZoomGesture(onPositionChange: { translation in
+                        if playerScale > 1.1 {
+                            playerScaledOffset = .init(width: playerScaledOffset.width + translation.x, height: playerScaledOffset.height + translation.y)
+                        }
+                    }, onScaleChange: { scale in
+                        if scale >= 1.0 {
+                            playerScale = scale
+                        } else {
+                            playerScale = 1.0
+                        }
+                        if scale <= 1.1 {
+                            playerScaledOffset = .zero
+                        }
+                    })
+                    .rotationEffect(.degrees(isFullScreen ? 90 : 0))
+                    .frame(
+                        width: isFullScreen ? WKInterfaceDevice.current().screenBounds.height : nil,
+                        height: isFullScreen ? WKInterfaceDevice.current().screenBounds.width : nil
+                    )
+                    .offset(y: isFullScreen ? 20 : 0)
+                    .scaleEffect(playerScale)
+                    .ignoresSafeArea()
+                    .offset(playerScaledOffset)
+                    .animation(.smooth, value: cachedPlayerTimeControlStatus)
+                    .animation(.smooth, value: playerScale)
+                    ._statusBarHidden(true)
+                    .overlay {
+                        ZStack {
+                            if isDanmakuEnabled {
+                                VStack {
+                                    ForEach(0...3, id: \.self) { i in
+                                        ZStack {
+                                            ForEach(0..<showDanmakus.count, id: \.self) { j in
+                                                if j % 4 == i {
+                                                    if showDanmakus[j]["Type"]! == "1" || showDanmakus[j]["Type"]! == "2" || showDanmakus[j]["Type"]! == "3" {
+                                                        if Double(showDanmakus[j]["Appear"]!)! < player.currentTime().seconds + 10 && Double(showDanmakus[j]["Appear"]!)! + 10 > player.currentTime().seconds {
+                                                            Text(showDanmakus[j]["Text"]!)
+                                                                .font(.system(size: 12))
+                                                                .foregroundColor(Color(hex: Int(showDanmakus[j]["Color"]!)!))
+                                                                .frame(maxWidth: .infinity)
+                                                                .offset(x: Double(showDanmakus[j]["Appear"]!)! * 50)
                                                         }
                                                     }
                                                 }
                                             }
                                         }
-                                        Spacer()
                                     }
-                                    .allowsHitTesting(false)
-                                    .offset(x: WKInterfaceDevice.current().screenBounds.width / 2)
-                                    .offset(x: -danmakuOffset)
-                                    .animation(.smooth, value: danmakuOffset)
+                                    Spacer()
                                 }
+                                .allowsHitTesting(false)
+                                .offset(x: WKInterfaceDevice.current().screenBounds.width / 2)
+                                .offset(x: -danmakuOffset)
+                                .animation(.smooth, value: danmakuOffset)
                             }
-                            .rotationEffect(.degrees(isFullScreen ? 90 : 0))
-                            .frame(width: isFullScreen ? WKInterfaceDevice.current().screenBounds.height : nil, height: isFullScreen ? WKInterfaceDevice.current().screenBounds.width : nil)
                         }
-                        .animation(.smooth, value: playerScale)
-                        .animation(.smooth, value: __playerScale)
-                    if cachedPlayerTimeControlStatus == .paused {
-                        VStack {
-                            ZStack {
-                                Color.accentColor // For tap gesture
-                                    .frame(width: 60, height: 40)
-                                    .opacity(0.0100000002421438702673861521)
-                                HStack(spacing: 2) {
-                                    Image(systemName: "rectangle.portrait.arrowtriangle.2.outward")
-                                        .shadow(color: .accentColor, radius: 1)
-                                    Text(String(__playerScale))
-                                        .shadow(color: .accentColor, radius: 1)
-                                }
-                                .font(.system(size: 14))
-                            }
-                            .onTapGesture {
-                                if __playerScale < 10.0 {
-                                    __playerScale += 1.0
-                                    playerScale += 1.0
-                                } else {
-                                    __playerScale = 1.0
-                                    playerScale = 1.0
-                                    playerScaledOffset = CGSizeZero
-                                    playerScaledLastOffset = CGSizeZero
-                                }
-                            }
-                            Spacer()
-                        }
-                        .ignoresSafeArea()
                     }
-                }
-                .animation(.smooth, value: cachedPlayerTimeControlStatus)
-                .scrollIndicators(.never)
-                ._statusBarHidden(true)
-                .tag(1)
+                    .tag(1)
                 List {
                     Section {
                         Button(action: {
@@ -554,24 +535,88 @@ struct VideoPlayerView: View {
 }
 
 #if os(watchOS)
-private extension View {
+extension View {
     @ViewBuilder
-    func dragGestureByPlayerScale(_ scale: Binding<CGFloat>, offset: Binding<CGSize>, lastOffset: Binding<CGSize>) -> some View {
-        if scale.wrappedValue != 1.0 {
-            self.gesture(
-                DragGesture()
-                    .onChanged { gesture in
-                        offset.wrappedValue = CGSize(
-                            width: gesture.translation.width + lastOffset.wrappedValue.width,
-                            height: gesture.translation.height + lastOffset.wrappedValue.height
-                        )
-                    }
-                    .onEnded { _ in
-                        lastOffset.wrappedValue = offset.wrappedValue
-                    }
-            )
-        } else {
-            self
+    func touchZoomable() -> some View {
+        ZoomableRepresent(sourceView: self)
+    }
+    
+    @ViewBuilder
+    func withTouchZoomGesture(onPositionChange: @escaping (CGPoint) -> Void, onScaleChange: @escaping (CGFloat) -> Void) -> some View {
+        ZoomableRepresent(sourceView: self, onPositionChange: onPositionChange, onScaleChange: onScaleChange)
+    }
+}
+
+private struct ZoomableRepresent<T>: _UIViewControllerRepresentable where T: View {
+    let sourceView: T
+    var onPositionChange: ((CGPoint) -> Void)?
+    var onScaleChange: ((CGFloat) -> Void)?
+    
+    func makeUIViewController(context: Context) -> some NSObject {
+        let hostingSource = Dynamic(_makeUIHostingController(AnyView(sourceView)))
+        hostingSource.view.userInteractionEnabled = true
+        
+        let panGesture = Dynamic.UIPanGestureRecognizer.initWithTarget(context.coordinator, action: #selector(Coordinator.handlePanGesture(_:)))
+        panGesture.delegate = context.coordinator
+        panGesture.cancelsTouchesInView = false
+        hostingSource.view.addGestureRecognizer(panGesture)
+        
+        let pinchGesture = Dynamic.UIPinchGestureRecognizer.initWithTarget(context.coordinator, action: #selector(Coordinator.handlePinchGesture(_:)))
+        panGesture.delegate = context.coordinator
+        panGesture.cancelsTouchesInView = false
+        hostingSource.view.addGestureRecognizer(pinchGesture)
+        
+        return hostingSource.asObject!
+    }
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(Dynamic(_makeUIHostingController(AnyView(sourceView))).view.asObject!, onPositionChange: onPositionChange, onScaleChange: onScaleChange)
+    }
+    
+    @objcMembers
+    final class Coordinator: NSObject {
+        let hostingSource: NSObject
+        var onPositionChange: ((CGPoint) -> Void)?
+        var onScaleChange: ((CGFloat) -> Void)?
+        
+        init(_ hostingSource: NSObject, onPositionChange: ((CGPoint) -> Void)? = nil, onScaleChange: ((CGFloat) -> Void)? = nil) {
+            self.hostingSource = hostingSource
+            self.onPositionChange = onPositionChange
+            self.onScaleChange = onScaleChange
+        }
+        
+        func handlePanGesture(_ panGesture: NSObject) {
+            let panGesture = Dynamic(panGesture)
+            let translation = panGesture.translationInView(panGesture.view.superview.asObject!).asCGPoint!
+            if let onPositionChange {
+                onPositionChange(translation)
+                panGesture.setTranslation(CGPoint.zero, inView: hostingSource)
+            } else {
+                if panGesture.state == 1 || panGesture.state == 2 {
+                    let centerPoint = panGesture.view.center.asCGPoint!
+                    panGesture.view.center = CGPoint(x: centerPoint.x + translation.x, y: centerPoint.y + translation.y)
+                    panGesture.setTranslation(CGPoint.zero, inView: hostingSource)
+                }
+            }
+        }
+        func handlePinchGesture(_ pinchGesture: NSObject) {
+            let pinchGesture = Dynamic(pinchGesture)
+            if pinchGesture.state == 1 || pinchGesture.state == 2 {
+                let scale = pinchGesture.scale.asDouble!
+                if let onScaleChange {
+                    onScaleChange(scale)
+                } else {
+                    pinchGesture.view.transform = CGAffineTransform(scaleX: scale, y: scale)
+                }
+            }
+        }
+        
+        func gestureRecognizer(
+            _ gestureRecognizer: Any,
+            shouldRecognizeSimultaneouslyWith otherGestureRecognizer: Any
+        ) -> Bool {
+            true
         }
     }
 }
