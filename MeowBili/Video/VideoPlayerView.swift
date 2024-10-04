@@ -95,6 +95,7 @@ struct VideoPlayerView: View {
                                                             Text(showDanmakus[j]["Text"]!)
                                                                 .font(.system(size: 14))
                                                                 .foregroundColor(Color(hex: Int(showDanmakus[j]["Color"]!)!))
+                                                                .frame(maxWidth: .infinity)
                                                                 .offset(x: Double(showDanmakus[j]["Appear"]!)! * 50)
                                                         }
                                                     }
@@ -105,6 +106,7 @@ struct VideoPlayerView: View {
                                     Spacer()
                                 }
                                 .allowsHitTesting(false)
+                                .offset(x: UIScreen.main.bounds.width / 2)
                                 .offset(x: -danmakuOffset)
                                 .animation(.smooth, value: danmakuOffset)
                             }
@@ -162,6 +164,7 @@ struct VideoPlayerView: View {
                                                                 Text(showDanmakus[j]["Text"]!)
                                                                     .font(.system(size: 12))
                                                                     .foregroundColor(Color(hex: Int(showDanmakus[j]["Color"]!)!))
+                                                                    .frame(maxWidth: .infinity)
                                                                     .offset(x: Double(showDanmakus[j]["Appear"]!)! * 50)
                                                             }
                                                         }
@@ -172,6 +175,7 @@ struct VideoPlayerView: View {
                                         Spacer()
                                     }
                                     .allowsHitTesting(false)
+                                    .offset(x: WKInterfaceDevice.current().screenBounds.width / 2)
                                     .offset(x: -danmakuOffset)
                                     .animation(.smooth, value: danmakuOffset)
                                 }
