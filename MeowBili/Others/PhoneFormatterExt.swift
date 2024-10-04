@@ -22,13 +22,13 @@ func phoneFormatter(region: String) -> String {
     switch region {
     case "":
         return "手机号码"
-    case "86" :
+    case "86":
         return "000 0000 0000"
-    case "us","ca":
+    case "us", "ca":
         return "000 000 0000"
-    case "886","351" :
+    case "886", "351":
         return "000 000 000"
-    case "852","853","65","64":
+    case "852", "853", "65", "64":
         return "0000 0000"
     case "44":
         return "0000 000000"
