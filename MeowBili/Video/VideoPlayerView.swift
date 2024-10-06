@@ -263,7 +263,7 @@ struct VideoPlayerView: View {
                 }
                 .tag(2)
             }
-            .tabViewStyle(.page)
+            .tabViewStyle(.page(indexDisplayMode: cachedPlayerTimeControlStatus != .playing ? .always : .never))
             .toolbar(.hidden, for: .navigationBar)
             .ignoresSafeArea()
             .accessibilityQuickAction(style: .prompt) {
@@ -614,7 +614,7 @@ private struct ZoomableRepresent<T>: _UIViewControllerRepresentable where T: Vie
         
         func gestureRecognizer(
             _ gestureRecognizer: Any,
-            shouldRecognizeSimultaneouslyWith otherGestureRecognizer: Any
+            shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: Any
         ) -> Bool {
             true
         }
