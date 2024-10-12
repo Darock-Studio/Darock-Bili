@@ -562,8 +562,8 @@ private struct ZoomableRepresent<T>: _UIViewControllerRepresentable where T: Vie
         hostingSource.view.addGestureRecognizer(panGesture)
         
         let pinchGesture = Dynamic.UIPinchGestureRecognizer.initWithTarget(context.coordinator, action: #selector(Coordinator.handlePinchGesture(_:)))
-        panGesture.delegate = context.coordinator
-        panGesture.cancelsTouchesInView = false
+        pinchGesture.delegate = context.coordinator
+        pinchGesture.cancelsTouchesInView = false
         hostingSource.view.addGestureRecognizer(pinchGesture)
         
         return hostingSource.asObject!
@@ -603,7 +603,7 @@ private struct ZoomableRepresent<T>: _UIViewControllerRepresentable where T: Vie
         func handlePinchGesture(_ pinchGesture: NSObject) {
             let pinchGesture = Dynamic(pinchGesture)
             if pinchGesture.state == 1 || pinchGesture.state == 2 {
-                let scale = pinchGesture.scale.asDouble!
+                let scale = CGFloat(pinchGesture.scale.asFloat!)
                 if let onScaleChange {
                     onScaleChange(scale)
                 } else {
