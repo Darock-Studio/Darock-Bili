@@ -30,6 +30,7 @@ struct MainView: View {
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
     @AppStorage("bili_jct") var biliJct = ""
+    @AppStorage("CachedBiliTicket") var cachedBiliTicket = ""
     @AppStorage("IsShowNetworkFixing") var isShowNetworkFixing = true
     @State var userFaceUrl = ""
     @State var username = ""
@@ -112,12 +113,11 @@ struct MainView: View {
             .onAppear {
                 if username == "" {
                     let headers: HTTPHeaders = [
-                        "cookie": "SESSDATA=\(sessdata); innersign=0; buvid3=\(globalBuvid3); b_nut=1704873471; i-wanna-go-back=-1; b_ut=7; b_lsid=9910433CB_18CF260AB89; enable_web_push=DISABLE; header_theme_version=undefined; home_feed_column=4; browser_resolution=3440-1440; buvid4=\(globalBuvid4);",
+                        "cookie": "SESSDATA=\(sessdata); innersign=0; buvid3=\(globalBuvid3); b_nut=1704873471; i-wanna-go-back=-1; b_ut=7; b_lsid=9910433CB_18CF260AB89; enable_web_push=DISABLE; header_theme_version=undefined; home_feed_column=4; browser_resolution=3440-1440; buvid4=\(globalBuvid4); bili_ticket=\(cachedBiliTicket)",
                         "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                     ]
                     biliWbiSign(paramEncoded: "mid=\(dedeUserID)".base64Encoded()) { signed in
                         if let signed {
-                            debugPrint(signed)
                             DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
                                 if isSuccess {
                                     debugPrint(respJson)
@@ -366,10 +366,8 @@ struct MainView: View {
             }
             biliWbiSign(paramEncoded: "y_num=5&fresh_type=3&feed_version=V_FAVOR_WATCH_LATER&fresh_idx_1h=\(freshCount)&fetch_row=1&fresh_idx=\(freshCount)&brush=4&homepage_ver=1&ps=20&last_y_num=5&screen=2353-686&seo_info=\(lastShowlist)".base64Encoded()) { signed in
                 if let signed {
-                    debugPrint(signed)
                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/wbi/index/top/feed/rcmd?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
-                            debugPrint(respJson)
                             if !CheckBApiError(from: respJson) { return }
                             let datas = respJson["data"]["item"]
                             if clearWhenFinish {

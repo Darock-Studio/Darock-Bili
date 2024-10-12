@@ -122,6 +122,7 @@ struct LoginView: View {
                                         UserDefaults.standard.set(userList2, forKey: "userList2")
                                         UserDefaults.standard.set(userList3, forKey: "userList3")
                                         UserDefaults.standard.set(userList4, forKey: "userList4")
+                                        updateBiliTicket(csrf: biliJct)
                                         presentationMode.wrappedValue.dismiss()
                                     }
                                 }
@@ -447,6 +448,7 @@ struct LoginView: View {
                                             sessdata = String(setCookie.split(separator: "SESSDATA=")[1].split(separator: ";")[0])
                                         }
                                         biliJct = String(setCookie.split(separator: "bili_jct=")[1].split(separator: ";")[0])
+                                        updateBiliTicket(csrf: biliJct)
                                         presentationMode.wrappedValue.dismiss()
                                     } else if json["data"]["status"].int == 1006 {
                                         
