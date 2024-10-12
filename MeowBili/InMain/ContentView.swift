@@ -120,6 +120,7 @@ struct ContentView: View {
             }
         }
         .onAppear {
+            updateBiliTicket(csrf: biliJct)
             if dedeUserID != "" {
                 getBuvid(url: "https://api.bilibili.com/x/space/wbi/acc/info".urlEncoded()) { buvid3, buvid4, _uuid, _ in
                     let headers: HTTPHeaders = [

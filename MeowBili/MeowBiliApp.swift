@@ -40,8 +40,6 @@ var debugBuild: Bool {
     #endif
 }
 
-var debugControlStdout = "stdo\n"
-
 var pShowTipText = ""
 var pShowTipSymbol = ""
 var pIsShowingTip = false
@@ -368,17 +366,8 @@ struct DarockBili_Watch_AppApp: App {
                                             Spacer()
                                         }
                                         .allowsHitTesting(false)
-                                        ScrollView {
-                                            LazyVStack {
-                                                Text(debugControlStdout)
-                                                    .font(.system(size: 5, design: .monospaced))
-                                            }
-                                        }
-                                        .border(Color.gray, width: 1)
-                                        .frame(width: 150, height: 90)
                                     }
                                     .font(.system(size: 10))
-                                    
                                     .onAppear {
                                         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
                                             systemResourceRefreshTimer = timer
