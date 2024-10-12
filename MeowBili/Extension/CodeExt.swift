@@ -633,15 +633,12 @@ private func hmacSHA256(key: String, message: String) -> String? {
     guard let keyData = key.data(using: .utf8), let messageData = message.data(using: .utf8) else {
         return nil
     }
-    
     var hmac = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
-    
     keyData.withUnsafeBytes { keyBytes in
         messageData.withUnsafeBytes { messageBytes in
             CCHmac(CCHmacAlgorithm(kCCHmacAlgSHA256), keyBytes.baseAddress, keyData.count, messageBytes.baseAddress, messageData.count, &hmac)
         }
     }
-    
     let hmacData = Data(hmac)
     return hmacData.map { String(format: "%02hhx", $0) }.joined()
 }
