@@ -70,8 +70,10 @@ struct AboutApp: View {
                 }
                 if !debugBuild {
                     Text("\(String(try! String(contentsOf: Bundle.main.url(forResource: "CurrentChannel", withExtension: "drkdatac")!).split(separator: "\n")[0])) 通道")
+                        .font(.system(size: 18))
                 } else {
                     Text("调试构建")
+                        .font(.system(size: 18))
                 }
                 Group {
                     if debug {

@@ -629,12 +629,38 @@ public func getBuvid(url: String, callback: @escaping (String, String, String, S
 }
 // swiftlint:enable colon
 
-public func debugPrint(_ items: Any..., separator: String = " ", terminator: String = "\n") {
-    Swift.debugPrint(items, separator: separator, terminator: terminator)
-    if debug {
-        debugControlStdout += items.debugDescription + terminator
-        if debugControlStdout.count > 5000 {
-            debugControlStdout.removeFirst(500)
+private func hmacSHA256(key: String, message: String) -> String? {
+    guard let keyData = key.data(using: .utf8), let messageData = message.data(using: .utf8) else {
+        return nil
+    }
+    
+    var hmac = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
+    
+    keyData.withUnsafeBytes { keyBytes in
+        messageData.withUnsafeBytes { messageBytes in
+            CCHmac(CCHmacAlgorithm(kCCHmacAlgSHA256), keyBytes.baseAddress, keyData.count, messageBytes.baseAddress, messageData.count, &hmac)
+        }
+    }
+    
+    let hmacData = Data(hmac)
+    return hmacData.map { String(format: "%02hhx", $0) }.joined()
+}
+func updateBiliTicket(csrf: String) {
+    let key = "XgwSnGZ1p"
+    let timestamp = Int(Date.now.timeIntervalSince1970)
+    let message = "ts\(timestamp)"
+    guard let hexSign = hmacSHA256(key: key, message: message) else {
+        return
+    }
+    let url = "https://api.bilibili.com/bapis/bilibili.api.ticket.v1.Ticket/GenWebTicket"
+    let headers: HTTPHeaders = [
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0"
+    ]
+    DarockKit.Network.shared.requestJSON("\(url)?key_id=ec02&hexsign=\(hexSign)&context[ts]=\(timestamp)&csrf=\(csrf)", method: .post, headers: headers) { respJson, isSuccess in
+        if isSuccess {
+            if let ticket = respJson["data"]["ticket"].string {
+                UserDefaults.standard.set(ticket, forKey: "CachedBiliTicket")
+            }
         }
     }
 }

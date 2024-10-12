@@ -29,6 +29,8 @@
 		8C0557DF2B791B84009D9CD0 /* AZVideoPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8C0557DE2B791B84009D9CD0 /* AZVideoPlayer */; };
 		8C2DFCAF2C4AA15C003AEC67 /* NewFeaturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2DFCAE2C4AA15C003AEC67 /* NewFeaturesView.swift */; };
 		8C2DFCB02C4AA15C003AEC67 /* NewFeaturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2DFCAE2C4AA15C003AEC67 /* NewFeaturesView.swift */; };
+		8C3C52F62CBAE79B00622CE4 /* SeasonArchiveListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C52F52CBAE79200622CE4 /* SeasonArchiveListView.swift */; };
+		8C3C52F72CBAE79B00622CE4 /* SeasonArchiveListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C52F52CBAE79200622CE4 /* SeasonArchiveListView.swift */; };
 		8C617F412B92334B000A3687 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C617F402B92334B000A3687 /* SafariWebExtensionHandler.swift */; };
 		8C617F442B92334B000A3687 /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = 8C617F432B92334B000A3687 /* _locales */; };
 		8C617F462B92334B000A3687 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 8C617F452B92334B000A3687 /* images */; };
@@ -266,6 +268,7 @@
 		8C0557E02B7A0480009D9CD0 /* MeowBili.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeowBili.entitlements; sourceTree = "<group>"; };
 		8C2DFCAE2C4AA15C003AEC67 /* NewFeaturesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeaturesView.swift; sourceTree = "<group>"; };
 		8C2DFCB52C4E6B2B003AEC67 /* MeowBiliTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeowBiliTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C3C52F52CBAE79200622CE4 /* SeasonArchiveListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonArchiveListView.swift; sourceTree = "<group>"; };
 		8C617F3E2B92334B000A3687 /* SafariExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SafariExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C617F402B92334B000A3687 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
 		8C617F432B92334B000A3687 /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; path = _locales; sourceTree = "<group>"; };
@@ -653,6 +656,7 @@
 		8CA7CCBB2B77B3FC008E587F /* Video */ = {
 			isa = PBXGroup;
 			children = (
+				8C3C52F52CBAE79200622CE4 /* SeasonArchiveListView.swift */,
 				8CA7CCBC2B77B40B008E587F /* VideoPlayerView.swift */,
 				8CA7CCC02B77B44E008E587F /* VideoDownloadView.swift */,
 				8CA7CCC22B77B45F008E587F /* VideoDetailView.swift */,
@@ -1164,6 +1168,7 @@
 				8CA7CCDA2B77B55F008E587F /* LiveDetailView.swift in Sources */,
 				8CA7CC6C2B77AE80008E587F /* DownloadObj.swift in Sources */,
 				8CC3D55D2B7CC936005636DC /* OCCodeExt.m in Sources */,
+				8C3C52F62CBAE79B00622CE4 /* SeasonArchiveListView.swift in Sources */,
 				8CA7CCD12B77B504008E587F /* BangumiDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1229,6 +1234,7 @@
 				8CBFF0C92B85E55F00350E0F /* BangumiDownloadView.swift in Sources */,
 				8CBFF0D52B85E55F00350E0F /* SettingsView.swift in Sources */,
 				8CBFF0BB2B85E55F00350E0F /* DynamicDetailView.swift in Sources */,
+				8C3C52F72CBAE79B00622CE4 /* SeasonArchiveListView.swift in Sources */,
 				8CBFF0E42B85E55F00350E0F /* BangumiDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

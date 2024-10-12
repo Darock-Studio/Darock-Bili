@@ -282,7 +282,7 @@ func VideoCard(_ videoDetails: [String: String]) -> some View {
             }
             .lineLimit(1)
             .font(.system(size: 11))
-            .foregroundColor(.gray)
+            .opacity(0.6)
         }
     })
     .buttonBorderShape(.roundedRectangle(radius: 14))

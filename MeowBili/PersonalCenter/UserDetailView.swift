@@ -29,6 +29,7 @@ struct UserDetailView: View {
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
     @AppStorage("bili_jct") var biliJct = ""
+    @AppStorage("CachedBiliTicket") var cachedBiliTicket = ""
     @State var userFaceUrl = ""
     @State var username = ""
     @State var userLevel = 0
@@ -328,12 +329,11 @@ struct UserDetailView: View {
         }
         .onAppear {
             let headers: HTTPHeaders = [
-                "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3);",
+                "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3); bili_ticket=\(cachedBiliTicket)",
                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             ]
             biliWbiSign(paramEncoded: "mid=\(uid)".base64Encoded()) { signed in
                 if let signed {
-                    debugPrint(signed)
                     autoRetryRequestApi("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             if !CheckBApiError(from: respJson) { return }
@@ -840,6 +840,7 @@ struct UserDetailView: View {
         @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
         @AppStorage("SESSDATA") var sessdata = ""
         @AppStorage("bili_jct") var biliJct = ""
+        @AppStorage("CachedBiliTicket") var cachedBiliTicket = ""
         @State var isNoVideo = false
         @State var isNoArticle = false
         @State var isVideosLoaded = false
@@ -873,10 +874,47 @@ struct UserDetailView: View {
                         .frame(height: 20)
                 }
                 if viewSelector == .video {
-                    if videos.count != 0 {
+                    if !videos.isEmpty {
                         Section {
-                            ForEach(0...videos.count - 1, id: \.self) { i in
-                                VideoCard(["Pic": videos[i]["PicUrl"]!, "Title": videos[i]["Title"]!, "BV": videos[i]["BV"]!, "UP": username, "View": videos[i]["PlayCount"]!, "Danmaku": videos[i]["DanmakuCount"]!])
+                            ForEach(0..<videos.count, id: \.self) { i in
+                                if videos[i]["IsSeasonArchive"] != "true" {
+                                    VideoCard(["Pic": videos[i]["PicUrl"]!, "Title": videos[i]["Title"]!, "BV": videos[i]["BV"]!, "UP": username, "View": videos[i]["PlayCount"]!, "Danmaku": videos[i]["DanmakuCount"]!])
+                                } else {
+                                    NavigationLink(destination: { SeasonArchiveListView(mid: videos[i]["MID"]!, seasonID: videos[i]["SeasonID"]!, username: username) }, label: {
+                                        VStack {
+                                            HStack {
+                                                WebImage(url: URL(string: videos[i]["PicUrl"]! + "@100w")!, options: [.progressiveLoad, .scaleDownLargeImages])
+                                                    .placeholder {
+                                                        RoundedRectangle(cornerRadius: 7)
+                                                            .frame(width: 50, height: 30)
+                                                            .foregroundColor(Color(hex: 0x3D3D3D))
+                                                            .redacted(reason: .placeholder)
+                                                    }
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: 50)
+                                                    .cornerRadius(7)
+                                                Text(videos[i]["Title"]!)
+                                                    .font(.system(size: 14, weight: .bold))
+                                                    .lineLimit(2)
+                                                    .multilineTextAlignment(.leading)
+                                                Spacer()
+                                            }
+                                            HStack {
+                                                Image(systemName: "play.circle")
+                                                Text(videos[i]["PlayCount"]!.shorter())
+                                                    .offset(x: -3)
+                                                Image(systemName: "square.3.layers.3d")
+                                                Text(videos[i]["EPCount"]!)
+                                                    .offset(x: -3)
+                                                Spacer()
+                                            }
+                                            .lineLimit(1)
+                                            .font(.system(size: 11))
+                                            .foregroundColor(.gray)
+                                        }
+                                    })
+                                }
                             }
                         }
                         Section {
@@ -1005,7 +1043,7 @@ struct UserDetailView: View {
                             if articleNowPage != 1 {
                                 Button(action: {
                                     articleNowPage -= 1
-                                    RefreshArticles()
+                                    refreshArticles()
                                 }, label: {
                                     Image(systemName: "chevron.left")
                                         .bold()
@@ -1039,7 +1077,7 @@ struct UserDetailView: View {
                                         Button(action: {
                                             if let cInt = Int(articleTargetJumpPageCache) {
                                                 articleNowPage = cInt
-                                                RefreshArticles()
+                                                refreshArticles()
                                             }
                                             isArticalPageJumpPresented = false
                                         }, label: {
@@ -1055,7 +1093,7 @@ struct UserDetailView: View {
                             if articleNowPage != articleTotalPage {
                                 Button(action: {
                                     articleNowPage += 1
-                                    RefreshArticles()
+                                    refreshArticles()
                                 }, label: {
                                     Image(systemName: "chevron.right")
                                         .bold()
@@ -1082,7 +1120,7 @@ struct UserDetailView: View {
                 case .video:
                     break
                 case .article:
-                    RefreshArticles()
+                    refreshArticles()
                 case .dynamic:
                     break
                 }
@@ -1090,13 +1128,12 @@ struct UserDetailView: View {
         }
         
         func refreshVideos() {
-            videos = [[String: String]]()
+            videos.removeAll()
             let headers: HTTPHeaders = [
                 "accept": "*/*",
                 "accept-encoding": "gzip, deflate, br",
                 "accept-language": "zh-CN,zh;q=0.9",
-                //"cookie": "\(sessdata == "" ? "" : "SESSDATA=\(sessdata); ")buvid3=\(globalBuvid3); b_nut=\(Date.now.timeStamp); buvid4=\(globalBuvid4);",
-                "cookie": "SESSDATA=\(sessdata); buvid_fp=e651c1a382430ea93631e09474e0b395; buvid3=\(UuidInfoc.gen()); buvid4=buvid4-failed-1",
+                "cookie": "SESSDATA=\(sessdata); buvid_fp=e651c1a382430ea93631e09474e0b395; buvid3=\(UuidInfoc.gen()); buvid4=buvid4-failed-1; bili_ticket=\(cachedBiliTicket)",
                 "origin": "https://space.bilibili.com",
                 "referer": "https://space.bilibili.com/\(uid)/video",
 //                "User-Agent": "Mozilla/5.0" // Bypass? rdar://gh/SocialSisterYi/bilibili-API-collect/issues/868#1859065874
@@ -1104,17 +1141,24 @@ struct UserDetailView: View {
             ]
             biliWbiSign(paramEncoded: "mid=\(uid)&ps=50&pn=\(videoNowPage)&dm_img_list=[]&dm_img_str=V2ViR0wgMS4wIChPcGVuR0wgRVMgMi4wIENocm9taXVtKQ&dm_cover_img_str=VjNEIDQuMkJyb2FkY2".base64Encoded()) { signed in
                 if let signed {
-                    debugPrint(signed)
                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/arc/search?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
-                            DispatchQueue(label: "com.darock.DarockBili.Video-Load", qos: .utility).async {
-                                debugPrint(respJson)
+                            DispatchQueue(label: "com.darock.DarockBili.Video-Load", qos: .userInitiated).async {
                                 if !CheckBApiError(from: respJson) { return }
                                 let vlist = respJson["data"]["list"]["vlist"]
                                 for video in vlist {
-                                    videos.append(["Title": video.1["title"].string ?? "[加载失败]", "Length": video.1["length"].string ?? "E", "PlayCount": String(video.1["play"].int ?? -1), "PicUrl": video.1["pic"].string ?? "E", "BV": video.1["bvid"].string ?? "E", "Timestamp": String(video.1["created"].int ?? 0), "DanmakuCount": String(video.1["video_review"].int ?? -1)])
+                                    var data = ["Title": video.1["title"].string ?? "[加载失败]", "Length": video.1["length"].string ?? "E", "PlayCount": String(video.1["play"].int ?? -1), "PicUrl": video.1["pic"].string ?? "E", "BV": video.1["bvid"].string ?? "E", "Timestamp": String(video.1["created"].int ?? 0), "DanmakuCount": String(video.1["video_review"].int ?? -1)]
+                                    if video.1["meta"].dictionary != nil {
+                                        let season = video.1["meta"]
+                                        data.updateValue(season["title"].string ?? "[加载失败]", forKey: "Title")
+                                        data.updateValue(season["cover"].string ?? "E", forKey: "PicUrl")
+                                        data.updateValue(String(season["id"].int ?? -1), forKey: "SeasonID")
+                                        data.updateValue(String(season["mid"].int64 ?? 1), forKey: "MID")
+                                        data.updateValue(String(season["ep_count"].int ?? -1), forKey: "EPCount")
+                                        data.updateValue("true", forKey: "IsSeasonArchive")
+                                    }
+                                    videos.append(data)
                                 }
-                                debugPrint(respJson["data"]["page"]["count"].int ?? 0)
                                 videoTotalPage = Int((respJson["data"]["page"]["count"].int ?? 0) / 50) + 1
                                 videoCount = respJson["data"]["page"]["count"].int ?? 0
                                 if !isVideosLoaded {
@@ -1129,7 +1173,7 @@ struct UserDetailView: View {
                 }
             }
         }
-        func RefreshArticles() {
+        func refreshArticles() {
             articles = [[String: String]]()
             let headers: HTTPHeaders = [
                 "accept-language": "en,zh-CN;q=0.9,zh;q=0.8",
@@ -1138,11 +1182,9 @@ struct UserDetailView: View {
             ]
             biliWbiSign(paramEncoded: "mid=\(uid)&ps=30&pn=\(articleNowPage)&sort=publish_time&platform=web".base64Encoded()) { signed in
                 if let signed {
-                    debugPrint(signed)
                     DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/article?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
-                            DispatchQueue(label: "com.darock.DarockBili.Article-Load", qos: .utility).async {
-                                debugPrint(respJson)
+                            DispatchQueue(label: "com.darock.DarockBili.Article-Load", qos: .userInitiated).async {
                                 if !CheckBApiError(from: respJson) { return }
                                 let articlesJson = respJson["data"]["articles"]
                                 for article in articlesJson {
