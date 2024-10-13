@@ -20,6 +20,7 @@ import SwiftUI
 import EFQRCode
 import DarockKit
 import MarkdownUI
+import RadarKitCore
 import AuthenticationServices
 
 #if os(watchOS)
@@ -164,30 +165,24 @@ struct InAppFeedbackView: View {
                                 return
                             }
                             isSending = true
-                            let msgToSend = """
-                            \(titleInput)
-                            State：0
-                            Type：\(feedbackType)
-                            Content：\(contentInputs.joined(separator: "\\n"))
-                            Time：\(Date.now.timeIntervalSince1970)
-                            Version：v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)
-                            OS：\(WKInterfaceDevice.current().systemVersion)
-                            Sender: User
-                            """
-                            DarockKit.Network.shared
-                                .requestString("https://fapi.darock.top:65535/feedback/submit/anony/喵哩喵哩/\(msgToSend.base64Encoded().replacingOccurrences(of: "/", with: "{slash}"))") { respStr, isSuccess in
-                                    if isSuccess {
-                                        if Int(respStr) != nil {
-                                            var arr = UserDefaults.standard.stringArray(forKey: "RadarFBIDs") ?? [String]()
-                                            arr.insert(respStr, at: 0)
-                                            UserDefaults.standard.set(arr, forKey: "RadarFBIDs")
-                                            tipWithText("已发送", symbol: "paperplane.fill")
-                                            presentationMode.wrappedValue.dismiss()
-                                        } else {
-                                            tipWithText("服务器错误", symbol: "xmark.circle.fill")
-                                        }
-                                    }
+                            Task {
+                                let feedbackManager = RKCFeedbackManager(projectName: "喵哩喵哩")
+                                let id = await feedbackManager.newFeedback(try! .init(title: titleInput, content: contentInputs.joined(separator: "\\n"), sender: "User", additionalData: .rawString("""
+                                Type：\(feedbackType)
+                                Version：v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary?["CFBundleVersion"] as! String)
+                                OS：\(WKInterfaceDevice.current().systemVersion)
+                                """)))
+                                if let id {
+                                    var arr = UserDefaults.standard.stringArray(forKey: "RadarFBIDs") ?? [String]()
+                                    arr.insert(String(id), at: 0)
+                                    UserDefaults.standard.set(arr, forKey: "RadarFBIDs")
+                                    tipWithText("已发送", symbol: "paperplane.fill")
+                                    presentationMode.wrappedValue.dismiss()
+                                } else {
+                                    tipWithText("服务器错误", symbol: "xmark.circle.fill")
                                 }
+                                isSending = false
+                            }
                         }, label: {
                             if !isSending {
                                 Text("提交")
@@ -285,24 +280,18 @@ struct InAppFeedbackView: View {
                     }
                     isReplySubmitted = true
                     if replyInput != "" {
-                        let enced = """
-                        Content：\(replyInput)
-                        Sender：User
-                        Time：\(Date.now.timeIntervalSince1970)
-                        """.base64Encoded().replacingOccurrences(of: "/", with: "{slash}")
-                        DarockKit.Network.shared
-                            .requestString("https://fapi.darock.top:65535/radar/reply/喵哩喵哩/\(id)/\(enced)") { respStr, isSuccess in
-                                if isSuccess {
-                                    if respStr.apiFixed() == "Success" {
-                                        refresh()
-                                        replyInput = ""
-                                        isReplyPresented = false
-                                    } else {
-                                        tipWithText("未知错误", symbol: "xmark.circle.fill")
-                                    }
-                                    isReplySubmitted = false
-                                }
+                        let feedbackManager = RKCFeedbackManager(projectName: "喵哩喵哩")
+                        Task {
+                            let isSuccess = await feedbackManager.replyFeedback(toId: id, withContent: replyInput, bySender: "User")
+                            if isSuccess {
+                                refresh()
+                                replyInput = ""
+                                isReplyPresented = false
+                            } else {
+                                tipWithText("未知错误", symbol: "xmark.circle.fill")
                             }
+                            isReplySubmitted = false
+                        }
                     }
                 }
             })

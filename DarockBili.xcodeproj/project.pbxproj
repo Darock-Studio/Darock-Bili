@@ -27,6 +27,10 @@
 		03B5D24C2C4691E700BF8322 /* SwitchAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B5D24A2C4691E700BF8322 /* SwitchAccountView.swift */; };
 		8C03B6DE2C280BAA000770B4 /* Cepheus in Frameworks */ = {isa = PBXBuildFile; productRef = 8C03B6DD2C280BAA000770B4 /* Cepheus */; };
 		8C0557DF2B791B84009D9CD0 /* AZVideoPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8C0557DE2B791B84009D9CD0 /* AZVideoPlayer */; };
+		8C20267D2CBBA32E00D7C5F9 /* RadarKitCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C20267C2CBBA32E00D7C5F9 /* RadarKitCore.xcframework */; };
+		8C20267E2CBBA32E00D7C5F9 /* RadarKitCore.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8C20267C2CBBA32E00D7C5F9 /* RadarKitCore.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8C2026802CBBA33300D7C5F9 /* RadarKitCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C20267C2CBBA32E00D7C5F9 /* RadarKitCore.xcframework */; };
+		8C2026812CBBA33300D7C5F9 /* RadarKitCore.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8C20267C2CBBA32E00D7C5F9 /* RadarKitCore.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8C2DFCAF2C4AA15C003AEC67 /* NewFeaturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2DFCAE2C4AA15C003AEC67 /* NewFeaturesView.swift */; };
 		8C2DFCB02C4AA15C003AEC67 /* NewFeaturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2DFCAE2C4AA15C003AEC67 /* NewFeaturesView.swift */; };
 		8C3C52F62CBAE79B00622CE4 /* SeasonArchiveListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C52F52CBAE79200622CE4 /* SeasonArchiveListView.swift */; };
@@ -96,7 +100,6 @@
 		8CA7CC952B77B0FB008E587F /* SkinChooserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC942B77B0FB008E587F /* SkinChooserView.swift */; };
 		8CA7CC972B77B115008E587F /* SkinExplorerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC962B77B115008E587F /* SkinExplorerView.swift */; };
 		8CA7CC992B77B127008E587F /* SkinDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC982B77B127008E587F /* SkinDownloadView.swift */; };
-		8CA7CC9B2B77B13D008E587F /* Passthroughs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC9A2B77B13D008E587F /* Passthroughs.swift */; };
 		8CA7CC9D2B77B150008E587F /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC9C2B77B150008E587F /* AboutView.swift */; };
 		8CA7CC9F2B77B166008E587F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC9E2B77B166008E587F /* SettingsView.swift */; };
 		8CA7CCA12B77B2DC008E587F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCA02B77B2DC008E587F /* LoginView.swift */; };
@@ -137,7 +140,6 @@
 		8CBFF0B72B85E55F00350E0F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC42B77AC4A008E587F /* ContentView.swift */; };
 		8CBFF0B82B85E55F00350E0F /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCA52B77B314008E587F /* CommentsView.swift */; };
 		8CBFF0B92B85E55F00350E0F /* LinkDetectText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */; };
-		8CBFF0BA2B85E55F00350E0F /* Passthroughs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CC9A2B77B13D008E587F /* Passthroughs.swift */; };
 		8CBFF0BB2B85E55F00350E0F /* DynamicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCCB2B77B4CA008E587F /* DynamicDetailView.swift */; };
 		8CBFF0BC2B85E55F00350E0F /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCB72B77B3D6008E587F /* HistoryView.swift */; };
 		8CBFF0BD2B85E55F00350E0F /* DynamicSendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCCD2B77B4DF008E587F /* DynamicSendView.swift */; };
@@ -238,6 +240,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		8C20267F2CBBA32E00D7C5F9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8C20267E2CBBA32E00D7C5F9 /* RadarKitCore.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C2026822CBBA33300D7C5F9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8C2026812CBBA33300D7C5F9 /* RadarKitCore.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8C617F5A2B92334B000A3687 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -266,6 +290,7 @@
 		03B2F80E2C45AED7007EB850 /* PhoneFormatterExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneFormatterExt.swift; sourceTree = "<group>"; };
 		03B5D24A2C4691E700BF8322 /* SwitchAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchAccountView.swift; sourceTree = "<group>"; };
 		8C0557E02B7A0480009D9CD0 /* MeowBili.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeowBili.entitlements; sourceTree = "<group>"; };
+		8C20267C2CBBA32E00D7C5F9 /* RadarKitCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RadarKitCore.xcframework; path = DarockFrameworks/RadarKitCore.xcframework; sourceTree = "<group>"; };
 		8C2DFCAE2C4AA15C003AEC67 /* NewFeaturesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeaturesView.swift; sourceTree = "<group>"; };
 		8C2DFCB52C4E6B2B003AEC67 /* MeowBiliTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeowBiliTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C3C52F52CBAE79200622CE4 /* SeasonArchiveListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonArchiveListView.swift; sourceTree = "<group>"; };
@@ -320,7 +345,6 @@
 		8CA7CC942B77B0FB008E587F /* SkinChooserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinChooserView.swift; sourceTree = "<group>"; };
 		8CA7CC962B77B115008E587F /* SkinExplorerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinExplorerView.swift; sourceTree = "<group>"; };
 		8CA7CC982B77B127008E587F /* SkinDownloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinDownloadView.swift; sourceTree = "<group>"; };
-		8CA7CC9A2B77B13D008E587F /* Passthroughs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Passthroughs.swift; sourceTree = "<group>"; };
 		8CA7CC9C2B77B150008E587F /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		8CA7CC9E2B77B166008E587F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8CA7CCA02B77B2DC008E587F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -396,6 +420,7 @@
 			files = (
 				8CB176A52BB8188700CEC05C /* SDWebImageSwiftUI in Frameworks */,
 				8CA370DF2B827AAD00CE0E9E /* AlertToast in Frameworks */,
+				8C20267D2CBBA32E00D7C5F9 /* RadarKitCore.xcframework in Frameworks */,
 				8CA7CC0F2B77AC93008E587F /* ZipArchive in Frameworks */,
 				8CA7CCDF2B77BB5A008E587F /* AlertKit in Frameworks */,
 				8CA7CC192B77AC93008E587F /* SDWebImagePDFCoder in Frameworks */,
@@ -433,6 +458,7 @@
 				8CB176B02BB8421300CEC05C /* DarockKit in Frameworks */,
 				8CA7CBF32B77AC8A008E587F /* SDWebImageWebPCoder in Frameworks */,
 				8CA7CBEF2B77AC8A008E587F /* EFQRCode in Frameworks */,
+				8C2026802CBBA33300D7C5F9 /* RadarKitCore.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,7 +607,6 @@
 			children = (
 				8CA7CC8C2B77B07E008E587F /* CCodes */,
 				8CA7CC932B77B0E4008E587F /* Skins */,
-				8CA7CC9A2B77B13D008E587F /* Passthroughs.swift */,
 				B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */,
 				8CA7CC9C2B77B150008E587F /* AboutView.swift */,
 				8CA7CC9E2B77B166008E587F /* SettingsView.swift */,
@@ -773,6 +798,7 @@
 		B4468A902B4FC8B7002CCEB2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8C20267C2CBBA32E00D7C5F9 /* RadarKitCore.xcframework */,
 				8CC3D5662B7CDCE1005636DC /* Intents.framework */,
 			);
 			name = Frameworks;
@@ -828,6 +854,7 @@
 				8CA7CBBE2B77AC4A008E587F /* Resources */,
 				8CA7CBDF2B77AC4D008E587F /* Embed Watch Content */,
 				8C617F5A2B92334B000A3687 /* Embed Foundation Extensions */,
+				8C20267F2CBBA32E00D7C5F9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -868,6 +895,7 @@
 				8CC5B6C22B86582400BAD89E /* ShellScript */,
 				8CA7CBCC2B77AC4C008E587F /* Frameworks */,
 				8CA7CBCD2B77AC4C008E587F /* Resources */,
+				8C2026822CBBA33300D7C5F9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1147,7 +1175,6 @@
 				8CA7CCCA2B77B4B2008E587F /* UserDynamicMainView.swift in Sources */,
 				8CA7CCAE2B77B36E008E587F /* PersonAccountView.swift in Sources */,
 				8CA7CCD52B77B530008E587F /* BangumiPlayerView.swift in Sources */,
-				8CA7CC9B2B77B13D008E587F /* Passthroughs.swift in Sources */,
 				8CA7CCB02B77B383008E587F /* FavoriteView.swift in Sources */,
 				8CA7CC9D2B77B150008E587F /* AboutView.swift in Sources */,
 				8CA7CC882B77B039008E587F /* UIExt.swift in Sources */,
@@ -1210,7 +1237,6 @@
 				8CBFF0EB2B85E55F00350E0F /* FavoriteView.swift in Sources */,
 				8CBFF0E12B85E55F00350E0F /* UserDynamicMainView.swift in Sources */,
 				8C9776092BCECBC3006EDB58 /* Audio.swift in Sources */,
-				8CBFF0BA2B85E55F00350E0F /* Passthroughs.swift in Sources */,
 				8CBFF0B92B85E55F00350E0F /* LinkDetectText.swift in Sources */,
 				8CBFF0CB2B85E55F00350E0F /* bMessageSendView.swift in Sources */,
 				8CBFF0CF2B85E55F00350E0F /* LiveMessagesView.swift in Sources */,

@@ -21,9 +21,16 @@ import Dynamic
 import DarockKit
 import Alamofire
 
-var failedDownloadTasks = [Int]()
-var downloadResumeDatas = [Int: [String: String]]()
-var videoDownloadRequests = [DownloadRequest]()
+var videoDownloadNeedsResumeIdentifiers = Set<Int>()
+var videoDownloadRequests = [URLSessionTask]()
+var videoDownloadDetails = [Int: [String: String]]()
+let videoDownloadSession = {
+    let configuration = URLSessionConfiguration.background(withIdentifier: "com.darock.DarockBili.Video-Download.background")
+    configuration.isDiscretionary = false
+    configuration.sessionSendsLaunchEvents = true
+    let session = URLSession(configuration: configuration, delegate: VideoDownloadSessionDelegate.shared, delegateQueue: nil)
+    return session
+}()
 
 struct VideoDownloadView: View {
     var bvid: String
@@ -71,74 +78,89 @@ struct VideoDownloadView: View {
                 return
             }
             isInitialized = true
-            DispatchQueue(label: "com.darock.DarockBili.VideoDownload", qos: .background).async {
-                let headers: HTTPHeaders = [
-                    "cookie": "SESSDATA=\(sessdata)",
-                    "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                ]
-                AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(bvid)").response { response in
-                    let cid = Int64((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
-                    AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(bvid)&cid=\(cid)", headers: headers).response { response in
-                        let headers: HTTPHeaders = [
-                            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-                            "accept-encoding": "gzip, deflate, br",
-                            "accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
-                            "cookie": "",
-                            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.30 Safari/537.36 Edg/84.0.522.11",
-                            "sec-fetch-dest": "document",
-                            "sec-fetch-mode": "navigate",
-                            "sec-fetch-site": "none",
-                            "sec-fetch-user": "?1",
-                            "upgrade-insecure-requests": "1",
-                            "referer": "https://www.bilibili.com/"
-                        ]
-                        let downloadCID = String(VideoDownloadView.downloadCID ?? 0)
-                        let destination: DownloadRequest.Destination = { _, _ in
-                            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-                            let fileURL = documentsURL.appendingPathComponent("dlds/\(bvid)\(isPaged ? downloadCID : "").mp4")
-                            
-                            return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
-                        }
-                        isLoading = false
-                        downloadingProgressDatas.append((.init(), false))
-                        let currentDownloadingIndex = downloadingProgressDatas.count - 1
-                        videoDownloadRequests.append(
-                            AF.download((VideoDownloadView.downloadLink ?? (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&")), headers: headers, to: destination)
-                                .downloadProgress { p in
-                                    downloadingProgressDatas[currentDownloadingIndex].pts.send(.init(data: .init(progress: p.fractionCompleted, currentSize: p.completedUnitCount, totalSize: p.totalUnitCount), videoDetails: videoDetails))
-                                }
-                                .response { r in
-                                    if r.error == nil, let filePath = r.fileURL?.path {
-                                        debugPrint(filePath)
-                                        debugPrint(bvid)
-                                        var detTmp = videoDetails
-                                        detTmp.updateValue(filePath, forKey: "Path")
-                                        detTmp.updateValue(String(Date.now.timeIntervalSince1970), forKey: "Time")
-                                        UserDefaults.standard.set(detTmp, forKey: "\(bvid)\(isPaged ? downloadCID : "")")
-                                        downloadingProgressDatas[currentDownloadingIndex].isFinished = true
-                                    } else {
-                                        if FileManager.default.fileExists(atPath: NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(currentDownloadingIndex).drkdatav") {
-                                            try? FileManager.default.removeItem(atPath: NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(currentDownloadingIndex).drkdatav")
-                                        }
-                                        try? r.resumeData?.write(to: URL(filePath: NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(currentDownloadingIndex).drkdatav"))
-                                        var detTmp = videoDetails
-                                        detTmp.updateValue("\(bvid)\(isPaged ? String(VideoDownloadView.downloadCID!) : "")", forKey: "SetKey")
-                                        downloadResumeDatas.updateValue(detTmp, forKey: currentDownloadingIndex)
-                                        failedDownloadTasks.append(currentDownloadingIndex)
-                                        debugPrint(r.error as Any)
-                                    }
-                                }
-                        )
-                        VideoDownloadView.downloadLink = nil
+            let headers: HTTPHeaders = [
+                "cookie": "SESSDATA=\(sessdata)",
+                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            ]
+            AF.request("https://api.bilibili.com/x/web-interface/view?bvid=\(bvid)").response { response in
+                let cid = Int64((String(data: response.data!, encoding: .utf8)?.components(separatedBy: "\"pages\":[{\"cid\":")[1].components(separatedBy: ",")[0])!)!
+                AF.request("https://api.bilibili.com/x/player/playurl?platform=html5&bvid=\(bvid)&cid=\(cid)", headers: headers).response { response in
+                    let headers = [
+                        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                        "accept-encoding": "gzip, deflate, br",
+                        "accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
+                        "cookie": "SESSDATA=\(sessdata)",
+                        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.30 Safari/537.36 Edg/84.0.522.11",
+                        "sec-fetch-dest": "document",
+                        "sec-fetch-mode": "navigate",
+                        "sec-fetch-site": "none",
+                        "sec-fetch-user": "?1",
+                        "upgrade-insecure-requests": "1",
+                        "referer": "https://www.bilibili.com/"
+                    ]
+                    let downloadCID = String(VideoDownloadView.downloadCID ?? 0)
+                    isLoading = false
+                    var request = URLRequest(url: URL(string: VideoDownloadView.downloadLink ?? (String(data: response.data!, encoding: .utf8)?.components(separatedBy: ",\"url\":\"")[1].components(separatedBy: "\",")[0])!.replacingOccurrences(of: "\\u0026", with: "&"))!)
+                    request.allHTTPHeaderFields = headers
+                    let task = videoDownloadSession.downloadTask(with: request)
+                    task.resume()
+                    var videoDetails = videoDetails
+                    if isPaged {
+                        videoDetails.updateValue(downloadCID, forKey: "DownloadCID")
                     }
+                    videoDownloadDetails.updateValue(videoDetails, forKey: task.taskIdentifier)
+                    videoDownloadRequests.append(task)
+                    VideoDownloadView.downloadLink = nil
                 }
             }
         }
     }
 }
 
-struct VideoDownloadView_Previews: PreviewProvider {
-    static var previews: some View {
-        VideoDownloadView(bvid: "BV1PP41137Px", videoDetails: ["Pic": "http://i1.hdslb.com/bfs/archive/453a7f8deacb98c3b083ead733291f080383723a.jpg", "Title": "解压视频：20000个小球Marble run动画", "BV": "BV1PP41137Px", "UP": "小球模拟", "View": "114514", "Danmaku": "1919810"])
+private class VideoDownloadSessionDelegate: NSObject, URLSessionDelegate, URLSessionDownloadDelegate {
+    static let shared = VideoDownloadSessionDelegate()
+    
+    func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
+        debugPrint("Finish Background Events")
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        debugPrint(location)
+        downloadTask.progress.completedUnitCount = downloadTask.progress.totalUnitCount
+        if var details = videoDownloadDetails[downloadTask.taskIdentifier] {
+            let destination = URL(filePath: NSHomeDirectory() + "/Documents/dlds/\(details["BV"]!)\(details["DownloadCID"] ?? "").mp4")
+            do {
+                try FileManager.default.moveItem(at: location, to: destination)
+                details.updateValue(destination.path, forKey: "Path")
+                details.updateValue(String(Date.now.timeIntervalSince1970), forKey: "Time")
+                UserDefaults.standard.set(details, forKey: "\(details["BV"]!)\(details["DownloadCID"] ?? "")")
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        DispatchQueue.main.async {
+            downloadTask.progress.completedUnitCount = totalBytesWritten
+            downloadTask.progress.totalUnitCount = totalBytesExpectedToWrite
+        }
+    }
+    
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: (any Error)?) {
+        guard let error else { return }
+        let userInfo = (error as NSError).userInfo
+        if let resumeData = userInfo[NSURLSessionDownloadTaskResumeData] as? Data {
+            do {
+                let resumeFilePath = NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(task.taskIdentifier).drkdatav"
+                if FileManager.default.fileExists(atPath: resumeFilePath) {
+                    try FileManager.default.removeItem(atPath: resumeFilePath)
+                }
+                try resumeData.write(to: URL(filePath: resumeFilePath))
+                videoDownloadNeedsResumeIdentifiers.insert(task.taskIdentifier)
+            } catch {
+                print(error)
+            }
+        }
     }
 }

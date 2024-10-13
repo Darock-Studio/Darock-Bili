@@ -1,0 +1,110 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.9.10 clang-1600.0.26.2)
+// swift-module-flags: -target arm64-apple-ios16.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name RadarKitCore
+import CommonCrypto
+import Foundation
+import OSLog
+@_exported import RadarKitCore
+import Swift
+import SwiftUI
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@objc @objcMembers public class RKCFileFormatter : ObjectiveC.NSObject {
+  final public let formattingFile: RadarKitCore.RKCFeedback
+  public init(for file: RadarKitCore.RKCFeedback)
+  public func content() -> RadarKitCore.RKCFormattedFile
+  public func replies() -> [RadarKitCore.RKCFormattedFile]
+  @objc deinit
+}
+@dynamicMemberLookup public struct RKCFormattedFile {
+  public let _rawDictionary: [Swift.String : Swift.String]
+  public let isInternalHidden: Swift.Bool
+  public subscript(dynamicMember member: Swift.String) -> Swift.String? {
+    get
+  }
+  public subscript(key: Swift.String) -> Swift.String? {
+    get
+  }
+  public var allKeysForUser: [Swift.String] {
+    get
+  }
+  public var allKeys: [Swift.String] {
+    get
+  }
+}
+postfix operator /
+@objc @objcMembers public class RKCFeedbackManager : ObjectiveC.NSObject {
+  @objc final public let managingProjectName: Swift.String
+  @objc public init(projectName: Swift.String)
+  public func getFeedback(byId id: Swift.String) async -> RadarKitCore.RKCFeedback?
+  public func newFeedback(_ data: RadarKitCore.NewFeedbackData) async -> Swift.Int?
+  @objc @discardableResult
+  public func replyFeedback(toId id: Swift.String, withContent content: Swift.String, bySender sender: Swift.String) async -> Swift.Bool
+  @objc deinit
+}
+public struct RKCFeedback : Swift.Identifiable {
+  public let id: Swift.String
+  public var title: Swift.String
+  public var state: RadarKitCore.RKCFileState
+  public var rawText: Swift.String
+  public var _formattedTexts: [Swift.String]
+  public var _replies: [[Swift.String]]
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  public typealias ID = Swift.String
+}
+extension RadarKitCore.RKCFeedback {
+  public var shouldDisableUserReply: Swift.Bool {
+    get
+  }
+}
+public struct NewFeedbackData {
+  public var title: Swift.String
+  public var content: Swift.String
+  public var sender: Swift.String
+  public var additionalData: RadarKitCore.NewFeedbackData.AdditionalData
+  public init(title: Swift.String, content: Swift.String, sender: Swift.String, additionalData: RadarKitCore.NewFeedbackData.AdditionalData = .dictionary([:])) throws
+  public enum InputError : Swift.Error {
+    case emptyTitle
+    case multilineTitle
+    public static func == (a: RadarKitCore.NewFeedbackData.InputError, b: RadarKitCore.NewFeedbackData.InputError) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum AdditionalData {
+    case dictionary([Swift.String : Swift.String])
+    case rawString(Swift.String)
+  }
+}
+@objc public enum RKCFileState : Swift.Int {
+  case unmarked = 0
+  case workAsExpected
+  case unableToFix
+  case duplicate
+  case shelved
+  case fixing
+  case fixedInFutureVersions
+  case fixed
+  case loading
+  case cannotReproduce
+  case unrelated
+  case detailsRequired
+  public var tintColor: SwiftUICore.Color {
+    get
+  }
+  public var symbol: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension RadarKitCore.NewFeedbackData.InputError : Swift.Equatable {}
+extension RadarKitCore.NewFeedbackData.InputError : Swift.Hashable {}
+extension RadarKitCore.RKCFileState : Swift.Equatable {}
+extension RadarKitCore.RKCFileState : Swift.Hashable {}
+extension RadarKitCore.RKCFileState : Swift.RawRepresentable {}

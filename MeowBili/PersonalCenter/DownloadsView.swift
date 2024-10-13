@@ -34,8 +34,8 @@ struct DownloadsView: View {
     var body: some View {
         List {
             Section {
-                if metadatas.count != 0 {
-                    ForEach(0...metadatas.count - 1, id: \.self) { i in
+                if !metadatas.isEmpty {
+                    ForEach(0..<metadatas.count, id: \.self) { i in
                         if metadatas[i]["notGet"] == nil {
                             if searchInput.isEmpty || metadatas[i]["Title"]!.contains(searchInput) {
                                 Button(action: {
@@ -58,16 +58,22 @@ struct DownloadsView: View {
                                             Text(metadatas[i]["Title"]!)
                                                 .font(.system(size: 14, weight: .bold))
                                                 .lineLimit(3)
-                                            Label(metadatas[i]["UP"]!, systemImage: "person")
-                                                .font(.system(size: 11))
-                                                .foregroundColor(.gray)
-                                                .lineLimit(1)
+                                            HStack {
+                                                Image(systemName: "person")
+                                                Text(metadatas[i]["UP"]!)
+                                                    .offset(x: -3)
+                                                Spacer()
+                                            }
+                                            .lineLimit(1)
+                                            .font(.system(size: 11))
+                                            .opacity(0.6)
                                         }
                                     }
                                 })
                                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                     Button(role: .destructive, action: {
                                         try! FileManager.default.removeItem(atPath: vRootPath + metadatas[i]["Path"]!)
+                                        metadatas.remove(at: i)
                                     }, label: {
                                         Image(systemName: "xmark.bin.fill")
                                     })
@@ -134,15 +140,15 @@ struct DownloadingListView: View {
     @State var downloadProgresses = [Double]()
     @State var downloadedSizes = [Int64]()
     @State var totalSizes = [Int64]()
-    @State var videoDetails = [[String: String]]()
-    @State var localFailedDownloadTasks = [Int]()
+    @State var localFailedDownloadTasks = Set<Int>()
     @State var localVariableUpdateTimer: Timer?
+    @State var isRefreshing = false
     var body: some View {
         List {
-            if downloadingProgressDatas.count != 0 && totalSizes.count != 0 {
-                ForEach(0..<downloadingProgressDatas.count, id: \.self) { i in
-                    if !localFailedDownloadTasks.contains(i) {
-                        if !(downloadingProgressDatas[from: i]?.isFinished ?? false) && downloadProgresses[from: i] != 1.0 {
+            if !videoDownloadRequests.isEmpty && !isRefreshing {
+                ForEach(0..<videoDownloadRequests.count, id: \.self) { i in
+                    if !localFailedDownloadTasks.contains(videoDownloadRequests[i].taskIdentifier) {
+                        if downloadProgresses[from: i] != 1.0 {
                             if let downloadProgress = downloadProgresses[from: i], let downloadSize = downloadedSizes[from: i], let totalSize = totalSizes[from: i] {
                                 VStack {
                                     HStack {
@@ -151,7 +157,7 @@ struct DownloadingListView: View {
                                             .bold()
                                         Spacer()
                                     }
-                                    MarqueeText(text: videoDetails[i]["Title"] ?? "", font: .systemFont(ofSize: 17), leftFade: 5, rightFade: 5, startDelay: 1.5)
+                                    MarqueeText(text: videoDownloadDetails[videoDownloadRequests[i].taskIdentifier]?["Title"] ?? "", font: .systemFont(ofSize: 17), leftFade: 5, rightFade: 5, startDelay: 1.5)
                                     ProgressView(value: downloadProgress * 100, total: 100.0)
                                     HStack {
                                         Spacer()
@@ -174,11 +180,10 @@ struct DownloadingListView: View {
                                         Image(systemName: "xmark.circle.fill")
                                     })
                                 }
-                                .onReceive(downloadingProgressDatas[i].pts) { data in
-                                    downloadProgresses[i] = data.data.progress
-                                    downloadedSizes[i] = data.data.currentSize
-                                    totalSizes[i] = data.data.totalSize
-                                    videoDetails[i] = data.videoDetails
+                                .onReceive(videoDownloadRequests[i].progress.publisher(for: \.completedUnitCount)) { _ in
+                                    downloadProgresses[i] = videoDownloadRequests[i].progress.fractionCompleted
+                                    downloadedSizes[i] = videoDownloadRequests[i].progress.completedUnitCount
+                                    totalSizes[i] = videoDownloadRequests[i].progress.totalUnitCount
                                 }
                             }
                         } else {
@@ -195,34 +200,16 @@ struct DownloadingListView: View {
                         }
                     } else {
                         Button(action: {
-                            DispatchQueue(label: "com.darock.DarockBili.VideoDownload", qos: .background).async {
-                                if let resumeData = try? Data(contentsOf: URL(filePath: NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(i).drkdatav")) {
-                                    failedDownloadTasks.remove(at: i)
-                                    AF.download(resumingWith: resumeData)
-                                        .downloadProgress { p in
-                                            downloadingProgressDatas[i].pts.send(.init(data: .init(progress: p.fractionCompleted, currentSize: p.completedUnitCount, totalSize: p.totalUnitCount), videoDetails: downloadResumeDatas[i]!))
-                                        }
-                                        .response { r in
-                                            if r.error == nil, let filePath = r.fileURL?.path {
-                                                debugPrint(filePath)
-                                                debugPrint(downloadResumeDatas[i]!["BV"] ?? "")
-                                                var detTmp = downloadResumeDatas[i] ?? [:]
-                                                detTmp.updateValue(filePath, forKey: "Path")
-                                                detTmp.updateValue(String(Date.now.timeIntervalSince1970), forKey: "Time")
-                                                let setKey = detTmp["SetKey"] ?? downloadResumeDatas[i]!["BV"]!
-                                                detTmp.removeValue(forKey: "SetKey")
-                                                UserDefaults.standard.set(detTmp, forKey: setKey)
-                                                downloadingProgressDatas[i].isFinished = true
-                                            } else {
-                                                if FileManager.default.fileExists(atPath: NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(i).drkdatav") {
-                                                    try? FileManager.default.removeItem(atPath: NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(i).drkdatav")
-                                                }
-                                                try? r.resumeData?.write(to: URL(filePath: NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(i).drkdatav"))
-                                                failedDownloadTasks.append(i)
-                                                debugPrint(r.error as Any)
-                                            }
-                                        }
+                            if let resumeData = try? Data(contentsOf: URL(filePath: NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(videoDownloadRequests[i].taskIdentifier).drkdatav")) {
+                                let task = videoDownloadSession.downloadTask(withResumeData: resumeData)
+                                if let sourceDetails = videoDownloadDetails[videoDownloadRequests[i].taskIdentifier] {
+                                    videoDownloadDetails.removeValue(forKey: videoDownloadRequests[i].taskIdentifier)
+                                    videoDownloadDetails.updateValue(sourceDetails, forKey: task.taskIdentifier)
                                 }
+                                task.resume()
+                                videoDownloadNeedsResumeIdentifiers.remove(videoDownloadRequests[i].taskIdentifier)
+                                videoDownloadRequests[i] = task
+                                isRefreshing = true
                             }
                         }, label: {
                             VStack {
@@ -244,20 +231,22 @@ struct DownloadingListView: View {
                 }
             } else {
                 Text("Download.nothing")
+                    .onAppear {
+                        isRefreshing = false
+                    }
             }
         }
         .navigationTitle("Download.list")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            downloadProgresses = Array(repeating: 0.0, count: downloadingProgressDatas.count)
-            downloadedSizes = Array(repeating: 0, count: downloadingProgressDatas.count)
-            totalSizes = Array(repeating: 0, count: downloadingProgressDatas.count)
-            videoDetails = Array(repeating: [:], count: downloadingProgressDatas.count)
+            downloadProgresses = Array(repeating: 0.0, count: videoDownloadRequests.count)
+            downloadedSizes = Array(repeating: 0, count: videoDownloadRequests.count)
+            totalSizes = Array(repeating: 0, count: videoDownloadRequests.count)
 #if os(watchOS)
             Dynamic.PUICApplication.sharedPUICApplication().setExtendedIdleTime(3600.0, disablesSleepGesture: true, wantsAutorotation: false)
 #endif
             localVariableUpdateTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
-                localFailedDownloadTasks = failedDownloadTasks
+                localFailedDownloadTasks = videoDownloadNeedsResumeIdentifiers
             }
         }
         .onDisappear {
