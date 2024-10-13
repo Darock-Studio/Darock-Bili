@@ -1352,14 +1352,19 @@ struct VideoDetailView: View {
                                     "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3); buvid4=\(globalBuvid4)",
                                     "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                 ]
-                                let cid = videoPages[i]["CID"]!
-                                videoCID = Int64(cid)!
-                                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?bvid=\(videoDetails["BV"]!)&cid=\(cid)&qn=\(sessdata == "" ? 64 : 80)", headers: headers) { respJson, isSuccess in
+                                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/view?bvid=\(videoDetails["BV"]!)", headers: headers) { respJson, isSuccess in
                                     if isSuccess {
                                         if !CheckBApiError(from: respJson) { return }
-                                        VideoDownloadView.downloadLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
-                                        VideoDownloadView.downloadCID = videoCID
-                                        isDownloadPresented = true
+                                        let cid = respJson["data"]["pages"][i]["cid"].int64!
+                                        videoCID = cid
+                                        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/player/playurl?bvid=\(videoDetails["BV"]!)&cid=\(cid)&qn=\(sessdata == "" ? 64 : 80)", headers: headers) { respJson, isSuccess in
+                                            if isSuccess {
+                                                if !CheckBApiError(from: respJson) { return }
+                                                VideoDownloadView.downloadLink = respJson["data"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
+                                                VideoDownloadView.downloadCID = videoCID
+                                                isDownloadPresented = true
+                                            }
+                                        }
                                     }
                                 }
                             }, label: {

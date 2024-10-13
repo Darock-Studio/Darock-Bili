@@ -1,0 +1,6 @@
+framework module RadarKitCore {
+  umbrella header "RadarKitCore.h"
+  export *
+
+  module * { export * }
+}
