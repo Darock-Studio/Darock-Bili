@@ -201,9 +201,7 @@
 		B2B8137F2CC3D0ED00C69D17 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B8137E2CC3D0ED00C69D17 /* WidgetKit.framework */; };
 		B2B813812CC3D0ED00C69D17 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B813802CC3D0ED00C69D17 /* SwiftUI.framework */; };
 		B2B813842CC3D0ED00C69D17 /* MeowWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B813832CC3D0ED00C69D17 /* MeowWidgetBundle.swift */; };
-		B2B813862CC3D0ED00C69D17 /* MeowWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B813852CC3D0ED00C69D17 /* MeowWidgetLiveActivity.swift */; };
 		B2B813882CC3D0ED00C69D17 /* MeowWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B813872CC3D0ED00C69D17 /* MeowWidget.swift */; };
-		B2B8138A2CC3D0ED00C69D17 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B813892CC3D0ED00C69D17 /* AppIntent.swift */; };
 		B2B8138C2CC3D0F300C69D17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2B8138B2CC3D0F300C69D17 /* Assets.xcassets */; };
 		B2B813902CC3D0F300C69D17 /* MeowWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B2B8137D2CC3D0ED00C69D17 /* MeowWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B2B813972CC3D22800C69D17 /* BiliBiliAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B813962CC3D22800C69D17 /* BiliBiliAPIService.swift */; };
@@ -419,9 +417,7 @@
 		B2B8137E2CC3D0ED00C69D17 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		B2B813802CC3D0ED00C69D17 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		B2B813832CC3D0ED00C69D17 /* MeowWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeowWidgetBundle.swift; sourceTree = "<group>"; };
-		B2B813852CC3D0ED00C69D17 /* MeowWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeowWidgetLiveActivity.swift; sourceTree = "<group>"; };
 		B2B813872CC3D0ED00C69D17 /* MeowWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeowWidget.swift; sourceTree = "<group>"; };
-		B2B813892CC3D0ED00C69D17 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
 		B2B8138B2CC3D0F300C69D17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B2B8138D2CC3D0F300C69D17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2B813962CC3D22800C69D17 /* BiliBiliAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiliBiliAPIService.swift; sourceTree = "<group>"; };
@@ -796,9 +792,7 @@
 			isa = PBXGroup;
 			children = (
 				B2B813832CC3D0ED00C69D17 /* MeowWidgetBundle.swift */,
-				B2B813852CC3D0ED00C69D17 /* MeowWidgetLiveActivity.swift */,
 				B2B813872CC3D0ED00C69D17 /* MeowWidget.swift */,
-				B2B813892CC3D0ED00C69D17 /* AppIntent.swift */,
 				B2B8139A2CC3D37500C69D17 /* TrendingView.swift */,
 				B2B8138B2CC3D0F300C69D17 /* Assets.xcassets */,
 				B2B8138D2CC3D0F300C69D17 /* Info.plist */,
@@ -1380,8 +1374,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2B813862CC3D0ED00C69D17 /* MeowWidgetLiveActivity.swift in Sources */,
-				B2B8138A2CC3D0ED00C69D17 /* AppIntent.swift in Sources */,
 				B2B813842CC3D0ED00C69D17 /* MeowWidgetBundle.swift in Sources */,
 				B2B8139D2CC3D37500C69D17 /* TrendingView.swift in Sources */,
 				B2B813882CC3D0ED00C69D17 /* MeowWidget.swift in Sources */,
