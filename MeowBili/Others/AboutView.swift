@@ -255,6 +255,7 @@ struct AboutCredits: View {
                     Text("令枫")
                     Text("ThreeManager785")
                     Text("Dignite")
+                    Text("DannyFeng")
                     Text("-- And You --")
                         .sheet(isPresented: $isEasterEgg1Presented, content: { EasterEgg1View(isGenshin: $isGenshin) })
                         .onTapGesture(count: 10) {
@@ -337,9 +338,8 @@ struct OpenSourceView: View {
     https://github.com/adamzarn/AZVideoPlayer
     ---------------------
     
-    --- CepheusKeyboardKit ---
+    --- Cepheus ---
     Licensed under Apache License 2.0
-    Code Changes: https://github.com/Serene-Garden/Cepheus/compare/main...WindowsMEMZ:Cepheus:main
     --------------------------
     
     --- Dynamic ---
