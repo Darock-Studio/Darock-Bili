@@ -198,6 +198,18 @@
 		8CC5B7432B8749BC00BAD89E /* MeowBiliUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC5B7422B8749BC00BAD89E /* MeowBiliUITests.swift */; };
 		8CD3D0402C8C715300E9C37C /* MarqueeText in Frameworks */ = {isa = PBXBuildFile; productRef = 8CD3D03F2C8C715300E9C37C /* MarqueeText */; };
 		8CD3D0422C8C715B00E9C37C /* MarqueeText in Frameworks */ = {isa = PBXBuildFile; productRef = 8CD3D0412C8C715B00E9C37C /* MarqueeText */; };
+		B2B8137F2CC3D0ED00C69D17 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B8137E2CC3D0ED00C69D17 /* WidgetKit.framework */; };
+		B2B813812CC3D0ED00C69D17 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B813802CC3D0ED00C69D17 /* SwiftUI.framework */; };
+		B2B813842CC3D0ED00C69D17 /* MeowWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B813832CC3D0ED00C69D17 /* MeowWidgetBundle.swift */; };
+		B2B813882CC3D0ED00C69D17 /* MeowWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B813872CC3D0ED00C69D17 /* MeowWidget.swift */; };
+		B2B8138C2CC3D0F300C69D17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2B8138B2CC3D0F300C69D17 /* Assets.xcassets */; };
+		B2B813902CC3D0F300C69D17 /* MeowWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B2B8137D2CC3D0ED00C69D17 /* MeowWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B2B813972CC3D22800C69D17 /* BiliBiliAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B813962CC3D22800C69D17 /* BiliBiliAPIService.swift */; };
+		B2B813982CC3D22800C69D17 /* BiliBiliAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B813962CC3D22800C69D17 /* BiliBiliAPIService.swift */; };
+		B2B813992CC3D22800C69D17 /* BiliBiliAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B813962CC3D22800C69D17 /* BiliBiliAPIService.swift */; };
+		B2B8139B2CC3D37500C69D17 /* TrendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B8139A2CC3D37500C69D17 /* TrendingView.swift */; };
+		B2B8139C2CC3D37500C69D17 /* TrendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B8139A2CC3D37500C69D17 /* TrendingView.swift */; };
+		B2B8139D2CC3D37500C69D17 /* TrendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B8139A2CC3D37500C69D17 /* TrendingView.swift */; };
 		B4DAF0DD2B80725800755F0C /* LinkDetectText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */; };
 /* End PBXBuildFile section */
 
@@ -237,6 +249,13 @@
 			remoteGlobalIDString = 8CA7CBBF2B77AC4A008E587F;
 			remoteInfo = MeowBili;
 		};
+		B2B8138E2CC3D0F300C69D17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B44689C42B4FC15A002CCEB2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B2B8137C2CC3D0ED00C69D17;
+			remoteInfo = MeowWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -268,6 +287,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				B2B813902CC3D0F300C69D17 /* MeowWidgetExtension.appex in Embed Foundation Extensions */,
 				8C617F562B92334B000A3687 /* SafariExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
@@ -393,6 +413,15 @@
 		8CD9463A2B64CD0F005D00D0 /* Bangumi_Detail_Season.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Bangumi_Detail_Season.json; sourceTree = "<group>"; };
 		8CFB6B652C650FED007C7BAA /* Watch Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Watch Debug.entitlements"; sourceTree = "<group>"; };
 		8CFB6B662C650FFE007C7BAA /* Watch Release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Watch Release.entitlements"; sourceTree = "<group>"; };
+		B2B8137D2CC3D0ED00C69D17 /* MeowWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MeowWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2B8137E2CC3D0ED00C69D17 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		B2B813802CC3D0ED00C69D17 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		B2B813832CC3D0ED00C69D17 /* MeowWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeowWidgetBundle.swift; sourceTree = "<group>"; };
+		B2B813872CC3D0ED00C69D17 /* MeowWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeowWidget.swift; sourceTree = "<group>"; };
+		B2B8138B2CC3D0F300C69D17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B2B8138D2CC3D0F300C69D17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2B813962CC3D22800C69D17 /* BiliBiliAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiliBiliAPIService.swift; sourceTree = "<group>"; };
+		B2B8139A2CC3D37500C69D17 /* TrendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingView.swift; sourceTree = "<group>"; };
 		B4468A152B4FC24A002CCEB2 /* Dynamic_Feed_All.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Dynamic_Feed_All.json; sourceTree = "<group>"; };
 		B4468A162B4FC24A002CCEB2 /* Search_With_UP_V2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Search_With_UP_V2.json; sourceTree = "<group>"; };
 		B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkDetectText.swift; sourceTree = "<group>"; };
@@ -466,6 +495,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2B8137A2CC3D0ED00C69D17 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2B813812CC3D0ED00C69D17 /* SwiftUI.framework in Frameworks */,
+				B2B8137F2CC3D0ED00C69D17 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -750,9 +788,30 @@
 			path = Entitlements;
 			sourceTree = "<group>";
 		};
+		B2B813822CC3D0ED00C69D17 /* MeowWidget */ = {
+			isa = PBXGroup;
+			children = (
+				B2B813832CC3D0ED00C69D17 /* MeowWidgetBundle.swift */,
+				B2B813872CC3D0ED00C69D17 /* MeowWidget.swift */,
+				B2B8139A2CC3D37500C69D17 /* TrendingView.swift */,
+				B2B8138B2CC3D0F300C69D17 /* Assets.xcassets */,
+				B2B8138D2CC3D0F300C69D17 /* Info.plist */,
+			);
+			path = MeowWidget;
+			sourceTree = "<group>";
+		};
+		B2B813952CC3D1D800C69D17 /* SharedCode */ = {
+			isa = PBXGroup;
+			children = (
+				B2B813962CC3D22800C69D17 /* BiliBiliAPIService.swift */,
+			);
+			path = SharedCode;
+			sourceTree = "<group>";
+		};
 		B44689C32B4FC15A002CCEB2 = {
 			isa = PBXGroup;
 			children = (
+				B2B813952CC3D1D800C69D17 /* SharedCode */,
 				8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */,
 				8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */,
 				8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */,
@@ -768,6 +827,7 @@
 				8C8578A62C5A18AA00AF93D1 /* MeowBiliTests */,
 				8CC5B7412B8749BC00BAD89E /* MeowBiliUITests */,
 				8C617F3F2B92334B000A3687 /* SafariExtension */,
+				B2B813822CC3D0ED00C69D17 /* MeowWidget */,
 				B44689CB2B4FC15A002CCEB2 /* Products */,
 				B4468A902B4FC8B7002CCEB2 /* Frameworks */,
 			);
@@ -781,6 +841,7 @@
 				8CC5B7402B8749BC00BAD89E /* MeowBiliUITests.xctest */,
 				8C617F3E2B92334B000A3687 /* SafariExtension.appex */,
 				8C2DFCB52C4E6B2B003AEC67 /* MeowBiliTests.xctest */,
+				B2B8137D2CC3D0ED00C69D17 /* MeowWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -800,6 +861,8 @@
 			children = (
 				8C20267C2CBBA32E00D7C5F9 /* RadarKitCore.xcframework */,
 				8CC3D5662B7CDCE1005636DC /* Intents.framework */,
+				B2B8137E2CC3D0ED00C69D17 /* WidgetKit.framework */,
+				B2B813802CC3D0ED00C69D17 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -861,6 +924,7 @@
 			dependencies = (
 				8CA7CBD22B77AC4C008E587F /* PBXTargetDependency */,
 				8C617F552B92334B000A3687 /* PBXTargetDependency */,
+				B2B8138F2CC3D0F300C69D17 /* PBXTargetDependency */,
 			);
 			name = MeowBili;
 			packageProductDependencies = (
@@ -940,6 +1004,23 @@
 			productReference = 8CC5B7402B8749BC00BAD89E /* MeowBiliUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		B2B8137C2CC3D0ED00C69D17 /* MeowWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B2B813942CC3D0F400C69D17 /* Build configuration list for PBXNativeTarget "MeowWidgetExtension" */;
+			buildPhases = (
+				B2B813792CC3D0ED00C69D17 /* Sources */,
+				B2B8137A2CC3D0ED00C69D17 /* Frameworks */,
+				B2B8137B2CC3D0ED00C69D17 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MeowWidgetExtension;
+			productName = MeowWidgetExtension;
+			productReference = B2B8137D2CC3D0ED00C69D17 /* MeowWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -947,7 +1028,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastSwiftUpdateCheck = 1600;
+				LastSwiftUpdateCheck = 1510;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					8C2DFCB42C4E6B2B003AEC67 = {
@@ -970,6 +1051,9 @@
 					8CC5B73F2B8749BC00BAD89E = {
 						CreatedOnToolsVersion = 15.2;
 						TestTargetID = 8CA7CBBF2B77AC4A008E587F;
+					};
+					B2B8137C2CC3D0ED00C69D17 = {
+						CreatedOnToolsVersion = 15.1;
 					};
 				};
 			};
@@ -1015,6 +1099,7 @@
 				8CC5B73F2B8749BC00BAD89E /* MeowBiliUITests */,
 				8C617F3D2B92334B000A3687 /* SafariExtension */,
 				8C82F8202BB709E1009AEFD2 /* Alternative Destribution */,
+				B2B8137C2CC3D0ED00C69D17 /* MeowWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -1073,6 +1158,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2B8137B2CC3D0ED00C69D17 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2B8138C2CC3D0F300C69D17 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1140,7 +1233,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CA7CCA32B77B2F3008E587F /* NoticeView.swift in Sources */,
+				B2B813972CC3D22800C69D17 /* BiliBiliAPIService.swift in Sources */,
 				8CA7CC952B77B0FB008E587F /* SkinChooserView.swift in Sources */,
+				B2B8139B2CC3D37500C69D17 /* TrendingView.swift in Sources */,
 				8CA7CCA62B77B315008E587F /* CommentsView.swift in Sources */,
 				8CA7CC6F2B77AEB4008E587F /* SearchView.swift in Sources */,
 				8C2DFCB02C4AA15C003AEC67 /* NewFeaturesView.swift in Sources */,
@@ -1205,7 +1300,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CBFF0C02B85E55F00350E0F /* SkinDownloadView.swift in Sources */,
+				B2B813982CC3D22800C69D17 /* BiliBiliAPIService.swift in Sources */,
 				8CBFF0C82B85E55F00350E0F /* BangumiPlayerView.swift in Sources */,
+				B2B8139C2CC3D37500C69D17 /* TrendingView.swift in Sources */,
 				8CBFF0C72B85E55F00350E0F /* VideoDownloadView.swift in Sources */,
 				03B2F8102C45AED7007EB850 /* PhoneFormatterExt.swift in Sources */,
 				8CBFF0E32B85E55F00350E0F /* AboutView.swift in Sources */,
@@ -1273,6 +1370,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B2B813792CC3D0ED00C69D17 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2B813842CC3D0ED00C69D17 /* MeowWidgetBundle.swift in Sources */,
+				B2B8139D2CC3D37500C69D17 /* TrendingView.swift in Sources */,
+				B2B813882CC3D0ED00C69D17 /* MeowWidget.swift in Sources */,
+				B2B813992CC3D22800C69D17 /* BiliBiliAPIService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1300,6 +1408,11 @@
 			isa = PBXTargetDependency;
 			target = 8CA7CBBF2B77AC4A008E587F /* MeowBili */;
 			targetProxy = 8CC5B7462B8749BC00BAD89E /* PBXContainerItemProxy */;
+		};
+		B2B8138F2CC3D0F300C69D17 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B2B8137C2CC3D0ED00C69D17 /* MeowWidgetExtension */;
+			targetProxy = B2B8138E2CC3D0F300C69D17 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1501,6 +1614,7 @@
 		8C82F7802BB6DF2D009AEFD2 /* Alternative */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
@@ -1671,6 +1785,7 @@
 		8CA7CBDD2B77AC4D008E587F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
@@ -1716,6 +1831,7 @@
 		8CA7CBDE2B77AC4D008E587F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
@@ -1880,6 +1996,95 @@
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
+		};
+		B2B813912CC3D0F300C69D17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B57D8PP775;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MeowWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MeowWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili.MeowWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B2B813922CC3D0F300C69D17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B57D8PP775;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MeowWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MeowWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili.MeowWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B2B813932CC3D0F300C69D17 /* Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MU2GGQV46U;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MeowWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MeowWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili.MeowWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Alternative;
 		};
 		B44689DE2B4FC15B002CCEB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -2066,6 +2271,16 @@
 				8CC5B7482B8749BC00BAD89E /* Debug */,
 				8CC5B7492B8749BC00BAD89E /* Release */,
 				8C82F7842BB6DF2D009AEFD2 /* Alternative */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B2B813942CC3D0F400C69D17 /* Build configuration list for PBXNativeTarget "MeowWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2B813912CC3D0F300C69D17 /* Debug */,
+				B2B813922CC3D0F300C69D17 /* Release */,
+				B2B813932CC3D0F300C69D17 /* Alternative */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

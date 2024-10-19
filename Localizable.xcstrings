@@ -9301,7 +9301,14 @@
       }
     },
     "允许后台播放" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow Background Sound"
+          }
+        }
+      }
     },
     "允许收集使用信息" : {
       "extractionState" : "stale",
@@ -10228,6 +10235,16 @@
         }
       }
     },
+    "手记建议" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suggestions for Journal"
+          }
+        }
+      }
+    },
     "扩展的触感反馈" : {
       "localizations" : {
         "en" : {
@@ -10341,7 +10358,14 @@
       }
     },
     "搜索 - %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search - %@"
+          }
+        }
+      }
     },
     "播放" : {
       "localizations" : {
@@ -10775,7 +10799,14 @@
       }
     },
     "版本 %@ 现已可用" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version %@ is now available"
+          }
+        }
+      }
     },
     "状态" : {
       "localizations" : {
@@ -10979,7 +11010,14 @@
       }
     },
     "若要在后台播放，你需要在播放前连接蓝牙音频设备。" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To play in the background, you need to connect a Bluetooth audio device before playing videos."
+          }
+        }
+      }
     },
     "虽然我们无法一一以文字回复提交的每一份反馈，但我们会查看每一份反馈并监控提交的反馈数量，以便更好地了解问题的范围。" : {
       "localizations" : {

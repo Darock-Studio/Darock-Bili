@@ -1,13 +1,12 @@
 {
-  "originHash" : "8c2c877bde34ef404029556772999ba0d07e63e1ddebb393eb9aacd889b58866",
   "pins" : [
     {
       "identity" : "alamofire",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire",
       "state" : {
-        "revision" : "f455c2975872ccd2d9c81594c658af65716e9b9a",
-        "version" : "5.9.1"
+        "revision" : "ea6a94b7dddffd0ca4d0f29252d95310b84dec84",
+        "version" : "5.10.0"
       }
     },
     {
@@ -42,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Serene-Garden/Cepheus",
       "state" : {
-        "revision" : "9ba67002a9ac27ba93fc91377798fc2d2e113e69",
-        "version" : "2.4.1"
+        "revision" : "8508ddae95de0300c9d45ebdc21078171779adcd",
+        "version" : "2.5.1"
       }
     },
     {
@@ -52,7 +51,7 @@
       "location" : "https://github.com/Darock-Studio/DarockKit",
       "state" : {
         "branch" : "main",
-        "revision" : "c36f40dc6174d729836a9fe1cb45bd18573589e5"
+        "revision" : "0c80f45f9b1e65903d11951f0172d1c0e4b5f270"
       }
     },
     {
@@ -69,7 +68,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/EFPrefix/EFQRCode",
       "state" : {
-        "revision" : "2991c2f318ad9529d93b2a73a382a3f9c72c64ce",
+        "revision" : "3a6c5012f1a0df404a92e55bb01b4b685ff5a2d1",
         "version" : "6.2.2"
       }
     },
@@ -96,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/gonzalezreal/NetworkImage",
       "state" : {
-        "revision" : "7aff8d1b31148d32c5933d75557d42f6323ee3d1",
-        "version" : "6.0.0"
+        "revision" : "2849f5323265386e200484b0d0f896e73c3411b9",
+        "version" : "6.0.1"
       }
     },
     {
@@ -164,21 +163,30 @@
       }
     },
     {
+      "identity" : "swift-cmark",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftlang/swift-cmark",
+      "state" : {
+        "revision" : "3ccff77b2dc5b96b77db3da0d68d28068593fa53",
+        "version" : "0.5.0"
+      }
+    },
+    {
       "identity" : "swift-markdown-ui",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/gonzalezreal/swift-markdown-ui",
       "state" : {
-        "revision" : "55441810c0f678c78ed7e2ebd46dde89228e02fc",
-        "version" : "2.4.0"
+        "revision" : "5f613358148239d0292c0cef674a3c2314737f9e",
+        "version" : "2.4.1"
       }
     },
     {
       "identity" : "swift_qrcodejs",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ApolloZhu/swift_qrcodejs.git",
+      "location" : "https://github.com/EFPrefix/swift_qrcodejs.git",
       "state" : {
-        "revision" : "374dc7f7b9e76c6aeb393f6a84590c6d387e1ecb",
-        "version" : "2.2.2"
+        "revision" : "817ba220a2eba840bae888e7eeb11207bec05f8c",
+        "version" : "2.3.0"
       }
     },
     {
@@ -213,10 +221,10 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ZipArchive/ZipArchive",
       "state" : {
-        "revision" : "79d4dc9729096c6ad83dd3cee2b9f354d1b4ab7b",
-        "version" : "2.5.5"
+        "revision" : "df35718ea19a94e015b91dc4881dee028ce4cdba",
+        "version" : "2.6.0"
       }
     }
   ],
-  "version" : 3
+  "version" : 2
 }
