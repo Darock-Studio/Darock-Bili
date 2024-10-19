@@ -39,7 +39,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8CA370C62B82528400CE0E9E"
+               BlueprintIdentifier = "8C2DFCB42C4E6B2B003AEC67"
                BuildableName = "MeowBiliTests.xctest"
                BlueprintName = "MeowBiliTests"
                ReferencedContainer = "container:DarockBili.xcodeproj">
