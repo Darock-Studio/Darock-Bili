@@ -4732,35 +4732,6 @@
         }
       }
     },
-    "Home.update.%@.%@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "v%1$@ build %2$@ had released"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "v%1$@ ビルド %2$@がリリースされました"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "v%1$@ Build %2$@已推出"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "v%1$@ Build %2$@已經推出"
-          }
-        }
-      }
-    },
     "Home.update.skip" : {
       "localizations" : {
         "en" : {
@@ -9731,7 +9702,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "MeowBili\nBuild Beta. Build %1$@.xc_verd.%2$@"
+            "value" : "MeowBili\nDebug Build. Build %1$@.xc_verd.%2$@"
           }
         },
         "zh-Hans" : {
@@ -10256,9 +10227,6 @@
           }
         }
       }
-    },
-    "手记建议" : {
-
     },
     "扩展的触感反馈" : {
       "localizations" : {

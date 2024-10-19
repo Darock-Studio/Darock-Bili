@@ -330,6 +330,7 @@ struct UserDetailView: View {
         .onAppear {
             let headers: HTTPHeaders = [
                 "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3); bili_ticket=\(cachedBiliTicket)",
+                "referer": "https://message.bilibili.com/", // rdar://gh/SocialSisterYi/bilibili-API-collect/issues/631#issuecomment-2099276628
                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             ]
             biliWbiSign(paramEncoded: "mid=\(uid)".base64Encoded()) { signed in
