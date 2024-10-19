@@ -18,8 +18,7 @@
 
 import DarockKit
 
-public class BiliAPI {
+class BiliAPI {
     static let shared = BiliAPI()
-    
     
 }

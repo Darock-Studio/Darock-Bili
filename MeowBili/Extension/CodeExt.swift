@@ -667,3 +667,10 @@ extension String: @retroactive Identifiable {
         self
     }
 }
+
+postfix operator /
+extension String? {
+    static postfix func /(lhs: String?) -> String {
+        lhs ?? "[加载失败]"
+    }
+}
