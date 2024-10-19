@@ -23,6 +23,5 @@ import SwiftUI
 struct MeowWidgetBundle: WidgetBundle {
     var body: some Widget {
         MeowWidget()
-        MeowWidgetLiveActivity()
     }
 }
