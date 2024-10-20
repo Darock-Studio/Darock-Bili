@@ -112,27 +112,15 @@ struct MainView: View {
             .sheet(isPresented: $isNewUserPresenting, content: { LoginView() })
             .onAppear {
                 if username == "" {
-                    let headers: HTTPHeaders = [
-                        "cookie": "SESSDATA=\(sessdata)",
-                        "referer": "https://message.bilibili.com/", // rdar://gh/SocialSisterYi/bilibili-API-collect/issues/631#issuecomment-2099276628
-                        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                    ]
-                    biliWbiSign(paramEncoded: "mid=\(dedeUserID)".base64Encoded()) { signed in
-                        if let signed {
-                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
-                                if isSuccess {
-                                    debugPrint(respJson)
-                                    if !CheckBApiError(from: respJson) { return }
-                                    username = respJson["data"]["name"].string ?? ""
-                                    userSign = respJson["data"]["sign"].string ?? ""
-                                    userFaceUrl = respJson["data"]["face"].string ?? "E"
-                                    if let bd = respJson["data"]["birthday"].string, let mo = bd.split(separator: "-")[from: 0], let d = bd.split(separator: "-")[from: 1] {
-                                        if let imo = Int(mo), let id = Int(d), imo == Date.now.month && id == Date.now.day {
-                                            festivalType = .birthday
-                                        }
-                                    }
-                                } else if isShowNetworkFixing {
-                                    isNetworkFixPresented = true
+                    Task {
+                        if let info = await BiliAPI.shared.userInfo() {
+                            username = info.name
+                            userSign = info.sign
+                            userFaceUrl = info.face
+                            let bd = info.birthday
+                            if let mo = bd.split(separator: "-")[from: 0], let d = bd.split(separator: "-")[from: 1] {
+                                if let imo = Int(mo), let id = Int(d), imo == Date.now.month && id == Date.now.day {
+                                    festivalType = .birthday
                                 }
                             }
                         }

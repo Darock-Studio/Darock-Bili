@@ -198,6 +198,10 @@
 		8CC5B7432B8749BC00BAD89E /* MeowBiliUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC5B7422B8749BC00BAD89E /* MeowBiliUITests.swift */; };
 		8CD3D0402C8C715300E9C37C /* MarqueeText in Frameworks */ = {isa = PBXBuildFile; productRef = 8CD3D03F2C8C715300E9C37C /* MarqueeText */; };
 		8CD3D0422C8C715B00E9C37C /* MarqueeText in Frameworks */ = {isa = PBXBuildFile; productRef = 8CD3D0412C8C715B00E9C37C /* MarqueeText */; };
+		8CF148952CC40A4C00C13711 /* BiliAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF148922CC403BF00C13711 /* BiliAPI.swift */; };
+		8CF148962CC40A4C00C13711 /* BiliAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF148922CC403BF00C13711 /* BiliAPI.swift */; };
+		8CF148972CC40AAB00C13711 /* ResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF148942CC4040E00C13711 /* ResponseModels.swift */; };
+		8CF148982CC40AAB00C13711 /* ResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF148942CC4040E00C13711 /* ResponseModels.swift */; };
 		B2B8137F2CC3D0ED00C69D17 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B8137E2CC3D0ED00C69D17 /* WidgetKit.framework */; };
 		B2B813812CC3D0ED00C69D17 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B813802CC3D0ED00C69D17 /* SwiftUI.framework */; };
 		B2B813842CC3D0ED00C69D17 /* MeowWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B813832CC3D0ED00C69D17 /* MeowWidgetBundle.swift */; };
@@ -1255,6 +1259,7 @@
 				8CA7CCB62B77B3BF008E587F /* UserDetailView.swift in Sources */,
 				8CA7CCCE2B77B4DF008E587F /* DynamicSendView.swift in Sources */,
 				8CA7CCCC2B77B4CA008E587F /* DynamicDetailView.swift in Sources */,
+				8CF148952CC40A4C00C13711 /* BiliAPI.swift in Sources */,
 				8CA7CCC52B77B47A008E587F /* AudioPlayerView.swift in Sources */,
 				8CA7CCC82B77B49D008E587F /* ImageViewerView.swift in Sources */,
 				8CA7CC972B77B115008E587F /* SkinExplorerView.swift in Sources */,
@@ -1263,6 +1268,7 @@
 				8CC3D5652B7CCF3C005636DC /* SelfQrCardView.swift in Sources */,
 				8CA7CCB82B77B3D6008E587F /* HistoryView.swift in Sources */,
 				8CA7CCDC2B77B571008E587F /* LiveMessagesView.swift in Sources */,
+				8CF148972CC40AAB00C13711 /* ResponseModels.swift in Sources */,
 				8CC3D55A2B7CB95D005636DC /* NowPlayingExtension.m in Sources */,
 				8CA7CC6A2B77AE62008E587F /* Bangumi.swift in Sources */,
 				8CA7CBC52B77AC4A008E587F /* ContentView.swift in Sources */,
@@ -1322,6 +1328,7 @@
 				8CBFF0C52B85E55F00350E0F /* SkinExplorerView.swift in Sources */,
 				8CBFF0BC2B85E55F00350E0F /* HistoryView.swift in Sources */,
 				8CBFF0B72B85E55F00350E0F /* ContentView.swift in Sources */,
+				8CF148962CC40A4C00C13711 /* BiliAPI.swift in Sources */,
 				8CBFF0DB2B85E55F00350E0F /* SignalErrorView.swift in Sources */,
 				8CBFF0D82B85E55F00350E0F /* VideoDetailView.swift in Sources */,
 				8CBFF0D72B85E55F00350E0F /* MainView.swift in Sources */,
@@ -1330,6 +1337,7 @@
 				8CBFF0E82B85E55F00350E0F /* LivePlayerView.swift in Sources */,
 				8CBFF0BD2B85E55F00350E0F /* DynamicSendView.swift in Sources */,
 				8CBFF0DD2B85E55F00350E0F /* DownloadObj.swift in Sources */,
+				8CF148982CC40AAB00C13711 /* ResponseModels.swift in Sources */,
 				8CBFF0D02B85E55F00350E0F /* AVExtension.m in Sources */,
 				8CBFF0C12B85E55F00350E0F /* CodeExt.swift in Sources */,
 				8CBFF0E62B85E55F00350E0F /* PersonAccountView.swift in Sources */,
@@ -1684,6 +1692,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MeowBili-Watch-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.darock.alt785.DarockBili;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
@@ -1902,6 +1911,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MeowBili-Watch-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.darock.DarockBili;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
@@ -1939,6 +1949,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MeowBili-Watch-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.darock.DarockBili;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;

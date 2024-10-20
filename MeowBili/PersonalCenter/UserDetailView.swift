@@ -328,49 +328,31 @@ struct UserDetailView: View {
             #endif
         }
         .onAppear {
-            let headers: HTTPHeaders = [
-                "cookie": "SESSDATA=\(sessdata); buvid3=\(globalBuvid3); bili_ticket=\(cachedBiliTicket)",
-                "referer": "https://message.bilibili.com/", // rdar://gh/SocialSisterYi/bilibili-API-collect/issues/631#issuecomment-2099276628
-                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-            ]
-            biliWbiSign(paramEncoded: "mid=\(uid)".base64Encoded()) { signed in
-                if let signed {
-                    autoRetryRequestApi("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
-                        if isSuccess {
-                            if !CheckBApiError(from: respJson) { return }
-                            userFaceUrl = respJson["data"]["face"].string ?? "E"
-                            username = respJson["data"]["name"].string ?? "[加载失败]"
-                            userLevel = respJson["data"]["level"].int ?? 0
-                            officialType = respJson["data"]["official"]["type"].int ?? -1
-                            officialTitle = respJson["data"]["official"]["title"].string ?? ""
-                            userSign = respJson["data"]["sign"].string ?? "[加载失败]"
-                            coinCount = respJson["data"]["coins"].int ?? -1
-                            vipLabel = respJson["data"]["vip"]["label"]["text"].string ?? ""
-                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation/stat?vmid=\(uid)", headers: headers) { respJson, isSuccess in
-                                if isSuccess {
-                                    followCount = respJson["data"]["following"].int ?? -1
-                                    fansCount = respJson["data"]["follower"].int ?? -1
-                                }
-                            }
-                        }
+            Task {
+                if let info = await BiliAPI.shared.userInfo(of: uid) {
+                    userFaceUrl = info.face
+                    username = info.name
+                    userLevel = info.level
+                    officialType = info.official.type
+                    officialTitle = info.official.title
+                    userSign = info.sign
+                    coinCount = Int(info.coins)
+                    vipLabel = info.vip?.label.text ?? ""
+                    if let relation = await BiliAPI.shared.userRelation(of: uid) {
+                        followCount = relation.following
+                        fansCount = relation.follower
                     }
                 }
             }
-            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation?fid=\(uid)", headers: headers) { respJson, isSuccess in
-                if isSuccess {
-                    if !CheckBApiError(from: respJson) { return }
-                    if respJson["data"]["attribute"].int ?? 0 == 2 || respJson["data"]["attribute"].int ?? 0 == 6 {
-                        isFollowed = true
-                    }
-                }
+            Task {
+                isFollowed = await BiliAPI.shared.isFollowed(user: uid)
             }
             if uid == dedeUserID {
-                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/nav", headers: headers) { respJson, isSuccess in
-                    if isSuccess {
-                        if !CheckBApiError(from: respJson) { return }
-                        currentExp = respJson["data"]["level_info"]["current_exp"].int ?? 0
-                        nextExp = respJson["data"]["level_info"]["next_exp"].int ?? 0
-                        minExp = respJson["data"]["level_info"]["current_min"].int ?? 0
+                Task {
+                    if let exp = await BiliAPI.shared.currentUserExperience() {
+                        currentExp = exp.current
+                        nextExp = exp.next
+                        minExp = exp.min
                     }
                 }
             }

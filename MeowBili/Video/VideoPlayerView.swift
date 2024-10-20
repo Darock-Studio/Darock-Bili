@@ -157,7 +157,6 @@ struct VideoPlayerView: View {
                             playerScaledOffset = .zero
                         }
                     })
-                    .rotationEffect(.degrees(isFullScreen ? 90 : 0))
                     .frame(
                         width: isFullScreen ? WKInterfaceDevice.current().screenBounds.height : nil,
                         height: isFullScreen ? WKInterfaceDevice.current().screenBounds.width : nil
@@ -199,6 +198,7 @@ struct VideoPlayerView: View {
                             }
                         }
                     }
+                    .rotationEffect(.degrees(isFullScreen ? 90 : 0))
                     .tag(1)
                 List {
                     Section {
