@@ -217,20 +217,12 @@ struct LiveDetailView: View {
                     tagName = respJson["data"]["tags"].string ?? "[加载失败]"
                     if let upUid = respJson["data"]["uid"].int64 {
                         streamerId = upUid
-                        biliWbiSign(paramEncoded: "mid=\(upUid)".base64Encoded()) { signed in
-                            if let signed {
-                                debugPrint(signed)
-                                autoRetryRequestApi("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
-                                    if isSuccess {
-                                        if !CheckBApiError(from: respJson) { return }
-                                        streamerFaceUrl = respJson["data"]["face"].string ?? "E"
-                                        streamerName = respJson["data"]["name"].string ?? "[加载失败]"
-                                        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation/stat?vmid=\(upUid)", headers: headers) { respJson, isSuccess in
-                                            if isSuccess {
-                                                streamerFansCount = respJson["data"]["follower"].int ?? -1
-                                            }
-                                        }
-                                    }
+                        Task {
+                            if let info = await BiliAPI.shared.userInfo(of: String(upUid)) {
+                                streamerFaceUrl = info.face
+                                streamerName = info.name
+                                if let relation = await BiliAPI.shared.userRelation(of: String(upUid)) {
+                                    streamerFansCount = relation.follower
                                 }
                             }
                         }

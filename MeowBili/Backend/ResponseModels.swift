@@ -23,29 +23,29 @@ struct UserInfo: Identifiable {
     let id: Int64
     let sex: String
     let level: Int
-    let coins: Double?
+    let coins: Double
     let face: String
     let vip: VIPDetail?
     let birthday: String
-    let official: OfficialDetail?
+    let official: OfficialDetail
     let name: String
     let sign: String
     
     init(json: JSON) {
-        self.id = json["mid"].int64Value
-        self.sex = json["sex"].string/
-        self.level = json["level"].int ?? 0
-        self.coins = json["coins"].double ?? 0
-        self.face = json["face"].string/
-        if json["vip"].dictionary != nil {
-            self.vip = .init(json: json["vip"])
+        self.id = json["data"]["mid"].int64Value
+        self.sex = json["data"]["sex"].string/
+        self.level = json["data"]["level"].int ?? 0
+        self.coins = json["data"]["coins"].double ?? -1
+        self.face = json["data"]["face"].string/
+        if json["data"]["vip"].dictionary != nil {
+            self.vip = .init(json: json["data"]["vip"])
+        } else {
+            self.vip = nil
         }
-        self.birthday = json["birthday"].string ?? "01-01"
-        if json["official"].dictionary != nil {
-            self.official = .init(json: json["official"])
-        }
-        self.name = json["name"].string/
-        self.sign = json["sign"].string/
+        self.birthday = json["data"]["birthday"].string ?? "01-01"
+        self.official = .init(json: json["data"]["official"])
+        self.name = json["data"]["name"].string/
+        self.sign = json["data"]["sign"].string/
     }
     
     struct VIPDetail {
@@ -75,5 +75,15 @@ struct UserInfo: Identifiable {
             self.role = json["role"].int ?? 0
             self.type = json["type"].int ?? 0
         }
+    }
+}
+
+struct UserRelation {
+    let following: Int
+    let follower: Int
+    
+    init(json: JSON) {
+        self.following = json["following"].int ?? -1
+        self.follower = json["follower"].int ?? -1
     }
 }
