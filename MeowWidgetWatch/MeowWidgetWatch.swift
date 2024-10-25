@@ -1,9 +1,9 @@
 //
 //
-//  MeowWidget.swift
-//  MeowWidgetExtension
+//  MeowWidgetWatch.swift
+//  MeowWidgetWatchExtension
 //
-//  Created by feng on 10/19/24.
+//  Created by feng on 10/25/24.
 //
 //===----------------------------------------------------------------------===//
 //
@@ -23,18 +23,16 @@ import Intents
 struct MeowWidgetEntry: TimelineEntry {
     let date: Date
     let videoTitle: String
-    let videoDescription: String
     let videoAuthor: String
-    let videoViews: String
 }
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> MeowWidgetEntry {
-        MeowWidgetEntry(date: Date(), videoTitle: "miku miku oo ee oo", videoDescription: "https://twitter.com/i/status/1697029186777706544 channel（twi:_CASTSTATION）", videoAuthor: "未来de残像", videoViews: "365.4万")
+        MeowWidgetEntry(date: Date(), videoTitle: "miku miku oo ee oo", videoAuthor: "未来de残像")
     }
 
     func getSnapshot(in context: Context, completion: @escaping (MeowWidgetEntry) -> ()) {
-        let entry = MeowWidgetEntry(date: Date(), videoTitle: "视频名称", videoDescription: "描述", videoAuthor: "作者", videoViews: "播放量")
+        let entry = MeowWidgetEntry(date: Date(), videoTitle: "视频名称", videoAuthor: "作者")
         completion(entry)
     }
 
@@ -60,9 +58,7 @@ struct Provider: TimelineProvider {
                     let entry = MeowWidgetEntry(
                         date: entryDate,
                         videoTitle: video.title,
-                        videoDescription: video.description,
-                        videoAuthor: video.author,
-                        videoViews: video.views
+                        videoAuthor: video.author
                     )
                     entries.append(entry)
                 }
@@ -71,7 +67,7 @@ struct Provider: TimelineProvider {
                 let timeline = Timeline(entries: entries, policy: .after(nextUpdateDate))
                 completion(timeline)
             } else {
-                let entry = MeowWidgetEntry(date: Date(), videoTitle: "暂无数据", videoDescription: "", videoAuthor: "", videoViews: "")
+                let entry = MeowWidgetEntry(date: Date(), videoTitle: "暂无数据", videoAuthor: "")
                 completion(Timeline(entries: [entry], policy: .atEnd))
             }
         }
@@ -93,38 +89,13 @@ struct MeowWidgetEntryView: View {
             Spacer().frame(height: 10)
 
             switch family {
-            case .systemSmall:
-                Text("在喵哩喵哩查看视频")
-                    .font(.headline)
-                
-            case .systemMedium:
+            case .accessoryCircular, .accessoryRectangular:
                 Text(entry.videoTitle)
                     .font(.headline)
-                Text(entry.videoDescription)
-                    .font(.subheadline)
-                Spacer()
-                
-            case .systemLarge:
-                Text(entry.videoTitle)
-                    .font(.headline)
-                Text(entry.videoDescription)
-                    .font(.subheadline)
-                Spacer()
-                VStack(alignment: .leading) {
-                    Text("作者: \(entry.videoAuthor)")
-                        .font(.footnote)
-                    Text("播放量: \(entry.videoViews)")
-                        .font(.footnote)
-                }
-                Text("在喵哩喵哩查看更多内容")
-                    .font(.footnote)
-                    .foregroundColor(.gray)
 
             default:
                 Text(entry.videoTitle)
                     .font(.headline)
-                Text(entry.videoDescription)
-                    .font(.subheadline)
             }
         }
         .padding()
@@ -141,6 +112,6 @@ struct MeowWidget: Widget {
         }
         .configurationDisplayName("喵哩喵哩小组件")
         .description("热门或推荐的视频内容")
-        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
+        .supportedFamilies([.accessoryCircular, .accessoryRectangular])
     }
 }
