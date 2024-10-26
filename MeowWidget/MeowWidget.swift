@@ -51,10 +51,12 @@ struct Provider: TimelineProvider {
                 allVideos.append(contentsOf: recommendationsVideos)
             }
 
+            // 如果有数据，则创建entries
             if !allVideos.isEmpty {
                 var entries: [MeowWidgetEntry] = []
                 let currentDate = Date()
                 
+                // 每隔 10 分钟轮播一个视频
                 for (index, video) in allVideos.enumerated() {
                     let entryDate = Calendar.current.date(byAdding: .minute, value: index * 10, to: currentDate) ?? currentDate
                     let entry = MeowWidgetEntry(
@@ -78,7 +80,7 @@ struct Provider: TimelineProvider {
     }
 }
 
-struct MeowWidgetEntryView: View {
+struct MeowWidgetEntryView : View {
     var entry: Provider.Entry
     @Environment(\.widgetFamily) var family
 
@@ -109,16 +111,23 @@ struct MeowWidgetEntryView: View {
                     .font(.headline)
                 Text(entry.videoDescription)
                     .font(.subheadline)
+                Text("作者: \(entry.videoAuthor)")
+                    .font(.footnote)
+                Text("播放量: \(entry.videoViews)")
+                    .font(.footnote)
                 Spacer()
-                VStack(alignment: .leading) {
-                    Text("作者: \(entry.videoAuthor)")
-                        .font(.footnote)
-                    Text("播放量: \(entry.videoViews)")
-                        .font(.footnote)
-                }
                 Text("在喵哩喵哩查看更多内容")
                     .font(.footnote)
                     .foregroundColor(.gray)
+
+            case .accessoryCircular, .accessoryRectangular:
+                if entry.videoTitle == "打开喵哩喵哩" {
+                    Text("打开喵哩喵哩")
+                        .font(.headline)
+                } else {
+                    Text(entry.videoTitle)
+                        .font(.headline)
+                }
 
             default:
                 Text(entry.videoTitle)
@@ -132,6 +141,7 @@ struct MeowWidgetEntryView: View {
     }
 }
 
+
 struct MeowWidget: Widget {
     let kind: String = "MeowWidget"
 
@@ -141,6 +151,14 @@ struct MeowWidget: Widget {
         }
         .configurationDisplayName("喵哩喵哩小组件")
         .description("热门或推荐的视频内容")
-        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
+        .supportedFamilies(families)
+    }
+    
+    private var families: [WidgetFamily] {
+        #if os(watchOS)
+        return [.accessoryCircular, .accessoryRectangular]
+        #else
+        return [.systemSmall, .systemMedium, .systemLarge, .accessoryCircular, .accessoryRectangular]
+        #endif
     }
 }
