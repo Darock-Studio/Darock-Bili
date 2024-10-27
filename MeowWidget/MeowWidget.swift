@@ -30,7 +30,7 @@ struct MeowWidgetEntry: TimelineEntry {
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> MeowWidgetEntry {
-        MeowWidgetEntry(date: Date(), videoTitle: "视频名称", videoDescription: "描述", videoAuthor: "作者", videoViews: "播放量")
+        MeowWidgetEntry(date: Date(), videoTitle: "miku miku oo ee oo", videoDescription: "https://twitter.com/i/status/1697029186777706544 channel（twi:_CASTSTATION）", videoAuthor: "未来de残像", videoViews: "365.4万")
     }
 
     func getSnapshot(in context: Context, completion: @escaping (MeowWidgetEntry) -> ()) {
@@ -80,16 +80,13 @@ struct Provider: TimelineProvider {
     }
 }
 
-struct MeowWidgetEntryView : View {
+struct MeowWidgetEntryView: View {
     var entry: Provider.Entry
     @Environment(\.widgetFamily) var family
 
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Image("MeowBili")
-                    .resizable()
-                    .frame(width: 24, height: 24)
                 Text("喵哩喵哩")
                     .font(.headline)
                     .foregroundColor(Color("WidgetTitleColor"))
@@ -99,7 +96,7 @@ struct MeowWidgetEntryView : View {
 
             switch family {
             case .systemSmall:
-                Text(entry.videoTitle)
+                Text("在喵哩喵哩查看视频")
                     .font(.headline)
                 
             case .systemMedium:
@@ -107,22 +104,20 @@ struct MeowWidgetEntryView : View {
                     .font(.headline)
                 Text(entry.videoDescription)
                     .font(.subheadline)
-                Spacer()
-                Text("在喵哩喵哩查看更多内容")
-                    .font(.footnote)
-                    .foregroundColor(.gray)
                 
             case .systemLarge:
                 Text(entry.videoTitle)
                     .font(.headline)
                 Text(entry.videoDescription)
                     .font(.subheadline)
-                Text("作者: \(entry.videoAuthor)")
-                    .font(.footnote)
-                Text("播放量: \(entry.videoViews)")
-                    .font(.footnote)
+                VStack(alignment: .leading) {
+                    Text("作者: \(entry.videoAuthor)")
+                        .font(.footnote)
+                    Text("播放量: \(entry.videoViews)")
+                        .font(.footnote)
+                }
                 Spacer()
-                Text("在喵哩喵哩查看更多内容")
+                Text("在喵哩喵哩查看视频")
                     .font(.footnote)
                     .foregroundColor(.gray)
 
@@ -143,7 +138,6 @@ struct MeowWidgetEntryView : View {
             }
         }
         .padding()
-        .background(Color("WidgetBackgroundColor"))
         .widgetURL(URL(string: "meowbili://")!)
     }
 }
@@ -156,7 +150,7 @@ struct MeowWidget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             MeowWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("喵哩喵哩Widget")
+        .configurationDisplayName("喵哩喵哩小组件")
         .description("热门或推荐的视频内容")
         .supportedFamilies(families)
     }
