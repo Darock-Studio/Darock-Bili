@@ -202,9 +202,6 @@
 		8CF148962CC40A4C00C13711 /* BiliAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF148922CC403BF00C13711 /* BiliAPI.swift */; };
 		8CF148972CC40AAB00C13711 /* ResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF148942CC4040E00C13711 /* ResponseModels.swift */; };
 		8CF148982CC40AAB00C13711 /* ResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF148942CC4040E00C13711 /* ResponseModels.swift */; };
-		B230F2E72CCD47F700DB5A3A /* MeowWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B813872CC3D0ED00C69D17 /* MeowWidget.swift */; };
-		B230F2E82CCD47F800DB5A3A /* MeowWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B813872CC3D0ED00C69D17 /* MeowWidget.swift */; };
-		B230F2E92CCD47FF00DB5A3A /* MeowWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B813832CC3D0ED00C69D17 /* MeowWidgetBundle.swift */; };
 		B2B8137F2CC3D0ED00C69D17 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B8137E2CC3D0ED00C69D17 /* WidgetKit.framework */; };
 		B2B813812CC3D0ED00C69D17 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B813802CC3D0ED00C69D17 /* SwiftUI.framework */; };
 		B2B813842CC3D0ED00C69D17 /* MeowWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B813832CC3D0ED00C69D17 /* MeowWidgetBundle.swift */; };
@@ -1258,7 +1255,6 @@
 				8CA7CCA62B77B315008E587F /* CommentsView.swift in Sources */,
 				8CA7CC6F2B77AEB4008E587F /* SearchView.swift in Sources */,
 				8C2DFCB02C4AA15C003AEC67 /* NewFeaturesView.swift in Sources */,
-				B230F2E92CCD47FF00DB5A3A /* MeowWidgetBundle.swift in Sources */,
 				8CA7CCD82B77B54F008E587F /* LivePlayerView.swift in Sources */,
 				8CA7CCB62B77B3BF008E587F /* UserDetailView.swift in Sources */,
 				8CA7CCCE2B77B4DF008E587F /* DynamicSendView.swift in Sources */,
@@ -1311,7 +1307,6 @@
 				8CA7CC992B77B127008E587F /* SkinDownloadView.swift in Sources */,
 				8CA7CCDA2B77B55F008E587F /* LiveDetailView.swift in Sources */,
 				8CA7CC6C2B77AE80008E587F /* DownloadObj.swift in Sources */,
-				B230F2E72CCD47F700DB5A3A /* MeowWidget.swift in Sources */,
 				8CC3D55D2B7CC936005636DC /* OCCodeExt.m in Sources */,
 				8C3C52F62CBAE79B00622CE4 /* SeasonArchiveListView.swift in Sources */,
 				8CA7CCD12B77B504008E587F /* BangumiDetailView.swift in Sources */,
@@ -1381,7 +1376,6 @@
 				8CBFF0DE2B85E55F00350E0F /* DownloadsView.swift in Sources */,
 				8CBFF0C92B85E55F00350E0F /* BangumiDownloadView.swift in Sources */,
 				8CBFF0D52B85E55F00350E0F /* SettingsView.swift in Sources */,
-				B230F2E82CCD47F800DB5A3A /* MeowWidget.swift in Sources */,
 				8CBFF0BB2B85E55F00350E0F /* DynamicDetailView.swift in Sources */,
 				8C3C52F72CBAE79B00622CE4 /* SeasonArchiveListView.swift in Sources */,
 				8CBFF0E42B85E55F00350E0F /* BangumiDetailView.swift in Sources */,
