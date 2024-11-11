@@ -166,18 +166,18 @@ Meowbili's Version number is **different** on GitHub and TestFlight(Same on abou
 So, we only add build number on Testflight. However, on Github we use easy to understand version number. We recommanded to use version number on Github to identity Meowbili.
 
 ## 💬User Comments
-~~When people used this, they all say good~~
+~~When people used this, they all say good.~~
 
 > [!TIP]
-> When I found that I could browse Bilibili directly on Apple Watch, my excitement was imaginable. This is thanks to the small and powerful application of Meowbili.As a smart watch that never leaves my hands all day long, Apple Watch is not only a time display and motion tracking for me, but also has gradually evolved into a little secretary in my daily life. But now, with the emergence of Meowbili, its functions have become richer and richer, and my entertainment life has also improved.
+> The time I found that I could watch Bilibili directly on Apple Watch, my excitement was imaginable. That's incredable! Thanks to the small and powerful application "Meowbili". As a device that never leaves my hands all day long, Apple Watch is not only a device that displays time or tracks motion, but also has been a little secretary in my daily life. But now, with the emergence of Meowbili, its functions have become richer and richer, and the quality of my life has also improved.
 > 
-> The first thing to appreciate is the design of Meowbili. This app is excellently optimized for the small screen of Apple Watch. Its interface is clean and intuitive, which is convenient for users to quickly browse and search for content with limited screen size. The font size and button layout take into account the convenience of touch and will not make people feel crowded or difficult to operate.
+> The First thing I want to appreciate is the design of Meowbili. This app is excellently optimized for the small screen of Apple Watch. Its interface is clean and intuitive, which is convenient for users to quickly browse and search for content with limited screen size. The font size and button layout take into account the peculiarity of touch on small screens and will not make people difficult to operate.
 > 
-> Secondly, the practicality of functions is also my favorite. Although the screen of Apple Watch is not suitable for watching videos for a long time, Meowbili allows me to quickly check the updates in my spare time, keep abreast of the latest developments, and even watch some short videos or listen to the voice of the uploader when it is inconvenient to take out the mobile phone. This kind of experience makes me feel very convenient.
+> Secondly, I also in favor of its functions. Although the screen of Apple Watch is not suitable for watching videos for a long time, Meowbili allows me to quickly check the updates in my spare time ~~at school~~, learn about latest trends, watch videos and listen to the voice of ups the time inconvenient to take out the mobile phone. This kind of experience makes me feel very convenient.
 > 
-> Generally speaking, Meowbili not only adds fun to my daily use of Apple Watch, but also meets my needs as a video content enthusiast. It is a must-have application for users who like to stay online at any time and anywhere.
+> Generally speaking, Meowbili not only adds fun to my daily use of Apple Watch, but also meets my needs as a video enthusiast. It is a must-have app for users who like to stay online at any time and anywhere (~~school~~).
 > 
-> ————Ling Changjing
+> ————Malody Rin
 
 > [!TIP]
 > If I am first year in high school,
