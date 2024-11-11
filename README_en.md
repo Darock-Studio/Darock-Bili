@@ -177,7 +177,7 @@ So, we only add build number on Testflight. However, on Github we use easy to un
 > 
 > Generally speaking, Meowbili not only adds fun to my daily use of Apple Watch, but also meets my needs as a video enthusiast. It is a must-have app for users who like to stay online at any time and anywhere (~~school~~).
 > 
-> ————Malody Rin
+> ————Created with ChatGPT 3.5 by Malody Rin with optimization
 
 > [!TIP]
 > If I am first year in high school,
