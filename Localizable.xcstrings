@@ -9253,16 +9253,6 @@
         }
       }
     },
-    "作者: %@ | 播放量: %@" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "作者: %1$@ | 播放量: %2$@"
-          }
-        }
-      }
-    },
     "你要存储当前的草稿吗？" : {
       "localizations" : {
         "en" : {

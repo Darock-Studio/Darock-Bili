@@ -1,0 +1,86 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.0.2 effective-5.10 (swiftlang-6.0.2.1.2 clang-1600.0.26.4)
+// swift-module-flags: -target arm64_32-apple-watchos9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name NotifKit
+@_exported import NotifKit
+import OSLog
+import Swift
+import SwiftUI
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+public struct NKTipPresentationData {
+  public var text: Swift.String
+  public var symbol: Swift.String
+  public init(text: Foundation.LocalizedStringResource, symbol: Swift.String)
+  @_disfavoredOverload public init(text: Swift.String, symbol: Swift.String)
+}
+public struct NKTipper {
+  public static let scaleStyle: NotifKit.NKTipper
+  public static let slideStyle: NotifKit.NKTipper
+  public init<AppearenceBackground>(_ appearance: NotifKit.NKTipAppearence<AppearenceBackground>) where AppearenceBackground : NotifKit._NKBackground
+  public init(transition: SwiftUICore.AnyTransition, @SwiftUICore.ViewBuilder customView: @escaping (NotifKit.NKTipPresentationData) -> some View)
+  public func present(text: Foundation.LocalizedStringResource, symbol: Swift.String, duration: Foundation.TimeInterval = 3.0)
+  @_disfavoredOverload public func present(text: Swift.String, symbol: Swift.String, duration: Foundation.TimeInterval = 3.0)
+  public func present(_ data: NotifKit.NKTipPresentationData, duration: Foundation.TimeInterval = 3.0)
+}
+public struct NKTipAppearence<Background> where Background : NotifKit._NKBackground {
+  public let background: Background
+  public let transition: NotifKit.NKTipAppearence<Background>.PresentationTransition
+  public let animation: SwiftUICore.Animation?
+  public let textConfiguration: NotifKit.NKTipAppearence<Background>.TextConfiguration
+  public init(background: Background, transition: NotifKit.NKTipAppearence<Background>.PresentationTransition, animation: SwiftUICore.Animation? = nil, textConfiguration: NotifKit.NKTipAppearence<Background>.TextConfiguration = .init())
+  public enum PresentationTransition {
+    case scale
+    case slide
+    case custom(SwiftUICore.AnyTransition)
+  }
+  public struct TextConfiguration {
+    public let truncation: NotifKit.NKTipAppearence<Background>.TextConfiguration.TruncationMode
+    public let font: UIKit.UIFont
+    public let color: SwiftUICore.Color
+    public init(truncation: NotifKit.NKTipAppearence<Background>.TextConfiguration.TruncationMode = .scale, font: UIKit.UIFont = .boldSystemFont(ofSize: 14), color: SwiftUICore.Color? = nil)
+    public enum TruncationMode {
+      case ellipses
+      case scale
+      case marquee
+      public static func == (a: NotifKit.NKTipAppearence<Background>.TextConfiguration.TruncationMode, b: NotifKit.NKTipAppearence<Background>.TextConfiguration.TruncationMode) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
+      public var hashValue: Swift.Int {
+        get
+      }
+    }
+  }
+}
+public protocol _NKBackground {
+  func _addBackground(@SwiftUICore.ViewBuilder to view: () -> some View) -> SwiftUICore.AnyView
+}
+@available(watchOS 10.0, *)
+public struct NKMaterialBackground : NotifKit._NKBackground {
+  public let material: SwiftUICore.Material
+  public let cornerRadius: CoreFoundation.CGFloat
+  public init(material: SwiftUICore.Material, cornerRadius: CoreFoundation.CGFloat = 14)
+}
+public struct NKCompatibleMaterialBackground : NotifKit._NKBackground {
+  public let material: NotifKit.NKCompatibleMaterialBackground.CompatibleMaterial
+  public let cornerRadius: CoreFoundation.CGFloat
+  public init(material: NotifKit.NKCompatibleMaterialBackground.CompatibleMaterial, cornerRadius: CoreFoundation.CGFloat = 14)
+  public enum CompatibleMaterial : Swift.Sendable {
+    case regular
+    case thick
+    case thin
+    case ultraThin
+    case ultraThick
+    public static func == (a: NotifKit.NKCompatibleMaterialBackground.CompatibleMaterial, b: NotifKit.NKCompatibleMaterialBackground.CompatibleMaterial) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+public struct NKShapeBackground<ShapeType> : NotifKit._NKBackground where ShapeType : SwiftUICore.Shape {
+  public init(shape: ShapeType)
+}
+extension NotifKit.NKTipAppearence.TextConfiguration.TruncationMode : Swift.Equatable {}
+extension NotifKit.NKTipAppearence.TextConfiguration.TruncationMode : Swift.Hashable {}
+extension NotifKit.NKCompatibleMaterialBackground.CompatibleMaterial : Swift.Equatable {}
+extension NotifKit.NKCompatibleMaterialBackground.CompatibleMaterial : Swift.Hashable {}

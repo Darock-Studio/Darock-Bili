@@ -26,6 +26,7 @@ import SDWebImageSVGCoder
 import SDWebImageWebPCoder
 #if os(watchOS)
 import WatchKit
+import NotifKit
 #else
 import CoreHaptics
 #endif
@@ -39,10 +40,6 @@ var debugBuild: Bool {
     false
     #endif
 }
-
-var pShowTipText = ""
-var pShowTipSymbol = ""
-var pIsShowingTip = false
 
 var isShowMemoryInScreen = false
 
@@ -133,9 +130,6 @@ struct DarockBili_Watch_AppApp: App {
     @AppStorage("IsReduceBrightness") var isReduceBrightness = false
     @AppStorage("ReduceBrightnessPercent") var reduceBrightnessPercent = 0.1
     @State var screenTimeCaculateTimer: Timer?
-    @State var showTipText = ""
-    @State var showTipSymbol = ""
-    @State var isShowingTip = false
     @State var isLowBatteryMode = false
     // Debug Controls
     @State var isShowingDebugControls = false
@@ -200,30 +194,6 @@ struct DarockBili_Watch_AppApp: App {
                 ZStack {
                     #if os(watchOS)
                     ContentView()
-                    VStack {
-                        Spacer()
-                        if isShowingTip {
-                            HStack {
-                                Image(systemName: showTipSymbol)
-                                Text(showTipText)
-                            }
-                            .font(.system(size: 14, weight: .bold))
-                            .frame(width: WKInterfaceDevice.current().screenBounds.width - 20, height: 50)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.1)
-                            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
-                            .transition(
-                                AnyTransition
-                                    .opacity
-                                    .combined(with: .scale)
-                                    .animation(.bouncy(duration: 0.35))
-                            )
-                        }
-                        Spacer()
-                            .frame(height: 15)
-                    }
-                    .ignoresSafeArea()
-                    .allowsHitTesting(false)
                     if isReduceBrightness {
                         Rectangle()
                             .fill(Color.black)
@@ -286,13 +256,8 @@ struct DarockBili_Watch_AppApp: App {
                     isInLowBatteryMode = UserDefaults.standard.bool(forKey: "IsInLowBatteryMode")
                     #endif
                     
-                    Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
-                        showTipText = pShowTipText
-                        showTipSymbol = pShowTipSymbol
+                    Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
                         UserDefaults.standard.set(isLowBatteryMode, forKey: "IsInLowBatteryMode")
-                        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
-                            isShowingTip = pIsShowingTip
-                        }
                     }
                     
                     Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
@@ -448,12 +413,9 @@ struct DarockBili_Watch_AppApp: App {
 }
 
 public func tipWithText(_ text: String, symbol: String = "", time: Double = 3.0) {
-    pShowTipText = text
-    pShowTipSymbol = symbol
-    pIsShowingTip = true
-    Timer.scheduledTimer(withTimeInterval: time, repeats: false) { _ in
-        pIsShowingTip = false
-    }
+    #if os(watchOS)
+    NKTipper.scaleStyle.present(text: text, symbol: symbol, duration: time)
+    #endif
 }
 
 #if !os(watchOS)
