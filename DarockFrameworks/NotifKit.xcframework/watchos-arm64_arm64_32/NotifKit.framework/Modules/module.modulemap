@@ -1,0 +1,6 @@
+framework module NotifKit {
+  umbrella header "NotifKit.h"
+  export *
+
+  module * { export * }
+}
