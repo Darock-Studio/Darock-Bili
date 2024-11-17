@@ -97,7 +97,7 @@ struct CommentsView: View {
                             if !comments[i]["Pictures"]!.isEmpty {
                                 let picUrls = comments[i]["Pictures"]!.components(separatedBy: "|")
                                 ForEach(0..<picUrls.count, id: \.self) { i in
-                                    WebImage(url: URL(string: picUrls[i]))
+                                    WebImage(url: URL(string: picUrls[i] + "@200h"))
                                         .resizable()
                                         .scaledToFit()
                                         .cornerRadius(10)
