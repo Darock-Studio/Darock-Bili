@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1600"
-   version = "1.7">
+   LastUpgradeVersion = "1610"
+   wasCreatedForAppExtension = "YES"
+   version = "2.0">
    <BuildAction
       parallelizeBuildables = "YES"
-      buildImplicitDependencies = "YES">
+      buildImplicitDependencies = "YES"
+      buildArchitectures = "Automatic">
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
@@ -14,9 +16,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8CA7CBCE2B77AC4C008E587F"
-               BuildableName = "&#x55b5;&#x54e9;&#x55b5;&#x54e9;.app"
-               BlueprintName = "MeowBili Watch App"
+               BlueprintIdentifier = "B2B8137C2CC3D0ED00C69D17"
+               BuildableName = "MeowWidgetExtension.appex"
+               BlueprintName = "MeowWidgetExtension"
                ReferencedContainer = "container:DarockBili.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,67 +44,62 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
-      <Testables>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8C2DFCB42C4E6B2B003AEC67"
-               BuildableName = "MeowBiliTests.xctest"
-               BlueprintName = "MeowBiliTests"
-               ReferencedContainer = "container:DarockBili.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8CC5B73F2B8749BC00BAD89E"
-               BuildableName = "MeowBiliUITests.xctest"
-               BlueprintName = "MeowBiliUITests"
-               ReferencedContainer = "container:DarockBili.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = "zh-Hans"
+      selectedDebuggerIdentifier = ""
+      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
       launchStyle = "0"
+      askForAppToLaunch = "Yes"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
-      notificationPayloadFile = "Examples/SDWebImage Watch Demo Extension/PushNotificationPayload.apns">
+      launchAutomaticallySubstyle = "2">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8CA7CBCE2B77AC4C008E587F"
-            BuildableName = "&#x55b5;&#x54e9;&#x55b5;&#x54e9;.app"
-            BlueprintName = "MeowBili Watch App"
+            BlueprintIdentifier = "8CA7CBBF2B77AC4A008E587F"
+            BuildableName = "MeowBili.app"
+            BlueprintName = "MeowBili"
             ReferencedContainer = "container:DarockBili.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "_XCWidgetKind"
+            value = ""
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "_XCWidgetDefaultView"
+            value = "timeline"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "_XCWidgetFamily"
+            value = "systemMedium"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      debugDocumentVersioning = "YES">
+      debugDocumentVersioning = "YES"
+      askForAppToLaunch = "Yes"
+      launchAutomaticallySubstyle = "2">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8CA7CBCE2B77AC4C008E587F"
-            BuildableName = "&#x55b5;&#x54e9;&#x55b5;&#x54e9;.app"
-            BlueprintName = "MeowBili Watch App"
+            BlueprintIdentifier = "8CA7CBBF2B77AC4A008E587F"
+            BuildableName = "MeowBili.app"
+            BlueprintName = "MeowBili"
             ReferencedContainer = "container:DarockBili.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
