@@ -1,12 +1,13 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.9.10 clang-1600.0.26.2)
-// swift-module-flags: -target x86_64-apple-ios16.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name RadarKitCore
+// swift-compiler-version: Apple Swift version 6.0.2 effective-5.10 (swiftlang-6.0.2.1.2 clang-1600.0.26.4)
+// swift-module-flags: -target x86_64-apple-ios16.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature SymbolLinkageMarkers -enable-bare-slash-regex -module-name RadarKitCore
 import CommonCrypto
 import Foundation
 import OSLog
 @_exported import RadarKitCore
 import Swift
 import SwiftUI
+import UIKit
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
@@ -46,11 +47,10 @@ postfix operator /
 public struct RKCFeedback : Swift.Identifiable {
   public let id: Swift.String
   public var title: Swift.String
-  public var state: RadarKitCore.RKCFileState
+  public var state: RadarKitCore.RKCFileStatus
   public var rawText: Swift.String
   public var _formattedTexts: [Swift.String]
   public var _replies: [[Swift.String]]
-  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
   public typealias ID = Swift.String
 }
 extension RadarKitCore.RKCFeedback {
@@ -63,7 +63,8 @@ public struct NewFeedbackData {
   public var content: Swift.String
   public var sender: Swift.String
   public var additionalData: RadarKitCore.NewFeedbackData.AdditionalData
-  public init(title: Swift.String, content: Swift.String, sender: Swift.String, additionalData: RadarKitCore.NewFeedbackData.AdditionalData = .dictionary([:])) throws
+  public var attachments: [RadarKitCore.RKCAttachment]
+  public init(title: Swift.String, content: Swift.String, sender: Swift.String, additionalData: RadarKitCore.NewFeedbackData.AdditionalData = .dictionary([:]), attachments: [RadarKitCore.RKCAttachment] = []) throws
   public enum InputError : Swift.Error {
     case emptyTitle
     case multilineTitle
@@ -78,33 +79,40 @@ public struct NewFeedbackData {
     case rawString(Swift.String)
   }
 }
-@objc public enum RKCFileState : Swift.Int {
-  case unmarked = 0
+public enum RKCFileStatus : Swift.String, Swift.CaseIterable, Swift.Equatable, Swift.Hashable, Swift.Codable {
+  case unmarked
+  case underInvestigation
   case workAsExpected
   case unableToFix
   case duplicate
-  case shelved
+  case futureConsideration
+  case longTermPlan
   case fixing
-  case fixedInFutureVersions
-  case fixed
-  case loading
+  case fixPendingRelease
+  case fixCompleted
   case cannotReproduce
-  case unrelated
   case detailsRequired
-  public var tintColor: SwiftUICore.Color {
+  case unrelated
+  case undefined
+  public init(_rawValue rawValue: Swift.String)
+  public init?(rawValue: Swift.String)
+  public typealias AllCases = [RadarKitCore.RKCFileStatus]
+  public typealias RawValue = Swift.String
+  nonisolated public static var allCases: [RadarKitCore.RKCFileStatus] {
     get
   }
-  public var symbol: Swift.String {
-    get
-  }
-  public init?(rawValue: Swift.Int)
-  public typealias RawValue = Swift.Int
-  public var rawValue: Swift.Int {
+  public var rawValue: Swift.String {
     get
   }
 }
+@objc @_inheritsConvenienceInitializers @objcMembers public class RKCAttachmentManager : ObjectiveC.NSObject {
+  @objc public static let shared: RadarKitCore.RKCAttachmentManager
+  public func attachImage(_ image: UIKit.UIImage) async -> RadarKitCore.RKCAttachment?
+  @objc override dynamic public init()
+  @objc deinit
+}
+public struct RKCAttachment {
+}
 extension RadarKitCore.NewFeedbackData.InputError : Swift.Equatable {}
 extension RadarKitCore.NewFeedbackData.InputError : Swift.Hashable {}
-extension RadarKitCore.RKCFileState : Swift.Equatable {}
-extension RadarKitCore.RKCFileState : Swift.Hashable {}
-extension RadarKitCore.RKCFileState : Swift.RawRepresentable {}
+extension RadarKitCore.RKCFileStatus : Swift.RawRepresentable {}

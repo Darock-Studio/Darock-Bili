@@ -204,6 +204,8 @@
 		8CF148962CC40A4C00C13711 /* BiliAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF148922CC403BF00C13711 /* BiliAPI.swift */; };
 		8CF148972CC40AAB00C13711 /* ResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF148942CC4040E00C13711 /* ResponseModels.swift */; };
 		8CF148982CC40AAB00C13711 /* ResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF148942CC4040E00C13711 /* ResponseModels.swift */; };
+		8CFB60072CF264F100003718 /* RadarKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CFB60062CF264F100003718 /* RadarKit.xcframework */; };
+		8CFB60082CF264F200003718 /* RadarKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8CFB60062CF264F100003718 /* RadarKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B2B8137F2CC3D0ED00C69D17 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B8137E2CC3D0ED00C69D17 /* WidgetKit.framework */; };
 		B2B813812CC3D0ED00C69D17 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B813802CC3D0ED00C69D17 /* SwiftUI.framework */; };
 		B2B813842CC3D0ED00C69D17 /* MeowWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B813832CC3D0ED00C69D17 /* MeowWidgetBundle.swift */; };
@@ -282,6 +284,7 @@
 			files = (
 				8C2026812CBBA33300D7C5F9 /* RadarKitCore.xcframework in Embed Frameworks */,
 				8C0FDC522CE91E0800D741A0 /* NotifKit.xcframework in Embed Frameworks */,
+				8CFB60082CF264F200003718 /* RadarKit.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,6 +422,7 @@
 		8CD9463A2B64CD0F005D00D0 /* Bangumi_Detail_Season.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Bangumi_Detail_Season.json; sourceTree = "<group>"; };
 		8CF148922CC403BF00C13711 /* BiliAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiliAPI.swift; sourceTree = "<group>"; };
 		8CF148942CC4040E00C13711 /* ResponseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseModels.swift; sourceTree = "<group>"; };
+		8CFB60062CF264F100003718 /* RadarKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RadarKit.xcframework; path = DarockFrameworks/RadarKit.xcframework; sourceTree = "<group>"; };
 		8CFB6B652C650FED007C7BAA /* Watch Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Watch Debug.entitlements"; sourceTree = "<group>"; };
 		8CFB6B662C650FFE007C7BAA /* Watch Release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Watch Release.entitlements"; sourceTree = "<group>"; };
 		B2B8137D2CC3D0ED00C69D17 /* MeowWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MeowWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -485,6 +489,7 @@
 				8CA7CBED2B77AC8A008E587F /* ZipArchive in Frameworks */,
 				8CA7CBF72B77AC8A008E587F /* SDWebImagePDFCoder in Frameworks */,
 				8C0FDC512CE91E0800D741A0 /* NotifKit.xcframework in Frameworks */,
+				8CFB60072CF264F100003718 /* RadarKit.xcframework in Frameworks */,
 				8C03B6DE2C280BAA000770B4 /* Cepheus in Frameworks */,
 				8CA7CBF52B77AC8A008E587F /* SDWebImageSVGCoder in Frameworks */,
 				8CA7CBE92B77AC8A008E587F /* SwiftDate in Frameworks */,
@@ -878,6 +883,7 @@
 		B4468A902B4FC8B7002CCEB2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8CFB60062CF264F100003718 /* RadarKit.xcframework */,
 				8C0FDC502CE91E0700D741A0 /* NotifKit.xcframework */,
 				8C20267C2CBBA32E00D7C5F9 /* RadarKitCore.xcframework */,
 				8CC3D5662B7CDCE1005636DC /* Intents.framework */,

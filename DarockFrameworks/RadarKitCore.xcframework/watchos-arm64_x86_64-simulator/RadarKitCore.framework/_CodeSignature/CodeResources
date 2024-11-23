@@ -10,15 +10,15 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		nHzYNWOwLAP5mKJS/9Zywmu/FfU=
+		g9Xwzz58quhNIgsR2xyHEuy7o/I=
 		</data>
 		<key>Modules/RadarKitCore.swiftmodule/Project/arm64-apple-watchos-simulator.swiftsourceinfo</key>
 		<data>
-		RUBPKS33QReycpQCoZdDCCtuIjc=
+		Sd+pHjvWQ9ky1ekEZZ3S06VDCRY=
 		</data>
 		<key>Modules/RadarKitCore.swiftmodule/Project/x86_64-apple-watchos-simulator.swiftsourceinfo</key>
 		<data>
-		OKKraKRKEMRSQxh6+r1SFUqHj84=
+		H9I0zFDvaoTUam05VpAhgH0Xf44=
 		</data>
 		<key>Modules/RadarKitCore.swiftmodule/arm64-apple-watchos-simulator.abi.json</key>
 		<data>
@@ -26,19 +26,19 @@
 		</data>
 		<key>Modules/RadarKitCore.swiftmodule/arm64-apple-watchos-simulator.private.swiftinterface</key>
 		<data>
-		FTa2or1DBNZ5U1lvNLcxFqj+Ndc=
+		sgvlQOaMm6AAdenn2XKvSHZyL28=
 		</data>
 		<key>Modules/RadarKitCore.swiftmodule/arm64-apple-watchos-simulator.swiftdoc</key>
 		<data>
-		QLE6el84mbvq+bau3fjbpq5gEwc=
+		Hd1zhAWUO0UaQYVOixVTWb5evsw=
 		</data>
 		<key>Modules/RadarKitCore.swiftmodule/arm64-apple-watchos-simulator.swiftinterface</key>
 		<data>
-		FTa2or1DBNZ5U1lvNLcxFqj+Ndc=
+		sgvlQOaMm6AAdenn2XKvSHZyL28=
 		</data>
 		<key>Modules/RadarKitCore.swiftmodule/arm64-apple-watchos-simulator.swiftmodule</key>
 		<data>
-		TIaKsynTCWs7UCH2Kp2qllaVKLo=
+		xSaDQq7E57sT6he6/kzKLOeNPp0=
 		</data>
 		<key>Modules/RadarKitCore.swiftmodule/x86_64-apple-watchos-simulator.abi.json</key>
 		<data>
@@ -46,19 +46,19 @@
 		</data>
 		<key>Modules/RadarKitCore.swiftmodule/x86_64-apple-watchos-simulator.private.swiftinterface</key>
 		<data>
-		ov0MRYUbzJowanCdsKZjy4uxfmI=
+		GKFDZT8+cvT11oJ4XDUbFqXoRSg=
 		</data>
 		<key>Modules/RadarKitCore.swiftmodule/x86_64-apple-watchos-simulator.swiftdoc</key>
 		<data>
-		4gd5U4//znvZA2oLxyRF1Ou/Yj4=
+		DJp1DMy9fOBusCOSYQT22FkX2Uo=
 		</data>
 		<key>Modules/RadarKitCore.swiftmodule/x86_64-apple-watchos-simulator.swiftinterface</key>
 		<data>
-		ov0MRYUbzJowanCdsKZjy4uxfmI=
+		GKFDZT8+cvT11oJ4XDUbFqXoRSg=
 		</data>
 		<key>Modules/RadarKitCore.swiftmodule/x86_64-apple-watchos-simulator.swiftmodule</key>
 		<data>
-		WJSEJIXW8FVs2XKcgmgwDgvzpmM=
+		QItAYpesoW/e8n+PnmF3h5kS2kY=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -78,14 +78,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			y17FbCEGVwogxwkvQ74wi6RwLIWuztHNrZH5YoL8O7E=
+			fCC3z+k6ipnnqZERwd4Os0rJSx6PnY0DFaDAUiObVPM=
 			</data>
 		</dict>
 		<key>Modules/RadarKitCore.swiftmodule/Project/x86_64-apple-watchos-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			bfCu9bhby24DVh7mDSFxIVX/2UiUvo02/rHuByDLRMY=
+			465Ola2E6pXSu2kEN5TybtK7vmC7H8GTzBiKK+amC/M=
 			</data>
 		</dict>
 		<key>Modules/RadarKitCore.swiftmodule/arm64-apple-watchos-simulator.abi.json</key>
@@ -99,28 +99,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			UKfNFmV7c7lAVO8xErNfYkuaWBbUiBKYc4Mi0LKulr0=
+			JtCrDPgLcGQ1FJfDGliu9OQTp1seF544WnRPV5dJlkA=
 			</data>
 		</dict>
 		<key>Modules/RadarKitCore.swiftmodule/arm64-apple-watchos-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			3yETuLOqdkFwkJ3DPTLvdsqwdu+hhFZWHXZf+4xE2EA=
+			wrxVWP9agMV+5R1iHjnC+grYDaTMU2S/zzRBPM1ve8U=
 			</data>
 		</dict>
 		<key>Modules/RadarKitCore.swiftmodule/arm64-apple-watchos-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			UKfNFmV7c7lAVO8xErNfYkuaWBbUiBKYc4Mi0LKulr0=
+			JtCrDPgLcGQ1FJfDGliu9OQTp1seF544WnRPV5dJlkA=
 			</data>
 		</dict>
 		<key>Modules/RadarKitCore.swiftmodule/arm64-apple-watchos-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			G+oaEkMM2dPAATMzInykU2/qISFj+JxeSo1a5pIvRBI=
+			YnII1Rvt6Wrs/CCBz8Z3yPqg+oWjH+Uu9uKAUIsXE3g=
 			</data>
 		</dict>
 		<key>Modules/RadarKitCore.swiftmodule/x86_64-apple-watchos-simulator.abi.json</key>
@@ -134,28 +134,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			2QmMLRRX3Bb4O60nFg45OgQRHndh8P2hFk90zKJa8QE=
+			y2UTSsR2hHajXHPjbxPJCJOQCT452/5VtVkG8ls5OO4=
 			</data>
 		</dict>
 		<key>Modules/RadarKitCore.swiftmodule/x86_64-apple-watchos-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			zj/sVSps91wi8tNnoBP0qmlB0IjsxWOoJBaGLyZ4q5c=
+			tzCMeBpHbF8hiWsmQe8zSkiX/DXS/m0J6OfD7qdk9wk=
 			</data>
 		</dict>
 		<key>Modules/RadarKitCore.swiftmodule/x86_64-apple-watchos-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			2QmMLRRX3Bb4O60nFg45OgQRHndh8P2hFk90zKJa8QE=
+			y2UTSsR2hHajXHPjbxPJCJOQCT452/5VtVkG8ls5OO4=
 			</data>
 		</dict>
 		<key>Modules/RadarKitCore.swiftmodule/x86_64-apple-watchos-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			G9+/WOBsDIa46eYr53POBVHhO4S7dkA+Tuji/93pGZc=
+			95oocCfa10PrpdpLr99TFvS/PkvguvrF2i69Pn3phCQ=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

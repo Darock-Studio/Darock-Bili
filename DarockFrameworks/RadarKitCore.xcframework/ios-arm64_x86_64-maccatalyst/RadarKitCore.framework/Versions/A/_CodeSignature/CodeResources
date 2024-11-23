@@ -6,7 +6,7 @@
 	<dict>
 		<key>Resources/Info.plist</key>
 		<data>
-		isSZRWeIQfxaYNijmLFIxRGyXDs=
+		e5RWYwkzEUVPJ9M9fZvbbVpkqKk=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -22,14 +22,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			1coFLirb15qpUiIjCqB54moiBnZP8YrJDYiG/WMrTLo=
+			7FTXxZ35aDFpsyiVQBmddnsCPzg97ncf0RGqlAEyumA=
 			</data>
 		</dict>
 		<key>Modules/RadarKitCore.swiftmodule/Project/x86_64-apple-ios-macabi.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			g0lwn4dGSf65S0TAgYQPo5hO3ZlqfxjLV9SaSJtx+q0=
+			Fw4XeJb3oWAoTKYxhm5MNCZQlVHH+QsoFkUVZzR8p+M=
 			</data>
 		</dict>
 		<key>Modules/RadarKitCore.swiftmodule/arm64-apple-ios-macabi.abi.json</key>
@@ -43,28 +43,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Kxfv1CeshqGmCUePEm5aoikWjsmh6lzGAzNWVxfVjes=
+			m/jE2Is6SeK4QXj5aTgFItoCoc57gSX6K3lowUjMcAY=
 			</data>
 		</dict>
 		<key>Modules/RadarKitCore.swiftmodule/arm64-apple-ios-macabi.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Rbp6oe7O1TTRYd1x0qtKIwNUDMbKil9jz+Ewbor0rlI=
+			OBQymy2/n/JBYjZbS9z7xT4HQnk9DwLGDPS92uXSyEo=
 			</data>
 		</dict>
 		<key>Modules/RadarKitCore.swiftmodule/arm64-apple-ios-macabi.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Kxfv1CeshqGmCUePEm5aoikWjsmh6lzGAzNWVxfVjes=
+			m/jE2Is6SeK4QXj5aTgFItoCoc57gSX6K3lowUjMcAY=
 			</data>
 		</dict>
 		<key>Modules/RadarKitCore.swiftmodule/arm64-apple-ios-macabi.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			yPje0jUPo+ZZw5Zsg49Y0DKdXzYVHwcwM06CSkUb0OA=
+			arFenXT/sLE++dQKLMDoNWQ6ecFMiVI4MKqd4Mg1Fis=
 			</data>
 		</dict>
 		<key>Modules/RadarKitCore.swiftmodule/x86_64-apple-ios-macabi.abi.json</key>
@@ -78,28 +78,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			MrRPqrDDDJ7AyEkF+nBQvDTiNCPWrNyZLE0JSao49po=
+			OoHBjRq827qNId06DxJhwReJA7HEI8/BUOF9zg5OY0c=
 			</data>
 		</dict>
 		<key>Modules/RadarKitCore.swiftmodule/x86_64-apple-ios-macabi.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ApKNwq94LP+KVvLx5DZ8U51OJ+pJzynQwheYu3Epxl4=
+			Fuy5stidM1RGNsfNwJFsxuzEuBONtDu1cwC9W0KzWSo=
 			</data>
 		</dict>
 		<key>Modules/RadarKitCore.swiftmodule/x86_64-apple-ios-macabi.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			MrRPqrDDDJ7AyEkF+nBQvDTiNCPWrNyZLE0JSao49po=
+			OoHBjRq827qNId06DxJhwReJA7HEI8/BUOF9zg5OY0c=
 			</data>
 		</dict>
 		<key>Modules/RadarKitCore.swiftmodule/x86_64-apple-ios-macabi.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			jM0haDd04l2cKuhCU2GYUiBSQBGgT8WWRekEjJXDJ74=
+			gQQosBGg3FjZg06sQ0b2lNvDDLwYxmj3hxWrLGWPwU0=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -113,7 +113,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			jU0valGkXHZmzvERRFYwza8+xuY1HTuC4znJoJYirCU=
+			CSRYlirc/TmK5hR2LeOyLjXrvR/120QEt417sjXOdDM=
 			</data>
 		</dict>
 	</dict>
