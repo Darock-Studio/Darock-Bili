@@ -1022,7 +1022,7 @@ struct VideoDetailView: View {
                     }
                 Spacer()
                     .frame(height: 20)
-                MarqueeText(text: videoDetails["Title"]!, font: .systemFont(ofSize: 12, weight: .bold), leftFade: 5, rightFade: 5, startDelay: 1.5)
+                MarqueeText(text: videoDetails["Title"]!, font: .systemFont(ofSize: 12, weight: .bold), leftFade: 5, rightFade: 5, startDelay: 1.5, alignment: .center)
                     .padding(.horizontal, 10)
                 Text(videoDetails["UP"]!)
                     .lineLimit(1)

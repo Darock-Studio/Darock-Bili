@@ -157,17 +157,6 @@ struct VideoPlayerView: View {
                             playerScaledOffset = .zero
                         }
                     })
-                    .frame(
-                        width: isFullScreen ? WKInterfaceDevice.current().screenBounds.height : nil,
-                        height: isFullScreen ? WKInterfaceDevice.current().screenBounds.width : nil
-                    )
-                    .offset(y: isFullScreen ? 20 : 0)
-                    .scaleEffect(playerScale)
-                    .ignoresSafeArea()
-                    .offset(playerScaledOffset)
-                    .animation(.smooth, value: cachedPlayerTimeControlStatus)
-                    .animation(.smooth, value: playerScale)
-                    ._statusBarHidden(true)
                     .overlay {
                         ZStack {
                             if isDanmakuEnabled {
@@ -199,6 +188,17 @@ struct VideoPlayerView: View {
                         }
                     }
                     .rotationEffect(.degrees(isFullScreen ? 90 : 0))
+                    .frame(
+                        width: isFullScreen ? WKInterfaceDevice.current().screenBounds.height : nil,
+                        height: isFullScreen ? WKInterfaceDevice.current().screenBounds.width : nil
+                    )
+                    .offset(y: isFullScreen ? 19 : 0)
+                    .scaleEffect(playerScale)
+                    .ignoresSafeArea()
+                    .offset(playerScaledOffset)
+                    .animation(.smooth, value: cachedPlayerTimeControlStatus)
+                    .animation(.smooth, value: playerScale)
+                    ._statusBarHidden(true)
                     .tag(1)
                 List {
                     Section {
@@ -603,7 +603,11 @@ private struct ZoomableRepresent<T>: _UIViewControllerRepresentable where T: Vie
         func handlePinchGesture(_ pinchGesture: NSObject) {
             let pinchGesture = Dynamic(pinchGesture)
             if pinchGesture.state == 1 || pinchGesture.state == 2 {
+                #if !targetEnvironment(simulator)
                 let scale = CGFloat(pinchGesture.scale.asFloat!)
+                #else
+                let scale = CGFloat(pinchGesture.scale.asDouble!)
+                #endif
                 if let onScaleChange {
                     onScaleChange(scale)
                 } else {
