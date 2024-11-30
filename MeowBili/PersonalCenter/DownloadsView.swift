@@ -25,6 +25,11 @@ import MarqueeText
 import AVFoundation
 import SDWebImageSwiftUI
 
+var downloadingProgressDataList = [(pts: PassthroughSubject<DownloadTaskDetailData, Never>, isFinished: Bool)]()
+var failedDownloadTasks = [Int]()
+var downloadResumeDatas = [Int: [String: String]]()
+var videoDownloadRequests = [DownloadRequest]()
+
 struct DownloadsView: View {
     public static var willPlayVideoPath = ""
     @State var metadatas = [[String: String]]()
@@ -140,15 +145,15 @@ struct DownloadingListView: View {
     @State var downloadProgresses = [Double]()
     @State var downloadedSizes = [Int64]()
     @State var totalSizes = [Int64]()
-    @State var localFailedDownloadTasks = Set<Int>()
+    @State var videoDetails = [[String: String]]()
+    @State var localFailedDownloadTasks = [Int]()
     @State var localVariableUpdateTimer: Timer?
-    @State var isRefreshing = false
     var body: some View {
         List {
-            if !videoDownloadRequests.isEmpty && !isRefreshing {
-                ForEach(0..<videoDownloadRequests.count, id: \.self) { i in
-                    if !localFailedDownloadTasks.contains(videoDownloadRequests[i].taskIdentifier) {
-                        if downloadProgresses[from: i] != 1.0 {
+            if downloadingProgressDataList.count != 0 && totalSizes.count != 0 {
+                ForEach(0..<downloadingProgressDataList.count, id: \.self) { i in
+                    if !localFailedDownloadTasks.contains(i) {
+                        if !(downloadingProgressDataList[from: i]?.isFinished ?? false) && downloadProgresses[from: i] != 1.0 {
                             if let downloadProgress = downloadProgresses[from: i], let downloadSize = downloadedSizes[from: i], let totalSize = totalSizes[from: i] {
                                 VStack {
                                     HStack {
@@ -157,7 +162,7 @@ struct DownloadingListView: View {
                                             .bold()
                                         Spacer()
                                     }
-                                    MarqueeText(text: videoDownloadDetails[videoDownloadRequests[i].taskIdentifier]?["Title"] ?? "", font: .systemFont(ofSize: 17), leftFade: 5, rightFade: 5, startDelay: 1.5)
+                                    MarqueeText(text: videoDetails[i]["Title"] ?? "", font: .systemFont(ofSize: 17), leftFade: 5, rightFade: 5, startDelay: 1.5)
                                     ProgressView(value: downloadProgress * 100, total: 100.0)
                                     HStack {
                                         Spacer()
@@ -180,10 +185,11 @@ struct DownloadingListView: View {
                                         Image(systemName: "xmark.circle.fill")
                                     })
                                 }
-                                .onReceive(videoDownloadRequests[i].progress.publisher(for: \.completedUnitCount)) { _ in
-                                    downloadProgresses[i] = videoDownloadRequests[i].progress.fractionCompleted
-                                    downloadedSizes[i] = videoDownloadRequests[i].progress.completedUnitCount
-                                    totalSizes[i] = videoDownloadRequests[i].progress.totalUnitCount
+                                .onReceive(downloadingProgressDataList[i].pts) { data in
+                                    downloadProgresses[i] = data.data.progress
+                                    downloadedSizes[i] = data.data.currentSize
+                                    totalSizes[i] = data.data.totalSize
+                                    videoDetails[i] = data.videoDetails
                                 }
                             }
                         } else {
@@ -200,16 +206,34 @@ struct DownloadingListView: View {
                         }
                     } else {
                         Button(action: {
-                            if let resumeData = try? Data(contentsOf: URL(filePath: NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(videoDownloadRequests[i].taskIdentifier).drkdatav")) {
-                                let task = videoDownloadSession.downloadTask(withResumeData: resumeData)
-                                if let sourceDetails = videoDownloadDetails[videoDownloadRequests[i].taskIdentifier] {
-                                    videoDownloadDetails.removeValue(forKey: videoDownloadRequests[i].taskIdentifier)
-                                    videoDownloadDetails.updateValue(sourceDetails, forKey: task.taskIdentifier)
+                            DispatchQueue(label: "com.darock.DarockBili.VideoDownload", qos: .background).async {
+                                if let resumeData = try? Data(contentsOf: URL(filePath: NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(i).drkdatav")) {
+                                    failedDownloadTasks.remove(at: i)
+                                    AF.download(resumingWith: resumeData)
+                                        .downloadProgress { p in
+                                            downloadingProgressDataList[i].pts.send(.init(data: .init(progress: p.fractionCompleted, currentSize: p.completedUnitCount, totalSize: p.totalUnitCount), videoDetails: downloadResumeDatas[i]!))
+                                        }
+                                        .response { r in
+                                            if r.error == nil, let filePath = r.fileURL?.path {
+                                                debugPrint(filePath)
+                                                debugPrint(downloadResumeDatas[i]!["BV"] ?? "")
+                                                var detTmp = downloadResumeDatas[i] ?? [:]
+                                                detTmp.updateValue(filePath, forKey: "Path")
+                                                detTmp.updateValue(String(Date.now.timeIntervalSince1970), forKey: "Time")
+                                                let setKey = detTmp["SetKey"] ?? downloadResumeDatas[i]!["BV"]!
+                                                detTmp.removeValue(forKey: "SetKey")
+                                                UserDefaults.standard.set(detTmp, forKey: setKey)
+                                                downloadingProgressDataList[i].isFinished = true
+                                            } else {
+                                                if FileManager.default.fileExists(atPath: NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(i).drkdatav") {
+                                                    try? FileManager.default.removeItem(atPath: NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(i).drkdatav")
+                                                }
+                                                try? r.resumeData?.write(to: URL(filePath: NSHomeDirectory() + "/tmp/VideoDownloadResumeData\(i).drkdatav"))
+                                                failedDownloadTasks.append(i)
+                                                debugPrint(r.error as Any)
+                                            }
+                                        }
                                 }
-                                task.resume()
-                                videoDownloadNeedsResumeIdentifiers.remove(videoDownloadRequests[i].taskIdentifier)
-                                videoDownloadRequests[i] = task
-                                isRefreshing = true
                             }
                         }, label: {
                             VStack {
@@ -231,22 +255,20 @@ struct DownloadingListView: View {
                 }
             } else {
                 Text("Download.nothing")
-                    .onAppear {
-                        isRefreshing = false
-                    }
             }
         }
         .navigationTitle("Download.list")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            downloadProgresses = Array(repeating: 0.0, count: videoDownloadRequests.count)
-            downloadedSizes = Array(repeating: 0, count: videoDownloadRequests.count)
-            totalSizes = Array(repeating: 0, count: videoDownloadRequests.count)
+            downloadProgresses = Array(repeating: 0.0, count: downloadingProgressDataList.count)
+            downloadedSizes = Array(repeating: 0, count: downloadingProgressDataList.count)
+            totalSizes = Array(repeating: 0, count: downloadingProgressDataList.count)
+            videoDetails = Array(repeating: [:], count: downloadingProgressDataList.count)
 #if os(watchOS)
             Dynamic.PUICApplication.sharedPUICApplication().setExtendedIdleTime(3600.0, disablesSleepGesture: true, wantsAutorotation: false)
 #endif
             localVariableUpdateTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
-                localFailedDownloadTasks = videoDownloadNeedsResumeIdentifiers
+                localFailedDownloadTasks = failedDownloadTasks
             }
         }
         .onDisappear {
