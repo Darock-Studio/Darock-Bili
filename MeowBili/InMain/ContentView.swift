@@ -41,83 +41,81 @@ struct ContentView: View {
     @State var isNewFeaturePresented = false
     @FocusState var isSearchKeyboardFocused: Bool
     var body: some View {
-        NavigationStack {
-            TabView(selection: $mainTabSelection.onUpdate { oldValue, newValue in
-                if oldValue == newValue && newValue == 4 {
-                    isSearchKeyboardFocused = true
-                }
-            }) {
-                MainView(mainTabSelection: $mainTabSelection)
+        TabView(selection: $mainTabSelection.onUpdate { oldValue, newValue in
+            if oldValue == newValue && newValue == 4 {
+                isSearchKeyboardFocused = true
+            }
+        }) {
+            MainView(mainTabSelection: $mainTabSelection)
 #if !os(watchOS)
-                    .toolbar {
-                        ToolbarItem(placement: .topBarLeading) {
-                            if dedeUserID != "" {
-                                Button(action: {
-                                    mainTabSelection = 2
-                                }, label: {
-                                    WebImage(url: URL(string: userFaceUrl))
-                                        .resizable()
-                                        .placeholder {
-                                            Circle()
-                                                .frame(width: 35, height: 35)
-                                                .redacted(reason: .placeholder)
-                                        }
-                                        .frame(width: 35, height: 35)
-                                        .clipShape(Circle())
-                                })
-                                .buttonStyle(.borderless)
-                            }
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        if dedeUserID != "" {
+                            Button(action: {
+                                mainTabSelection = 2
+                            }, label: {
+                                WebImage(url: URL(string: userFaceUrl))
+                                    .resizable()
+                                    .placeholder {
+                                        Circle()
+                                            .frame(width: 35, height: 35)
+                                            .redacted(reason: .placeholder)
+                                    }
+                                    .frame(width: 35, height: 35)
+                                    .clipShape(Circle())
+                            })
+                            .buttonStyle(.borderless)
                         }
                     }
+                }
 #endif
-                    .tag(1)
-                    .tabItem {
-                        Label("navbar.suggest", systemImage: "sparkles")
-                    }
-                PersonAccountView()
-                    .tag(2)
-                    .tabItem {
-                        Label("navbar.my", systemImage: "person.fill")
-                    }
-                UserDynamicMainView()
-                    .tag(3)
-                    .tabItem {
-                        Label("navbar.dynamic", systemImage: "rectangle.stack.fill")
-                    }
+                .tag(1)
+                .tabItem {
+                    Label("navbar.suggest", systemImage: "sparkles")
+                }
+            PersonAccountView()
+                .tag(2)
+                .tabItem {
+                    Label("navbar.my", systemImage: "person.fill")
+                }
+            UserDynamicMainView()
+                .tag(3)
+                .tabItem {
+                    Label("navbar.dynamic", systemImage: "rectangle.stack.fill")
+                }
 #if !os(watchOS)
-                SearchMainView(isSearchKeyboardFocused: $isSearchKeyboardFocused)
-                    .tag(4)
-                    .tabItem {
-                        Label("搜索", systemImage: "magnifyingglass")
-                    }
+            SearchMainView(isSearchKeyboardFocused: $isSearchKeyboardFocused)
+                .tag(4)
+                .tabItem {
+                    Label("搜索", systemImage: "magnifyingglass")
+                }
 #endif
-            }
-            .accessibility(identifier: "MainTabView")
-            #if os(watchOS)
-            .sheet(isPresented: $isAudioControllerPresented, content: { AudioControllerView() })
-            .sheet(isPresented: $isNewFeaturePresented, onDismiss: {
-                isNewFeatureTipped = true
-            }, content: { NewFeaturesView() })
-            #endif
-            .sheet(isPresented: $isTermsPresented, onDismiss: {
-                isReadTerms = true
-            }, content: { TermsListView() })
-            .onAppear {
+        }
+        .accessibility(identifier: "MainTabView")
 #if os(watchOS)
-                if !isNewFeatureTipped {
-                    isNewFeaturePresented = true
-                }
-                if !isReadTerms {
-                    isTermsPresented = true
-                }
-                Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
-                    if pShouldPresentAudioController {
-                        pShouldPresentAudioController = false
-                        isAudioControllerPresented = true
-                    }
-                }
+        .sheet(isPresented: $isAudioControllerPresented, content: { AudioControllerView() })
+        .sheet(isPresented: $isNewFeaturePresented, onDismiss: {
+            isNewFeatureTipped = true
+        }, content: { NewFeaturesView() })
 #endif
+        .sheet(isPresented: $isTermsPresented, onDismiss: {
+            isReadTerms = true
+        }, content: { TermsListView() })
+        .onAppear {
+#if os(watchOS)
+            if !isNewFeatureTipped {
+                isNewFeaturePresented = true
             }
+            if !isReadTerms {
+                isTermsPresented = true
+            }
+            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
+                if pShouldPresentAudioController {
+                    pShouldPresentAudioController = false
+                    isAudioControllerPresented = true
+                }
+            }
+#endif
         }
         .onAppear {
             updateBiliTicket(csrf: biliJct)
@@ -145,7 +143,6 @@ struct TermsListView: View {
                     · 本 App 均使用来源于网络的公开信息进行开发。
                     · 本 App 中和B站相关的功能完全免费
                     · 本 App 中所呈现的B站内容来自哔哩哔哩官方。
-                    · 本 App 的开发者、负责人和实际责任人是\(Text("WindowsMEMZ").foregroundColor(Color.accentColor))\n  联系QQ：3245146430
                     """)
                 Button(action: {
                     isReadTerms = true

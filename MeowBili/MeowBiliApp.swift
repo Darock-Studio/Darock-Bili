@@ -148,11 +148,7 @@ struct DarockBili_Watch_AppApp: App {
     @State var fileLockerInput = ""
     @State var recoveryCodeInput = ""
     // Navigators
-    @State var isUrlOpenVideoPresented = false
-    @State var urlOpenVideoDetails = [String: String]()
-    #if !os(watchOS)
-    @State var shouldShowAppName = false
-    #endif
+    @State var urlOpenVideoDetails: [String: String]?
     var body: some SwiftUI.Scene {
         WindowGroup {
             if fileLockerPwd != "" {
@@ -192,8 +188,12 @@ struct DarockBili_Watch_AppApp: App {
                 }
             } else {
                 ZStack {
-                    #if os(watchOS)
-                    ContentView()
+                    NavigationStack {
+                        ContentView()
+                            .navigationDestination(item: $urlOpenVideoDetails) { detail in
+                                VideoDetailView(videoDetails: detail)
+                            }
+                    }
                     if isReduceBrightness {
                         Rectangle()
                             .fill(Color.black)
@@ -201,54 +201,6 @@ struct DarockBili_Watch_AppApp: App {
                             .opacity(reduceBrightnessPercent)
                             .allowsHitTesting(false)
                     }
-                    #else
-                    NavigationStack {
-                        ZStack {
-                            // Hide NavigationLinks behind
-                            NavigationLink("", isActive: $isUrlOpenVideoPresented, destination: { VideoDetailView(videoDetails: urlOpenVideoDetails) })
-                            ContentView()
-                        }
-                    }
-                    .onOpenURL { url in
-                        let dec = url.absoluteString.urlDecoded()
-                        let spd = dec.split(separator: "/").dropFirst()
-                        debugPrint(spd)
-                        switch spd[1] {
-                        case "withvideodetail":
-                            let kvs = dec.split(separator: "/", maxSplits: 1).dropFirst()[2].split(separator: "&") // e.g.: ["BV=xxx", "Title=xxx"]
-                            urlOpenVideoDetails.removeAll()
-                            for kv in kvs {
-                                let kav = kv.split(separator: "=")
-                                urlOpenVideoDetails.updateValue(String(kav[1]), forKey: String(kav[0]))
-                            }
-                            isUrlOpenVideoPresented = true
-                        case "openbvid":
-                            let bvid = spd[2]
-                            urlOpenVideoDetails = ["Pic": "", "Title": "Loading...", "BV": String(bvid), "UP": "Loading...", "View": "1", "Danmaku": "1"]
-                            isUrlOpenVideoPresented = true
-                        default:
-                            break
-                        }
-                    }
-                    if shouldShowAppName {
-                        VStack {
-                            Spacer()
-                                .frame(height: 12)
-                            ZStack {
-                                Capsule()
-                                    .fill(Color.accentColor)
-                                    .frame(width: 60, height: 20)
-                                HStack {
-                                    Text("喵哩喵哩")
-                                        .foregroundStyle(Color.white)
-                                        .font(.system(size: 12, weight: .medium))
-                                }
-                            }
-                            Spacer()
-                        }
-                        .ignoresSafeArea()
-                    }
-                    #endif
                 }
                 .blur(radius: isLuminanceReduced && blurWhenScreenSleep ? 12 : 0)
                 .onAppear {
@@ -361,9 +313,30 @@ struct DarockBili_Watch_AppApp: App {
                 .onContinueUserActivity(NSUserActivityTypeBrowsingWeb) { activity in
                     if let url = activity.webpageURL, let bvid = url.absoluteString.split(separator: "darock.top/meowbili/video/", maxSplits: 1)[from: 1] {
                         urlOpenVideoDetails = ["Pic": "", "Title": "Loading...", "BV": String(bvid), "UP": "Loading...", "View": "1", "Danmaku": "1"]
-                        isUrlOpenVideoPresented = true
                     }
                 }
+                #if os(iOS)
+                .onOpenURL { url in
+                    let dec = url.absoluteString.urlDecoded()
+                    let spd = dec.split(separator: "/").dropFirst()
+                    debugPrint(spd)
+                    switch spd[1] {
+                    case "withvideodetail":
+                        let kvs = dec.split(separator: "/", maxSplits: 1).dropFirst()[2].split(separator: "&") // e.g.: ["BV=xxx", "Title=xxx"]
+                        var details = [String: String]()
+                        for kv in kvs {
+                            let kav = kv.split(separator: "=")
+                            details.updateValue(String(kav[1]), forKey: String(kav[0]))
+                        }
+                        urlOpenVideoDetails = details
+                    case "openbvid":
+                        let bvid = spd[2]
+                        urlOpenVideoDetails = ["Pic": "", "Title": "Loading...", "BV": String(bvid), "UP": "Loading...", "View": "1", "Danmaku": "1"]
+                    default:
+                        break
+                    }
+                }
+                #endif
             }
         }
         .onChange(of: scenePhase) {
@@ -371,9 +344,7 @@ struct DarockBili_Watch_AppApp: App {
             case .background:
                 break
             case .inactive:
-                #if os(iOS)
-                shouldShowAppName = false
-                #endif
+                break
             case .active:
                 SDImageCodersManager.shared.addCoder(SDImageWebPCoder.shared)
                 SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)
@@ -388,8 +359,6 @@ struct DarockBili_Watch_AppApp: App {
                 WKInterfaceDevice.current().isBatteryMonitoringEnabled = true
                 #else
                 InitHapticEngine()
-                
-                shouldShowAppName = true
                 #endif
                 
                 if isScreenTimeEnabled {
