@@ -18,6 +18,123 @@
 
 import WidgetKit
 import SwiftUI
+
+struct MeowWidgetEntry: TimelineEntry {
+    let date: Date
+    let video: Video
+}
+
+struct Provider: TimelineProvider {
+    func placeholder(in context: Context) -> MeowWidgetEntry {
+        MeowWidgetEntry(date: Date(), video: Video(id: 0, title: "miku miku oo ee oo", description: "https://twitter.com/i/status/1697029186777706544 channel（twi:_CASTSTATION）", authorName: "未来de残像", viewCount: 0, likeCount: 0, coinCount: 0, shareCount: 0, danmakuCount: 0))
+    }
+
+    func getSnapshot(in context: Context, completion: @escaping (MeowWidgetEntry) -> Void) {
+        let placeholder = MeowWidgetEntry(date: Date(), video: Video(id: 0, title: "Snapshot", description: "Loading...", authorName: "Author", viewCount: 0, likeCount: 0, coinCount: 0, shareCount: 0, danmakuCount: 0))
+        completion(placeholder)
+    }
+
+    func getTimeline(in context: Context, completion: @escaping (Timeline<MeowWidgetEntry>) -> Void) {
+        BiliBiliAPIService.shared.fetchPopularVideos { videos in
+            let entries: [MeowWidgetEntry] = videos.enumerated().map { index, video in
+                let interval = 10 * 60 // 每10分钟更新
+                let date = Calendar.current.date(byAdding: .second, value: interval * index, to: Date()) ?? Date()
+                return MeowWidgetEntry(date: date, video: video)
+            }
+            let timeline = Timeline(entries: entries, policy: .atEnd)
+            completion(timeline)
+        }
+    }
+}
+
+struct MeowWidgetView: View {
+    @Environment(\.widgetFamily) var family
+    var entry: MeowWidgetEntry
+
+    var body: some View {
+        switch family {
+        case .accessoryInline:
+            Text("\(entry.video.title) ，作者： \(entry.video.authorName)")
+        case .accessoryCircular:
+            VStack {
+                Image(systemName: "play.circle.fill")
+                Text(entry.video.title)
+                    .font(.caption)
+            }
+        case .accessoryRectangular:
+            VStack(alignment: .leading) {
+                Text(entry.video.title)
+                    .font(.headline)
+                Text("作者： \(entry.video.authorName)")
+                    .font(.subheadline)
+            }
+        case .systemSmall:
+            VStack {
+                Text(entry.video.title)
+                    .font(.headline)
+                Text("作者： \(entry.video.authorName)")
+                    .font(.subheadline)
+            }
+        case .systemMedium:
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(entry.video.title)
+                        .font(.headline)
+                    Text(entry.video.description)
+                        .font(.caption)
+                        .lineLimit(2)
+                }
+                Spacer()
+                VStack {
+                    Text("观看量： \(entry.video.viewCount)")
+                    Text("点赞量： \(entry.video.likeCount)")
+                }
+            }
+        case .systemLarge:
+            VStack(alignment: .leading) {
+                Text(entry.video.title)
+                    .font(.title)
+                Text(entry.video.description)
+                    .font(.body)
+                    .lineLimit(3)
+                Spacer()
+                HStack {
+                    Text("观看量： \(entry.video.viewCount)")
+                    Text("点赞量： \(entry.video.likeCount)")
+                }
+            }
+        default:
+            Text("Unsupported Widget Family")
+        }
+    }
+}
+
+@main
+struct MeowWidget: Widget {
+    let kind: String = "MeowWidget"
+
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+            MeowWidgetView(entry: entry)
+        }
+        .configurationDisplayName("MeowWidget")
+        .description("热门或推荐的视频内容")
+        .supportedFamilies(families)
+    }
+    
+    private var families: [WidgetFamily] {
+        #if os(watchOS)
+        return [.accessoryInline, .accessoryCircular, .accessoryRectangular]
+        #else
+        return [.systemSmall, .systemMedium, .systemLarge, .accessoryCircular, .accessoryRectangular]
+        #endif
+    }
+}
+
+/*The Old Version For Reference in Future Updates
+ 
+import WidgetKit
+import SwiftUI
 import Intents
 
 struct MeowWidgetEntry: TimelineEntry {
@@ -163,3 +280,4 @@ struct MeowWidget: Widget {
         #endif
     }
 }
+*/
