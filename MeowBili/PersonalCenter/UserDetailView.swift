@@ -1131,7 +1131,7 @@ struct UserDetailView: View {
                                 let vlist = respJson["data"]["list"]["vlist"]
                                 for video in vlist {
                                     var data = ["Title": video.1["title"].string ?? "[加载失败]", "Length": video.1["length"].string ?? "E", "PlayCount": String(video.1["play"].int ?? -1), "PicUrl": video.1["pic"].string ?? "E", "BV": video.1["bvid"].string ?? "E", "Timestamp": String(video.1["created"].int ?? 0), "DanmakuCount": String(video.1["video_review"].int ?? -1)]
-                                    if video.1["meta"].dictionary != nil {
+                                    if video.1["meta"].dictionary != nil && video.1["meta"]["sign_state"].int != 0 {
                                         let season = video.1["meta"]
                                         data.updateValue(season["title"].string ?? "[加载失败]", forKey: "Title")
                                         data.updateValue(season["cover"].string ?? "E", forKey: "PicUrl")
