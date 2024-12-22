@@ -215,7 +215,6 @@
 		B2B813972CC3D22800C69D17 /* BiliBiliAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B813962CC3D22800C69D17 /* BiliBiliAPIService.swift */; };
 		B2B813982CC3D22800C69D17 /* BiliBiliAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B813962CC3D22800C69D17 /* BiliBiliAPIService.swift */; };
 		B2B813992CC3D22800C69D17 /* BiliBiliAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B813962CC3D22800C69D17 /* BiliBiliAPIService.swift */; };
-		B2B8139D2CC3D37500C69D17 /* TrendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B8139A2CC3D37500C69D17 /* TrendingView.swift */; };
 		B4DAF0DD2B80725800755F0C /* LinkDetectText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */; };
 /* End PBXBuildFile section */
 
@@ -433,7 +432,6 @@
 		B2B8138B2CC3D0F300C69D17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B2B8138D2CC3D0F300C69D17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2B813962CC3D22800C69D17 /* BiliBiliAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiliBiliAPIService.swift; sourceTree = "<group>"; };
-		B2B8139A2CC3D37500C69D17 /* TrendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingView.swift; sourceTree = "<group>"; };
 		B4468A152B4FC24A002CCEB2 /* Dynamic_Feed_All.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Dynamic_Feed_All.json; sourceTree = "<group>"; };
 		B4468A162B4FC24A002CCEB2 /* Search_With_UP_V2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Search_With_UP_V2.json; sourceTree = "<group>"; };
 		B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkDetectText.swift; sourceTree = "<group>"; };
@@ -817,7 +815,6 @@
 			children = (
 				B2B813832CC3D0ED00C69D17 /* MeowWidgetBundle.swift */,
 				B2B813872CC3D0ED00C69D17 /* MeowWidget.swift */,
-				B2B8139A2CC3D37500C69D17 /* TrendingView.swift */,
 				B2B8138B2CC3D0F300C69D17 /* Assets.xcassets */,
 				B2B8138D2CC3D0F300C69D17 /* Info.plist */,
 			);
@@ -1403,7 +1400,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2B813842CC3D0ED00C69D17 /* MeowWidgetBundle.swift in Sources */,
-				B2B8139D2CC3D37500C69D17 /* TrendingView.swift in Sources */,
 				B2B813882CC3D0ED00C69D17 /* MeowWidget.swift in Sources */,
 				B2B813992CC3D22800C69D17 /* BiliBiliAPIService.swift in Sources */,
 			);

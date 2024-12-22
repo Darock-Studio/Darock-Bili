@@ -21,6 +21,7 @@ import SwiftUI
 
 @main
 struct MeowWidgetBundle: WidgetBundle {
+    @WidgetBundleBuilder
     var body: some Widget {
         MeowWidget()
     }
