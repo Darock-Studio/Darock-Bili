@@ -145,19 +145,6 @@ struct MeowWidgetView: View {
         }
     }
 }
-
-@main
-struct MeowWidget: Widget {
-    let kind: String = "MeowWidget"
-
-    var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            MeowWidgetView(entry: entry)
-        }
-        .configurationDisplayName("MeowWidget")
-        .description("热门或推荐的视频内容")
-        .supportedFamilies(families)
-    }
     
     private var families: [WidgetFamily] {
         #if os(watchOS)
