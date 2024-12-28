@@ -18,52 +18,114 @@
 
 import Foundation
 
+// 定义 Video 数据模型
+struct Video: Identifiable {
+    let id: Int
+    let title: String
+    let description: String
+    let authorName: String
+    let viewCount: Int
+    let likeCount: Int
+    let coinCount: Int
+    let shareCount: Int
+    let danmakuCount: Int
+}
+
 class BiliBiliAPIService {
     
-    enum ContentType {
-        case trending, recommendations
+    static let shared = BiliBiliAPIService()
+    private init() {}
+
+    // MARK: - 数据获取
+
+    /// 获取热门内容
+    func fetchPopularVideos(completion: @escaping ([Video]) -> Void) {
+        let url = "https://api.bilibili.com/x/web-interface/popular"
+        fetchVideos(from: url, completion: completion)
     }
-    
-    /// 获取BiliBili数据
-    /// - Parameters:
-    ///   - type: 内容类型（热门或推荐）
-    ///   - limit: 限制返回的视频数量，默认是5
-    func fetchBiliBiliData(for type: ContentType, limit: Int = 5) async -> Result<[(title: String, description: String, author: String, views: String)], Error> {
-        do {
-            let urlString: String
-            switch type {
-            case .trending:
-                urlString = "https://api.bilibili.com/x/web-interface/popular?ps=\(limit)"
-            case .recommendations:
-                urlString = "https://api.bilibili.com/x/web-interface/index/top/rcmd?ps=1"
-            }
 
-            guard let url = URL(string: urlString) else {
-                throw URLError(.badURL)
-            }
+    /// 获取推荐内容
+    func fetchRecommendedVideos(completion: @escaping ([Video]) -> Void) {
+        let url = "https://api.bilibili.com/x/web-interface/index/top/rcmd"
+        fetchVideos(from: url, completion: completion)
+    }
 
-            let (data, _) = try await URLSession.shared.data(from: url)
+    // MARK: - 数据解析
 
-            if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-               let dataDict = json["data"] as? [String: Any],
-               let itemList = dataDict["item"] as? [[String: Any]] {
-
-                let videos = itemList.prefix(limit).map { video -> (String, String, String, String) in
-                    let videoTitle = video["title"] as? String ?? "无标题"
-                    let videoDesc = video["desc"] as? String ?? "无描述"
-                    let videoAuthor = (video["owner"] as? [String: Any])?["name"] as? String ?? "未知作者"
-                    let videoViews = (video["stat"] as? [String: Any])?["view"] as? Int ?? 0
-                    return (title: videoTitle, description: videoDesc, author: videoAuthor, views: "\(videoViews)")
-                }
-
-                return .success(videos)
-            } else {
-                return .failure(NSError(domain: "BiliBiliAPIService", code: -1, userInfo: [NSLocalizedDescriptionKey: "数据格式错误"]))
-            }
-
-        } catch {
-            return .failure(error)
+    /// 从 URL 获取视频数据
+    private func fetchVideos(from urlString: String, completion: @escaping ([Video]) -> Void) {
+        guard let url = URL(string: urlString) else {
+            print("Invalid URL")
+            completion([])
+            return
         }
+
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            if let error = error {
+                print("Error fetching data: \(error.localizedDescription)")
+                completion([])
+                return
+            }
+
+            guard let data = data else {
+                print("No data received")
+                completion([])
+                return
+            }
+
+            do {
+                // 解析 JSON 数据
+                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                   let data = json["data"] as? [String: Any],
+                   let list = data["list"] as? [[String: Any]] {
+
+                    let videos = list.compactMap { self?.parseVideo(from: $0) }
+
+                    DispatchQueue.main.async {
+                        completion(videos)
+                    }
+                } else {
+                    print("Invalid JSON structure")
+                    completion([])
+                }
+            } catch {
+                print("Error parsing JSON: \(error.localizedDescription)")
+                completion([])
+            }
+        }
+
+        task.resume()
     }
 
+    /// 解析单个视频条目
+    private func parseVideo(from dict: [String: Any]) -> Video? {
+        guard
+            let id = dict["aid"] as? Int,
+            let title = dict["title"] as? String,
+            let description = dict["desc"] as? String,
+            let owner = dict["owner"] as? [String: Any],
+            let authorName = owner["name"] as? String,
+            let stat = dict["stat"] as? [String: Any],
+            let viewCount = stat["view"] as? Int,
+            let likeCount = stat["like"] as? Int,
+            let coinCount = stat["coin"] as? Int,
+            let shareCount = stat["share"] as? Int,
+            let danmakuCount = stat["danmaku"] as? Int
+        else {
+            print("Missing data in video entry")
+            return nil
+        }
+
+        return Video(
+            id: id,
+            title: title,
+            description: description,
+            authorName: authorName,
+            viewCount: viewCount,
+            likeCount: likeCount,
+            coinCount: coinCount,
+            shareCount: shareCount,
+            danmakuCount: danmakuCount
+        )
+    }
 }
