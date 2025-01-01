@@ -78,14 +78,19 @@ struct ContentView: View {
                 .tabItem {
                     Label("navbar.my", systemImage: "person.fill")
                 }
-            UserDynamicMainView()
+            RankingsView()
                 .tag(3)
+                .tabItem {
+                    Label("排行榜", systemImage: "chart.bar.xaxis")
+                }
+            UserDynamicMainView()
+                .tag(4)
                 .tabItem {
                     Label("navbar.dynamic", systemImage: "rectangle.stack.fill")
                 }
 #if !os(watchOS)
             SearchMainView(isSearchKeyboardFocused: $isSearchKeyboardFocused)
-                .tag(4)
+                .tag(5)
                 .tabItem {
                     Label("搜索", systemImage: "magnifyingglass")
                 }

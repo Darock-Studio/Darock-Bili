@@ -454,6 +454,7 @@ struct VideoPlayerView: View {
                         }
                         return false
                     }
+                    guard showDanmakus.count > 1 else { return }
                     var removedCount = 0
                     for i in 1..<showDanmakus.count {
                         if showDanmakus.count - removedCount - i <= 0 {

@@ -56,6 +56,8 @@
 		8C8578B72C5BAC0100AF93D1 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8578B62C5BAC0100AF93D1 /* MarkdownUI */; };
 		8C9776082BCECBC3006EDB58 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9776072BCECBC3006EDB58 /* Audio.swift */; };
 		8C9776092BCECBC3006EDB58 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9776072BCECBC3006EDB58 /* Audio.swift */; };
+		8C9BD5F52D24FFE4009C8CE7 /* RankingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9BD5F42D24FFE0009C8CE7 /* RankingsView.swift */; };
+		8C9BD5F62D24FFE4009C8CE7 /* RankingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9BD5F42D24FFE0009C8CE7 /* RankingsView.swift */; };
 		8CA370DB2B82724400CE0E9E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */; };
 		8CA370DC2B82724400CE0E9E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */; };
 		8CA370DF2B827AAD00CE0E9E /* AlertToast in Frameworks */ = {isa = PBXBuildFile; platformFilters = (ios, maccatalyst, ); productRef = 8CA370DE2B827AAD00CE0E9E /* AlertToast */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -345,6 +347,7 @@
 		8C82F82E2BB70AA7009AEFD2 /* CODE_OF_CONDUCT.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CODE_OF_CONDUCT.md; sourceTree = "<group>"; };
 		8C8578A52C5A18AA00AF93D1 /* MeowBiliTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeowBiliTests.swift; sourceTree = "<group>"; };
 		8C9776072BCECBC3006EDB58 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
+		8C9BD5F42D24FFE0009C8CE7 /* RankingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingsView.swift; sourceTree = "<group>"; };
 		8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		8CA388A02B78B5D800F5F91F /* BiliFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BiliFont.ttf; sourceTree = "<group>"; };
 		8CA7CBC02B77AC4A008E587F /* MeowBili.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeowBili.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -628,6 +631,7 @@
 				8CA7CC6E2B77AEB4008E587F /* SearchView.swift */,
 				8CA7CC702B77AEE4008E587F /* MainView.swift */,
 				8CA7CBC42B77AC4A008E587F /* ContentView.swift */,
+				8C9BD5F42D24FFE0009C8CE7 /* RankingsView.swift */,
 				8C2DFCAE2C4AA15C003AEC67 /* NewFeaturesView.swift */,
 			);
 			path = InMain;
@@ -1313,6 +1317,7 @@
 				8CA7CBC32B77AC4A008E587F /* MeowBiliApp.swift in Sources */,
 				8CA7CCC12B77B44E008E587F /* VideoDownloadView.swift in Sources */,
 				8CA7CC832B77AFF2008E587F /* ErrorGetView.swift in Sources */,
+				8C9BD5F62D24FFE4009C8CE7 /* RankingsView.swift in Sources */,
 				8CA7CC992B77B127008E587F /* SkinDownloadView.swift in Sources */,
 				8CA7CCDA2B77B55F008E587F /* LiveDetailView.swift in Sources */,
 				8CA7CC6C2B77AE80008E587F /* DownloadObj.swift in Sources */,
@@ -1381,6 +1386,7 @@
 				8CBFF0ED2B85E55F00350E0F /* NetwokFixView.swift in Sources */,
 				8CBFF0E22B85E55F00350E0F /* AppFileManager.swift in Sources */,
 				8CBFF0E92B85E55F00350E0F /* Bangumi.swift in Sources */,
+				8C9BD5F52D24FFE4009C8CE7 /* RankingsView.swift in Sources */,
 				8CBFF0DE2B85E55F00350E0F /* DownloadsView.swift in Sources */,
 				8CBFF0C92B85E55F00350E0F /* BangumiDownloadView.swift in Sources */,
 				8CBFF0D52B85E55F00350E0F /* SettingsView.swift in Sources */,
