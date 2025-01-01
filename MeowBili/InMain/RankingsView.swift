@@ -24,7 +24,15 @@ struct RankingsView: View {
     var body: some View {
         List {
             Section {
-                NavigationLink(destination: { RankingCategoryListView(tid: 1) }, label: {
+                NavigationLink(destination: { RankingCategoryListView(rid: 0) }, label: {
+                    Label(title: {
+                        Text("全站")
+                    }, icon: {
+                        Image(systemName: "sparkles.tv.fill")
+                            .foregroundStyle(.accent)
+                    })
+                })
+                NavigationLink(destination: { RankingCategoryListView(rid: 1) }, label: {
                     Label(title: {
                         Text("动画")
                     }, icon: {
@@ -32,23 +40,7 @@ struct RankingsView: View {
                             .foregroundStyle(.purple)
                     })
                 })
-                NavigationLink(destination: { RankingCategoryListView(tid: 13) }, label: {
-                    Label(title: {
-                        Text("番剧")
-                    }, icon: {
-                        Image(systemName: "tv.fill")
-                            .foregroundStyle(.orange)
-                    })
-                })
-                NavigationLink(destination: { RankingCategoryListView(tid: 167) }, label: {
-                    Label(title: {
-                        Text("国创")
-                    }, icon: {
-                        Image(systemName: "flag.fill")
-                            .foregroundStyle(.red)
-                    })
-                })
-                NavigationLink(destination: { RankingCategoryListView(tid: 3) }, label: {
+                NavigationLink(destination: { RankingCategoryListView(rid: 3) }, label: {
                     Label(title: {
                         Text("音乐")
                     }, icon: {
@@ -56,7 +48,7 @@ struct RankingsView: View {
                             .foregroundStyle(.blue)
                     })
                 })
-                NavigationLink(destination: { RankingCategoryListView(tid: 129) }, label: {
+                NavigationLink(destination: { RankingCategoryListView(rid: 129) }, label: {
                     Label(title: {
                         Text("舞蹈")
                     }, icon: {
@@ -64,7 +56,7 @@ struct RankingsView: View {
                             .foregroundStyle(.red)
                     })
                 })
-                NavigationLink(destination: { RankingCategoryListView(tid: 4) }, label: {
+                NavigationLink(destination: { RankingCategoryListView(rid: 4) }, label: {
                     Label(title: {
                         Text("游戏")
                     }, icon: {
@@ -72,7 +64,7 @@ struct RankingsView: View {
                             .foregroundStyle(.green)
                     })
                 })
-                NavigationLink(destination: { RankingCategoryListView(tid: 36) }, label: {
+                NavigationLink(destination: { RankingCategoryListView(rid: 36) }, label: {
                     Label(title: {
                         Text("知识")
                     }, icon: {
@@ -80,7 +72,7 @@ struct RankingsView: View {
                             .foregroundStyle(.orange)
                     })
                 })
-                NavigationLink(destination: { RankingCategoryListView(tid: 188) }, label: {
+                NavigationLink(destination: { RankingCategoryListView(rid: 188) }, label: {
                     Label(title: {
                         Text("科技")
                     }, icon: {
@@ -88,7 +80,7 @@ struct RankingsView: View {
                             .foregroundStyle(.orange)
                     })
                 })
-                NavigationLink(destination: { RankingCategoryListView(tid: 234) }, label: {
+                NavigationLink(destination: { RankingCategoryListView(rid: 234) }, label: {
                     Label(title: {
                         Text("运动")
                     }, icon: {
@@ -96,7 +88,7 @@ struct RankingsView: View {
                             .foregroundStyle(.green)
                     })
                 })
-                NavigationLink(destination: { RankingCategoryListView(tid: 223) }, label: {
+                NavigationLink(destination: { RankingCategoryListView(rid: 223) }, label: {
                     Label(title: {
                         Text("汽车")
                     }, icon: {
@@ -104,7 +96,7 @@ struct RankingsView: View {
                             .foregroundStyle(.blue)
                     })
                 })
-                NavigationLink(destination: { RankingCategoryListView(tid: 160) }, label: {
+                NavigationLink(destination: { RankingCategoryListView(rid: 160) }, label: {
                     Label(title: {
                         Text("生活")
                     }, icon: {
@@ -112,7 +104,7 @@ struct RankingsView: View {
                             .foregroundStyle(.yellow)
                     })
                 })
-                NavigationLink(destination: { RankingCategoryListView(tid: 211) }, label: {
+                NavigationLink(destination: { RankingCategoryListView(rid: 211) }, label: {
                     Label(title: {
                         Text("美食")
                     }, icon: {
@@ -120,7 +112,7 @@ struct RankingsView: View {
                             .foregroundStyle(.orange)
                     })
                 })
-                NavigationLink(destination: { RankingCategoryListView(tid: 217) }, label: {
+                NavigationLink(destination: { RankingCategoryListView(rid: 217) }, label: {
                     Label(title: {
                         Text("动物圈")
                     }, icon: {
@@ -128,7 +120,7 @@ struct RankingsView: View {
                             .foregroundStyle(.pink)
                     })
                 })
-                NavigationLink(destination: { RankingCategoryListView(tid: 119) }, label: {
+                NavigationLink(destination: { RankingCategoryListView(rid: 119) }, label: {
                     Label(title: {
                         Text("鬼畜")
                     }, icon: {
@@ -136,7 +128,7 @@ struct RankingsView: View {
                             .foregroundStyle(.blue)
                     })
                 })
-                NavigationLink(destination: { RankingCategoryListView(tid: 155) }, label: {
+                NavigationLink(destination: { RankingCategoryListView(rid: 155) }, label: {
                     Label(title: {
                         Text("时尚")
                     }, icon: {
@@ -144,7 +136,7 @@ struct RankingsView: View {
                             .foregroundStyle(.pink)
                     })
                 })
-                NavigationLink(destination: { RankingCategoryListView(tid: 5) }, label: {
+                NavigationLink(destination: { RankingCategoryListView(rid: 5) }, label: {
                     Label(title: {
                         Text("娱乐")
                     }, icon: {
@@ -152,7 +144,7 @@ struct RankingsView: View {
                             .foregroundStyle(.orange)
                     })
                 })
-                NavigationLink(destination: { RankingCategoryListView(tid: 181) }, label: {
+                NavigationLink(destination: { RankingCategoryListView(rid: 181) }, label: {
                     Label(title: {
                         Text("影视")
                     }, icon: {
@@ -160,7 +152,7 @@ struct RankingsView: View {
                             .foregroundStyle(.blue)
                     })
                 })
-                NavigationLink(destination: { RankingCategoryListView(tid: 177) }, label: {
+                NavigationLink(destination: { RankingCategoryListView(rid: 177) }, label: {
                     Label(title: {
                         Text("纪录片")
                     }, icon: {
@@ -168,7 +160,7 @@ struct RankingsView: View {
                             .foregroundStyle(.blue)
                     })
                 })
-                NavigationLink(destination: { RankingCategoryListView(tid: 23) }, label: {
+                NavigationLink(destination: { RankingCategoryListView(rid: 23) }, label: {
                     Label(title: {
                         Text("电影")
                     }, icon: {
@@ -176,7 +168,7 @@ struct RankingsView: View {
                             .foregroundStyle(.green)
                     })
                 })
-                NavigationLink(destination: { RankingCategoryListView(tid: 11) }, label: {
+                NavigationLink(destination: { RankingCategoryListView(rid: 11) }, label: {
                     Label(title: {
                         Text("电视剧")
                     }, icon: {
@@ -194,7 +186,7 @@ struct RankingsView: View {
 }
 
 private struct RankingCategoryListView: View {
-    var tid: Int
+    var rid: Int
     @AppStorage("DedeUserID") var dedeUserID = ""
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
@@ -214,15 +206,23 @@ private struct RankingCategoryListView: View {
         }
         .onAppear {
             let headers: HTTPHeaders = [
-                "cookie": "SESSDATA=\(sessdata)",
-                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                "accept": "*/*",
+                "accept-encoding": "gzip, deflate, br",
+                "accept-language": "zh-CN,zh;q=0.9",
+                "cookie": "SESSDATA=\(sessdata); buvid_fp=e651c1a382430ea93631e09474e0b395; buvid3=\(UuidInfoc.gen()); buvid4=buvid4-failed-1",
+                "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                "Referer": "https://www.bilibili.com/v/popular/rank"
             ]
-            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/ranking/v2?tid=\(tid)&type=all", headers: headers) { respJson, isSuccess in
-                if isSuccess {
-                    if !CheckBApiError(from: respJson) { return }
-                    let data = respJson["data"]["list"]
-                    for videoInfo in data {
-                        videos.append(["Pic": videoInfo.1["pic"].string ?? "E", "Title": videoInfo.1["title"].string ?? "[加载失败]", "BV": videoInfo.1["bvid"].string ?? "E", "UP": videoInfo.1["owner"]["name"].string ?? "[加载失败]", "View": String(videoInfo.1["stat"]["view"].int ?? -1), "Danmaku": String(videoInfo.1["stat"]["danmaku"].int ?? -1)])
+            biliWbiSign(paramEncoded: "rid=\(rid)&type=all".base64Encoded()) { signed in
+                if let signed {
+                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/ranking/v2?\(signed)", headers: headers) { respJson, isSuccess in
+                        if isSuccess {
+                            if !CheckBApiError(from: respJson) { return }
+                            let data = respJson["data"]["list"]
+                            for videoInfo in data {
+                                videos.append(["Pic": videoInfo.1["pic"].string ?? "E", "Title": videoInfo.1["title"].string ?? "[加载失败]", "BV": videoInfo.1["bvid"].string ?? "E", "UP": videoInfo.1["owner"]["name"].string ?? "[加载失败]", "View": String(videoInfo.1["stat"]["view"].int ?? -1), "Danmaku": String(videoInfo.1["stat"]["danmaku"].int ?? -1)])
+                            }
+                        }
                     }
                 }
             }

@@ -9364,6 +9364,9 @@
         }
       }
     },
+    "全站" : {
+
+    },
     "关联反馈" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -9852,9 +9855,6 @@
         }
       }
     },
-    "国创" : {
-
-    },
     "在iPhone上继续" : {
       "localizations" : {
         "en" : {
@@ -10288,6 +10288,7 @@
       }
     },
     "手记建议" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10934,9 +10935,6 @@
           }
         }
       }
-    },
-    "番剧" : {
-
     },
     "知识" : {
 
