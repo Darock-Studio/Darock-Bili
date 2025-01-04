@@ -114,9 +114,9 @@ struct MeowWidgetView: View {
         case .systemLarge:
             VStack(alignment: .leading) {
                 Text(entry.video.title)
-                    .font(.title)
+                    .font(.headline)
                 Text(entry.video.description)
-                    .font(.body)
+                    .font(.caption)
                     .lineLimit(3)
                 Spacer()
                 HStack {
