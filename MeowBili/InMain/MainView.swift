@@ -130,10 +130,17 @@ struct MainView: View {
                     festivalType = .fools
                 } else if Date.now.month == 1 && Date.now.day == 24 {
                     festivalType = .darockc
-                } else if Date.now.month == 1 && Date.now.day == 1 {
+                } else if (Date.now.month == 1 && Date.now.day == 1) || todayIsChineseNewYear() {
                     festivalType = .newyr
                 } else {
                     festivalType = .normal
+                }
+                
+                func todayIsChineseNewYear() -> Bool {
+                    let today = Date()
+                    let chineseCalendar = Calendar(identifier: .chinese)
+                    let components = chineseCalendar.dateComponents([.month, .day], from: today)
+                    return components.month == 1 && components.day == 1
                 }
             }
         #endif

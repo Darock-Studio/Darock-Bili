@@ -109,6 +109,7 @@ struct SeasonArchiveListView: View {
                         for video in respJson["data"]["archives"] {
                             videos.append(["Title": video.1["title"].string ?? "[加载失败]", "PlayCount": String(video.1["stat"]["view"].int ?? -1), "PicUrl": video.1["pic"].string ?? "E", "BV": video.1["bvid"].string ?? "E"])
                         }
+                        totalPage = Int((respJson["data"]["page"]["total"].int ?? 0) / 20) + 1
                     }
                 }
             }

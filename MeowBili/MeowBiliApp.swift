@@ -390,6 +390,8 @@ public func tipWithText(_ text: String, symbol: String = "", time: Double = 3.0)
 #if !os(watchOS)
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        DarockKit.Network.shared.requestString("https://fapi.darock.top:65535/analyze/add/MLStatsiOSAppStartupCount") { _, _ in }
+        
         return true
     }
     
@@ -406,6 +408,8 @@ class AppDelegate: NSObject, WKApplicationDelegate {
         SDImageCache.shared.config.shouldCacheImagesInMemory = false
         SDImageCache.shared.config.shouldUseWeakMemoryCache = true
         SDImageCache.shared.clearMemory()
+        
+        DarockKit.Network.shared.requestString("https://fapi.darock.top:65535/analyze/add/MLStatswatchOSAppStartupCount") { _, _ in }
     }
 }
 #endif
