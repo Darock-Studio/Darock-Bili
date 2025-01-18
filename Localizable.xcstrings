@@ -2083,7 +2083,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🎉🎉🎉\nToday is Darock’s anniversary.\nCome to our QQ Group 248036605 and join the event!"
+            "value" : "🎉🎉🎉\nToday is Darock’s anniversary.\nCome to our QQ Group 1019196619 and join the event!"
           }
         }
       }
@@ -3370,7 +3370,14 @@
       }
     },
     "DannyFeng" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DannyFeng"
+          }
+        }
+      }
     },
     "Darock Studio" : {
       "localizations" : {
@@ -7799,7 +7806,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ""
+            "value" : "Troubleshoot.problem.internet.meaning"
           }
         }
       }
@@ -9365,7 +9372,14 @@
       }
     },
     "全站" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Whole BiliBili"
+          }
+        }
+      }
     },
     "关联反馈" : {
       "extractionState" : "stale",
@@ -9395,7 +9409,14 @@
       }
     },
     "分区" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Subdivision"
+          }
+        }
+      }
     },
     "分析与改进" : {
       "extractionState" : "stale",
@@ -9533,10 +9554,24 @@
       }
     },
     "动物圈" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pets & Wildlife"
+          }
+        }
+      }
     },
     "动画" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anime"
+          }
+        }
+      }
     },
     "历史记录" : {
       "localizations" : {
@@ -9872,7 +9907,14 @@
       }
     },
     "在使用本 App 前，您需要先知晓以下信息：\n· 本 App 由第三方开发者以及部分社区用户贡献，与哔哩哔哩无合作关系，哔哩哔哩是上海宽娱数码科技有限公司的商标。\n· 本 App 并不是哔哩哔哩的替代品，我们建议您在能够使用官方客户端时尽量使用官方客户端。\n· 本 App 均使用来源于网络的公开信息进行开发。\n· 本 App 中和B站相关的功能完全免费\n· 本 App 中所呈现的B站内容来自哔哩哔哩官方。" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Before using this App, you need to know the following information:\n· This App is contributed by third-party developers and some community users. There is no cooperative relationship with BiliBili, which is a trademark of Shanghai Kuanyu Digital Technology Co., Ltd.\n· This App is not a substitute for BiliBili. We recommend that you use the official client if possible.\n· This App is developed using public information from the Internet.\n· The functions related to BiliBili in this App are completely free.\n· The content of BiliBili presented in this App comes from the official website of BiliBili."
+          }
+        }
+      }
     },
     "在使用本 App 前，您需要先知晓以下信息：\n· 本 App 由第三方开发者以及部分社区用户贡献，与哔哩哔哩无合作关系，哔哩哔哩是上海宽娱数码科技有限公司的商标。\n· 本 App 并不是哔哩哔哩的替代品，我们建议您在能够使用官方客户端时尽量使用官方客户端。\n· 本 App 均使用来源于网络的公开信息进行开发。\n· 本 App 中和B站相关的功能完全免费\n· 本 App 中所呈现的B站内容来自哔哩哔哩官方。\n· 本 App 的开发者、负责人和实际责任人是%@\n  联系QQ：3245146430" : {
       "extractionState" : "stale",
@@ -9980,7 +10022,14 @@
       }
     },
     "娱乐" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entertainment"
+          }
+        }
+      }
     },
     "媒体" : {
       "localizations" : {
@@ -10185,7 +10234,14 @@
       }
     },
     "影视" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Film & Television"
+          }
+        }
+      }
     },
     "快进 10 秒" : {
       "localizations" : {
@@ -10320,7 +10376,14 @@
       }
     },
     "排行榜" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Charts"
+          }
+        }
+      }
     },
     "推荐" : {
       "localizations" : {
@@ -10516,7 +10579,14 @@
       }
     },
     "时尚" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fasion"
+          }
+        }
+      }
     },
     "昨天和今天" : {
       "localizations" : {
@@ -10807,7 +10877,14 @@
       }
     },
     "汽车" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vehicles"
+          }
+        }
+      }
     },
     "清除历史记录" : {
       "localizations" : {
@@ -10862,7 +10939,14 @@
       }
     },
     "游戏" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gaming"
+          }
+        }
+      }
     },
     "热搜" : {
       "localizations" : {
@@ -10906,13 +10990,34 @@
       }
     },
     "生活" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Life"
+          }
+        }
+      }
     },
     "电影" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Movies"
+          }
+        }
+      }
     },
     "电视剧" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TV Drama"
+          }
+        }
+      }
     },
     "画面" : {
       "localizations" : {
@@ -10937,7 +11042,14 @@
       }
     },
     "知识" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Knowledge"
+          }
+        }
+      }
     },
     "示例：评论区缺少最新的回复" : {
       "localizations" : {
@@ -10972,7 +11084,14 @@
       }
     },
     "科技" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tech"
+          }
+        }
+      }
     },
     "稍后再看" : {
       "localizations" : {
@@ -11062,7 +11181,14 @@
       }
     },
     "纪录片" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Documentaries"
+          }
+        }
+      }
     },
     "经验" : {
       "localizations" : {
@@ -11107,10 +11233,24 @@
       }
     },
     "美食" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Food"
+          }
+        }
+      }
     },
     "舞蹈" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dance"
+          }
+        }
+      }
     },
     "若要在后台播放，你需要在播放前连接蓝牙音频设备。" : {
       "localizations" : {
@@ -11403,7 +11543,14 @@
       }
     },
     "运动" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sports"
+          }
+        }
+      }
     },
     "退出 App" : {
       "localizations" : {
@@ -11531,7 +11678,14 @@
       }
     },
     "音乐" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Music"
+          }
+        }
+      }
     },
     "音频播放" : {
       "localizations" : {
@@ -11576,7 +11730,14 @@
       }
     },
     "鬼畜" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kichiku"
+          }
+        }
+      }
     },
     "" : {
       "localizations" : {
