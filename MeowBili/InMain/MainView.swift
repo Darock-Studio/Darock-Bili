@@ -82,7 +82,7 @@ struct MainView: View {
                             })
                         case .darockc:
                             NavigationLink(destination: {
-                                Text("🎉🎉🎉\n今天是 Darock 周年庆\n到我们群 248036605 参加活动吧！")
+                                Text("🎉🎉🎉\n今天是 Darock 周年庆\n到我们群 1019196619 参加活动吧！")
                             }, label: {
                                 Text("🎉")
                             })
