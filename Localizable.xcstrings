@@ -375,23 +375,6 @@
         }
       }
     },
-    "%@：反馈暂未被阅读，或是正在验证问题。\n\n%@：报告中描述的是预期中的表现。\n\n%@：报告中的问题无法被修复，或是不具有可行性。\n\n%@：在你提交此报告前，已有另一人提出了相同的问题，你仍会在第一个报告得到修复后收到“已修复”的状态更新。\n        你的报告可能会与那些初看似乎具有相同根源的类似报告分到一组。但是，类似的报告也可能包含多种原因。如果你发现该修复方案解决了类似报告中的问题，但无法完全解决你报告的问题，请提交新报告。\n\n%@：短时间内可能无法解决此问题。\n\n%@：Darock 正在为此问题提供修复方案。\n\n%@：修复工作已完成，但还未提交更新或是更新正在等待发布。\n\n%@：修复工作已完成，可更新至最新版本验证修复。\n\n%@：报告与 App 本身无关，或是问题并非由 App 本身引起。\n\n%@：未能通过报告中的问题复现问题，需要提供更多信息。\n\n%@：提供的信息不足以让我们确定问题，你需要补充更多信息。" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$@: The feedback has not been read yet, or the problem is being verified.\n\n%2$@: The report describes the expected performance.\n\n%3$@: The problem in the report cannot be fixed or is not feasible to operate.\n\n%4$@: Someone has reported the same question before you submit this report, however, you will still receive a \"fixed\" status update after the first report is repaired. Your report may be divided into groups with similar reports that seem to have the same roots at first time. However, similar reports may also contain multiple reasons. If you find that the repair solution solves the problem similar to the report, but cannot completely solve the problem you reported, please submit a new report.\n\n%5$@: This problem may not be solved in a short time.\n\n%6$@: Darock is fixing this problem.\n\n%7$@: The fix work has been completed, but the update has not been submitted or the update is waiting for release.\n\n%8$@: The fix work has been completed and can be updated to the latest version to verify.\n\n%9$@: The report has nothing to do with the this App, or the problem is not caused by this App.\n\n%10$@: Failed to reproduce the problem in your report and more information needs to be provided.\n\n%11$@: The information provided is not enough for us to determine the problem. You need to provide more information."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@：反馈暂未被阅读，或是正在验证问题。\n\n%2$@：报告中描述的是预期中的表现。\n\n%3$@：报告中的问题无法被修复，或是不具有可行性。\n\n%4$@：在你提交此报告前，已有另一人提出了相同的问题，你仍会在第一个报告得到修复后收到“已修复”的状态更新。\n        你的报告可能会与那些初看似乎具有相同根源的类似报告分到一组。但是，类似的报告也可能包含多种原因。如果你发现该修复方案解决了类似报告中的问题，但无法完全解决你报告的问题，请提交新报告。\n\n%5$@：短时间内可能无法解决此问题。\n\n%6$@：Darock 正在为此问题提供修复方案。\n\n%7$@：修复工作已完成，但还未提交更新或是更新正在等待发布。\n\n%8$@：修复工作已完成，可更新至最新版本验证修复。\n\n%9$@：报告与 App 本身无关，或是问题并非由 App 本身引起。\n\n%10$@：未能通过报告中的问题复现问题，需要提供更多信息。\n\n%11$@：提供的信息不足以让我们确定问题，你需要补充更多信息。"
-          }
-        }
-      }
-    },
     "%@(%@)" : {
       "localizations" : {
         "en" : {
@@ -437,133 +420,12 @@
         }
       }
     },
-    "%@已修复" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@Fixed"
-          }
-        }
-      }
-    },
-    "%@已在未来版本修复" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@Fixed in future updates"
-          }
-        }
-      }
-    },
-    "%@按预期工作" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@Work as expected"
-          }
-        }
-      }
-    },
-    "%@搁置" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@Put on hold"
-          }
-        }
-      }
-    },
-    "%@无法修复" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@Unable to fix"
-          }
-        }
-      }
-    },
-    "%@未标记" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@Unmarked"
-          }
-        }
-      }
-    },
-    "%@未能复现" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@Unable to reproduce"
-          }
-        }
-      }
-    },
-    "%@正在修复" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@Fixing"
-          }
-        }
-      }
-    },
     "%@粉丝" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ Followers"
-          }
-        }
-      }
-    },
-    "%@问题并不与 App 相关" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@The problem is not related to this App"
-          }
-        }
-      }
-    },
-    "%@问题重复" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@Duplicated"
-          }
-        }
-      }
-    },
-    "%@需要更多细节" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@More details are required"
           }
         }
       }
@@ -2078,7 +1940,7 @@
         }
       }
     },
-    "🎉🎉🎉\n今天是 Darock 周年庆\n到我们群 248036605 参加活动吧！" : {
+    "🎉🎉🎉\n今天是 Darock 周年庆\n到我们群 1019196619 参加活动吧！" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2160,6 +2022,16 @@
       },
       "shouldTranslate" : false
     },
+    "1小时" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 Hour"
+          }
+        }
+      }
+    },
     "2x" : {
       "localizations" : {
         "en" : {
@@ -2170,6 +2042,16 @@
         }
       },
       "shouldTranslate" : false
+    },
+    "2小时" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2 Hours"
+          }
+        }
+      }
     },
     "3x" : {
       "localizations" : {
@@ -2192,6 +2074,46 @@
         }
       },
       "shouldTranslate" : false
+    },
+    "5分钟" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5 Minutes"
+          }
+        }
+      }
+    },
+    "10分钟（默认）" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "10 Minutes (Default)"
+          }
+        }
+      }
+    },
+    "15分钟" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15 Minutes"
+          }
+        }
+      }
+    },
+    "30分钟" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "30 Minutes"
+          }
+        }
+      }
     },
     "114" : {
       "localizations" : {
@@ -3068,17 +2990,6 @@
         }
       }
     },
-    "App 版本" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "App Version"
-          }
-        }
-      }
-    },
     "Bangumi" : {
       "localizations" : {
         "en" : {
@@ -3385,17 +3296,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Darock Studio"
-          }
-        }
-      }
-    },
-    "Darock 会收集必要的诊断信息以便进行改进。如果您不愿意被收集信息，请勿发送。" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Darock will collect essential diagnosis info in order to fix the issue. Do not send if you do not wish your datas to be collected."
           }
         }
       }
@@ -4360,23 +4260,6 @@
         }
       }
     },
-    "FB%@%@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Feedback%1$@%2$@"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "FB%1$@%2$@"
-          }
-        }
-      }
-    },
     "FocusStateDebug" : {
       "localizations" : {
         "en" : {
@@ -4780,17 +4663,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "再次輕點以跳過本次更新"
-          }
-        }
-      }
-    },
-    "ID: %@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ID: %@"
           }
         }
       }
@@ -8990,29 +8862,6 @@
         }
       }
     },
-    "Video.more" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "More"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "もっと多く"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "更多"
-          }
-        }
-      }
-    },
     "Video.play" : {
       "localizations" : {
         "en" : {
@@ -9165,28 +9014,6 @@
         }
       }
     },
-    "与此反馈重复" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Duplicated with this Feedback"
-          }
-        }
-      }
-    },
-    "了解反馈状态" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Learn more about Feedback Status"
-          }
-        }
-      }
-    },
     "二维码名片" : {
       "localizations" : {
         "en" : {
@@ -9277,17 +9104,6 @@
         }
       }
     },
-    "你要存储当前的草稿吗？" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do you want to save your current draft?"
-          }
-        }
-      }
-    },
     "使用“相机”App" : {
       "localizations" : {
         "en" : {
@@ -9338,17 +9154,6 @@
         }
       }
     },
-    "允许收集使用信息" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow Collecting Usage Data"
-          }
-        }
-      }
-    },
     "全屏" : {
       "localizations" : {
         "en" : {
@@ -9381,17 +9186,6 @@
         }
       }
     },
-    "关联反馈" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Associate Feedbacks"
-          }
-        }
-      }
-    },
     "内容" : {
       "localizations" : {
         "en" : {
@@ -9418,17 +9212,6 @@
         }
       }
     },
-    "分析与改进" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Analysis & Improvements"
-          }
-        }
-      }
-    },
     "切换账号" : {
       "localizations" : {
         "en" : {
@@ -9449,24 +9232,12 @@
         }
       }
     },
-    "删除草稿" : {
-      "extractionState" : "stale",
+    "刷新时间" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Delete the Draft"
-          }
-        }
-      }
-    },
-    "加载更多" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Load More"
+            "value" : "Refresh Time"
           }
         }
       }
@@ -9605,28 +9376,6 @@
         }
       }
     },
-    "反馈状态" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Feedback Status"
-          }
-        }
-      }
-    },
-    "反馈类型" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Request Type"
-          }
-        }
-      }
-    },
     "发布于 %@" : {
       "localizations" : {
         "en" : {
@@ -9645,17 +9394,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "發布於 %@"
-          }
-        }
-      }
-    },
-    "发送" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Send"
           }
         }
       }
@@ -9694,17 +9432,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "發送彈幕"
-          }
-        }
-      }
-    },
-    "发送的反馈" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sent Feedbacks"
           }
         }
       }
@@ -9813,83 +9540,6 @@
         }
       }
     },
-    "喵哩喵哩为完整开源项目，欢迎检查代码以确认无隐私问题" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "MeowBili is a fully-open-source project, you can check code to confirm it has no privacy issues."
-          }
-        }
-      }
-    },
-    "喵哩喵哩开源页" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "MeowBili Open-source Page"
-          }
-        }
-      }
-    },
-    "喵哩喵哩收集使用信息仅用以帮助改进质量，不会用于广告、个人画像之类，收集的信息不会关联到个人。此更改立即生效，不会影响哔哩哔哩官方对您的数据收集。" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "MeowBili only collects datas for improving and will not be used to advertise or generate user image. The datas collected will not be linked to your identity. This change will make effect immediately and will not affect Bilibili collecting your data."
-          }
-        }
-      }
-    },
-    "回复" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reply"
-          }
-        }
-      }
-    },
-    "回复 %lld" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reply %lld"
-          }
-        }
-      }
-    },
-    "回复信息" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reply Message"
-          }
-        }
-      }
-    },
-    "回复内容" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reply Content"
-          }
-        }
-      }
-    },
     "在iPhone上继续" : {
       "localizations" : {
         "en" : {
@@ -9912,35 +9562,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Before using this App, you need to know the following information:\n· This App is contributed by third-party developers and some community users. There is no cooperative relationship with BiliBili, which is a trademark of Shanghai Kuanyu Digital Technology Co., Ltd.\n· This App is not a substitute for BiliBili. We recommend that you use the official client if possible.\n· This App is developed using public information from the Internet.\n· The functions related to BiliBili in this App are completely free.\n· The content of BiliBili presented in this App comes from the official website of BiliBili."
-          }
-        }
-      }
-    },
-    "在使用本 App 前，您需要先知晓以下信息：\n· 本 App 由第三方开发者以及部分社区用户贡献，与哔哩哔哩无合作关系，哔哩哔哩是上海宽娱数码科技有限公司的商标。\n· 本 App 并不是哔哩哔哩的替代品，我们建议您在能够使用官方客户端时尽量使用官方客户端。\n· 本 App 均使用来源于网络的公开信息进行开发。\n· 本 App 中和B站相关的功能完全免费\n· 本 App 中所呈现的B站内容来自哔哩哔哩官方。\n· 本 App 的开发者、负责人和实际责任人是%@\n  联系QQ：3245146430" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You should know these before using this App：\n· This App is made by third-party developers and some community contributors. It has no any cooperation relation with Bilibili. Bilibili is Shanghai Kuanyu Digital Technology Co., Ltd.'s trademark.\n· This App is not a replacement of Bilibili. We recommend you use the official client as long as you can.\n· All development is using public information from the Internet.\n· All contents related with Bilibili are all free.\n· All contents displayed related with Bilibili are all from official Bilibili.\n· The App's developer, person in charge and the actual person responsible is %@.\n· The English version is for reference only. Please refer to the simplified Chinese version.\n  Contact QQ：3245146430"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "このアプリを使用する前に、以下の情報を理解しておく必要があります：\n· このアプリは第三者開発者と一部のコミュニティユーザーによって提供されており、哔哩哔哩とは協力関係にありません。哔哩哔哩は上海宽娱数码科技有限公司の商標です。\n· このアプリは、Bilibili の代替品ではなく、公式クライアントが利用可能な場合はできるだけ公式クライアントを使用することを推奨します。\n· このアプリはすべてインターネットから得られた公開情報を元に開発されています。\n· B站関連の機能全てが完全無料で利用可能です\n· アプリ内で表示されるB站コンテンツはすべてBilibili公式から取得しています。\n· 本 App の開発者、責任者及び実際の責任者さん%@ \n　連絡先QQ：3245146430"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在使用本 App 前，您需要先知晓以下信息：\n· 本 App 由第三方开发者以及部分社区用户贡献，与哔哩哔哩无合作关系，哔哩哔哩是上海宽娱数码科技有限公司的商标。\n· 本 App 并不是哔哩哔哩的替代品，我们建议您在能够使用官方客户端时尽量使用官方客户端。\n· 本 App 均使用来源于网络的公开信息进行开发。\n· 本 App 中和B站相关的功能完全免费\n· 本 App 中所呈现的B站内容来自哔哩哔哩官方。\n· 本 App 的开发者、负责人和实际责任人是%@\n  联系QQ：3245146430"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在使用本 App 前，您需要先了解以下資訊：\n· 本 App 是由第三方開發者以及部分社區用戶貢獻，與哔哩哔哩無合作關係，哔哩哔哩是上海寬娛數碼科技有限公司的商標。\n· 本 App 並不是替品，我們建議您在能夠使用官方客戶端時儘量使用官方客戶端。\n· 本 App 使用來源於網路的公開信息進行開發。\n· 本 App 中和B站相關的功能完全免費\n· 本 App 中所呈現的B站內容來自於官方。\n· 本App 的開發者、負責人和實際責任人是%@\n   聯絡QQ：3245146430"
           }
         }
       }
@@ -10057,17 +9678,6 @@
         }
       }
     },
-    "存储草稿" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Save the draft"
-          }
-        }
-      }
-    },
     "完成" : {
       "localizations" : {
         "en" : {
@@ -10136,6 +9746,26 @@
         }
       }
     },
+    "小组件" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widgets"
+          }
+        }
+      }
+    },
+    "小组件刷新时间" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widget Refresh Time"
+          }
+        }
+      }
+    },
     "已使用 %@ MB" : {
       "localizations" : {
         "en" : {
@@ -10196,17 +9826,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "底部"
-          }
-        }
-      }
-    },
-    "建议" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Recommendations"
           }
         }
       }
@@ -10343,34 +9962,12 @@
         }
       }
     },
-    "手记建议" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Suggestions for Journal"
-          }
-        }
-      }
-    },
     "扩展的触感反馈" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Extended Haptic Feedback"
-          }
-        }
-      }
-    },
-    "换行" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enter"
           }
         }
       }
@@ -10423,50 +10020,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Recommended View Style "
-          }
-        }
-      }
-    },
-    "描述" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Description"
-          }
-        }
-      }
-    },
-    "描述行%lld" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Description Line %lld"
-          }
-        }
-      }
-    },
-    "提交" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Submit"
-          }
-        }
-      }
-    },
-    "提交反馈" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Submit Feedback"
           }
         }
       }
@@ -10563,17 +10116,6 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "文件保险箱通过对喵哩喵哩进行加密来保护 App 内的数据。\n\n警告：你将需要密码或恢复密钥才能访问数据。在此设置过程中，会自动生成恢复密钥。如果同时忘记了密码和恢复密钥，数据将会丢失。\n\n已%1$@喵哩喵哩的文件保险箱。%2$@"
-          }
-        }
-      }
-    },
-    "新建反馈" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "New Feedback"
           }
         }
       }
@@ -10700,39 +10242,6 @@
         }
       }
     },
-    "更新标签" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Update tags"
-          }
-        }
-      }
-    },
-    "未完成的编辑" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Draft"
-          }
-        }
-      }
-    },
-    "来自" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "From"
-          }
-        }
-      }
-    },
     "来自 Darock 的推荐" : {
       "localizations" : {
         "en" : {
@@ -10791,28 +10300,6 @@
         }
       }
     },
-    "标签不会被本地化，因为它们是动态添加的。" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tags will not be localized because they are dynamic."
-          }
-        }
-      }
-    },
-    "标题" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Title"
-          }
-        }
-      }
-    },
     "模式" : {
       "localizations" : {
         "en" : {
@@ -10861,17 +10348,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Normal"
-          }
-        }
-      }
-    },
-    "此反馈已关闭，若要重新进行反馈，请创建一个新的反馈" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This feedback is closed. If you want to re-feedback, please create a new one."
           }
         }
       }
@@ -10964,17 +10440,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Version %@ is now available"
-          }
-        }
-      }
-    },
-    "状态" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Status"
           }
         }
       }
@@ -11137,45 +10602,12 @@
         }
       }
     },
-    "简洁地描述问题" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Describe the Issue Concisely"
-          }
-        }
-      }
-    },
-    "类型" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Type"
-          }
-        }
-      }
-    },
     "粉丝列表" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Follower List"
-          }
-        }
-      }
-    },
-    "系统版本" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "System Version"
           }
         }
       }
@@ -11258,17 +10690,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "To play in the background, you need to connect a Bluetooth audio device before playing videos."
-          }
-        }
-      }
-    },
-    "虽然我们无法一一以文字回复提交的每一份反馈，但我们会查看每一份反馈并监控提交的反馈数量，以便更好地了解问题的范围。" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Although we cannot reply to every feedback submitted in text one by one, we will review each feedback and monitor the number of feedback submitted in order to better understand the scope of the problem."
           }
         }
       }
@@ -11407,45 +10828,12 @@
         }
       }
     },
-    "请为你的反馈提供描述性的标题：" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please provide a descriptive title for your feedback:"
-          }
-        }
-      }
-    },
-    "请包括：\n- 问题的清晰描述\n- 逐步说明重现问题的详细步骤（如果可能）\n- 期望的结果\n- 当前所示结果" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please include:\n- A clear description of the problem\n- Step by step to explain the detailed steps to reproduce the problem (if possible)\n- Expected results\n- The current results"
-          }
-        }
-      }
-    },
     "请将恢复密钥保存到安全的位置" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Please store the recovery key in a safe place."
-          }
-        }
-      }
-    },
-    "请描述该问题以及重现问题的步骤：" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please describe the problem and the steps to reproduce them:"
           }
         }
       }
@@ -11632,17 +11020,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "重新載入"
-          }
-        }
-      }
-    },
-    "错误/异常行为" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Error/Unexpected Behavior"
           }
         }
       }
