@@ -50,10 +50,16 @@ struct Provider: TimelineProvider {
 
 struct MeowWidgetView: View {
     @Environment(\.widgetFamily) var family
+    @AppStorage("WidgetOpenWithBiliBili") var openWithBili = false
     var entry: MeowWidgetEntry
     
     var body: some View {
         let widgetURL = URL(string: "wget://openURL/\(entry.video.id)")
+        if openWithBili == true {
+            let widgetURL = URL(string: "https://www.bilibili.com/video/\(entry.video.id)")
+        } else {
+            let widgetURL = URL(string: "wget://openURL/\(entry.video.id)")
+        }
         switch family {
         case .accessoryInline:
             Text(entry.video.title)

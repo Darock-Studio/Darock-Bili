@@ -589,12 +589,12 @@ struct SoundAHapticSettingsView: View {
 
 struct WidgetSettingsView: View {
     @AppStorage("WidgetRefreshInterval") var refreshInterval: Int = 10
-    // @State var isNewToWidget = true for future updates
+    @AppStorage("WidgetOpenWithBiliBili") var openWithBili = false
     var body: some View {
-        // Here we go refreshment settings
         Form {
-            Section(header: Text("小组件刷新时间")){
-                Picker("刷新时间", selection: $refreshInterval){
+            Section(header: Text("刷新")){
+                // Here we go refreshment settings
+                Picker("小组件刷新时间", selection: $refreshInterval){
                     Text("5分钟").tag(5)
                     Text("10分钟（默认）").tag(10)
                     Text("15分钟").tag(15)
@@ -603,8 +603,19 @@ struct WidgetSettingsView: View {
                     Text("2小时").tag(120)
                 }
             }
+            // Customize which app to open
+            Section(header: Text("打开方式")){
+                Picker("小组件视频打开方式", selection: $openWithBili){
+                    Text("喵哩喵哩").tag(false)
+                    Text("哔哩哔哩").tag(true)
+                }
+                if openWithBili == true {
+                    Text("要通过哔哩哔哩打开小组件中展示的视频，你需要在设备上安装哔哩哔哩客户端。")
+                } else {
+                    Text("目前仅支持打开喵哩喵哩客户端主页。")
+                }
+            }
         }
-        // Here comes more features
     }
 }
 
