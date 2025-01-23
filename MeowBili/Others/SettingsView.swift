@@ -588,7 +588,7 @@ struct SoundAHapticSettingsView: View {
 }
 
 struct WidgetSettingsView: View {
-    @AppStorage("widgetRefreshInterval") var refreshInterval: Int = 10
+    @AppStorage("WidgetRefreshInterval") var refreshInterval: Int = 10
     // @State var isNewToWidget = true for future updates
     var body: some View {
         // Here we go refreshment settings

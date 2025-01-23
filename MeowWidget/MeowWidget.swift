@@ -25,7 +25,7 @@ struct MeowWidgetEntry: TimelineEntry {
 }
 
 struct Provider: TimelineProvider {
-    @AppStorage("widgetRefreshInterval") var refreshInterval: Int = 10
+    @AppStorage("WidgetRefreshInterval") var refreshInterval: Int = 10
     func placeholder(in context: Context) -> MeowWidgetEntry {
         MeowWidgetEntry(date: Date(), video: Video(id: 0, title: "miku miku oo ee oo", description: "https://twitter.com/i/status/1697029186777706544 channel（twi:_CASTSTATION）", authorName: "未来de残像", viewCount: 0, likeCount: 0, coinCount: 0, shareCount: 0, danmakuCount: 0))
     }
@@ -52,7 +52,6 @@ struct MeowWidgetView: View {
     @Environment(\.widgetFamily) var family
     var entry: MeowWidgetEntry
     
-    @ViewBuilder
     var body: some View {
         let widgetURL = URL(string: "wget://openURL/\(entry.video.id)")
         switch family {
