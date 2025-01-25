@@ -17,7 +17,8 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
-import DarockKit
+import DarockUI
+import DarockFoundation
 
 struct AboutView: View {
     var body: some View {
@@ -98,9 +99,9 @@ struct AboutApp: View {
             .onTapGesture(count: 9) {
                 debug.toggle()
                 if debug {
-                    AlertKitAPI.present(title: "Dev On", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                    tipWithText("Dev On", symbol: "checkmark.circle.fill")
                 } else {
-                    AlertKitAPI.present(title: "Dev Off", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                    tipWithText("Dev Off", symbol: "checkmark.circle.fill")
                 }
             }
         }
@@ -117,7 +118,6 @@ struct AboutCredits: View {
             Section {
                 Text("WindowsMEMZ")
                 Text("Lightning-Lion")
-                Text("Linecom")
                 Text("令枫")
                 Text("ThreeManager785")
                 Text("Dignite")

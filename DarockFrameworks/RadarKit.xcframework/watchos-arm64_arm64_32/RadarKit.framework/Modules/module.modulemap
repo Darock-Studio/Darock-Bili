@@ -1,6 +1,0 @@
-framework module RadarKit {
-  umbrella header "RadarKit.h"
-  export *
-
-  module * { export * }
-}

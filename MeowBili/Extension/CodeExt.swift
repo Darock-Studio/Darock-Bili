@@ -20,12 +20,12 @@ import OSLog
 import SwiftUI
 import Dynamic
 import CryptoKit
-import DarockKit
 import Alamofire
 import SwiftyJSON
 import Foundation
 import AVFoundation
 import CommonCrypto
+import DarockFoundation
 
 extension String {
     func shorter() -> String {
@@ -149,7 +149,7 @@ public func autoRetryRequestApi(_ url: String, headers: HTTPHeaders?, maxReqCoun
     }
 
     func sigReq(_ url: String, headers: HTTPHeaders?, maxReqCount: Int = 10, callback: @escaping (JSON, Bool) -> Void) {
-        DarockKit.Network.shared.requestJSON(url, headers: headers) { respJson, isSuccess in
+        requestJSON(url, headers: headers) { respJson, isSuccess in
             if isSuccess {
                 if CheckBApiError(from: respJson, noTip: true) { // Requesting succeed
                     callback(respJson, true)
@@ -614,7 +614,7 @@ public func getBuvid(url: String, callback: @escaping (String, String, String, S
         "5f45":0, // laboratory, set from cookie, null if empty, source remains unknown
         "db46":0 // is_selfdef, default 0
     ]
-    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/frontend/finger/spi") { respJson, isSuccess in
+    requestJSON("https://api.bilibili.com/x/frontend/finger/spi") { respJson, isSuccess in
         if isSuccess {
             let buvid3 = respJson["data"]["b_3"].string ?? ""
             let buvid4 = respJson["data"]["b_4"].string ?? ""
@@ -653,7 +653,7 @@ func updateBiliTicket(csrf: String) {
     let headers: HTTPHeaders = [
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0"
     ]
-    DarockKit.Network.shared.requestJSON("\(url)?key_id=ec02&hexsign=\(hexSign)&context[ts]=\(timestamp)&csrf=\(csrf)", method: .post, headers: headers) { respJson, isSuccess in
+    requestJSON("\(url)?key_id=ec02&hexsign=\(hexSign)&context[ts]=\(timestamp)&csrf=\(csrf)", method: .post, headers: headers) { respJson, isSuccess in
         if isSuccess {
             if let ticket = respJson["data"]["ticket"].string {
                 UserDefaults.standard.set(ticket, forKey: "CachedBiliTicket")

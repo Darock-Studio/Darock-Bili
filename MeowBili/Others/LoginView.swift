@@ -17,10 +17,11 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
+import DarockUI
 import EFQRCode
 import Alamofire
-import DarockKit
 import SwiftyJSON
+import DarockFoundation
 import AuthenticationServices
 
 struct LoginView: View {
@@ -92,7 +93,7 @@ struct LoginView: View {
                 let headers: HTTPHeaders = [
                     "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                 ]
-                DarockKit.Network.shared.requestJSON("https://passport.bilibili.com/x/passport-login/web/qrcode/generate", headers: headers) { respJson, isSuccess in
+                requestJSON("https://passport.bilibili.com/x/passport-login/web/qrcode/generate", headers: headers) { respJson, isSuccess in
                     if isSuccess {
                         let qrUrl = respJson["data"]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
                         debugPrint(qrUrl)
@@ -102,7 +103,7 @@ struct LoginView: View {
                         qrKey = respJson["data"]["qrcode_key"].string!
                         Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
                             qrTimer = timer
-                            DarockKit.Network.shared.requestJSON("https://passport.bilibili.com/x/passport-login/web/qrcode/poll?qrcode_key=\(qrKey)", headers: headers) { respJson, isSuccess in
+                            requestJSON("https://passport.bilibili.com/x/passport-login/web/qrcode/poll?qrcode_key=\(qrKey)", headers: headers) { respJson, isSuccess in
                                 if isSuccess {
                                     if respJson["data"]["code"].int == 86090 {
                                         isScanned = true
@@ -390,20 +391,12 @@ struct LoginView: View {
                                                 if let json = try? JSON(data: response.data!), let token = json["data"]["captcha_key"].string {
                                                     smsLoginToken = token
                                                 } else {
-#if os(iOS)
-                                                    AlertKitAPI.present(title: "获取出错", subtitle: "请稍后重试", icon: .error, style: .iOS17AppleMusic, haptic: .error)
-#else
                                                     tipWithText("获取出错", symbol: "xmark.circle.fill")
-#endif
                                                 }
                                             }
                                         }
                                     } else {
-                                        #if os(iOS)
-                                        AlertKitAPI.present(title: "手机号错误", subtitle: "请输入正确的手机号", icon: .error, style: .iOS17AppleMusic, haptic: .error)
-                                        #else
                                         tipWithText("手机号错误", symbol: "xmark.circle.fill")
-                                        #endif
                                     }
                                 }, label: {
                                     if validate.isEmpty {
@@ -490,7 +483,7 @@ struct LoginView: View {
                 let headers: HTTPHeaders = [
                     "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                 ]
-                DarockKit.Network.shared.requestJSON("https://passport.bilibili.com/x/passport-login/captcha?source=main_web", headers: headers) { respJson, isSuccess in
+                requestJSON("https://passport.bilibili.com/x/passport-login/captcha?source=main_web", headers: headers) { respJson, isSuccess in
                     if isSuccess {
                         challenge = respJson["data"]["geetest"]["challenge"].string!
                         gt = respJson["data"]["geetest"]["gt"].string!

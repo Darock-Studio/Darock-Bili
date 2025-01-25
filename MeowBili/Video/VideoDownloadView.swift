@@ -18,8 +18,8 @@
 
 import SwiftUI
 import Dynamic
-import DarockKit
 import Alamofire
+import DarockFoundation
 
 struct VideoDownloadView: View {
     var bvid: String

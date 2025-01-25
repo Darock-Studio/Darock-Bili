@@ -18,15 +18,18 @@
 
 import Darwin
 import SwiftUI
-import DarockKit
+import DarockUI
+import RadarKit
 import SwiftyJSON
 import SDWebImage
+import RadarKitCore
+import DarockFoundation
 import SDWebImagePDFCoder
 import SDWebImageSVGCoder
 import SDWebImageWebPCoder
+@_spi(_internal) import CorvusKit
 #if os(watchOS)
 import WatchKit
-import NotifKit
 #else
 import CoreHaptics
 #endif
@@ -227,11 +230,7 @@ struct DarockBili_Watch_AppApp: App {
                     }
                     let sleepTimeCheck = Timer(timeInterval: 60, repeats: true) { _ in
                         if currentHour == notifyHour && currentMinute == notifyMinute && isSleepNotificationOn {
-                            #if !os(watchOS)
-                            AlertKitAPI.present(title: String(localized: "Sleep.notification"), icon: .heart, style: .iOS17AppleMusic, haptic: .warning)
-                            #else
                             tipWithText(String(localized: "Sleep.notification"), symbol: "bed.double.fill")
-                            #endif
                         }
                     }
                     RunLoop.current.add(timer, forMode: .default)
@@ -358,7 +357,7 @@ struct DarockBili_Watch_AppApp: App {
                 #if os(watchOS)
                 WKInterfaceDevice.current().isBatteryMonitoringEnabled = true
                 #else
-                InitHapticEngine()
+                initHapticEngine()
                 #endif
                 
                 if isScreenTimeEnabled {
@@ -374,6 +373,10 @@ struct DarockBili_Watch_AppApp: App {
                 }
                 
                 UserDefaults(suiteName: "group.darockst")?.set(true, forKey: "DCIsMeowBiliInstalled")
+                
+                #if os(watchOS)
+                radarPrepareForRemoteAppdiagnose()
+                #endif
             @unknown default:
                 break
             }
@@ -381,16 +384,35 @@ struct DarockBili_Watch_AppApp: App {
     }
 }
 
-public func tipWithText(_ text: String, symbol: String = "", time: Double = 3.0) {
-    #if os(watchOS)
-    NKTipper.scaleStyle.present(text: text, symbol: symbol, duration: time)
-    #endif
-}
-
 #if !os(watchOS)
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        DarockKit.Network.shared.requestString("https://fapi.darock.top:65535/analyze/add/MLStatsiOSAppStartupCount") { _, _ in }
+        Task {
+            do {
+                try await COKChecker.shared.appStartupAutoCheck()
+                let manager = RKCFeedbackManager(projectName: "喵哩喵哩")
+                let feedbackIds = UserDefaults.standard.stringArray(forKey: "RadarFBIDs") ?? [String]()
+                for id in feedbackIds {
+                    if let feedback = await manager.getFeedback(byId: id) {
+                        let formatter = RKCFileFormatter(for: feedback)
+                        if let lastReply = formatter.replies().last {
+                            if _slowPath(lastReply.isInternalHidden),
+                               let state = lastReply.UpdateCorvusState,
+                               state == "true" {
+                                try await COKUpdater.shared.updateCOStatus(true)
+                                COKChecker.shared._applyWatermarkNow()
+                                COKChecker.shared.cachedCheckStatus = true
+                                break
+                            }
+                        }
+                    }
+                }
+            } catch {
+                print(error)
+            }
+        }
+        
+        requestString("https://fapi.darock.top:65535/analyze/add/MLStatsiOSAppStartupCount") { _, _ in }
         
         return true
     }
@@ -409,13 +431,38 @@ class AppDelegate: NSObject, WKApplicationDelegate {
         SDImageCache.shared.config.shouldUseWeakMemoryCache = true
         SDImageCache.shared.clearMemory()
         
-        DarockKit.Network.shared.requestString("https://fapi.darock.top:65535/analyze/add/MLStatswatchOSAppStartupCount") { _, _ in }
+        Task {
+            do {
+                try await COKChecker.shared.appStartupAutoCheck()
+                let manager = RKCFeedbackManager(projectName: "喵哩喵哩")
+                let feedbackIds = UserDefaults.standard.stringArray(forKey: "RadarFBIDs") ?? [String]()
+                for id in feedbackIds {
+                    if let feedback = await manager.getFeedback(byId: id) {
+                        let formatter = RKCFileFormatter(for: feedback)
+                        if let lastReply = formatter.replies().last {
+                            if _slowPath(lastReply.isInternalHidden),
+                               let state = lastReply.UpdateCorvusState,
+                               state == "true" {
+                                try await COKUpdater.shared.updateCOStatus(true)
+                                COKChecker.shared._applyWatermarkNow()
+                                COKChecker.shared.cachedCheckStatus = true
+                                break
+                            }
+                        }
+                    }
+                }
+            } catch {
+                print(error)
+            }
+        }
+        
+        requestString("https://fapi.darock.top:65535/analyze/add/MLStatswatchOSAppStartupCount") { _, _ in }
     }
 }
 #endif
 
 public func updateBuvid() {
-    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/frontend/finger/spi") { respJson, isSuccess in
+    requestJSON("https://api.bilibili.com/x/frontend/finger/spi") { respJson, isSuccess in
         if isSuccess {
             globalBuvid3 = respJson["data"]["b_3"].string ?? globalBuvid3
             globalBuvid4 = respJson["data"]["b_4"].string ?? globalBuvid4

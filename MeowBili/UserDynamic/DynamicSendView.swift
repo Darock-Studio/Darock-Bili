@@ -17,10 +17,11 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
-import DarockKit
 import PhotosUI
+import DarockUI
 import Alamofire
 import SwiftyJSON
+import DarockFoundation
 #if canImport(JournalingSuggestions)
 import JournalingSuggestions
 #endif
@@ -101,18 +102,10 @@ struct DynamicSendView: View {
                                     debugPrint(response)
                                     if let rd = response.data, let json = try? JSON(data: rd) {
                                         if !CheckBApiError(from: json) { return }
-                                        #if !os(watchOS)
-                                        AlertKitAPI.present(title: "发送成功", icon: .done, style: .iOS17AppleMusic, haptic: .success)
-                                        #else
                                         tipWithText("发送成功", symbol: "checkmark.circle.fill")
-                                        #endif
                                         presentationMode.wrappedValue.dismiss()
                                     } else {
-                                        #if !os(watchOS)
-                                        AlertKitAPI.present(title: "发送失败,未知错误", icon: .error, style: .iOS17AppleMusic, haptic: .error)
-                                        #else
                                         tipWithText("发送失败,未知错误", symbol: "xmark.circle.fill")
-                                        #endif
                                     }
                                     sendProgressText = ""
                                 }
@@ -186,11 +179,7 @@ struct DynamicSendView: View {
                 upliPtr.advanced(by: currentUploadImageIndex.pointee).pointee = "\(url)||\(convertedImages[currentUploadImageIndex.pointee].size.width)||\(convertedImages[currentUploadImageIndex.pointee].size.height)||\(Double(convertedImages[currentUploadImageIndex.pointee].pngData()!.count) / 1024.0)"
             } else {
                 currentUploadImageIndex.deallocate()
-                #if !os(watchOS)
-                AlertKitAPI.present(title: "上传图片时失败,未知错误", icon: .error, style: .iOS17AppleMusic, haptic: .error)
-                #else
                 tipWithText("上传图片时失败,未知错误", symbol: "xmark.circle.fill")
-                #endif
                 return
             }
             currentUploadImageIndex.pointee++
@@ -235,11 +224,7 @@ struct DynamicSendView: View {
             }
         } else {
             currentUploadImageIndex.deallocate()
-            #if !os(watchOS)
-            AlertKitAPI.present(title: "上传图片时失败,未知错误", icon: .error, style: .iOS17AppleMusic, haptic: .error)
-            #else
             tipWithText("上传图片时失败,未知错误", symbol: "xmark.circle.fill")
-            #endif
         }
     }
     

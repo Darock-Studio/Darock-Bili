@@ -19,9 +19,11 @@
 import UIKit
 import SwiftUI
 import Dynamic
-import DarockKit
+import DarockUI
+import NotifKit
 import Alamofire
 import Foundation
+import DarockFoundation
 import MobileCoreServices
 import AuthenticationServices
 import SDWebImageSwiftUI
@@ -96,29 +98,29 @@ func VideoCard(_ videoDetails: [String: String], onAppear: @escaping () -> Void 
                         if action == "Like" {
                             AF.request("https://api.bilibili.com/x/web-interface/archive/like", method: .post, parameters: ["bvid": videoDetails["BV"]!, "like": 1, "eab_x": 2, "ramval": 0, "source": "web_normal", "ga": 1, "csrf": biliJct], headers: headers).response { _ in
                                 if items.count == 1 {
-                                    AlertKitAPI.present(title: "已点赞", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                    tipWithText("已点赞", symbol: "checkmark.circle.fill")
                                 } else if item == items.last! {
-                                    AlertKitAPI.present(title: "已完成\(items.count)项操作", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                    tipWithText("已完成\(items.count)项操作", symbol: "checkmark.circle.fill")
                                 }
                             }
                         } else if action == "Coin" {
                             AF.request("https://api.bilibili.com/x/web-interface/coin/add", method: .post, parameters: BiliVideoCoin(bvid: videoDetails["BV"]!, multiply: 1, csrf: biliJct), headers: headers).response { _ in
                                 if items.count == 1 {
-                                    AlertKitAPI.present(title: "已投币", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                    tipWithText("已投币", symbol: "checkmark.circle.fill")
                                 } else if item == items.last! {
-                                    AlertKitAPI.present(title: "已完成\(items.count)项操作", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                    tipWithText("已完成\(items.count)项操作", symbol: "checkmark.circle.fill")
                                 }
                             }
                         } else if action == "Favorite" {
                             let avid = bv2av(bvid: videoDetails["BV"]!)
-                            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v3/fav/folder/created/list-all?type=2&rid=\(avid)&up_mid=\(UserDefaults.standard.string(forKey: "DedeUserID") ?? "")", headers: headers) { respJson, isSuccess in
+                            requestJSON("https://api.bilibili.com/x/v3/fav/folder/created/list-all?type=2&rid=\(avid)&up_mid=\(UserDefaults.standard.string(forKey: "DedeUserID") ?? "")", headers: headers) { respJson, isSuccess in
                                 if isSuccess {
                                     if !CheckBApiError(from: respJson) { return }
                                     AF.request("https://api.bilibili.com/x/v3/fav/resource/deal", method: .post, parameters: ["rid": avid, "type": 2, "add_media_ids": respJson["data"]["list"][0]["id"].int ?? 0, "csrf": biliJct], headers: headers).response { _ in
                                         if items.count == 1 {
-                                            AlertKitAPI.present(title: "已收藏", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                            tipWithText("已收藏", symbol: "checkmark.circle.fill")
                                         } else if item == items.last! {
-                                            AlertKitAPI.present(title: "已完成\(items.count)项操作", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                            tipWithText("已完成\(items.count)项操作", symbol: "checkmark.circle.fill")
                                         }
                                     }
                                 }
@@ -498,6 +500,14 @@ func LargeVideoCard(_ videoDetails: [String: String]) -> some View {
     .buttonBorderShape(.roundedRectangle(radius: 14))
     #else
     VideoCard(videoDetails)
+    #endif
+}
+
+func tipWithText(_ text: String, symbol: String = "", time: Double = 3.0) {
+    #if os(watchOS)
+    NKTipper.scaleStyle.present(text: text, symbol: symbol, duration: time)
+    #else
+    NKTipper.tinyStyle.present(text: text, symbol: symbol, duration: time)
     #endif
 }
 

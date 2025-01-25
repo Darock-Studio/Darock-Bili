@@ -17,9 +17,10 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
-import DarockKit
+import DarockUI
 import Alamofire
 import SwiftSoup
+import DarockFoundation
 #if !os(watchOS)
 import WebKit
 #endif
@@ -54,7 +55,7 @@ struct ArticleView: View {
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.large)
         .onAppear {
-            DarockKit.Network.shared.requestString("https://www.bilibili.com/read/cv\(cvid)") { respStr, isSuccess in
+            requestString("https://www.bilibili.com/read/cv\(cvid)") { respStr, isSuccess in
                 if isSuccess {
                     do {
                         let doc: Document = try SwiftSoup.parse(respStr)

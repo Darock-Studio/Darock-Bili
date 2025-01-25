@@ -1,12 +1,13 @@
 {
+  "originHash" : "45bd3d20033c2287d7115f7e1c9f8ed3737b5d023ab779923c7857dd09a9f6f7",
   "pins" : [
     {
       "identity" : "alamofire",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire",
       "state" : {
-        "revision" : "ea6a94b7dddffd0ca4d0f29252d95310b84dec84",
-        "version" : "5.10.0"
+        "revision" : "513364f870f6bfc468f9d2ff0a95caccc10044c5",
+        "version" : "5.10.2"
       }
     },
     {
@@ -41,17 +42,35 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Serene-Garden/Cepheus",
       "state" : {
-        "revision" : "8508ddae95de0300c9d45ebdc21078171779adcd",
-        "version" : "2.5.1"
+        "revision" : "fc776af21b0df05238b6bc6c9143e493530e0be3",
+        "version" : "2.6.0"
       }
     },
     {
-      "identity" : "darockkit",
+      "identity" : "corvuskit",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Darock-Studio/DarockKit",
+      "location" : "https://github.com/Darock-Studio/CorvusKit",
       "state" : {
         "branch" : "main",
-        "revision" : "0c80f45f9b1e65903d11951f0172d1c0e4b5f270"
+        "revision" : "865481811cdc0d2e815c9a18be0bbda6878fb5f3"
+      }
+    },
+    {
+      "identity" : "darockfoundation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Darock-Studio/DarockFoundation",
+      "state" : {
+        "branch" : "main",
+        "revision" : "914678eb6936130582e5e398754e2079c1f669a4"
+      }
+    },
+    {
+      "identity" : "darockui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Darock-Studio/DarockUI",
+      "state" : {
+        "branch" : "main",
+        "revision" : "a7f4dc5ce3e7bd47f83e867b35b48e64144249cc"
       }
     },
     {
@@ -86,7 +105,6 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/joekndy/MarqueeText",
       "state" : {
-        "branch" : "master",
         "revision" : "e18d514455563ad00581e0d825146c6f15b1c6c4"
       }
     },
@@ -97,6 +115,33 @@
       "state" : {
         "revision" : "2849f5323265386e200484b0d0f896e73c3411b9",
         "version" : "6.0.1"
+      }
+    },
+    {
+      "identity" : "notifkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Darock-Studio/NotifKit",
+      "state" : {
+        "branch" : "main",
+        "revision" : "b8c26ce4c4ce36845c2f30fbdbaab392f6065633"
+      }
+    },
+    {
+      "identity" : "radarkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Darock-Studio/RadarKit/",
+      "state" : {
+        "branch" : "main",
+        "revision" : "3871fffdc949d5d8ca85dc4ed1bc4b0723c50b13"
+      }
+    },
+    {
+      "identity" : "radarkitcore",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Darock-Studio/RadarKitCore",
+      "state" : {
+        "branch" : "main",
+        "revision" : "3a74b5742d4fc2725244095bf4768c8eacdf8aea"
       }
     },
     {
@@ -113,8 +158,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
       "state" : {
-        "revision" : "8a1be70a625683bc04d6903e2935bf23f3c6d609",
-        "version" : "5.19.7"
+        "revision" : "10d06f6a33bafae8c164fbfd1f03391f6d4692b3",
+        "version" : "5.20.0"
       }
     },
     {
@@ -131,8 +176,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImageSVGCoder",
       "state" : {
-        "revision" : "950167445ab703740569869c8b7510efc9d09a26",
-        "version" : "1.7.0"
+        "revision" : "85b5d58ad02c207c496fa34426dc6560d6ae32f0",
+        "version" : "1.8.0"
       }
     },
     {
@@ -203,8 +248,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/scinfu/SwiftSoup",
       "state" : {
-        "revision" : "3c2c7e1e72b8abd96eafbae80323c5c1e5317437",
-        "version" : "2.7.5"
+        "revision" : "6b4930da67b462d3f200472c902dd016d37a554d",
+        "version" : "2.7.7"
       }
     },
     {
@@ -212,8 +257,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SwiftyJSON/SwiftyJSON",
       "state" : {
-        "revision" : "2b6054efa051565954e1d2b9da831680026cd768",
-        "version" : "4.3.0"
+        "revision" : "af76cf3ef710b6ca5f8c05f3a31307d44a3c5828",
+        "version" : "5.0.2"
       }
     },
     {
@@ -226,5 +271,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

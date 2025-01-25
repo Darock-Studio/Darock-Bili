@@ -19,10 +19,11 @@
 #if !os(watchOS)
 import UIKit
 import SwiftUI
+import DarockUI
 import EFQRCode
-import DarockKit
 import Alamofire
 import SwiftyJSON
+import DarockFoundation
 import SDWebImageSwiftUI
 import ScreenshotableView
 
@@ -39,7 +40,7 @@ struct SelfQrCardView: View {
         VStack {
             ScreenshotableView(shotting: $shotting) { image in
                 UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-                AlertKitAPI.present(title: "已保存", subtitle: "二维码名片已保存到相册", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                tipWithText("已保存到相册", symbol: "checkmark.circle.fill")
             } content: { _ in
                 VStack {
                     HStack {

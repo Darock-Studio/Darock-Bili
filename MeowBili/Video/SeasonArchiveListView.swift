@@ -17,9 +17,9 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
-import DarockKit
 import Alamofire
 import SwiftyJSON
+import DarockFoundation
 
 struct SeasonArchiveListView: View {
     var mid: String
@@ -99,7 +99,7 @@ struct SeasonArchiveListView: View {
         ]
         biliWbiSign(paramEncoded: "mid=\(mid)&season_id=\(seasonID)&page_num=\(currentPage)&page_size=20".base64Encoded()) { signed in
             if let signed {
-                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/polymer/web-space/seasons_archives_list?\(signed)", headers: headers) { respJson, isSuccess in
+                requestJSON("https://api.bilibili.com/x/polymer/web-space/seasons_archives_list?\(signed)", headers: headers) { respJson, isSuccess in
                     if isSuccess {
                         debugPrint(respJson)
                         if !CheckBApiError(from: respJson) { return }

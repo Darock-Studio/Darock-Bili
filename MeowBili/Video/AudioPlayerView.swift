@@ -19,10 +19,11 @@
 import Combine
 import SwiftUI
 import Dynamic
-import DarockKit
+import DarockUI
 import Alamofire
 import MediaPlayer
 import AVFoundation
+import DarockFoundation
 import SDWebImageSwiftUI
 
 let globalAudioPlayer = AVPlayer()
@@ -207,7 +208,7 @@ struct AudioControllerView: View {
                 "cookie": "SESSDATA=\(sessdata)",
                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             ]
-            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/view?bvid=\(nowPlayingVideoId)", headers: headers) { respJson, isSuccess in
+            requestJSON("https://api.bilibili.com/x/web-interface/view?bvid=\(nowPlayingVideoId)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
                     debugPrint(respJson)
                     backgroundImageUrl = URL(string: respJson["data"]["pic"].string ?? "")

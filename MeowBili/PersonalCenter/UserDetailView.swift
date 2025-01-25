@@ -17,9 +17,10 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
-import DarockKit
+import DarockUI
 import Alamofire
 import SwiftyJSON
+import DarockFoundation
 import AuthenticationServices
 import SDWebImageSwiftUI
 
@@ -135,10 +136,10 @@ struct UserDetailView: View {
                                         let json = try! JSON(data: response.data!)
                                         let code = json["code"].int!
                                         if code == 0 {
-                                            AlertKitAPI.present(title: isFollowed ? String(localized: "Account.tips.unfollowed") : String(localized: "Account.tips.followed"), icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                                            tipWithText(isFollowed ? String(localized: "Account.tips.unfollowed") : String(localized: "Account.tips.followed"), symbol: "checkmark.circle.fill")
                                             isFollowed.toggle()
                                         } else {
-                                            AlertKitAPI.present(title: json["message"].string!, icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                                            tipWithText(json["message"].string!, symbol: "checkmark.circle.fill")
                                         }
                                     }
                                 }, label: {
@@ -599,7 +600,7 @@ struct UserDetailView: View {
             biliWbiSign(paramEncoded: "mid=\(uid)&ps=30&pn=\(articleNowPage)&sort=publish_time&platform=web".base64Encoded()) { signed in
                 if let signed {
                     debugPrint(signed)
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/article?\(signed)", headers: headers) { respJson, isSuccess in
+                    requestJSON("https://api.bilibili.com/x/space/wbi/article?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             debugPrint(respJson)
                             if !CheckBApiError(from: respJson) { return }
@@ -1124,7 +1125,7 @@ struct UserDetailView: View {
             ]
             biliWbiSign(paramEncoded: "mid=\(uid)&ps=50&pn=\(videoNowPage)&dm_img_list=[]&dm_img_str=V2ViR0wgMS4wIChPcGVuR0wgRVMgMi4wIENocm9taXVtKQ&dm_cover_img_str=VjNEIDQuMkJyb2FkY2".base64Encoded()) { signed in
                 if let signed {
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/arc/search?\(signed)", headers: headers) { respJson, isSuccess in
+                    requestJSON("https://api.bilibili.com/x/space/wbi/arc/search?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             DispatchQueue(label: "com.darock.DarockBili.Video-Load", qos: .userInitiated).async {
                                 if !CheckBApiError(from: respJson) { return }
@@ -1165,7 +1166,7 @@ struct UserDetailView: View {
             ]
             biliWbiSign(paramEncoded: "mid=\(uid)&ps=30&pn=\(articleNowPage)&sort=publish_time&platform=web".base64Encoded()) { signed in
                 if let signed {
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/article?\(signed)", headers: headers) { respJson, isSuccess in
+                    requestJSON("https://api.bilibili.com/x/space/wbi/article?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             DispatchQueue(label: "com.darock.DarockBili.Article-Load", qos: .userInitiated).async {
                                 if !CheckBApiError(from: respJson) { return }

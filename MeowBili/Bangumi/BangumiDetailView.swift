@@ -17,10 +17,10 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
-import DarockKit
 import Alamofire
 import SwiftyJSON
 import MarqueeText
+import DarockFoundation
 import SDWebImageSwiftUI
 
 struct BangumiDetailView: View {
@@ -108,7 +108,7 @@ struct BangumiDetailView: View {
                 "cookie": "SESSDATA=\(sessdata)",
                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             ]
-            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/pgc/view/web/season?season_id=\(bangumiData.seasonId)", headers: headers) { respJson, isSuccess in
+            requestJSON("https://api.bilibili.com/pgc/view/web/season?season_id=\(bangumiData.seasonId)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
                     if !CheckBApiError(from: respJson) { return }
                     debugPrint(respJson)
@@ -118,14 +118,14 @@ struct BangumiDetailView: View {
                     }
                 }
             }
-            DarockKit.Network.shared.requestJSON("https://api.bilibili.com/pgc/web/season/section?season_id=\(bangumiData.seasonId)", headers: headers) { respJson, isSuccess in
+            requestJSON("https://api.bilibili.com/pgc/web/season/section?season_id=\(bangumiData.seasonId)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
                     epDatas.removeAll()
                     for ep in respJson["result"]["main_section"]["episodes"] {
                         epDatas.append(BangumiEp(aid: ep.1["aid"].int64 ?? 0, epid: ep.1["id"].int64 ?? 0, cid: ep.1["cid"].int64 ?? 0, cover: ep.1["cover"].string ?? "E", title: ep.1["title"].string ?? "[加载失败]", longTitle: ep.1["long_title"].string ?? "[加载失败]"))
                     }
                     #if !os(watchOS)
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/pgc/player/web/playurl?ep_id=\(epDatas[0].epid)&qn=16&fnval=1", headers: headers) { respJson, isSuccess in
+                    requestJSON("https://api.bilibili.com/pgc/player/web/playurl?ep_id=\(epDatas[0].epid)&qn=16&fnval=1", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             if !CheckBApiError(from: respJson) { return }
                             bangumiLink = respJson["result"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")
@@ -244,7 +244,7 @@ struct BangumiDetailView: View {
                             "Accept-Language": "zh-CN,zh;q=0.9",
                             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                         ]
-                        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/pgc/player/web/v2/playurl?ep_id=\(epDatas[i].epid)&qn=32&fnval=1&session=5a90f7022988409ff9fa72a3c25cd576", headers: headers) { respJson, isSuccess in
+                        requestJSON("https://api.bilibili.com/pgc/player/web/v2/playurl?ep_id=\(epDatas[i].epid)&qn=32&fnval=1&session=5a90f7022988409ff9fa72a3c25cd576", headers: headers) { respJson, isSuccess in
                             if isSuccess {
                                 debugPrint(respJson)
                                 if !CheckBApiError(from: respJson) {
@@ -276,7 +276,7 @@ struct BangumiDetailView: View {
                                     "Accept-Language": "zh-CN,zh;q=0.9",
                                     "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                                 ]
-                                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/pgc/player/web/v2/playurl?ep_id=\(epDatas[i].epid)&qn=64&fnval=1&session=5a90f7022988409ff9fa72a3c25cd576", headers: headers) { respJson, isSuccess in
+                                requestJSON("https://api.bilibili.com/pgc/player/web/v2/playurl?ep_id=\(epDatas[i].epid)&qn=64&fnval=1&session=5a90f7022988409ff9fa72a3c25cd576", headers: headers) { respJson, isSuccess in
                                     if isSuccess {
                                         if !CheckBApiError(from: respJson) { return }
                                         bangumiLink = respJson["result"]["video_info"]["durl"][0]["url"].string!.replacingOccurrences(of: "\\u0026", with: "&")

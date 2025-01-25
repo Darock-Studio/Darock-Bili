@@ -17,8 +17,8 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
-import DarockKit
 import Alamofire
+import DarockFoundation
 
 struct RankingsView: View {
     var body: some View {
@@ -215,7 +215,7 @@ private struct RankingCategoryListView: View {
             ]
             biliWbiSign(paramEncoded: "rid=\(rid)&type=all".base64Encoded()) { signed in
                 if let signed {
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/ranking/v2?\(signed)", headers: headers) { respJson, isSuccess in
+                    requestJSON("https://api.bilibili.com/x/web-interface/ranking/v2?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             if !CheckBApiError(from: respJson) { return }
                             let data = respJson["data"]["list"]

@@ -17,9 +17,9 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
-import DarockKit
 import Alamofire
 import SwiftyJSON
+import DarockFoundation
 
 class BiliAPI {
     static let shared = BiliAPI()
@@ -43,7 +43,7 @@ class BiliAPI {
         return await withCheckedContinuation { continuation in
             biliWbiSign(paramEncoded: "mid=\(uid)".base64Encoded()) { signed in
                 if let signed {
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
+                    requestJSON("https://api.bilibili.com/x/space/wbi/acc/info?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             if !CheckBApiError(from: respJson) {
                                 continuation.resume(returning: nil)
@@ -67,7 +67,7 @@ class BiliAPI {
             "referer": "https://message.bilibili.com/", // rdar://gh/SocialSisterYi/bilibili-API-collect/issues/631#issuecomment-2099276628
             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         ]
-        if case .success(let json) = await DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation/stat?vmid=\(uid)", headers: headers) {
+        if case .success(let json) = await requestJSON("https://api.bilibili.com/x/relation/stat?vmid=\(uid)", headers: headers) {
             if !CheckBApiError(from: json) { return nil }
             return UserRelation(json: json["data"])
         } else {
@@ -81,7 +81,7 @@ class BiliAPI {
             "referer": "https://message.bilibili.com/", // rdar://gh/SocialSisterYi/bilibili-API-collect/issues/631#issuecomment-2099276628
             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         ]
-        if case let .success(json) = await DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation?fid=\(uid)", headers: headers) {
+        if case let .success(json) = await requestJSON("https://api.bilibili.com/x/relation?fid=\(uid)", headers: headers) {
             if !CheckBApiError(from: json) { return false }
             if json["data"]["attribute"].int ?? 0 == 2 || json["data"]["attribute"].int ?? 0 == 6 {
                 return true
@@ -96,7 +96,7 @@ class BiliAPI {
             "referer": "https://message.bilibili.com/", // rdar://gh/SocialSisterYi/bilibili-API-collect/issues/631#issuecomment-2099276628
             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         ]
-        if case let .success(json) = await DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/nav", headers: headers) {
+        if case let .success(json) = await requestJSON("https://api.bilibili.com/x/web-interface/nav", headers: headers) {
             if !CheckBApiError(from: json) { return nil }
             let currentExp = json["data"]["level_info"]["current_exp"].int ?? 0
             let nextExp = json["data"]["level_info"]["next_exp"].int ?? 0

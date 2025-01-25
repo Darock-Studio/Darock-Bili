@@ -17,9 +17,10 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
-import DarockKit
+import DarockUI
 import Alamofire
 import SwiftyJSON
+import DarockFoundation
 
 // swiftlint:disable:next type_name
 struct bMessageSendView: View {
@@ -137,11 +138,7 @@ struct bMessageSendView: View {
                             if json["code"].int! == 0 {
                                 //tipWithText("发送成功", symbol: "checkmark.circle.fill")
                             } else {
-#if !os(watchOS)
-                                AlertKitAPI.present(title: String(localized: "Direct-message.failed"), icon: .error, style: .iOS17AppleMusic, haptic: .error)
-#else
                                 tipWithText(String(localized: "Direct-message.failed"), symbol: "xmark.circle.fill")
-#endif
                             }
                         }
                     }
@@ -177,7 +174,7 @@ struct bMessageSendView: View {
         let headers: HTTPHeaders = [
             "cookie": "SESSDATA=\(sessdata);"
         ]
-        DarockKit.Network.shared.requestJSON("https://api.vc.bilibili.com/svr_sync/v1/svr_sync/fetch_session_msgs?talker_id=\(uid)&session_type=1&size=20", headers: headers) { respJson, isSuccess in
+        requestJSON("https://api.vc.bilibili.com/svr_sync/v1/svr_sync/fetch_session_msgs?talker_id=\(uid)&session_type=1&size=20", headers: headers) { respJson, isSuccess in
             if isSuccess {
                 debugPrint(respJson)
                 if deleteAll {

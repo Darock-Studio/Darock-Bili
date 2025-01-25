@@ -18,8 +18,9 @@
 
 import AVKit
 import SwiftUI
+import DarockUI
 import Alamofire
-import DarockKit
+import DarockFoundation
 #if !os(watchOS)
 import AZVideoPlayer
 #endif

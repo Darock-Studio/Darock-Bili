@@ -20,9 +20,10 @@ import AVKit
 import SwiftUI
 import Dynamic
 import Combine
-import DarockKit
+import DarockUI
 import Alamofire
 import AVFoundation
+import DarockFoundation
 #if !os(watchOS)
 import AZVideoPlayer
 #endif

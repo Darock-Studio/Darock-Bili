@@ -17,9 +17,9 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
-import DarockKit
 import Alamofire
 import SwiftyJSON
+import DarockFoundation
 import SDWebImageSwiftUI
 
 var pIsAudioControllerAvailable = false

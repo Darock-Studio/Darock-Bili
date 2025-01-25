@@ -19,10 +19,10 @@
 import AVKit
 import SwiftUI
 import Combine
-import DarockKit
 import Alamofire
 import SwiftyJSON
 import AVFoundation
+import DarockFoundation
 import SDWebImageSwiftUI
 
 struct PersonAccountView: View {
@@ -174,9 +174,8 @@ struct PersonAccountView: View {
                         })
                         .buttonBorderShape(.roundedRectangle(radius: 13))
                     }
-#if os(watchOS)
                     Section {
-                        NavigationLink(destination: { InAppFeedbackView() }, label: {
+                        NavigationLink(destination: { FeedbackView() }, label: {
                             HStack {
                                 Image(systemName: "exclamationmark.bubble")
                                     .foregroundColor(.accentColor)
@@ -185,7 +184,6 @@ struct PersonAccountView: View {
                             .font(.system(size: 16))
                         })
                     }
-#endif
                 }
             }
 #if !os(watchOS)

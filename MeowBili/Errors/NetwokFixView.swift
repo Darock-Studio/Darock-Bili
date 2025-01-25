@@ -17,10 +17,11 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
-import DarockKit
+import DarockUI
 import Alamofire
 import SwiftyJSON
 import Foundation
+import DarockFoundation
 
 struct NetworkFixView: View {
     @State var progressTimer: Timer?
@@ -162,10 +163,10 @@ struct NetworkFixView: View {
                             Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { timer in
                                 timer.invalidate()
                                 networkState = 1
-                                DarockKit.Network.shared.requestString("https://apple.com.cn") { _, isSuccess in
+                                requestString("https://apple.com.cn") { _, isSuccess in
                                     if isSuccess {
                                         darockAPIState = 1
-                                        DarockKit.Network.shared.requestString("https://api.darock.top") { respStr, isSuccess in
+                                        requestString("https://api.darock.top") { respStr, isSuccess in
                                             if isSuccess {
                                                 if respStr.apiFixed() == "OK" {
                                                     darockAPIState = 3
@@ -176,7 +177,7 @@ struct NetworkFixView: View {
                                                 darockAPIState = 1
                                             }
                                             bilibiliAPIState = 2
-                                            DarockKit.Network.shared.requestString("https://api.bilibili.com/") { _, isSuccess in
+                                            requestString("https://api.bilibili.com/") { _, isSuccess in
                                                 if isSuccess {
                                                     bilibiliAPIState = 3
                                                 } else {
@@ -254,10 +255,10 @@ struct NetworkFixView: View {
                 Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { timer in
                     timer.invalidate()
                     networkState = 1
-                    DarockKit.Network.shared.requestString("https://baidu.com") { _, isSuccess in
+                    requestString("https://baidu.com") { _, isSuccess in
                         if isSuccess {
                             darockAPIState = 1
-                            DarockKit.Network.shared.requestString("https://api.darock.top") { respStr, isSuccess in
+                            requestString("https://api.darock.top") { respStr, isSuccess in
                                 Timer.scheduledTimer(withTimeInterval: 2.5, repeats: false) { timer in
                                     if isSuccess {
                                         if respStr.apiFixed() == "OK" {
@@ -273,7 +274,7 @@ struct NetworkFixView: View {
                                     timer.invalidate()
                                 }
                                 bilibiliAPIState = 2
-                                DarockKit.Network.shared.requestString("https://api.bilibili.com/") { _, isSuccess in
+                                requestString("https://api.bilibili.com/") { _, isSuccess in
                                     if isSuccess {
                                         bilibiliAPIState = 3
                                     } else {
@@ -432,11 +433,7 @@ public func CheckBApiError(from input: JSON, noTip: Bool = false) -> Bool {
     }
     let msg = errorCodeTextDic[code] ?? (input["message"].string ?? "")
     if !noTip {
-        #if !os(watchOS)
-        AlertKitAPI.present(title: msg, icon: .error, style: .iOS17AppleMusic, haptic: .error)
-        #else
         tipWithText(msg, symbol: "xmark.circle.fill")
-        #endif
     }
     return false
 }

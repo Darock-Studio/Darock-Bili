@@ -17,8 +17,8 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
-import DarockKit
 import Alamofire
+import DarockFoundation
 
 struct SignalErrorView: View {
     @State var userDesc = ""

@@ -19,7 +19,7 @@
 import Charts
 import SwiftUI
 import SwiftDate
-import DarockKit
+import DarockFoundation
 import SDWebImageSwiftUI
 import AuthenticationServices
 #if os(watchOS)
@@ -1336,7 +1336,7 @@ struct SoftwareUpdateView: View {
             }
         }
         .onAppear {
-            DarockKit.Network.shared.requestString("https://fapi.darock.top:65535/bili/newver") { respStr, isSuccess in
+            requestString("https://fapi.darock.top:65535/bili/newver") { respStr, isSuccess in
                 if isSuccess && respStr.apiFixed().contains("|") {
                     latestVer = String(respStr.apiFixed().split(separator: "|")[0])
                     latestBuild = String(respStr.apiFixed().split(separator: "|")[1])
@@ -1345,7 +1345,7 @@ struct SoftwareUpdateView: View {
                     if nowMajorVer != latestVer || Int(nowBuildVer)! < Int(latestBuild)! {
                         shouldUpdate = true
                     }
-                    DarockKit.Network.shared.requestString("https://fapi.darock.top:65535/bili/newver/note") { respStr, isSuccess in
+                    requestString("https://fapi.darock.top:65535/bili/newver/note") { respStr, isSuccess in
                         if isSuccess {
                             releaseNote = respStr.apiFixed()
                             isLoading = false

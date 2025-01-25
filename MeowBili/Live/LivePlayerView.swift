@@ -18,10 +18,10 @@
 
 import AVKit
 import SwiftUI
-import DarockKit
 import Alamofire
 import SwiftyJSON
 import AVFoundation
+import DarockFoundation
 
 struct LivePlayerView: View {
     @State var livePlayer: AVPlayer?

@@ -17,7 +17,7 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
-import DarockKit
+import DarockUI
 import SDWebImageSwiftUI
 
 struct ImageViewerView: View {
@@ -35,7 +35,7 @@ struct ImageViewerView: View {
                     Button(action: {
                         let img = UIImage(data: try! Data(contentsOf: URL(string: url)!))!
                         UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil)
-                        AlertKitAPI.present(title: "已保存", subtitle: "图片已保存到相册", icon: .done, style: .iOS17AppleMusic, haptic: .success)
+                        tipWithText("已保存到相册", symbol: "checkmark.circle.fill")
                     }, label: {
                         Image(systemName: "square.and.arrow.down")
                     })

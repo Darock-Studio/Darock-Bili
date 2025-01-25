@@ -27,12 +27,6 @@
 		03B5D24C2C4691E700BF8322 /* SwitchAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B5D24A2C4691E700BF8322 /* SwitchAccountView.swift */; };
 		8C03B6DE2C280BAA000770B4 /* Cepheus in Frameworks */ = {isa = PBXBuildFile; productRef = 8C03B6DD2C280BAA000770B4 /* Cepheus */; };
 		8C0557DF2B791B84009D9CD0 /* AZVideoPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8C0557DE2B791B84009D9CD0 /* AZVideoPlayer */; };
-		8C0FDC512CE91E0800D741A0 /* NotifKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0FDC502CE91E0700D741A0 /* NotifKit.xcframework */; };
-		8C0FDC522CE91E0800D741A0 /* NotifKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0FDC502CE91E0700D741A0 /* NotifKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		8C20267D2CBBA32E00D7C5F9 /* RadarKitCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C20267C2CBBA32E00D7C5F9 /* RadarKitCore.xcframework */; };
-		8C20267E2CBBA32E00D7C5F9 /* RadarKitCore.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8C20267C2CBBA32E00D7C5F9 /* RadarKitCore.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		8C2026802CBBA33300D7C5F9 /* RadarKitCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C20267C2CBBA32E00D7C5F9 /* RadarKitCore.xcframework */; };
-		8C2026812CBBA33300D7C5F9 /* RadarKitCore.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8C20267C2CBBA32E00D7C5F9 /* RadarKitCore.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8C2DFCAF2C4AA15C003AEC67 /* NewFeaturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2DFCAE2C4AA15C003AEC67 /* NewFeaturesView.swift */; };
 		8C2DFCB02C4AA15C003AEC67 /* NewFeaturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2DFCAE2C4AA15C003AEC67 /* NewFeaturesView.swift */; };
 		8C3C52F62CBAE79B00622CE4 /* SeasonArchiveListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C52F52CBAE79200622CE4 /* SeasonArchiveListView.swift */; };
@@ -47,6 +41,18 @@
 		8C617F502B92334B000A3687 /* popup.css in Resources */ = {isa = PBXBuildFile; fileRef = 8C617F4F2B92334B000A3687 /* popup.css */; };
 		8C617F522B92334B000A3687 /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = 8C617F512B92334B000A3687 /* popup.js */; };
 		8C617F562B92334B000A3687 /* SafariExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8C617F3E2B92334B000A3687 /* SafariExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8C6CC5E12D45508C008309E5 /* DarockFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 8C6CC5E02D45508C008309E5 /* DarockFoundation */; };
+		8C6CC5E42D45509E008309E5 /* DarockUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8C6CC5E32D45509E008309E5 /* DarockUI */; };
+		8C6CC5E72D4550B4008309E5 /* RadarKitCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8C6CC5E62D4550B4008309E5 /* RadarKitCore */; };
+		8C6CC5EA2D4550C6008309E5 /* RadarKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8C6CC5E92D4550C6008309E5 /* RadarKit */; };
+		8C6CC5EC2D4550E1008309E5 /* DarockFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 8C6CC5EB2D4550E1008309E5 /* DarockFoundation */; };
+		8C6CC5EE2D4550E1008309E5 /* DarockUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8C6CC5ED2D4550E1008309E5 /* DarockUI */; };
+		8C6CC5F02D4550E1008309E5 /* RadarKitCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8C6CC5EF2D4550E1008309E5 /* RadarKitCore */; };
+		8C6CC5F22D4550E1008309E5 /* RadarKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8C6CC5F12D4550E1008309E5 /* RadarKit */; };
+		8C6CC5F82D4558D4008309E5 /* NotifKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8C6CC5F72D4558D4008309E5 /* NotifKit */; };
+		8C6CC5FA2D4558DF008309E5 /* NotifKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8C6CC5F92D4558DF008309E5 /* NotifKit */; };
+		8C6CC6062D4568BA008309E5 /* CorvusKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8C6CC6052D4568BA008309E5 /* CorvusKit */; };
+		8C6CC6082D4568C2008309E5 /* CorvusKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8C6CC6072D4568C2008309E5 /* CorvusKit */; };
 		8C81D2B12BCBA57F00EC58F4 /* FansListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C81D2B02BCBA57F00EC58F4 /* FansListView.swift */; };
 		8C81D2B22BCBA58000EC58F4 /* FansListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C81D2B02BCBA57F00EC58F4 /* FansListView.swift */; };
 		8C82F7932BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */ = {isa = PBXBuildFile; fileRef = 8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */; };
@@ -139,8 +145,6 @@
 		8CB0D0272B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */ = {isa = PBXBuildFile; fileRef = 8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */; };
 		8CB176A52BB8188700CEC05C /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8CB176A42BB8188700CEC05C /* SDWebImageSwiftUI */; };
 		8CB176A72BB8189300CEC05C /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8CB176A62BB8189300CEC05C /* SDWebImageSwiftUI */; };
-		8CB176AE2BB8420B00CEC05C /* DarockKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8CB176AD2BB8420B00CEC05C /* DarockKit */; };
-		8CB176B02BB8421300CEC05C /* DarockKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8CB176AF2BB8421300CEC05C /* DarockKit */; };
 		8CBFF0B72B85E55F00350E0F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CBC42B77AC4A008E587F /* ContentView.swift */; };
 		8CBFF0B82B85E55F00350E0F /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7CCA52B77B314008E587F /* CommentsView.swift */; };
 		8CBFF0B92B85E55F00350E0F /* LinkDetectText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DAF0DB2B80725800755F0C /* LinkDetectText.swift */; };
@@ -206,8 +210,6 @@
 		8CF148962CC40A4C00C13711 /* BiliAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF148922CC403BF00C13711 /* BiliAPI.swift */; };
 		8CF148972CC40AAB00C13711 /* ResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF148942CC4040E00C13711 /* ResponseModels.swift */; };
 		8CF148982CC40AAB00C13711 /* ResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF148942CC4040E00C13711 /* ResponseModels.swift */; };
-		8CFB60072CF264F100003718 /* RadarKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CFB60062CF264F100003718 /* RadarKit.xcframework */; };
-		8CFB60082CF264F200003718 /* RadarKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8CFB60062CF264F100003718 /* RadarKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B2B8137F2CC3D0ED00C69D17 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B8137E2CC3D0ED00C69D17 /* WidgetKit.framework */; };
 		B2B813812CC3D0ED00C69D17 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B813802CC3D0ED00C69D17 /* SwiftUI.framework */; };
 		B2B813842CC3D0ED00C69D17 /* MeowWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B813832CC3D0ED00C69D17 /* MeowWidgetBundle.swift */; };
@@ -266,30 +268,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		8C20267F2CBBA32E00D7C5F9 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				8C20267E2CBBA32E00D7C5F9 /* RadarKitCore.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8C2026822CBBA33300D7C5F9 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				8C2026812CBBA33300D7C5F9 /* RadarKitCore.xcframework in Embed Frameworks */,
-				8C0FDC522CE91E0800D741A0 /* NotifKit.xcframework in Embed Frameworks */,
-				8CFB60082CF264F200003718 /* RadarKit.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8C617F5A2B92334B000A3687 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -460,23 +438,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C6CC5E12D45508C008309E5 /* DarockFoundation in Frameworks */,
+				8C6CC5E72D4550B4008309E5 /* RadarKitCore in Frameworks */,
 				8CB176A52BB8188700CEC05C /* SDWebImageSwiftUI in Frameworks */,
 				8CA370DF2B827AAD00CE0E9E /* AlertToast in Frameworks */,
-				8C20267D2CBBA32E00D7C5F9 /* RadarKitCore.xcframework in Frameworks */,
+				8C6CC5EA2D4550C6008309E5 /* RadarKit in Frameworks */,
 				8CA7CC0F2B77AC93008E587F /* ZipArchive in Frameworks */,
+				8C6CC5F82D4558D4008309E5 /* NotifKit in Frameworks */,
 				8CA7CCDF2B77BB5A008E587F /* AlertKit in Frameworks */,
 				8CA7CC192B77AC93008E587F /* SDWebImagePDFCoder in Frameworks */,
 				8CA7CC172B77AC93008E587F /* SDWebImageSVGCoder in Frameworks */,
 				8CC3D5632B7CCE57005636DC /* ScreenshotableView in Frameworks */,
 				8CD3D0422C8C715B00E9C37C /* MarqueeText in Frameworks */,
+				8C6CC5E42D45509E008309E5 /* DarockUI in Frameworks */,
 				8C8578B72C5BAC0100AF93D1 /* MarkdownUI in Frameworks */,
 				8C0557DF2B791B84009D9CD0 /* AZVideoPlayer in Frameworks */,
 				8CA7CC0B2B77AC93008E587F /* SwiftDate in Frameworks */,
 				8CA7CC1F2B77AC93008E587F /* Dynamic in Frameworks */,
 				8CA7CC1B2B77AC93008E587F /* SwiftSoup in Frameworks */,
 				8CA3889F2B78B1E300F5F91F /* AZVideoPlayer in Frameworks */,
+				8C6CC6062D4568BA008309E5 /* CorvusKit in Frameworks */,
 				8CA388992B789A0300F5F91F /* AZVideoPlayer in Frameworks */,
-				8CB176AE2BB8420B00CEC05C /* DarockKit in Frameworks */,
 				8CA7CC152B77AC93008E587F /* SDWebImageWebPCoder in Frameworks */,
 				8CA7CC112B77AC93008E587F /* EFQRCode in Frameworks */,
 			);
@@ -489,20 +471,22 @@
 				8CB176A72BB8189300CEC05C /* SDWebImageSwiftUI in Frameworks */,
 				8CA7CBED2B77AC8A008E587F /* ZipArchive in Frameworks */,
 				8CA7CBF72B77AC8A008E587F /* SDWebImagePDFCoder in Frameworks */,
-				8C0FDC512CE91E0800D741A0 /* NotifKit.xcframework in Frameworks */,
-				8CFB60072CF264F100003718 /* RadarKit.xcframework in Frameworks */,
 				8C03B6DE2C280BAA000770B4 /* Cepheus in Frameworks */,
 				8CA7CBF52B77AC8A008E587F /* SDWebImageSVGCoder in Frameworks */,
+				8C6CC5F22D4550E1008309E5 /* RadarKit in Frameworks */,
+				8C6CC5F02D4550E1008309E5 /* RadarKitCore in Frameworks */,
 				8CA7CBE92B77AC8A008E587F /* SwiftDate in Frameworks */,
 				8CA7CBFD2B77AC8A008E587F /* Dynamic in Frameworks */,
 				8C8578B52C5BABF100AF93D1 /* MarkdownUI in Frameworks */,
 				8CD3D0402C8C715300E9C37C /* MarqueeText in Frameworks */,
+				8C6CC5EE2D4550E1008309E5 /* DarockUI in Frameworks */,
+				8C6CC5FA2D4558DF008309E5 /* NotifKit in Frameworks */,
 				8CA7CBF92B77AC8A008E587F /* SwiftSoup in Frameworks */,
 				8CA7CBEB2B77AC8A008E587F /* SFSymbol in Frameworks */,
-				8CB176B02BB8421300CEC05C /* DarockKit in Frameworks */,
 				8CA7CBF32B77AC8A008E587F /* SDWebImageWebPCoder in Frameworks */,
+				8C6CC5EC2D4550E1008309E5 /* DarockFoundation in Frameworks */,
 				8CA7CBEF2B77AC8A008E587F /* EFQRCode in Frameworks */,
-				8C2026802CBBA33300D7C5F9 /* RadarKitCore.xcframework in Frameworks */,
+				8C6CC6082D4568C2008309E5 /* CorvusKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -944,7 +928,6 @@
 				8CA7CBBE2B77AC4A008E587F /* Resources */,
 				8CA7CBDF2B77AC4D008E587F /* Embed Watch Content */,
 				8C617F5A2B92334B000A3687 /* Embed Foundation Extensions */,
-				8C20267F2CBBA32E00D7C5F9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -970,9 +953,14 @@
 				8CC3D5622B7CCE57005636DC /* ScreenshotableView */,
 				8CA370DE2B827AAD00CE0E9E /* AlertToast */,
 				8CB176A42BB8188700CEC05C /* SDWebImageSwiftUI */,
-				8CB176AD2BB8420B00CEC05C /* DarockKit */,
 				8C8578B62C5BAC0100AF93D1 /* MarkdownUI */,
 				8CD3D0412C8C715B00E9C37C /* MarqueeText */,
+				8C6CC5E02D45508C008309E5 /* DarockFoundation */,
+				8C6CC5E32D45509E008309E5 /* DarockUI */,
+				8C6CC5E62D4550B4008309E5 /* RadarKitCore */,
+				8C6CC5E92D4550C6008309E5 /* RadarKit */,
+				8C6CC5F72D4558D4008309E5 /* NotifKit */,
+				8C6CC6052D4568BA008309E5 /* CorvusKit */,
 			);
 			productName = MeowBili;
 			productReference = 8CA7CBC02B77AC4A008E587F /* MeowBili.app */;
@@ -986,7 +974,6 @@
 				8CC5B6C22B86582400BAD89E /* ShellScript */,
 				8CA7CBCC2B77AC4C008E587F /* Frameworks */,
 				8CA7CBCD2B77AC4C008E587F /* Resources */,
-				8C2026822CBBA33300D7C5F9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1004,10 +991,15 @@
 				8CA7CBF82B77AC8A008E587F /* SwiftSoup */,
 				8CA7CBFC2B77AC8A008E587F /* Dynamic */,
 				8CB176A62BB8189300CEC05C /* SDWebImageSwiftUI */,
-				8CB176AF2BB8421300CEC05C /* DarockKit */,
 				8C03B6DD2C280BAA000770B4 /* Cepheus */,
 				8C8578B42C5BABF100AF93D1 /* MarkdownUI */,
 				8CD3D03F2C8C715300E9C37C /* MarqueeText */,
+				8C6CC5EB2D4550E1008309E5 /* DarockFoundation */,
+				8C6CC5ED2D4550E1008309E5 /* DarockUI */,
+				8C6CC5EF2D4550E1008309E5 /* RadarKitCore */,
+				8C6CC5F12D4550E1008309E5 /* RadarKit */,
+				8C6CC5F92D4558DF008309E5 /* NotifKit */,
+				8C6CC6072D4568C2008309E5 /* CorvusKit */,
 			);
 			productName = "MeowBili Watch App";
 			productReference = 8CA7CBCF2B77AC4C008E587F /* 喵哩喵哩.app */;
@@ -1056,7 +1048,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1510;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					8C2DFCB42C4E6B2B003AEC67 = {
 						CreatedOnToolsVersion = 16.0;
@@ -1111,10 +1103,15 @@
 				8CC3D5612B7CCE57005636DC /* XCRemoteSwiftPackageReference "ScreenshotableView" */,
 				8CA370DD2B827AAD00CE0E9E /* XCRemoteSwiftPackageReference "AlertToast" */,
 				8CB176A32BB8188600CEC05C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
-				8CB176AC2BB8420A00CEC05C /* XCRemoteSwiftPackageReference "DarockKit" */,
 				8C03B6DC2C280BAA000770B4 /* XCRemoteSwiftPackageReference "Cepheus" */,
 				8C8578B32C5BABF000AF93D1 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				8CD3D03E2C8C6EB300E9C37C /* XCRemoteSwiftPackageReference "MarqueeText" */,
+				8C6CC5DF2D45508C008309E5 /* XCRemoteSwiftPackageReference "DarockFoundation" */,
+				8C6CC5E22D45509E008309E5 /* XCRemoteSwiftPackageReference "DarockUI" */,
+				8C6CC5E52D4550B4008309E5 /* XCRemoteSwiftPackageReference "RadarKitCore" */,
+				8C6CC5E82D4550C6008309E5 /* XCRemoteSwiftPackageReference "RadarKit" */,
+				8C6CC5F62D4558D4008309E5 /* XCRemoteSwiftPackageReference "NotifKit" */,
+				8C6CC6042D4568BA008309E5 /* XCRemoteSwiftPackageReference "CorvusKit" */,
 			);
 			productRefGroup = B44689CB2B4FC15A002CCEB2 /* Products */;
 			projectDirPath = "";
@@ -1644,7 +1641,6 @@
 		8C82F7802BB6DF2D009AEFD2 /* Alternative */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
@@ -1816,7 +1812,6 @@
 		8CA7CBDD2B77AC4D008E587F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
@@ -1862,7 +1857,6 @@
 		8CA7CBDE2B77AC4D008E587F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
@@ -2347,6 +2341,54 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		8C6CC5DF2D45508C008309E5 /* XCRemoteSwiftPackageReference "DarockFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Darock-Studio/DarockFoundation";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		8C6CC5E22D45509E008309E5 /* XCRemoteSwiftPackageReference "DarockUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Darock-Studio/DarockUI";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		8C6CC5E52D4550B4008309E5 /* XCRemoteSwiftPackageReference "RadarKitCore" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Darock-Studio/RadarKitCore";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		8C6CC5E82D4550C6008309E5 /* XCRemoteSwiftPackageReference "RadarKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Darock-Studio/RadarKit/";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		8C6CC5F62D4558D4008309E5 /* XCRemoteSwiftPackageReference "NotifKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Darock-Studio/NotifKit";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		8C6CC6042D4568BA008309E5 /* XCRemoteSwiftPackageReference "CorvusKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Darock-Studio/CorvusKit";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		8C8578B32C5BABF000AF93D1 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
@@ -2379,14 +2421,6 @@
 				minimumVersion = 2.2.7;
 			};
 		};
-		8CB176AC2BB8420A00CEC05C /* XCRemoteSwiftPackageReference "DarockKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Darock-Studio/DarockKit";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		8CC3D5612B7CCE57005636DC /* XCRemoteSwiftPackageReference "ScreenshotableView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RickeyBoy/ScreenshotableView";
@@ -2399,8 +2433,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/joekndy/MarqueeText";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = revision;
+				revision = e18d514455563ad00581e0d825146c6f15b1c6c4;
 			};
 		};
 		B4468A712B4FC5F1002CCEB2 /* XCRemoteSwiftPackageReference "SwiftDate" */ = {
@@ -2487,6 +2521,66 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8C0557DD2B791B84009D9CD0 /* XCRemoteSwiftPackageReference "AZVideoPlayer" */;
 			productName = AZVideoPlayer;
+		};
+		8C6CC5E02D45508C008309E5 /* DarockFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C6CC5DF2D45508C008309E5 /* XCRemoteSwiftPackageReference "DarockFoundation" */;
+			productName = DarockFoundation;
+		};
+		8C6CC5E32D45509E008309E5 /* DarockUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C6CC5E22D45509E008309E5 /* XCRemoteSwiftPackageReference "DarockUI" */;
+			productName = DarockUI;
+		};
+		8C6CC5E62D4550B4008309E5 /* RadarKitCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C6CC5E52D4550B4008309E5 /* XCRemoteSwiftPackageReference "RadarKitCore" */;
+			productName = RadarKitCore;
+		};
+		8C6CC5E92D4550C6008309E5 /* RadarKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C6CC5E82D4550C6008309E5 /* XCRemoteSwiftPackageReference "RadarKit" */;
+			productName = RadarKit;
+		};
+		8C6CC5EB2D4550E1008309E5 /* DarockFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C6CC5DF2D45508C008309E5 /* XCRemoteSwiftPackageReference "DarockFoundation" */;
+			productName = DarockFoundation;
+		};
+		8C6CC5ED2D4550E1008309E5 /* DarockUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C6CC5E22D45509E008309E5 /* XCRemoteSwiftPackageReference "DarockUI" */;
+			productName = DarockUI;
+		};
+		8C6CC5EF2D4550E1008309E5 /* RadarKitCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C6CC5E52D4550B4008309E5 /* XCRemoteSwiftPackageReference "RadarKitCore" */;
+			productName = RadarKitCore;
+		};
+		8C6CC5F12D4550E1008309E5 /* RadarKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C6CC5E82D4550C6008309E5 /* XCRemoteSwiftPackageReference "RadarKit" */;
+			productName = RadarKit;
+		};
+		8C6CC5F72D4558D4008309E5 /* NotifKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C6CC5F62D4558D4008309E5 /* XCRemoteSwiftPackageReference "NotifKit" */;
+			productName = NotifKit;
+		};
+		8C6CC5F92D4558DF008309E5 /* NotifKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C6CC5F62D4558D4008309E5 /* XCRemoteSwiftPackageReference "NotifKit" */;
+			productName = NotifKit;
+		};
+		8C6CC6052D4568BA008309E5 /* CorvusKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C6CC6042D4568BA008309E5 /* XCRemoteSwiftPackageReference "CorvusKit" */;
+			productName = CorvusKit;
+		};
+		8C6CC6072D4568C2008309E5 /* CorvusKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C6CC6042D4568BA008309E5 /* XCRemoteSwiftPackageReference "CorvusKit" */;
+			productName = CorvusKit;
 		};
 		8C8578B42C5BABF100AF93D1 /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2610,16 +2704,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8CB176A32BB8188600CEC05C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
-		};
-		8CB176AD2BB8420B00CEC05C /* DarockKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8CB176AC2BB8420A00CEC05C /* XCRemoteSwiftPackageReference "DarockKit" */;
-			productName = DarockKit;
-		};
-		8CB176AF2BB8421300CEC05C /* DarockKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8CB176AC2BB8420A00CEC05C /* XCRemoteSwiftPackageReference "DarockKit" */;
-			productName = DarockKit;
 		};
 		8CC3D5622B7CCE57005636DC /* ScreenshotableView */ = {
 			isa = XCSwiftPackageProductDependency;

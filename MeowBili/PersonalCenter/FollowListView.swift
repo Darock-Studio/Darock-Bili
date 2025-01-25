@@ -17,9 +17,10 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
-import DarockKit
+import DarockUI
 import Alamofire
 import SwiftyJSON
+import DarockFoundation
 import MobileCoreServices
 import SDWebImageSwiftUI
 #if !os(watchOS)
@@ -112,11 +113,7 @@ struct FollowListView: View {
                                                 deletedUserId = Int64(users[i]["UID"]!)!
                                                 isDeleteUndoPresented = true
                                             } else {
-                                                #if !os(watchOS)
-                                                AlertKitAPI.present(title: json["message"].string!, icon: .error, style: .iOS17AppleMusic, haptic: .error)
-                                                #else
                                                 tipWithText(json["message"].string!, symbol: "xmark.circle.fill")
-                                                #endif
                                             }
                                         }
                                     }, label: {
@@ -258,7 +255,7 @@ struct FollowListView: View {
                     users.removeAll()
                     RefreshNew()
                 } else {
-                    AlertKitAPI.present(title: json["message"].string!, icon: .error, style: .iOS17AppleMusic, haptic: .error)
+                    tipWithText(json["message"].string!, symbol: "xmark.circle.fill")
                 }
             }
         }
@@ -289,7 +286,7 @@ struct FollowListView: View {
             "cookie": "SESSDATA=\(sessdata);",
             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         ]
-        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/relation/followings?vmid=\(viewUserId)&order_type=&ps=50&pn=\(nowPage)", headers: headers) { respJson, isSuccess in
+        requestJSON("https://api.bilibili.com/x/relation/followings?vmid=\(viewUserId)&order_type=&ps=50&pn=\(nowPage)", headers: headers) { respJson, isSuccess in
             if isSuccess {
                 if !CheckBApiError(from: respJson) { return }
                 let datas = respJson["data"]["list"]

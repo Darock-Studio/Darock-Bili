@@ -18,9 +18,10 @@
 
 import OSLog
 import SwiftUI
-import DarockKit
+import DarockUI
 import Alamofire
 import SwiftyJSON
+import DarockFoundation
 import SDWebImageSwiftUI
 
 struct CommentsView: View {
@@ -226,7 +227,7 @@ struct CommentsView: View {
             "cookie": "SESSDATA=\(sessdata);",
             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         ]
-        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v2/reply?type=\(type)&oid=\(id)&sort=1&ps=20&pn=\(nowPage)", headers: headers) { respJson, isSuccess in
+        requestJSON("https://api.bilibili.com/x/v2/reply?type=\(type)&oid=\(id)&sort=1&ps=20&pn=\(nowPage)", headers: headers) { respJson, isSuccess in
             if isSuccess {
                 DispatchQueue(label: "com.darock.DarockBili.Comment-Load", qos: .background).async {
                     debugPrint(respJson)
@@ -379,7 +380,7 @@ struct CommentsView: View {
                             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                         ]
                         debugPrint("https://api.bilibili.com/x/v2/reply/reply?type=\(type)&oid=\(avid)&root=\(rootData["Rpid"]!)")
-                        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v2/reply/reply?type=\(type)&oid=\(avid)&root=\(rootData["Rpid"]!)", headers: headers) { respJson, isSuccess in
+                        requestJSON("https://api.bilibili.com/x/v2/reply/reply?type=\(type)&oid=\(avid)&root=\(rootData["Rpid"]!)", headers: headers) { respJson, isSuccess in
                             if isSuccess {
                                 debugPrint(respJson)
                                 if !CheckBApiError(from: respJson) { return }

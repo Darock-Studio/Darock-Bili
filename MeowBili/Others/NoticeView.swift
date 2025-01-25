@@ -17,7 +17,7 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
-import DarockKit
+import DarockFoundation
 
 struct NoticeView: View {
     @State var noticeDetail = ""
@@ -27,12 +27,12 @@ struct NoticeView: View {
                 .bold()
         }
         .onAppear {
-            DarockKit.Network.shared.requestString("https://fapi.darock.top:65535/bili/notice/detail") { respStr, isSuccess in
+            requestString("https://fapi.darock.top:65535/bili/notice/detail") { respStr, isSuccess in
                 if isSuccess {
                     if respStr.apiFixed() != "" {
                         noticeDetail = respStr.apiFixed().replacingOccurrences(of: "\\n", with: "\n")
                     } else {
-                        DarockKit.Network.shared.requestString("https://fapi.darock.top:65535/bili/notice") { respStr, isSuccess in
+                        requestString("https://fapi.darock.top:65535/bili/notice") { respStr, isSuccess in
                             if isSuccess {
                                 noticeDetail = respStr.apiFixed()
                             }

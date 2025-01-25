@@ -17,9 +17,9 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
-import DarockKit
 import Alamofire
 import SwiftyJSON
+import DarockFoundation
 import MobileCoreServices
 
 struct FavoriteView: View {
@@ -49,7 +49,7 @@ struct FavoriteView: View {
                     "cookie": "SESSDATA=\(sessdata);",
                     "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                 ]
-                DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v3/fav/folder/created/list-all?up_mid=\(dedeUserID)", headers: headers) { respJson, isSuccess in
+                requestJSON("https://api.bilibili.com/x/v3/fav/folder/created/list-all?up_mid=\(dedeUserID)", headers: headers) { respJson, isSuccess in
                     if isSuccess {
                         debugPrint(respJson)
                         if !CheckBApiError(from: respJson) { return }
@@ -153,7 +153,7 @@ struct FavoriteDetailView: View {
             "cookie": "SESSDATA=\(sessdata);",
             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         ]
-        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/v3/fav/resource/list?media_id=\(folderDatas["ID"]!)&ps=20&pn=\(nowPage)", headers: headers) { respJson, isSuccess in
+        requestJSON("https://api.bilibili.com/x/v3/fav/resource/list?media_id=\(folderDatas["ID"]!)&ps=20&pn=\(nowPage)", headers: headers) { respJson, isSuccess in
             if isSuccess {
                 details.removeAll()
                 if !CheckBApiError(from: respJson) { return }

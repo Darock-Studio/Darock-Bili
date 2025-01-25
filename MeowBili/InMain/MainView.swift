@@ -18,9 +18,9 @@
 
 import SwiftUI
 import Dynamic
-import DarockKit
 import Alamofire
 import SwiftyJSON
+import DarockFoundation
 import SDWebImageSwiftUI
 
 struct MainView: View {
@@ -314,12 +314,12 @@ struct MainView: View {
                     #endif
                     isFirstLoaded = true
                 }
-                DarockKit.Network.shared.requestString("https://fapi.darock.top:65535/bili/notice") { respStr, isSuccess in
+                requestString("https://fapi.darock.top:65535/bili/notice") { respStr, isSuccess in
                     if isSuccess {
                         notice = respStr.apiFixed()
                     }
                 }
-                DarockKit.Network.shared.requestString("https://fapi.darock.top:65535/bili/newver") { respStr, isSuccess in
+                requestString("https://fapi.darock.top:65535/bili/newver") { respStr, isSuccess in
                     if isSuccess {
                         let spdVer = respStr.apiFixed().split(separator: ".")
                         if 3...4 ~= spdVer.count {
@@ -362,7 +362,7 @@ struct MainView: View {
             }
             biliWbiSign(paramEncoded: "y_num=5&fresh_type=3&feed_version=V_FAVOR_WATCH_LATER&fresh_idx_1h=\(freshCount)&fetch_row=1&fresh_idx=\(freshCount)&brush=4&homepage_ver=1&ps=20&last_y_num=5&screen=2353-686&seo_info=\(lastShowlist)".base64Encoded()) { signed in
                 if let signed {
-                    DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/wbi/index/top/feed/rcmd?\(signed)", headers: headers) { respJson, isSuccess in
+                    requestJSON("https://api.bilibili.com/x/web-interface/wbi/index/top/feed/rcmd?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
                             if !CheckBApiError(from: respJson) { return }
                             let datas = respJson["data"]["item"]
@@ -394,7 +394,7 @@ struct MainView: View {
             }
         }
         func LoadDarockSuggestions() {
-            DarockKit.Network.shared.requestString("https://fapi.darock.top:65535/bili/sgsfrmdrk") { respStr, isSuccess in
+            requestString("https://fapi.darock.top:65535/bili/sgsfrmdrk") { respStr, isSuccess in
                 if isSuccess {
                     if !respStr.apiFixed().hasPrefix("BV") { return }
                     let bvs = respStr.apiFixed().split(separator: "|").map { String($0) }
@@ -404,7 +404,7 @@ struct MainView: View {
                     ]
                     darockSuggestions.removeAll()
                     for bvid in bvs {
-                        DarockKit.Network.shared.requestJSON("https://api.bilibili.com/x/web-interface/view?bvid=\(bvid)", headers: headers) { respJson, isSuccess in
+                        requestJSON("https://api.bilibili.com/x/web-interface/view?bvid=\(bvid)", headers: headers) { respJson, isSuccess in
                             if isSuccess {
                                 if !CheckBApiError(from: respJson) { return }
                                 var vd = ["BV": bvid]

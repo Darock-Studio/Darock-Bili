@@ -18,8 +18,8 @@
 
 import Testing
 import Alamofire
-import DarockKit
 import SwiftyJSON
+import DarockFoundation
 @testable import MeowBili
 
 struct BiliAPITests {
@@ -37,7 +37,7 @@ struct BiliAPITests {
         "https://s.search.bilibili.com/main/hotword"
     ])
     func testAPIError(_ path: String) async throws {
-        DarockKit.Network.shared.requestJSON(path, headers: headers) { respJson, isSuccess in
+        requestJSON(path, headers: headers) { respJson, isSuccess in
             #expect(isSuccess && CheckBApiError(from: respJson))
         }
     }
@@ -49,7 +49,7 @@ struct BiliAPITests {
     func testWbiAPIError(_ data: (path: String, param: String)) async throws {
         biliWbiSign(paramEncoded: data.param.base64Encoded()) { signed in
             let signed = #require(signed)
-            DarockKit.Network.shared.requestJSON(data.path + signed, headers: headers) { respJson, isSuccess in
+            requestJSON(data.path + signed, headers: headers) { respJson, isSuccess in
                 #expect(isSuccess && CheckBApiError(from: respJson))
             }
         }
