@@ -111,6 +111,20 @@ struct SettingsView: View {
                     }
                 })
                 
+                NavigationLink(destination: { WidgetSettingsView().navigationTitle("小组件")}, label: {
+                    HStack{
+                        ZStack{
+                            Color.blue
+                                .frame(width: 26, height: 26)
+                                .clipShape(RoundedRectangle(cornerRadius: 5))
+                            Image(systemName: "widget.small")
+                                .font(.system(size: 16))
+                                .foregroundColor(.white)
+                        }
+                        Text("小组件")
+                    }
+                })
+                
                 NavigationLink(destination: { SleepTimeView().navigationTitle("Settings.sleep") }, label: {
                     HStack {
                         ZStack {
@@ -570,6 +584,27 @@ struct SoundAHapticSettingsView: View {
                 Text("触感")
             }
         }
+    }
+}
+
+struct WidgetSettingsView: View {
+    @AppStorage("WidgetRefreshInterval") var refreshInterval: Int = 10
+    // @State var isNewToWidget = true for future updates
+    var body: some View {
+        // Here we go refreshment settings
+        Form {
+            Section(header: Text("小组件刷新时间")){
+                Picker("刷新时间", selection: $refreshInterval){
+                    Text("5分钟").tag(5)
+                    Text("10分钟（默认）").tag(10)
+                    Text("15分钟").tag(15)
+                    Text("30分钟").tag(30)
+                    Text("1小时").tag(60)
+                    Text("2小时").tag(120)
+                }
+            }
+        }
+        // Here comes more features
     }
 }
 

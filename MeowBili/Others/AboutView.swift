@@ -121,6 +121,7 @@ struct AboutCredits: View {
                 Text("令枫")
                 Text("ThreeManager785")
                 Text("Dignite")
+                Text("DannyFeng")
                 Text("-- And You --")
                     .sheet(isPresented: $isEasterEgg1Presented, content: { EasterEgg1View(isGenshin: $isGenshin) })
                     .onTapGesture(count: 10) {
