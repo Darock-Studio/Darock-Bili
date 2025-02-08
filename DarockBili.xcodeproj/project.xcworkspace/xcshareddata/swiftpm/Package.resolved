@@ -52,7 +52,7 @@
       "location" : "https://github.com/Darock-Studio/CorvusKit",
       "state" : {
         "branch" : "main",
-        "revision" : "865481811cdc0d2e815c9a18be0bbda6878fb5f3"
+        "revision" : "df7f095270fe54ba52e5c232bc0f326718f910f6"
       }
     },
     {
@@ -96,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/libwebp-Xcode.git",
       "state" : {
-        "revision" : "b2b1d20a90b14d11f6ef4241da6b81c1d3f171e4",
-        "version" : "1.3.2"
+        "revision" : "0d60654eeefd5d7d2bef3835804892c40225e8b2",
+        "version" : "1.5.0"
       }
     },
     {

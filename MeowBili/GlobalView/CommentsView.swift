@@ -98,11 +98,11 @@ struct CommentsView: View {
                             if !comments[i]["Pictures"]!.isEmpty {
                                 let picUrls = comments[i]["Pictures"]!.components(separatedBy: "|")
                                 ForEach(0..<picUrls.count, id: \.self) { i in
-                                    WebImage(url: URL(string: picUrls[i] + "@200h"))
+                                    WebImage(url: URL(string: picUrls[i] + "@200w_150h_0e"))
                                         .resizable()
-                                        .scaledToFit()
+                                        .scaledToFill()
                                         .cornerRadius(10)
-                                        .frame(maxHeight: 150)
+                                        .frame(maxHeight: 100)
                                         .onTapGesture {
                                             presentImageItem = picUrls[i]
                                         }

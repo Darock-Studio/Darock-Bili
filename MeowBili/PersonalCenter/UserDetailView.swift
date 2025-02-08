@@ -32,6 +32,8 @@ struct UserDetailView: View {
     @AppStorage("bili_jct") var biliJct = ""
     @AppStorage("CachedBiliTicket") var cachedBiliTicket = ""
     @State var userFaceUrl = ""
+    @State var userFaceAvgColor = ""
+    @State var backgroundPicOpacity = 0.0
     @State var username = ""
     @State var userLevel = 0
     @State var officialType = -1
@@ -325,7 +327,16 @@ struct UserDetailView: View {
                     }
             }
             .tabViewStyle(.verticalPage)
-            .containerBackground(Color.accentColor.gradient, for: .navigation)
+            .containerBackground(userFaceAvgColor.isEmpty ? Color.accentColor.gradient : {
+                let hexSanitized = userFaceAvgColor.hasPrefix("#") ? String(userFaceAvgColor.dropFirst()) : userFaceAvgColor
+                guard hexSanitized.count == 6, let intValue = Int(hexSanitized, radix: 16) else {
+                    return Color.accentColor.gradient
+                }
+                let red = Double((intValue >> 16) & 0xFF) / 255.0
+                let green = Double((intValue >> 8) & 0xFF) / 255.0
+                let blue = Double(intValue & 0xFF) / 255.0
+                return Color(red: red, green: green, blue: blue).gradient
+            }(), for: .navigation)
             #endif
         }
         .onAppear {
@@ -342,6 +353,13 @@ struct UserDetailView: View {
                     if let relation = await BiliAPI.shared.userRelation(of: uid) {
                         followCount = relation.following
                         fansCount = relation.follower
+                    }
+                    requestJSON("\(userFaceUrl)@.avg_color") { respJson, isSuccess in
+                        if isSuccess {
+                            withAnimation(.easeOut) {
+                                userFaceAvgColor = respJson["RGB"].string ?? ""
+                            }
+                        }
                     }
                 }
             }
