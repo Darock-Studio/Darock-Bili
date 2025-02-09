@@ -229,3 +229,7 @@
 > Darock 与 Bilibili 并无合作关系，本 App 仅作学习用途
 >
 > 本 App 所有源代码开源，仅用于学习 Swift 开发。
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Darock-Studio/Darock-Bili&type=Date)](https://star-history.com/#Darock-Studio/Darock-Bili&Date)
