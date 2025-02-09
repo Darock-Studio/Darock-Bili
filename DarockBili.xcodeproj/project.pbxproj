@@ -387,6 +387,7 @@
 		8CB0D0242B88D20F0057EF1C /* ci_pre_xcodebuild.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_pre_xcodebuild.sh; sourceTree = "<group>"; };
 		8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */ = {isa = PBXFileReference; lastKnownFileType = text; path = CurrentChannel.drkdatac; sourceTree = "<group>"; };
 		8CB1769F2BB7E41C00CEC05C /* Alternative.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Alternative.entitlements; sourceTree = "<group>"; };
+		8CB954482D5967590002EF8E /* MeowBili Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "MeowBili Watch App.entitlements"; sourceTree = "<group>"; };
 		8CBFF1272B86188D00350E0F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		8CC3D5572B7CA209005636DC /* UserDynamicListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDynamicListView.swift; sourceTree = "<group>"; };
 		8CC3D5592B7CB95D005636DC /* NowPlayingExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NowPlayingExtension.m; sourceTree = "<group>"; };
@@ -820,6 +821,7 @@
 		B44689C32B4FC15A002CCEB2 = {
 			isa = PBXGroup;
 			children = (
+				8CB954482D5967590002EF8E /* MeowBili Watch App.entitlements */,
 				B2B813952CC3D1D800C69D17 /* SharedCode */,
 				8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */,
 				8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */,
@@ -1689,6 +1691,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "MeowBili Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1351;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";

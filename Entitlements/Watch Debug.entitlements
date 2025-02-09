@@ -9,6 +9,7 @@
 	<key>com.apple.security.application-groups</key>
 	<array>
 		<string>group.darockst</string>
+		<string>group.darock.SharingFramework.RadarKit</string>
 	</array>
 </dict>
 </plist>
