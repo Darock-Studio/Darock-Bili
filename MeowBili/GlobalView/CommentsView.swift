@@ -101,8 +101,9 @@ struct CommentsView: View {
                                     WebImage(url: URL(string: picUrls[i] + "@200w_150h_0e"))
                                         .resizable()
                                         .scaledToFill()
-                                        .cornerRadius(10)
                                         .frame(maxHeight: 100)
+                                        .clipped()
+                                        .cornerRadius(10)
                                         .onTapGesture {
                                             presentImageItem = picUrls[i]
                                         }

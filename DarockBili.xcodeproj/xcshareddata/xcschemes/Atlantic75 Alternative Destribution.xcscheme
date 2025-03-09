@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8C82F8202BB709E1009AEFD2"
-               BuildableName = "Alternative Destribution"
-               BlueprintName = "Alternative Destribution"
+               BuildableName = "Atlantic75 Alternative Destribution"
+               BlueprintName = "Atlantic75 Alternative Destribution"
                ReferencedContainer = "container:DarockBili.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -51,8 +51,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8C82F8202BB709E1009AEFD2"
-            BuildableName = "Alternative Destribution"
-            BlueprintName = "Alternative Destribution"
+            BuildableName = "Atlantic75 Alternative Destribution"
+            BlueprintName = "Atlantic75 Alternative Destribution"
             ReferencedContainer = "container:DarockBili.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

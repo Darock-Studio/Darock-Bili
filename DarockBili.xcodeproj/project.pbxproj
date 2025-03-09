@@ -7,15 +7,26 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		8C82F8202BB709E1009AEFD2 /* Alternative Destribution */ = {
+		8C72EA4D2D7D76F90091F17F /* CanerHK Alternative Destribution */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = 8C82F8212BB709E1009AEFD2 /* Build configuration list for PBXAggregateTarget "Alternative Destribution" */;
+			buildConfigurationList = 8C72EA502D7D76F90091F17F /* Build configuration list for PBXAggregateTarget "CanerHK Alternative Destribution" */;
+			buildPhases = (
+			);
+			dependencies = (
+				8C72EA4E2D7D76F90091F17F /* PBXTargetDependency */,
+			);
+			name = "CanerHK Alternative Destribution";
+			productName = "Alternative Destribution";
+		};
+		8C82F8202BB709E1009AEFD2 /* Atlantic75 Alternative Destribution */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 8C82F8212BB709E1009AEFD2 /* Build configuration list for PBXAggregateTarget "Atlantic75 Alternative Destribution" */;
 			buildPhases = (
 			);
 			dependencies = (
 				8C82F8262BB709F3009AEFD2 /* PBXTargetDependency */,
 			);
-			name = "Alternative Destribution";
+			name = "Atlantic75 Alternative Destribution";
 			productName = "Alternative Destribution";
 		};
 /* End PBXAggregateTarget section */
@@ -237,6 +248,13 @@
 			remoteGlobalIDString = 8C617F3D2B92334B000A3687;
 			remoteInfo = SafariExtension;
 		};
+		8C72EA4F2D7D76F90091F17F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B44689C42B4FC15A002CCEB2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CA7CBBF2B77AC4A008E587F;
+			remoteInfo = MeowBili;
+		};
 		8C82F8252BB709F3009AEFD2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B44689C42B4FC15A002CCEB2 /* Project object */;
@@ -387,7 +405,7 @@
 		8CB0D0242B88D20F0057EF1C /* ci_pre_xcodebuild.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_pre_xcodebuild.sh; sourceTree = "<group>"; };
 		8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */ = {isa = PBXFileReference; lastKnownFileType = text; path = CurrentChannel.drkdatac; sourceTree = "<group>"; };
 		8CB1769F2BB7E41C00CEC05C /* Alternative.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Alternative.entitlements; sourceTree = "<group>"; };
-		8CB954482D5967590002EF8E /* MeowBili Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "MeowBili Watch App.entitlements"; sourceTree = "<group>"; };
+		8CB954482D5967590002EF8E /* Watch Alternative.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Watch Alternative.entitlements"; sourceTree = "<group>"; };
 		8CBFF1272B86188D00350E0F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		8CC3D5572B7CA209005636DC /* UserDynamicListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDynamicListView.swift; sourceTree = "<group>"; };
 		8CC3D5592B7CB95D005636DC /* NowPlayingExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NowPlayingExtension.m; sourceTree = "<group>"; };
@@ -795,6 +813,7 @@
 				8CB1769F2BB7E41C00CEC05C /* Alternative.entitlements */,
 				8CFB6B652C650FED007C7BAA /* Watch Debug.entitlements */,
 				8CFB6B662C650FFE007C7BAA /* Watch Release.entitlements */,
+				8CB954482D5967590002EF8E /* Watch Alternative.entitlements */,
 			);
 			path = Entitlements;
 			sourceTree = "<group>";
@@ -821,7 +840,6 @@
 		B44689C32B4FC15A002CCEB2 = {
 			isa = PBXGroup;
 			children = (
-				8CB954482D5967590002EF8E /* MeowBili Watch App.entitlements */,
 				B2B813952CC3D1D800C69D17 /* SharedCode */,
 				8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */,
 				8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */,
@@ -1125,7 +1143,8 @@
 				8CC5B73F2B8749BC00BAD89E /* MeowBiliUITests */,
 				B2B8137C2CC3D0ED00C69D17 /* MeowWidgetExtension */,
 				8C617F3D2B92334B000A3687 /* SafariExtension */,
-				8C82F8202BB709E1009AEFD2 /* Alternative Destribution */,
+				8C82F8202BB709E1009AEFD2 /* Atlantic75 Alternative Destribution */,
+				8C72EA4D2D7D76F90091F17F /* CanerHK Alternative Destribution */,
 			);
 		};
 /* End PBXProject section */
@@ -1423,6 +1442,11 @@
 			target = 8C617F3D2B92334B000A3687 /* SafariExtension */;
 			targetProxy = 8C617F542B92334B000A3687 /* PBXContainerItemProxy */;
 		};
+		8C72EA4E2D7D76F90091F17F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8CA7CBBF2B77AC4A008E587F /* MeowBili */;
+			targetProxy = 8C72EA4F2D7D76F90091F17F /* PBXContainerItemProxy */;
+		};
 		8C82F8262BB709F3009AEFD2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8CA7CBBF2B77AC4A008E587F /* MeowBili */;
@@ -1493,7 +1517,7 @@
 			};
 			name = Release;
 		};
-		8C2DFCBD2C4E6B2C003AEC67 /* Alternative */ = {
+		8C2DFCBD2C4E6B2C003AEC67 /* Atlantic75 Alternative */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1515,7 +1539,7 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MeowBili.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MeowBili";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Alternative;
+			name = "Atlantic75 Alternative";
 		};
 		8C617F582B92334B000A3687 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1581,7 +1605,7 @@
 			};
 			name = Release;
 		};
-		8C82F77F2BB6DF2D009AEFD2 /* Alternative */ = {
+		8C72EA452D7D75C90091F17F /* CanerHK Alternative */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1638,9 +1662,314 @@
 				WATCHOS_DEPLOYMENT_TARGET = 9.0;
 				XROS_DEPLOYMENT_TARGET = 1.0;
 			};
-			name = Alternative;
+			name = "CanerHK Alternative";
 		};
-		8C82F7802BB6DF2D009AEFD2 /* Alternative */ = {
+		8C72EA462D7D75C90091F17F /* CanerHK Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Entitlements/Alternative.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1351;
+				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
+				DEVELOPMENT_TEAM = NCQ5SP3RL2;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MeowBili/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "喵哩喵哩使用相册保存权限以保存二维码名片至本地";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.darock.alt-caner.DarockBili";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "MeowBili/MeowBili-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,6";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "CanerHK Alternative";
+		};
+		8C72EA472D7D75C90091F17F /* CanerHK Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Entitlements/Watch Alternative.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1351;
+				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
+				DEVELOPMENT_TEAM = NCQ5SP3RL2;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MeowBili-Watch-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.darock.alt785.DarockBili;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.darock.alt-caner.DarockBili.watchkitapp";
+				PRODUCT_NAME = "喵哩喵哩";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "MeowBili/MeowBili-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = "";
+				TARGETED_DEVICE_FAMILY = 4;
+				USER_HEADER_SEARCH_PATHS = "";
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = "CanerHK Alternative";
+		};
+		8C72EA482D7D75C90091F17F /* CanerHK Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B57D8PP775;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.darock.MeowBiliTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MeowBili.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MeowBili";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "CanerHK Alternative";
+		};
+		8C72EA492D7D75C90091F17F /* CanerHK Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1351;
+				DEVELOPMENT_TEAM = B57D8PP775;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.darock.MeowBiliUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MeowBili;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "CanerHK Alternative";
+		};
+		8C72EA4A2D7D75C90091F17F /* CanerHK Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1351;
+				DEVELOPMENT_TEAM = MU2GGQV46U;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MeowWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MeowWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.darock.alt785.DarockBili.MeowWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "CanerHK Alternative";
+		};
+		8C72EA4B2D7D75C90091F17F /* CanerHK Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1351;
+				DEVELOPMENT_TEAM = NCQ5SP3RL2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SafariExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SafariExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.darock.alt-caner.DarockBili.SafariExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Osize";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "CanerHK Alternative";
+		};
+		8C72EA4C2D7D75C90091F17F /* CanerHK Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B38QUJMY47;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = "CanerHK Alternative";
+		};
+		8C72EA512D7D76F90091F17F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B38QUJMY47;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		8C72EA522D7D76F90091F17F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B38QUJMY47;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		8C72EA532D7D76F90091F17F /* Atlantic75 Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B38QUJMY47;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = "Atlantic75 Alternative";
+		};
+		8C72EA542D7D76F90091F17F /* CanerHK Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B38QUJMY47;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = "CanerHK Alternative";
+		};
+		8C82F77F2BB6DF2D009AEFD2 /* Atlantic75 Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+				XROS_DEPLOYMENT_TARGET = 1.0;
+			};
+			name = "Atlantic75 Alternative";
+		};
+		8C82F7802BB6DF2D009AEFD2 /* Atlantic75 Alternative */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1684,14 +2013,14 @@
 				TARGETED_DEVICE_FAMILY = "1,2,6";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Alternative;
+			name = "Atlantic75 Alternative";
 		};
-		8C82F7812BB6DF2D009AEFD2 /* Alternative */ = {
+		8C82F7812BB6DF2D009AEFD2 /* Atlantic75 Alternative */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "MeowBili Watch App.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Entitlements/Watch Alternative.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1351;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
@@ -1723,9 +2052,9 @@
 				VALIDATE_PRODUCT = YES;
 				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
-			name = Alternative;
+			name = "Atlantic75 Alternative";
 		};
-		8C82F7842BB6DF2D009AEFD2 /* Alternative */ = {
+		8C82F7842BB6DF2D009AEFD2 /* Atlantic75 Alternative */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1747,9 +2076,9 @@
 				TEST_TARGET_NAME = MeowBili;
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Alternative;
+			name = "Atlantic75 Alternative";
 		};
-		8C82F7852BB6DF2D009AEFD2 /* Alternative */ = {
+		8C82F7852BB6DF2D009AEFD2 /* Atlantic75 Alternative */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1780,7 +2109,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Alternative;
+			name = "Atlantic75 Alternative";
 		};
 		8C82F8222BB709E1009AEFD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1802,7 +2131,7 @@
 			};
 			name = Release;
 		};
-		8C82F8242BB709E1009AEFD2 /* Alternative */ = {
+		8C82F8242BB709E1009AEFD2 /* Atlantic75 Alternative */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1810,7 +2139,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 			};
-			name = Alternative;
+			name = "Atlantic75 Alternative";
 		};
 		8CA7CBDD2B77AC4D008E587F /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1920,7 +2249,7 @@
 				INFOPLIST_FILE = "MeowBili-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.darock.DarockBili;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.darock.alt785.DarockBili;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1958,7 +2287,7 @@
 				INFOPLIST_FILE = "MeowBili-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.darock.DarockBili;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.darock.alt785.DarockBili;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2086,7 +2415,7 @@
 			};
 			name = Release;
 		};
-		B2B813932CC3D0F300C69D17 /* Alternative */ = {
+		B2B813932CC3D0F300C69D17 /* Atlantic75 Alternative */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2114,7 +2443,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Alternative;
+			name = "Atlantic75 Alternative";
 		};
 		B44689DE2B4FC15B002CCEB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -2250,7 +2579,8 @@
 			buildConfigurations = (
 				8C2DFCBB2C4E6B2C003AEC67 /* Debug */,
 				8C2DFCBC2C4E6B2C003AEC67 /* Release */,
-				8C2DFCBD2C4E6B2C003AEC67 /* Alternative */,
+				8C2DFCBD2C4E6B2C003AEC67 /* Atlantic75 Alternative */,
+				8C72EA482D7D75C90091F17F /* CanerHK Alternative */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2260,17 +2590,30 @@
 			buildConfigurations = (
 				8C617F582B92334B000A3687 /* Debug */,
 				8C617F592B92334B000A3687 /* Release */,
-				8C82F7852BB6DF2D009AEFD2 /* Alternative */,
+				8C82F7852BB6DF2D009AEFD2 /* Atlantic75 Alternative */,
+				8C72EA4B2D7D75C90091F17F /* CanerHK Alternative */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8C82F8212BB709E1009AEFD2 /* Build configuration list for PBXAggregateTarget "Alternative Destribution" */ = {
+		8C72EA502D7D76F90091F17F /* Build configuration list for PBXAggregateTarget "CanerHK Alternative Destribution" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C72EA512D7D76F90091F17F /* Debug */,
+				8C72EA522D7D76F90091F17F /* Release */,
+				8C72EA532D7D76F90091F17F /* Atlantic75 Alternative */,
+				8C72EA542D7D76F90091F17F /* CanerHK Alternative */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8C82F8212BB709E1009AEFD2 /* Build configuration list for PBXAggregateTarget "Atlantic75 Alternative Destribution" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8C82F8222BB709E1009AEFD2 /* Debug */,
 				8C82F8232BB709E1009AEFD2 /* Release */,
-				8C82F8242BB709E1009AEFD2 /* Alternative */,
+				8C82F8242BB709E1009AEFD2 /* Atlantic75 Alternative */,
+				8C72EA4C2D7D75C90091F17F /* CanerHK Alternative */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2280,7 +2623,8 @@
 			buildConfigurations = (
 				8CA7CBE02B77AC4D008E587F /* Debug */,
 				8CA7CBE12B77AC4D008E587F /* Release */,
-				8C82F7812BB6DF2D009AEFD2 /* Alternative */,
+				8C82F7812BB6DF2D009AEFD2 /* Atlantic75 Alternative */,
+				8C72EA472D7D75C90091F17F /* CanerHK Alternative */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2290,7 +2634,8 @@
 			buildConfigurations = (
 				8CA7CBDD2B77AC4D008E587F /* Debug */,
 				8CA7CBDE2B77AC4D008E587F /* Release */,
-				8C82F7802BB6DF2D009AEFD2 /* Alternative */,
+				8C82F7802BB6DF2D009AEFD2 /* Atlantic75 Alternative */,
+				8C72EA462D7D75C90091F17F /* CanerHK Alternative */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2300,7 +2645,8 @@
 			buildConfigurations = (
 				8CC5B7482B8749BC00BAD89E /* Debug */,
 				8CC5B7492B8749BC00BAD89E /* Release */,
-				8C82F7842BB6DF2D009AEFD2 /* Alternative */,
+				8C82F7842BB6DF2D009AEFD2 /* Atlantic75 Alternative */,
+				8C72EA492D7D75C90091F17F /* CanerHK Alternative */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2310,7 +2656,8 @@
 			buildConfigurations = (
 				B2B813912CC3D0F300C69D17 /* Debug */,
 				B2B813922CC3D0F300C69D17 /* Release */,
-				B2B813932CC3D0F300C69D17 /* Alternative */,
+				B2B813932CC3D0F300C69D17 /* Atlantic75 Alternative */,
+				8C72EA4A2D7D75C90091F17F /* CanerHK Alternative */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2320,7 +2667,8 @@
 			buildConfigurations = (
 				B44689DE2B4FC15B002CCEB2 /* Debug */,
 				B44689DF2B4FC15B002CCEB2 /* Release */,
-				8C82F77F2BB6DF2D009AEFD2 /* Alternative */,
+				8C82F77F2BB6DF2D009AEFD2 /* Atlantic75 Alternative */,
+				8C72EA452D7D75C90091F17F /* CanerHK Alternative */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
