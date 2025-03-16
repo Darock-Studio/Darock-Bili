@@ -3237,7 +3237,14 @@
       }
     },
     "Corvus 封禁" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Corvus Banned"
+          }
+        }
+      }
     },
     "Current Global Buvid3: %@" : {
       "localizations" : {
@@ -9108,15 +9115,11 @@
       }
     },
     "你因为在“反馈助理”中发送不适宜的言论而被附加 Corvus 封禁。\n\n此封禁不会影响 App 功能，但会禁用你的“反馈助理”，以及在你的 App 内加上如你现在看到的水印。\n\n你可以通过下方的表单进行申诉。" : {
-
-    },
-    "你要存储当前的草稿吗？" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Do you want to save your current draft?"
+            "value" : "You have been banned by Corvus for sending inappropriate comments in the \"Feedback Assistant\". This ban will not affect the functions of the App, but it will disable your \"Feedback Assistant\" and add watermarks in your App like what you see now. You can appeal through the form below."
           }
         }
       }
@@ -9260,7 +9263,14 @@
       }
     },
     "前置条件" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preconditions"
+          }
+        }
+      }
     },
     "动态" : {
       "localizations" : {
@@ -9983,7 +9993,14 @@
       }
     },
     "手记建议" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Journal Suggestions"
+          }
+        }
+      }
     },
     "扩展的触感反馈" : {
       "localizations" : {
@@ -9996,7 +10013,14 @@
       }
     },
     "按原样抄写" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy as it is"
+          }
+        }
+      }
     },
     "排行榜" : {
       "localizations" : {
@@ -10061,15 +10085,11 @@
       }
     },
     "描述文本" : {
-
-    },
-    "描述行%lld" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Description Line %lld"
+            "value" : "Description"
           }
         }
       }
@@ -10080,17 +10100,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Submit"
-          }
-        }
-      }
-    },
-    "提交反馈" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Submit Feedback"
           }
         }
       }
@@ -10434,7 +10443,14 @@
       }
     },
     "法律之前人人平等，并有权享受法律的平等保护，不受任何歧视。人人有权享受平等保护，以免受违反本宣言的任何歧视行为以及煽动这种歧视的任何行为之害。" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Before the law, everyone is equal and has the right to enjoy the equal protection of the law without any discrimination. Everyone has the right to equal protection against any act of discrimination that violates this Declaration and any act that incites such discrimination."
+          }
+        }
+      }
     },
     "清除历史记录" : {
       "localizations" : {
@@ -10902,30 +10918,15 @@
         }
       }
     },
-    "请为你的反馈提供描述性的标题：" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please provide a descriptive title for your feedback:"
-          }
-        }
-      }
-    },
-    "请包括：\n- 问题的清晰描述\n- 逐步说明重现问题的详细步骤（如果可能）\n- 期望的结果\n- 当前所示结果" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please include:\n- A clear description of the problem\n- Step by step to explain the detailed steps to reproduce the problem (if possible)\n- Expected results\n- The current results"
-          }
-        }
-      }
-    },
     "请对本次申诉情况进行详细描述。" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please describe this appeal in detail."
+          }
+        }
+      }
     },
     "请将恢复密钥保存到安全的位置" : {
       "localizations" : {
@@ -10938,15 +10939,11 @@
       }
     },
     "请按原样抄写上方文本。" : {
-
-    },
-    "请描述该问题以及重现问题的步骤：" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Please describe the problem and the steps to reproduce them:"
+            "value" : "Please copy the above text as it is."
           }
         }
       }
@@ -11054,7 +11051,14 @@
       }
     },
     "还差 %lld 字" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " %lld  letters remain"
+          }
+        }
+      }
     },
     "退出 App" : {
       "localizations" : {
