@@ -61,7 +61,6 @@ private struct CorvusBannedView: View {
     @State var descriptionInput = ""
     @State var descriptionSnapshotCount = 0
     @State var isSubmitting = false
-    @State var descriptionClearTimer: Timer?
     var body: some View {
         List {
             Section {
@@ -130,22 +129,6 @@ private struct CorvusBannedView: View {
         }
         .listStyle(.plain)
         .navigationTitle("Corvus 封禁")
-        .onAppear {
-            descriptionClearTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-                #if os(watchOS)
-                let removeCount = 10
-                #else
-                let removeCount = 20
-                #endif
-                if (descriptionInput.count - descriptionSnapshotCount > removeCount) && !descriptionInput.isEmpty {
-                    descriptionInput = ""
-                }
-                descriptionSnapshotCount = descriptionInput.count
-            }
-        }
-        .onDisappear {
-            descriptionClearTimer?.invalidate()
-        }
     }
 }
 

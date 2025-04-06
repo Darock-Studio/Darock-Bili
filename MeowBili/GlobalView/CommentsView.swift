@@ -76,7 +76,7 @@ struct CommentsView: View {
                                 isSenderDetailsPresented[i] = true
                             }
                             HStack {
-#if !os(watchOS)
+                                #if !os(watchOS)
                                 CopyableView(comments[i]["Text"]!) {
                                     Text(comments[i]["Text"]!)
                                         .font(.system(size: 16, weight: .bold))
@@ -85,14 +85,14 @@ struct CommentsView: View {
                                             comments[i].updateValue((comments[i]["isFull"] ?? "false") == "true" ? "false" : "true", forKey: "isFull")
                                         }
                                 }
-#else
+                                #else
                                 Text(comments[i]["Text"]!)
                                     .font(.system(size: 16, weight: .bold))
                                     .lineLimit((comments[i]["isFull"] ?? "false") == "true" ? 1000 : 8)
                                     .onTapGesture {
                                         comments[i].updateValue((comments[i]["isFull"] ?? "false") == "true" ? "false" : "true", forKey: "isFull")
                                     }
-#endif
+                                #endif
                                 Spacer()
                             }
                             if !comments[i]["Pictures"]!.isEmpty {
