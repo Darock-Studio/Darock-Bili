@@ -43,10 +43,10 @@ Language: <a href="./README.md">简体中文</a>｜English｜<a href="./README_j
 ### TestFlight
 [Here](https://testflight.apple.com/join/TbuBT6ig)
 
-## 🙌Contribute
-It is Welcomed to open issues and pull requests to help us get better.
+## 🙌Contribution
+It is welcomed to open issues and pull requests to help us get better.
 
-View contribute/develop document at [/doc/dev](/doc/dev) 
+View contribution/development documents at [/doc/dev](/doc/dev) 
 
 <details><summary>Some unreasonable code clip in this project</summary>
 
@@ -156,14 +156,14 @@ View contribute/develop document at [/doc/dev](/doc/dev)
 </details>
 
 ### Contribute Steps
-Open an Pull Request->Wait for review->Repair problem (if have)->Wait for compile check->merge to main（or Close Pull Request）
+Open an Pull Request -> Wait for Review -> Code Fix (if available) -> Waiting for CI/CD -> Merge to main (or Close Pull Request)
 
-Everyone（including administrators）cannot skip any steps.
+Everyone (including administrators) cannot skip any steps above.
 
 ## 📝Version Number
-Meowbili's Version number is **different** on GitHub and TestFlight(Same on about page). Because if add Version number on Testflight, app need to review by Apple. But if only add build number can prevent this.
+MeowBili's Version number is **different** on GitHub and TestFlight (Same on about page). Because app need to be reviewed by Apple if version number on TestFlight is increased while increase build number only can prevent this.
 
-So, we only add build number on Testflight. However, on Github we use easy to understand version number. We recommanded to use version number on Github to identity Meowbili.
+So, we only increase build number on TestFlight. However, we use easy-to-understand version number on GitHub. We recommanded to use version number on Github to identity MeowBili.
 
 ## 💬User Comments
 ~~When people used this, they all say good.~~
@@ -208,7 +208,7 @@ So, we only add build number on Testflight. However, on Github we use easy to un
 
 ## Important Information
 > [!IMPORTANT]
-> The videos and other data in this App come from Bilibili, the copyright belongs to BiliBili and the video creators.
+> The videos and other data in this App come from BiliBili, the copyright belongs to BiliBili and the video creators.
 >
 > Darock has no partnership with BiliBili, this App is for learning purposes only.
 >
