@@ -25,18 +25,18 @@ Language: <a href="./README.md">简体中文</a>｜English｜<a href="./README_j
 - Customized Suggestion
 - Account Login
 - Video Download
-- View Video Details（Play counts、introduction...）
+- View Video Details (Play counts, introduction...)
 - View Video Comments
 - Send Comments
 - View Suggested Video
-- Video Actions（Like、Throw Coins、Add to favorites...）
-- User Detail Page（Fans、Follows count，User bio...）
+- Video Actions (Like/Throw Coins/Add to favorites...)
+- User Detail Page (Fans/Follows count/User bio...)
 - User Videos and Articles
-- User Actions（Follow、Direct Message）
-- Search（Videos、Users）
+- User Actions (Follow/Direct Message)
+- Search (Videos/Users)
 - Follow List
-- Favorites（Folder）
-- Watch Later（View、Add）
+- Favorites (Folders)
+- Watch Later (View/Add)
 - View Moments
 
 ## ⬇️Install
@@ -44,7 +44,7 @@ Language: <a href="./README.md">简体中文</a>｜English｜<a href="./README_j
 [Here](https://testflight.apple.com/join/TbuBT6ig)
 
 ## 🙌Contribute
-Welcome to open issues and pull requests to help us get better.
+It is Welcomed to open issues and pull requests to help us get better.
 
 View contribute/develop document at [/doc/dev](/doc/dev) 
 
@@ -208,8 +208,8 @@ So, we only add build number on Testflight. However, on Github we use easy to un
 
 ## Important Information
 > [!IMPORTANT]
-> The videos and other data in this App come from Bilibili, the copyright belongs to Bilibili and the video creators.
+> The videos and other data in this App come from Bilibili, the copyright belongs to BiliBili and the video creators.
 >
-> Darock has no partnership with Bilibili, this App is for learning purposes only.
+> Darock has no partnership with BiliBili, this App is for learning purposes only.
 >
-> All source code of this App is open source, and it's only for learning Swift development.
+> All source code of this App is open-sourced, and it's only for learning Swift development.
