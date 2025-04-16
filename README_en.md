@@ -4,7 +4,7 @@ Language: <a href="./README.md">简体中文</a>｜English｜<a href="./README_j
     <img src="./Artwork/rm-ico-vision.png" width="200" height="200">
 </p>
 
-# Meowbili - Cross-platform native Swift Bilibili client
+# Meowbili - Cross-platform native Swift BiliBili client
 
 ![Swift](https://img.shields.io/badge/Swift-5.9-orange.svg)&nbsp;
 ![GitHub Repo stars](https://img.shields.io/github/stars/Darock-Studio/Darock-Bili?style=flat)&nbsp;
