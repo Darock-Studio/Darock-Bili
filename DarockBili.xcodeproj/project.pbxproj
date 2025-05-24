@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		8C72EA4D2D7D76F90091F17F /* CanerHK Alternative Destribution */ = {
+		8C72EA4D2D7D76F90091F17F /* KentYe Alternative Destribution */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = 8C72EA502D7D76F90091F17F /* Build configuration list for PBXAggregateTarget "CanerHK Alternative Destribution" */;
+			buildConfigurationList = 8C72EA502D7D76F90091F17F /* Build configuration list for PBXAggregateTarget "KentYe Alternative Destribution" */;
 			buildPhases = (
 			);
 			dependencies = (
 				8C72EA4E2D7D76F90091F17F /* PBXTargetDependency */,
 			);
-			name = "CanerHK Alternative Destribution";
+			name = "KentYe Alternative Destribution";
 			productName = "Alternative Destribution";
 		};
 		8C82F8202BB709E1009AEFD2 /* Atlantic75 Alternative Destribution */ = {
@@ -1144,7 +1144,7 @@
 				B2B8137C2CC3D0ED00C69D17 /* MeowWidgetExtension */,
 				8C617F3D2B92334B000A3687 /* SafariExtension */,
 				8C82F8202BB709E1009AEFD2 /* Atlantic75 Alternative Destribution */,
-				8C72EA4D2D7D76F90091F17F /* CanerHK Alternative Destribution */,
+				8C72EA4D2D7D76F90091F17F /* KentYe Alternative Destribution */,
 			);
 		};
 /* End PBXProject section */
@@ -1605,7 +1605,7 @@
 			};
 			name = Release;
 		};
-		8C72EA452D7D75C90091F17F /* CanerHK Alternative */ = {
+		8C72EA452D7D75C90091F17F /* KentYe Alternative */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1662,9 +1662,9 @@
 				WATCHOS_DEPLOYMENT_TARGET = 9.0;
 				XROS_DEPLOYMENT_TARGET = 1.0;
 			};
-			name = "CanerHK Alternative";
+			name = "KentYe Alternative";
 		};
-		8C72EA462D7D75C90091F17F /* CanerHK Alternative */ = {
+		8C72EA462D7D75C90091F17F /* KentYe Alternative */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1674,7 +1674,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1351;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
-				DEVELOPMENT_TEAM = NCQ5SP3RL2;
+				DEVELOPMENT_TEAM = W6D36R8RMG;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1695,7 +1695,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.darock.alt-caner.DarockBili";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.darock.caner-alt.DarockBili";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1708,9 +1708,9 @@
 				TARGETED_DEVICE_FAMILY = "1,2,6";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = "CanerHK Alternative";
+			name = "KentYe Alternative";
 		};
-		8C72EA472D7D75C90091F17F /* CanerHK Alternative */ = {
+		8C72EA472D7D75C90091F17F /* KentYe Alternative */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
@@ -1719,7 +1719,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1351;
 				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
-				DEVELOPMENT_TEAM = NCQ5SP3RL2;
+				DEVELOPMENT_TEAM = W6D36R8RMG;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -1734,7 +1734,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.darock.alt-caner.DarockBili.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.darock.caner-alt.DarockBili.watchkitapp";
 				PRODUCT_NAME = "喵哩喵哩";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1747,9 +1747,9 @@
 				VALIDATE_PRODUCT = YES;
 				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
-			name = "CanerHK Alternative";
+			name = "KentYe Alternative";
 		};
-		8C72EA482D7D75C90091F17F /* CanerHK Alternative */ = {
+		8C72EA482D7D75C90091F17F /* KentYe Alternative */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1771,9 +1771,9 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MeowBili.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MeowBili";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = "CanerHK Alternative";
+			name = "KentYe Alternative";
 		};
-		8C72EA492D7D75C90091F17F /* CanerHK Alternative */ = {
+		8C72EA492D7D75C90091F17F /* KentYe Alternative */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1795,16 +1795,16 @@
 				TEST_TARGET_NAME = MeowBili;
 				VALIDATE_PRODUCT = YES;
 			};
-			name = "CanerHK Alternative";
+			name = "KentYe Alternative";
 		};
-		8C72EA4A2D7D75C90091F17F /* CanerHK Alternative */ = {
+		8C72EA4A2D7D75C90091F17F /* KentYe Alternative */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1351;
-				DEVELOPMENT_TEAM = NCQ5SP3RL2;
+				DEVELOPMENT_TEAM = W6D36R8RMG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MeowWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MeowWidget;
@@ -1816,7 +1816,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.darock.alt-caner.DarockBili.MeowWidget";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.darock.caner-alt.DarockBili.MeowWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1825,14 +1825,14 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = "CanerHK Alternative";
+			name = "KentYe Alternative";
 		};
-		8C72EA4B2D7D75C90091F17F /* CanerHK Alternative */ = {
+		8C72EA4B2D7D75C90091F17F /* KentYe Alternative */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1351;
-				DEVELOPMENT_TEAM = NCQ5SP3RL2;
+				DEVELOPMENT_TEAM = W6D36R8RMG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SafariExtension;
@@ -1848,7 +1848,7 @@
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.darock.alt-caner.DarockBili.SafariExtension";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.darock.caner-alt.DarockBili.SafariExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1858,9 +1858,9 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = "CanerHK Alternative";
+			name = "KentYe Alternative";
 		};
-		8C72EA4C2D7D75C90091F17F /* CanerHK Alternative */ = {
+		8C72EA4C2D7D75C90091F17F /* KentYe Alternative */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1868,7 +1868,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 			};
-			name = "CanerHK Alternative";
+			name = "KentYe Alternative";
 		};
 		8C72EA512D7D76F90091F17F /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1900,7 +1900,7 @@
 			};
 			name = "Atlantic75 Alternative";
 		};
-		8C72EA542D7D76F90091F17F /* CanerHK Alternative */ = {
+		8C72EA542D7D76F90091F17F /* KentYe Alternative */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1908,7 +1908,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 			};
-			name = "CanerHK Alternative";
+			name = "KentYe Alternative";
 		};
 		8C82F77F2BB6DF2D009AEFD2 /* Atlantic75 Alternative */ = {
 			isa = XCBuildConfiguration;
@@ -2032,7 +2032,7 @@
 				INFOPLIST_FILE = "MeowBili-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.darock.alt785.DarockBili;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.darock.alt-caner.DarockBili";
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2249,7 +2249,7 @@
 				INFOPLIST_FILE = "MeowBili-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.darock.DarockBili;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.darock.alt-caner.DarockBili";
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2287,7 +2287,7 @@
 				INFOPLIST_FILE = "MeowBili-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.darock.DarockBili;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.darock.alt-caner.DarockBili";
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2580,7 +2580,7 @@
 				8C2DFCBB2C4E6B2C003AEC67 /* Debug */,
 				8C2DFCBC2C4E6B2C003AEC67 /* Release */,
 				8C2DFCBD2C4E6B2C003AEC67 /* Atlantic75 Alternative */,
-				8C72EA482D7D75C90091F17F /* CanerHK Alternative */,
+				8C72EA482D7D75C90091F17F /* KentYe Alternative */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2591,18 +2591,18 @@
 				8C617F582B92334B000A3687 /* Debug */,
 				8C617F592B92334B000A3687 /* Release */,
 				8C82F7852BB6DF2D009AEFD2 /* Atlantic75 Alternative */,
-				8C72EA4B2D7D75C90091F17F /* CanerHK Alternative */,
+				8C72EA4B2D7D75C90091F17F /* KentYe Alternative */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8C72EA502D7D76F90091F17F /* Build configuration list for PBXAggregateTarget "CanerHK Alternative Destribution" */ = {
+		8C72EA502D7D76F90091F17F /* Build configuration list for PBXAggregateTarget "KentYe Alternative Destribution" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8C72EA512D7D76F90091F17F /* Debug */,
 				8C72EA522D7D76F90091F17F /* Release */,
 				8C72EA532D7D76F90091F17F /* Atlantic75 Alternative */,
-				8C72EA542D7D76F90091F17F /* CanerHK Alternative */,
+				8C72EA542D7D76F90091F17F /* KentYe Alternative */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2613,7 +2613,7 @@
 				8C82F8222BB709E1009AEFD2 /* Debug */,
 				8C82F8232BB709E1009AEFD2 /* Release */,
 				8C82F8242BB709E1009AEFD2 /* Atlantic75 Alternative */,
-				8C72EA4C2D7D75C90091F17F /* CanerHK Alternative */,
+				8C72EA4C2D7D75C90091F17F /* KentYe Alternative */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2624,7 +2624,7 @@
 				8CA7CBE02B77AC4D008E587F /* Debug */,
 				8CA7CBE12B77AC4D008E587F /* Release */,
 				8C82F7812BB6DF2D009AEFD2 /* Atlantic75 Alternative */,
-				8C72EA472D7D75C90091F17F /* CanerHK Alternative */,
+				8C72EA472D7D75C90091F17F /* KentYe Alternative */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2635,7 +2635,7 @@
 				8CA7CBDD2B77AC4D008E587F /* Debug */,
 				8CA7CBDE2B77AC4D008E587F /* Release */,
 				8C82F7802BB6DF2D009AEFD2 /* Atlantic75 Alternative */,
-				8C72EA462D7D75C90091F17F /* CanerHK Alternative */,
+				8C72EA462D7D75C90091F17F /* KentYe Alternative */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2646,7 +2646,7 @@
 				8CC5B7482B8749BC00BAD89E /* Debug */,
 				8CC5B7492B8749BC00BAD89E /* Release */,
 				8C82F7842BB6DF2D009AEFD2 /* Atlantic75 Alternative */,
-				8C72EA492D7D75C90091F17F /* CanerHK Alternative */,
+				8C72EA492D7D75C90091F17F /* KentYe Alternative */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2657,7 +2657,7 @@
 				B2B813912CC3D0F300C69D17 /* Debug */,
 				B2B813922CC3D0F300C69D17 /* Release */,
 				B2B813932CC3D0F300C69D17 /* Atlantic75 Alternative */,
-				8C72EA4A2D7D75C90091F17F /* CanerHK Alternative */,
+				8C72EA4A2D7D75C90091F17F /* KentYe Alternative */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2668,7 +2668,7 @@
 				B44689DE2B4FC15B002CCEB2 /* Debug */,
 				B44689DF2B4FC15B002CCEB2 /* Release */,
 				8C82F77F2BB6DF2D009AEFD2 /* Atlantic75 Alternative */,
-				8C72EA452D7D75C90091F17F /* CanerHK Alternative */,
+				8C72EA452D7D75C90091F17F /* KentYe Alternative */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

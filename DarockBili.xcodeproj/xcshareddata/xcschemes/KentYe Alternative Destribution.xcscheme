@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8C72EA4D2D7D76F90091F17F"
-               BuildableName = "CanerHK Alternative Destribution"
-               BlueprintName = "CanerHK Alternative Destribution"
+               BuildableName = "KentYe Alternative Destribution"
+               BlueprintName = "KentYe Alternative Destribution"
                ReferencedContainer = "container:DarockBili.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -51,8 +51,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8C72EA4D2D7D76F90091F17F"
-            BuildableName = "CanerHK Alternative Destribution"
-            BlueprintName = "CanerHK Alternative Destribution"
+            BuildableName = "KentYe Alternative Destribution"
+            BlueprintName = "KentYe Alternative Destribution"
             ReferencedContainer = "container:DarockBili.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -61,7 +61,7 @@
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "CanerHK Alternative"
+      buildConfiguration = "KentYe Alternative"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
