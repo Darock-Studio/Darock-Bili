@@ -370,7 +370,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Channel %@"
+            "value" : "%@ Channel"
           }
         }
       }
