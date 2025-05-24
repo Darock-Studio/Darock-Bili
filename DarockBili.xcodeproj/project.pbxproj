@@ -1727,7 +1727,7 @@
 				INFOPLIST_FILE = "MeowBili-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.darock.alt-caner.DarockBili";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.darock.caner-alt.DarockBili";
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2032,7 +2032,7 @@
 				INFOPLIST_FILE = "MeowBili-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.darock.alt-caner.DarockBili";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.darock.alt785.DarockBili;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2249,7 +2249,7 @@
 				INFOPLIST_FILE = "MeowBili-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.darock.alt-caner.DarockBili";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.darock.DarockBili;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2287,7 +2287,7 @@
 				INFOPLIST_FILE = "MeowBili-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.darock.alt-caner.DarockBili";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.darock.DarockBili;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
