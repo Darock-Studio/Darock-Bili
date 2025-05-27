@@ -9892,12 +9892,32 @@
         }
       }
     },
+    "快进 %llds" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%llds Backward"
+          }
+        }
+      }
+    },
     "快进 10 秒" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "10sec forward"
+          }
+        }
+      }
+    },
+    "快退 %llds" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%llds Forward"
           }
         }
       }
@@ -9993,6 +10013,7 @@
       }
     },
     "手记建议" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
