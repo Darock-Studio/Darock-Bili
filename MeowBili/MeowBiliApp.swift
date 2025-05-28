@@ -56,7 +56,6 @@ var isInLowBatteryMode = false
 var globalBuvid3 = ""
 var globalBuvid4 = ""
 
-let minimumOpacity = 0.0100000002421438702673861521
 // swiftlint:disable no_c_style_comment
 /*
  ::::::::::::::-:=**=========+===++++++++++*%+*%%%%#%%%%%*++#@%%%@@@%%@@@%%%%%%%*+*#****#%%@@@@@@@@@%
