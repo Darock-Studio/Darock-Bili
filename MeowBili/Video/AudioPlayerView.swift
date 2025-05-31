@@ -70,7 +70,7 @@ struct AudioControllerView: View {
                         .redacted(reason: .placeholder)
                         .offset(y: -24)
                 }
-                // Audio Controls
+                    // Audio Controls
                 VStack {
                     Spacer()
                     VStack {
@@ -112,19 +112,19 @@ struct AudioControllerView: View {
                         HStack {
                             Button(action: {
                                 switch playbackBehavior {
-                                case .pause:
-                                    playbackBehavior = .singleLoop
-                                case .singleLoop:
-                                    playbackBehavior = .pause
+                                    case .pause:
+                                        playbackBehavior = .singleLoop
+                                    case .singleLoop:
+                                        playbackBehavior = .pause
                                 }
                                 UserDefaults.standard.set(playbackBehavior.rawValue, forKey: "MPPlaybackBehavior")
                             }, label: {
                                 Group {
                                     switch playbackBehavior {
-                                    case .pause:
-                                        Image(systemName: "pause.circle")
-                                    case .singleLoop:
-                                        Image(systemName: "repeat.1")
+                                        case .pause:
+                                            Image(systemName: "pause.circle")
+                                        case .singleLoop:
+                                            Image(systemName: "repeat.1")
                                     }
                                 }
                                 .font(.system(size: 20))
@@ -136,6 +136,11 @@ struct AudioControllerView: View {
                                 if isPlaying {
                                     globalAudioPlayer.pause()
                                 } else {
+                                    if currentItemTotalTime == currentPlaybackTime {
+                                        globalAudioPlayer.seek(to: CMTime(seconds: 0, preferredTimescale: 60000),
+                                                               toleranceBefore: .zero,
+                                                               toleranceAfter: .zero)
+                                    }
                                     globalAudioPlayer.play()
                                 }
                             }, label: {
@@ -195,7 +200,7 @@ struct AudioControllerView: View {
             }
         }
         .onReceive(globalAudioPlayer.periodicTimePublisher()) { time in
-            // Code in this closure runs at nearly each frame, optimizing for speed is important.
+                // Code in this closure runs at nearly each frame, optimizing for speed is important.
             if time.seconds - currentPlaybackTime >= 0.3 || time.seconds < currentPlaybackTime {
                 currentPlaybackTime = time.seconds
             }
