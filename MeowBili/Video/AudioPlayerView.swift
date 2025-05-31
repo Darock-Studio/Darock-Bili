@@ -46,31 +46,118 @@ struct AudioControllerView: View {
     @State var playbackBehavior = PlaybackBehavior.pause
     @State var backgroundImageUrl: URL?
     @State var videoName = ""
+    @State var backwardTaps = 0
+    @State var backwardTapsSnapshot = 0
+    @State var forwardTaps = 0 //双击屏幕右侧的点击计数器
+    @State var forwardTapsSnapshop = 0
+    @State var forwardTimer: Timer?
+    @State var backwardTimer: Timer?
     var body: some View {
         NavigationStack {
             ZStack {
-                if let backgroundImageUrl {
-                    WebImage(url: backgroundImageUrl, options: [.progressiveLoad, .scaleDownLargeImages])
-                        .placeholder {
-                            RoundedRectangle(cornerRadius: 14)
-                                .frame(width: 120, height: 80)
-                                .foregroundColor(Color(hex: 0x3D3D3D))
-                                .redacted(reason: .placeholder)
-                        }
-                        .resizable()
-                        .cornerRadius(10)
-                        .scaledToFit()
-                        .frame(width: 120, height: 80)
-                        .shadow(color: .black.opacity(0.5), radius: 5, x: 1, y: 2)
-                        .offset(y: -24)
-                } else {
-                    RoundedRectangle(cornerRadius: 14)
-                        .frame(width: 120, height: 80)
-                        .foregroundColor(Color(hex: 0x3D3D3D))
-                        .redacted(reason: .placeholder)
-                        .offset(y: -24)
+                HStack {
+                    Rectangle()
+                        .frame(width: 45)
+                        .opacity(kViewMinimumRenderableOpacity)
+                        .onTapGesture(perform: {
+                            if currentPlaybackTime - 10 > 0 {
+                                forwardTaps = 0
+                                backwardTaps += 1
+                                backwardTapsSnapshot = backwardTaps
+                                if backwardTaps > 1 {
+                                    globalAudioPlayer.seek(to: CMTime(seconds: currentPlaybackTime - 10, preferredTimescale: 60000),
+                                                           toleranceBefore: .zero,
+                                                           toleranceAfter: .zero)
+                                }
+                            }
+                        })
+                    Spacer()
+                    Rectangle()
+                        .frame(width: 45)
+                        .opacity(kViewMinimumRenderableOpacity)
+                        .onTapGesture(perform: {
+                            if currentPlaybackTime + 10 < currentItemTotalTime {
+                                backwardTaps = 0
+                                forwardTaps += 1
+                                forwardTapsSnapshop = forwardTaps
+                                if forwardTaps > 1 {
+                                    globalAudioPlayer.seek(to: CMTime(seconds: currentPlaybackTime + 10, preferredTimescale: 60000),
+                                                           toleranceBefore: .zero,
+                                                           toleranceAfter: .zero)
+                                }
+                            }
+                        })
                 }
-                // Audio Controls
+                .ignoresSafeArea(.container)
+                .frame(height: 120)
+                .offset(y: -20)
+                .onChange(of: forwardTaps, perform: { value in
+                    if forwardTaps != 0 {
+                        forwardTimer?.invalidate()
+                        forwardTimer = Timer.scheduledTimer(withTimeInterval: 0.75, repeats: false) { value in
+                            if forwardTapsSnapshop == forwardTaps {
+                                print("[\(currentGlobalSystemTime())][HKR][L] S\(forwardTapsSnapshop), T\(forwardTaps)")
+                                forwardTaps = 0
+                            }
+                            forwardTapsSnapshop = forwardTaps
+                        }
+                    }
+                })
+                .onChange(of: backwardTaps, perform: { value in
+                    if backwardTaps != 0 {
+                        backwardTimer?.invalidate()
+                        backwardTimer = Timer.scheduledTimer(withTimeInterval: 0.75, repeats: false) { _ in
+                                //            if forwardTapsSnapshop == forwardTaps {
+                                //              forwardTaps = 0
+                                //            }
+                            if backwardTapsSnapshot == backwardTaps {
+                                print("[\(currentGlobalSystemTime())][HKR][R] S\(backwardTapsSnapshot), T\(backwardTaps)")
+                                backwardTaps = 0
+                            }
+                                //            forwardTapsSnapshop = forwardTaps
+                            
+                        }
+                    }
+                })
+                /*
+                 {
+                 Timer.scheduledTimer(withTimeInterval: 0.75, repeats: true) { _ in
+                 if forwardTapsSnapshop == forwardTaps {
+                 forwardTaps = 0
+                 }
+                 if backwardTapsSnapshot == backwardTaps {
+                 backwardTaps = 0
+                 }
+                 forwardTapsSnapshop = forwardTaps
+                 backwardTapsSnapshot = backwardTaps
+                 }
+                 }
+                 */
+                Group {
+                    if let backgroundImageUrl {
+                        WebImage(url: backgroundImageUrl, options: [.progressiveLoad, .scaleDownLargeImages])
+                            .placeholder {
+                                RoundedRectangle(cornerRadius: 14)
+                                    .frame(width: 120, height: 80)
+                                    .foregroundColor(Color(hex: 0x3D3D3D))
+                                    .redacted(reason: .placeholder)
+                            }
+                            .resizable()
+                            .cornerRadius(10)
+                            .scaledToFit()
+                            .frame(width: 120, height: 80)
+                            .shadow(color: .black.opacity(0.5), radius: 5, x: 1, y: 2)
+                            .offset(y: -24)
+                    } else {
+                        RoundedRectangle(cornerRadius: 14)
+                            .frame(width: 120, height: 80)
+                            .foregroundColor(Color(hex: 0x3D3D3D))
+                            .redacted(reason: .placeholder)
+                            .offset(y: -24)
+                    }
+                }
+                
+                    // Audio Controls
                 VStack {
                     Spacer()
                     VStack {
@@ -112,19 +199,19 @@ struct AudioControllerView: View {
                         HStack {
                             Button(action: {
                                 switch playbackBehavior {
-                                case .pause:
-                                    playbackBehavior = .singleLoop
-                                case .singleLoop:
-                                    playbackBehavior = .pause
+                                    case .pause:
+                                        playbackBehavior = .singleLoop
+                                    case .singleLoop:
+                                        playbackBehavior = .pause
                                 }
                                 UserDefaults.standard.set(playbackBehavior.rawValue, forKey: "MPPlaybackBehavior")
                             }, label: {
                                 Group {
                                     switch playbackBehavior {
-                                    case .pause:
-                                        Image(systemName: "pause.circle")
-                                    case .singleLoop:
-                                        Image(systemName: "repeat.1")
+                                        case .pause:
+                                            Image(systemName: "pause.circle")
+                                        case .singleLoop:
+                                            Image(systemName: "repeat.1")
                                     }
                                 }
                                 .font(.system(size: 20))
@@ -136,6 +223,11 @@ struct AudioControllerView: View {
                                 if isPlaying {
                                     globalAudioPlayer.pause()
                                 } else {
+                                    if currentItemTotalTime == currentPlaybackTime {
+                                        globalAudioPlayer.seek(to: CMTime(seconds: 0, preferredTimescale: 60000),
+                                                               toleranceBefore: .zero,
+                                                               toleranceAfter: .zero)
+                                    }
                                     globalAudioPlayer.play()
                                 }
                             }, label: {
@@ -165,7 +257,7 @@ struct AudioControllerView: View {
                 }
                 .ignoresSafeArea()
             }
-            .navigationTitle(videoName)
+            .navigationTitle(backwardTaps > 1 ? (Text("快退 \(10*(backwardTaps-1))s")) : (forwardTaps > 1 ? Text("快进 \(10*(forwardTaps-1))s") : Text(videoName)))
             .modifier(BlurBackground(imageUrl: backgroundImageUrl))
         }
         .onAppear {
@@ -195,7 +287,7 @@ struct AudioControllerView: View {
             }
         }
         .onReceive(globalAudioPlayer.periodicTimePublisher()) { time in
-            // Code in this closure runs at nearly each frame, optimizing for speed is important.
+                // Code in this closure runs at nearly each frame, optimizing for speed is important.
             if time.seconds - currentPlaybackTime >= 0.3 || time.seconds < currentPlaybackTime {
                 currentPlaybackTime = time.seconds
             }
@@ -224,7 +316,7 @@ struct AudioControllerView: View {
                 Circle()
                     .fill(Color.gray)
                     .scaleEffect(configuration.isPressed ? 0.9 : 1)
-                    .opacity(configuration.isPressed ? 0.4 : 0.0100000002421438702673861521)
+                    .opacity(configuration.isPressed ? 0.4 : kViewMinimumRenderableOpacity)
                 configuration.label
                     .scaleEffect(configuration.isPressed ? 0.9 : 1)
             }
