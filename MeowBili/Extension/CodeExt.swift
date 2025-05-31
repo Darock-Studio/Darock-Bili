@@ -662,12 +662,6 @@ func updateBiliTicket(csrf: String) {
     }
 }
 
-extension String: @retroactive Identifiable {
-    public var id: Self {
-        self
-    }
-}
-
 postfix operator /
 extension String? {
     static postfix func /(lhs: String?) -> String {

@@ -856,126 +856,255 @@ struct UserDetailView: View {
         @State var isArticalPageJumpPresented = false
         @State var articleTargetJumpPageCache = ""
         var body: some View {
-            List {
-                if #unavailable(watchOS 10) {
-                    Button(action: {
-                        if viewSelector == .video {
-                            viewSelector = .article
-                        } else if viewSelector == .article {
-                            viewSelector = .dynamic
-                        } else if viewSelector == .dynamic {
-                            viewSelector = .video
+            VStack {
+                ifContainer(viewSelector != .dynamic) { content in
+                    List { content }
+                } false: { content in
+                    ScrollView {
+                        VStack {
+                            content
                         }
-                    }, label: {
-                        HStack {
-                            Image(systemName: viewSelector == .video ? "play.circle" : "doc.text.image")
-                            Text(viewSelector == .video ? String(localized: "Account.check-videos") : String(localized: "Account.check-articles"))
-                        }
-                    })
-                    Spacer()
-                        .frame(height: 20)
-                }
-                if viewSelector == .video {
-                    if !videos.isEmpty {
-                        Section {
-                            ForEach(0..<videos.count, id: \.self) { i in
-                                if videos[i]["IsSeasonArchive"] != "true" {
-                                    VideoCard(["Pic": videos[i]["PicUrl"]!, "Title": videos[i]["Title"]!, "BV": videos[i]["BV"]!, "UP": username, "View": videos[i]["PlayCount"]!, "Danmaku": videos[i]["DanmakuCount"]!])
-                                } else {
-                                    NavigationLink(destination: { SeasonArchiveListView(mid: videos[i]["MID"]!, seasonID: videos[i]["SeasonID"]!, username: username) }, label: {
-                                        VStack {
-                                            HStack {
-                                                WebImage(url: URL(string: videos[i]["PicUrl"]! + "@100w")!, options: [.progressiveLoad, .scaleDownLargeImages])
-                                                    .placeholder {
-                                                        RoundedRectangle(cornerRadius: 7)
-                                                            .frame(width: 50, height: 30)
-                                                            .foregroundColor(Color(hex: 0x3D3D3D))
-                                                            .redacted(reason: .placeholder)
+                    }
+                } containing: {
+                    if #unavailable(watchOS 10) {
+                        Button(action: {
+                            if viewSelector == .video {
+                                viewSelector = .article
+                            } else if viewSelector == .article {
+                                viewSelector = .dynamic
+                            } else if viewSelector == .dynamic {
+                                viewSelector = .video
+                            }
+                        }, label: {
+                            HStack {
+                                Image(systemName: viewSelector == .video ? "play.circle" : "doc.text.image")
+                                Text(viewSelector == .video ? String(localized: "Account.check-videos") : String(localized: "Account.check-articles"))
+                            }
+                        })
+                        Spacer()
+                            .frame(height: 20)
+                    }
+                    if viewSelector == .video {
+                        if !videos.isEmpty {
+                            Section {
+                                ForEach(0..<videos.count, id: \.self) { i in
+                                    if videos[i]["IsSeasonArchive"] != "true" {
+                                        VideoCard(["Pic": videos[i]["PicUrl"]!, "Title": videos[i]["Title"]!, "BV": videos[i]["BV"]!, "UP": username, "View": videos[i]["PlayCount"]!, "Danmaku": videos[i]["DanmakuCount"]!])
+                                    } else {
+                                        NavigationLink(destination: { SeasonArchiveListView(mid: videos[i]["MID"]!, seasonID: videos[i]["SeasonID"]!, username: username) }, label: {
+                                            VStack {
+                                                HStack {
+                                                    WebImage(url: URL(string: videos[i]["PicUrl"]! + "@100w")!, options: [.progressiveLoad, .scaleDownLargeImages])
+                                                        .placeholder {
+                                                            RoundedRectangle(cornerRadius: 7)
+                                                                .frame(width: 50, height: 30)
+                                                                .foregroundColor(Color(hex: 0x3D3D3D))
+                                                                .redacted(reason: .placeholder)
+                                                        }
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .frame(width: 50)
+                                                        .cornerRadius(7)
+                                                    Text(videos[i]["Title"]!)
+                                                        .font(.system(size: 14, weight: .bold))
+                                                        .lineLimit(2)
+                                                        .multilineTextAlignment(.leading)
+                                                    Spacer()
+                                                }
+                                                HStack {
+                                                    Image(systemName: "play.circle")
+                                                    Text(videos[i]["PlayCount"]!.shorter())
+                                                        .offset(x: -3)
+                                                    Image(systemName: "square.3.layers.3d")
+                                                    Text(videos[i]["EPCount"]!)
+                                                        .offset(x: -3)
+                                                    Spacer()
+                                                }
+                                                .lineLimit(1)
+                                                .font(.system(size: 11))
+                                                .foregroundColor(.gray)
+                                            }
+                                        })
+                                    }
+                                }
+                            }
+                            Section {
+                                HStack {
+                                    if videoNowPage != 1 {
+                                        Button(action: {
+                                            videoNowPage -= 1
+                                            refreshVideos()
+                                        }, label: {
+                                            Image(systemName: "chevron.left")
+                                                .bold()
+                                        })
+                                        // rdar://so?56576298
+                                        .buttonStyle(.bordered)
+                                        .buttonBorderShape(.roundedRectangle(radius: 0))
+                                        .frame(width: 30)
+                                    }
+                                    Spacer()
+                                    Text("\(videoNowPage) / \(videoTotalPage)")
+                                        .font(.system(size: 18, weight: .bold))
+                                        .sheet(isPresented: $isVideoPageJumpPresented, content: {
+                                            VStack {
+                                                Text("Account.list.goto")
+                                                    .font(.system(size: 20, weight: .bold))
+                                                HStack {
+                                                    TextField("Account.list.destination", text: $videoTargetJumpPageCache) {
+                                                        if let cInt = Int(videoTargetJumpPageCache) {
+                                                            if cInt <= 0 {
+                                                                videoTargetJumpPageCache = "1"
+                                                            }
+                                                            if cInt > videoTotalPage {
+                                                                videoTargetJumpPageCache = String(videoTotalPage)
+                                                            }
+                                                        } else {
+                                                            videoTargetJumpPageCache = String(videoNowPage)
+                                                        }
                                                     }
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .frame(width: 50)
-                                                    .cornerRadius(7)
-                                                Text(videos[i]["Title"]!)
-                                                    .font(.system(size: 14, weight: .bold))
-                                                    .lineLimit(2)
-                                                    .multilineTextAlignment(.leading)
-                                                Spacer()
+                                                    Text(" / \(videoTotalPage)")
+                                                }
+                                                Button(action: {
+                                                    if let cInt = Int(videoTargetJumpPageCache) {
+                                                        videoNowPage = cInt
+                                                        refreshVideos()
+                                                    }
+                                                    isVideoPageJumpPresented = false
+                                                }, label: {
+                                                    Text("Account.list.go")
+                                                })
                                             }
+                                        })
+                                        .onTapGesture {
+                                            videoTargetJumpPageCache = String(videoNowPage)
+                                            isVideoPageJumpPresented = true
+                                        }
+                                    Spacer()
+                                    if videoNowPage != videoTotalPage {
+                                        Button(action: {
+                                            videoNowPage += 1
+                                            refreshVideos()
+                                        }, label: {
+                                            Image(systemName: "chevron.right")
+                                                .bold()
+                                        })
+                                        .buttonStyle(.bordered)
+                                        .buttonBorderShape(.roundedRectangle(radius: 0))
+                                        .frame(width: 30)
+                                    }
+                                }
+                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                            }
+                            .listRowBackground(Color.clear)
+                        } else {
+                            if isNoVideo {
+                                Text("Account.list.no-video")
+                            } else {
+                                ProgressView()
+                            }
+                        }
+                    } else if viewSelector == .article {
+                        Section {
+                            if articles.count != 0 {
+                                ForEach(0...articles.count - 1, id: \.self) { i in
+                                    NavigationLink(destination: { ArticleView(cvid: articles[i]["CV"]!) }, label: {
+                                        VStack {
+                                            Text(articles[i]["Title"]!)
+                                                .font(.system(size: 16, weight: .bold))
+                                                .lineLimit(3)
                                             HStack {
-                                                Image(systemName: "play.circle")
-                                                Text(videos[i]["PlayCount"]!.shorter())
-                                                    .offset(x: -3)
-                                                Image(systemName: "square.3.layers.3d")
-                                                Text(videos[i]["EPCount"]!)
-                                                    .offset(x: -3)
-                                                Spacer()
+                                                VStack {
+                                                    Text(articles[i]["Summary"]!)
+                                                        .font(.system(size: 10, weight: .bold))
+                                                        .lineLimit(3)
+                                                        .foregroundColor(.gray)
+                                                    HStack {
+                                                        Text(articles[i]["Type"]!)
+                                                            .font(.system(size: 10))
+                                                            .lineLimit(1)
+                                                            .foregroundColor(.gray)
+                                                        Label(articles[i]["View"]!, systemImage: "eye.fill")
+                                                            .font(.system(size: 10))
+                                                            .lineLimit(1)
+                                                            .foregroundColor(.gray)
+                                                        Label(articles[i]["Like"]!, systemImage: "hand.thumbsup.fill")
+                                                            .font(.system(size: 10))
+                                                            .lineLimit(1)
+                                                            .foregroundColor(.gray)
+                                                    }
+                                                }
+                                                WebImage(url: URL(string: articles[i]["Pic"]! + "@60w"), options: [.progressiveLoad])
+                                                    .cornerRadius(5)
                                             }
-                                            .lineLimit(1)
-                                            .font(.system(size: 11))
-                                            .foregroundColor(.gray)
                                         }
                                     })
+                                    .buttonBorderShape(.roundedRectangle(radius: 14))
+                                }
+                            } else {
+                                if isNoArticle {
+                                    Text("Account.list.no-article")
+                                } else {
+                                    ProgressView()
                                 }
                             }
                         }
                         Section {
                             HStack {
-                                if videoNowPage != 1 {
+                                if articleNowPage != 1 {
                                     Button(action: {
-                                        videoNowPage -= 1
-                                        refreshVideos()
+                                        articleNowPage -= 1
+                                        refreshArticles()
                                     }, label: {
                                         Image(systemName: "chevron.left")
                                             .bold()
                                     })
-                                    // rdar://so?56576298
                                     .buttonStyle(.bordered)
                                     .buttonBorderShape(.roundedRectangle(radius: 0))
                                     .frame(width: 30)
                                 }
                                 Spacer()
-                                Text("\(videoNowPage) / \(videoTotalPage)")
+                                Text("\(articleNowPage) / \(articleTotalPage)")
                                     .font(.system(size: 18, weight: .bold))
-                                    .sheet(isPresented: $isVideoPageJumpPresented, content: {
+                                    .sheet(isPresented: $isArticalPageJumpPresented, content: {
                                         VStack {
                                             Text("Account.list.goto")
                                                 .font(.system(size: 20, weight: .bold))
                                             HStack {
-                                                TextField("Account.list.destination", text: $videoTargetJumpPageCache) {
-                                                    if let cInt = Int(videoTargetJumpPageCache) {
+                                                TextField("Account.list.destination", text: $articleTargetJumpPageCache) {
+                                                    if let cInt = Int(articleTargetJumpPageCache) {
                                                         if cInt <= 0 {
-                                                            videoTargetJumpPageCache = "1"
+                                                            articleTargetJumpPageCache = "1"
                                                         }
-                                                        if cInt > videoTotalPage {
-                                                            videoTargetJumpPageCache = String(videoTotalPage)
+                                                        if cInt > articleTotalPage {
+                                                            articleTargetJumpPageCache = String(articleTotalPage)
                                                         }
                                                     } else {
-                                                        videoTargetJumpPageCache = String(videoNowPage)
+                                                        articleTargetJumpPageCache = String(articleNowPage)
                                                     }
                                                 }
-                                                Text(" / \(videoTotalPage)")
+                                                Text(" / \(articleTotalPage)")
                                             }
                                             Button(action: {
-                                                if let cInt = Int(videoTargetJumpPageCache) {
-                                                    videoNowPage = cInt
-                                                    refreshVideos()
+                                                if let cInt = Int(articleTargetJumpPageCache) {
+                                                    articleNowPage = cInt
+                                                    refreshArticles()
                                                 }
-                                                isVideoPageJumpPresented = false
+                                                isArticalPageJumpPresented = false
                                             }, label: {
                                                 Text("Account.list.go")
                                             })
                                         }
                                     })
                                     .onTapGesture {
-                                        videoTargetJumpPageCache = String(videoNowPage)
-                                        isVideoPageJumpPresented = true
+                                        articleTargetJumpPageCache = String(articleNowPage)
+                                        isArticalPageJumpPresented = true
                                     }
                                 Spacer()
-                                if videoNowPage != videoTotalPage {
+                                if articleNowPage != articleTotalPage {
                                     Button(action: {
-                                        videoNowPage += 1
-                                        refreshVideos()
+                                        articleNowPage += 1
+                                        refreshArticles()
                                     }, label: {
                                         Image(systemName: "chevron.right")
                                             .bold()
@@ -988,128 +1117,9 @@ struct UserDetailView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                         }
                         .listRowBackground(Color.clear)
-                    } else {
-                        if isNoVideo {
-                            Text("Account.list.no-video")
-                        } else {
-                            ProgressView()
-                        }
+                    } else if viewSelector == .dynamic {
+                        UserDynamicListView(uid: uid)
                     }
-                } else if viewSelector == .article {
-                    Section {
-                        if articles.count != 0 {
-                            ForEach(0...articles.count - 1, id: \.self) { i in
-                                NavigationLink(destination: { ArticleView(cvid: articles[i]["CV"]!) }, label: {
-                                    VStack {
-                                        Text(articles[i]["Title"]!)
-                                            .font(.system(size: 16, weight: .bold))
-                                            .lineLimit(3)
-                                        HStack {
-                                            VStack {
-                                                Text(articles[i]["Summary"]!)
-                                                    .font(.system(size: 10, weight: .bold))
-                                                    .lineLimit(3)
-                                                    .foregroundColor(.gray)
-                                                HStack {
-                                                    Text(articles[i]["Type"]!)
-                                                        .font(.system(size: 10))
-                                                        .lineLimit(1)
-                                                        .foregroundColor(.gray)
-                                                    Label(articles[i]["View"]!, systemImage: "eye.fill")
-                                                        .font(.system(size: 10))
-                                                        .lineLimit(1)
-                                                        .foregroundColor(.gray)
-                                                    Label(articles[i]["Like"]!, systemImage: "hand.thumbsup.fill")
-                                                        .font(.system(size: 10))
-                                                        .lineLimit(1)
-                                                        .foregroundColor(.gray)
-                                                }
-                                            }
-                                            WebImage(url: URL(string: articles[i]["Pic"]! + "@60w"), options: [.progressiveLoad])
-                                                .cornerRadius(5)
-                                        }
-                                    }
-                                })
-                                .buttonBorderShape(.roundedRectangle(radius: 14))
-                            }
-                        } else {
-                            if isNoArticle {
-                                Text("Account.list.no-article")
-                            } else {
-                                ProgressView()
-                            }
-                        }
-                    }
-                    Section {
-                        HStack {
-                            if articleNowPage != 1 {
-                                Button(action: {
-                                    articleNowPage -= 1
-                                    refreshArticles()
-                                }, label: {
-                                    Image(systemName: "chevron.left")
-                                        .bold()
-                                })
-                                .buttonStyle(.bordered)
-                                .buttonBorderShape(.roundedRectangle(radius: 0))
-                                .frame(width: 30)
-                            }
-                            Spacer()
-                            Text("\(articleNowPage) / \(articleTotalPage)")
-                                .font(.system(size: 18, weight: .bold))
-                                .sheet(isPresented: $isArticalPageJumpPresented, content: {
-                                    VStack {
-                                        Text("Account.list.goto")
-                                            .font(.system(size: 20, weight: .bold))
-                                        HStack {
-                                            TextField("Account.list.destination", text: $articleTargetJumpPageCache) {
-                                                if let cInt = Int(articleTargetJumpPageCache) {
-                                                    if cInt <= 0 {
-                                                        articleTargetJumpPageCache = "1"
-                                                    }
-                                                    if cInt > articleTotalPage {
-                                                        articleTargetJumpPageCache = String(articleTotalPage)
-                                                    }
-                                                } else {
-                                                    articleTargetJumpPageCache = String(articleNowPage)
-                                                }
-                                            }
-                                            Text(" / \(articleTotalPage)")
-                                        }
-                                        Button(action: {
-                                            if let cInt = Int(articleTargetJumpPageCache) {
-                                                articleNowPage = cInt
-                                                refreshArticles()
-                                            }
-                                            isArticalPageJumpPresented = false
-                                        }, label: {
-                                            Text("Account.list.go")
-                                        })
-                                    }
-                                })
-                                .onTapGesture {
-                                    articleTargetJumpPageCache = String(articleNowPage)
-                                    isArticalPageJumpPresented = true
-                                }
-                            Spacer()
-                            if articleNowPage != articleTotalPage {
-                                Button(action: {
-                                    articleNowPage += 1
-                                    refreshArticles()
-                                }, label: {
-                                    Image(systemName: "chevron.right")
-                                        .bold()
-                                })
-                                .buttonStyle(.bordered)
-                                .buttonBorderShape(.roundedRectangle(radius: 0))
-                                .frame(width: 30)
-                            }
-                        }
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                    }
-                    .listRowBackground(Color.clear)
-                } else if viewSelector == .dynamic {
-                    UserDynamicListView(uid: uid)
                 }
             }
             .onAppear {

@@ -54,7 +54,7 @@ struct UserDynamicListView: View {
                         }
                         if dynamics[i]["Type"]! as! BiliDynamicType == .draw {
                             if let draws = dynamics[i]["Draws"] as? [[String: String]] {
-#if !os(watchOS)
+                                #if !os(watchOS)
                                 LazyVGrid(columns: [GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3)), GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3)), GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3))]) {
                                     ForEach(0..<draws.count, id: \.self) { j in
                                         VStack {
@@ -67,7 +67,7 @@ struct UserDynamicListView: View {
                                         }
                                     }
                                 }
-#else
+                                #else
                                 LazyVGrid(columns: [GridItem(.fixed(50)), GridItem(.fixed(50)), GridItem(.fixed(50))]) {
                                     ForEach(0..<draws.count, id: \.self) { j in
                                         if isDynamicImagePresented[i].count > j {
@@ -83,7 +83,7 @@ struct UserDynamicListView: View {
                                         }
                                     }
                                 }
-#endif
+                                #endif
                             }
                         } else if dynamics[i]["Type"]! as! BiliDynamicType == .video {
                             if let archive = dynamics[i]["Archive"] as? [String: String] {
@@ -135,7 +135,7 @@ struct UserDynamicListView: View {
                                             }
                                             if orig["Type"]! as! BiliDynamicType == .draw {
                                                 if let draws = orig["Draws"] as? [[String: String]] {
-#if !os(watchOS)
+                                                    #if !os(watchOS)
                                                     LazyVGrid(columns: [GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3)), GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3)), GridItem(.fixed((UIScreen.main.bounds.width - 50) / 3))]) {
                                                         ForEach(0..<draws.count, id: \.self) { j in
                                                             VStack {
@@ -148,7 +148,7 @@ struct UserDynamicListView: View {
                                                             }
                                                         }
                                                     }
-#else
+                                                    #else
                                                     LazyVGrid(columns: [GridItem(.fixed(50)), GridItem(.fixed(50)), GridItem(.fixed(50))]) {
                                                         ForEach(0..<draws.count, id: \.self) { j in
                                                             if isDynamicImagePresented[i].count > j {
@@ -164,7 +164,7 @@ struct UserDynamicListView: View {
                                                             }
                                                         }
                                                     }
-#endif
+                                                    #endif
                                                 }
                                             } else if orig["Type"]! as! BiliDynamicType == .video {
                                                 if let archive = orig["Archive"] as? [String: String] {
@@ -208,9 +208,7 @@ struct UserDynamicListView: View {
                                 }
                             }
                         }
-                        #if !os(watchOS)
                         Divider()
-                        #endif
                     }
                 }
             }

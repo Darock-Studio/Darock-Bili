@@ -17,14 +17,18 @@
 //===----------------------------------------------------------------------===//
 
 import SwiftUI
+import Dynamic
 import Alamofire
 import SwiftyJSON
 import DarockFoundation
 import SDWebImageSwiftUI
 import AuthenticationServices
+@_spi(_internal) import DarockUI
 
 #if os(watchOS)
 import WatchKit
+#else
+import SafariServices
 #endif
 
 struct SearchMainView: View {
@@ -232,39 +236,44 @@ struct SearchView: View {
                     if articles.count != 0 {
                         ForEach(0..<articles.count, id: \.self) { i in
                             Button(action: {
-                                let session = ASWebAuthenticationSession(url: URL(string: "https://www.bilibili.com/read/cv\(articles[i]["CV"]!)")!, callbackURLScheme: nil) { _, _ in
-                                    return
-                                }
-                                session.prefersEphemeralWebBrowserSession = true
-                                session.start()
+                                #if !os(watchOS)
+                                let configuration = SFSafariViewController.Configuration()
+                                configuration.entersReaderIfAvailable = true
+                                let safariViewController = SFSafariViewController(url: URL(string: "https://www.bilibili.com/read/cv\(articles[i]["CV"]!)")!, configuration: configuration)
+                                _presentViewController(safariViewController)
+                                #else
+                                dlopen("/System/Library/Frameworks/SafariServices.framework/SafariServices", RTLD_NOW)
+                                let configuration = Dynamic.SFSafariViewControllerConfiguration()
+                                configuration.entersReaderIfAvailable = true
+                                let safariViewController = Dynamic.SFSafariViewController.initWithURL(URL(string: "https://www.bilibili.com/read/cv\(articles[i]["CV"]!)")!, configuration: configuration)
+                                _presentViewController(safariViewController.asObject!)
+                                #endif
                             }, label: {
                                 VStack {
                                     Text(articles[i]["Title"]!)
                                         .font(.system(size: 16, weight: .bold))
                                         .lineLimit(3)
                                     HStack {
-                                        VStack {
-                                            Text(articles[i]["Summary"]!)
-                                                .font(.system(size: 10, weight: .bold))
-                                                .lineLimit(3)
-                                                .foregroundColor(.gray)
-                                            HStack {
-                                                Text(articles[i]["Type"]!)
-                                                    .font(.system(size: 10))
-                                                    .lineLimit(1)
-                                                    .foregroundColor(.gray)
-                                                Label(articles[i]["View"]!, systemImage: "eye.fill")
-                                                    .font(.system(size: 10))
-                                                    .lineLimit(1)
-                                                    .foregroundColor(.gray)
-                                                Label(articles[i]["Like"]!, systemImage: "hand.thumbsup.fill")
-                                                    .font(.system(size: 10))
-                                                    .lineLimit(1)
-                                                    .foregroundColor(.gray)
-                                            }
-                                        }
+                                        Text(articles[i]["Summary"]!)
+                                            .font(.system(size: 10, weight: .bold))
+                                            .lineLimit(3)
+                                            .foregroundColor(.gray)
                                         WebImage(url: URL(string: articles[i]["Pic"]! + "@60w"), options: [.progressiveLoad])
                                             .cornerRadius(5)
+                                    }
+                                    HStack {
+                                        Text(articles[i]["Type"]!)
+                                            .font(.system(size: 10))
+                                            .lineLimit(1)
+                                            .foregroundColor(.gray)
+                                        Label(articles[i]["View"]!, systemImage: "eye.fill")
+                                            .font(.system(size: 10))
+                                            .lineLimit(1)
+                                            .foregroundColor(.gray)
+                                        Label(articles[i]["Like"]!, systemImage: "hand.thumbsup.fill")
+                                            .font(.system(size: 10))
+                                            .lineLimit(1)
+                                            .foregroundColor(.gray)
                                     }
                                 }
                             })
