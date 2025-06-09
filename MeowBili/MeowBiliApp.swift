@@ -412,7 +412,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             }
         }
         
-        requestString("https://fapi.darock.top:65535/analyze/add/MLStatsiOSAppStartupCount") { _, _ in }
+        requestAPI("/analyze/add/MLStatsiOSAppStartupCount") { _, _ in }
         
         return true
     }
@@ -456,7 +456,7 @@ class AppDelegate: NSObject, WKApplicationDelegate {
             }
         }
         
-        requestString("https://fapi.darock.top:65535/analyze/add/MLStatswatchOSAppStartupCount") { _, _ in }
+        requestAPI("/analyze/add/MLStatswatchOSAppStartupCount") { _, _ in }
     }
 }
 #endif

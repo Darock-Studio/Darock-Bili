@@ -27,12 +27,12 @@ struct NoticeView: View {
                 .bold()
         }
         .onAppear {
-            requestString("https://fapi.darock.top:65535/bili/notice/detail") { respStr, isSuccess in
+            requestAPI("/bili/notice/detail") { respStr, isSuccess in
                 if isSuccess {
                     if respStr.apiFixed() != "" {
                         noticeDetail = respStr.apiFixed().replacingOccurrences(of: "\\n", with: "\n")
                     } else {
-                        requestString("https://fapi.darock.top:65535/bili/notice") { respStr, isSuccess in
+                        requestAPI("/bili/notice") { respStr, isSuccess in
                             if isSuccess {
                                 noticeDetail = respStr.apiFixed()
                             }

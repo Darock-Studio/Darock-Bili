@@ -102,7 +102,7 @@ struct ErrorGetView: View {
                             }
                         }
                         .onAppear {
-                            requestString("https://fapi.darock.top:65535/bili/feedback/\(("范围：\(error.area)\n位置：\(error.inAppArea)\n详细信息：\(error.errDetail)\n用户描述：\(doing)").base64Encoded())") { respStr, isSuccess in
+                            requestAPI("/bili/feedback/\(("范围：\(error.area)\n位置：\(error.inAppArea)\n详细信息：\(error.errDetail)\n用户描述：\(doing)").base64Encoded())") { respStr, isSuccess in
                                 if isSuccess {
                                     sentCode = respStr
                                     isSent = true

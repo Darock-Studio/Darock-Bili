@@ -166,7 +166,7 @@ struct NetworkFixView: View {
                                 requestString("https://apple.com.cn") { _, isSuccess in
                                     if isSuccess {
                                         darockAPIState = 1
-                                        requestString("https://api.darock.top") { respStr, isSuccess in
+                                        requestAPI("/") { respStr, isSuccess in
                                             if isSuccess {
                                                 if respStr.apiFixed() == "OK" {
                                                     darockAPIState = 3
@@ -258,7 +258,7 @@ struct NetworkFixView: View {
                     requestString("https://baidu.com") { _, isSuccess in
                         if isSuccess {
                             darockAPIState = 1
-                            requestString("https://api.darock.top") { respStr, isSuccess in
+                            requestAPI("/") { respStr, isSuccess in
                                 Timer.scheduledTimer(withTimeInterval: 2.5, repeats: false) { timer in
                                     if isSuccess {
                                         if respStr.apiFixed() == "OK" {

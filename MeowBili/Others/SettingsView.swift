@@ -1371,7 +1371,7 @@ struct SoftwareUpdateView: View {
             }
         }
         .onAppear {
-            requestString("https://fapi.darock.top:65535/bili/newver") { respStr, isSuccess in
+            requestAPI("/bili/newver") { respStr, isSuccess in
                 if isSuccess && respStr.apiFixed().contains("|") {
                     latestVer = String(respStr.apiFixed().split(separator: "|")[0])
                     latestBuild = String(respStr.apiFixed().split(separator: "|")[1])
@@ -1380,7 +1380,7 @@ struct SoftwareUpdateView: View {
                     if nowMajorVer != latestVer || Int(nowBuildVer)! < Int(latestBuild)! {
                         shouldUpdate = true
                     }
-                    requestString("https://fapi.darock.top:65535/bili/newver/note") { respStr, isSuccess in
+                    requestAPI("/bili/newver/note") { respStr, isSuccess in
                         if isSuccess {
                             releaseNote = respStr.apiFixed()
                             isLoading = false

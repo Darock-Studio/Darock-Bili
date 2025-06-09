@@ -314,19 +314,19 @@ struct MainView: View {
                     #endif
                     isFirstLoaded = true
                 }
-                requestString("https://fapi.darock.top:65535/bili/notice") { respStr, isSuccess in
+                requestAPI("/bili/notice") { respStr, isSuccess in
                     if isSuccess {
                         notice = respStr.apiFixed()
                     }
                 }
-                requestString("https://fapi.darock.top:65535/bili/newver") { respStr, isSuccess in
+                requestAPI("/bili/newver") { respStr, isSuccess in
                     if isSuccess {
                         let spdVer = respStr.apiFixed().split(separator: ".")
                         if 3...4 ~= spdVer.count {
                             newMajorVer = respStr.apiFixed()
                             if let x = Int(spdVer[0]), let y = Int(spdVer[1]), let z = Int(spdVer[2]) {
                                 if let _url = Bundle.main.url(forResource: "SemanticVersion", withExtension: "drkdatas"),
-                                   let currVerSpd = (try? String(contentsOf: _url))?.split(separator: "\n")[0].split(separator: "."),
+                                   let currVerSpd = (try? String(contentsOf: _url))?.split(separator: "\n")[from: 0]?.split(separator: "."),
                                    3...4 ~= currVerSpd.count {
                                     if let cx = Int(currVerSpd[0]), let cy = Int(currVerSpd[1]), let cz = Int(currVerSpd[2]) {
                                         if x > cx {
@@ -394,7 +394,7 @@ struct MainView: View {
             }
         }
         func LoadDarockSuggestions() {
-            requestString("https://fapi.darock.top:65535/bili/sgsfrmdrk") { respStr, isSuccess in
+            requestAPI("/bili/sgsfrmdrk") { respStr, isSuccess in
                 if isSuccess {
                     if !respStr.apiFixed().hasPrefix("BV") { return }
                     let bvs = respStr.apiFixed().split(separator: "|").map { String($0) }
