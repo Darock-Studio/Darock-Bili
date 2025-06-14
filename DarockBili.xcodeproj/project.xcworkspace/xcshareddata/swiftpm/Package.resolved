@@ -1,5 +1,5 @@
 {
-  "originHash" : "45bd3d20033c2287d7115f7e1c9f8ed3737b5d023ab779923c7857dd09a9f6f7",
+  "originHash" : "9106adeac49f9f1e501fdf19a99d08ac9747292617a5d0236a2915067489fdc7",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -70,7 +70,7 @@
       "location" : "https://github.com/Darock-Studio/DarockUI",
       "state" : {
         "branch" : "main",
-        "revision" : "927322ee58f33c0d6f5e4b32b67144d0fa1f0d23"
+        "revision" : "e33b26b9d32846e9dcda96026e93d34e0a40af1d"
       }
     },
     {
@@ -101,20 +101,20 @@
       }
     },
     {
+      "identity" : "markdownui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Darock-Package-Distribution/MarkdownUI",
+      "state" : {
+        "branch" : "main",
+        "revision" : "e5819df5cf70578973195e1fe644b029124b6951"
+      }
+    },
+    {
       "identity" : "marqueetext",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/joekndy/MarqueeText",
       "state" : {
         "revision" : "e18d514455563ad00581e0d825146c6f15b1c6c4"
-      }
-    },
-    {
-      "identity" : "networkimage",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/gonzalezreal/NetworkImage",
-      "state" : {
-        "revision" : "2849f5323265386e200484b0d0f896e73c3411b9",
-        "version" : "6.0.1"
       }
     },
     {
@@ -132,7 +132,7 @@
       "location" : "https://github.com/Darock-Studio/RadarKit/",
       "state" : {
         "branch" : "main",
-        "revision" : "bcfaffa8b2acefe38f0282b398d6da68a23e394f"
+        "revision" : "19e99bfb8b9f87e51dcec7d56209ccf2d1dba12c"
       }
     },
     {
@@ -158,8 +158,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
       "state" : {
-        "revision" : "cac9a55a3ae92478a2c95042dcc8d9695d2129ca",
-        "version" : "5.21.0"
+        "revision" : "b62cb63bf4ed1f04c961a56c9c6c9d5ab8524ec6",
+        "version" : "5.21.1"
       }
     },
     {
@@ -208,24 +208,6 @@
       }
     },
     {
-      "identity" : "swift-cmark",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/swiftlang/swift-cmark",
-      "state" : {
-        "revision" : "b022b08312decdc46585e0b3440d97f6f22ef703",
-        "version" : "0.6.0"
-      }
-    },
-    {
-      "identity" : "swift-markdown-ui",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/gonzalezreal/swift-markdown-ui",
-      "state" : {
-        "revision" : "5f613358148239d0292c0cef674a3c2314737f9e",
-        "version" : "2.4.1"
-      }
-    },
-    {
       "identity" : "swift_qrcodejs",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/EFPrefix/swift_qrcodejs.git",
@@ -248,8 +230,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/scinfu/SwiftSoup",
       "state" : {
-        "revision" : "bba848db50462894e7fc0891d018dfecad4ef11e",
-        "version" : "2.8.7"
+        "revision" : "aa85ee96017a730031bafe411cde24a08a17a9c9",
+        "version" : "2.8.8"
       }
     },
     {

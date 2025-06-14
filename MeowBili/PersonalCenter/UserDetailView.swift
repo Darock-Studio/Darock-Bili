@@ -162,7 +162,7 @@ struct UserDetailView: View {
                         }
                         if uid == dedeUserID {
                             if userLevel > 0 {
-                                Gauge(value: Double(currentExp), in: Double(minExp)...Double(nextExp), label: {
+                                Gauge(value: Double(currentExp), in: Double(min(minExp, nextExp))...Double(max(minExp, nextExp)), label: {
                                     Text("经验")
                                 }, currentValueLabel: {
                                     Text(String(currentExp))

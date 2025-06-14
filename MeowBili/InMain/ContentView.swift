@@ -41,13 +41,106 @@ struct ContentView: View {
     @State var isNewFeaturePresented = false
     @FocusState var isSearchKeyboardFocused: Bool
     var body: some View {
+        Group {
+            if #available(iOS 18.0, watchOS 11.0, *) {
+                mainTabView
+            } else {
+                compatibleMainTabView
+            }
+        }
+        .accessibility(identifier: "MainTabView")
+        #if os(watchOS)
+        .sheet(isPresented: $isAudioControllerPresented, content: { AudioControllerView() })
+        .sheet(isPresented: $isNewFeaturePresented, onDismiss: {
+            isNewFeatureTipped = true
+        }, content: { NewFeaturesView() })
+        #endif
+        .sheet(isPresented: $isTermsPresented, onDismiss: {
+            isReadTerms = true
+        }, content: { TermsListView() })
+        .onAppear {
+            #if os(watchOS)
+            if !isNewFeatureTipped {
+                isNewFeaturePresented = true
+            }
+            if !isReadTerms {
+                isTermsPresented = true
+            }
+            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
+                if pShouldPresentAudioController {
+                    pShouldPresentAudioController = false
+                    isAudioControllerPresented = true
+                }
+            }
+            #endif
+        }
+        .onAppear {
+            updateBiliTicket(csrf: biliJct)
+            if dedeUserID != "" {
+                Task {
+                    if let info = await BiliAPI.shared.userInfo() {
+                        userFaceUrl = info.face
+                    }
+                }
+            }
+        }
+    }
+    
+    @available(iOS 18.0, watchOS 11.0, *)
+    @ViewBuilder
+    var mainTabView: some View {
+        TabView(selection: $mainTabSelection) {
+            Tab("navbar.suggest", systemImage: "sparkles", value: 1) {
+                MainView(mainTabSelection: $mainTabSelection)
+                #if !os(watchOS)
+                    .toolbar {
+                        ToolbarItem(placement: .topBarLeading) {
+                            if dedeUserID != "" {
+                                Button(action: {
+                                    mainTabSelection = 2
+                                }, label: {
+                                    WebImage(url: URL(string: userFaceUrl))
+                                        .resizable()
+                                        .placeholder {
+                                            Circle()
+                                                .frame(width: 35, height: 35)
+                                                .redacted(reason: .placeholder)
+                                        }
+                                        .frame(width: 35, height: 35)
+                                        .clipShape(Circle())
+                                })
+                                .buttonStyle(.borderless)
+                            }
+                        }
+                    }
+                #endif
+            }
+            Tab("navbar.my", systemImage: "person.fill", value: 2) {
+                PersonAccountView()
+            }
+            Tab("排行榜", systemImage: "chart.bar.xaxis", value: 3) {
+                RankingsView()
+            }
+            Tab("navbar.dynamic", systemImage: "rectangle.stack.fill", value: 4) {
+                UserDynamicMainView()
+            }
+            #if !os(watchOS)
+            Tab("搜索", systemImage: "magnifyingglass", value: 5, role: .search) {
+                SearchMainView(isSearchKeyboardFocused: $isSearchKeyboardFocused)
+            }
+            #endif
+        }
+    }
+    
+    @ViewBuilder
+    var compatibleMainTabView: some View {
         TabView(selection: $mainTabSelection.onUpdate { oldValue, newValue in
             if oldValue == newValue && newValue == 4 {
                 isSearchKeyboardFocused = true
             }
         }) {
             MainView(mainTabSelection: $mainTabSelection)
-#if !os(watchOS)
+            #if !os(watchOS)
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         if dedeUserID != "" {
@@ -68,7 +161,7 @@ struct ContentView: View {
                         }
                     }
                 }
-#endif
+            #endif
                 .tag(1)
                 .tabItem {
                     Label("navbar.suggest", systemImage: "sparkles")
@@ -88,49 +181,13 @@ struct ContentView: View {
                 .tabItem {
                     Label("navbar.dynamic", systemImage: "rectangle.stack.fill")
                 }
-#if !os(watchOS)
+            #if !os(watchOS)
             SearchMainView(isSearchKeyboardFocused: $isSearchKeyboardFocused)
                 .tag(5)
                 .tabItem {
                     Label("搜索", systemImage: "magnifyingglass")
                 }
-#endif
-        }
-        .accessibility(identifier: "MainTabView")
-#if os(watchOS)
-        .sheet(isPresented: $isAudioControllerPresented, content: { AudioControllerView() })
-        .sheet(isPresented: $isNewFeaturePresented, onDismiss: {
-            isNewFeatureTipped = true
-        }, content: { NewFeaturesView() })
-#endif
-        .sheet(isPresented: $isTermsPresented, onDismiss: {
-            isReadTerms = true
-        }, content: { TermsListView() })
-        .onAppear {
-#if os(watchOS)
-            if !isNewFeatureTipped {
-                isNewFeaturePresented = true
-            }
-            if !isReadTerms {
-                isTermsPresented = true
-            }
-            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
-                if pShouldPresentAudioController {
-                    pShouldPresentAudioController = false
-                    isAudioControllerPresented = true
-                }
-            }
-#endif
-        }
-        .onAppear {
-            updateBiliTicket(csrf: biliJct)
-            if dedeUserID != "" {
-                Task {
-                    if let info = await BiliAPI.shared.userInfo() {
-                        userFaceUrl = info.face
-                    }
-                }
-            }
+            #endif
         }
     }
 }

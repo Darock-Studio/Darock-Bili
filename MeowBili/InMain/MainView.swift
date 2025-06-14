@@ -80,6 +80,7 @@ struct MainView: View {
                                         .foregroundColor(.accentColor)
                                 }
                             })
+                            .buttonStyle(.borderless)
                         case .darockc:
                             NavigationLink(destination: {
                                 Text("🎉🎉🎉\n今天是 Darock 周年庆\n到我们群 1019196619 参加活动吧！")
@@ -106,7 +107,6 @@ struct MainView: View {
                             })
                         }
                     }
-                    .buttonStyle(.plain)
                 }
             }
             .sheet(isPresented: $isNewUserPresenting, content: { LoginView() })
@@ -265,6 +265,7 @@ struct MainView: View {
                             Section {
                                 if isLoadingNew {
                                     ProgressView()
+                                        .centerAligned()
                                 }
                             }
                         } else if isFailedToLoad {
@@ -276,6 +277,7 @@ struct MainView: View {
                             Text("Home.no-internet")
                         } else {
                             ProgressView()
+                                .centerAligned()
                         }
                     }
                     .scrollIndicators(.never)

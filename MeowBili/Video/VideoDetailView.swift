@@ -257,7 +257,12 @@ struct VideoDetailView: View {
                     TabView(selection: $mainVerticalTabViewSelection) {
                         VStack {
                             watchDetailFirstPage
-                                .offset(y: 16)
+                                .wrapIf({ if #unavailable(watchOS 26) { true } else { false } }()) { content in
+                                    // The bottomBar of this view in watchOS older than 26.0 is placed at a place
+                                    // higher than expected, we have to add an offset manually.
+                                    content
+                                        .offset(y: 16)
+                                }
                                 .toolbar {
                                     ToolbarItem(placement: .topBarTrailing) {
                                         NavigationLink(destination: { videoContextActionMenuView }, label: {

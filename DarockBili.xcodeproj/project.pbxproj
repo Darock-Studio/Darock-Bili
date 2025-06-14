@@ -69,8 +69,6 @@
 		8C82F7932BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */ = {isa = PBXBuildFile; fileRef = 8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */; };
 		8C82F7942BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */ = {isa = PBXBuildFile; fileRef = 8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */; };
 		8C8578A72C5A18AA00AF93D1 /* MeowBiliTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8578A52C5A18AA00AF93D1 /* MeowBiliTests.swift */; };
-		8C8578B52C5BABF100AF93D1 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8578B42C5BABF100AF93D1 /* MarkdownUI */; };
-		8C8578B72C5BAC0100AF93D1 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8578B62C5BAC0100AF93D1 /* MarkdownUI */; };
 		8C9776082BCECBC3006EDB58 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9776072BCECBC3006EDB58 /* Audio.swift */; };
 		8C9776092BCECBC3006EDB58 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9776072BCECBC3006EDB58 /* Audio.swift */; };
 		8C9BD5F52D24FFE4009C8CE7 /* RankingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9BD5F42D24FFE0009C8CE7 /* RankingsView.swift */; };
@@ -470,7 +468,6 @@
 				8CC3D5632B7CCE57005636DC /* ScreenshotableView in Frameworks */,
 				8CD3D0422C8C715B00E9C37C /* MarqueeText in Frameworks */,
 				8C6CC5E42D45509E008309E5 /* DarockUI in Frameworks */,
-				8C8578B72C5BAC0100AF93D1 /* MarkdownUI in Frameworks */,
 				8C0557DF2B791B84009D9CD0 /* AZVideoPlayer in Frameworks */,
 				8CA7CC0B2B77AC93008E587F /* SwiftDate in Frameworks */,
 				8CA7CC1F2B77AC93008E587F /* Dynamic in Frameworks */,
@@ -496,7 +493,6 @@
 				8C6CC5F02D4550E1008309E5 /* RadarKitCore in Frameworks */,
 				8CA7CBE92B77AC8A008E587F /* SwiftDate in Frameworks */,
 				8CA7CBFD2B77AC8A008E587F /* Dynamic in Frameworks */,
-				8C8578B52C5BABF100AF93D1 /* MarkdownUI in Frameworks */,
 				8CD3D0402C8C715300E9C37C /* MarqueeText in Frameworks */,
 				8C6CC5EE2D4550E1008309E5 /* DarockUI in Frameworks */,
 				8C6CC5FA2D4558DF008309E5 /* NotifKit in Frameworks */,
@@ -973,7 +969,6 @@
 				8CC3D5622B7CCE57005636DC /* ScreenshotableView */,
 				8CA370DE2B827AAD00CE0E9E /* AlertToast */,
 				8CB176A42BB8188700CEC05C /* SDWebImageSwiftUI */,
-				8C8578B62C5BAC0100AF93D1 /* MarkdownUI */,
 				8CD3D0412C8C715B00E9C37C /* MarqueeText */,
 				8C6CC5E02D45508C008309E5 /* DarockFoundation */,
 				8C6CC5E32D45509E008309E5 /* DarockUI */,
@@ -1012,7 +1007,6 @@
 				8CA7CBFC2B77AC8A008E587F /* Dynamic */,
 				8CB176A62BB8189300CEC05C /* SDWebImageSwiftUI */,
 				8C03B6DD2C280BAA000770B4 /* Cepheus */,
-				8C8578B42C5BABF100AF93D1 /* MarkdownUI */,
 				8CD3D03F2C8C715300E9C37C /* MarqueeText */,
 				8C6CC5EB2D4550E1008309E5 /* DarockFoundation */,
 				8C6CC5ED2D4550E1008309E5 /* DarockUI */,
@@ -1124,7 +1118,6 @@
 				8CA370DD2B827AAD00CE0E9E /* XCRemoteSwiftPackageReference "AlertToast" */,
 				8CB176A32BB8188600CEC05C /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				8C03B6DC2C280BAA000770B4 /* XCRemoteSwiftPackageReference "Cepheus" */,
-				8C8578B32C5BABF000AF93D1 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				8CD3D03E2C8C6EB300E9C37C /* XCRemoteSwiftPackageReference "MarqueeText" */,
 				8C6CC5DF2D45508C008309E5 /* XCRemoteSwiftPackageReference "DarockFoundation" */,
 				8C6CC5E22D45509E008309E5 /* XCRemoteSwiftPackageReference "DarockUI" */,
@@ -2740,14 +2733,6 @@
 				kind = branch;
 			};
 		};
-		8C8578B32C5BABF000AF93D1 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.3.1;
-			};
-		};
 		8CA370DD2B827AAD00CE0E9E /* XCRemoteSwiftPackageReference "AlertToast" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/elai950/AlertToast";
@@ -2932,16 +2917,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8C6CC6042D4568BA008309E5 /* XCRemoteSwiftPackageReference "CorvusKit" */;
 			productName = CorvusKit;
-		};
-		8C8578B42C5BABF100AF93D1 /* MarkdownUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8C8578B32C5BABF000AF93D1 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
-			productName = MarkdownUI;
-		};
-		8C8578B62C5BAC0100AF93D1 /* MarkdownUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8C8578B32C5BABF000AF93D1 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
-			productName = MarkdownUI;
 		};
 		8CA370DE2B827AAD00CE0E9E /* AlertToast */ = {
 			isa = XCSwiftPackageProductDependency;

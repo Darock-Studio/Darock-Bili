@@ -39,15 +39,6 @@ struct FeedbackView: View {
                 .radarTipper { text, symbol in
                     tipWithText(text, symbol: symbol)
                 }
-                .radarMessageMarkdownRender { str in
-                    Markdown(str)
-                        .environment(\.openURL, OpenURLAction { url in
-                            let session = ASWebAuthenticationSession(url: url, callbackURLScheme: nil) { _, _ in }
-                            session.prefersEphemeralWebBrowserSession = true
-                            session.start()
-                            return .handled
-                        })
-                }
         } else {
             CorvusBannedView()
         }
