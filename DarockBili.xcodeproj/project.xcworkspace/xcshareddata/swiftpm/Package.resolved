@@ -61,7 +61,7 @@
       "location" : "https://github.com/Darock-Studio/DarockFoundation",
       "state" : {
         "branch" : "main",
-        "revision" : "e32261dd077d4935ebc5da3995b44453818f8c8c"
+        "revision" : "217f002106f97eebac53765f24911ae1d9861ce7"
       }
     },
     {
@@ -70,7 +70,7 @@
       "location" : "https://github.com/Darock-Studio/DarockUI",
       "state" : {
         "branch" : "main",
-        "revision" : "a7f4dc5ce3e7bd47f83e867b35b48e64144249cc"
+        "revision" : "e33b26b9d32846e9dcda96026e93d34e0a40af1d"
       }
     },
     {
@@ -98,6 +98,15 @@
       "state" : {
         "revision" : "0d60654eeefd5d7d2bef3835804892c40225e8b2",
         "version" : "1.5.0"
+      }
+    },
+    {
+      "identity" : "markdownui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Darock-Package-Distribution/MarkdownUI",
+      "state" : {
+        "branch" : "main",
+        "revision" : "e5819df5cf70578973195e1fe644b029124b6951"
       }
     },
     {
@@ -132,7 +141,7 @@
       "location" : "https://github.com/Darock-Studio/RadarKit/",
       "state" : {
         "branch" : "main",
-        "revision" : "bcfaffa8b2acefe38f0282b398d6da68a23e394f"
+        "revision" : "19e99bfb8b9f87e51dcec7d56209ccf2d1dba12c"
       }
     },
     {
@@ -158,8 +167,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
       "state" : {
-        "revision" : "cac9a55a3ae92478a2c95042dcc8d9695d2129ca",
-        "version" : "5.21.0"
+        "revision" : "b62cb63bf4ed1f04c961a56c9c6c9d5ab8524ec6",
+        "version" : "5.21.1"
       }
     },
     {
@@ -230,8 +239,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/EFPrefix/swift_qrcodejs.git",
       "state" : {
-        "revision" : "817ba220a2eba840bae888e7eeb11207bec05f8c",
-        "version" : "2.3.0"
+        "revision" : "d1605333f7edac39b4518538ef4f2638fdd2e4d6",
+        "version" : "2.3.1"
       }
     },
     {
@@ -248,8 +257,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/scinfu/SwiftSoup",
       "state" : {
-        "revision" : "bba848db50462894e7fc0891d018dfecad4ef11e",
-        "version" : "2.8.7"
+        "revision" : "aa85ee96017a730031bafe411cde24a08a17a9c9",
+        "version" : "2.8.8"
       }
     },
     {

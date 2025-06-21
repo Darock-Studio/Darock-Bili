@@ -97,7 +97,6 @@ struct AudioControllerView: View {
                         forwardTimer?.invalidate()
                         forwardTimer = Timer.scheduledTimer(withTimeInterval: 0.75, repeats: false) { value in
                             if forwardTapsSnapshop == forwardTaps {
-                                print("[\(currentGlobalSystemTime())][HKR][L] S\(forwardTapsSnapshop), T\(forwardTaps)")
                                 forwardTaps = 0
                             }
                             forwardTapsSnapshop = forwardTaps
@@ -112,7 +111,6 @@ struct AudioControllerView: View {
                             //              forwardTaps = 0
                             //            }
                             if backwardTapsSnapshot == backwardTaps {
-                                print("[\(currentGlobalSystemTime())][HKR][R] S\(backwardTapsSnapshot), T\(backwardTaps)")
                                 backwardTaps = 0
                             }
                             //            forwardTapsSnapshop = forwardTaps
@@ -255,10 +253,6 @@ struct AudioControllerView: View {
             resetGlobalAudioLooper()
             pIsAudioControllerAvailable = true
             Dynamic.PUICApplication.sharedPUICApplication().setExtendedIdleTime(1600.0, disablesSleepGesture: true, wantsAutorotation: false)
-            if !isFastFowardUsedBefore {
-                isFastFowardUsedBefore = true
-                tipWithText("你知道吗：轻点屏幕左右两侧可以更改进度条")
-            }
         }
         .onDisappear {
             Dynamic.PUICApplication.sharedPUICApplication().extendedIdleTime = 0.0
