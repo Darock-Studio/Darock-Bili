@@ -36,6 +36,7 @@ struct AudioControllerView: View {
     @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") var sessdata = ""
     @AppStorage("bili_jct") var biliJct = ""
+    @AppStorage("isFastFowardUsedBefore") var isFastFowardUsedBefore = false
     @Namespace var coverScaleNamespace
     @State var currentPlaybackTime = globalAudioPlayer.currentTime().seconds
     @State var currentItemTotalTime = 0.0
@@ -254,6 +255,10 @@ struct AudioControllerView: View {
             resetGlobalAudioLooper()
             pIsAudioControllerAvailable = true
             Dynamic.PUICApplication.sharedPUICApplication().setExtendedIdleTime(1600.0, disablesSleepGesture: true, wantsAutorotation: false)
+            if !isFastFowardUsedBefore {
+                isFastFowardUsedBefore = true
+                tipWithText("你知道吗：轻点屏幕左右两侧可以更改进度条")
+            }
         }
         .onDisappear {
             Dynamic.PUICApplication.sharedPUICApplication().extendedIdleTime = 0.0
