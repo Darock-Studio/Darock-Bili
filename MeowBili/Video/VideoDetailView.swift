@@ -255,47 +255,45 @@ struct VideoDetailView: View {
             ZStack {
                 Group {
                     TabView(selection: $mainVerticalTabViewSelection) {
-                        VStack {
-                            watchDetailFirstPage
-                                .wrapIf({ if #unavailable(watchOS 26) { true } else { false } }()) { content in
-                                    // The bottomBar of this view in watchOS older than 26.0 is placed at a place
-                                    // higher than expected, we have to add an offset manually.
-                                    content
-                                        .offset(y: 16)
+                        watchDetailFirstPage
+                            .wrapIf({ if #unavailable(watchOS 26) { true } else { false } }()) { content in
+                                // The bottomBar of this view in watchOS older than 26.0 is placed at a place
+                                // higher than expected, we have to add an offset manually.
+                                content
+                                    .offset(y: 16)
+                            }
+                            .toolbar {
+                                ToolbarItem(placement: .topBarTrailing) {
+                                    NavigationLink(destination: { videoContextActionMenuView }, label: {
+                                        Image(systemName: "ellipsis")
+                                    })
                                 }
-                                .toolbar {
-                                    ToolbarItem(placement: .topBarTrailing) {
-                                        NavigationLink(destination: { videoContextActionMenuView }, label: {
-                                            Image(systemName: "ellipsis")
-                                        })
-                                    }
-                                    ToolbarItemGroup(placement: .bottomBar) {
+                                ToolbarItemGroup(placement: .bottomBar) {
+                                    Button(action: {
+                                        isLoading = true
+                                        decodeVideo(isAudio: true)
+                                    }, label: {
+                                        Image(systemName: "waveform")
+                                    })
+                                    if videoPages.count <= 1 {
                                         Button(action: {
                                             isLoading = true
-                                            decodeVideo(isAudio: true)
+                                            debugPrint(videoDetails["BV"]!)
+                                            decodeVideo()
                                         }, label: {
-                                            Image(systemName: "waveform")
+                                            Image(systemName: "play.fill")
                                         })
-                                        if videoPages.count <= 1 {
-                                            Button(action: {
-                                                isLoading = true
-                                                debugPrint(videoDetails["BV"]!)
-                                                decodeVideo()
-                                            }, label: {
-                                                Image(systemName: "play.fill")
-                                            })
-                                            
-                                        } else {
-                                            Button(action: {
-                                                mainVerticalTabViewSelection = 3
-                                            }, label: {
-                                                Image(systemName: "rectangle.stack")
-                                            })
-                                        }
+                                        
+                                    } else {
+                                        Button(action: {
+                                            mainVerticalTabViewSelection = 3
+                                        }, label: {
+                                            Image(systemName: "rectangle.stack")
+                                        })
                                     }
                                 }
-                                .tag(1)
-                        }
+                            }
+                            .tag(1)
                         watchDetailSecondPage
                             .tag(2)
                         if videoPages.count > 1 {
@@ -931,6 +929,12 @@ struct VideoDetailView: View {
                             Spacer()
                         }
                     })
+                    .wrapIf({ if #available(watchOS 26.0, *) { true } else { false } }()) { content in
+                        if #available(watchOS 26.0, *) {
+                            content
+                                .buttonStyle(.glass)
+                        }
+                    }
                     .buttonBorderShape(.roundedRectangle(radius: 18))
                     .accessibilityIdentifier("AuthorDetailButton")
                 }
@@ -996,6 +1000,12 @@ struct VideoDetailView: View {
                                     .scaledToFit()
                             }
                         })
+                    }
+                    .wrapIf({ if #available(watchOS 26.0, *) { true } else { false } }()) { content in
+                        if #available(watchOS 26.0, *) {
+                            content
+                                .buttonStyle(.glass)
+                        }
                     }
                     .buttonBorderShape(.roundedRectangle(radius: 18))
                     .sheet(isPresented: $isFavoriteChoosePresented, content: { VideoFavoriteAddView(videoDetails: $videoDetails, isFavoured: $isFavoured) })
