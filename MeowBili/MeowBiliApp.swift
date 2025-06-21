@@ -474,7 +474,7 @@ public func updateBuvid() {
 }
 
 
-func currentGlobalSystemTime() -> String {
+func _currentGlobalSystemTime() -> String {
   let currentDate = Date()
   let dateFormatter = DateFormatter()
   dateFormatter.dateFormat = "HH:mm:ss"
