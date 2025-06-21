@@ -111,9 +111,9 @@ struct SettingsView: View {
                     }
                 })
                 
-                NavigationLink(destination: { WidgetSettingsView().navigationTitle("小组件")}, label: {
-                    HStack{
-                        ZStack{
+                NavigationLink(destination: { WidgetSettingsView().navigationTitle("小组件") }, label: {
+                    HStack {
+                        ZStack {
                             Color.blue
                                 .frame(width: 26, height: 26)
                                 .clipShape(RoundedRectangle(cornerRadius: 5))
@@ -554,8 +554,8 @@ struct NotificationSettingsView: View {
         List {
             Section {
                 Toggle("启用通知", isOn: $isNotificationEnabled)
-                    .onChange(of: isNotificationEnabled) { value in
-                        if value {
+                    .onChange(of: isNotificationEnabled) {
+                        if isNotificationEnabled {
                             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { isGrand, _ in
                                 DispatchQueue.main.async {
                                     if !isGrand {
@@ -593,8 +593,8 @@ struct WidgetSettingsView: View {
     var body: some View {
         // Here we go refreshment settings
         Form {
-            Section(header: Text("小组件刷新时间")){
-                Picker("刷新时间", selection: $refreshInterval){
+            Section(header: Text("小组件刷新时间")) {
+                Picker("刷新时间", selection: $refreshInterval) {
                     Text("5分钟").tag(5)
                     Text("10分钟（默认）").tag(10)
                     Text("15分钟").tag(15)
@@ -1218,10 +1218,10 @@ struct PrivacySettingsView: View {
             List {
                 Section {
                     Toggle("文件保险箱", isOn: $isFileLockerEnabled)
-                        .onChange(of: isFileLockerEnabled) { value in
-                            if value && UserDefaults.standard.string(forKey: "FileLockerPassword") == nil {
+                        .onChange(of: isFileLockerEnabled) {
+                            if isFileLockerEnabled && UserDefaults.standard.string(forKey: "FileLockerPassword") == nil {
                                 isSetPasswdPresented = true
-                            } else if !value {
+                            } else if !isFileLockerEnabled {
                                 isFileLockerEnabled = false
                                 UserDefaults.standard.removeObject(forKey: "FileLockerPassword")
                                 UserDefaults.standard.removeObject(forKey: "FileLockerRecoverCode")
@@ -1437,8 +1437,8 @@ struct BatterySettingsView: View {
             }
             .listRowBackground(Color.clear)
             Toggle("Battery.low-power-mode", isOn: $isLowBatteryMode)
-                .onChange(of: isLowBatteryMode) { value in
-                    isInLowBatteryMode = value
+                .onChange(of: isLowBatteryMode) {
+                    isInLowBatteryMode = isLowBatteryMode
                 }
         }
         .onAppear {

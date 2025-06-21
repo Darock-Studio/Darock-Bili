@@ -191,17 +191,15 @@ func biliWbiSign(paramEncoded: String, completion: @escaping (String?) -> Void) 
         let headers: HTTPHeaders = [
             "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         ]
-        AF.request("https://api.bilibili.com/x/web-interface/nav", headers: headers).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
+        requestJSON("https://api.bilibili.com/x/web-interface/nav", headers: headers) { json, isSuccess in
+            if isSuccess {
                 let imgURL = json["data"]["wbi_img"]["img_url"].string ?? ""
                 let subURL = json["data"]["wbi_img"]["sub_url"].string ?? ""
                 let imgKey = imgURL.components(separatedBy: "/").last?.components(separatedBy: ".").first ?? ""
                 let subKey = subURL.components(separatedBy: "/").last?.components(separatedBy: ".").first ?? ""
                 completion(.success((imgKey, subKey)))
-            case .failure(let error):
-                completion(.failure(error))
+            } else {
+                completion(.failure(NSError(domain: "GET_WBI_KEYS", code: 1)))
             }
         }
     }
@@ -664,7 +662,7 @@ func updateBiliTicket(csrf: String) {
 
 postfix operator /
 extension String? {
-    static postfix func /(lhs: String?) -> String {
+    static postfix func / (lhs: String?) -> String {
         lhs ?? "[加载失败]"
     }
 }

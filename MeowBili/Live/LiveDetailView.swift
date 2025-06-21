@@ -208,7 +208,7 @@ struct LiveDetailView: View {
                 "cookie": "SESSDATA=\(sessdata)",
                 "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             ]
-            requestJSON("https://api.live.bilibili.com/room/v1/Room/get_info?room_id=\(liveDetails["ID"]!)") { respJson, isSuccess in
+            requestJSON("https://api.live.bilibili.com/room/v1/Room/get_info?room_id=\(liveDetails["ID"]!)", headers: headers) { respJson, isSuccess in
                 if isSuccess {
                     watchingCount = respJson["data"]["online"].int ?? 0
                     description = respJson["data"]["description"].string ?? "[加载失败]"

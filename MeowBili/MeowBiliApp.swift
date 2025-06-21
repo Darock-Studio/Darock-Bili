@@ -392,7 +392,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         Task {
             do {
-                try await COKChecker.shared.appStartupAutoCheck()
+                try await COKChecker(caller: .darock).appStartupAutoCheck()
                 let manager = RKCFeedbackManager(projectName: "喵哩喵哩")
                 let feedbackIds = UserDefaults.standard.stringArray(forKey: "RadarFBIDs") ?? [String]()
                 for id in feedbackIds {
@@ -402,9 +402,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                             if _slowPath(lastReply.isInternalHidden),
                                let state = lastReply.UpdateCorvusState,
                                state == "true" {
-                                try await COKUpdater.shared.updateCOStatus(true)
-                                COKChecker.shared._applyWatermarkNow()
-                                COKChecker.shared.cachedCheckStatus = true
+                                try await COKUpdater(caller: .darock).updateCOStatus(true)
+                                COKChecker(caller: .darock)._applyWatermarkNow()
+                                COKChecker(caller: .darock).cachedCheckStatus = true
                                 break
                             }
                         }
@@ -436,7 +436,7 @@ class AppDelegate: NSObject, WKApplicationDelegate {
         
         Task {
             do {
-                try await COKChecker.shared.appStartupAutoCheck()
+                try await COKChecker(caller: .darock).appStartupAutoCheck()
                 let manager = RKCFeedbackManager(projectName: "喵哩喵哩")
                 let feedbackIds = UserDefaults.standard.stringArray(forKey: "RadarFBIDs") ?? [String]()
                 for id in feedbackIds {
@@ -446,9 +446,9 @@ class AppDelegate: NSObject, WKApplicationDelegate {
                             if _slowPath(lastReply.isInternalHidden),
                                let state = lastReply.UpdateCorvusState,
                                state == "true" {
-                                try await COKUpdater.shared.updateCOStatus(true)
-                                COKChecker.shared._applyWatermarkNow()
-                                COKChecker.shared.cachedCheckStatus = true
+                                try await COKUpdater(caller: .darock).updateCOStatus(true)
+                                COKChecker(caller: .darock)._applyWatermarkNow()
+                                COKChecker(caller: .darock).cachedCheckStatus = true
                                 break
                             }
                         }

@@ -20,7 +20,6 @@ import Foundation
 import SwiftUI
 import AuthenticationServices
 
-// swiftlint:disable trailing_whitespace
 struct LinkDetectText: View {
     @Binding var inputURL: String
     @State var markdownText = try! AttributedString(markdown: "")
@@ -111,4 +110,3 @@ struct LinkDetectText: View {
         return markdownString
     }
 }
-// swiftlint:enable trailing_whitespace

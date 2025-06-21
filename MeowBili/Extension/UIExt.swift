@@ -74,7 +74,7 @@ func VideoCard(_ videoDetails: [String: String], onAppear: @escaping () -> Void 
     .buttonBorderShape(.roundedRectangle(radius: 14))
     .onDrag {
         if (UserDefaults.standard.object(forKey: "IsUseExtHaptic") as? Bool) ?? true {
-            PlayHaptic(sharpness: 0.05, intensity: 0.5)
+            playHaptic(sharpness: 0.05, intensity: 0.5)
         }
         var cpdDetail = videoDetails
         cpdDetail.updateValue("archive", forKey: "Type")
@@ -84,7 +84,7 @@ func VideoCard(_ videoDetails: [String: String], onAppear: @escaping () -> Void 
     }
     .onDrop(of: [UTType.data.identifier], isTargeted: nil) { items in
         if (UserDefaults.standard.object(forKey: "IsUseExtHaptic") as? Bool) ?? true {
-            PlayHaptic(sharpness: 0.05, intensity: 0.5)
+            playHaptic(sharpness: 0.05, intensity: 0.5)
         }
         for item in items {
             item.loadDataRepresentation(forTypeIdentifier: UTType.data.identifier) { (data, _) in

@@ -92,18 +92,18 @@ struct AudioControllerView: View {
                 .ignoresSafeArea(.container)
                 .frame(height: 120)
                 .offset(y: -20)
-                .onChange(of: forwardTaps, perform: { value in
+                .onChange(of: forwardTaps) {
                     if forwardTaps != 0 {
                         forwardTimer?.invalidate()
-                        forwardTimer = Timer.scheduledTimer(withTimeInterval: 0.75, repeats: false) { value in
+                        forwardTimer = Timer.scheduledTimer(withTimeInterval: 0.75, repeats: false) { _ in
                             if forwardTapsSnapshop == forwardTaps {
                                 forwardTaps = 0
                             }
                             forwardTapsSnapshop = forwardTaps
                         }
                     }
-                })
-                .onChange(of: backwardTaps, perform: { value in
+                }
+                .onChange(of: backwardTaps) {
                     if backwardTaps != 0 {
                         backwardTimer?.invalidate()
                         backwardTimer = Timer.scheduledTimer(withTimeInterval: 0.75, repeats: false) { _ in
@@ -117,7 +117,7 @@ struct AudioControllerView: View {
                             
                         }
                     }
-                })
+                }
                 Group {
                     if let backgroundImageUrl {
                         WebImage(url: backgroundImageUrl, options: [.progressiveLoad, .scaleDownLargeImages])

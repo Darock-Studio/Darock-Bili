@@ -71,15 +71,14 @@ struct UserDynamicListView: View {
                                 LazyVGrid(columns: [GridItem(.fixed(50)), GridItem(.fixed(50)), GridItem(.fixed(50))]) {
                                     ForEach(0..<draws.count, id: \.self) { j in
                                         if isDynamicImagePresented[i].count > j {
-                                            VStack {
-                                                NavigationLink("", isActive: $isDynamicImagePresented[i][j], destination: { ImageViewerView(url: draws[j]["Src"]!) })
-                                                    .frame(width: 0, height: 0)
-                                                WebImage(url: URL(string: draws[j]["Src"]! + "@60w_40h"), options: [.progressiveLoad])
-                                                    .cornerRadius(5)
-                                                    .onTapGesture {
-                                                        isDynamicImagePresented[i][j] = true
-                                                    }
-                                            }
+                                            WebImage(url: URL(string: draws[j]["Src"]! + "@60w_40h"), options: [.progressiveLoad])
+                                                .cornerRadius(5)
+                                                .onTapGesture {
+                                                    isDynamicImagePresented[i][j] = true
+                                                }
+                                                .navigationDestination(isPresented: $isDynamicImagePresented[i][j]) {
+                                                    ImageViewerView(url: draws[j]["Src"]!)
+                                                }
                                         }
                                     }
                                 }
@@ -152,15 +151,14 @@ struct UserDynamicListView: View {
                                                     LazyVGrid(columns: [GridItem(.fixed(50)), GridItem(.fixed(50)), GridItem(.fixed(50))]) {
                                                         ForEach(0..<draws.count, id: \.self) { j in
                                                             if isDynamicImagePresented[i].count > j {
-                                                                VStack {
-                                                                    NavigationLink("", isActive: $isDynamicImagePresented[i][j], destination: { ImageViewerView(url: draws[j]["Src"]!) })
-                                                                        .frame(width: 0, height: 0)
-                                                                    WebImage(url: URL(string: draws[j]["Src"]! + "@60w_40h"), options: [.progressiveLoad])
-                                                                        .cornerRadius(5)
-                                                                        .onTapGesture {
-                                                                            isDynamicImagePresented[i][j] = true
-                                                                        }
-                                                                }
+                                                                WebImage(url: URL(string: draws[j]["Src"]! + "@60w_40h"), options: [.progressiveLoad])
+                                                                    .cornerRadius(5)
+                                                                    .onTapGesture {
+                                                                        isDynamicImagePresented[i][j] = true
+                                                                    }
+                                                                    .navigationDestination(isPresented: $isDynamicImagePresented[i][j]) {
+                                                                        ImageViewerView(url: draws[j]["Src"]!)
+                                                                    }
                                                             }
                                                         }
                                                     }

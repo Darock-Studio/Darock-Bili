@@ -97,15 +97,14 @@ struct DynamicDetailView: View {
                             LazyVGrid(columns: [GridItem(.fixed(50)), GridItem(.fixed(50)), GridItem(.fixed(50))]) {
                                 ForEach(0..<draws.count, id: \.self) { i in
                                     if isDynamicImagePresented.count > i {
-                                        VStack {
-                                            NavigationLink("", isActive: $isDynamicImagePresented[i], destination: { ImageViewerView(url: draws[i]["Src"]!) })
-                                                .frame(width: 0, height: 0)
-                                            WebImage(url: URL(string: draws[i]["Src"]! + "@60w_40h"), options: [.progressiveLoad])
-                                                .cornerRadius(5)
-                                                .onTapGesture {
-                                                    isDynamicImagePresented[i] = true
-                                                }
-                                        }
+                                        WebImage(url: URL(string: draws[i]["Src"]! + "@60w_40h"), options: [.progressiveLoad])
+                                            .cornerRadius(5)
+                                            .onTapGesture {
+                                                isDynamicImagePresented[i] = true
+                                            }
+                                            .navigationDestination(isPresented: $isDynamicImagePresented[i]) {
+                                                ImageViewerView(url: draws[i]["Src"]!)
+                                            }
                                     }
                                 }
                             }
@@ -211,15 +210,14 @@ struct DynamicDetailView: View {
                                                 LazyVGrid(columns: [GridItem(.fixed(50)), GridItem(.fixed(50)), GridItem(.fixed(50))]) {
                                                     ForEach(0..<draws.count, id: \.self) { i in
                                                         if isDynamicImagePresented.count > i {
-                                                            VStack {
-                                                                NavigationLink("", isActive: $isDynamicImagePresented[i], destination: { ImageViewerView(url: draws[i]["Src"]!) })
-                                                                    .frame(width: 0, height: 0)
-                                                                WebImage(url: URL(string: draws[i]["Src"]! + "@60w_40h"), options: [.progressiveLoad])
-                                                                    .cornerRadius(5)
-                                                                    .onTapGesture {
-                                                                        isDynamicImagePresented[i] = true
-                                                                    }
-                                                            }
+                                                            WebImage(url: URL(string: draws[i]["Src"]! + "@60w_40h"), options: [.progressiveLoad])
+                                                                .cornerRadius(5)
+                                                                .onTapGesture {
+                                                                    isDynamicImagePresented[i] = true
+                                                                }
+                                                                .navigationDestination(isPresented: $isDynamicImagePresented[i]) {
+                                                                    ImageViewerView(url: draws[i]["Src"]!)
+                                                                }
                                                         }
                                                     }
                                                 }

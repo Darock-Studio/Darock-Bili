@@ -243,70 +243,67 @@ struct UserDetailView: View {
             }
             #else
             TabView {
-                VStack {
-                    NavigationLink("", isActive: $isSendbMessagePresented, destination: { bMessageSendView(uid: Int64(uid)!, username: username) })
-                        .frame(width: 0, height: 0)
-                    FirstPageBase(uid: uid, userFaceUrl: $userFaceUrl, username: $username, followCount: $followCount, fansCount: $fansCount, coinCount: $coinCount, isFollowed: $isFollowed, isSendbMessagePresented: $isSendbMessagePresented)
-                }
-                .toolbar {
-                    ToolbarItemGroup(placement: .bottomBar) {
-                        Button(action: {
-                            let headers: HTTPHeaders = [
-                                "cookie": "SESSDATA=\(sessdata);"
-                            ]
-                            AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
-                                debugPrint(response)
-                                let json = try! JSON(data: response.data!)
-                                let code = json["code"].int!
-                                if code == 0 {
-                                    tipWithText(isFollowed ? String(localized: "Account.tips.unfollowed") : String(localized: "Account.tips.followed"), symbol: "checkmark.circle.fill")
-                                    isFollowed.toggle()
-                                } else {
-                                    tipWithText(json["message"].string!, symbol: "xmark.circle.fill")
-                                }
-                            }
-                        }, label: {
-                            Image(systemName: isFollowed ? "person.badge.minus" : "person.badge.plus")
-                        })
-                        VStack {
-                            if dedeUserID == uid {
-                                HStack {
-                                    Image(systemName: "b.circle")
-                                        .font(.system(size: 12))
-                                        .opacity(0.55)
-                                        .offset(y: 1)
-                                    if coinCount != -1 {
-                                        Text(String(coinCount))
-                                            .font(.system(size: 14))
+                FirstPageBase(uid: uid, userFaceUrl: $userFaceUrl, username: $username, followCount: $followCount, fansCount: $fansCount, coinCount: $coinCount, isFollowed: $isFollowed, isSendbMessagePresented: $isSendbMessagePresented)
+                    .navigationDestination(isPresented: $isSendbMessagePresented, destination: { bMessageSendView(uid: Int64(uid)!, username: username) })
+                    .toolbar {
+                        ToolbarItemGroup(placement: .bottomBar) {
+                            Button(action: {
+                                let headers: HTTPHeaders = [
+                                    "cookie": "SESSDATA=\(sessdata);"
+                                ]
+                                AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
+                                    debugPrint(response)
+                                    let json = try! JSON(data: response.data!)
+                                    let code = json["code"].int!
+                                    if code == 0 {
+                                        tipWithText(isFollowed ? String(localized: "Account.tips.unfollowed") : String(localized: "Account.tips.followed"), symbol: "checkmark.circle.fill")
+                                        isFollowed.toggle()
                                     } else {
-                                        Text("114")
-                                            .font(.system(size: 14))
-                                            .redacted(reason: .placeholder)
+                                        tipWithText(json["message"].string!, symbol: "xmark.circle.fill")
                                     }
                                 }
+                            }, label: {
+                                Image(systemName: isFollowed ? "person.badge.minus" : "person.badge.plus")
+                            })
+                            VStack {
+                                if dedeUserID == uid {
+                                    HStack {
+                                        Image(systemName: "b.circle")
+                                            .font(.system(size: 12))
+                                            .opacity(0.55)
+                                            .offset(y: 1)
+                                        if coinCount != -1 {
+                                            Text(String(coinCount))
+                                                .font(.system(size: 14))
+                                        } else {
+                                            Text("114")
+                                                .font(.system(size: 14))
+                                                .redacted(reason: .placeholder)
+                                        }
+                                    }
+                                }
+                                Button(action: {
+                                    isInfoSheetPresented = true
+                                }, label: {
+                                    Text(officialType == -1 ? "Account.info" : "Account.certification")
+                                })
+                                .buttonStyle(.borderless)
+                                .font(.caption)
                             }
                             Button(action: {
-                                isInfoSheetPresented = true
+                                isSendbMessagePresented = true
                             }, label: {
-                                Text(officialType == -1 ? "Account.info" : "Account.certification")
+                                Image(systemName: "ellipsis.bubble")
                             })
-                            .buttonStyle(.borderless)
-                            .font(.caption)
                         }
-                        Button(action: {
-                            isSendbMessagePresented = true
-                        }, label: {
-                            Image(systemName: "ellipsis.bubble")
-                        })
                     }
-                }
-                .navigationTitle(username)
-                .sheet(isPresented: $isInfoSheetPresented, content: {
-                    ScrollView {
-                        SecondPageBase(uid: uid, officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign, userLevel: $userLevel, vipLabel: $vipLabel)
-                    }
-                })
-                .tag(1)
+                    .navigationTitle(username)
+                    .sheet(isPresented: $isInfoSheetPresented, content: {
+                        ScrollView {
+                            SecondPageBase(uid: uid, officialType: $officialType, officialTitle: $officialTitle, userSign: $userSign, userLevel: $userLevel, vipLabel: $vipLabel)
+                        }
+                    })
+                    .tag(1)
                 VideosListBase(uid: uid, username: $username, videos: $videos, articles: $articles, viewSelector: $viewSelector, videoCount: $videoCount, articalCount: $articalCount)
                     .tag(2)
                     .navigationTitle(viewSelector == .video ? "Account.videos.\(videoCount)" : "Account.articals.\(articalCount)")

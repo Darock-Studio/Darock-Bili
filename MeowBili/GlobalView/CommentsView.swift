@@ -58,8 +58,6 @@ struct CommentsView: View {
                                     .frame(width: 35, height: 35)
                                     .clipShape(Circle())
                                 VStack(alignment: .leading) {
-                                    NavigationLink("", isActive: $isSenderDetailsPresented[i], destination: { UserDetailView(uid: comments[i]["SenderID"]!) })
-                                        .frame(width: 0, height: 0)
                                     HStack {
                                         Text(comments[i]["Sender"]!)
                                             .font(.system(size: 14, weight: .bold))
@@ -70,6 +68,7 @@ struct CommentsView: View {
                                         .foregroundColor(.gray)
                                         .lineLimit(1)
                                 }
+                                .navigationDestination(isPresented: $isSenderDetailsPresented[i], destination: { UserDetailView(uid: comments[i]["SenderID"]!) })
                                 Spacer()
                             }
                             .onTapGesture {
@@ -294,9 +293,7 @@ struct CommentsView: View {
                                                 .resizable()
                                                 .frame(width: 35, height: 35)
                                                 .clipShape(Circle())
-                                            VStack {
-                                                NavigationLink("", isActive: $isSenderDetailsPresented[i], destination: { UserDetailView(uid: replies[i]["SenderID"]!) })
-                                                    .frame(width: 0, height: 0)
+                                            VStack(alignment: .leading) {
                                                 HStack {
                                                     Text(replies[i]["Sender"]!)
                                                         .font(.system(size: 14, weight: .bold))
@@ -307,6 +304,7 @@ struct CommentsView: View {
                                                     .foregroundColor(.gray)
                                                     .lineLimit(1)
                                             }
+                                            .navigationDestination(isPresented: $isSenderDetailsPresented[i], destination: { UserDetailView(uid: replies[i]["SenderID"]!) })
                                             Spacer()
                                         }
                                         .onTapGesture {

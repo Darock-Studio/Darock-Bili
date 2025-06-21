@@ -48,23 +48,17 @@ struct SearchMainView: View {
     var body: some View {
         List {
             Section {
-                ZStack {
-                    NavigationLink("", destination: SearchView(keyword: $searchText), isActive: $isSearchPresented)
-                        .frame(width: 0, height: 0)
-                        .hidden()
-                        .disabled(true)
-                    TextField("搜索", text: $searchText) {
-                        isSearchPresented = true
-                        if searchText != (searchHistory.first ?? "") {
-                            UserDefaults.standard.set([searchText] + searchHistory, forKey: "SearchHistory")
-                        }
+                TextField("搜索", text: $searchText) {
+                    isSearchPresented = true
+                    if searchText != (searchHistory.first ?? "") {
+                        UserDefaults.standard.set([searchText] + searchHistory, forKey: "SearchHistory")
                     }
-                    .submitLabel(.search)
-                    #if !os(watchOS)
-                        .focused(isSearchKeyboardFocused)
-                    #endif
-                        .accessibilityIdentifier("SearchInput")
                 }
+                .submitLabel(.search)
+                #if !os(watchOS)
+                .focused(isSearchKeyboardFocused)
+                #endif
+                .accessibilityIdentifier("SearchInput")
                 if debug {
                     Button(action: {
                         searchText = "Darock"
@@ -133,6 +127,7 @@ struct SearchMainView: View {
             }
         }
         .scrollDismissesKeyboard(.immediately)
+        .navigationDestination(isPresented: $isSearchPresented, destination: { SearchView(keyword: $searchText) })
         .onAppear {
             searchHistory.removeAll()
             searchHistory = UserDefaults.standard.stringArray(forKey: "SearchHistory") ?? [String]()

@@ -60,7 +60,7 @@ class BiliBiliAPIService {
             return
         }
 
-        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
             if let error = error {
                 print("Error fetching data: \(error.localizedDescription)")
                 completion([])

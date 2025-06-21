@@ -33,7 +33,7 @@ struct FeedbackView: View {
     @State var feedbackIds = [String]()
     @State var badgeOnIds = [String]()
     var body: some View {
-        if !COKChecker.shared.cachedCheckStatus {
+        if !COKChecker(caller: .darock).cachedCheckStatus {
             RKFeedbackView(projName: "喵哩喵哩")
                 .radarTitleInputSample("示例：评论区缺少最新的回复")
                 .radarTipper { text, symbol in

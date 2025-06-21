@@ -71,8 +71,6 @@ struct UserDynamicMainView: View {
                                     WebImage(url: URL(string: dynamics[i]["SenderPic"]! as! String + "@30w"), options: [.progressiveLoad])
                                         .clipShape(Circle())
                                     VStack {
-                                        NavigationLink("", isActive: $isSenderDetailsPresented[i], destination: { UserDetailView(uid: dynamics[i]["SenderID"]! as! String) })
-                                            .frame(width: 0, height: 0)
                                         HStack {
                                             Text(dynamics[i]["SenderName"]! as! String)
                                                 .font(.system(size: 14, weight: .bold))
@@ -100,6 +98,7 @@ struct UserDynamicMainView: View {
                                             Spacer()
                                         }
                                     }
+                                    .navigationDestination(isPresented: $isSenderDetailsPresented[i], destination: { UserDetailView(uid: dynamics[i]["SenderID"]! as! String) })
                                     Spacer()
                                 }
                                 .onTapGesture {
@@ -136,15 +135,14 @@ struct UserDynamicMainView: View {
                                         LazyVGrid(columns: [GridItem(.fixed(50)), GridItem(.fixed(50)), GridItem(.fixed(50))]) {
                                             ForEach(0..<draws.count, id: \.self) { j in
                                                 if isDynamicImagePresented[i].count > j {
-                                                    VStack {
-                                                        NavigationLink("", isActive: $isDynamicImagePresented[i][j], destination: { ImageViewerView(url: draws[j]["Src"]!) })
-                                                            .frame(width: 0, height: 0)
-                                                        WebImage(url: URL(string: draws[j]["Src"]! + "@60w_40h"), options: [.progressiveLoad])
-                                                            .cornerRadius(5)
-                                                            .onTapGesture {
-                                                                isDynamicImagePresented[i][j] = true
-                                                            }
-                                                    }
+                                                    WebImage(url: URL(string: draws[j]["Src"]! + "@60w_40h"), options: [.progressiveLoad])
+                                                        .cornerRadius(5)
+                                                        .onTapGesture {
+                                                            isDynamicImagePresented[i][j] = true
+                                                        }
+                                                        .navigationDestination(isPresented: $isDynamicImagePresented[i][j]) {
+                                                            ImageViewerView(url: draws[j]["Src"]!)
+                                                        }
                                                 }
                                             }
                                         }
@@ -192,8 +190,6 @@ struct UserDynamicMainView: View {
                                                         WebImage(url: URL(string: dynamics[i]["SenderPic"]! as! String + "@30w"), options: [.progressiveLoad])
                                                             .clipShape(Circle())
                                                         VStack {
-                                                            NavigationLink("", isActive: $isSenderDetailsPresented[i], destination: { UserDetailView(uid: orig["SenderID"]! as! String) })
-                                                                .frame(width: 0, height: 0)
                                                             HStack {
                                                                 Text(orig["SenderName"]! as! String)
                                                                     .font(.system(size: 14, weight: .bold))
@@ -220,6 +216,9 @@ struct UserDynamicMainView: View {
                                                                 .lineLimit(1)
                                                                 Spacer()
                                                             }
+                                                        }
+                                                        .navigationDestination(isPresented: $isSenderDetailsPresented[i]) {
+                                                            UserDetailView(uid: orig["SenderID"]! as! String)
                                                         }
                                                         Spacer()
                                                     }
@@ -252,15 +251,14 @@ struct UserDynamicMainView: View {
                                                             LazyVGrid(columns: [GridItem(.fixed(50)), GridItem(.fixed(50)), GridItem(.fixed(50))]) {
                                                                 ForEach(0..<draws.count, id: \.self) { j in
                                                                     if isDynamicImagePresented[i].count > j {
-                                                                        VStack {
-                                                                            NavigationLink("", isActive: $isDynamicImagePresented[i][j], destination: { ImageViewerView(url: draws[j]["Src"]!) })
-                                                                                .frame(width: 0, height: 0)
-                                                                            WebImage(url: URL(string: draws[j]["Src"]! + "@60w_40h"), options: [.progressiveLoad])
-                                                                                .cornerRadius(5)
-                                                                                .onTapGesture {
-                                                                                    isDynamicImagePresented[i][j] = true
-                                                                                }
-                                                                        }
+                                                                        WebImage(url: URL(string: draws[j]["Src"]! + "@60w_40h"), options: [.progressiveLoad])
+                                                                            .cornerRadius(5)
+                                                                            .onTapGesture {
+                                                                                isDynamicImagePresented[i][j] = true
+                                                                            }
+                                                                            .navigationDestination(isPresented: $isDynamicImagePresented[i][j]) {
+                                                                                ImageViewerView(url: draws[j]["Src"]!)
+                                                                            }
                                                                     }
                                                                 }
                                                             }

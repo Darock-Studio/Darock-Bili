@@ -75,7 +75,7 @@ func validatePhoneNumber(num: String, cc: String) -> Bool {
         } else {
             return false
         }
-    case "1","44":
+    case "1", "44":
         if num.count == 10 {
             return true
         } else {

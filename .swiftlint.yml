@@ -15,6 +15,7 @@ disabled_rules:
   - legacy_constant
   - non_optional_string_data_conversion
   - optional_data_string_conversion
+  - attributes
 
 opt_in_rules:
   - attributes
@@ -44,10 +45,6 @@ file_length:
 large_tuple:
   warning: 5
   error: 10
-
-attributes:
-  attributes_with_arguments_always_on_line_above: false
-
 
 custom_rules:
   no_c_style_comment:

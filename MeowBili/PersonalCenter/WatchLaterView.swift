@@ -57,7 +57,7 @@ struct WatchLaterView: View {
             .navigationBarTitleDisplayMode(.large)
             #if !os(watchOS)
             .onDrop(of: [UTType.data.identifier], isTargeted: nil) { items in
-                PlayHaptic(sharpness: 0.05, intensity: 0.5)
+                playHaptic(sharpness: 0.05, intensity: 0.5)
                 for item in items {
                     item.loadDataRepresentation(forTypeIdentifier: UTType.data.identifier) { (data, _) in
                         if let data = data, let dict = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [String: String] {

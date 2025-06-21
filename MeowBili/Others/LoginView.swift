@@ -301,11 +301,11 @@ struct LoginView: View {
                                 #if !os(watchOS)
                                 TextField("", text: $displayCC).frame(width: 40)
                                 #endif
-                                    TextField("\(PhoneFormat)", text: $accountInput)
+                                TextField("\(PhoneFormat)", text: $accountInput)
                                 #if !os(watchOS)
                                     .keyboardType(.phonePad)
                                 #endif
-                                    .onChange(of: accountInput, perform: { _ in
+                                    .onChange(of: accountInput) {
                                         if !passwdInput.isEmpty {
                                             currentStep = 3
                                         } else if !accountInput.isEmpty {
@@ -313,22 +313,22 @@ struct LoginView: View {
                                         } else {
                                             currentStep = 1
                                         }
-                                    })
-                                    .onChange(of: countryCode, perform: { _ in
+                                    }
+                                    .onChange(of: countryCode) {
                                         PhoneFormat = phoneFormatter(region: countryCode)
                                         if countryCode == "us" || countryCode == "ca" {
                                             displayCC = "1"
                                         } else {
                                             displayCC = countryCode
                                         }
-                                    })
-                                    .onChange(of: displayCC, perform: { _ in
+                                    }
+                                    .onChange(of: displayCC) {
                                         if displayCC == "1" {
                                             countryCode = "us"
                                         } else {
                                             countryCode = displayCC
                                         }
-                                    })
+                                    }
                             }
                         }
                     }
@@ -343,7 +343,7 @@ struct LoginView: View {
                                 #if !os(watchOS)
                                     .keyboardType(.numberPad)
                                 #endif
-                                    .onChange(of: passwdInput, perform: { _ in
+                                    .onChange(of: passwdInput) {
                                         if !passwdInput.isEmpty {
                                             currentStep = 3
                                         } else if !accountInput.isEmpty {
@@ -352,7 +352,7 @@ struct LoginView: View {
                                             currentStep = 1
                                         }
                                         print(currentStep)
-                                    })
+                                    }
                                 Button(action: {
                                     let isValidPhone = validatePhoneNumber(num: accountInput, cc: displayCC)
                                     if !accountInput.contains(" ") && isValidPhone {
