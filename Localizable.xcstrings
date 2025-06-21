@@ -9222,6 +9222,9 @@
         }
       }
     },
+    "分享" : {
+
+    },
     "分区" : {
       "localizations" : {
         "en" : {
@@ -10013,7 +10016,6 @@
       }
     },
     "手记建议" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

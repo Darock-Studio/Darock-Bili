@@ -119,7 +119,7 @@ var globalBuvid4 = ""
 */
 // swiftlint:enable no_c_style_comment
 @main
-struct DarockBili_Watch_AppApp: App {
+struct DarockBiliApp: App {
     #if os(watchOS)
     @WKApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     #else
@@ -324,7 +324,7 @@ struct DarockBili_Watch_AppApp: App {
                     debugPrint(spd)
                     switch spd[1] {
                     case "withvideodetail":
-                        let kvs = dec.split(separator: "/", maxSplits: 1).dropFirst()[2].split(separator: "&") // e.g.: ["BV=xxx", "Title=xxx"]
+                        let kvs = dec.split(separator: "/", maxSplits: 2)[2].split(separator: "&") // e.g.: ["BV=xxx", "Title=xxx"]
                         var details = [String: String]()
                         for kv in kvs {
                             let kav = kv.split(separator: "=")

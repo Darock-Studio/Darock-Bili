@@ -101,7 +101,7 @@ struct VideoDetailView: View {
                         Button(action: {
                             isMoreMenuPresented = true
                         }, label: {
-                            Image(systemName: "ellipsis.circle")
+                            Image(systemName: "ellipsis")
                         })
                     }
                 }
@@ -786,6 +786,9 @@ struct VideoDetailView: View {
             }, label: {
                 Label("Video.watch-later", systemImage: "memories.badge.plus")
             })
+            ShareLink(item: URL(string: "https://bilibili.com/video/\(videoDetails["BV"]!)")!) {
+                Label("分享", systemImage: "square.and.arrow.up")
+            }
             NavigationLink(destination: {
                 VStack {
                     if let qrImg = continueQr {
