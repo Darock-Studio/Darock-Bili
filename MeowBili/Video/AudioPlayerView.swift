@@ -136,6 +136,11 @@ struct AudioControllerView: View {
                                 if isPlaying {
                                     globalAudioPlayer.pause()
                                 } else {
+                                    if currentItemTotalTime == currentPlaybackTime {
+                                        globalAudioPlayer.seek(to: CMTime(seconds: 0, preferredTimescale: 60000),
+                                                               toleranceBefore: .zero,
+                                                               toleranceAfter: .zero)
+                                    }
                                     globalAudioPlayer.play()
                                 }
                             }, label: {
