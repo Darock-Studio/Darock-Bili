@@ -35,7 +35,10 @@ struct DynamicDetailView: View {
                 VStack {
                     NavigationLink(destination: { UserDetailView(uid: dynamicDetails["SenderID"]! as! String) }, label: {
                         HStack {
-                            WebImage(url: URL(string: dynamicDetails["SenderPic"]! as! String + "@30w"), options: [.progressiveLoad])
+                            WebImage(url: URL(string: dynamicDetails["SenderPic"]! as! String + "@60w"))
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 30, height: 30)
                                 .clipShape(Circle())
                             VStack {
                                 HStack {

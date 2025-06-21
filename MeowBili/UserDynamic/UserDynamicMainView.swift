@@ -68,7 +68,10 @@ struct UserDynamicMainView: View {
                         ForEach(0..<dynamics.count, id: \.self) { i in
                             VStack {
                                 HStack {
-                                    WebImage(url: URL(string: dynamics[i]["SenderPic"]! as! String + "@30w"), options: [.progressiveLoad])
+                                    WebImage(url: URL(string: dynamics[i]["SenderPic"]! as! String + "@60w"))
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 30, height: 30)
                                         .clipShape(Circle())
                                     VStack {
                                         HStack {
@@ -111,6 +114,7 @@ struct UserDynamicMainView: View {
                                                 dynamics[i]["WithText"]! as! String
                                             }, set: { _ in }))
                                             .font(.system(size: 16))
+                                            .lineLimit(10)
                                             Spacer()
                                         }
                                     })
@@ -179,6 +183,12 @@ struct UserDynamicMainView: View {
                                                 .foregroundColor(.gray)
                                             }
                                         })
+                                        .wrapIf({ if #available(iOS 26.0, watchOS 26.0, *) { true } else { false } }()) { content in
+                                            if #available(iOS 26.0, watchOS 26.0, *) {
+                                                content
+                                                    .buttonStyle(.glass)
+                                            }
+                                        }
                                         .buttonBorderShape(.roundedRectangle(radius: 14))
                                     }
                                 } else if dynamics[i]["Type"]! as! BiliDynamicType == .forward {
@@ -187,7 +197,10 @@ struct UserDynamicMainView: View {
                                             NavigationLink(destination: { DynamicDetailView(dynamicDetails: orig) }, label: {
                                                 VStack {
                                                     HStack {
-                                                        WebImage(url: URL(string: dynamics[i]["SenderPic"]! as! String + "@30w"), options: [.progressiveLoad])
+                                                        WebImage(url: URL(string: dynamics[i]["SenderPic"]! as! String + "@60w"))
+                                                            .resizable()
+                                                            .scaledToFit()
+                                                            .frame(width: 30, height: 30)
                                                             .clipShape(Circle())
                                                         VStack {
                                                             HStack {
@@ -296,12 +309,24 @@ struct UserDynamicMainView: View {
                                                                     .foregroundColor(.gray)
                                                                 }
                                                             })
+                                                            .wrapIf({ if #available(iOS 26.0, watchOS 26.0, *) { true } else { false } }()) { content in
+                                                                if #available(iOS 26.0, watchOS 26.0, *) {
+                                                                    content
+                                                                        .buttonStyle(.glass)
+                                                                }
+                                                            }
                                                             .buttonBorderShape(.roundedRectangle(radius: 14))
                                                             .disabled(true)
                                                         }
                                                     }
                                                 }
                                             })
+                                            .wrapIf({ if #available(iOS 26.0, watchOS 26.0, *) { true } else { false } }()) { content in
+                                                if #available(iOS 26.0, watchOS 26.0, *) {
+                                                    content
+                                                        .buttonStyle(.glass)
+                                                }
+                                            }
                                             .buttonBorderShape(.roundedRectangle(radius: 14))
                                         }
                                     }
