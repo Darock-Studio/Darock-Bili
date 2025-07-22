@@ -43,8 +43,8 @@ file_length:
   error: 10000
 
 large_tuple:
-  warning: 5
-  error: 10
+  warning: 10
+  error: 20
 
 custom_rules:
   no_c_style_comment:

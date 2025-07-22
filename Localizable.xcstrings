@@ -10016,6 +10016,7 @@
       }
     },
     "手记建议" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

@@ -65,11 +65,16 @@ struct CommentsView: View {
                                     }
                                     Text(comments[i]["IP"]!)
                                         .font(.system(size: 10))
-                                        .foregroundColor(.gray)
                                         .lineLimit(1)
+                                        .opacity(0.6)
                                 }
                                 .navigationDestination(isPresented: $isSenderDetailsPresented[i], destination: { UserDetailView(uid: comments[i]["SenderID"]!) })
                                 Spacer()
+                                if comments[i]["IsPinned"] == "true" {
+                                    Image(systemName: "pin.fill")
+                                        .foregroundStyle(.accent)
+                                        .rotationEffect(.degrees(45))
+                                }
                             }
                             .onTapGesture {
                                 isSenderDetailsPresented[i] = true
@@ -258,8 +263,32 @@ struct CommentsView: View {
                         for pic in reply.1["content"]["pictures"].arrayValue {
                             pictures.append(pic["img_src"].string ?? "[加载失败]")
                         }
-                        comments.append(["Text": text, "Sender": reply.1["member"]["uname"].string ?? "[加载失败]", "SenderPic": reply.1["member"]["avatar"].string ?? "E", "SenderID": reply.1["member"]["mid"].string ?? "E", "IP": reply.1["reply_control"]["location"].string ?? "", "UserAction": String(reply.1["action"].int ?? 0), "Rpid": reply.1["rpid_str"].string ?? "-1", "Like": String(reply.1["like"].int ?? -1), "Pictures": pictures.joined(separator: "|")])
+                        var emoteInfo = ""
+                        for (emote, info) in reply.1["content"]["emote"].dictionaryValue {
+                            emoteInfo += "|\(emote)::\(info["url"].stringValue)"
+                        }
+                        comments.append(["Text": text, "Sender": reply.1["member"]["uname"].string ?? "[加载失败]", "SenderPic": reply.1["member"]["avatar"].string ?? "E", "SenderID": reply.1["member"]["mid"].string ?? "E", "IP": reply.1["reply_control"]["location"].string ?? "", "UserAction": String(reply.1["action"].int ?? 0), "Rpid": reply.1["rpid_str"].string ?? "-1", "Like": String(reply.1["like"].int ?? -1), "Pictures": pictures.joined(separator: "|"), "EmoteInfo": emoteInfo])
                         calNum += 1
+                    }
+                    // Pinned comment
+                    if nowPage == 1 && respJson["data"]["upper"]["top"].null == nil {
+                        let reply = respJson["data"]["upper"]["top"]
+                        isSenderDetailsPresented.insert(false, at: 0)
+                        let repliesInComment = reply["replies"]
+                        commentReplies.insert([], at: 0)
+                        for sigReply in repliesInComment {
+                            commentReplies[0].append(["Text": sigReply.1["content"]["message"].string ?? "[加载失败]", "Sender": sigReply.1["member"]["uname"].string ?? "[加载失败]", "SenderPic": sigReply.1["member"]["avatar"].string ?? "E", "SenderID": sigReply.1["member"]["mid"].string ?? "E", "IP": sigReply.1["reply_control"]["location"].string ?? "", "UserAction": String(sigReply.1["action"].int ?? 0), "Rpid": String(sigReply.1["rpid"].int ?? -1), "Like": String(sigReply.1["like"].int ?? -1)])
+                        }
+                        let text = reply["content"]["message"].string ?? "[加载失败]"
+                        var pictures = [String]()
+                        for pic in reply["content"]["pictures"].arrayValue {
+                            pictures.append(pic["img_src"].string ?? "[加载失败]")
+                        }
+                        var emoteInfo = ""
+                        for (emote, info) in reply["content"]["emote"].dictionaryValue {
+                            emoteInfo += "|\(emote)::\(info["url"].stringValue)"
+                        }
+                        comments.insert(["Text": text, "Sender": reply["member"]["uname"].string ?? "[加载失败]", "SenderPic": reply["member"]["avatar"].string ?? "E", "SenderID": reply["member"]["mid"].string ?? "E", "IP": reply["reply_control"]["location"].string ?? "", "UserAction": String(reply["action"].int ?? 0), "Rpid": reply["rpid_str"].string ?? "-1", "Like": String(reply["like"].int ?? -1), "Pictures": pictures.joined(separator: "|"), "EmoteInfo": emoteInfo, "IsPinned": "true"], at: 0)
                     }
                 }
             } else {
@@ -301,8 +330,8 @@ struct CommentsView: View {
                                                 }
                                                 Text(replies[i]["IP"]!)
                                                     .font(.system(size: 10))
-                                                    .foregroundColor(.gray)
                                                     .lineLimit(1)
+                                                    .opacity(0.6)
                                             }
                                             .navigationDestination(isPresented: $isSenderDetailsPresented[i], destination: { UserDetailView(uid: replies[i]["SenderID"]!) })
                                             Spacer()
@@ -393,7 +422,11 @@ struct CommentsView: View {
                                 if !CheckBApiError(from: respJson) { return }
                                 for reply in respJson["data"]["replies"] {
                                     isSenderDetailsPresented.append(false)
-                                    replies.append(["Text": reply.1["content"]["message"].string ?? "[加载失败]", "Sender": reply.1["member"]["uname"].string ?? "[加载失败]", "SenderPic": reply.1["member"]["avatar"].string ?? "E", "SenderID": reply.1["member"]["mid"].string ?? "E", "IP": reply.1["reply_control"]["location"].string ?? "", "UserAction": String(reply.1["action"].int ?? 0), "Rpid": reply.1["rpid_str"].string ?? "-1", "Like": String(reply.1["like"].int ?? -1)])
+                                    var emoteInfo = ""
+                                    for (emote, info) in reply.1["content"]["emote"].dictionaryValue {
+                                        emoteInfo += "|\(emote)::\(info["url"].stringValue)"
+                                    }
+                                    replies.append(["Text": reply.1["content"]["message"].string ?? "[加载失败]", "Sender": reply.1["member"]["uname"].string ?? "[加载失败]", "SenderPic": reply.1["member"]["avatar"].string ?? "E", "SenderID": reply.1["member"]["mid"].string ?? "E", "IP": reply.1["reply_control"]["location"].string ?? "", "UserAction": String(reply.1["action"].int ?? 0), "Rpid": reply.1["rpid_str"].string ?? "-1", "Like": String(reply.1["like"].int ?? -1), "EmoteInfo": emoteInfo])
                                 }
                             }
                         }
