@@ -415,13 +415,26 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             }
         }
         
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { isGrand, _ in
+            DispatchQueue.main.async {
+                if isGrand {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            }
+        }
+        
         requestAPI("/analyze/add/MLStatsiOSAppStartupCount") { _, _ in }
         
         return true
     }
     
-    func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
-        //AlertKitAPI.present(title: "低内存警告", subtitle: "喵哩喵哩收到了低内存警告", icon: .error, style: .iOS17AppleMusic, haptic: .warning)
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let tokenString = deviceToken.hexEncodedString()
+        UserDefaults.standard.set(tokenString, forKey: "UserNotificationToken")
+        if !UserDefaults.standard.bool(forKey: "IsNotificationRegistered") {
+            requestAPI("/apns/devtoken/add/MeowBili_iOS_Promotion/0/\(tokenString)") { _, _ in }
+            UserDefaults.standard.set(true, forKey: "IsNotificationRegistered")
+        }
     }
 }
 #else
@@ -459,7 +472,24 @@ class AppDelegate: NSObject, WKApplicationDelegate {
             }
         }
         
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { isGrand, _ in
+            DispatchQueue.main.async {
+                if isGrand {
+                    WKApplication.shared().registerForRemoteNotifications()
+                }
+            }
+        }
+        
         requestAPI("/analyze/add/MLStatswatchOSAppStartupCount") { _, _ in }
+    }
+    
+    func didRegisterForRemoteNotifications(withDeviceToken deviceToken: Data) {
+        let tokenString = deviceToken.hexEncodedString()
+        UserDefaults.standard.set(tokenString, forKey: "UserNotificationToken")
+        if !UserDefaults.standard.bool(forKey: "IsNotificationRegistered") {
+            requestAPI("/apns/devtoken/add/MeowBili_Watch_Promotion/0/\(tokenString)") { _, _ in }
+            UserDefaults.standard.set(true, forKey: "IsNotificationRegistered")
+        }
     }
 }
 #endif
