@@ -404,7 +404,6 @@
 		8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */ = {isa = PBXFileReference; lastKnownFileType = text; path = CurrentChannel.drkdatac; sourceTree = "<group>"; };
 		8CB1769F2BB7E41C00CEC05C /* Alternative.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Alternative.entitlements; sourceTree = "<group>"; };
 		8CB954482D5967590002EF8E /* Watch Alternative.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Watch Alternative.entitlements"; sourceTree = "<group>"; };
-		8CBFF1272B86188D00350E0F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		8CC3D5572B7CA209005636DC /* UserDynamicListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDynamicListView.swift; sourceTree = "<group>"; };
 		8CC3D5592B7CB95D005636DC /* NowPlayingExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NowPlayingExtension.m; sourceTree = "<group>"; };
 		8CC3D55B2B7CB96C005636DC /* NowPlayingExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NowPlayingExtension.h; sourceTree = "<group>"; };
@@ -843,7 +842,6 @@
 				E2B720932B67858E00ABB0A6 /* Localizable.xcstrings */,
 				8C72E32A2B6605B80087486E /* README.md */,
 				8CA388A02B78B5D800F5F91F /* BiliFont.ttf */,
-				8CBFF1272B86188D00350E0F /* .swiftlint.yml */,
 				8C82F82F2BB70AA7009AEFD2 /* .github */,
 				8CB0D0222B88CE980057EF1C /* ci_scripts */,
 				B4468A142B4FC24A002CCEB2 /* JSONReturnExamples */,
@@ -939,7 +937,6 @@
 			buildConfigurationList = 8CA7CBE32B77AC4D008E587F /* Build configuration list for PBXNativeTarget "MeowBili" */;
 			buildPhases = (
 				8CA7CBBC2B77AC4A008E587F /* Sources */,
-				8CBFF1262B86157800350E0F /* Run SwiftLint */,
 				8CA7CBBD2B77AC4A008E587F /* Frameworks */,
 				8CA7CBBE2B77AC4A008E587F /* Resources */,
 				8CA7CBDF2B77AC4D008E587F /* Embed Watch Content */,
@@ -986,7 +983,6 @@
 			buildConfigurationList = 8CA7CBE22B77AC4D008E587F /* Build configuration list for PBXNativeTarget "MeowBili Watch App" */;
 			buildPhases = (
 				8CA7CBCB2B77AC4C008E587F /* Sources */,
-				8CC5B6C22B86582400BAD89E /* ShellScript */,
 				8CA7CBCC2B77AC4C008E587F /* Frameworks */,
 				8CA7CBCD2B77AC4C008E587F /* Resources */,
 			);
@@ -1208,46 +1204,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		8CBFF1262B86157800350E0F /* Run SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run SwiftLint";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n  echo \"warning: To edit codes for MeowBili project, you need SwiftLint to keep our coding style\"\nfi\n";
-		};
-		8CC5B6C22B86582400BAD89E /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n  echo \"warning: To edit codes for MeowBili project, you need SwiftLint to keep our coding style\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8C2DFCB12C4E6B2B003AEC67 /* Sources */ = {
