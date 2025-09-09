@@ -83,7 +83,7 @@ struct MainView: View {
                             .buttonStyle(.borderless)
                         case .darockc:
                             NavigationLink(destination: {
-                                Text("🎉🎉🎉\n今天是 Darock 周年庆\n到我们群 1019196619 参加活动吧！")
+                                Text("🎉🎉🎉\n今天是 Darock 周年庆\n到我们群 937980534 参加活动吧！")
                             }, label: {
                                 Text("🎉")
                             })
@@ -404,10 +404,11 @@ struct MainView: View {
                         "cookie": "SESSDATA=\(sessdata)",
                         "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                     ]
-                    darockSuggestions.removeAll()
-                    for bvid in bvs {
-                        requestJSON("https://api.bilibili.com/x/web-interface/view?bvid=\(bvid)", headers: headers) { respJson, isSuccess in
-                            if isSuccess {
+                    var suggestions = [[String: String]]()
+                    Task {
+                        for bvid in bvs {
+                            let result = await requestJSON("https://api.bilibili.com/x/web-interface/view?bvid=\(bvid)", headers: headers)
+                            if case let .success(respJson) = result {
                                 if !CheckBApiError(from: respJson) { return }
                                 var vd = ["BV": bvid]
                                 vd.updateValue(respJson["data"]["title"].string ?? "[加载失败]", forKey: "Title")
@@ -415,9 +416,10 @@ struct MainView: View {
                                 vd.updateValue(String(respJson["data"]["stat"]["danmaku"].int ?? 0), forKey: "Danmaku")
                                 vd.updateValue(respJson["data"]["pic"].string ?? "[加载失败]", forKey: "Pic")
                                 vd.updateValue(respJson["data"]["owner"]["name"].string ?? "[加载失败]", forKey: "UP")
-                                darockSuggestions.append(vd)
+                                suggestions.append(vd)
                             }
                         }
+                        darockSuggestions = suggestions
                     }
                 }
             }

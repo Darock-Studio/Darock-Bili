@@ -1940,12 +1940,12 @@
         }
       }
     },
-    "🎉🎉🎉\n今天是 Darock 周年庆\n到我们群 1019196619 参加活动吧！" : {
+    "🎉🎉🎉\n今天是 Darock 周年庆\n到我们群 937980534 参加活动吧！" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🎉🎉🎉\nToday is Darock’s anniversary.\nCome to our QQ Group 1019196619 and join the event!"
+            "value" : "🎉🎉🎉\nToday is Darock’s anniversary.\nCome to our QQ Group 937980534 and join the event!"
           }
         }
       }
@@ -9223,7 +9223,14 @@
       }
     },
     "分享" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share"
+          }
+        }
+      }
     },
     "分区" : {
       "localizations" : {

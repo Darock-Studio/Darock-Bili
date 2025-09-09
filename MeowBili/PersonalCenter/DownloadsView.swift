@@ -44,7 +44,7 @@ struct DownloadsView: View {
                         if metadatas[i]["notGet"] == nil {
                             if searchInput.isEmpty || metadatas[i]["Title"]!.contains(searchInput) {
                                 Button(action: {
-                                    DownloadsView.willPlayVideoPath = vRootPath + metadatas[i]["Path"]!
+                                    DownloadsView.willPlayVideoPath = vRootPath + "/" + metadatas[i]["Path"]!
                                     isPlayerPresented = true
                                 }, label: {
                                     HStack {
