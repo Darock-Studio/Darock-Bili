@@ -6,7 +6,7 @@ elif [ "$CI_WORKFLOW" = "Alternative" ]; then
     NEW_TEXT="785"
 elif [ "$CI_WORKFLOW" = "KentYe Alternative" ]; then
     NEW_TEXT="Kent Ye"
-elif [ "$CI_WORKFLOW" = "KentYe Alternative" ]; then
+elif [ "$CI_WORKFLOW" = "Darock Alternative" ]; then
     NEW_TEXT="Darock Alt"
 else
     NEW_TEXT="Unknown"
