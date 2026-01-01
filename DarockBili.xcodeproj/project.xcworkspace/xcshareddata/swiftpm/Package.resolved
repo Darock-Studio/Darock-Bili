@@ -1,5 +1,5 @@
 {
-  "originHash" : "9106adeac49f9f1e501fdf19a99d08ac9747292617a5d0236a2915067489fdc7",
+  "originHash" : "14e8d9315dcb5b17a7bbc868cbb55914dad5732365c708b2309a6d0358dc0f65",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -44,15 +44,6 @@
       "state" : {
         "revision" : "fc776af21b0df05238b6bc6c9143e493530e0be3",
         "version" : "2.6.0"
-      }
-    },
-    {
-      "identity" : "corvuskit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Darock-Studio/CorvusKit",
-      "state" : {
-        "branch" : "main",
-        "revision" : "df7f095270fe54ba52e5c232bc0f326718f910f6"
       }
     },
     {

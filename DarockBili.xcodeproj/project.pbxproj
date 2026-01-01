@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -73,8 +73,6 @@
 		8C6CC5F22D4550E1008309E5 /* RadarKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8C6CC5F12D4550E1008309E5 /* RadarKit */; };
 		8C6CC5F82D4558D4008309E5 /* NotifKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8C6CC5F72D4558D4008309E5 /* NotifKit */; };
 		8C6CC5FA2D4558DF008309E5 /* NotifKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8C6CC5F92D4558DF008309E5 /* NotifKit */; };
-		8C6CC6062D4568BA008309E5 /* CorvusKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8C6CC6052D4568BA008309E5 /* CorvusKit */; };
-		8C6CC6082D4568C2008309E5 /* CorvusKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8C6CC6072D4568C2008309E5 /* CorvusKit */; };
 		8C81D2B12BCBA57F00EC58F4 /* FansListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C81D2B02BCBA57F00EC58F4 /* FansListView.swift */; };
 		8C81D2B22BCBA58000EC58F4 /* FansListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C81D2B02BCBA57F00EC58F4 /* FansListView.swift */; };
 		8C82F7932BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */ = {isa = PBXBuildFile; fileRef = 8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */; };
@@ -490,7 +488,6 @@
 				8CA7CC1F2B77AC93008E587F /* Dynamic in Frameworks */,
 				8CA7CC1B2B77AC93008E587F /* SwiftSoup in Frameworks */,
 				8CA3889F2B78B1E300F5F91F /* AZVideoPlayer in Frameworks */,
-				8C6CC6062D4568BA008309E5 /* CorvusKit in Frameworks */,
 				8CA388992B789A0300F5F91F /* AZVideoPlayer in Frameworks */,
 				8CA7CC152B77AC93008E587F /* SDWebImageWebPCoder in Frameworks */,
 				8CA7CC112B77AC93008E587F /* EFQRCode in Frameworks */,
@@ -518,7 +515,6 @@
 				8CA7CBF32B77AC8A008E587F /* SDWebImageWebPCoder in Frameworks */,
 				8C6CC5EC2D4550E1008309E5 /* DarockFoundation in Frameworks */,
 				8CA7CBEF2B77AC8A008E587F /* EFQRCode in Frameworks */,
-				8C6CC6082D4568C2008309E5 /* CorvusKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -990,7 +986,6 @@
 				8C6CC5E62D4550B4008309E5 /* RadarKitCore */,
 				8C6CC5E92D4550C6008309E5 /* RadarKit */,
 				8C6CC5F72D4558D4008309E5 /* NotifKit */,
-				8C6CC6052D4568BA008309E5 /* CorvusKit */,
 			);
 			productName = MeowBili;
 			productReference = 8CA7CBC02B77AC4A008E587F /* MeowBili.app */;
@@ -1027,7 +1022,6 @@
 				8C6CC5EF2D4550E1008309E5 /* RadarKitCore */,
 				8C6CC5F12D4550E1008309E5 /* RadarKit */,
 				8C6CC5F92D4558DF008309E5 /* NotifKit */,
-				8C6CC6072D4568C2008309E5 /* CorvusKit */,
 			);
 			productName = "MeowBili Watch App";
 			productReference = 8CA7CBCF2B77AC4C008E587F /* 喵哩喵哩.app */;
@@ -1138,7 +1132,7 @@
 				8C6CC5E52D4550B4008309E5 /* XCRemoteSwiftPackageReference "RadarKitCore" */,
 				8C6CC5E82D4550C6008309E5 /* XCRemoteSwiftPackageReference "RadarKit" */,
 				8C6CC5F62D4558D4008309E5 /* XCRemoteSwiftPackageReference "NotifKit" */,
-				8C6CC6042D4568BA008309E5 /* XCRemoteSwiftPackageReference "CorvusKit" */,
+				071A5CB62F06B85100E4CA00 /* XCLocalSwiftPackageReference "../../依赖/CorvusKit" */,
 			);
 			productRefGroup = B44689CB2B4FC15A002CCEB2 /* Products */;
 			projectDirPath = "";
@@ -3024,6 +3018,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		071A5CB62F06B85100E4CA00 /* XCLocalSwiftPackageReference "../../依赖/CorvusKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../依赖/CorvusKit";
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		8C03B6DC2C280BAA000770B4 /* XCRemoteSwiftPackageReference "Cepheus" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -3076,14 +3077,6 @@
 		8C6CC5F62D4558D4008309E5 /* XCRemoteSwiftPackageReference "NotifKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Darock-Studio/NotifKit";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-		8C6CC6042D4568BA008309E5 /* XCRemoteSwiftPackageReference "CorvusKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Darock-Studio/CorvusKit";
 			requirement = {
 				branch = main;
 				kind = branch;
@@ -3263,16 +3256,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8C6CC5F62D4558D4008309E5 /* XCRemoteSwiftPackageReference "NotifKit" */;
 			productName = NotifKit;
-		};
-		8C6CC6052D4568BA008309E5 /* CorvusKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8C6CC6042D4568BA008309E5 /* XCRemoteSwiftPackageReference "CorvusKit" */;
-			productName = CorvusKit;
-		};
-		8C6CC6072D4568C2008309E5 /* CorvusKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8C6CC6042D4568BA008309E5 /* XCRemoteSwiftPackageReference "CorvusKit" */;
-			productName = CorvusKit;
 		};
 		8CA370DE2B827AAD00CE0E9E /* AlertToast */ = {
 			isa = XCSwiftPackageProductDependency;
