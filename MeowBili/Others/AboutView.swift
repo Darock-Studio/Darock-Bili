@@ -122,6 +122,7 @@ struct AboutCredits: View {
                 Text("ThreeManager785")
                 Text("Dignite")
                 Text("DannyFeng")
+                Text("Eric-Terminal")
                 Text("-- And You --")
                     .sheet(isPresented: $isEasterEgg1Presented, content: { EasterEgg1View(isGenshin: $isGenshin) })
                     .onTapGesture(count: 10) {
@@ -257,6 +258,7 @@ struct AboutCredits: View {
                     Text("ThreeManager785")
                     Text("Dignite")
                     Text("DannyFeng")
+                    Text("Eric-Terminal")
                     Text("-- And You --")
                         .sheet(isPresented: $isEasterEgg1Presented, content: { EasterEgg1View(isGenshin: $isGenshin) })
                         .onTapGesture(count: 10) {

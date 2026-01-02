@@ -77,8 +77,31 @@ struct DownloadsView: View {
                                 })
                                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                     Button(role: .destructive, action: {
-                                        try! FileManager.default.removeItem(atPath: vRootPath + metadatas[i]["Path"]!)
-                                        metadatas.remove(at: i)
+                                        let filePath = vRootPath + metadatas[i]["Path"]!
+                                        let bvidKey = metadatas[i]["BV"] ?? ""
+                                        
+                                        DispatchQueue.global(qos: .userInitiated).async {
+                                            do {
+                                                // 检查文件是否存在
+                                                if FileManager.default.fileExists(atPath: filePath) {
+                                                    try FileManager.default.removeItem(atPath: filePath)
+                                                }
+                                                
+                                                // 删除 UserDefaults 中的元数据
+                                                if !bvidKey.isEmpty {
+                                                    UserDefaults.standard.removeObject(forKey: bvidKey)
+                                                }
+                                                
+                                                DispatchQueue.main.async {
+                                                    metadatas.remove(at: i)
+                                                }
+                                            } catch {
+                                                debugPrint("删除文件失败: \(error.localizedDescription)")
+                                                DispatchQueue.main.async {
+                                                    tipWithText("删除失败", symbol: "xmark.circle.fill")
+                                                }
+                                            }
+                                        }
                                     }, label: {
                                         Image(systemName: "xmark.bin.fill")
                                     })

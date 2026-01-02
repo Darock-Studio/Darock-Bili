@@ -117,11 +117,22 @@ class AppFileManager {
     }
     /// 删除文件(夹)
     /// - Parameter name: 文件(夹)名
-    public func DeleteFile(_ name: String) {
+    /// - Returns: 如果删除成功或文件不存在返回true，否则返回false
+    @discardableResult
+    public func DeleteFile(_ name: String) -> Bool {
         let manager = FileManager.default
         let urlForDocument = manager.urls(for: .documentDirectory, in: .userDomainMask)
         let fileStr = urlForDocument[0].path + "/\(path)/\(name)"
-        try! manager.removeItem(atPath: fileStr)
+        
+        do {
+            if manager.fileExists(atPath: fileStr) {
+                try manager.removeItem(atPath: fileStr)
+            }
+            return true
+        } catch {
+            debugPrint("删除文件失败: \(error.localizedDescription)")
+            return false
+        }
     }
     /// 存储文件夹下图片排序
     /// - Parameters:
