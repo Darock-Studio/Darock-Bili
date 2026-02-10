@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
+		07A35BB02F3AF95500F93EE3 /* EricTerminal Alternative Destribution */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 07A35BB32F3AF95500F93EE3 /* Build configuration list for PBXAggregateTarget "EricTerminal Alternative Destribution" */;
+			buildPhases = (
+			);
+			dependencies = (
+				07A35BB12F3AF95500F93EE3 /* PBXTargetDependency */,
+			);
+			name = "EricTerminal Alternative Destribution";
+			productName = "Alternative Destribution";
+		};
 		8C622BCE2E91907600FF6950 /* Darock Alternative Destribution */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 8C622BD12E91907600FF6950 /* Build configuration list for PBXAggregateTarget "Darock Alternative Destribution" */;
@@ -243,6 +254,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		07A35BB22F3AF95500F93EE3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B44689C42B4FC15A002CCEB2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CA7CBBF2B77AC4A008E587F;
+			remoteInfo = MeowBili;
+		};
 		8C2DFCB92C4E6B2C003AEC67 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B44689C42B4FC15A002CCEB2 /* Project object */;
@@ -1153,6 +1171,7 @@
 				8C82F8202BB709E1009AEFD2 /* Atlantic75 Alternative Destribution */,
 				8C72EA4D2D7D76F90091F17F /* KentYe Alternative Destribution */,
 				8C622BCE2E91907600FF6950 /* Darock Alternative Destribution */,
+				07A35BB02F3AF95500F93EE3 /* EricTerminal Alternative Destribution */,
 			);
 		};
 /* End PBXProject section */
@@ -1400,6 +1419,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		07A35BB12F3AF95500F93EE3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8CA7CBBF2B77AC4A008E587F /* MeowBili */;
+			targetProxy = 07A35BB22F3AF95500F93EE3 /* PBXContainerItemProxy */;
+		};
 		8C2DFCBA2C4E6B2C003AEC67 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8CA7CBBF2B77AC4A008E587F /* MeowBili */;
@@ -1443,6 +1467,357 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		07A35BA62F3AF8E400F93EE3 /* EricTerminal Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+				XROS_DEPLOYMENT_TARGET = 1.0;
+			};
+			name = "EricTerminal Alternative";
+		};
+		07A35BA72F3AF8E400F93EE3 /* EricTerminal Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Entitlements/MeowBili.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1351;
+				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview Content\"";
+				DEVELOPMENT_TEAM = K9LDK6LF4H;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MeowBili/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "喵哩喵哩使用相册保存权限以保存二维码名片至本地";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0.0;
+				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
+				PRODUCT_BUNDLE_IDENTIFIER = com.darock.eric.DarockBili;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "MeowBili/MeowBili-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,6";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "EricTerminal Alternative";
+		};
+		07A35BA82F3AF8E400F93EE3 /* EricTerminal Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconWatch;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Entitlements/Watch Release.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1351;
+				DEVELOPMENT_ASSET_PATHS = "\"MeowBili/Preview\\ Content\"";
+				DEVELOPMENT_TEAM = K9LDK6LF4H;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MeowBili-Watch-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.darock.DarockBili;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
+				PRODUCT_BUNDLE_IDENTIFIER = com.darock.eric.DarockBili.watchkitapp;
+				PRODUCT_NAME = "喵哩喵哩";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "MeowBili/MeowBili-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = "";
+				TARGETED_DEVICE_FAMILY = 4;
+				USER_HEADER_SEARCH_PATHS = "";
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = "EricTerminal Alternative";
+		};
+		07A35BA92F3AF8E400F93EE3 /* EricTerminal Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B57D8PP775;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.darock.MeowBiliTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MeowBili.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MeowBili";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "EricTerminal Alternative";
+		};
+		07A35BAA2F3AF8E400F93EE3 /* EricTerminal Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1351;
+				DEVELOPMENT_TEAM = B57D8PP775;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.darock.MeowBiliUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MeowBili;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "EricTerminal Alternative";
+		};
+		07A35BAB2F3AF8E400F93EE3 /* EricTerminal Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1351;
+				DEVELOPMENT_TEAM = K9LDK6LF4H;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MeowWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MeowWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
+				PRODUCT_BUNDLE_IDENTIFIER = com.darock.eric.DarockBili.MeowWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "EricTerminal Alternative";
+		};
+		07A35BAC2F3AF8E400F93EE3 /* EricTerminal Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1351;
+				DEVELOPMENT_TEAM = K9LDK6LF4H;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SafariExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SafariExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
+				PRODUCT_BUNDLE_IDENTIFIER = com.darock.eric.DarockBili.SafariExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Osize";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "EricTerminal Alternative";
+		};
+		07A35BAD2F3AF8E400F93EE3 /* EricTerminal Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B38QUJMY47;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = "EricTerminal Alternative";
+		};
+		07A35BAE2F3AF8E400F93EE3 /* EricTerminal Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B38QUJMY47;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = "EricTerminal Alternative";
+		};
+		07A35BAF2F3AF8E400F93EE3 /* EricTerminal Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B38QUJMY47;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = "EricTerminal Alternative";
+		};
+		07A35BB42F3AF95500F93EE3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B38QUJMY47;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		07A35BB52F3AF95500F93EE3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B38QUJMY47;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		07A35BB62F3AF95500F93EE3 /* EricTerminal Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B38QUJMY47;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = "EricTerminal Alternative";
+		};
+		07A35BB72F3AF95500F93EE3 /* Darock Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B38QUJMY47;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = "Darock Alternative";
+		};
+		07A35BB82F3AF95500F93EE3 /* Atlantic75 Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B38QUJMY47;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = "Atlantic75 Alternative";
+		};
+		07A35BB92F3AF95500F93EE3 /* KentYe Alternative */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B38QUJMY47;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = "KentYe Alternative";
+		};
 		8C2DFCBB2C4E6B2C003AEC67 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1705,7 +2080,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.darockalt.shared.DarockBili;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.darock.DarockBili;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2036,7 +2411,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.darock.caner-alt.DarockBili";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.darock.DarockBili;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2347,7 +2722,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "喵哩喵哩";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.darock.alt785.DarockBili;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.darock.DarockBili;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2902,11 +3277,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		07A35BB32F3AF95500F93EE3 /* Build configuration list for PBXAggregateTarget "EricTerminal Alternative Destribution" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07A35BB42F3AF95500F93EE3 /* Debug */,
+				07A35BB52F3AF95500F93EE3 /* Release */,
+				07A35BB62F3AF95500F93EE3 /* EricTerminal Alternative */,
+				07A35BB72F3AF95500F93EE3 /* Darock Alternative */,
+				07A35BB82F3AF95500F93EE3 /* Atlantic75 Alternative */,
+				07A35BB92F3AF95500F93EE3 /* KentYe Alternative */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8C2DFCBE2C4E6B2C003AEC67 /* Build configuration list for PBXNativeTarget "MeowBiliTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8C2DFCBB2C4E6B2C003AEC67 /* Debug */,
 				8C2DFCBC2C4E6B2C003AEC67 /* Release */,
+				07A35BA92F3AF8E400F93EE3 /* EricTerminal Alternative */,
 				8C622BC72E918F8700FF6950 /* Darock Alternative */,
 				8C2DFCBD2C4E6B2C003AEC67 /* Atlantic75 Alternative */,
 				8C72EA482D7D75C90091F17F /* KentYe Alternative */,
@@ -2919,6 +3308,7 @@
 			buildConfigurations = (
 				8C617F582B92334B000A3687 /* Debug */,
 				8C617F592B92334B000A3687 /* Release */,
+				07A35BAC2F3AF8E400F93EE3 /* EricTerminal Alternative */,
 				8C622BCA2E918F8700FF6950 /* Darock Alternative */,
 				8C82F7852BB6DF2D009AEFD2 /* Atlantic75 Alternative */,
 				8C72EA4B2D7D75C90091F17F /* KentYe Alternative */,
@@ -2931,6 +3321,7 @@
 			buildConfigurations = (
 				8C622BD22E91907600FF6950 /* Debug */,
 				8C622BD32E91907600FF6950 /* Release */,
+				07A35BAF2F3AF8E400F93EE3 /* EricTerminal Alternative */,
 				8C622BD42E91907600FF6950 /* Darock Alternative */,
 				8C622BD52E91907600FF6950 /* Atlantic75 Alternative */,
 				8C622BD62E91907600FF6950 /* KentYe Alternative */,
@@ -2943,6 +3334,7 @@
 			buildConfigurations = (
 				8C72EA512D7D76F90091F17F /* Debug */,
 				8C72EA522D7D76F90091F17F /* Release */,
+				07A35BAE2F3AF8E400F93EE3 /* EricTerminal Alternative */,
 				8C622BCC2E918F8700FF6950 /* Darock Alternative */,
 				8C72EA532D7D76F90091F17F /* Atlantic75 Alternative */,
 				8C72EA542D7D76F90091F17F /* KentYe Alternative */,
@@ -2955,6 +3347,7 @@
 			buildConfigurations = (
 				8C82F8222BB709E1009AEFD2 /* Debug */,
 				8C82F8232BB709E1009AEFD2 /* Release */,
+				07A35BAD2F3AF8E400F93EE3 /* EricTerminal Alternative */,
 				8C622BCB2E918F8700FF6950 /* Darock Alternative */,
 				8C82F8242BB709E1009AEFD2 /* Atlantic75 Alternative */,
 				8C72EA4C2D7D75C90091F17F /* KentYe Alternative */,
@@ -2967,6 +3360,7 @@
 			buildConfigurations = (
 				8CA7CBE02B77AC4D008E587F /* Debug */,
 				8CA7CBE12B77AC4D008E587F /* Release */,
+				07A35BA82F3AF8E400F93EE3 /* EricTerminal Alternative */,
 				8C622BC62E918F8700FF6950 /* Darock Alternative */,
 				8C82F7812BB6DF2D009AEFD2 /* Atlantic75 Alternative */,
 				8C72EA472D7D75C90091F17F /* KentYe Alternative */,
@@ -2979,6 +3373,7 @@
 			buildConfigurations = (
 				8CA7CBDD2B77AC4D008E587F /* Debug */,
 				8CA7CBDE2B77AC4D008E587F /* Release */,
+				07A35BA72F3AF8E400F93EE3 /* EricTerminal Alternative */,
 				8C622BC52E918F8700FF6950 /* Darock Alternative */,
 				8C82F7802BB6DF2D009AEFD2 /* Atlantic75 Alternative */,
 				8C72EA462D7D75C90091F17F /* KentYe Alternative */,
@@ -2991,6 +3386,7 @@
 			buildConfigurations = (
 				8CC5B7482B8749BC00BAD89E /* Debug */,
 				8CC5B7492B8749BC00BAD89E /* Release */,
+				07A35BAA2F3AF8E400F93EE3 /* EricTerminal Alternative */,
 				8C622BC82E918F8700FF6950 /* Darock Alternative */,
 				8C82F7842BB6DF2D009AEFD2 /* Atlantic75 Alternative */,
 				8C72EA492D7D75C90091F17F /* KentYe Alternative */,
@@ -3003,6 +3399,7 @@
 			buildConfigurations = (
 				B2B813912CC3D0F300C69D17 /* Debug */,
 				B2B813922CC3D0F300C69D17 /* Release */,
+				07A35BAB2F3AF8E400F93EE3 /* EricTerminal Alternative */,
 				8C622BC92E918F8700FF6950 /* Darock Alternative */,
 				B2B813932CC3D0F300C69D17 /* Atlantic75 Alternative */,
 				8C72EA4A2D7D75C90091F17F /* KentYe Alternative */,
@@ -3015,6 +3412,7 @@
 			buildConfigurations = (
 				B44689DE2B4FC15B002CCEB2 /* Debug */,
 				B44689DF2B4FC15B002CCEB2 /* Release */,
+				07A35BA62F3AF8E400F93EE3 /* EricTerminal Alternative */,
 				8C622BC42E918F8700FF6950 /* Darock Alternative */,
 				8C82F77F2BB6DF2D009AEFD2 /* Atlantic75 Alternative */,
 				8C72EA452D7D75C90091F17F /* KentYe Alternative */,
