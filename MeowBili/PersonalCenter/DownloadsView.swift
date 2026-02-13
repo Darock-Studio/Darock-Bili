@@ -77,7 +77,7 @@ struct DownloadsView: View {
                                 })
                                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                     Button(role: .destructive, action: {
-                                        let filePath = vRootPath + metadatas[i]["Path"]!
+                                        let filePath = vRootPath + "/" + metadatas[i]["Path"]!
                                         let bvidKey = metadatas[i]["BV"] ?? ""
                                         
                                         DispatchQueue.global(qos: .userInitiated).async {
