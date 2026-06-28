@@ -143,6 +143,7 @@ struct DownloadsView: View {
                     let nameWithOutSuffix = String(name.split(separator: ".")[0])
                     if UserDefaults.standard.dictionary(forKey: nameWithOutSuffix) != nil {
                         var dicV = UserDefaults.standard.dictionary(forKey: nameWithOutSuffix)! as! [String: String]
+                        dicV.updateValue(nameWithOutSuffix, forKey: "BV")
                         if let p = dicV["Path"] {
                             if p.contains("/") {
                                 dicV.updateValue(String(p.split(separator: "/").last!), forKey: "Path")
