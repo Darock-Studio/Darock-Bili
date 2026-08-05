@@ -103,18 +103,20 @@ struct LoginView: View {
                         qrKey = respJson["data"]["qrcode_key"].string!
                         Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
                             qrTimer = timer
-                            requestJSON("https://passport.bilibili.com/x/passport-login/web/qrcode/poll?qrcode_key=\(qrKey)", headers: headers) { respJson, isSuccess in
-                                if isSuccess {
+                            AF.request("https://passport.bilibili.com/x/passport-login/web/qrcode/poll?qrcode_key=\(qrKey)", headers: headers).response { response in
+                                if let data = response.data,
+                                   let respJson = try? JSON(data: data) {
                                     if respJson["data"]["code"].int == 86090 {
                                         isScanned = true
                                     } else if respJson["data"]["code"].int == 0 {
                                         timer.invalidate()
-                                        debugPrint(respJson)
-                                        let respUrl = respJson["data"]["url"].string!
-                                        dedeUserID = String(respUrl.split(separator: "DedeUserID=")[1].split(separator: "&")[0])
-                                        dedeUserID__ckMd5 = String(respUrl.split(separator: "DedeUserID__ckMd5=")[1].split(separator: "&")[0])
-                                        sessdata = String(respUrl.split(separator: "SESSDATA=")[1].split(separator: "&")[0])
-                                        biliJct = String(respUrl.split(separator: "bili_jct=")[1].split(separator: "&")[0])
+                                        let setCookie = response.response!.headers.value(for: "Set-Cookie")!
+                                        let separatedCookies = setCookie.split(separator: ", ")
+                                            .compactMap { $0.split(separator: ";").first }
+                                        dedeUserID = String(separatedCookies.first { $0.hasPrefix("DedeUserID") }!.dropFirst("DedeUserID=".count))
+                                        dedeUserID__ckMd5 = String(separatedCookies.first { $0.hasPrefix("DedeUserID__ckMd5") }!.dropFirst("DedeUserID__ckMd5=".count))
+                                        sessdata = String(separatedCookies.first { $0.hasPrefix("SESSDATA") }!.dropFirst("SESSDATA=".count))
+                                        biliJct = String(separatedCookies.first { $0.hasPrefix("bili_jct") }!.dropFirst("bili_jct=".count))
                                         userList1.append(dedeUserID)
                                         userList2.append(dedeUserID__ckMd5)
                                         userList3.append(sessdata)
