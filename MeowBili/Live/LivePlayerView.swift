@@ -24,8 +24,8 @@ import AVFoundation
 import DarockFoundation
 
 struct LivePlayerView: View {
-    @State var livePlayer: AVPlayer?
-    @State var tabviewChoseTab = 2
+    @State private var livePlayer: AVPlayer?
+    @State private var tabviewChoseTab = 2
     var body: some View {
         VideoPlayer(player: livePlayer)
         #if os(watchOS)

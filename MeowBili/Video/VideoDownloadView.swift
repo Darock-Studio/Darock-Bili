@@ -27,13 +27,13 @@ struct VideoDownloadView: View {
     var isPaged = false
     public static var downloadLink: String?
     public static var downloadCID: Int64?
-    @Environment(\.presentationMode) var presentationMode
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @State var isLoading = true
-    @State var isInitialized = false
+    @Environment(\.dismiss) private var dismiss
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @State private var isLoading = true
+    @State private var isInitialized = false
     var body: some View {
         NavigationStack {
             List {

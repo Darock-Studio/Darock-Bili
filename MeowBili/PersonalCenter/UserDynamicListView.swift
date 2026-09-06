@@ -24,16 +24,16 @@ import SDWebImageSwiftUI
 
 struct UserDynamicListView: View {
     var uid: String
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @State var dynamics = [[String: Any?]]()
-    @State var isLoaded = false
-    @State var lastDynamicID = ""
-    @State var isLoadingNew = false
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @State private var dynamics = [[String: Any?]]()
+    @State private var isLoaded = false
+    @State private var lastDynamicID = ""
+    @State private var isLoadingNew = false
     #if os(watchOS)
-    @State var isDynamicImagePresented = [[Bool]]()
+    @State private var isDynamicImagePresented = [[Bool]]()
     #endif
     var body: some View {
         WatchFixedScroll {

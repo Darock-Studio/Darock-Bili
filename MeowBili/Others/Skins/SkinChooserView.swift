@@ -380,7 +380,7 @@ struct SkinChooserView: View {
         "Uzi": "https://darock.top/meowbili/res/skin/Uzi/Uzi_package.zip",
         "V我套餐": "https://darock.top/meowbili/res/skin/V我套餐/V我套餐_package.zip"
     ]
-    @State var listSearchCache = ""
+    @State private var listSearchCache = ""
     var filteredSkins: [String: String] {
         if listSearchCache.isEmpty {
             return skinsPath

@@ -24,12 +24,12 @@ import DarockFoundation
 import MobileCoreServices
 
 struct WatchLaterView: View {
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @State var laters = [[String: String]]()
-    @State var isMoreMenuPresented = false
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @State private var laters = [[String: String]]()
+    @State private var isMoreMenuPresented = false
     var body: some View {
         List {
             Group {

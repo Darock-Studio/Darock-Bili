@@ -19,15 +19,15 @@
 import SwiftUI
 
 struct SwitchAccountView: View {
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @State var userList1: [Any] = []
-    @State var userList2: [Any] = []
-    @State var userList3: [Any] = []
-    @State var userList4: [Any] = []
-    @State var isLoginSheetPersented = false
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @State private var userList1: [Any] = []
+    @State private var userList2: [Any] = []
+    @State private var userList3: [Any] = []
+    @State private var userList4: [Any] = []
+    @State private var isLoginSheetPersented = false
     var body: some View {
         NavigationStack {
             List {

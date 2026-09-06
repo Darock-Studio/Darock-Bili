@@ -35,33 +35,33 @@ struct BangumiPlayerView: View {
     @Binding var shouldPause: Bool
     @Binding var currentPlayTime: Double
     #endif
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @AppStorage("IsShowNormalDanmaku") var isShowNormalDanmaku = true
-    @AppStorage("IsShowTopDanmaku") var isShowTopDanmaku = true
-    @AppStorage("IsShowBottomDanmaku") var isShowBottomDanmaku = true
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @AppStorage("IsShowNormalDanmaku") private var isShowNormalDanmaku = true
+    @AppStorage("IsShowTopDanmaku") private var isShowTopDanmaku = true
+    @AppStorage("IsShowBottomDanmaku") private var isShowBottomDanmaku = true
     #if !os(watchOS)
-    @AppStorage("IsRecordHistory") var isRecordHistory = true
+    @AppStorage("IsRecordHistory") private var isRecordHistory = true
     #else
-    @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
-    @AppStorage("IsDanmakuEnabled") var isDanmakuEnabled = true
-    @AppStorage("IsVideoPlayerGestureEnabled") var isVideoPlayerGestureEnabled = true
-    @State var tabviewChoseTab = 1
-    @State var isFullScreen = false
-    @State var playbackSpeed = 1.0
-    @State var jumpToInput = ""
+    @AppStorage("RecordHistoryTime") private var recordHistoryTime = "into"
+    @AppStorage("IsDanmakuEnabled") private var isDanmakuEnabled = true
+    @AppStorage("IsVideoPlayerGestureEnabled") private var isVideoPlayerGestureEnabled = true
+    @State private var tabviewChoseTab = 1
+    @State private var isFullScreen = false
+    @State private var playbackSpeed = 1.0
+    @State private var jumpToInput = ""
     #endif
-    @State var currentTime: Double = 0.0
-    @State var playerTimer: Timer?
-    @State var danmakuTimer: Timer?
-    @State var playProgressTimer: Timer?
-    @State var player: AVPlayer!
-    @State var isFinishedInit = false
-    @State var willBeginFullScreenPresentation = false
-    @State var showDanmakus = [[String: String]]()
-    @State var danmakuOffset: CGFloat = 0
+    @State private var currentTime: Double = 0.0
+    @State private var playerTimer: Timer?
+    @State private var danmakuTimer: Timer?
+    @State private var playProgressTimer: Timer?
+    @State private var player: AVPlayer!
+    @State private var isFinishedInit = false
+    @State private var willBeginFullScreenPresentation = false
+    @State private var showDanmakus = [[String: String]]()
+    @State private var danmakuOffset: CGFloat = 0
     var body: some View {
         Group {
             #if os(watchOS)

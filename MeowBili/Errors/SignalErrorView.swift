@@ -21,9 +21,9 @@ import Alamofire
 import DarockFoundation
 
 struct SignalErrorView: View {
-    @State var userDesc = ""
-    @State var isSending = false
-    @State var errorText = ""
+    @State private var userDesc = ""
+    @State private var isSending = false
+    @State private var errorText = ""
     var body: some View {
         ScrollView {
             VStack {

@@ -22,10 +22,10 @@ import AuthenticationServices
 
 struct LinkDetectText: View {
     @Binding var inputURL: String
-    @State var markdownText = try! AttributedString(markdown: "")
-    @State var linkColor = Color.blue
-    @State var error: Error?
-    @State var isFinishedLoad = false
+    @State private var markdownText = try! AttributedString(markdown: "")
+    @State private var linkColor = Color.blue
+    @State private var error: Error?
+    @State private var isFinishedLoad = false
     var body: some View {
 //        Group {
 //            if let error {

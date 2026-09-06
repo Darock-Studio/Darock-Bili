@@ -21,14 +21,14 @@ import DarockFoundation
 
 struct ErrorGetView: View {
     var error: GetableError
-    @Environment(\.presentationMode) var presentationMode
-    @State var doing = ""
-    @State var isClosePresented = false
-    @State var isSendPresented = false
-    @State var isSent = false
-    @State var sentCode = ""
-    @State var isError = false
-    @State var isNetworkFixPresented = false
+    @Environment(\.dismiss) private var dismiss
+    @State private var doing = ""
+    @State private var isClosePresented = false
+    @State private var isSendPresented = false
+    @State private var isSent = false
+    @State private var sentCode = ""
+    @State private var isError = false
+    @State private var isNetworkFixPresented = false
     var body: some View {
         ScrollView {
             Group {
@@ -86,7 +86,7 @@ struct ErrorGetView: View {
                                     .font(.system(size: 18, weight: .bold))
                                 if error.ignoreable {
                                     Button(action: {
-                                        presentationMode.wrappedValue.dismiss()
+                                        dismiss()
                                     }, label: {
                                         Text("Error.leave")
                                             .bold()
@@ -112,7 +112,7 @@ struct ErrorGetView: View {
                     })
                     Button(action: {
                         if error.ignoreable {
-                            presentationMode.wrappedValue.dismiss()
+                            dismiss()
                         } else {
                             isClosePresented = true
                         }

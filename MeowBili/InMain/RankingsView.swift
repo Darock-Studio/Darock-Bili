@@ -187,11 +187,11 @@ struct RankingsView: View {
 
 private struct RankingCategoryListView: View {
     var rid: Int
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @State var videos = [[String: String]]()
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @State private var videos = [[String: String]]()
     var body: some View {
         List {
             if !videos.isEmpty {

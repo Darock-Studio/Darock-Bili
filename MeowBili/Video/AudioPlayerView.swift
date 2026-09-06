@@ -32,27 +32,27 @@ var nowPlayingVideoId = ""
 
 #if os(watchOS)
 struct AudioControllerView: View {
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @AppStorage("isFastFowardUsedBefore") var isFastFowardUsedBefore = false
-    @Namespace var coverScaleNamespace
-    @State var currentPlaybackTime = globalAudioPlayer.currentTime().seconds
-    @State var currentItemTotalTime = 0.0
-    @State var currentScrolledId = 0.0
-    @State var isPlaying = false
-    @State var isProgressDraging = false
-    @State var progressDragingNewTime = 0.0
-    @State var playbackBehavior = PlaybackBehavior.pause
-    @State var backgroundImageUrl: URL?
-    @State var videoName = ""
-    @State var backwardTaps = 0
-    @State var backwardTapsSnapshot = 0
-    @State var forwardTaps = 0 //双击屏幕右侧的点击计数器
-    @State var forwardTapsSnapshop = 0
-    @State var forwardTimer: Timer?
-    @State var backwardTimer: Timer?
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @AppStorage("isFastFowardUsedBefore") private var isFastFowardUsedBefore = false
+    @Namespace private var coverScaleNamespace
+    @State private var currentPlaybackTime = globalAudioPlayer.currentTime().seconds
+    @State private var currentItemTotalTime = 0.0
+    @State private var currentScrolledId = 0.0
+    @State private var isPlaying = false
+    @State private var isProgressDraging = false
+    @State private var progressDragingNewTime = 0.0
+    @State private var playbackBehavior = PlaybackBehavior.pause
+    @State private var backgroundImageUrl: URL?
+    @State private var videoName = ""
+    @State private var backwardTaps = 0
+    @State private var backwardTapsSnapshot = 0
+    @State private var forwardTaps = 0 //双击屏幕右侧的点击计数器
+    @State private var forwardTapsSnapshop = 0
+    @State private var forwardTimer: Timer?
+    @State private var backwardTimer: Timer?
     var body: some View {
         NavigationStack {
             ZStack {
@@ -311,7 +311,7 @@ struct AudioControllerView: View {
 
 struct AudioVisualizerView: View {
     @State private var drawingHeight = true
-    @State var isAudioPlaying = globalAudioPlayer.timeControlStatus == .playing
+    @State private var isAudioPlaying = globalAudioPlayer.timeControlStatus == .playing
     var animation: Animation {
         return .linear(duration: 0.5).repeatForever()
     }

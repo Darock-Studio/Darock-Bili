@@ -237,6 +237,8 @@
 		8CC5B7432B8749BC00BAD89E /* MeowBiliUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC5B7422B8749BC00BAD89E /* MeowBiliUITests.swift */; };
 		8CD3D0402C8C715300E9C37C /* MarqueeText in Frameworks */ = {isa = PBXBuildFile; productRef = 8CD3D03F2C8C715300E9C37C /* MarqueeText */; };
 		8CD3D0422C8C715B00E9C37C /* MarqueeText in Frameworks */ = {isa = PBXBuildFile; productRef = 8CD3D0412C8C715B00E9C37C /* MarqueeText */; };
+		8CD6D8503041C17D00DE7200 /* FunderList.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8CD6D84F3041C17600DE7200 /* FunderList.txt */; };
+		8CD6D8513041C17D00DE7200 /* FunderList.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8CD6D84F3041C17600DE7200 /* FunderList.txt */; };
 		8CF148952CC40A4C00C13711 /* BiliAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF148922CC403BF00C13711 /* BiliAPI.swift */; };
 		8CF148962CC40A4C00C13711 /* BiliAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF148922CC403BF00C13711 /* BiliAPI.swift */; };
 		8CF148972CC40AAB00C13711 /* ResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF148942CC4040E00C13711 /* ResponseModels.swift */; };
@@ -451,6 +453,7 @@
 		8CC5B7402B8749BC00BAD89E /* MeowBiliUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeowBiliUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CC5B7422B8749BC00BAD89E /* MeowBiliUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeowBiliUITests.swift; sourceTree = "<group>"; };
 		8CC5B74B2B8749FC00BAD89E /* MeowBili.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = MeowBili.xctestplan; sourceTree = "<group>"; };
+		8CD6D84F3041C17600DE7200 /* FunderList.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = FunderList.txt; sourceTree = "<group>"; };
 		8CD9463A2B64CD0F005D00D0 /* Bangumi_Detail_Season.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Bangumi_Detail_Season.json; sourceTree = "<group>"; };
 		8CF148922CC403BF00C13711 /* BiliAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiliAPI.swift; sourceTree = "<group>"; };
 		8CF148942CC4040E00C13711 /* ResponseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseModels.swift; sourceTree = "<group>"; };
@@ -874,6 +877,7 @@
 				B2B813952CC3D1D800C69D17 /* SharedCode */,
 				8C82F7922BB6EAB0009AEFD2 /* SemanticVersion.drkdatas */,
 				8CB0D0252B88D67D0057EF1C /* CurrentChannel.drkdatac */,
+				8CD6D84F3041C17600DE7200 /* FunderList.txt */,
 				8CA370D92B82724400CE0E9E /* PrivacyInfo.xcprivacy */,
 				E2B720932B67858E00ABB0A6 /* Localizable.xcstrings */,
 				8C72E32A2B6605B80087486E /* README.md */,
@@ -1207,6 +1211,7 @@
 				8CA388A22B78B5D800F5F91F /* BiliFont.ttf in Resources */,
 				8CA7CBC72B77AC4C008E587F /* Assets.xcassets in Resources */,
 				8C82F7932BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */,
+				8CD6D8503041C17D00DE7200 /* FunderList.txt in Resources */,
 				8CB0D0262B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */,
 				8CA370DB2B82724400CE0E9E /* PrivacyInfo.xcprivacy in Resources */,
 				8CA7CCE02B77C3A8008E587F /* Localizable.xcstrings in Resources */,
@@ -1219,6 +1224,7 @@
 			files = (
 				8C82F7942BB6EAB0009AEFD2 /* SemanticVersion.drkdatas in Resources */,
 				8CB0D0272B88D67D0057EF1C /* CurrentChannel.drkdatac in Resources */,
+				8CD6D8513041C17D00DE7200 /* FunderList.txt in Resources */,
 				8CA388A32B78B5D800F5F91F /* BiliFont.ttf in Resources */,
 				8CA370DC2B82724400CE0E9E /* PrivacyInfo.xcprivacy in Resources */,
 				8CA7CCE12B77C3A9008E587F /* Localizable.xcstrings in Resources */,
@@ -2092,6 +2098,7 @@
 				PRODUCT_NAME = "喵哩喵哩";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DAROCK_ALT;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "MeowBili/MeowBili-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

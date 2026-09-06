@@ -23,12 +23,12 @@ import DarockFoundation
 import MobileCoreServices
 
 struct FavoriteView: View {
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @State var favoriteFolders = [[String: String]]()
-    @State var isLoaded = false
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @State private var favoriteFolders = [[String: String]]()
+    @State private var isLoaded = false
     var body: some View {
         List {
             if favoriteFolders.count != 0 {
@@ -67,13 +67,13 @@ struct FavoriteView: View {
 
 struct FavoriteDetailView: View {
     var folderDatas: [String: String]
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @State var details = [[String: String]]()
-    @State var nowPage = 1
-    @State var totalPage = 1
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @State private var details = [[String: String]]()
+    @State private var nowPage = 1
+    @State private var totalPage = 1
     var body: some View {
         List {
             if details.count != 0 {

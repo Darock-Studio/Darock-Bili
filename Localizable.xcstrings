@@ -392,6 +392,16 @@
       },
       "shouldTranslate" : false
     },
+    "%@%@" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@%2$@"
+          }
+        }
+      }
+    },
     "%@MB / %@MB" : {
       "localizations" : {
         "en" : {
@@ -9583,6 +9593,9 @@
         }
       }
     },
+    "在 TestFlight 提供测试的开发者账户需要每年付费，众筹全额用于续费开发者账户，Darock 不从中盈利。" : {
+
+    },
     "在iPhone上继续" : {
       "localizations" : {
         "en" : {
@@ -9819,6 +9832,9 @@
         }
       }
     },
+    "已排序，贡献较大的已%@" : {
+
+    },
     "已选择的图片" : {
       "localizations" : {
         "en" : {
@@ -9992,6 +10008,9 @@
           }
         }
       }
+    },
+    "您正在使用的喵哩喵哩测试通道由 Darock Community 的以下成员众筹支持" : {
+
     },
     "我的收藏" : {
       "localizations" : {

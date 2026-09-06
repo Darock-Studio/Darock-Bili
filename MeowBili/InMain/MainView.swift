@@ -26,23 +26,23 @@ import SDWebImageSwiftUI
 struct MainView: View {
     @Binding var mainTabSelection: Int
     @Namespace public var imageAnimation
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @AppStorage("CachedBiliTicket") var cachedBiliTicket = ""
-    @AppStorage("IsShowNetworkFixing") var isShowNetworkFixing = true
-    @State var userFaceUrl = ""
-    @State var username = ""
-    @State var userSign = ""
-    @State var isNetworkFixPresented = false
-    @State var isLoginPresented = false
-    @State var userList1: [Any] = []
-    @State var userList2: [Any] = []
-    @State var userList3: [Any] = []
-    @State var userList4: [Any] = []
-    @State var isNewUserPresenting = false
-    @State var festivalType = FestivalType.normal
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @AppStorage("CachedBiliTicket") private var cachedBiliTicket = ""
+    @AppStorage("IsShowNetworkFixing") private var isShowNetworkFixing = true
+    @State private var userFaceUrl = ""
+    @State private var username = ""
+    @State private var userSign = ""
+    @State private var isNetworkFixPresented = false
+    @State private var isLoginPresented = false
+    @State private var userList1: [Any] = []
+    @State private var userList2: [Any] = []
+    @State private var userList3: [Any] = []
+    @State private var userList4: [Any] = []
+    @State private var isNewUserPresenting = false
+    @State private var festivalType = FestivalType.normal
     var body: some View {
         #if !os(watchOS)
         MainViewMain()
@@ -146,28 +146,28 @@ struct MainView: View {
         #endif
     }
     struct MainViewMain: View {
-        @AppStorage("DedeUserID") var dedeUserID = ""
-        @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-        @AppStorage("SESSDATA") var sessdata = ""
-        @AppStorage("bili_jct") var biliJct = ""
-        @AppStorage("UpdateTipIgnoreVersion") var updateTipIgnoreVersion = ""
-        @AppStorage("IsShowNetworkFixing") var isShowNetworkFixing = true
-        @AppStorage("IsShowVideoSuggestionsFromDarock") var isShowVideoSuggestionsFromDarock = true
-        @AppStorage("IsTipDarockSuggestions") var isTipDarockSuggestions = true
-        @AppStorage("IsLargeSuggestionStyle") var isLargeSuggestionStyle = false
-        @State var videos = [[String: String]]()
-        @State var notice = ""
-        @State var isNetworkFixPresented = false
-        @State var isFirstLoaded = false
-        @State var newMajorVer = ""
-        @State var isNewVerAvailable = false
-        @State var isShowDisableNewVerTip = false
-        @State var isLoadingNew = false
-        @State var isFailedToLoad = false
-        @State var showedAvidList = [UInt64]()
-        @State var freshCount = 0
-        @State var darockSuggestions = [[String: String]]()
-        @State var isShowingAudioController = false
+        @AppStorage("DedeUserID") private var dedeUserID = ""
+        @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+        @AppStorage("SESSDATA") private var sessdata = ""
+        @AppStorage("bili_jct") private var biliJct = ""
+        @AppStorage("UpdateTipIgnoreVersion") private var updateTipIgnoreVersion = ""
+        @AppStorage("IsShowNetworkFixing") private var isShowNetworkFixing = true
+        @AppStorage("IsShowVideoSuggestionsFromDarock") private var isShowVideoSuggestionsFromDarock = true
+        @AppStorage("IsTipDarockSuggestions") private var isTipDarockSuggestions = true
+        @AppStorage("IsLargeSuggestionStyle") private var isLargeSuggestionStyle = false
+        @State private var videos = [[String: String]]()
+        @State private var notice = ""
+        @State private var isNetworkFixPresented = false
+        @State private var isFirstLoaded = false
+        @State private var newMajorVer = ""
+        @State private var isNewVerAvailable = false
+        @State private var isShowDisableNewVerTip = false
+        @State private var isLoadingNew = false
+        @State private var isFailedToLoad = false
+        @State private var showedAvidList = [UInt64]()
+        @State private var freshCount = 0
+        @State private var darockSuggestions = [[String: String]]()
+        @State private var isShowingAudioController = false
         var body: some View {
             ZStack {
                 LargeFixedForm {

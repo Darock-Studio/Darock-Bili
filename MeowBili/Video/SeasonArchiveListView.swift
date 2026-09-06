@@ -25,16 +25,16 @@ struct SeasonArchiveListView: View {
     var mid: String
     var seasonID: String
     var username: String
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @AppStorage("CachedBiliTicket") var cachedBiliTicket = ""
-    @State var backgroundImageUrl: URL?
-    @State var seasonName = ""
-    @State var videos = [[String: String]]()
-    @State var currentPage = 1
-    @State var totalPage = 1
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @AppStorage("CachedBiliTicket") private var cachedBiliTicket = ""
+    @State private var backgroundImageUrl: URL?
+    @State private var seasonName = ""
+    @State private var videos = [[String: String]]()
+    @State private var currentPage = 1
+    @State private var totalPage = 1
     var body: some View {
         List {
             if !videos.isEmpty {

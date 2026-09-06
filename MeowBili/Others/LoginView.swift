@@ -25,40 +25,40 @@ import DarockFoundation
 import AuthenticationServices
 
 struct LoginView: View {
-    @Environment(\.presentationMode) var presentationMode
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
+    @Environment(\.dismiss) private var dismiss
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
     //Captcha
-    @State var loginToken = ""
-    @State var challenge = ""
-    @State var gt = ""
-    @State var validate = ""
-    @State var seccode = ""
+    @State private var loginToken = ""
+    @State private var challenge = ""
+    @State private var gt = ""
+    @State private var validate = ""
+    @State private var seccode = ""
     //Bili Returns
-    @State var salt = ""
-    @State var publicKey = ""
+    @State private var salt = ""
+    @State private var publicKey = ""
     //User Input
-    @State var accountInput = ""
-    @State var passwdInput = ""
+    @State private var accountInput = ""
+    @State private var passwdInput = ""
     //---QR Login---
-    @State var qrImage: CGImage?
-    @State var qrKey = ""
-    @State var isScanned = false
-    @State var qrTimer: Timer?
+    @State private var qrImage: CGImage?
+    @State private var qrKey = ""
+    @State private var isScanned = false
+    @State private var qrTimer: Timer?
     
-    @State var smsLoginToken = ""
+    @State private var smsLoginToken = ""
     
-    @State var countryCode = "86"
-    @State var PhoneFormat = ""
-    @State var displayCC = ""
+    @State private var countryCode = "86"
+    @State private var PhoneFormat = ""
+    @State private var displayCC = ""
     
-    @State var userList1: [Any] = []
-    @State var userList2: [Any] = []
-    @State var userList3: [Any] = []
-    @State var userList4: [Any] = []
-    @State var currentStep = 1
+    @State private var userList1: [Any] = []
+    @State private var userList2: [Any] = []
+    @State private var userList3: [Any] = []
+    @State private var userList4: [Any] = []
+    @State private var currentStep = 1
     var body: some View {
         TabView {
             //--QR Login--
@@ -126,7 +126,7 @@ struct LoginView: View {
                                         UserDefaults.standard.set(userList3, forKey: "userList3")
                                         UserDefaults.standard.set(userList4, forKey: "userList4")
                                         updateBiliTicket(csrf: biliJct)
-                                        presentationMode.wrappedValue.dismiss()
+                                        dismiss()
                                     }
                                 }
                             }
@@ -444,7 +444,7 @@ struct LoginView: View {
                                         }
                                         biliJct = String(setCookie.split(separator: "bili_jct=")[1].split(separator: ";")[0])
                                         updateBiliTicket(csrf: biliJct)
-                                        presentationMode.wrappedValue.dismiss()
+                                        dismiss()
                                     } else if json["data"]["status"].int == 1006 {
                                         
                                     } else if json["data"]["status"].int == 1007 {

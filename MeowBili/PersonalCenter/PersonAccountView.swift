@@ -28,19 +28,19 @@ import SDWebImageSwiftUI
 struct PersonAccountView: View {
     var isSettingsButtonTrailing = false
     @Namespace public var imageAnimation
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @AppStorage("IsShowNetworkFixing") var isShowNetworkFixing = true
-    @State var username = ""
-    @State var userSign = ""
-    @State var userFaceUrl = ""
-    @State var isLogoutAlertPresented = false
-    @State var isUserDetailSelfPresented = false
-    @State var isNetworkFixPresented = false
-    @State var isUserSwitchPresented = false
-    @State var isNewUserPresenting = false
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @AppStorage("IsShowNetworkFixing") private var isShowNetworkFixing = true
+    @State private var username = ""
+    @State private var userSign = ""
+    @State private var userFaceUrl = ""
+    @State private var isLogoutAlertPresented = false
+    @State private var isUserDetailSelfPresented = false
+    @State private var isNetworkFixPresented = false
+    @State private var isUserSwitchPresented = false
+    @State private var isNewUserPresenting = false
     var body: some View {
         List {
             if sessdata == "" {

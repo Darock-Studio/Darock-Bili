@@ -125,36 +125,36 @@ struct DarockBiliApp: App {
     #else
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     #endif
-    @Environment(\.scenePhase) var scenePhase
-    @Environment(\.isLuminanceReduced) var isLuminanceReduced
+    @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.isLuminanceReduced) private var isLuminanceReduced
     // Screen Time
-    @AppStorage("isSleepNotificationOn") var isSleepNotificationOn = false
-    @AppStorage("notifyHour") var notifyHour = 0
-    @AppStorage("notifyMinute") var notifyMinute = 0
-    @AppStorage("IsScreenTimeEnabled") var isScreenTimeEnabled = true
-    @AppStorage("BlurWhenScreenSleep") var blurWhenScreenSleep = false
-    @AppStorage("IsReduceBrightness") var isReduceBrightness = false
-    @AppStorage("ReduceBrightnessPercent") var reduceBrightnessPercent = 0.1
-    @State var screenTimeCaculateTimer: Timer?
-    @State var isLowBatteryMode = false
+    @AppStorage("isSleepNotificationOn") private var isSleepNotificationOn = false
+    @AppStorage("notifyHour") private var notifyHour = 0
+    @AppStorage("notifyMinute") private var notifyMinute = 0
+    @AppStorage("IsScreenTimeEnabled") private var isScreenTimeEnabled = true
+    @AppStorage("BlurWhenScreenSleep") private var blurWhenScreenSleep = false
+    @AppStorage("IsReduceBrightness") private var isReduceBrightness = false
+    @AppStorage("ReduceBrightnessPercent") private var reduceBrightnessPercent = 0.1
+    @State private var screenTimeCaculateTimer: Timer?
+    @State private var isLowBatteryMode = false
     // Debug Controls
-    @State var isShowingDebugControls = false
-    @State var systemResourceRefreshTimer: Timer?
-    @State var memoryUsage: Float = 0.0
-    @State var isShowMemoryUsage = false
-    @State var currentHour = 0
-    @State var currentMinute = 0
+    @State private var isShowingDebugControls = false
+    @State private var systemResourceRefreshTimer: Timer?
+    @State private var memoryUsage: Float = 0.0
+    @State private var isShowMemoryUsage = false
+    @State private var currentHour = 0
+    @State private var currentMinute = 0
     // Handoff
-    @State var handoffVideoDetails = [String: String]()
-    @State var shouldPushVideoView = false
+    @State private var handoffVideoDetails = [String: String]()
+    @State private var shouldPushVideoView = false
     // FileLocker
-    @State var fileLockerPwd = UserDefaults.standard.string(forKey: "FileLockerPassword") ?? ""
-    @State var fileLockerRecoverCode = UserDefaults.standard.string(forKey: "FileLockerRecoverCode") ?? ""
-    @State var fileLockerRetryCount = 0
-    @State var fileLockerInput = ""
-    @State var recoveryCodeInput = ""
+    @State private var fileLockerPwd = UserDefaults.standard.string(forKey: "FileLockerPassword") ?? ""
+    @State private var fileLockerRecoverCode = UserDefaults.standard.string(forKey: "FileLockerRecoverCode") ?? ""
+    @State private var fileLockerRetryCount = 0
+    @State private var fileLockerInput = ""
+    @State private var recoveryCodeInput = ""
     // Navigators
-    @State var urlOpenVideoDetails: [String: String]?
+    @State private var urlOpenVideoDetails: [String: String]?
     var body: some SwiftUI.Scene {
         WindowGroup {
             if fileLockerPwd != "" {

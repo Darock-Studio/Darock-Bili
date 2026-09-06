@@ -29,25 +29,25 @@ import AlertToast
 
 struct FollowListView: View {
     var viewUserId: String
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @State var users = [[String: String]]()
-    @State var nowPage = 1
-    @State var totalPage = 1
-    @State var isLoadedFollows = false
-    @State var isLoadingNew = false
-    @State var pinnedUsers = [String]()
-    @State var isDeleteUndoPresented = false
-    @State var deletedUserName = ""
-    @State var deletedUserId: Int64 = 0
-    @State var isUndoCompletePresented = false
-    @State var undoTipText = ""
-    @State var isSelecting = false
-    @State var isSelected = [Bool]()
-    @State var deletedUserIds = [Int64]()
-    @State var isMultipleUndoPresented = false
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @State private var users = [[String: String]]()
+    @State private var nowPage = 1
+    @State private var totalPage = 1
+    @State private var isLoadedFollows = false
+    @State private var isLoadingNew = false
+    @State private var pinnedUsers = [String]()
+    @State private var isDeleteUndoPresented = false
+    @State private var deletedUserName = ""
+    @State private var deletedUserId: Int64 = 0
+    @State private var isUndoCompletePresented = false
+    @State private var undoTipText = ""
+    @State private var isSelecting = false
+    @State private var isSelected = [Bool]()
+    @State private var deletedUserIds = [Int64]()
+    @State private var isMultipleUndoPresented = false
     var body: some View {
         List {
             if users.count != 0 {

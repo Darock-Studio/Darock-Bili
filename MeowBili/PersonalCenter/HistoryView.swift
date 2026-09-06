@@ -23,19 +23,19 @@ import DarockFoundation
 import MobileCoreServices
 
 struct HistoryView: View {
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @State var histories = [Any]()
-    @State var isLoaded = false
-    @State var hasData = true
-    @State var nowPage = 1
-    @State var totalPage = 1
-    @State var isEmptyHistoryPresented = false
-    @State var selectedEmptyAction = 0
-    @State var isDoingEmpty = false
-    @State var searchInput = ""
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @State private var histories = [Any]()
+    @State private var isLoaded = false
+    @State private var hasData = true
+    @State private var nowPage = 1
+    @State private var totalPage = 1
+    @State private var isEmptyHistoryPresented = false
+    @State private var selectedEmptyAction = 0
+    @State private var isDoingEmpty = false
+    @State private var searchInput = ""
     var body: some View {
         List {
             Group {

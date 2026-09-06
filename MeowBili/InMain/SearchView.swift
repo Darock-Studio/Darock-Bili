@@ -35,16 +35,16 @@ struct SearchMainView: View {
     #if !os(watchOS)
     var isSearchKeyboardFocused: FocusState<Bool>.Binding
     #endif
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @AppStorage("IsShowHotsInSearch") var isShowHotsInSearch = true
-    @AppStorage("IsHotSearchFolded") var isHotSearchFolded = false
-    @State var searchText = ""
-    @State var isSearchPresented = false
-    @State var searchHistory = [String]()
-    @State var hotSearches = [String]()
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @AppStorage("IsShowHotsInSearch") private var isShowHotsInSearch = true
+    @AppStorage("IsHotSearchFolded") private var isHotSearchFolded = false
+    @State private var searchText = ""
+    @State private var isSearchPresented = false
+    @State private var searchHistory = [String]()
+    @State private var hotSearches = [String]()
     var body: some View {
         List {
             Section {
@@ -150,19 +150,19 @@ struct SearchMainView: View {
 
 struct SearchView: View {
     @Binding var keyword: String
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @State var videos = [[String: String]]()
-    @State var users = [[String: Any]]()
-    @State var articles = [[String: String]]()
-    @State var bangumis = [BangumiData]()
-    @State var liverooms = [[String: String]]()
-    @State var isLoaded = false
-    @State var searchType = SearchType.video
-    @State var isNoResult = false
-    @State var currentPage = 1
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @State private var videos = [[String: String]]()
+    @State private var users = [[String: Any]]()
+    @State private var articles = [[String: String]]()
+    @State private var bangumis = [BangumiData]()
+    @State private var liverooms = [[String: String]]()
+    @State private var isLoaded = false
+    @State private var searchType = SearchType.video
+    @State private var isNoResult = false
+    @State private var currentPage = 1
     var body: some View {
         List {
             Section {

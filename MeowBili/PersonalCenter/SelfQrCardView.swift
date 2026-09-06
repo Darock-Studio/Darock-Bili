@@ -28,14 +28,14 @@ import SDWebImageSwiftUI
 import ScreenshotableView
 
 struct SelfQrCardView: View {
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @State var shotting = false
-    @State var username = ""
-    @State var userFaceUrl = ""
-    @State var qrcodeImg: CGImage?
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @State private var shotting = false
+    @State private var username = ""
+    @State private var userFaceUrl = ""
+    @State private var qrcodeImg: CGImage?
     var body: some View {
         VStack {
             ScreenshotableView(shotting: $shotting) { image in

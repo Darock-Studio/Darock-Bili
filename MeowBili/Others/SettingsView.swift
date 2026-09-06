@@ -29,12 +29,12 @@ import UserNotifications
 #endif
 
 struct SettingsView: View {
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @AppStorage("IsLargeSuggestionStyle") var isLargeSuggestionStyle = false
-    @State var isLogoutAlertPresented = false
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @AppStorage("IsLargeSuggestionStyle") private var isLargeSuggestionStyle = false
+    @State private var isLogoutAlertPresented = false
     var body: some View {
         List {
             #if !os(watchOS)
@@ -449,15 +449,15 @@ struct SettingsView: View {
 }
 
 struct PlayerSettingsView: View {
-    @AppStorage("VideoGetterSource") var videoGetterSource = "official"
-    @AppStorage("IsShowNormalDanmaku") var isShowNormalDanmaku = true
-    @AppStorage("IsShowTopDanmaku") var isShowTopDanmaku = true
-    @AppStorage("IsShowBottomDanmaku") var isShowBottomDanmaku = true
-    @AppStorage("ExternalSound") var externalSound = false
+    @AppStorage("VideoGetterSource") private var videoGetterSource = "official"
+    @AppStorage("IsShowNormalDanmaku") private var isShowNormalDanmaku = true
+    @AppStorage("IsShowTopDanmaku") private var isShowTopDanmaku = true
+    @AppStorage("IsShowBottomDanmaku") private var isShowBottomDanmaku = true
+    @AppStorage("ExternalSound") private var externalSound = false
     #if os(watchOS)
-    @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
+    @AppStorage("RecordHistoryTime") private var recordHistoryTime = "into"
     #else
-    @AppStorage("IsRecordHistory") var isRecordHistory = true
+    @AppStorage("IsRecordHistory") private var isRecordHistory = true
     #endif
     var body: some View {
         List {
@@ -499,7 +499,7 @@ struct PlayerSettingsView: View {
 }
 
 struct KeyboardSettingsView: View {
-    @AppStorage("IsUseExtKeyboard") var isUseExtKeyboard = false
+    @AppStorage("IsUseExtKeyboard") private var isUseExtKeyboard = false
     var body: some View {
         List {
             Section {
@@ -515,7 +515,7 @@ struct KeyboardSettingsView: View {
 }
 
 struct SuggestionViewSettingsView: View {
-    @AppStorage("IsLargeSuggestionStyle") var isLargeSuggestionStyle = false
+    @AppStorage("IsLargeSuggestionStyle") private var isLargeSuggestionStyle = false
     var body: some View {
         List {
             Picker("推荐视图样式", selection: $isLargeSuggestionStyle) {
@@ -528,9 +528,9 @@ struct SuggestionViewSettingsView: View {
 }
 
 struct NetworkSettingsView: View {
-    @AppStorage("IsShowVideoSuggestionsFromDarock") var isShowVideoSuggestionsFromDarock = true
-    @AppStorage("IsShowHotsInSearch") var isShowHotsInSearch = true
-    @AppStorage("IsShowNetworkFixing") var isShowNetworkFixing = true
+    @AppStorage("IsShowVideoSuggestionsFromDarock") private var isShowVideoSuggestionsFromDarock = true
+    @AppStorage("IsShowHotsInSearch") private var isShowHotsInSearch = true
+    @AppStorage("IsShowNetworkFixing") private var isShowNetworkFixing = true
     var body: some View {
         List {
             Section {
@@ -549,7 +549,7 @@ struct NetworkSettingsView: View {
 
 #if !os(watchOS)
 struct NotificationSettingsView: View {
-    @AppStorage("IsNotificationEnabled") var isNotificationEnabled = false
+    @AppStorage("IsNotificationEnabled") private var isNotificationEnabled = false
     var body: some View {
         List {
             Section {
@@ -575,7 +575,7 @@ struct NotificationSettingsView: View {
 #endif
 
 struct SoundAHapticSettingsView: View {
-    @AppStorage("IsUseExtHaptic") var isUseExtHaptic = true
+    @AppStorage("IsUseExtHaptic") private var isUseExtHaptic = true
     var body: some View {
         List {
             Section {
@@ -588,7 +588,7 @@ struct SoundAHapticSettingsView: View {
 }
 
 struct WidgetSettingsView: View {
-    @AppStorage("WidgetRefreshInterval") var refreshInterval: Int = 10
+    @AppStorage("WidgetRefreshInterval") private var refreshInterval: Int = 10
     // @State var isNewToWidget = true for future updates
     var body: some View {
         // Here we go refreshment settings
@@ -609,10 +609,10 @@ struct WidgetSettingsView: View {
 }
 
 struct ScreenTimeSettingsView: View {
-    @AppStorage("IsScreenTimeEnabled") var isScreenTimeEnabled = true
-    @State var screenTimes = [Int]()
-    @State var mainBarData = [SingleTimeBarMarkData]()
-    @State var dayAverageTime = 0 // Minutes
+    @AppStorage("IsScreenTimeEnabled") private var isScreenTimeEnabled = true
+    @State private var screenTimes = [Int]()
+    @State private var mainBarData = [SingleTimeBarMarkData]()
+    @State private var dayAverageTime = 0 // Minutes
     var body: some View {
         List {
             if isScreenTimeEnabled {
@@ -695,8 +695,8 @@ struct ScreenTimeSettingsView: View {
 }
 
 struct AccessibilitySettingsView: View {
-    @AppStorage("IsReduceBrightness") var isReduceBrightness = false
-    @AppStorage("ReduceBrightnessPercent") var reduceBrightnessPercent = 0.1
+    @AppStorage("IsReduceBrightness") private var isReduceBrightness = false
+    @AppStorage("ReduceBrightnessPercent") private var reduceBrightnessPercent = 0.1
     var body: some View {
         List {
             Section {
@@ -710,13 +710,13 @@ struct AccessibilitySettingsView: View {
 }
 
 struct StorageSettingsView: View {
-    @State var isLoading = true
-    @State var docSize: UInt64 = 0
-    @State var tmpSize: UInt64 = 0
-    @State var bundleSize: UInt64 = 0
-    @State var isClearingCache = false
-    @State var videoMetadatas = [[String: String]]()
-    @State var vRootPath = ""
+    @State private var isLoading = true
+    @State private var docSize: UInt64 = 0
+    @State private var tmpSize: UInt64 = 0
+    @State private var bundleSize: UInt64 = 0
+    @State private var isClearingCache = false
+    @State private var videoMetadatas = [[String: String]]()
+    @State private var vRootPath = ""
     var body: some View {
         Form {
             List {
@@ -1066,13 +1066,13 @@ struct StorageSettingsView: View {
 }
 
 struct SleepTimeView: View {
-    @AppStorage("isSleepNotificationOn") var isSleepNotificationOn = false
-    @AppStorage("notifyHour") var notifyHour = 0
-    @AppStorage("notifyMinute") var notifyMinute = 0
-    @State var currentHour = 0
-    @State var currentMinute = 0
-    @State var currentSecond = 0
-    @State var isEditingTime = false
+    @AppStorage("isSleepNotificationOn") private var isSleepNotificationOn = false
+    @AppStorage("notifyHour") private var notifyHour = 0
+    @AppStorage("notifyMinute") private var notifyMinute = 0
+    @State private var currentHour = 0
+    @State private var currentMinute = 0
+    @State private var currentSecond = 0
+    @State private var isEditingTime = false
     var body: some View {
         List {
             Section(content: {
@@ -1157,8 +1157,8 @@ struct DebugMenuView: View {
     }
 
     struct BuvidFpDebug: View {
-        @State var fp = ""
-        @State var resu = ""
+        @State private var fp = ""
+        @State private var resu = ""
         var body: some View {
             List {
                 TextField("fp", text: $fp)
@@ -1176,7 +1176,7 @@ struct DebugMenuView: View {
         }
     }
     struct UuidDebug: View {
-        @State var uuid = ""
+        @State private var uuid = ""
         var body: some View {
             List {
                 Button(action: {
@@ -1189,10 +1189,10 @@ struct DebugMenuView: View {
         }
     }
     struct Buvid34Debug: View {
-        @State var activeBdUrl = "https://www.bilibili.com/"
-        @State var locBuvid3 = ""
-        @State var locBuvid4 = ""
-        @State var locUplResp = ""
+        @State private var activeBdUrl = "https://www.bilibili.com/"
+        @State private var locBuvid3 = ""
+        @State private var locBuvid4 = ""
+        @State private var locUplResp = ""
         var body: some View {
             List {
                 Section {
@@ -1220,7 +1220,7 @@ struct DebugMenuView: View {
 }
 
 struct PrivacySettingsView: View {
-    @AppStorage("BlurWhenScreenSleep") var blurWhenScreenSleep = false
+    @AppStorage("BlurWhenScreenSleep") private var blurWhenScreenSleep = false
     var body: some View {
         List {
             #if os(watchOS)
@@ -1235,12 +1235,12 @@ struct PrivacySettingsView: View {
     }
     
     struct FileLocker: View {
-        @State var isFileLockerEnabled = false
-        @State var isSetPasswdPresented = false
-        @State var passwdInput = ""
-        @State var gendRecCode = ""
-        @State var encryptProgress = 0.0
-        @State var isFinishedEncrypt = false
+        @State private var isFileLockerEnabled = false
+        @State private var isSetPasswdPresented = false
+        @State private var passwdInput = ""
+        @State private var gendRecCode = ""
+        @State private var encryptProgress = 0.0
+        @State private var isFinishedEncrypt = false
         var body: some View {
             List {
                 Section {
@@ -1337,12 +1337,12 @@ struct PrivacySettingsView: View {
 
 #if os(watchOS)
 struct SoftwareUpdateView: View {
-    @State var shouldUpdate = false
-    @State var isLoading = true
-    @State var isFailed = false
-    @State var latestVer = ""
-    @State var latestBuild = ""
-    @State var releaseNote = ""
+    @State private var shouldUpdate = false
+    @State private var isLoading = true
+    @State private var isFailed = false
+    @State private var latestVer = ""
+    @State private var latestBuild = ""
+    @State private var releaseNote = ""
     var body: some View {
         ScrollView {
             VStack {
@@ -1424,8 +1424,8 @@ struct SoftwareUpdateView: View {
 }
 
 struct GestureSettingsView: View {
-    @AppStorage("IsVideoPlayerGestureEnabled") var isVideoPlayerGestureEnabled = true
-    @AppStorage("VideoPlayerGestureBehavior") var videoPlayerGestureBehavior = "Play/Pause"
+    @AppStorage("IsVideoPlayerGestureEnabled") private var isVideoPlayerGestureEnabled = true
+    @AppStorage("VideoPlayerGestureBehavior") private var videoPlayerGestureBehavior = "Play/Pause"
     var body: some View {
         List {
             Section {
@@ -1448,9 +1448,9 @@ struct GestureSettingsView: View {
 }
 
 struct BatterySettingsView: View {
-    @State var batteryLevel = 0.0
-    @State var batteryState = WKInterfaceDeviceBatteryState.unknown
-    @State var isLowBatteryMode = isInLowBatteryMode
+    @State private var batteryLevel = 0.0
+    @State private var batteryState = WKInterfaceDeviceBatteryState.unknown
+    @State private var isLowBatteryMode = isInLowBatteryMode
     var body: some View {
         List {
             HStack {

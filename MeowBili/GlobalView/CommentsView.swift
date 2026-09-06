@@ -27,25 +27,25 @@ import SDWebImageSwiftUI
 struct CommentsView: View {
     var oid: String
     var type: Int = 1
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @State var id = ""
-    @State var comments = [[String: String]]()
-    @State var sepTexts = [[String]]()
-    @State var emojiUrls = [[String]]()
-    @State var isEmoted = [Bool]()
-    @State var commentReplies = [[[String: String]]]()
-    @State var nowPage = 1
-    @State var isSenderDetailsPresented = [Bool]()
-    @State var isLoaded = false
-    @State var isSendCommentPresented = false
-    @State var isNoMore = false
-    @State var presentRepliesGoto = ""
-    @State var presentRepliesRootData = [String: String]()
-    @State var isCommentRepliesPresented = false
-    @State var presentImageItem: String?
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @State private var id = ""
+    @State private var comments = [[String: String]]()
+    @State private var sepTexts = [[String]]()
+    @State private var emojiUrls = [[String]]()
+    @State private var isEmoted = [Bool]()
+    @State private var commentReplies = [[[String: String]]]()
+    @State private var nowPage = 1
+    @State private var isSenderDetailsPresented = [Bool]()
+    @State private var isLoaded = false
+    @State private var isSendCommentPresented = false
+    @State private var isNoMore = false
+    @State private var presentRepliesGoto = ""
+    @State private var presentRepliesRootData = [String: String]()
+    @State private var isCommentRepliesPresented = false
+    @State private var presentImageItem: String?
     var body: some View {
         ScrollView {
             VStack {
@@ -303,13 +303,13 @@ struct CommentsView: View {
         var type: Int
         @Binding var goto: String
         @Binding var rootData: [String: String]
-        @AppStorage("DedeUserID") var dedeUserID = ""
-        @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-        @AppStorage("SESSDATA") var sessdata = ""
-        @AppStorage("bili_jct") var biliJct = ""
-        @State var replies = [[String: String]]()
-        @State var isSenderDetailsPresented = [Bool]()
-        @State var currentPresentationDetent = PresentationDetent.medium
+        @AppStorage("DedeUserID") private var dedeUserID = ""
+        @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+        @AppStorage("SESSDATA") private var sessdata = ""
+        @AppStorage("bili_jct") private var biliJct = ""
+        @State private var replies = [[String: String]]()
+        @State private var isSenderDetailsPresented = [Bool]()
+        @State private var currentPresentationDetent = PresentationDetent.medium
         var body: some View {
             NavigationStack {
                 ScrollViewReader { proxy in
@@ -443,14 +443,14 @@ struct CommentsView: View {
     struct CommentSendView: View {
         var oid: String
         var type: Int
-        @Environment(\.presentationMode) var presentationMode
-        @AppStorage("DedeUserID") var dedeUserID = ""
-        @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-        @AppStorage("SESSDATA") var sessdata = ""
-        @AppStorage("bili_jct") var biliJct = ""
-        @State var sendCommentCache = ""
-        @State var isSendingComment = false
-        @State var id = ""
+        @Environment(\.dismiss) private var dismiss
+        @AppStorage("DedeUserID") private var dedeUserID = ""
+        @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+        @AppStorage("SESSDATA") private var sessdata = ""
+        @AppStorage("bili_jct") private var biliJct = ""
+        @State private var sendCommentCache = ""
+        @State private var isSendingComment = false
+        @State private var id = ""
         var body: some View {
             NavigationStack {
                 VStack {
@@ -465,7 +465,7 @@ struct CommentsView: View {
                                     sendCommentCache = ""
                                     debugPrint(response)
                                     isSendingComment = false
-                                    presentationMode.wrappedValue.dismiss()
+                                    dismiss()
                                 }
                             }
                         }

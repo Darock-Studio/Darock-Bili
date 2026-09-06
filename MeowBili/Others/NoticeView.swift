@@ -20,7 +20,7 @@ import SwiftUI
 import DarockFoundation
 
 struct NoticeView: View {
-    @State var noticeDetail = ""
+    @State private var noticeDetail = ""
     var body: some View {
         List {
             Text(noticeDetail)

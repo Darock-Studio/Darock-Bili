@@ -26,13 +26,13 @@ import DarockFoundation
 struct bMessageSendView: View {
     var uid: Int64
     var username: String
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @State var messages = [[String: String]]()
-    @State var sendTextCache = ""
-    @State var refreshTimer: Timer?
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @State private var messages = [[String: String]]()
+    @State private var sendTextCache = ""
+    @State private var refreshTimer: Timer?
     var body: some View {
         ScrollView {
             VStack {

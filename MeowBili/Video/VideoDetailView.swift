@@ -33,64 +33,69 @@ import WatchKit
 #endif
 
 struct VideoDetailView: View {
-    @State var videoDetails: [String: String]
-    @Environment(\.colorScheme) var colorScheme
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @AppStorage("VideoGetterSource") var videoGetterSource = "official"
-    @AppStorage("IsDanmakuEnabled") var isDanmakuEnabled = true
-    @AppStorage("IsUseExtHaptic") var isUseExtHaptic = true
+    @State private var videoDetails: [String: String]
+    @Environment(\.colorScheme) private var colorScheme
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @AppStorage("VideoGetterSource") private var videoGetterSource = "official"
+    @AppStorage("IsDanmakuEnabled") private var isDanmakuEnabled = true
+    @AppStorage("IsUseExtHaptic") private var isUseExtHaptic = true
     #if os(watchOS)
-    @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
-    @State var isLoading = false
+    @AppStorage("RecordHistoryTime") private var recordHistoryTime = "into"
+    @State private var isLoading = false
     #else
-    @State var isDecoded = false
+    @State private var isDecoded = false
     #endif
-    @State var isLiked = false
-    @State var isCoined = false
-    @State var isFavoured = false
-    @State var isCoinViewPresented = false
-    @State var videoPages = [[String: String]]()
-    @State var goodVideos = [[String: String]]()
-    @State var owner = [String: String]()
-    @State var stat = [String: String]()
-    @State var honors = [String]()
-    @State var tags = [String]()
-    @State var subTitles = [[String: String]]()
-    @State var ownerFansCount: Int64 = 0
-    @State var nowPlayingCount = "0"
-    @State var publishTime = ""
-    @State var videoDesc = ""
-    @State var backgroundPicOpacity = 0.0
-    @State var mainVerticalTabViewSelection = 1
-    @State var videoPartShouldShowDownloadTip = false
-    @State var isCoverImageViewPresented = false
-    @State var tagText = ""
-    @State var isFavoriteChoosePresented = false
-    @State var tagDisplayedNum = 0
-    @State var currentDetailSelection = 1
-    @State var playingPageIndex = 0
-    @State var videoLink = ""
-    @State var videoBvid = ""
-    @State var videoCID: Int64 = 0
-    @State var isDescSelectPresented = false
+    @State private var isLiked = false
+    @State private var isCoined = false
+    @State private var isFavoured = false
+    @State private var isCoinViewPresented = false
+    @State private var videoPages = [[String: String]]()
+    @State private var goodVideos = [[String: String]]()
+    @State private var owner = [String: String]()
+    @State private var stat = [String: String]()
+    @State private var honors = [String]()
+    @State private var tags = [String]()
+    @State private var subTitles = [[String: String]]()
+    @State private var ownerFansCount: Int64 = 0
+    @State private var nowPlayingCount = "0"
+    @State private var publishTime = ""
+    @State private var videoDesc = ""
+    @State private var backgroundPicOpacity = 0.0
+    @State private var mainVerticalTabViewSelection = 1
+    @State private var videoPartShouldShowDownloadTip = false
+    @State private var isCoverImageViewPresented = false
+    @State private var tagText = ""
+    @State private var isFavoriteChoosePresented = false
+    @State private var tagDisplayedNum = 0
+    @State private var currentDetailSelection = 1
+    @State private var playingPageIndex = 0
+    @State private var videoLink = ""
+    @State private var videoBvid = ""
+    @State private var videoCID: Int64 = 0
+    @State private var isDescSelectPresented = false
+
+    init(videoDetails: [String: String]) {
+        _videoDetails = State(initialValue: videoDetails)
+    }
+
     #if !os(watchOS)
-    @State var isMoreMenuPresented = false
-    @State var isDownloadPresented = false
-    @State var shouldPausePlayer = false
-    @State var danmakuSendCache = ""
-    @State var danmakuSendColor = Color(hex: 0xFFFFFF)
-    @State var currentPlayTime = 0.0
-    @State var danmakuSendFontSize = 25
-    @State var danmakuSendMode = 1
-    @State var willEnterGoodVideo = false
-    @FocusState var isEditingDanmaku: Bool
+    @State private var isMoreMenuPresented = false
+    @State private var isDownloadPresented = false
+    @State private var shouldPausePlayer = false
+    @State private var danmakuSendCache = ""
+    @State private var danmakuSendColor = Color(hex: 0xFFFFFF)
+    @State private var currentPlayTime = 0.0
+    @State private var danmakuSendFontSize = 25
+    @State private var danmakuSendMode = 1
+    @State private var willEnterGoodVideo = false
+    @FocusState private var isEditingDanmaku: Bool
     #else
-    @State var isVideoPlayerPresented = false
-    @State var continueQr: CGImage?
-    @State var isFirstLoaded = false
+    @State private var isVideoPlayerPresented = false
+    @State private var continueQr: CGImage?
+    @State private var isFirstLoaded = false
     #endif
     var body: some View {
         Group {
@@ -1135,14 +1140,14 @@ struct VideoDetailView: View {
     struct VideoFavoriteAddView: View {
         @Binding var videoDetails: [String: String]
         @Binding var isFavoured: Bool
-        @Environment(\.presentationMode) var presentationMode
-        @AppStorage("DedeUserID") var dedeUserID = ""
-        @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-        @AppStorage("SESSDATA") var sessdata = ""
-        @AppStorage("bili_jct") var biliJct = ""
-        @State var favoriteFolderList = [[String: String]]()
-        @State var isFavoriteTargetIn = [Bool]()
-        @State var isItemLoading = [Bool]()
+        @Environment(\.dismiss) private var dismiss
+        @AppStorage("DedeUserID") private var dedeUserID = ""
+        @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+        @AppStorage("SESSDATA") private var sessdata = ""
+        @AppStorage("bili_jct") private var biliJct = ""
+        @State private var favoriteFolderList = [[String: String]]()
+        @State private var isFavoriteTargetIn = [Bool]()
+        @State private var isItemLoading = [Bool]()
         var body: some View {
             NavigationStack {
                 List {
@@ -1228,18 +1233,18 @@ struct VideoDetailView: View {
         @Binding var videoPages: [[String: String]]
         @Binding var isLoading: Bool
         @Binding var videoPartShouldShowDownloadTip: Bool
-        @AppStorage("DedeUserID") var dedeUserID = ""
-        @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-        @AppStorage("SESSDATA") var sessdata = ""
-        @AppStorage("bili_jct") var biliJct = ""
-        @AppStorage("VideoGetterSource") var videoGetterSource = "official"
-        @State var isVideoPlayerPresented = false
-        @State var downloadTipOffset: CGFloat = 0.0
-        @State var downloadTipOpacity: CGFloat = 1.0
-        @State var isDownloadPresented = false
-        @State var videoLink = ""
-        @State var videoBvid = ""
-        @State var videoCID: Int64 = 0
+        @AppStorage("DedeUserID") private var dedeUserID = ""
+        @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+        @AppStorage("SESSDATA") private var sessdata = ""
+        @AppStorage("bili_jct") private var biliJct = ""
+        @AppStorage("VideoGetterSource") private var videoGetterSource = "official"
+        @State private var isVideoPlayerPresented = false
+        @State private var downloadTipOffset: CGFloat = 0.0
+        @State private var downloadTipOpacity: CGFloat = 1.0
+        @State private var isDownloadPresented = false
+        @State private var videoLink = ""
+        @State private var videoBvid = ""
+        @State private var videoCID: Int64 = 0
         var body: some View {
             List {
                 if videoPages.count != 0 {
@@ -1352,12 +1357,12 @@ struct VideoDetailView: View {
 private struct VideoThrowCoinView: View {
     var bvid: String
     @Binding var isCoined: Bool
-    @Environment(\.presentationMode) var presentationMode
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @State var choseCoin = 2
+    @Environment(\.dismiss) private var dismiss
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @State private var choseCoin = 2
     var body: some View {
         VStack {
             Picker("Video.coin.throw", selection: $choseCoin) {
@@ -1376,7 +1381,7 @@ private struct VideoThrowCoinView: View {
                     debugPrint(response)
                     isCoined = true
                     tipWithText("已投币", symbol: "checkmark.circle.fill")
-                    presentationMode.wrappedValue.dismiss()
+                    dismiss()
                 }
             }, label: {
                 Text("Video.coin.throw")

@@ -24,15 +24,15 @@ import SDWebImageSwiftUI
 
 struct FansListView: View {
     var viewUserId: String
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @State var users = [[String: String]]()
-    @State var nowPage = 1
-    @State var totalPage = 1
-    @State var isLoadedFollows = false
-    @State var isLoadingNew = false
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @State private var users = [[String: String]]()
+    @State private var nowPage = 1
+    @State private var totalPage = 1
+    @State private var isLoadedFollows = false
+    @State private var isLoadingNew = false
     var body: some View {
         List {
             if users.count != 0 {

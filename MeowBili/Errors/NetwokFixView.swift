@@ -24,11 +24,11 @@ import Foundation
 import DarockFoundation
 
 struct NetworkFixView: View {
-    @State var progressTimer: Timer?
-    @State var networkState = 0
-    @State var darockAPIState = 0
-    @State var bilibiliAPIState = 0
-    @State var isTroubleshooting = false
+    @State private var progressTimer: Timer?
+    @State private var networkState = 0
+    @State private var darockAPIState = 0
+    @State private var bilibiliAPIState = 0
+    @State private var isTroubleshooting = false
     // 0 尚未检查
     // 1 正在检查
     // 2 不可用

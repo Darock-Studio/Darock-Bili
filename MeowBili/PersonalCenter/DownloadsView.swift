@@ -32,10 +32,10 @@ var videoDownloadRequests = [DownloadRequest]()
 
 struct DownloadsView: View {
     public static var willPlayVideoPath = ""
-    @State var metadatas = [[String: String]]()
-    @State var isPlayerPresented = false
-    @State var vRootPath = ""
-    @State var searchInput = ""
+    @State private var metadatas = [[String: String]]()
+    @State private var isPlayerPresented = false
+    @State private var vRootPath = ""
+    @State private var searchInput = ""
     var body: some View {
         List {
             Section {
@@ -166,12 +166,12 @@ struct DownloadsView: View {
 }
 
 struct DownloadingListView: View {
-    @State var downloadProgresses = [Double]()
-    @State var downloadedSizes = [Int64]()
-    @State var totalSizes = [Int64]()
-    @State var videoDetails = [[String: String]]()
-    @State var localFailedDownloadTasks = [Int]()
-    @State var localVariableUpdateTimer: Timer?
+    @State private var downloadProgresses = [Double]()
+    @State private var downloadedSizes = [Int64]()
+    @State private var totalSizes = [Int64]()
+    @State private var videoDetails = [[String: String]]()
+    @State private var localFailedDownloadTasks = [Int]()
+    @State private var localVariableUpdateTimer: Timer?
     var body: some View {
         List {
             if downloadingProgressDataList.count != 0 && totalSizes.count != 0 {
@@ -307,9 +307,9 @@ struct DownloadingListView: View {
 
 struct OfflineVideoPlayer: View {
     var path: String?
-    @State var tabviewChoseTab = 1
-    @State var isFullScreen = false
-    @State var player: AVPlayer!
+    @State private var tabviewChoseTab = 1
+    @State private var isFullScreen = false
+    @State private var player: AVPlayer!
     var body: some View {
         #if os(watchOS)
         TabView(selection: $tabviewChoseTab) {

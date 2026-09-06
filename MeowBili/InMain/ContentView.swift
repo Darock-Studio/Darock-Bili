@@ -26,20 +26,26 @@ var pIsAudioControllerAvailable = false
 var pShouldPresentAudioController = false
 
 struct ContentView: View {
-    public static var nowAppVer = "1.0.0|106"
-    @AppStorage("IsNewFeatureTipped1") var isNewFeatureTipped = false
-    @AppStorage("LastUsingVer") var lastUsingVer = ""
-    @AppStorage("IsReadTerms") var isReadTerms = false
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @State var mainTabSelection = 1
-    @State var isTermsPresented = false
-    @State var userFaceUrl = ""
-    @State var isAudioControllerPresented = false
-    @State var isNewFeaturePresented = false
-    @FocusState var isSearchKeyboardFocused: Bool
+    @AppStorage("IsNewFeatureTipped1") private var isNewFeatureTipped = false
+    @AppStorage("LastUsingVer") private var lastUsingVer = ""
+    @AppStorage("IsReadTerms") private var isReadTerms = false
+    @AppStorage("ShouldShowFunderList") private var shouldShowFunderList = {
+        #if DAROCK_ALT
+        true
+        #else
+        false
+        #endif
+    }()
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @State private var mainTabSelection = 1
+    @State private var isTermsPresented = false
+    @State private var userFaceUrl = ""
+    @State private var isAudioControllerPresented = false
+    @State private var isNewFeaturePresented = false
+    @FocusState private var isSearchKeyboardFocused: Bool
     var body: some View {
         Group {
             if #available(iOS 18.0, watchOS 11.0, *) {
@@ -58,6 +64,9 @@ struct ContentView: View {
         .sheet(isPresented: $isTermsPresented, onDismiss: {
             isReadTerms = true
         }, content: { TermsListView() })
+        .sheet(isPresented: $shouldShowFunderList) {
+            FunderListView()
+        }
         .onAppear {
             #if os(watchOS)
             if !isNewFeatureTipped {
@@ -85,7 +94,7 @@ struct ContentView: View {
             }
         }
     }
-    
+
     @available(iOS 18.0, watchOS 11.0, *)
     @ViewBuilder
     var mainTabView: some View {
@@ -193,8 +202,8 @@ struct ContentView: View {
 }
 
 struct TermsListView: View {
-    @Environment(\.presentationMode) var presentationMode
-    @AppStorage("IsReadTerms") var isReadTerms = false
+    @Environment(\.dismiss) private var dismiss
+    @AppStorage("IsReadTerms") private var isReadTerms = false
     var body: some View {
         ScrollView {
             VStack {
@@ -208,7 +217,7 @@ struct TermsListView: View {
                     """)
                 Button(action: {
                     isReadTerms = true
-                    presentationMode.wrappedValue.dismiss()
+                    dismiss()
                 }, label: {
                     Text("Home.understand")
                 })
@@ -218,9 +227,40 @@ struct TermsListView: View {
         }
     }
 }
+private struct FunderListView: View {
+    @Environment(\.dismiss) private var dismiss
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading) {
+                Text("您正在使用的喵哩喵哩测试通道由 Darock Community 的以下成员众筹支持")
+                    .font(.system(size: 15))
+                Text("已排序，贡献较大的已\(lustrousText("增辉"))")
+                    .font(.system(size: 13))
+                    .foregroundStyle(.secondary)
+                Spacer()
+                    .frame(height: 10)
+                if let url = Bundle.main.url(forResource: "FunderList", withExtension: "txt"),
+                   let content = try? String(contentsOf: url, encoding: .utf8) {
+                    ForEach(content.components(separatedBy: .newlines), id: \.self) { name in
+                        if name.hasSuffix("[Lustre]") {
+                            lustrousText(String(name.dropLast("[Lustre]".count)))
+                        } else {
+                            Text(name)
+                        }
+                    }
+                }
+                Spacer()
+                    .frame(height: 10)
+                Text("在 TestFlight 提供测试的开发者账户需要每年付费，众筹全额用于续费开发者账户，Darock 不从中盈利。")
+                    .font(.system(size: 13))
+                    .foregroundStyle(.secondary)
+            }
+            .padding(.horizontal)
+        }
+    }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+    private func lustrousText(_ content: String) -> Text {
+        Text("\(content)\(Image(systemName: "sparkle"))")
+            .foregroundColor(.yellow)
     }
 }

@@ -26,35 +26,35 @@ import SDWebImageSwiftUI
 
 struct UserDetailView: View {
     var uid: String
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @AppStorage("CachedBiliTicket") var cachedBiliTicket = ""
-    @State var userFaceUrl = ""
-    @State var userFaceAvgColor = ""
-    @State var backgroundPicOpacity = 0.0
-    @State var username = ""
-    @State var userLevel = 0
-    @State var officialType = -1
-    @State var officialTitle = ""
-    @State var userSign = ""
-    @State var followCount = -1
-    @State var fansCount = -1
-    @State var vipLabel = ""
-    @State var videos = [[String: String]]()
-    @State var viewSelector: UserDetailViewPubsType = .video
-    @State var articles = [[String: String]]()
-    @State var videoCount = 0
-    @State var articalCount = 0
-    @State var coinCount = -1
-    @State var isFollowed = false
-    @State var isInfoSheetPresented = false
-    @State var currentExp = 0
-    @State var nextExp = 0
-    @State var minExp = 0
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @AppStorage("CachedBiliTicket") private var cachedBiliTicket = ""
+    @State private var userFaceUrl = ""
+    @State private var userFaceAvgColor = ""
+    @State private var backgroundPicOpacity = 0.0
+    @State private var username = ""
+    @State private var userLevel = 0
+    @State private var officialType = -1
+    @State private var officialTitle = ""
+    @State private var userSign = ""
+    @State private var followCount = -1
+    @State private var fansCount = -1
+    @State private var vipLabel = ""
+    @State private var videos = [[String: String]]()
+    @State private var viewSelector: UserDetailViewPubsType = .video
+    @State private var articles = [[String: String]]()
+    @State private var videoCount = 0
+    @State private var articalCount = 0
+    @State private var coinCount = -1
+    @State private var isFollowed = false
+    @State private var isInfoSheetPresented = false
+    @State private var currentExp = 0
+    @State private var nextExp = 0
+    @State private var minExp = 0
     #if os(watchOS)
-    @State var isSendbMessagePresented = false
+    @State private var isSendbMessagePresented = false
     #endif
     let levelColors = [Color(red: 192/255, green: 192/255, blue: 192/255), //0
                        Color(red: 192/255, green: 192/255, blue: 192/255), //1
@@ -384,22 +384,22 @@ struct UserDetailView: View {
         @Binding var viewSelector: UserDetailViewPubsType
         @Binding var videoCount: Int
         @Binding var articalCount: Int
-        @AppStorage("DedeUserID") var dedeUserID = ""
-        @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-        @AppStorage("SESSDATA") var sessdata = ""
-        @AppStorage("bili_jct") var biliJct = ""
-        @State var isNoVideo = false
-        @State var isNoArticle = false
-        @State var isVideosLoaded = false
-        @State var isArticlesLoaded = false
-        @State var videoTotalPage = 1
-        @State var videoNowPage = 1
-        @State var articleTotalPage = 1
-        @State var articleNowPage = 1
-        @State var isVideoPageJumpPresented = false
-        @State var videoTargetJumpPageCache = ""
-        @State var isArticalPageJumpPresented = false
-        @State var articleTargetJumpPageCache = ""
+        @AppStorage("DedeUserID") private var dedeUserID = ""
+        @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+        @AppStorage("SESSDATA") private var sessdata = ""
+        @AppStorage("bili_jct") private var biliJct = ""
+        @State private var isNoVideo = false
+        @State private var isNoArticle = false
+        @State private var isVideosLoaded = false
+        @State private var isArticlesLoaded = false
+        @State private var videoTotalPage = 1
+        @State private var videoNowPage = 1
+        @State private var articleTotalPage = 1
+        @State private var articleNowPage = 1
+        @State private var isVideoPageJumpPresented = false
+        @State private var videoTargetJumpPageCache = ""
+        @State private var isArticalPageJumpPresented = false
+        @State private var articleTargetJumpPageCache = ""
         var body: some View {
             List {
                 Section {
@@ -647,11 +647,11 @@ struct UserDetailView: View {
         @Binding var coinCount: Int
         @Binding var isFollowed: Bool
         @Binding var isSendbMessagePresented: Bool
-        @AppStorage("DedeUserID") var dedeUserID = ""
-        @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-        @AppStorage("SESSDATA") var sessdata = ""
-        @AppStorage("bili_jct") var biliJct = ""
-        @State var isAvatorViewPresented = false
+        @AppStorage("DedeUserID") private var dedeUserID = ""
+        @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+        @AppStorage("SESSDATA") private var sessdata = ""
+        @AppStorage("bili_jct") private var biliJct = ""
+        @State private var isAvatorViewPresented = false
         var body: some View {
             VStack {
                 Spacer()
@@ -835,23 +835,23 @@ struct UserDetailView: View {
         @Binding var viewSelector: UserDetailViewPubsType
         @Binding var videoCount: Int
         @Binding var articalCount: Int
-        @AppStorage("DedeUserID") var dedeUserID = ""
-        @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-        @AppStorage("SESSDATA") var sessdata = ""
-        @AppStorage("bili_jct") var biliJct = ""
-        @AppStorage("CachedBiliTicket") var cachedBiliTicket = ""
-        @State var isNoVideo = false
-        @State var isNoArticle = false
-        @State var isVideosLoaded = false
-        @State var isArticlesLoaded = false
-        @State var videoTotalPage = 1
-        @State var videoNowPage = 1
-        @State var articleTotalPage = 1
-        @State var articleNowPage = 1
-        @State var isVideoPageJumpPresented = false
-        @State var videoTargetJumpPageCache = ""
-        @State var isArticalPageJumpPresented = false
-        @State var articleTargetJumpPageCache = ""
+        @AppStorage("DedeUserID") private var dedeUserID = ""
+        @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+        @AppStorage("SESSDATA") private var sessdata = ""
+        @AppStorage("bili_jct") private var biliJct = ""
+        @AppStorage("CachedBiliTicket") private var cachedBiliTicket = ""
+        @State private var isNoVideo = false
+        @State private var isNoArticle = false
+        @State private var isVideosLoaded = false
+        @State private var isArticlesLoaded = false
+        @State private var videoTotalPage = 1
+        @State private var videoNowPage = 1
+        @State private var articleTotalPage = 1
+        @State private var articleNowPage = 1
+        @State private var isVideoPageJumpPresented = false
+        @State private var videoTargetJumpPageCache = ""
+        @State private var isArticalPageJumpPresented = false
+        @State private var articleTargetJumpPageCache = ""
         var body: some View {
             VStack {
                 ifContainer(viewSelector != .dynamic) { content in

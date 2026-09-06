@@ -43,8 +43,8 @@ struct ArticleView_Previews: PreviewProvider {
 #if os(watchOS)
 struct ArticleView: View {
     var cvid: String
-    @State var title = ""
-    @State var content = ""
+    @State private var title = ""
+    @State private var content = ""
     var body: some View {
         ScrollView {
             VStack {

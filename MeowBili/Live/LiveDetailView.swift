@@ -26,25 +26,25 @@ import SDWebImageSwiftUI
 struct LiveDetailView: View {
     var liveDetails: [String: String]
     public static var willPlayStreamUrl = ""
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @State var watchingCount = 0
-    @State var description = ""
-    @State var liveStatus = LiveRoomStatus.notStart
-    @State var startTime = ""
-    @State var streamerId: Int64 = 0
-    @State var streamerName = ""
-    @State var streamerFaceUrl = ""
-    @State var streamerFansCount = 0
-    @State var tagName = ""
-    @State var backgroundPicOpacity = 0.0
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @State private var watchingCount = 0
+    @State private var description = ""
+    @State private var liveStatus = LiveRoomStatus.notStart
+    @State private var startTime = ""
+    @State private var streamerId: Int64 = 0
+    @State private var streamerName = ""
+    @State private var streamerFaceUrl = ""
+    @State private var streamerFansCount = 0
+    @State private var tagName = ""
+    @State private var backgroundPicOpacity = 0.0
     #if !os(watchOS)
-    @State var isDecoded = false
+    @State private var isDecoded = false
     #else
-    @State var isLoading = false
-    @State var isLivePlayerPresented = false
+    @State private var isLoading = false
+    @State private var isLivePlayerPresented = false
     #endif
     var body: some View {
         Group {
@@ -249,7 +249,7 @@ struct LiveDetailView: View {
         @Binding var streamerName: String
         @Binding var isLoading: Bool
         @Binding var isLivePlayerPresented: Bool
-        @State var isCoverImageViewPresented = false
+        @State private var isCoverImageViewPresented = false
         var body: some View {
             VStack {
                 Spacer()
@@ -314,11 +314,11 @@ struct LiveDetailView: View {
         @Binding var streamerFaceUrl: String
         @Binding var streamerFansCount: Int
         @Binding var tagName: String
-        @State var ownerBlockOffset: CGFloat = 20
-        @State var nowWatchingCountOffset: CGFloat = 20
-        @State var publishTimeTextOffset: CGFloat = 20
-        @State var liveIdTextOffset: CGFloat = 20
-        @State var descOffset: CGFloat = 20
+        @State private var ownerBlockOffset: CGFloat = 20
+        @State private var nowWatchingCountOffset: CGFloat = 20
+        @State private var publishTimeTextOffset: CGFloat = 20
+        @State private var liveIdTextOffset: CGFloat = 20
+        @State private var descOffset: CGFloat = 20
         var body: some View {
             ScrollView {
                 VStack {

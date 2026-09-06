@@ -42,41 +42,41 @@ struct VideoPlayerView: View {
     @Binding var willEnterGoodVideo: Bool
     #endif
     #if os(watchOS)
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) private var dismiss
     #endif
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @AppStorage("IsShowNormalDanmaku") var isShowNormalDanmaku = true
-    @AppStorage("IsShowTopDanmaku") var isShowTopDanmaku = true
-    @AppStorage("IsShowBottomDanmaku") var isShowBottomDanmaku = true
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @AppStorage("IsShowNormalDanmaku") private var isShowNormalDanmaku = true
+    @AppStorage("IsShowTopDanmaku") private var isShowTopDanmaku = true
+    @AppStorage("IsShowBottomDanmaku") private var isShowBottomDanmaku = true
     #if !os(watchOS)
-    @AppStorage("IsRecordHistory") var isRecordHistory = true
+    @AppStorage("IsRecordHistory") private var isRecordHistory = true
     #else
-    @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
-    @AppStorage("IsDanmakuEnabled") var isDanmakuEnabled = true
-    @AppStorage("IsVideoPlayerGestureEnabled") var isVideoPlayerGestureEnabled = true
-    @AppStorage("VideoPlayerGestureBehavior") var videoPlayerGestureBehavior = "Play/Pause"
-    @AppStorage("ExternalSound") var externalSound = false
-    @State var tabviewChoseTab = 1
-    @State var isFullScreen = false
-    @State var playbackSpeed = 1.0
-    @State var jumpToInput = ""
-    @State var playerScale: CGFloat = 1.0
-    @State var playerScaledOffset = CGSizeZero
-    @State var playerScaledLastOffset = CGSizeZero
-    @State var cachedPlayerTimeControlStatus = AVPlayer.TimeControlStatus.paused
+    @AppStorage("RecordHistoryTime") private var recordHistoryTime = "into"
+    @AppStorage("IsDanmakuEnabled") private var isDanmakuEnabled = true
+    @AppStorage("IsVideoPlayerGestureEnabled") private var isVideoPlayerGestureEnabled = true
+    @AppStorage("VideoPlayerGestureBehavior") private var videoPlayerGestureBehavior = "Play/Pause"
+    @AppStorage("ExternalSound") private var externalSound = false
+    @State private var tabviewChoseTab = 1
+    @State private var isFullScreen = false
+    @State private var playbackSpeed = 1.0
+    @State private var jumpToInput = ""
+    @State private var playerScale: CGFloat = 1.0
+    @State private var playerScaledOffset = CGSizeZero
+    @State private var playerScaledLastOffset = CGSizeZero
+    @State private var cachedPlayerTimeControlStatus = AVPlayer.TimeControlStatus.paused
     #endif
-    @State var currentTime: Double = 0.0
-    @State var playerTimer: Timer?
-    @State var playProgressTimer: Timer?
-    @State var player: AVPlayer! = AVPlayer()
-    @State var isFinishedInit = false
-    @State var willBeginFullScreenPresentation = false
-    @State var showDanmakus = [[String: String]]()
-    @State var danmakuOffset: CGFloat = 0
-    @State var didEnterGoodVideo = false
+    @State private var currentTime: Double = 0.0
+    @State private var playerTimer: Timer?
+    @State private var playProgressTimer: Timer?
+    @State private var player: AVPlayer! = AVPlayer()
+    @State private var isFinishedInit = false
+    @State private var willBeginFullScreenPresentation = false
+    @State private var showDanmakus = [[String: String]]()
+    @State private var danmakuOffset: CGFloat = 0
+    @State private var didEnterGoodVideo = false
     var body: some View {
         Group {
             #if !os(watchOS)
@@ -281,11 +281,11 @@ struct VideoPlayerView: View {
                             if player.timeControlStatus == .playing {
                                 player.pause()
                             } else if player.timeControlStatus == .paused {
-                                presentationMode.wrappedValue.dismiss()
+                                dismiss()
                             }
                         case "Exit":
                             player.pause()
-                            presentationMode.wrappedValue.dismiss()
+                            dismiss()
                         case "Exit App":
                             exit(0)
                         default:

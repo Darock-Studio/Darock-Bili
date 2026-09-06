@@ -109,10 +109,10 @@ struct AboutApp: View {
 }
 
 struct AboutCredits: View {
-    @Environment(\.presentationMode) var presentationMode
-    @State var isEasterEgg1Presented = false
-    @State var isGenshin = false
-    @State var genshinOverlayTextOpacity: CGFloat = 0.0
+    @Environment(\.dismiss) private var dismiss
+    @State private var isEasterEgg1Presented = false
+    @State private var isGenshin = false
+    @State private var genshinOverlayTextOpacity: CGFloat = 0.0
     var body: some View {
         List {
             Section {
@@ -155,7 +155,7 @@ struct AboutCredits: View {
                     genshinOverlayTextOpacity = 1.0
                     Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
                         isGenshin = false
-                        presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     }
                 }
             }
@@ -165,15 +165,15 @@ struct AboutCredits: View {
     // MARK: Easter Eggs
     struct EasterEgg1View: View {
         @Binding var isGenshin: Bool
-        @Environment(\.presentationMode) var presentationMode
-        @State var codeInput = ""
+        @Environment(\.dismiss) private var dismiss
+        @State private var codeInput = ""
         var body: some View {
             VStack {
                 TextField("About.mystery-code", text: $codeInput)
                 Button(action: {
                     if codeInput == "Genshin" {
                         isGenshin = true
-                        presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     } else {
                         codeInput = String(localized: "About.mystery-code.error")
                     }
@@ -243,10 +243,10 @@ struct AboutApp: View {
 }
 
 struct AboutCredits: View {
-    @Environment(\.presentationMode) var presentationMode
-    @State var isEasterEgg1Presented = false
-    @State var isGenshin = false
-    @State var genshinOverlayTextOpacity: CGFloat = 0.0
+    @Environment(\.dismiss) private var dismiss
+    @State private var isEasterEgg1Presented = false
+    @State private var isGenshin = false
+    @State private var genshinOverlayTextOpacity: CGFloat = 0.0
     var body: some View {
         NavigationStack {
             List {
@@ -291,7 +291,7 @@ struct AboutCredits: View {
                     genshinOverlayTextOpacity = 1.0
                     Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
                         isGenshin = false
-                        presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     }
                 }
             }
@@ -301,15 +301,15 @@ struct AboutCredits: View {
     // MARK: Easter Eggs
     struct EasterEgg1View: View {
         @Binding var isGenshin: Bool
-        @Environment(\.presentationMode) var presentationMode
-        @State var codeInput = ""
+        @Environment(\.dismiss) private var dismiss
+        @State private var codeInput = ""
         var body: some View {
             VStack {
                 TextField("About.mystery-code", text: $codeInput)
                 Button(action: {
                     if codeInput == "Genshin" {
                         isGenshin = true
-                        presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     } else {
                         codeInput = String(localized: "About.mystery-code.error")
                     }

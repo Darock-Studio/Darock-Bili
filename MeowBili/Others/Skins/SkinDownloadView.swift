@@ -21,11 +21,11 @@ import Alamofire
 import ZipArchive
 
 struct SkinDownloadView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) private var dismiss
     var name: String
     var link: String
-    @State var downloadProgress = 0.0
-    @State var isUnzipping = false
+    @State private var downloadProgress = 0.0
+    @State private var isUnzipping = false
     var body: some View {
         VStack {
             Text(isUnzipping ? "Skin.unzipping" : "Skin.downloading")
@@ -49,7 +49,7 @@ struct SkinDownloadView: View {
                         try! SSZipArchive.unzipFile(atPath: filePath, toDestination: filePath.replacingOccurrences(of: "package.zip", with: "") + name, overwrite: true, password: nil)
                         isUnzipping = false
                         debugPrint(AppFileManager(path: "skin").GetRoot() ?? [[:]])
-                        presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     } else {
                         debugPrint(r.error as Any)
                     }

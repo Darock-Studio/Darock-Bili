@@ -30,8 +30,8 @@ import Cepheus
 #endif
 
 struct FeedbackView: View {
-    @State var feedbackIds = [String]()
-    @State var badgeOnIds = [String]()
+    @State private var feedbackIds = [String]()
+    @State private var badgeOnIds = [String]()
     var body: some View {
         if !COKChecker(caller: .darock).cachedCheckStatus {
             RKFeedbackView(projName: "喵哩喵哩")
@@ -47,11 +47,11 @@ struct FeedbackView: View {
 
 private struct CorvusBannedView: View {
     let declaration = String(localized: "法律之前人人平等，并有权享受法律的平等保护，不受任何歧视。人人有权享受平等保护，以免受违反本宣言的任何歧视行为以及煽动这种歧视的任何行为之害。")
-    @Environment(\.presentationMode) var presentationMode
-    @State var copyDeclarationInput = ""
-    @State var descriptionInput = ""
-    @State var descriptionSnapshotCount = 0
-    @State var isSubmitting = false
+    @Environment(\.dismiss) private var dismiss
+    @State private var copyDeclarationInput = ""
+    @State private var descriptionInput = ""
+    @State private var descriptionSnapshotCount = 0
+    @State private var isSubmitting = false
     var body: some View {
         List {
             Section {
@@ -106,7 +106,7 @@ private struct CorvusBannedView: View {
                             _ = try await RKCFeedbackManager(projectName: "Corvus申诉")
                                 .newFeedback(.init(title: "喵哩喵哩", content: descriptionInput, sender: "User"))
                             tipWithText("已提交", symbol: "checkmark.circle.fill")
-                            presentationMode.wrappedValue.dismiss()
+                            dismiss()
                         } catch {
                             tipWithText("提交时出错", symbol: "xmark.circle.fill")
                         }

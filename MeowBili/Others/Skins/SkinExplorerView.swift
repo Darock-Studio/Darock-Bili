@@ -19,8 +19,8 @@
 import SwiftUI
 
 struct SkinExplorerView: View {
-    @AppStorage("UsingSkin") var usingSkin = ""
-    @State var skinNames = [String]()
+    @AppStorage("UsingSkin") private var usingSkin = ""
+    @State private var skinNames = [String]()
     var body: some View {
         List {
             if #unavailable(watchOS 10) {

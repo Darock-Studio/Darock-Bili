@@ -24,25 +24,30 @@ import DarockFoundation
 import SDWebImageSwiftUI
 
 struct BangumiDetailView: View {
-    @State var bangumiData: BangumiData
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @AppStorage("RecordHistoryTime") var recordHistoryTime = "into"
-    @AppStorage("IsDanmakuEnabled") var isDanmakuEnabled = true
-    @State var paymentData: BangumiPayment?
-    @State var epDatas = [BangumiEp]()
-    @State var isLoading = false
-    @State var mainTabSelection = 1
-    @State var isBangumiPlayerPresented = false
-    @State var isMoreMenuPresented = false
-    @State var backgroundPicOpacity = 0.0
-    @State var navigationSelectedEpdata: BangumiEp?
-    @State var bangumiLink = ""
-    @State var isDecoded = false
-    @State var isShouldPause = false
-    @State var currentPlayTime = 0.0
+    @State private var bangumiData: BangumiData
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @AppStorage("RecordHistoryTime") private var recordHistoryTime = "into"
+    @AppStorage("IsDanmakuEnabled") private var isDanmakuEnabled = true
+    @State private var paymentData: BangumiPayment?
+    @State private var epDatas = [BangumiEp]()
+    @State private var isLoading = false
+    @State private var mainTabSelection = 1
+    @State private var isBangumiPlayerPresented = false
+    @State private var isMoreMenuPresented = false
+    @State private var backgroundPicOpacity = 0.0
+    @State private var navigationSelectedEpdata: BangumiEp?
+    @State private var bangumiLink = ""
+    @State private var isDecoded = false
+    @State private var isShouldPause = false
+    @State private var currentPlayTime = 0.0
+
+    init(bangumiData: BangumiData) {
+        _bangumiData = State(initialValue: bangumiData)
+    }
+
     var body: some View {
         TabView {
             ZStack {
@@ -142,11 +147,11 @@ struct BangumiDetailView: View {
         @Binding var bangumiData: BangumiData
         @Binding var isBangumiPlayerPresented: Bool
         @Binding var isLoading: Bool
-        @AppStorage("DedeUserID") var dedeUserID = ""
-        @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-        @AppStorage("SESSDATA") var sessdata = ""
-        @AppStorage("bili_jct") var biliJct = ""
-        @State var isCoverImageViewPresented = false
+        @AppStorage("DedeUserID") private var dedeUserID = ""
+        @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+        @AppStorage("SESSDATA") private var sessdata = ""
+        @AppStorage("bili_jct") private var biliJct = ""
+        @State private var isCoverImageViewPresented = false
         var body: some View {
             VStack {
                 Spacer()
@@ -223,12 +228,12 @@ struct BangumiDetailView: View {
         @Binding var isBangumiPlayerPresented: Bool
         @Binding var isLoading: Bool
         @Binding var bangumiLink: String
-        @Environment(\.colorScheme) var colorScheme
-        @AppStorage("DedeUserID") var dedeUserID = ""
-        @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-        @AppStorage("SESSDATA") var sessdata = ""
-        @AppStorage("bili_jct") var biliJct = ""
-        @State var playingPageIndex = 0
+        @Environment(\.colorScheme) private var colorScheme
+        @AppStorage("DedeUserID") private var dedeUserID = ""
+        @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+        @AppStorage("SESSDATA") private var sessdata = ""
+        @AppStorage("bili_jct") private var biliJct = ""
+        @State private var playingPageIndex = 0
         var body: some View {
             #if os(watchOS)
             if epDatas.count != 0 {

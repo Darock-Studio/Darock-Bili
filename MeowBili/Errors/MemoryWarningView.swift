@@ -19,7 +19,7 @@
 import SwiftUI
 
 struct MemoryWarningView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) private var dismiss
     var body: some View {
         ScrollView {
             VStack {
@@ -28,13 +28,13 @@ struct MemoryWarningView: View {
                 Text("Memory.too-much-occupied")
                 Text("Memory.limit")
                 Button(action: {
-                    presentationMode.wrappedValue.dismiss()
+                    dismiss()
                 }, label: {
                     Text("Memory.understand")
                 })
                 Button(action: {
                     isShowMemoryInScreen = true
-                    presentationMode.wrappedValue.dismiss()
+                    dismiss()
                 }, label: {
                     Text("Memory.display-usage")
                 })

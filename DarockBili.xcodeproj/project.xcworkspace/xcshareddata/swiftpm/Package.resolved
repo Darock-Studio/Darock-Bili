@@ -61,7 +61,7 @@
       "location" : "https://github.com/Darock-Studio/DarockFoundation",
       "state" : {
         "branch" : "main",
-        "revision" : "217f002106f97eebac53765f24911ae1d9861ce7"
+        "revision" : "dc088462e867e100aedea146eb69a886146eb055"
       }
     },
     {
@@ -70,7 +70,7 @@
       "location" : "https://github.com/Darock-Studio/DarockUI",
       "state" : {
         "branch" : "main",
-        "revision" : "e33b26b9d32846e9dcda96026e93d34e0a40af1d"
+        "revision" : "3f433dddd7d5416887febb5088dc68ac78db13ab"
       }
     },
     {

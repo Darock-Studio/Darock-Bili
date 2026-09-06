@@ -27,18 +27,18 @@ import JournalingSuggestions
 #endif
 
 struct DynamicSendView: View {
-    @Environment(\.presentationMode) var presentationMode
-    @AppStorage("DynamicTailSetting") var dynamicTailSetting = "NotSet"
-    @AppStorage("DedeUserID") var dedeUserID = ""
-    @AppStorage("DedeUserID__ckMd5") var dedeUserID__ckMd5 = ""
-    @AppStorage("SESSDATA") var sessdata = ""
-    @AppStorage("bili_jct") var biliJct = ""
-    @State var selectedPhotos = [PhotosPickerItem]()
-    @State var dynamicText = ""
-    @State var convertedImages = [UIImage]()
-    @State var isTailInitPresented = false
-    @State var isSending = false
-    @State var sendProgressText = ""
+    @Environment(\.dismiss) private var dismiss
+    @AppStorage("DynamicTailSetting") private var dynamicTailSetting = "NotSet"
+    @AppStorage("DedeUserID") private var dedeUserID = ""
+    @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
+    @AppStorage("SESSDATA") private var sessdata = ""
+    @AppStorage("bili_jct") private var biliJct = ""
+    @State private var selectedPhotos = [PhotosPickerItem]()
+    @State private var dynamicText = ""
+    @State private var convertedImages = [UIImage]()
+    @State private var isTailInitPresented = false
+    @State private var isSending = false
+    @State private var sendProgressText = ""
     var body: some View {
         NavigationStack {
             List {
@@ -103,7 +103,7 @@ struct DynamicSendView: View {
                                     if let rd = response.data, let json = try? JSON(data: rd) {
                                         if !CheckBApiError(from: json) { return }
                                         tipWithText("发送成功", symbol: "checkmark.circle.fill")
-                                        presentationMode.wrappedValue.dismiss()
+                                        dismiss()
                                     } else {
                                         tipWithText("发送失败,未知错误", symbol: "xmark.circle.fill")
                                     }
@@ -229,9 +229,9 @@ struct DynamicSendView: View {
     }
     
     struct DynamicTailSetView: View {
-        @Environment(\.presentationMode) var presentationMode
-        @AppStorage("DynamicTailSetting") var dynamicTailSetting = "NotSet"
-        @State var tailContent = "———— 来自 watchOS 喵哩喵哩客户端"
+        @Environment(\.dismiss) private var dismiss
+        @AppStorage("DynamicTailSetting") private var dynamicTailSetting = "NotSet"
+        @State private var tailContent = "———— 来自 watchOS 喵哩喵哩客户端"
         var body: some View {
             List {
                 Section {
@@ -249,7 +249,7 @@ struct DynamicSendView: View {
                 Section {
                     Button(action: {
                         dynamicTailSetting = tailContent
-                        presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     }, label: {
                         Text("应用")
                     })
