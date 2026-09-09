@@ -62,6 +62,7 @@
 		8C0557DF2B791B84009D9CD0 /* AZVideoPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 8C0557DE2B791B84009D9CD0 /* AZVideoPlayer */; };
 		8C2DFCAF2C4AA15C003AEC67 /* NewFeaturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2DFCAE2C4AA15C003AEC67 /* NewFeaturesView.swift */; };
 		8C2DFCB02C4AA15C003AEC67 /* NewFeaturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2DFCAE2C4AA15C003AEC67 /* NewFeaturesView.swift */; };
+		8C2E9FE0304DC7E5001E56EA /* ColorThief.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E9FDF304DC7E5001E56EA /* ColorThief.swift */; };
 		8C3C52F62CBAE79B00622CE4 /* SeasonArchiveListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C52F52CBAE79200622CE4 /* SeasonArchiveListView.swift */; };
 		8C3C52F72CBAE79B00622CE4 /* SeasonArchiveListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C52F52CBAE79200622CE4 /* SeasonArchiveListView.swift */; };
 		8C617F412B92334B000A3687 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C617F402B92334B000A3687 /* SafariWebExtensionHandler.swift */; };
@@ -355,6 +356,7 @@
 		8C20267C2CBBA32E00D7C5F9 /* RadarKitCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RadarKitCore.xcframework; path = DarockFrameworks/RadarKitCore.xcframework; sourceTree = "<group>"; };
 		8C2DFCAE2C4AA15C003AEC67 /* NewFeaturesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeaturesView.swift; sourceTree = "<group>"; };
 		8C2DFCB52C4E6B2B003AEC67 /* MeowBiliTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeowBiliTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C2E9FDF304DC7E5001E56EA /* ColorThief.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThief.swift; sourceTree = "<group>"; };
 		8C3C52F52CBAE79200622CE4 /* SeasonArchiveListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonArchiveListView.swift; sourceTree = "<group>"; };
 		8C617F3E2B92334B000A3687 /* SafariExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SafariExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C617F402B92334B000A3687 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
@@ -855,10 +857,11 @@
 		B2B813822CC3D0ED00C69D17 /* MeowWidget */ = {
 			isa = PBXGroup;
 			children = (
+				B2B8138D2CC3D0F300C69D17 /* Info.plist */,
 				B2B813832CC3D0ED00C69D17 /* MeowWidgetBundle.swift */,
+				8C2E9FDF304DC7E5001E56EA /* ColorThief.swift */,
 				B2B813872CC3D0ED00C69D17 /* MeowWidget.swift */,
 				B2B8138B2CC3D0F300C69D17 /* Assets.xcassets */,
-				B2B8138D2CC3D0F300C69D17 /* Info.plist */,
 			);
 			path = MeowWidget;
 			sourceTree = "<group>";
@@ -1418,6 +1421,7 @@
 			files = (
 				B2B813842CC3D0ED00C69D17 /* MeowWidgetBundle.swift in Sources */,
 				B2B813882CC3D0ED00C69D17 /* MeowWidget.swift in Sources */,
+				8C2E9FE0304DC7E5001E56EA /* ColorThief.swift in Sources */,
 				B2B813992CC3D22800C69D17 /* BiliBiliAPIService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1564,7 +1568,6 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0.0;
-				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.eric.DarockBili;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1605,7 +1608,6 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.eric.DarockBili.watchkitapp;
 				PRODUCT_NAME = "喵哩喵哩";
 				SDKROOT = watchos;
@@ -1688,7 +1690,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.eric.DarockBili.MeowWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1721,7 +1722,6 @@
 					"-framework",
 					SafariServices,
 				);
-				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.eric.DarockBili.SafariExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1916,7 +1916,6 @@
 					"-framework",
 					SafariServices,
 				);
-				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili.SafariExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1948,7 +1947,6 @@
 					"-framework",
 					SafariServices,
 				);
-				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili.SafariExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2052,7 +2050,6 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0.0;
-				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
 				PRODUCT_BUNDLE_IDENTIFIER = com.darockalt.shared.DarockBili;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2093,7 +2090,6 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
 				PRODUCT_BUNDLE_IDENTIFIER = com.darockalt.shared.DarockBili.watchkitapp;
 				PRODUCT_NAME = "喵哩喵哩";
 				SDKROOT = watchos;
@@ -2177,7 +2173,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
 				PRODUCT_BUNDLE_IDENTIFIER = com.darockalt.shared.DarockBili.MeowWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2210,7 +2205,6 @@
 					"-framework",
 					SafariServices,
 				);
-				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
 				PRODUCT_BUNDLE_IDENTIFIER = com.darockalt.shared.DarockBili.SafariExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2384,7 +2378,6 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0.0;
-				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.darock.caner-alt.DarockBili";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2425,7 +2418,6 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.darock.caner-alt.DarockBili.watchkitapp";
 				PRODUCT_NAME = "喵哩喵哩";
 				SDKROOT = watchos;
@@ -2508,7 +2500,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.darock.caner-alt.DarockBili.MeowWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2541,7 +2532,6 @@
 					"-framework",
 					SafariServices,
 				);
-				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.darock.caner-alt.DarockBili.SafariExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2695,7 +2685,6 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0.0;
-				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.alt785.DarockBili;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2736,7 +2725,6 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.alt785.DarockBili.watchkitapp;
 				PRODUCT_NAME = "喵哩喵哩";
 				SDKROOT = watchos;
@@ -2797,7 +2785,6 @@
 					"-framework",
 					SafariServices,
 				);
-				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.alt785.DarockBili.SafariExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2872,7 +2859,6 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0.0;
-				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2919,7 +2905,6 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0.0;
-				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2960,7 +2945,6 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili.watchkitapp;
 				PRODUCT_NAME = "喵哩喵哩";
 				SDKROOT = watchos;
@@ -3000,7 +2984,6 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili.watchkitapp;
 				PRODUCT_NAME = "喵哩喵哩";
 				SDKROOT = watchos;
@@ -3082,7 +3065,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili.MeowWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -3112,7 +3094,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.DarockBili.MeowWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -3143,7 +3124,6 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				OTHER_SWIFT_FLAGS = "-Rpass-missed=sil-assembly-vision-remark-gen";
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.alt785.DarockBili.MeowWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;

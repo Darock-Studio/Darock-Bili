@@ -23,6 +23,7 @@ struct Video: Identifiable {
     let id: Int
     let title: String
     let description: String
+    let coverImageURL: URL
     let authorName: String
     let viewCount: Int
     let likeCount: Int
@@ -103,6 +104,7 @@ class BiliBiliAPIService {
             let id = dict["aid"] as? Int,
             let title = dict["title"] as? String,
             let description = dict["desc"] as? String,
+            let coverImageURL = dict["pic"] as? String,
             let owner = dict["owner"] as? [String: Any],
             let authorName = owner["name"] as? String,
             let stat = dict["stat"] as? [String: Any],
@@ -120,6 +122,7 @@ class BiliBiliAPIService {
             id: id,
             title: title,
             description: description,
+            coverImageURL: URL(string: coverImageURL) ?? URL(string: "https://example.com")!,
             authorName: authorName,
             viewCount: viewCount,
             likeCount: likeCount,

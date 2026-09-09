@@ -61,7 +61,7 @@
       "location" : "https://github.com/Darock-Studio/DarockFoundation",
       "state" : {
         "branch" : "main",
-        "revision" : "dc088462e867e100aedea146eb69a886146eb055"
+        "revision" : "6e3dae3157d136a11b8c6be9716de4d4fa433701"
       }
     },
     {
@@ -132,7 +132,7 @@
       "location" : "https://github.com/Darock-Studio/RadarKit/",
       "state" : {
         "branch" : "main",
-        "revision" : "19e99bfb8b9f87e51dcec7d56209ccf2d1dba12c"
+        "revision" : "fbb906bbf690118f42df4b995ff203415a9a0c77"
       }
     },
     {
@@ -141,7 +141,7 @@
       "location" : "https://github.com/Darock-Studio/RadarKitCore",
       "state" : {
         "branch" : "main",
-        "revision" : "3a74b5742d4fc2725244095bf4768c8eacdf8aea"
+        "revision" : "173b252d3c012bd7457bdf78488e0bf9c945d91b"
       }
     },
     {
