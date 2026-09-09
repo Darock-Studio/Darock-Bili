@@ -30,11 +30,11 @@ struct ContentView: View {
     @AppStorage("LastUsingVer") private var lastUsingVer = ""
     @AppStorage("IsReadTerms") private var isReadTerms = false
     @AppStorage("ShouldShowFunderList") private var shouldShowFunderList = {
-        #if DAROCK_ALT
-        true
-        #else
+//        #if DAROCK_ALT
+//        true
+//        #else
         false
-        #endif
+//        #endif
     }()
     @AppStorage("DedeUserID") private var dedeUserID = ""
     @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
