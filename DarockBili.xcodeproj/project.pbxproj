@@ -1654,7 +1654,7 @@
 				CURRENT_PROJECT_VERSION = 1351;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.MeowBiliUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1711,7 +1711,7 @@
 				INFOPLIST_FILE = SafariExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SafariExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1905,7 +1905,7 @@
 				INFOPLIST_FILE = SafariExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SafariExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1936,7 +1936,7 @@
 				INFOPLIST_FILE = SafariExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SafariExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2137,7 +2137,7 @@
 				CURRENT_PROJECT_VERSION = 1351;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.MeowBiliUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2194,7 +2194,7 @@
 				INFOPLIST_FILE = SafariExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SafariExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2464,7 +2464,7 @@
 				CURRENT_PROJECT_VERSION = 1351;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.MeowBiliUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2521,7 +2521,7 @@
 				INFOPLIST_FILE = SafariExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SafariExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2747,7 +2747,7 @@
 				CURRENT_PROJECT_VERSION = 1351;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.MeowBiliUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2774,7 +2774,7 @@
 				INFOPLIST_FILE = SafariExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SafariExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3006,7 +3006,7 @@
 				CURRENT_PROJECT_VERSION = 1351;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.MeowBiliUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3029,7 +3029,7 @@
 				CURRENT_PROJECT_VERSION = 1351;
 				DEVELOPMENT_TEAM = B57D8PP775;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.darock.MeowBiliUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

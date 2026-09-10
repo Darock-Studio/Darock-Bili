@@ -23,15 +23,6 @@ struct SkinExplorerView: View {
     @State private var skinNames = [String]()
     var body: some View {
         List {
-            if #unavailable(watchOS 10) {
-                NavigationLink(destination: { SkinChooserView() }, label: {
-                    HStack {
-                        Image(systemName: "plus")
-                        Text("Skin.add")
-                    }
-                    .font(.system(size: 16, weight: .bold))
-                })
-            }
             if skinNames.count != 0 {
                 Section {
                     Button(action: {

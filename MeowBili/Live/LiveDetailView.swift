@@ -282,23 +282,6 @@ struct LiveDetailView: View {
                     .opacity(0.65)
                 Spacer()
                     .frame(height: 20)
-                if #unavailable(watchOS 10) {
-                    Button(action: {
-                        isLoading = true
-                        
-                        requestJSON("https://api.live.bilibili.com/room/v1/Room/playUrl?cid=\(liveDetails["ID"]!)&qn=150&platform=h5") { respJson, isSuccess in
-                            if isSuccess {
-                                debugPrint(respJson)
-                                LiveDetailView.willPlayStreamUrl = respJson["data"]["durl"][0]["url"].string ?? ""
-                                debugPrint(LiveDetailView.willPlayStreamUrl)
-                                isLivePlayerPresented = true
-                                isLoading = false
-                            }
-                        }
-                    }, label: {
-                        Label("Video.play", systemImage: "play.fill")
-                    })
-                }
             }
         }
     }

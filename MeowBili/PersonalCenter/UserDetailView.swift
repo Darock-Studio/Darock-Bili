@@ -708,50 +708,6 @@ struct UserDetailView: View {
                     .buttonStyle(.plain)
                     Spacer()
                 }
-                if #unavailable(watchOS 10) {
-                    if dedeUserID == uid {
-                        HStack {
-                            Image(systemName: "b.circle")
-                                .font(.system(size: 12))
-                                .opacity(0.55)
-                                .offset(y: 1)
-                            Text(String(coinCount))
-                                .font(.system(size: 14))
-                        }
-                    }
-                    Button(action: {
-                        let headers: HTTPHeaders = [
-                            "cookie": "SESSDATA=\(sessdata);",
-                            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-                        ]
-                        AF.request("https://api.bilibili.com/x/relation/modify", method: .post, parameters: ModifyUserRelation(fid: Int64(uid)!, act: isFollowed ? 2 : 1, csrf: biliJct), headers: headers).response { response in
-                            debugPrint(response)
-                            let json = try! JSON(data: response.data!)
-                            let code = json["code"].int!
-                            if code == 0 {
-                                tipWithText(isFollowed ? String(localized: "Account.tips.unfollowed") : String(localized: "Account.tips.followed"), symbol: "checkmark.circle.fill")
-                                isFollowed.toggle()
-                            } else {
-                                tipWithText(json["message"].string!, symbol: "xmark.circle.fill")
-                            }
-                        }
-                    }, label: {
-                        HStack {
-                            Image(systemName: isFollowed ? "person.badge.minus" : "person.badge.plus")
-                            Text(isFollowed ? String(localized: "Account.unfollow") : String(localized: "Account.follow"))
-                        }
-                    })
-                    NavigationLink("", isActive: $isSendbMessagePresented, destination: { bMessageSendView(uid: Int64(uid)!, username: username) })
-                        .frame(width: 0, height: 0)
-                    Button(action: {
-                        isSendbMessagePresented = true
-                    }, label: {
-                        HStack {
-                            Image(systemName: "ellipsis.bubble")
-                            Text("Account.direct-message")
-                        }
-                    })
-                }
                 Spacer()
             }
         }
@@ -863,24 +819,6 @@ struct UserDetailView: View {
                         }
                     }
                 } containing: {
-                    if #unavailable(watchOS 10) {
-                        Button(action: {
-                            if viewSelector == .video {
-                                viewSelector = .article
-                            } else if viewSelector == .article {
-                                viewSelector = .dynamic
-                            } else if viewSelector == .dynamic {
-                                viewSelector = .video
-                            }
-                        }, label: {
-                            HStack {
-                                Image(systemName: viewSelector == .video ? "play.circle" : "doc.text.image")
-                                Text(viewSelector == .video ? String(localized: "Account.check-videos") : String(localized: "Account.check-articles"))
-                            }
-                        })
-                        Spacer()
-                            .frame(height: 20)
-                    }
                     if viewSelector == .video {
                         if !videos.isEmpty {
                             Section {

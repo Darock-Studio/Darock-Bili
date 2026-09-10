@@ -8886,6 +8886,7 @@
       }
     },
     "Video.play" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11176,6 +11177,7 @@
       }
     },
     "重新载入" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

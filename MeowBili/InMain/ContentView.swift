@@ -27,7 +27,6 @@ var pShouldPresentAudioController = false
 
 struct ContentView: View {
     @AppStorage("IsNewFeatureTipped1") private var isNewFeatureTipped = false
-    @AppStorage("LastUsingVer") private var lastUsingVer = ""
     @AppStorage("IsReadTerms") private var isReadTerms = false
     @AppStorage("ShouldShowFunderList") private var shouldShowFunderList = {
 //        #if DAROCK_ALT

@@ -49,21 +49,6 @@ struct UserDynamicMainView: View {
                             Label("发送动态", systemImage: "square.and.pencil")
                         })
                         .buttonStyle(.borderedProminent)
-                        #else
-                        if #unavailable(watchOS 10) {
-                            Button(action: {
-                                lastDynamicID = ""
-                                dynamics.removeAll()
-                                ContinueLoadDynamic()
-                            }, label: {
-                                Label("重新载入", systemImage: "arrow.clockwise")
-                            })
-                            NavigationLink(destination: { DynamicSendView() }, label: {
-                                Label("发送动态", systemImage: "square.and.pencil")
-                            })
-                            Spacer()
-                                .frame(height: 10)
-                        }
                         #endif
                         ForEach(0..<dynamics.count, id: \.self) { i in
                             VStack {
