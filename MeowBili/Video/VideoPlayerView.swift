@@ -71,7 +71,8 @@ struct VideoPlayerView: View {
     @State private var currentTime: Double = 0.0
     @State private var playerTimer: Timer?
     @State private var playProgressTimer: Timer?
-    @State private var player: AVPlayer! = AVPlayer()
+    @State private var player = AVPlayer()
+    @State private var isPlaybackErrorPresented = false
     @State private var isFinishedInit = false
     @State private var willBeginFullScreenPresentation = false
     @State private var showDanmakus = [[String: String]]()
@@ -308,6 +309,10 @@ struct VideoPlayerView: View {
         }
         .onAppear {
             if !isFinishedInit {
+                guard let url = VideoPlaybackURL.parse(videoLink) else {
+                    isPlaybackErrorPresented = true
+                    return
+                }
                 isFinishedInit = true
                 
                 #if os(watchOS)
@@ -323,7 +328,7 @@ struct VideoPlayerView: View {
                 }
                 #endif
                 
-                let asset = AVURLAsset(url: URL(string: videoLink)!, options: ["AVURLAssetHTTPHeaderFieldsKey": ["User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15", "Referer": "https://www.bilibili.com"]])
+                let asset = AVURLAsset(url: url, options: ["AVURLAssetHTTPHeaderFieldsKey": ["User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15", "Referer": "https://www.bilibili.com"]])
                 let item = AVPlayerItem(asset: asset)
                 player = AVPlayer(playerItem: item)
                 player.play()
@@ -383,13 +388,13 @@ struct VideoPlayerView: View {
             if willEnterGoodVideo {
                 didEnterGoodVideo = true
                 willEnterGoodVideo = false
-                player?.pause()
+                player.pause()
                 return
             }
             #endif
             playerTimer?.invalidate()
             playProgressTimer?.invalidate()
-            player?.pause()
+            player.pause()
             if (player.currentItem?.duration.seconds ?? 0) - player.currentTime().seconds > 10 {
                 UserDefaults.standard.set(player.currentTime().seconds, forKey: "\(videoBvid)\(videoCID)PlayTime")
             } else {
@@ -397,10 +402,15 @@ struct VideoPlayerView: View {
             }
         }
         .onChange(of: videoLink) {
-            let asset = AVURLAsset(url: URL(string: videoLink)!, options: ["AVURLAssetHTTPHeaderFieldsKey": ["User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15", "Referer": "https://www.bilibili.com"]])
+            guard let url = VideoPlaybackURL.parse(videoLink) else {
+                player.pause()
+                isPlaybackErrorPresented = true
+                return
+            }
+            isPlaybackErrorPresented = false
+            let asset = AVURLAsset(url: url, options: ["AVURLAssetHTTPHeaderFieldsKey": ["User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15", "Referer": "https://www.bilibili.com"]])
             let item = AVPlayerItem(asset: asset)
-            player?.pause()
-            player = nil
+            player.pause()
             player = AVPlayer(playerItem: item)
             player.play()
             player.seek(to: CMTime(seconds: UserDefaults.standard.double(forKey: "\(videoBvid)\(videoCID)PlayTime"), preferredTimescale: 1))
@@ -419,11 +429,16 @@ struct VideoPlayerView: View {
         #if !os(watchOS)
         .onChange(of: shouldPause) {
             if shouldPause {
-                player?.pause()
+                player.pause()
                 shouldPause = false
             }
         }
         #endif
+        .alert("无法播放视频", isPresented: $isPlaybackErrorPresented) {
+            Button("好", role: .cancel) {}
+        } message: {
+            Text("播放地址无效，请返回重试或更换解析源。")
+        }
     }
     
     @_optimize(speed)
