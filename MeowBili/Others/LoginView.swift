@@ -26,6 +26,7 @@ import AuthenticationServices
 
 struct LoginView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.webAuthenticationSession) private var webAuthenticationSession
     @AppStorage("DedeUserID") private var dedeUserID = ""
     @AppStorage("DedeUserID__ckMd5") private var dedeUserID__ckMd5 = ""
     @AppStorage("SESSDATA") private var sessdata = ""
@@ -36,6 +37,7 @@ struct LoginView: View {
     @State private var gt = ""
     @State private var validate = ""
     @State private var seccode = ""
+    @State private var isAuthenticatingCaptcha = false
     //Bili Returns
     @State private var salt = ""
     @State private var publicKey = ""
@@ -359,24 +361,7 @@ struct LoginView: View {
                                     let isValidPhone = validatePhoneNumber(num: accountInput, cc: displayCC)
                                     if !accountInput.contains(" ") && isValidPhone {
                                         if validate.isEmpty {
-                                            #if !os(watchOS)
-                                            UIApplication.shared.open(URL(string: "https://darock.top/geetest?gt=\(gt)&challenge=\(challenge)")!)
-                                            #else
-                                            let session = ASWebAuthenticationSession(url: URL(string: "https://darock.top/geetest?gt=\(gt)&challenge=\(challenge)")!, callbackURLScheme: "drkbili") { url, _ in
-                                                if let url {
-                                                    let surl = url.absoluteString.urlDecoded()
-                                                    let ds = surl.components(separatedBy: "?")
-                                                    if ds[0].contains("logincap") {
-                                                        debugPrint(ds)
-                                                        let spdF = ds[1].split(separator: "&")
-                                                        validate = String(spdF[0])
-                                                        seccode = String(spdF[1])
-                                                    }
-                                                }
-                                            }
-                                            session.prefersEphemeralWebBrowserSession = true
-                                            session.start()
-                                            #endif
+                                            isAuthenticatingCaptcha = true
                                         } else {
                                             let headers: HTTPHeaders = [
                                                 "accept": "*/*",
@@ -419,7 +404,11 @@ struct LoginView: View {
                                             .foregroundStyle(.secondary)
                                     }
                                 })
-                                .disabled(!validate.isEmpty && accountInput.isEmpty)
+                                .disabled(
+                                    isAuthenticatingCaptcha
+                                        || (validate.isEmpty && (gt.isEmpty || challenge.isEmpty || loginToken.isEmpty))
+                                        || (!validate.isEmpty && accountInput.isEmpty)
+                                )
                             }
                         }
                     }
@@ -473,14 +462,9 @@ struct LoginView: View {
             .padding()
             #endif
             .tag(1)
-            .onOpenURL { url in
-                let surl = url.absoluteString.urlDecoded()
-                let ds = surl.components(separatedBy: "?")
-                if ds[0].contains("logincap") {
-                    debugPrint(ds)
-                    let spdF = ds[1].split(separator: "&")
-                    validate = String(spdF[0])
-                    seccode = String(spdF[1])
+            .task(id: isAuthenticatingCaptcha) {
+                if isAuthenticatingCaptcha {
+                    await authenticateCaptcha()
                 }
             }
             .onAppear {
@@ -506,6 +490,50 @@ struct LoginView: View {
                     countryCode = displayCC
                 }
             }
+        }
+    }
+    
+    @MainActor
+    private func authenticateCaptcha() async {
+        defer { isAuthenticatingCaptcha = false }
+        var components = URLComponents(string: "https://darock.top/geetest")!
+        components.queryItems = [
+            .init(name: "gt", value: gt),
+            .init(name: "challenge", value: challenge)
+        ]
+        guard let url = components.url else {
+            tipWithText("验证出错，请重试", symbol: "xmark.circle.fill")
+            return
+        }
+        
+        do {
+            let callbackURL = try await webAuthenticationSession.authenticate(
+                using: url,
+                callbackURLScheme: "drkbili",
+                preferredBrowserSession: .ephemeral
+            )
+            try Task.checkCancellation()
+            guard let callback = URLComponents(url: callbackURL, resolvingAgainstBaseURL: false),
+                  callback.scheme == "drkbili",
+                  callback.host == "logincap",
+                  let query = callback.percentEncodedQuery else {
+                tipWithText("验证出错，请重试", symbol: "xmark.circle.fill")
+                return
+            }
+            let values = query.split(separator: "&", omittingEmptySubsequences: false)
+            guard values.count == 2,
+                  let validation = String(values[0]).removingPercentEncoding,
+                  let securityCode = String(values[1]).removingPercentEncoding,
+                  !validation.isEmpty, !securityCode.isEmpty else {
+                tipWithText("验证出错，请重试", symbol: "xmark.circle.fill")
+                return
+            }
+            validate = validation
+            seccode = securityCode
+        } catch ASWebAuthenticationSessionError.canceledLogin {
+        } catch is CancellationError {
+        } catch {
+            tipWithText("验证出错，请重试", symbol: "xmark.circle.fill")
         }
     }
     
