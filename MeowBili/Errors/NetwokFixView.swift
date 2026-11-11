@@ -429,6 +429,12 @@ let errorCodeTextDic = [
 public func CheckBApiError(from input: JSON, noTip: Bool = false) -> Bool {
     let code = input["code"].int ?? 0
     if code == 0 {
+        if input["data"]["v_voucher"].string != nil {
+            if !noTip {
+                tipWithText("请稍后重试", symbol: "xmark.circle.fill")
+            }
+            return false
+        }
         return true
     }
     let msg = errorCodeTextDic[code] ?? (input["message"].string ?? "")

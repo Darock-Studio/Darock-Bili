@@ -167,81 +167,76 @@ public func autoRetryRequestApi(_ url: String, headers: HTTPHeaders?, maxReqCoun
 }
 
 func biliWbiSign(paramEncoded: String, completion: @escaping (String?) -> Void) {
-    func getMixinKey(orig: String) -> String {
-        return String(mixinKeyEncTab.map { orig[orig.index(orig.startIndex, offsetBy: $0)] }.prefix(32))
+    guard let query = paramEncoded.base64Decoded() else {
+        completion(nil)
+        return
     }
+    var parameters = [String: String]()
+    for pair in query.split(separator: "&") {
+        let components = pair.split(separator: "=", maxSplits: 1, omittingEmptySubsequences: false)
+        guard components.count == 2 else {
+            completion(nil)
+            return
+        }
+        parameters[String(components[0])] = String(components[1])
+    }
+    biliWbiSign(parameters: parameters, completion: completion)
+}
 
-    func encWbi(params: [String: Any], imgKey: String, subKey: String) -> (wts: String, w_rid: String) {
-        var params = params
-        let mixinKey = getMixinKey(orig: imgKey + subKey)
-        let currTime = round(Date().timeIntervalSince1970)
-        params["wts"] = Int(currTime)
-        let std = params.sorted { $0.key < $1.key }
-        var query = ""
-        for q in std {
-            query += "\(q.key)=\(q.value)&"
+func biliWbiSign(parameters: [String: String], completion: @escaping (String?) -> Void) {
+    let headers: HTTPHeaders = [
+        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Referer": "https://www.bilibili.com/"
+    ]
+    requestJSON("https://api.bilibili.com/x/web-interface/nav", headers: headers) { json, isSuccess in
+        guard isSuccess,
+              let imgURL = json["data"]["wbi_img"]["img_url"].string.flatMap(URL.init(string:)),
+              let subURL = json["data"]["wbi_img"]["sub_url"].string.flatMap(URL.init(string:)) else {
+            completion(nil)
+            return
         }
-        query.removeLast()
-        query = query.urlEncoded()
-        let wbiSign = calculateMD5(string: query + mixinKey)
-        return (String(Int(currTime)), wbiSign)
+        completion(biliWbiSignedQuery(
+            parameters: parameters,
+            imgKey: imgURL.deletingPathExtension().lastPathComponent,
+            subKey: subURL.deletingPathExtension().lastPathComponent,
+            timestamp: Int(Date().timeIntervalSince1970.rounded())
+        ))
     }
-    
-    func getWbiKeys(completion: @escaping (Result<(imgKey: String, subKey: String), Error>) -> Void) {
-        let headers: HTTPHeaders = [
-            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-        ]
-        requestJSON("https://api.bilibili.com/x/web-interface/nav", headers: headers) { json, isSuccess in
-            if isSuccess {
-                let imgURL = json["data"]["wbi_img"]["img_url"].string ?? ""
-                let subURL = json["data"]["wbi_img"]["sub_url"].string ?? ""
-                let imgKey = imgURL.components(separatedBy: "/").last?.components(separatedBy: ".").first ?? ""
-                let subKey = subURL.components(separatedBy: "/").last?.components(separatedBy: ".").first ?? ""
-                completion(.success((imgKey, subKey)))
-            } else {
-                completion(.failure(NSError(domain: "GET_WBI_KEYS", code: 1)))
-            }
+}
+
+func biliWbiSignedQuery(
+    parameters: [String: String],
+    imgKey: String,
+    subKey: String,
+    timestamp: Int
+) -> String? {
+    let isValidKey: (String) -> Bool = { key in
+        key.utf8.count == 32 && key.utf8.allSatisfy {
+            (48...57).contains($0) || (65...70).contains($0) || (97...102).contains($0)
         }
     }
-    
-    func calculateMD5(string: String) -> String {
-        let data = Data(string.utf8)
-        var digest = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
-        _ = data.withUnsafeBytes {
-            CC_MD5($0.baseAddress, CC_LONG(data.count), &digest)
-        }
-        return digest.map { String(format: "%02hhx", $0) }.joined()
-    }
-    
+    guard isValidKey(imgKey), isValidKey(subKey) else { return nil }
     let mixinKeyEncTab = [
         46, 47, 18, 2, 53, 8, 23, 32, 15, 50, 10, 31, 58, 3, 45, 35, 27, 43, 5, 49,
         33, 9, 42, 19, 29, 28, 14, 39, 12, 38, 41, 13, 37, 48, 7, 16, 24, 55, 40,
         61, 26, 17, 0, 1, 60, 51, 30, 4, 22, 25, 54, 21, 56, 59, 6, 63, 57, 62, 11,
         36, 20, 34, 44, 52
     ]
-    
-    getWbiKeys { result in
-        switch result {
-        case .success(let keys):
-            let decParam = paramEncoded.base64Decoded() ?? ""
-            let spdParam = decParam.components(separatedBy: "&")
-            var spdDicParam = [String: String]()
-            spdParam.forEach { pair in
-                let components = pair.components(separatedBy: "=")
-                if components.count == 2 {
-                    spdDicParam[components[0]] = components[1]
-                }
-            }
-            
-            let signedParams = encWbi(params: spdDicParam, imgKey: keys.imgKey, subKey: keys.subKey)
-            var query = decParam + "&w_rid=\(signedParams.w_rid)&wts=\(signedParams.wts)"
-            query = query.urlEncoded()
-            completion(query)
-        case .failure(let error):
-            print("Error getting keys: \(error)")
-            completion(nil)
-        }
-    }
+    let rawKey = Array((imgKey + subKey).utf8)
+    let mixinKey = String(decoding: mixinKeyEncTab.prefix(32).map { rawKey[$0] }, as: UTF8.self)
+    let allowedCharacters = CharacterSet(charactersIn: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_.!~*'()")
+    var parameters = parameters
+    parameters.removeValue(forKey: "w_rid")
+    parameters["wts"] = String(timestamp)
+    let query = parameters.sorted { $0.key < $1.key }.map { key, value in
+        let filteredValue = String(value.filter { !"!'()*".contains($0) })
+        let encodedKey = key.addingPercentEncoding(withAllowedCharacters: allowedCharacters)!
+        let encodedValue = filteredValue.addingPercentEncoding(withAllowedCharacters: allowedCharacters)!
+        return "\(encodedKey)=\(encodedValue)"
+    }.joined(separator: "&")
+    let signature = Insecure.MD5.hash(data: Data((query + mixinKey).utf8))
+        .map { String(format: "%02x", $0) }.joined()
+    return query + "&w_rid=\(signature)"
 }
 
 // AV & BV ID Convert Logic

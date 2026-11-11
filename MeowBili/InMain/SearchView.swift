@@ -350,7 +350,8 @@ struct SearchView: View {
                 "referer": "https://www.bilibili.com/",
                 "cookie": "SESSDATA=\(sessdata); bili_jct=\(biliJct); DedeUserID=\(dedeUserID); DedeUserID__ckMd5=\(dedeUserID__ckMd5); buvid3=\(globalBuvid3); buvid4=\(globalBuvid4)"
             ]
-            biliWbiSign(paramEncoded: "keyword=\(keyword)&search_type=\(type.rawValue)&page=\(page)".base64Encoded()) { signed in
+            let parameters = ["keyword": keyword, "search_type": type.rawValue, "page": String(page)]
+            biliWbiSign(parameters: parameters) { signed in
                 if let signed {
                     requestJSON("https://api.bilibili.com/x/web-interface/wbi/search/type?\(signed)", headers: headers) { respJson, isSuccess in
                         if isSuccess {
